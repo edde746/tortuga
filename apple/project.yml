@@ -284,6 +284,9 @@ targets:
         INFOPLIST_FILE: TopShelf/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: Tortuga
         TARGETED_DEVICE_FAMILY: "3"
+        # App Store Connect rejects an extension with a 64-bit slice whose Info.plist doesn't require arm64; Xcode
+        # writes the key for the app, not for an extension.
+        INFOPLIST_KEY_UIRequiredDeviceCapabilities: arm64
         # As the app's: team signing for a real Apple TV.
         DEVELOPMENT_TEAM: G88U5B5783
         CODE_SIGN_STYLE: Automatic
