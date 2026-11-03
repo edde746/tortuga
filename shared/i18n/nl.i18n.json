@@ -1,0 +1,2067 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Controleren op updates…",
+    "launchFailed": "Tortuga kon niet worden gestart.",
+    "startup": {
+      "database": "Database openen…",
+      "migration": "Database bijwerken…",
+      "account": "Je account laden…",
+      "profiles": "Profielen laden…"
+    },
+    "localNetworkUsage": "Tortuga gebruikt je lokale netwerk om add-ons, media en een synchronisatieserver die je thuis draait te bereiken."
+  },
+  "player": {
+    "nowPlaying": "Wordt afgespeeld",
+    "buffering": "Bufferen…",
+    "position": "${position} / ${duration}",
+    "timeline": "Afspeelpositie",
+    "play": "Afspelen",
+    "pause": "Pauzeren",
+    "resolving": "Stream voorbereiden…",
+    "opening": "Openen…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LIVE",
+      "position": "Live · ${time} gekeken",
+      "behind": "Live · ${time} achter",
+      "goToLive": "Naar live"
+    },
+    "nextEpisode": "Volgende aflevering",
+    "previousEpisode": "Vorige aflevering",
+    "lock": {
+      "button": "Scherm vergrendelen",
+      "tapToUnlock": "Tik om te ontgrendelen",
+      "tapAgainToUnlock": "Tik nogmaals om te ontgrendelen"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normaal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volume",
+      "level": "${percent}%",
+      "muted": "Gedempt",
+      "mute": "Dempen",
+      "unmute": "Dempen opheffen"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Ondertiteling",
+      "speed": "Afspeelsnelheid",
+      "subtitleDelay": "Ondertitelvertraging",
+      "audioDelay": "Audiovertraging",
+      "moreSubtitles": "Meer ondertitels",
+      "reset": "Resetten",
+      "subtitleDelayEarlier": "Ondertitelvertraging: eerder",
+      "subtitleDelayLater": "Ondertitelvertraging: later",
+      "audioDelayEarlier": "Audiovertraging: eerder",
+      "audioDelayLater": "Audiovertraging: later"
+    },
+    "track": {
+      "off": "Uit",
+      "numbered": "Spoor ${number}",
+      "defaultTrack": "Standaard",
+      "forced": "Geforceerd",
+      "sdh": "SDH",
+      "audioDescription": "Audiodescriptie",
+      "external": "Extern",
+      "second": "Tweede ondertiteling",
+      "showAsSecond": "Tonen als tweede ondertiteling",
+      "removeSecond": "Tweede ondertiteling verwijderen",
+      "otherLanguage": "Overig",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} kanaal",
+        "other": "${n} kanalen"
+      }
+    },
+    "info": {
+      "title": "Afspeelinfo",
+      "tab": "Info",
+      "resolution": "Resolutie",
+      "video": "Video",
+      "dynamicRange": "Dynamisch bereik",
+      "audio": "Audio",
+      "decoder": "Decoder",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hardware (${name})",
+      "softwareDecoder": "Software",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision-profiel ${profile}",
+      "stream": "Stream",
+      "addon": "Add-on",
+      "pickedBy": "Gekozen door",
+      "autoPlayFirstMatch": "Automatisch afspelen, eerste treffer",
+      "autoPlayLastLink": "Automatisch afspelen, dezelfde stream als vorige keer",
+      "source": "Bron",
+      "downloaded": "Gedownload",
+      "name": "Naam",
+      "file": "Bestand",
+      "container": "Container",
+      "fileSize": "Grootte",
+      "bitrate": "Bitrate",
+      "codec": "Codec",
+      "pixelFormat": "Pixelformaat",
+      "bitDepth": "${bits}-bit",
+      "color": "Kleur",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nits",
+      "mastering": "Masteringdisplay",
+      "nitsRange": "${min}–${max} nits",
+      "droppedFrames": "Overgeslagen frames",
+      "droppedFramesValue": "${output} (decoder ${decoder})",
+      "delayedFrames": "Vertraagde frames",
+      "output": "Uitvoer",
+      "hertz": "${value} Hz",
+      "channels": "Kanalen",
+      "sampleRate": "Samplefrequentie",
+      "track": "Spoor",
+      "secondTrack": "Tweede spoor",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Ruimtelijke audio",
+      "rendering": "Rendering",
+      "surround": "Surround",
+      "subtitles": "Ondertiteling",
+      "format": "Formaat",
+      "embedded": "Ingebed",
+      "delay": "Vertraging",
+      "network": "Netwerk",
+      "downloadSpeed": "Downloadsnelheid",
+      "buffering": "Bufferen",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Intro overslaan",
+      "recap": "Samenvatting overslaan",
+      "credits": "Aftiteling overslaan"
+    },
+    "prompt": {
+      "playNext": "Volgende aflevering afspelen: ${episode}",
+      "countdown": {
+        "one": "Automatisch over ${n} seconde",
+        "other": "Automatisch over ${n} seconden"
+      }
+    },
+    "options": {
+      "title": "Meer regelaars",
+      "videoFit": "Beeldverhouding",
+      "fit": {
+        "contain": "Letterbox",
+        "cover": "Scherm vullen",
+        "fill": "Uitrekken"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent}%",
+      "resetZoom": "Resetten",
+      "shaders": "Shaders",
+      "shader": {
+        "nvscalerDetail": "NVIDIA-beeldschaling voor scherpere video",
+        "neutral": "Neutraal",
+        "denoise": "Ruisonderdrukking",
+        "denoiseSharpen": "Ruisonderdrukking + verscherpen",
+        "fast": "Snel",
+        "highQuality": "Hoge kwaliteit",
+        "modeDetail": "${quality} · Modus ${mode}",
+        "customDetail": "Eigen GLSL-shader",
+        "importShader": "Shader importeren",
+        "imported": "Shader geïmporteerd",
+        "importFailed": "Kan de shader niet importeren",
+        "deleteLabel": "${name} verwijderen",
+        "deleteTitle": "${name} verwijderen?",
+        "delete": "Verwijderen",
+        "cancel": "Annuleren"
+      },
+      "sleepTimer": "Slaaptimer",
+      "sleepEndOfVideo": "Einde van huidige video",
+      "sleepMinutes": {
+        "one": "${n} minuut",
+        "other": "${n} minuten"
+      },
+      "sleepLeft": "Nog ${time}",
+      "autoPlayNext": "Volgende aflevering automatisch afspelen",
+      "audioOutput": "Audio-uitvoer",
+      "systemOutput": "Systeemstandaard",
+      "audioNormalization": "Volume normaliseren",
+      "audioChannels": "Audiokanalen",
+      "channels": {
+        "original": "Origineel",
+        "originalDetail": "Alle kanalen van het spoor afspelen",
+        "surround51": "Maximaal 5.1",
+        "surround51Detail": "7.1 terugmixen naar 5.1 voor tv's en receivers die alleen 5.1 ondersteunen",
+        "stereo": "Stereo",
+        "stereoDetail": "Terugmixen naar twee kanalen voor stereospeakers of een koptelefoon"
+      },
+      "on": "Aan",
+      "off": "Uit"
+    },
+    "stillWatching": {
+      "title": "Kijk je nog?",
+      "countdown": {
+        "one": "Pauzeert over ${n} seconde",
+        "other": "Pauzeert over ${n} seconden"
+      },
+      "keepWatching": "Doorgaan",
+      "pause": "Pauzeren"
+    },
+    "error": {
+      "title": "Kan deze stream niet afspelen",
+      "resolveTimeout": "Het duurde te lang voordat de stream startte.",
+      "expired": "De streamlink is verlopen.",
+      "notFound": "De stream is niet meer beschikbaar.",
+      "http": "De server antwoordde met HTTP ${status}.",
+      "cantOpen": "De stream kon niet worden geopend.",
+      "unsupportedFormat": "De stream heeft een formaat dat de speler niet kan lezen.",
+      "cantDecode": "De speler kon het beeld of geluid van deze stream niet afspelen.",
+      "engineFailed": "De speler is gestopt door een fout.",
+      "retry": "Opnieuw",
+      "nextStream": "Volgende stream proberen",
+      "close": "Sluiten",
+      "alternatives": {
+        "one": "Nog ${n} stream beschikbaar",
+        "other": "Nog ${n} streams beschikbaar"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Dit is niet de aflevering",
+      "titleMovie": "Dit is niet de film",
+      "titleVideo": "Dit is niet de video",
+      "sent": "De add-on stuurde een foutvideo in plaats van de stream.",
+      "byUrl": "De link is een van de foutvideo's van een add-on.",
+      "bySize": "Het bestand is ${served}, terwijl de stream ${size} opgaf.",
+      "byDuration": "Hij duurt ${length}, terwijl deze video ${known} duurde toen je hem het laatst afspeelde.",
+      "kept": "Je voortgang blijft bewaard.",
+      "chooseStream": "Andere stream kiezen",
+      "watch": "Bericht bekijken"
+    },
+    "osd": {
+      "volume": "Volume ${level}",
+      "brightness": "Helderheid ${level}",
+      "speed": "Snelheid ${speed}",
+      "subtitleDelay": "Ondertitelvertraging ${delay}",
+      "audioDelay": "Audiovertraging ${delay}",
+      "audioTrack": "Audio: ${track}",
+      "subtitleTrack": "Ondertiteling: ${track}",
+      "subtitlesOff": "Ondertiteling uit",
+      "chapter": "Hoofdstuk: ${title}",
+      "chapterNumbered": "Hoofdstuk ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shaders: ${name}",
+      "shadersOff": "Shaders uit"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Stream openen…",
+    "resolveFailed": {
+      "http": "De server van de stream antwoordde met HTTP ${status}",
+      "timeout": "De server van de stream deed er te lang over om te antwoorden",
+      "network": "Kan geen verbinding maken met de server van de stream",
+      "unsupportedUrl": "De link van deze stream kan niet worden geopend",
+      "tooManyRedirects": "De link van deze stream wordt te vaak doorgestuurd",
+      "unexpected": "Deze app liep tegen een fout aan bij het openen van deze stream"
+    },
+    "badge": {
+      "instant": "Direct",
+      "notInstant": "Niet direct"
+    },
+    "lastUsed": "Laatst afgespeeld",
+    "external": "Opent buiten de app",
+    "unplayable": {
+      "one": "${n} stream die deze app niet kan afspelen",
+      "other": "${n} streams die deze app niet kan afspelen"
+    },
+    "empty": "Geen streams gevonden",
+    "all": "Alle",
+    "refresh": "Vernieuwen",
+    "retryNamed": "${name} opnieuw proberen",
+    "filters": {
+      "hidden": {
+        "one": "${n} stream verborgen door je filters",
+        "other": "${n} streams verborgen door je filters"
+      },
+      "showing": {
+        "one": "${n} gefilterde stream wordt getoond",
+        "other": "${n} gefilterde streams worden getoond"
+      },
+      "show": "Tonen",
+      "hide": "Verbergen",
+      "rowNote": "Verborgen door je filters"
+    },
+    "sort": {
+      "title": "Sorteren",
+      "addonOrder": "Volgorde van add-ons",
+      "resolution": "Resolutie",
+      "source": "Bronkwaliteit",
+      "sizeLargest": "Grootste eerst",
+      "sizeSmallest": "Kleinste eerst",
+      "cached": "Direct eerst"
+    },
+    "autoPlay": {
+      "noMatch": "Automatisch afspelen vond geen stream die door je filters komt.",
+      "failed": "De automatisch gekozen stream startte niet. Kies een andere."
+    },
+    "download": {
+      "notice": "Kies de stream die je wilt downloaden.",
+      "action": "Downloaden",
+      "actionNamed": "${name} downloaden",
+      "queued": "Toegevoegd aan Downloads",
+      "failed": "Kan de download niet toevoegen."
+    },
+    "suggested": {
+      "label": "Voorgesteld",
+      "reason": "Zoals je recente keuzes: ${features}",
+      "audio": "audio: ${language}",
+      "subtitles": "ondertitels: ${language}",
+      "smaller": "kleinere bestanden",
+      "larger": "grotere bestanden"
+    }
+  },
+  "detail": {
+    "loadFailed": "Kan de details niet laden.",
+    "notFound": "Geen enkele add-on heeft details voor deze titel.",
+    "noAddons": "Geen van de geïnstalleerde add-ons heeft details voor deze titel.",
+    "noAnimeAddon": "Geen van de geïnstalleerde add-ons heeft details voor deze anime. Installeer een anime-add-on om deze te openen.",
+    "animeListsUnavailable": "De animelijsten zijn niet geladen, dus deze anime kan niet aan een titel worden gekoppeld. Controleer je verbinding en probeer het opnieuw.",
+    "findingAnime": "Deze anime opzoeken in de animelijsten…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} u ${minutes} min",
+      "hours": "${hours} u",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes-critici",
+        "rottenTomatoesAudience": "Rotten Tomatoes-publiek",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} procent"
+    },
+    "userRating": {
+      "rateLabel": "Deze titel beoordelen",
+      "label": "Jouw beoordeling: ${score}",
+      "range": "${low}–${high}",
+      "title": "Jouw beoordeling",
+      "hint": "Je score gaat naar elke dienst hieronder.",
+      "clear": "Beoordeling verwijderen",
+      "checking": "Controleren…",
+      "notRated": "Niet beoordeeld",
+      "unreadable": "Kon niet controleren",
+      "saving": "Opslaan…",
+      "saved": "Opgeslagen",
+      "removed": "Verwijderd",
+      "queued": "Nog niet verzonden, wordt opnieuw geprobeerd",
+      "failed": "Niet opgeslagen"
+    },
+    "links": {
+      "genres": "Genres",
+      "cast": "Cast",
+      "directors": "Regie",
+      "writers": "Scenario",
+      "website": "Website"
+    },
+    "facts": {
+      "title": "Informatie",
+      "released": "Verschenen",
+      "runtime": "Speelduur",
+      "country": "Land",
+      "language": "Taal",
+      "awards": "Prijzen",
+      "source": "Details van",
+      "failed": "Kon niet laden van"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailers",
+    "share": "Delen",
+    "season": "Seizoen ${number}",
+    "specials": "Specials",
+    "episodeNumbered": "Aflevering ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Met ${names}",
+    "castAndCrew": "Cast & crew",
+    "airs": "Verschijnt op ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "jan",
+      "feb": "feb",
+      "mar": "mrt",
+      "apr": "apr",
+      "may": "mei",
+      "jun": "jun",
+      "jul": "jul",
+      "aug": "aug",
+      "sep": "sep",
+      "oct": "okt",
+      "nov": "nov",
+      "dec": "dec"
+    },
+    "play": "Afspelen",
+    "playEpisode": "${episode} afspelen",
+    "resume": "Hervatten vanaf ${time}",
+    "resumeEpisode": "${episode} hervatten · ${time}",
+    "addToLibrary": "Toevoegen aan bibliotheek",
+    "removeFromLibrary": "Verwijderen uit bibliotheek",
+    "markWatched": "Markeren als bekeken",
+    "markUnwatched": "Markeren als niet bekeken",
+    "markAllWatched": "Alle afleveringen markeren als bekeken",
+    "markAllUnwatched": "Alle afleveringen markeren als niet bekeken",
+    "markSeasonWatched": "Seizoen markeren als bekeken",
+    "markSeasonUnwatched": "Seizoen markeren als niet bekeken",
+    "watched": "Bekeken",
+    "overviewHidden": "Beschrijving verborgen",
+    "moreActions": "Meer acties",
+    "moreActionsNamed": "Meer acties voor ${name}",
+    "showMore": "Meer",
+    "showLess": "Minder",
+    "findingStream": "Stream zoeken…",
+    "chooseStream": "Kies een stream",
+    "download": {
+      "download": "Downloaden",
+      "queued": "In wachtrij",
+      "waitingForWifi": "Wachten op Wi-Fi",
+      "downloading": "Downloaden ${percent}%",
+      "downloadingStarted": "Downloaden…",
+      "paused": "Gepauzeerd",
+      "failed": "Download mislukt",
+      "partial": "${done} van ${total} gedownload",
+      "downloaded": "Gedownload",
+      "menuTitle": "Downloaden",
+      "allSeasons": "Alle seizoenen",
+      "pick": {
+        "all": "Alle afleveringen",
+        "unwatched": "Niet-bekeken afleveringen",
+        "next5": "Volgende 5 niet-bekeken",
+        "next10": "Volgende 10 niet-bekeken"
+      },
+      "keepSynced": "Gesynchroniseerd houden",
+      "keepSyncedCount": {
+        "one": "${n} niet-bekeken aflevering bewaren",
+        "other": "${n} niet-bekeken afleveringen bewaren"
+      },
+      "keepSyncedAll": "Alle niet-bekeken afleveringen bewaren",
+      "manage": "Downloads beheren",
+      "pauseAll": "Downloads pauzeren",
+      "resumeAll": "Downloads hervatten",
+      "deleteSeason": "Downloads van dit seizoen verwijderen",
+      "deleteAll": "Alle downloads verwijderen",
+      "queuedEpisodes": {
+        "one": "${n} aflevering toegevoegd aan Downloads",
+        "other": "${n} afleveringen toegevoegd aan Downloads"
+      },
+      "nothingQueued": "Elke aflevering is al gedownload of staat in de wachtrij.",
+      "failedToQueue": "Kan de downloads niet toevoegen.",
+      "episode": {
+        "download": "Aflevering downloaden",
+        "pause": "Download pauzeren",
+        "resume": "Download hervatten",
+        "retry": "Download opnieuw proberen",
+        "pickStream": "Stream kiezen",
+        "cancel": "Download annuleren",
+        "delete": "Download verwijderen",
+        "queued": "In wachtrij",
+        "downloading": "${percent}%",
+        "paused": "Gepauzeerd",
+        "failed": "Download mislukt",
+        "downloaded": "Gedownload"
+      }
+    },
+    "related": {
+      "title": "Meer zoals dit",
+      "noneFound": "Geen vergelijkbare titels gevonden."
+    }
+  },
+  "library": {
+    "title": "Bibliotheek",
+    "continueWatching": "Verder kijken",
+    "sort": {
+      "lastWatched": "Recent bekeken",
+      "added": "Recent toegevoegd",
+      "name": "Titel A–Z",
+      "nameReverse": "Titel Z–A",
+      "timesWatched": "Meest bekeken",
+      "watched": "Bekeken eerst",
+      "notWatched": "Niet bekeken eerst"
+    },
+    "sortBy": "Sorteren op",
+    "sortByNamed": "Sorteren op: ${name}",
+    "empty": "Hier staat nog niets. Voeg titels toe aan de bibliotheek via hun detailpagina.",
+    "emptyContinueWatching": "Nog niets om verder te kijken. Titels verschijnen hier zodra je ze begint te kijken.",
+    "emptyType": "Hier staat niets van dit type.",
+    "watched": "Bekeken"
+  },
+  "mediaMenu": {
+    "markWatched": "Markeren als bekeken",
+    "markUnwatched": "Markeren als niet bekeken",
+    "removeFromContinueWatching": "Verwijderen uit Verder kijken",
+    "details": "Naar details",
+    "addToLibrary": "Toevoegen aan bibliotheek",
+    "removeFromLibrary": "Verwijderen uit bibliotheek",
+    "playFromStart": "Afspelen vanaf het begin",
+    "markSeasonWatched": "Seizoen markeren als bekeken",
+    "markSeasonUnwatched": "Seizoen markeren als niet bekeken",
+    "chooseStream": "Kies een stream",
+    "download": "Downloaden",
+    "pauseDownload": "Download pauzeren",
+    "resumeDownload": "Download hervatten",
+    "retryDownload": "Download opnieuw proberen",
+    "cancelDownload": "Download annuleren",
+    "deleteDownload": "Download verwijderen",
+    "pickStream": "Stream kiezen",
+    "trailer": "Trailer",
+    "markFailed": "Kan ${title} niet markeren: de details zijn niet geladen. Controleer de verbinding en probeer het opnieuw."
+  },
+  "session": {
+    "episode": "S${season}A${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "De geïnstalleerde add-ons konden niet worden gelezen. Start Tortuga opnieuw om het nog eens te proberen.",
+    "error": {
+      "invalidTransportUrl": "Dit is geen link naar een add-on. Links naar add-ons eindigen op /manifest.json.",
+      "timeout": "De add-on deed er te lang over om te reageren.",
+      "network": "Kan de add-on niet bereiken.",
+      "http": "De add-on gaf een fout (HTTP ${status}).",
+      "invalidResponse": "De add-on stuurde een antwoord dat deze app niet kan lezen.",
+      "unexpectedResponse": "De add-on stuurde een ander soort antwoord dan gevraagd.",
+      "emptyContent": "Niets gevonden.",
+      "invalidManifest": "Het manifest van de add-on is ongeldig.",
+      "configurationRequired": "Deze add-on moet worden geconfigureerd voordat je hem kunt installeren.",
+      "alreadyInstalled": "Deze add-on is al geïnstalleerd.",
+      "notInstalled": "Deze add-on is niet geïnstalleerd.",
+      "protectedAddon": "Deze add-on is ingebouwd en kan niet worden verwijderd of uitgezet."
+    },
+    "title": "Add-ons",
+    "allTypes": "Alle",
+    "empty": "Geen add-ons geïnstalleerd.",
+    "emptyFiltered": "Geen geïnstalleerde add-on heeft dit type.",
+    "builtIn": "Ingebouwd",
+    "builtInExplanation": "Deze add-on is ingebouwd en kan niet worden verwijderd of uitgezet.",
+    "cancel": "Annuleren",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Omhoog",
+    "moveUpNamed": "${name} omhoog verplaatsen",
+    "moveDown": "Omlaag",
+    "moveDownNamed": "${name} omlaag verplaatsen",
+    "dragToReorderNamed": "Volgorde van ${name} wijzigen",
+    "enabledNamed": "${name} gebruiken",
+    "close": "Sluiten",
+    "version": "Versie ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Catalogi",
+      "meta": "Details",
+      "stream": "Streams",
+      "subtitles": "Ondertiteling",
+      "addonCatalog": "Catalogi van add-ons",
+      "player": "Afspeelactiviteit",
+      "library": "Bibliotheekactiviteit"
+    },
+    "remove": {
+      "title": "${name} verwijderen?",
+      "message": "De add-on wordt op elk apparaat uit dit profiel verwijderd, samen met de instellingen waarmee hij is geconfigureerd.",
+      "confirm": "Verwijderen"
+    },
+    "details": {
+      "types": "Typen",
+      "resources": "Levert",
+      "catalogs": "Catalogi",
+      "contact": "Contact",
+      "configure": "Configureren",
+      "remove": "Verwijderen",
+      "enabled": "Deze add-on gebruiken",
+      "enabledOff": "Uit: Tortuga vraagt er niets aan en toont de catalogi niet.",
+      "shareTitle": "Link naar add-on",
+      "shareWarning": "Deze link kan de sleutels bevatten van de accounts waarmee deze add-on is geconfigureerd. Deel hem alleen met mensen die je vertrouwt.",
+      "revealLink": "Link tonen",
+      "hideLink": "Link verbergen",
+      "copyLink": "Link kopiëren",
+      "linkCopied": "Link gekopieerd."
+    },
+    "watchActivity": {
+      "title": "Kijkactiviteit versturen",
+      "explanation": "Deze add-on ontvangt je kijkactiviteit: wat je afspeelt, pauzeert en stopt, wat je aan je bibliotheek toevoegt of eruit verwijdert, en wat je als bekeken markeert.",
+      "agree": "Ik ga ermee akkoord dat deze add-on mijn kijkactiviteit ontvangt",
+      "notAllowed": "Ontvangt geen kijkactiviteit tot je het toestaat"
+    },
+    "install": {
+      "action": "Add-on installeren",
+      "title": "Een add-on installeren",
+      "linkHint": "Link naar add-on, eindigend op /manifest.json",
+      "submit": "Doorgaan",
+      "confirm": "Installeren",
+      "update": "Bijwerken",
+      "configure": "Configureren",
+      "configureFirst": "Deze add-on moet worden geconfigureerd voordat je hem kunt installeren. Configureer hem en installeer hem daarna vanaf zijn pagina.",
+      "alreadyInstalled": "Deze add-on is al geïnstalleerd.",
+      "updateDetails": "Geïnstalleerd. Dit werkt de gegevens ervan bij.",
+      "updateVersion": "Geïnstalleerd. Dit werkt hem bij naar versie ${version}.",
+      "adult": "Deze add-on is gemarkeerd als inhoud voor volwassenen.",
+      "installed": "${name} is geïnstalleerd.",
+      "updated": "${name} is bijgewerkt.",
+      "done": "Klaar"
+    },
+    "browse": {
+      "title": "Bladeren",
+      "installed": "Geïnstalleerd",
+      "installedNote": "Geïnstalleerd"
+    }
+  },
+  "settings": {
+    "title": "Instellingen",
+    "automatic": "Automatisch",
+    "listSeparator": ", ",
+    "cancel": "Annuleren",
+    "close": "Sluiten",
+    "increaseNamed": "${name} verhogen",
+    "decreaseNamed": "${name} verlagen",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "one": "${n} seconde",
+        "other": "${n} seconden"
+      }
+    },
+    "time": {
+      "justNow": "zojuist",
+      "minutesAgo": {
+        "one": "${n} minuut geleden",
+        "other": "${n} minuten geleden"
+      },
+      "hoursAgo": {
+        "one": "${n} uur geleden",
+        "other": "${n} uur geleden"
+      },
+      "daysAgo": {
+        "one": "${n} dag geleden",
+        "other": "${n} dagen geleden"
+      },
+      "monthsAgo": {
+        "one": "${n} maand geleden",
+        "other": "${n} maanden geleden"
+      },
+      "yearsAgo": {
+        "one": "${n} jaar geleden",
+        "other": "${n} jaar geleden"
+      }
+    },
+    "sections": {
+      "playback": "Afspelen",
+      "playbackSummary": "Talen, drempel voor bekeken, volgende aflevering en overslaan",
+      "device": "Dit apparaat",
+      "deviceSummary": "Decodering, HDR, framerate, audio, cache en crashrapporten",
+      "subtitles": "Ondertiteling",
+      "subtitlesSummary": "Grootte, kleur, rand en positie op dit apparaat",
+      "addons": "Add-ons",
+      "addonsSummary": {
+        "one": "${n} add-on geïnstalleerd",
+        "other": "${n} add-ons geïnstalleerd"
+      },
+      "addonsSummaryLoading": "Geïnstalleerde add-ons",
+      "home": "Home",
+      "homeSummary": "Welke rijen Home toont, en in welke volgorde",
+      "appearance": "Weergave",
+      "appearanceSummary": "Taal, posters en bekeken titels",
+      "trackers": "Trackers",
+      "trackersSummary": "Scrobbelen, kijkgeschiedenis en lijsten",
+      "trackersConnected": "Gekoppeld aan ${services}",
+      "account": "Account",
+      "about": "Over",
+      "downloads": "Downloads",
+      "downloadsSummary": "Locatie, alleen via Wi-Fi en opslag",
+      "data": "Exporteren en importeren",
+      "dataSummary": "De gegevens van je profielen in een bestand, en weer terug"
+    },
+    "profile": {
+      "locked": "Vergrendeld met pincode",
+      "unlocked": "Geen pincode",
+      "edit": "Profiel bewerken",
+      "manage": "Profielen wisselen of beheren"
+    },
+    "about": {
+      "version": "Versie ${version}",
+      "license": "Tortuga valt onder de GNU General Public License, versie 3. Je mag het gebruiken, bestuderen, delen en aanpassen, en wie je een kopie geeft, moet je ook de broncode aanbieden.",
+      "source": "Broncode",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga gebruikt Trakt, maar wordt niet door Trakt onderschreven of gecertificeerd.",
+      "notices": "Software van derden",
+      "noticeLink": "Projectpagina"
+    },
+    "appearance": {
+      "interfaceLanguage": "App-taal",
+      "interfaceLanguageHint": "De taal van de menu's en meldingen van de app",
+      "interfaceLanguageSystem": "Systeemstandaard",
+      "blurUnwatched": "Onbekeken afleveringen vervagen",
+      "blurUnwatchedHint": "Vervaag de afbeeldingen en verberg de beschrijvingen van afleveringen die je nog niet bent begonnen, zodat ze niets verklappen",
+      "hideWatched": "Bekeken titels verbergen",
+      "hideWatchedHint": "Laat films en series die je hebt uitgekeken weg uit de rijen van Home en uit Ontdekken. Een serie komt terug zodra er een nieuwe aflevering uit is",
+      "hidePosterCaptions": "Titels onder posters verbergen",
+      "hidePosterCaptionsHint": "Toon alleen de afbeelding. Verder kijken houdt de aflevering en de resterende tijd",
+      "posterTemplate": "URL-sjabloon voor posters",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} en {tvdb_id} staan voor de ID's van elke titel, {type} voor movie of series",
+      "posterTemplateNone": "Posters van de add-ons",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Geen http- of https-adres, dus genegeerd"
+    },
+    "home": {
+      "note": "Kies welke rijen Home toont en in welke volgorde. Dit hoort bij dit profiel en wordt gesynchroniseerd met je andere apparaten.",
+      "continueWatchingHint": "Altijd de eerste rij",
+      "rowsHeader": "Rijen",
+      "empty": "Geen geïnstalleerde add-on heeft een catalogus voor Home.",
+      "reset": "Standaard herstellen",
+      "moveUp": "Omhoog",
+      "moveUpNamed": "${name} omhoog verplaatsen",
+      "moveDown": "Omlaag",
+      "moveDownNamed": "${name} omlaag verplaatsen",
+      "dragToReorder": "Sleep om de volgorde te wijzigen",
+      "dragToReorderNamed": "Volgorde van ${name} wijzigen",
+      "newCollection": "Nieuwe collectie",
+      "importCollections": "Collecties importeren",
+      "exportCollections": "Collecties exporteren",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "deleteTitle": "‘${title}’ verwijderen?",
+      "deleteMessage": "De collectie verdwijnt uit dit profiel op al je apparaten."
+    },
+    "playback": {
+      "title": "Afspelen",
+      "note": "Deze instellingen horen bij dit profiel en worden gesynchroniseerd met je andere apparaten.",
+      "languagesHeader": "Talen",
+      "audioLanguages": "Audiotalen",
+      "audioLanguagesHint": "Welk audiospoor wordt afgespeeld, op volgorde van voorkeur",
+      "audioLanguagesNone": "Standaard van de video",
+      "audioLanguagesExplanation": "Een video speelt af in de eerste van deze talen die hij heeft. Zonder keuze speelt hij zijn standaardaudiospoor af.",
+      "subtitleLanguages": "Ondertiteltalen",
+      "subtitleLanguagesHint": "Welke ondertiteling wordt ingeschakeld, op volgorde van voorkeur",
+      "subtitleLanguagesNone": "Uit",
+      "subtitleLanguagesExplanation": "Ondertiteling in de eerste van deze talen die een video heeft, wordt ingeschakeld. Zonder keuze blijft ondertiteling uit, tenzij de video die afdwingt.",
+      "secondSubtitleLanguage": "Taal van de tweede ondertiteling",
+      "secondSubtitleLanguageHint": "Bovenin het beeld, samen met de eerste",
+      "secondSubtitleLanguageExplanation": "Ondertiteling in deze taal verschijnt bovenin het beeld, samen met de eerste ondertiteling. Zonder keuze verschijnt geen tweede ondertiteling, tenzij die in de speler wordt gekozen.",
+      "secondSubtitleLanguageNone": "Uit",
+      "showSubtitles": "Ondertiteling tonen",
+      "showSubtitlesHint": "Altijd: ondertiteling ook in de gesproken taal, SDH eerst",
+      "showSubtitlesFollowAudio": "Volgens audio",
+      "showSubtitlesAlways": "Altijd",
+      "chosenHeader": "Jouw talen",
+      "availableHeader": "Taal toevoegen",
+      "searchLanguages": "Talen zoeken",
+      "noLanguageMatches": "Geen taal gevonden.",
+      "playbackHeader": "Afspelen",
+      "watchedThreshold": "Telt als bekeken na",
+      "watchedThresholdHint": "Vanaf waar een video als bekeken telt en Verder kijken naar de volgende aflevering gaat",
+      "bingeWatching": "Volgende aflevering afspelen",
+      "bingeWatchingHint": "Start na afloop van een aflevering de volgende, waar mogelijk van dezelfde bron",
+      "upNextCountdown": "Aftellen volgende aflevering",
+      "upNextCountdownHint": "Hoelang de melding voor de volgende aflevering wacht voordat die start",
+      "upNextImmediately": "Meteen starten",
+      "seekShort": "Korte sprong",
+      "seekShortHint": "Pijltjestoetsen, de afstandsbediening en de spoelknoppen van de speler",
+      "seekLong": "Lange sprong",
+      "seekLongHint": "Shift met de pijltjestoetsen, en lang indrukken",
+      "videoClick": "Klikken op de video",
+      "videoClickHint": "Dubbelklikken opent en sluit nog steeds volledig scherm",
+      "videoClickPause": "Pauzeren en afspelen",
+      "videoClickControls": "Bediening tonen of verbergen",
+      "moveUp": "Omhoog",
+      "moveUpNamed": "${name} omhoog verplaatsen",
+      "moveDown": "Omlaag",
+      "moveDownNamed": "${name} omlaag verplaatsen",
+      "removeLanguage": "Verwijderen",
+      "removeLanguageNamed": "${name} verwijderen",
+      "dragToReorderNamed": "Volgorde van ${name} wijzigen",
+      "skipping": {
+        "header": "Overslaan",
+        "footer": "Intro's, samenvattingen en aftitelingen worden herkend aan de hoofdstuknamen van een video, dus alleen video's met benoemde hoofdstukken bieden aan om ze over te slaan. Bij automatisch overslaan telt de knop eerst af, en alles wat je in de speler doet, stopt het aftellen.",
+        "intros": "Intro's",
+        "introsHint": "Openingsnummers en titelsequenties",
+        "recaps": "Samenvattingen",
+        "recapsHint": "“Eerder in…” aan het begin van een aflevering",
+        "credits": "Aftiteling",
+        "creditsHint": "Aftiteling en vooruitblikken op de volgende aflevering; de melding voor de volgende aflevering verschijnt dan",
+        "off": "Uit",
+        "button": "Knop tonen",
+        "auto": "Automatisch overslaan"
+      },
+      "streams": {
+        "header": "Streams",
+        "footer": "De filters gelden voor elke streamlijst. Die laat zien hoeveel streams ze verbergen en kan ze toch tonen.",
+        "autoPlay": "Automatisch afspelen",
+        "autoPlayHint": "Slaat de streamlijst over bij Afspelen, Hervatten, een aflevering en de volgende aflevering; met een sortering wacht het tot alle add-ons hebben geantwoord",
+        "suggestions": "Een stream voorstellen",
+        "suggestionsHint": "Leert welke streams je op dit profiel kiest en markeert er een in de lijst",
+        "autoPlayOff": "Uit",
+        "autoPlayFirstMatch": "Eerste stream die door de filters komt",
+        "autoPlayReuseLastLink": "Dezelfde stream als vorige keer, anders de eerste die door de filters komt",
+        "qualities": "Kwaliteiten",
+        "qualitiesHint": "Welke resoluties de streamlijsten tonen",
+        "qualitiesAll": "Alle",
+        "qualitiesNone": "Geen",
+        "qualitiesAllBut": "Alle behalve ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Onbekend",
+        "ranges": "Dynamisch bereik",
+        "rangesHint": "Welke van SDR, HDR en Dolby Vision de streamlijsten tonen",
+        "codecs": "Videocodecs",
+        "codecsHint": "Welke videocodecs de streamlijsten tonen",
+        "minSize": "Minimale grootte",
+        "minSizeHint": "Verbergt streams van kleinere bestanden; een stream zonder grootte blijft",
+        "maxSize": "Maximale grootte",
+        "maxSizeHint": "Verbergt streams van grotere bestanden; een stream zonder grootte blijft",
+        "sizeAny": "Elke grootte",
+        "includePattern": "Alleen streams met patroon",
+        "includePatternHint": "Een reguliere expressie die wordt vergeleken met de naam, beschrijving en bestandsnaam van elke stream, ongeacht hoofdletters",
+        "includePatternNone": "Elke stream",
+        "includePlaceholder": "bijv. 1080p|2160p",
+        "excludePattern": "Streams verbergen met patroon",
+        "excludePatternHint": "Heeft voorrang op het patroon hierboven",
+        "excludePatternNone": "Geen",
+        "excludePlaceholder": "bijv. HDTV|XviD",
+        "invalidPattern": "Geen geldige reguliere expressie, dus deze wordt genegeerd",
+        "save": "Opslaan",
+        "clear": "Wissen"
+      }
+    },
+    "device": {
+      "title": "Dit apparaat",
+      "note": "Deze instellingen gelden alleen voor dit apparaat en worden niet gesynchroniseerd.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Hardwaredecodering",
+      "hardwareDecodingHint": "Decodeer video met de grafische hardware. Zet dit uit als video's beeldfouten tonen.",
+      "hdr": "HDR",
+      "hdrHint": "Speel HDR-video in HDR af als het scherm dat ondersteunt. Uit zet het om naar SDR.",
+      "matchFrameRate": "Framerate-wissel afdwingen",
+      "matchFrameRateHint": "Zet het scherm op de framerate van de video, ook waar het systeem dat niet zou doen. Het scherm wordt bij elke wissel even zwart.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Audio-passthrough",
+      "audioPassthroughHint": "Stuur surroundgeluid (Dolby Digital, DTS, TrueHD) ongedecodeerd naar de receiver",
+      "audioPassthroughHintApple": "Stuur Dolby Digital en Dolby Digital Plus, ook Atmos, naar de Dolby-decoder van het systeem; DTS en TrueHD worden als meerkanaals PCM afgespeeld. Zet dit uit als er geen geluid is.",
+      "audioPassthroughHintAppleSpatial": "Stuur Dolby Digital en Dolby Digital Plus, ook Atmos, naar de Dolby-decoder van het systeem en speel TrueHD Atmos en DTS:X af als ruimtelijke audio; andere DTS- en TrueHD-sporen worden als meerkanaals PCM afgespeeld. Zet dit uit als er geen geluid is.",
+      "audioPassthroughNormalized": "Uit zolang het volume wordt genormaliseerd",
+      "gesturesHeader": "Gebaren",
+      "swipeGestures": "Vegen voor helderheid en volume",
+      "swipeGesturesHint": "Veeg omhoog of omlaag over de linkerhelft van de video voor de helderheid, over de rechterhelft voor het volume.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Vooruitleescache",
+      "cacheSizeHint": "Hoeveel van een stream vooraf wordt geladen",
+      "discordHeader": "Discord",
+      "discordPresence": "Laten zien wat je kijkt",
+      "discordPresenceHint": "Je Discord-vrienden zien de titel en aflevering terwijl een video speelt. Discord moet op deze computer draaien.",
+      "privacyHeader": "Privacy",
+      "crashReports": "Crashrapporten versturen",
+      "crashReportsHint": "Stuurt wat er misging als de app crasht of een deel ervan faalt, nooit je add-onlinks of accounts"
+    },
+    "subtitles": {
+      "title": "Ondertiteling",
+      "note": "Deze instellingen gelden alleen voor dit apparaat en worden niet gesynchroniseerd. Ze bepalen de stijl van ondertiteling in platte tekst, zoals SRT; opgemaakte ondertiteling behoudt haar eigen uiterlijk, tenzij je de stijl ook daarop toepast.",
+      "previewText": "Zo ziet ondertiteling eruit",
+      "textHeader": "Tekst",
+      "size": "Grootte",
+      "textColor": "Kleur",
+      "bold": "Vet",
+      "outlineHeader": "Rand en achtergrond",
+      "outline": "Rand",
+      "outlineColor": "Randkleur",
+      "background": "Achtergrond",
+      "backgroundHint": "Een vlak achter de tekst, en hoe ondoorzichtig het is",
+      "backgroundOff": "Uit",
+      "positionHeader": "Positie",
+      "position": "Hoogte",
+      "positionHint": "Hoe ver boven de onderkant van het beeld de ondertiteling staat",
+      "positionBottom": "Onderaan",
+      "styledHeader": "Opgemaakte ondertiteling",
+      "styledOverride": "Toepassen op opgemaakte ondertiteling",
+      "styledOverrideHint": "ASS- en SSA-ondertiteling krijgt deze stijl in plaats van haar eigen stijl. Tekst in beeld en effecten kunnen er verkeerd uitzien.",
+      "outlines": {
+        "none": "Geen",
+        "thin": "Dun",
+        "thick": "Dik"
+      },
+      "colors": {
+        "white": "Wit",
+        "yellow": "Geel",
+        "green": "Groen",
+        "cyan": "Cyaan",
+        "gray": "Grijs",
+        "black": "Zwart"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "syncLabel": "Synchronisatie",
+      "syncNow": "Nu synchroniseren",
+      "lastSynced": "Laatst gesynchroniseerd ${time}",
+      "serverLabel": "Synchronisatieserver",
+      "identitiesHeader": "Inlogmethoden",
+      "linkIdentity": "Inlogmethode toevoegen",
+      "devicesHeader": "Apparaten",
+      "thisDevice": "Dit apparaat",
+      "activeNow": "Nu actief",
+      "lastActive": "Actief ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} is uitgelogd.",
+      "identityRemoved": "De inlogmethode via ${provider} is verwijderd.",
+      "cancel": "Annuleren",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Single sign-on"
+      },
+      "link": {
+        "start": "Nieuw apparaat koppelen",
+        "title": "Apparaat koppelen",
+        "instructions": "Kies op het nieuwe apparaat voor koppelen via een ander apparaat. Voer daarna de code in die het toont, of scan de QR-code.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Doorgaan",
+        "question": "“${name}” koppelen?",
+        "consequence": "Het apparaat wordt ingelogd op dit account, met de bijbehorende profielen, add-ons en bibliotheek.",
+        "approve": "Koppelen",
+        "reject": "Niet koppelen",
+        "approved": "${name} is gekoppeld. De rest van de installatie gaat vanzelf.",
+        "rejected": "${name} is niet gekoppeld.",
+        "expired": "De code is verlopen. Begin opnieuw op het nieuwe apparaat.",
+        "done": "Klaar"
+      },
+      "signOut": {
+        "action": "Uitloggen",
+        "title": "Uitloggen?",
+        "message": "Profielen, add-ons, bibliotheek en downloads worden van dit apparaat verwijderd. Alles behalve de downloads blijft in het account: log opnieuw in om het terug te krijgen.",
+        "confirm": "Uitloggen"
+      },
+      "delete": {
+        "action": "Account verwijderen",
+        "explanation": "Verwijdert het account en alle gesynchroniseerde gegevens ervan van de server.",
+        "title": "Account verwijderen?",
+        "message": "Het account en de bijbehorende profielen, add-ons, bibliotheek en geschiedenis worden definitief van de server verwijderd, en elk apparaat wordt uitgelogd. Dit kan niet ongedaan worden gemaakt.",
+        "confirm": "Account verwijderen"
+      },
+      "revoke": {
+        "title": "${name} uitloggen?",
+        "message": "${name} wordt uitgelogd en verdwijnt uit de apparaten van het account. Het kan later opnieuw worden gekoppeld.",
+        "messageThisDevice": "Dit is het apparaat dat je nu gebruikt. Het wordt uitgelogd en de profielen, add-ons, bibliotheek en downloads worden ervan verwijderd. Alles behalve de downloads blijft in het account.",
+        "confirm": "Apparaat uitloggen",
+        "confirmNamed": "Apparaat uitloggen: ${name}"
+      },
+      "unsynced": {
+        "title": "Niet-gesynchroniseerde wijzigingen verwijderen?",
+        "message": {
+          "one": "${n} wijziging op dit apparaat, zoals kijkvoortgang of een aanpassing in de bibliotheek, heeft het account niet bereikt. Als je nu uitlogt, wordt die definitief verwijderd. Met Annuleren blijft die hier en blijft dit apparaat ingelogd.",
+          "other": "${n} wijzigingen op dit apparaat, zoals kijkvoortgang of aanpassingen in de bibliotheek, hebben het account niet bereikt. Als je nu uitlogt, worden ze definitief verwijderd. Met Annuleren blijven ze hier en blijft dit apparaat ingelogd."
+        },
+        "confirm": "Uitloggen en verwijderen"
+      },
+      "unlink": {
+        "title": "Inlogmethode via ${provider} verwijderen?",
+        "message": "Je kunt dan niet meer met ${provider} inloggen op dit account.",
+        "confirm": "Verwijderen",
+        "action": "Inlogmethode via ${name} verwijderen"
+      }
+    },
+    "trackers": {
+      "title": "Trackers",
+      "note": "Gekoppelde diensten krijgen te zien wat dit profiel kijkt: de kijkvoortgang en titels die als bekeken zijn gemarkeerd. Een dienst koppelen of ontkoppelen geldt voor dit profiel op al je apparaten; de schakelaars hieronder gelden alleen voor dit apparaat.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Gekoppeld",
+      "connectedAs": "Gekoppeld als ${user}",
+      "notConnected": "Niet gekoppeld",
+      "unavailable": "Niet beschikbaar in deze versie van de app",
+      "connect": "Koppelen",
+      "connectNamed": "${name} koppelen",
+      "disconnect": "Ontkoppelen",
+      "disconnectNamed": "${name} ontkoppelen",
+      "scrobble": "Versturen wat je kijkt",
+      "scrobbleHint": "Kijkvoortgang en bekeken titels gaan naar ${service}",
+      "filtersHeader": "Te versturen",
+      "movies": "Films",
+      "series": "Series",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} wijziging wacht op verzending",
+        "other": "${n} wijzigingen wachten op verzending"
+      },
+      "notSent": {
+        "one": "${n} wijziging kon niet worden verzonden (laatste: ${reason})",
+        "other": "${n} wijzigingen konden niet worden verzonden (laatste: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} antwoordde met fout ${status}",
+        "refused": "${service} weigerde de wijziging",
+        "unreadable": "de wijziging kon niet worden gelezen"
+      },
+      "connectTitle": "${service} koppelen",
+      "starting": "Contact maken met ${service}…",
+      "waiting": "Wachten tot je Tortuga toegang geeft op ${service}…",
+      "linkInstructions": "Log in bij ${service} in je browser en geef Tortuga toegang.",
+      "linkScan": "Of scan de QR-code met je telefoon en log daar in.",
+      "openInBrowser": "Openen in browser",
+      "expired": "De code is verlopen voordat hij werd gebruikt.",
+      "declined": "${service} heeft de koppeling niet toegestaan.",
+      "unreachable": "Kan ${service} niet bereiken. Controleer de verbinding en probeer het opnieuw.",
+      "serverUnreachable": "Kan je Tortuga-server niet bereiken. Controleer de verbinding en probeer het opnieuw.",
+      "needsAccount": "Voor het koppelen van ${service} is een Tortuga-account nodig. Log eerst in op je account.",
+      "busy": "${service} is bezet. Probeer het over een minuut opnieuw.",
+      "refused": "${service} heeft het inloggen geweigerd.",
+      "failed": "Koppelen met ${service} is mislukt.",
+      "retry": "Opnieuw proberen",
+      "connectedNotice": "Gekoppeld aan ${service} als ${user}.",
+      "connectedNoticeNoName": "Gekoppeld aan ${service}.",
+      "disconnectTitle": "${service} ontkoppelen?",
+      "disconnectMessage": "Dit profiel stuurt op al je apparaten niet langer naar ${service} wat het kijkt, en wijzigingen die nog wachten worden verwijderd. Je ${service}-account houdt alles wat het al heeft.",
+      "disconnectedNotice": "Ontkoppeld van ${service}.",
+      "actionFailed": "Dat is niet gelukt. Probeer het opnieuw."
+    },
+    "downloads": {
+      "title": "Downloads",
+      "note": "Deze instellingen gelden alleen voor dit apparaat en worden niet gesynchroniseerd.",
+      "location": {
+        "title": "Locatie",
+        "hint": "Waar nieuwe downloads worden opgeslagen. Downloads die al zijn opgeslagen, blijven waar ze staan.",
+        "deviceStorage": "Interne opslag",
+        "external": "Externe opslag",
+        "change": "Map wijzigen"
+      },
+      "transferHeader": "Downloaden",
+      "wifiOnly": "Alleen downloaden via Wi-Fi",
+      "wifiOnlyHint": "Downloads wachten zolang het netwerk een datalimiet heeft, zoals bij mobiele data",
+      "atOnce": "Gelijktijdige downloads",
+      "atOnceHint": "Hoeveel downloads er tegelijk lopen",
+      "autoRemoveWatched": "Bekeken downloads verwijderen",
+      "autoRemoveWatchedHint": "Een download wordt verwijderd zodra hij is bekeken, nooit tijdens het afspelen",
+      "subtitleLanguages": "Op te slaan ondertiteling",
+      "subtitleLanguagesHint": "Ondertiteling in deze talen wordt bij elke download opgeslagen",
+      "subtitleLanguagesProfile": "Jouw ondertiteltalen: ${languages}",
+      "subtitleLanguagesProfileNone": "Jouw ondertiteltalen: geen",
+      "subtitleLanguagesExplanation": "Ondertiteling in deze talen wordt bij elke download opgeslagen, zodat je die ook zonder verbinding ziet.",
+      "useProfileLanguages": "Mijn ondertiteltalen gebruiken",
+      "storageHeader": "Opslag",
+      "deleteAll": "Alle downloads verwijderen",
+      "deleteAllTitle": "Alle downloads verwijderen?",
+      "deleteAllText": "Hiermee worden alle downloads op dit apparaat verwijderd, voor elk profiel.",
+      "deleteAllConfirm": "Alles verwijderen"
+    },
+    "data": {
+      "exportHeader": "Exporteren",
+      "categories": {
+        "addons": "Add-ons",
+        "addonsHint": "Geïnstalleerde add-ons in hun volgorde, met hun links",
+        "library": "Bibliotheek",
+        "libraryHint": "De titels die je hebt bewaard",
+        "progress": "Kijkvoortgang",
+        "progressHint": "Waar je bent gestopt en wat je hebt bekeken",
+        "settings": "Profielinstellingen",
+        "settingsHint": "Afspelen, streams, Home-rijen en de andere instellingen die worden gesynchroniseerd",
+        "streams": "Streamgeschiedenis",
+        "streamsHint": "De laatst afgespeelde stream van elke video"
+      },
+      "profilesHeader": "Profielen",
+      "privateNote": "Het bestand bevat de links van je add-ons en je streamgeschiedenis, waarin API-sleutels kunnen staan. Houd het privé: iedereen met het bestand kan ze gebruiken.",
+      "exportNote": "Pincodes, trackeraccounts, downloads en de instellingen van dit apparaat komen nooit in het bestand.",
+      "exportAction": "Exporteren naar bestand",
+      "saved": "${name} opgeslagen.",
+      "saveFailed": "Het bestand kon niet worden opgeslagen.",
+      "exportFailed": "Het exporteren is mislukt.",
+      "importHeader": "Importeren",
+      "importNote": "Opent een bestand dat met Tortuga is geëxporteerd. Per item krijgen de nieuwste gegevens voorrang, en er wordt niets op dit apparaat verwijderd.",
+      "importAction": "Importeren uit bestand",
+      "reviewTitle": "Importeren",
+      "source": "Geëxporteerd op ${date} met Tortuga ${version}",
+      "sourceUndated": "Geëxporteerd met Tortuga ${version}",
+      "dataHeader": "Gegevens",
+      "counts": {
+        "addons": {
+          "one": "${n} add-on",
+          "other": "${n} add-ons"
+        },
+        "titles": {
+          "one": "${n} titel",
+          "other": "${n} titels"
+        },
+        "progress": {
+          "one": "voortgang van ${n} titel",
+          "other": "voortgang van ${n} titels"
+        },
+        "settings": {
+          "one": "${n} instelling",
+          "other": "${n} instellingen"
+        },
+        "streams": {
+          "one": "${n} stream",
+          "other": "${n} streams"
+        },
+        "profiles": {
+          "one": "${n} profiel",
+          "other": "${n} profielen"
+        }
+      },
+      "into": "Naar",
+      "intoSame": "Naar ${name} op dit account",
+      "newProfile": "Een nieuw profiel",
+      "importConfirm": "Importeren",
+      "imported": "Import voltooid: ${changes}.",
+      "nothingNew": "Niets nieuws om te importeren: alles in het bestand stond hier al.",
+      "notTortuga": "Dit bestand is geen Tortuga-export. Er is niets geïmporteerd.",
+      "newer": "Dit bestand komt van een nieuwere versie van Tortuga. Werk Tortuga bij en importeer het daarna opnieuw.",
+      "damaged": "Dit bestand is beschadigd of onvolledig. Er is niets geïmporteerd.",
+      "clockAhead": "De tijden in dit bestand liggen ver voor op de klok van dit apparaat. Controleer de datum en tijd op beide apparaten en importeer het daarna opnieuw. Er is niets geïmporteerd.",
+      "importFailed": "Het importeren is mislukt.",
+      "unreadable": "Het bestand kon niet worden geopend. Er is niets geïmporteerd."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Bijgewerkt",
+      "syncing": "Synchroniseren…",
+      "offline": "Offline. Wijzigingen worden gesynchroniseerd zodra de verbinding terug is.",
+      "signedOut": "Uitgelogd",
+      "failed": {
+        "server": "De synchronisatieserver had een probleem. Zo meteen volgt een nieuwe poging.",
+        "rateLimited": "De synchronisatieserver vroeg om het rustiger aan te doen. Zo meteen volgt een nieuwe poging.",
+        "quotaExceeded": "De opslag van het account is vol, dus wijzigingen worden niet gesynchroniseerd.",
+        "tooLarge": "Sommige wijzigingen zijn te groot om te synchroniseren.",
+        "addonsTooLarge": "De add-ons van een profiel zijn te groot om te synchroniseren. Verwijder add-ons die het niet gebruikt.",
+        "clockWrong": "Sommige wijzigingen kunnen niet worden gesynchroniseerd. Controleer de datum en tijd op je apparaten.",
+        "unknown": "Synchroniseren mislukt. Zo meteen volgt een nieuwe poging."
+      }
+    },
+    "error": {
+      "network": "Kan de synchronisatieserver niet bereiken. Controleer de verbinding en probeer het opnieuw.",
+      "server": "De synchronisatieserver had een probleem. Probeer het later opnieuw.",
+      "rateLimited": "Te veel pogingen. Wacht even en probeer het opnieuw.",
+      "invalidServerUrl": "Dit is geen serveradres. Voer er een in zoals https://sync.example.com.",
+      "insecureServerUrl": "Gebruik https voor een server op internet. Gewone http werkt alleen voor een server in je eigen netwerk.",
+      "notTortugaServer": "Op dit adres reageerde geen Tortuga-synchronisatieserver.",
+      "incompatibleServer": "Deze server draait een oudere versie van Tortuga-synchronisatie en kan niet worden gebruikt.",
+      "providerNotEnabled": "Deze server biedt deze manier van inloggen niet aan.",
+      "signInRejected": "Het inloggen is niet gelukt. Probeer het opnieuw.",
+      "appleCodeRejected": "Apple heeft het inloggen niet geaccepteerd. Probeer het opnieuw.",
+      "providerUnavailable": "De inlogdienst kon niet worden bereikt. Probeer het later opnieuw.",
+      "signInCancelled": "Inloggen is geannuleerd.",
+      "signInExpired": "Het inloggen duurde te lang. Begin opnieuw.",
+      "identityInUse": "Deze inlogmethode hoort al bij een ander Tortuga-account.",
+      "lastIdentity": "Dit is de enige manier om in te loggen op het account, dus deze kan niet worden verwijderd.",
+      "sessionEnded": "Dit apparaat is uitgelogd. Log opnieuw in.",
+      "sessionUnreadable": "De inloggegevens van dit apparaat konden niet worden gelezen uit de beveiligde opslag van het systeem. Start Tortuga opnieuw om het nog eens te proberen.",
+      "notSignedIn": "Log eerst in.",
+      "notFound": "Dit bestaat niet meer op de server.",
+      "linkCodeInvalid": "Codes bestaan uit 8 letters en cijfers, zoals ABCD-EFGH.",
+      "linkNotFound": "Er wacht geen apparaat met deze code. Controleer de code of begin opnieuw op het nieuwe apparaat.",
+      "linkOtherServer": "Het andere apparaat gebruikt een andere synchronisatieserver.",
+      "linkFailed": "De koppeling kon niet worden voltooid. Begin opnieuw.",
+      "tooLarge": "Dit is te groot voor de synchronisatieserver.",
+      "quotaExceeded": "De opslag van het account is vol.",
+      "unsynced": {
+        "one": "${n} wijziging op dit apparaat is nog niet met het bijbehorende account gesynchroniseerd.",
+        "other": "${n} wijzigingen op dit apparaat zijn nog niet met het bijbehorende account gesynchroniseerd."
+      },
+      "unexpected": "Er is iets misgegaan. Probeer het opnieuw."
+    },
+    "deletion": {
+      "done": "Het account en de gegevens ervan zijn verwijderd.",
+      "appleRevoked": "Het account en de gegevens ervan zijn verwijderd, en Tortuga gebruikt je Apple ID niet meer.",
+      "appleManual": "Het account en de gegevens ervan zijn verwijderd. Verwijder Tortuga ter afronding via Instellingen → Apple ID → Log in met Apple.",
+      "githubManual": "Je kunt Tortuga uit je GitHub-account verwijderen via ${address}."
+    },
+    "switchAccount": {
+      "title": "Niet-gesynchroniseerde wijzigingen verwijderen?",
+      "message": {
+        "one": "Dit is een ander account dan het account waarop dit apparaat was ingelogd. ${n} wijziging die hier onder dat andere account is gemaakt, zoals kijkvoortgang of een aanpassing in de bibliotheek, heeft het nooit bereikt. Inloggen verwijdert die definitief, samen met de rest van de gegevens van dat account op dit apparaat, downloads inbegrepen.",
+        "other": "Dit is een ander account dan het account waarop dit apparaat was ingelogd. ${n} wijzigingen die hier onder dat andere account zijn gemaakt, zoals kijkvoortgang of aanpassingen in de bibliotheek, hebben het nooit bereikt. Inloggen verwijdert ze definitief, samen met de rest van de gegevens van dat account op dit apparaat, downloads inbegrepen."
+      },
+      "confirm": "Verwijderen en inloggen",
+      "cancel": "Annuleren",
+      "kept": "Niet ingelogd. De wijzigingen blijven op dit apparaat tot je inlogt op het account waarin ze zijn gemaakt."
+    },
+    "browser": {
+      "signedIn": "Ingelogd. Je kunt dit tabblad sluiten en teruggaan naar Tortuga.",
+      "failed": "Inloggen is niet voltooid. Ga terug naar Tortuga en probeer het opnieuw."
+    },
+    "signIn": {
+      "title": "Inloggen bij Tortuga",
+      "intro": "Met een Tortuga-account blijven je profielen, add-ons en bibliotheek op elk apparaat gesynchroniseerd.",
+      "apple": "Log in met Apple",
+      "google": "Inloggen met Google",
+      "github": "Inloggen met GitHub",
+      "oidc": "Inloggen met ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Koppelen via ander apparaat",
+      "linkDeviceHint": "Al ingelogd op een telefoon of computer? Koppel dit apparaat dan met een code.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Eigen server gebruiken",
+      "useHostedServer": "Tortuga-server gebruiken",
+      "serverField": "Serveradres",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Doorgaan",
+      "checkingServer": "Server controleren…",
+      "loadingOptions": "Inlogopties laden…",
+      "noOptions": "Deze server biedt geen manier om op dit apparaat in te loggen. Koppel het in plaats daarvan via een ingelogd apparaat.",
+      "retry": "Opnieuw proberen",
+      "starting": "Inloggen starten…",
+      "native": "Inloggen met ${provider}…",
+      "browser": "Ga verder in de browser. Dit scherm gaat verder zodra je daar bent ingelogd.",
+      "finishing": "Inloggen afronden…",
+      "cancel": "Annuleren",
+      "deviceCode": {
+        "instructions": "Ga op een telefoon of computer naar ${url} en voer deze code in:",
+        "scan": "Of scan de QR-code met je telefoon.",
+        "qrDescription": "QR-code om te scannen met je telefoon",
+        "expires": "De code verloopt over ${time}.",
+        "waiting": "Wachten tot je inlogt…"
+      }
+    },
+    "link": {
+      "title": "Dit apparaat koppelen",
+      "instructions": "Open op een ingelogd apparaat Instellingen, dan Account, dan Nieuw apparaat koppelen. Scan daar deze QR-code of voer de code in.",
+      "qrDescription": "QR-code om te scannen op het ingelogde apparaat",
+      "starting": "Code ophalen…",
+      "expires": "De code verloopt over ${time}.",
+      "waiting": "Wachten op goedkeuring op het andere apparaat…",
+      "rejected": "Het andere apparaat heeft de koppeling geweigerd.",
+      "expired": "De code is verlopen voordat hij werd gebruikt.",
+      "newCode": "Nieuwe code ophalen"
+    },
+    "identityLink": {
+      "title": "Inlogmethode toevoegen",
+      "intro": "Koppel nog een manier om in te loggen, zodat je niet buitengesloten raakt als je één account kwijtraakt.",
+      "allLinked": "Elke inlogmethode die dit apparaat biedt, is al gekoppeld.",
+      "linking": "Koppelen…"
+    }
+  },
+  "profiles": {
+    "title": "Wie kijkt er?",
+    "manageTitle": "Profielen beheren",
+    "manage": "Profielen beheren",
+    "done": "Klaar",
+    "add": "Profiel toevoegen",
+    "empty": "Maak een profiel aan om te beginnen.",
+    "loading": "Je profielen laden…",
+    "current": "Huidig profiel",
+    "switchProfile": "Profiel wisselen",
+    "pin": {
+      "title": "Voer de pincode voor ${name} in",
+      "wrong": "Verkeerde pincode. Probeer het opnieuw.",
+      "lockedOut": "Te veel pogingen. Probeer het over ${time} opnieuw.",
+      "cancel": "Annuleren",
+      "backspace": "Laatste cijfer wissen",
+      "entered": "${count} van ${total} cijfers ingevoerd"
+    },
+    "editor": {
+      "newTitle": "Nieuw profiel",
+      "editTitle": "Profiel bewerken",
+      "name": "Naam",
+      "nameRequired": "Voer een naam in.",
+      "nameTooLong": {
+        "one": "Een naam mag maximaal ${n} teken hebben.",
+        "other": "Een naam mag maximaal ${n} tekens hebben."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Geen pincode",
+      "pinOn": "Vergrendeld met pincode",
+      "setPin": "Pincode instellen",
+      "changePin": "Pincode wijzigen",
+      "removePin": "Pincode verwijderen",
+      "pinEnter": "Voer een pincode van 4 cijfers in",
+      "pinConfirm": "Voer de pincode nogmaals in",
+      "pinMismatch": "De pincodes kwamen niet overeen. Voer een nieuwe in.",
+      "pinNote": "Een pincode houdt anderen op je apparaten uit dit profiel. Het is een slot, geen wachtwoord.",
+      "save": "Opslaan",
+      "create": "Profiel aanmaken",
+      "cancel": "Annuleren",
+      "delete": "Profiel verwijderen",
+      "deleteConfirm": "${name} verwijderen? De add-ons, bibliotheek en geschiedenis van dit profiel worden op elk apparaat verwijderd. Dit kan niet ongedaan worden gemaakt.",
+      "deleteAction": "Verwijderen",
+      "saveFailed": "Kan het profiel niet opslaan. Probeer het opnieuw.",
+      "kids": {
+        "title": "Kinderprofiel",
+        "subtitle": "Toont alleen titels die zijn aanbevolen voor leeftijden tot het niveau dat je kiest. De meeste aanbevolen leeftijden zijn schattingen, geen officiële classificaties.",
+        "needsParent": "Stel eerst een pincode in op een profiel voor volwassenen: wie een kinderprofiel verlaat, moet die invoeren.",
+        "newOnly": "Alleen een nieuw profiel kan een kinderprofiel worden.",
+        "capTitle": "Hoogste aanbevolen leeftijd",
+        "capLittle": "Kleintjes",
+        "capLittleAges": "Aanbevolen 0+",
+        "capKids": "Kinderen",
+        "capKidsAges": "Kleintjes, plus aanbevolen 6+",
+        "capTeen": "Tieners",
+        "capTeenAges": "Kinderen, plus aanbevolen 12+",
+        "allowUnrated": "Titels zonder classificatie toestaan",
+        "allowUnratedNote": "Titels zonder aanbevolen leeftijd. Zolang dit uit staat, staat een ouder ze een voor een toe.",
+        "homeRows": "Home-rijen",
+        "homeRowsNote": "Optioneel. Ook titels in deze rijen moeten binnen de hoogste aanbevolen leeftijd vallen.",
+        "familyMovies": "Familiefilms",
+        "familySeries": "Familieseries",
+        "addonMissing": "De add-on ervan is niet geïnstalleerd in dit profiel.",
+        "allowed": "Toegestane titels",
+        "allowedNone": "Nog geen. Een ouder staat een titel toe vanaf de pagina ervan.",
+        "blocked": "Geblokkeerde titels",
+        "blockedNone": "Nog geen. Een ouder blokkeert een titel vanaf de pagina ervan.",
+        "remove": "${title} verwijderen",
+        "leaving": "Wie dit profiel verlaat, moet de pincode van een ouder invoeren.",
+        "off": "Links, add-ons en de meeste instellingen staan uit.",
+        "addons": "Video's komen van de add-ons van dit profiel. Tortuga controleert ze niet."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafiet",
+      "slate": "Leisteen",
+      "silver": "Zilver",
+      "ivory": "Ivoor",
+      "sand": "Zand",
+      "clay": "Klei",
+      "rose": "Roze",
+      "plum": "Pruim",
+      "dusk": "Schemer",
+      "sea": "Zee",
+      "sage": "Salie",
+      "moss": "Mos"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Niet beschikbaar op dit profiel",
+      "suggested": "Aanbevolen ${age}+",
+      "byAddon": "De add-on vindt het voor oudere kijkers",
+      "notRated": "Geen aanbevolen leeftijd",
+      "byParent": "Geblokkeerd door een ouder",
+      "unchecked": "De aanbevolen leeftijd kon niet worden gecontroleerd. Probeer het later opnieuw.",
+      "ask": "Een ouder vragen"
+    },
+    "block": "Blokkeren op dit profiel",
+    "pin": {
+      "title": "Voer de pincode van een ouder in",
+      "allow": "Om ${title} toe te staan op dit profiel",
+      "allowThis": "Om deze titel toe te staan op dit profiel",
+      "block": "Om ${title} te blokkeren op dit profiel",
+      "leave": "Om dit profiel te verlaten",
+      "settings": "Om deze instellingen te openen"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Alles",
+      "movie": "Films",
+      "series": "Series",
+      "channel": "Kanalen",
+      "tv": "Tv-zenders",
+      "other": "Overig"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Opnieuw",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Alles bekijken",
+      "downloading": "Downloaden: ${count}, ${percent}%",
+      "downloadingUnsized": "Downloaden: ${count}",
+      "empty": "Nog niets te zien. Installeer add-ons met catalogi om deze pagina te vullen.",
+      "allHidden": "Alle rijen van Home zijn verborgen. Via Instellingen → Home toon je ze weer."
+    },
+    "continueWatching": {
+      "title": "Verder kijken",
+      "episode": "Aflevering ${episode}",
+      "upNext": "Volgende",
+      "minutesLeft": "Nog ${minutes} min",
+      "hoursLeft": "Nog ${hours} u",
+      "hoursMinutesLeft": "Nog ${hours} u ${minutes} min",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Kijklijst",
+      "recommended": "Aanbevolen",
+      "trending": "Trending",
+      "planToWatch": "Wil ik zien",
+      "planning": "Gepland",
+      "airing": "Nu op tv",
+      "list": "Lijst",
+      "unreachable": "Kan ${service} niet bereiken.",
+      "signedOut": "${service} heeft je uitgelogd. Koppel het opnieuw in Instellingen.",
+      "failed": "${service} antwoordde niet zoals verwacht."
+    },
+    "discover": {
+      "type": "Type",
+      "catalog": "Catalogus",
+      "genre": "Genre",
+      "all": "Alle",
+      "empty": "Deze catalogus heeft niets om te tonen.",
+      "noCatalogs": "Geen van de geïnstalleerde add-ons heeft een catalogus om te bladeren.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Zoek films, series en meer",
+      "recent": "Recente zoekopdrachten",
+      "clearRecent": "Wissen",
+      "removeRecentNamed": "${name} verwijderen",
+      "noResults": "Geen resultaten voor “${query}”",
+      "noCatalogs": "Geen van de geïnstalleerde add-ons kan zoeken.",
+      "clearQuery": "Zoekopdracht wissen",
+      "hint": "Vind films, series en meer in de catalogi van je add-ons."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Home",
+      "discover": "Ontdekken",
+      "search": "Zoeken",
+      "library": "Bibliotheek",
+      "settings": "Instellingen"
+    },
+    "shortLabel": {
+      "board": "Home",
+      "library": "Bibliotheek",
+      "search": "Zoeken",
+      "settings": "Opties"
+    },
+    "back": "Terug",
+    "retry": "Opnieuw",
+    "close": "Sluiten",
+    "dismiss": "Negeren",
+    "qrFailed": "Deze link kan niet als QR-code worden getoond.",
+    "openOnPhone": {
+      "title": "Openen op je telefoon",
+      "message": "Dit apparaat kan deze link niet openen. Scan de code met de camera van je telefoon om hem daar te openen.",
+      "qrDescription": "QR-code van de link"
+    },
+    "player": {
+      "close": "Speler sluiten",
+      "fullscreen": "Volledig scherm",
+      "exitFullscreen": "Volledig scherm sluiten",
+      "rewind": "Terugspoelen",
+      "fastForward": "Vooruitspoelen",
+      "pictureInPicture": "Beeld-in-beeld"
+    },
+    "menu": {
+      "playback": "Afspelen",
+      "nextSubtitles": "Volgend ondertitelingsspoor",
+      "nextAudio": "Volgend audiospoor"
+    }
+  },
+  "watch": {
+    "title": "Samen kijken",
+    "intro": "Kijk synchroon met vrienden, ieder op een eigen apparaat. Iedereen speelt dezelfde titel af via de eigen add-ons. Start een kamer in de speler via Meer regelaars en dan Samen kijken.",
+    "controlMode": {
+      "hostOnly": "Alleen ik bedien",
+      "hostOnlyDetail": "Iedereen volgt als jij afspeelt, pauzeert of spoelt",
+      "anyone": "Iedereen bedient",
+      "anyoneDetail": "Iedereen in de kamer kan afspelen, pauzeren of spoelen"
+    },
+    "joinTitle": "Deelnemen aan kamer",
+    "joinHint": "Code of uitnodigingslink",
+    "joinLabel": "Deelnemen",
+    "joinInvalid": "Voer een kamercode van 6 tekens of een uitnodigingslink in",
+    "recentTitle": "Recente kamers",
+    "recentUsed": "Gebruikt ${time}",
+    "removeRecentNamed": "${name} verwijderen",
+    "invite": {
+      "title": "Deelnemen aan kamer ${code}? Die staat op ${server}, niet op je relayserver.",
+      "join": "Deelnemen",
+      "leaveTitle": "Kamer verlaten om deel te nemen aan kamer ${code}? Die staat op ${server}, niet op je relayserver.",
+      "leaveHostTitle": "Kamer verlaten om deel te nemen aan kamer ${code}? Die staat op ${server}, niet op je relayserver. Deze kamer gaat verder met de volgende deelnemer als host."
+    },
+    "relay": {
+      "checking": "Relay controleren…",
+      "unreachable": "Kan de relay op ${server} niet bereiken.",
+      "retry": "Opnieuw proberen",
+      "title": "Relayserver",
+      "hint": "De relay die kamers voor Samen kijken verbindt. Laat dit leeg om de openbare relays van Open Watch Party te gebruiken.",
+      "hosted": "Openbare relays van Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Voer een relayadres in dat begint met http:// of https://",
+      "save": "Opslaan",
+      "reset": "Openbare relays gebruiken"
+    },
+    "busy": {
+      "creating": "Kamer starten…",
+      "joining": "Deelnemen aan kamer…"
+    },
+    "dismiss": "Negeren",
+    "room": {
+      "codeLabel": "Kamercode",
+      "copyCode": "Code kopiëren",
+      "codeCopied": "Code gekopieerd",
+      "share": "Uitnodiging delen",
+      "shareText": "Kijk met me mee op Tortuga: open ${link} of voer kamercode ${code} in.",
+      "scan": "Scan met een telefoon om deel te nemen",
+      "youHost": "Jij bent de host",
+      "hostedBy": "Host: ${name}",
+      "hostOnly": "Alleen de host bedient het afspelen",
+      "anyone": "Iedereen bedient het afspelen",
+      "reconnecting": "Opnieuw verbinden…",
+      "hostReconnecting": "Wachten tot ${name} opnieuw verbinding maakt…",
+      "nowPlaying": "${title} wordt afgespeeld",
+      "nowPlayingEpisode": "${title} · ${episode} wordt afgespeeld",
+      "idleHost": "Speel iets af: iedereen in de kamer kijkt met je mee.",
+      "idleGuest": "Wachten tot ${name} iets afspeelt.",
+      "participants": {
+        "one": "${n} deelnemer",
+        "other": "${n} deelnemers"
+      },
+      "you": "${name} (jij)",
+      "hostBadge": "Host",
+      "makeHost": "Tot host maken",
+      "makeHostNamed": "${name} tot host maken",
+      "joinPlayback": "Meekijken",
+      "leave": "Kamer verlaten",
+      "leaveTitle": "Kamer verlaten?",
+      "leaveConfirm": "Verlaten",
+      "end": "Kamer sluiten",
+      "endTitle": "Kamer voor iedereen sluiten?",
+      "endConfirm": "Kamer sluiten",
+      "cancel": "Annuleren",
+      "leaveHostTitle": "Kamer verlaten? De kamer gaat verder met de volgende deelnemer als host.",
+      "kickNamed": "${name} verwijderen",
+      "kickTitle": "${name} uit de kamer verwijderen?",
+      "kickConfirm": "Verwijderen",
+      "lock": "Kamer vergrendelen",
+      "lockDetail": "Er kan niemand nieuw meedoen",
+      "controlTitle": "Wie het afspelen bedient"
+    },
+    "status": {
+      "ready": "Klaar",
+      "loading": "Laden",
+      "matching": "Bestand zoeken",
+      "buffering": "Bufferen",
+      "sameLength": "Zelfde lengte (${delta})",
+      "longer": "${delta} langer",
+      "shorter": "${delta} korter",
+      "noStream": "Geen stream gevonden",
+      "searchFailed": "Zoeken in add-ons mislukt",
+      "notPlaying": "Niet in de speler",
+      "away": "Verbinding verbroken",
+      "declined": "Speelt niet af",
+      "offset": "Verschuiving ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Kamer ${code}",
+      "startTitle": "Kamer starten met wat er nu speelt",
+      "liveNoRoom": "Een livestream kun je niet samen kijken",
+      "watching": {
+        "one": "${n} kijker",
+        "other": "${n} kijken samen"
+      },
+      "hostBadge": "HOST",
+      "waiting": "Wachten op ${names}…",
+      "waitingMore": {
+        "one": "Wachten op ${names} en nog ${n} persoon…",
+        "other": "Wachten op ${names} en nog ${n} personen…"
+      },
+      "syncing": "Synchroniseren…",
+      "matchingStart": "Bestand zoeken dat overeenkomt met dat van ${name}…",
+      "longer": "Jouw bestand is ${delta} langer dan dat van ${name}",
+      "shorter": "Jouw bestand is ${delta} korter dan dat van ${name}",
+      "mismatchDetail": "Het is misschien een andere versie, dus jullie posities lopen mogelijk niet gelijk.",
+      "playAnyway": "Toch afspelen",
+      "chooseStream": "Andere stream kiezen",
+      "noStream": "Geen van je add-ons heeft een stream voor ${title}.",
+      "searchFailed": "Sommige van je add-ons konden niet worden doorzocht op ${title}.",
+      "chooseAStream": "Kies een stream",
+      "pickFailed": "Die stream kon niet worden geopend.",
+      "hostControls": "Alleen ${name} bedient het afspelen in deze kamer",
+      "hostControlsUnnamed": "Alleen de host bedient het afspelen in deze kamer",
+      "pausedHere": "Gepauzeerd op dit apparaat. Druk op Afspelen om de kamer bij te halen.",
+      "dontPlay": "Niet afspelen",
+      "declined": "Je speelt ${title} niet af.",
+      "offsetTitle": "Verschuiving",
+      "offsetDetail": "Verschuift je bestand ten opzichte van dat van de kamer, voor een versie die eerder of later begint.",
+      "offsetReset": "Resetten"
+    },
+    "toast": {
+      "joined": "${name} doet mee",
+      "left": "${name} is vertrokken",
+      "paused": "${name} heeft gepauzeerd",
+      "resumed": "${name} heeft hervat",
+      "seeked": "${name} is naar een andere positie gesprongen",
+      "speed": "${name} heeft de snelheid op ${speed} gezet",
+      "buffering": "${name} is aan het bufferen",
+      "hostChanged": "${name} is nu de host",
+      "becameHost": "Jij bent nu de host",
+      "media": "${name} heeft ${title} gestart",
+      "forbidden": "Alleen de host kan dat doen"
+    },
+    "failure": {
+      "create": "Kan geen kamer starten. Probeer het opnieuw.",
+      "join": "Kan niet deelnemen aan de kamer. Probeer het opnieuw.",
+      "share": "Kan deze video niet met de kamer delen. Probeer een andere stream.",
+      "live": "Een livestream kun je niet samen kijken. De kamer wacht op een video.",
+      "roomNotFound": "Er is geen kamer met die code.",
+      "roomFull": "Die kamer is vol.",
+      "rateLimited": "Te veel pogingen. Wacht een minuut en probeer het opnieuw.",
+      "connection": "Kan de relay niet bereiken. Controleer de verbinding.",
+      "sessionLost": "De verbinding met de kamer is verbroken.",
+      "ended": "De host heeft de kamer gesloten.",
+      "roomLocked": "Die kamer is vergrendeld.",
+      "relayFull": "De relay is vol. Probeer het later opnieuw.",
+      "blocked": "Deze relay accepteert Tortuga niet.",
+      "kicked": "De host heeft je uit de kamer verwijderd.",
+      "expired": "De kamer is verlopen.",
+      "replaced": "Je hebt deze kamer op een ander apparaat betreden."
+    }
+  },
+  "downloads": {
+    "title": "Downloads",
+    "empty": "Nog niets gedownload. Download films en afleveringen via hun pagina om ze zonder verbinding te bekijken.",
+    "offline": "Je bent offline. Downloads gaan verder zodra je weer online bent.",
+    "storage": "${used} gebruikt · ${free} vrij",
+    "storageUsed": "${used} gebruikt",
+    "pauseAll": "Alles pauzeren",
+    "resumeAll": "Alles hervatten",
+    "actionFailed": "Kan de download niet wijzigen. Probeer het opnieuw.",
+    "actionsFailed": "Kan de downloads niet wijzigen. Probeer het opnieuw.",
+    "episodes": {
+      "one": "${n} aflevering",
+      "other": "${n} afleveringen"
+    },
+    "videos": {
+      "one": "${n} video",
+      "other": "${n} video's"
+    },
+    "otherVideos": "Overige video's",
+    "summary": "${count} · ${size}",
+    "progress": "${done} van ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "In wachtrij",
+      "waitingForWifi": "Wachten op Wi-Fi",
+      "waitingForNetwork": "Wachten op verbinding",
+      "resolving": "Voorbereiden…",
+      "downloading": "Downloaden",
+      "downloadingPercent": "Downloaden · ${percent}%",
+      "paused": "Gepauzeerd",
+      "failed": "Mislukt",
+      "completed": "Gedownload",
+      "cancelled": "Geannuleerd"
+    },
+    "action": {
+      "play": "Afspelen",
+      "pause": "Pauzeren",
+      "resume": "Hervatten",
+      "retry": "Opnieuw",
+      "pickStream": "Stream kiezen",
+      "cancel": "Download annuleren",
+      "delete": "Download verwijderen",
+      "deleteGroup": "Downloads verwijderen",
+      "openDetail": "Naar details"
+    },
+    "deleteConfirm": {
+      "title": "${count} van ${name} verwijderen?",
+      "message": "Opnieuw downloaden kost tijd en vraagt om een verbinding.",
+      "confirm": "Verwijderen",
+      "cancel": "Annuleren"
+    },
+    "keepSynced": {
+      "title": "Gesynchroniseerd houden",
+      "note": "Van elke serie hier blijven de volgende niet-bekeken afleveringen op dit apparaat gedownload. Kijk je er een, dan wordt er een nieuwe gedownload.",
+      "empty": "Er worden geen series gesynchroniseerd gehouden. Kies in het downloadmenu van een serie hoeveel niet-bekeken afleveringen je wilt bewaren.",
+      "series": {
+        "one": "${n} serie",
+        "other": "${n} series"
+      },
+      "manage": "“Gesynchroniseerd houden” beheren",
+      "pauseRule": "${title} pauzeren",
+      "resumeRule": "${title} hervatten",
+      "stopRule": "${title} niet meer gesynchroniseerd houden",
+      "status": {
+        "downloading": {
+          "one": "${n} aflevering wordt gedownload",
+          "other": "${n} afleveringen worden gedownload"
+        },
+        "failed": {
+          "one": "${n} aflevering mislukt",
+          "other": "${n} afleveringen mislukt"
+        },
+        "downloaded": {
+          "one": "${n} aflevering gedownload",
+          "other": "${n} afleveringen gedownload"
+        },
+        "downloadedNone": "Geen afleveringen gedownload"
+      },
+      "stop": {
+        "title": "${title} niet meer gesynchroniseerd houden?",
+        "message": {
+          "one": "${n} aflevering in Downloads komt van “Gesynchroniseerd houden”. Ook verwijderen?",
+          "other": "${n} afleveringen in Downloads komen van “Gesynchroniseerd houden”. Ook verwijderen?"
+        },
+        "messageNone": "Er worden geen afleveringen meer gedownload.",
+        "keep": "Downloads bewaren",
+        "delete": "Downloads verwijderen",
+        "confirm": "Stoppen",
+        "cancel": "Annuleren"
+      },
+      "notice": {
+        "one": "“Gesynchroniseerd houden” heeft ${n} aflevering van ${title} toegevoegd",
+        "other": "“Gesynchroniseerd houden” heeft ${n} afleveringen van ${title} toegevoegd"
+      },
+      "noticeSeveral": {
+        "one": "“Gesynchroniseerd houden” heeft ${n} aflevering toegevoegd",
+        "other": "“Gesynchroniseerd houden” heeft ${n} afleveringen toegevoegd"
+      },
+      "actionFailed": "Kan “Gesynchroniseerd houden” niet wijzigen. Probeer het opnieuw."
+    },
+    "failure": {
+      "noStream": "Er kon geen stream voor deze aflevering worden gekozen. Kies er zelf een.",
+      "noStreamInstant": "Er kon geen directe stream voor deze aflevering worden gekozen. Kies er zelf een.",
+      "network": "De verbinding is mislukt.",
+      "http": "De server antwoordde met HTTP ${status}.",
+      "streamGone": "De link is verlopen en de add-on biedt deze stream niet meer aan.",
+      "diskFull": "Het apparaat heeft geen ruimte meer. Downloads zijn gestopt.",
+      "notEnoughSpace": "Er is niet genoeg vrije ruimte voor deze download.",
+      "sizeMismatch": "Het gedownloade bestand is onvolledig.",
+      "unsupported": "Deze stream kan niet worden gedownload.",
+      "locationUnavailable": "De downloadlocatie is niet beschikbaar.",
+      "fileMissing": "Het gedownloade bestand ontbreekt.",
+      "storage": "De opslag van het apparaat reageerde niet."
+    },
+    "notification": {
+      "channel": "Downloads",
+      "title": "${title} wordt gedownload",
+      "count": {
+        "one": "${n} download",
+        "other": "${n} downloads"
+      },
+      "progress": "${percent}%",
+      "preparing": "Download voorbereiden…",
+      "waiting": "Wachten op Wi-Fi",
+      "paused": "Gepauzeerd",
+      "pause": "Pauzeren",
+      "resume": "Hervatten",
+      "cancel": "Annuleren",
+      "failed": "Download mislukt: ${title}",
+      "completed": "${title} is gedownload"
+    }
+  },
+  "offline": {
+    "title": "Je bent offline",
+    "text": "Maak verbinding met internet om te bladeren. Je downloads spelen ook zonder verbinding af.",
+    "textNoDownloads": "Maak verbinding met internet om te bladeren.",
+    "openDownloads": "Naar Downloads",
+    "detail": "Je ziet de details die bij je downloads zijn opgeslagen."
+  },
+  "playerApps": {
+    "chooser": "Elke keer vragen",
+    "tortuga": "Tortuga",
+    "playWith": "Afspelen met…",
+    "banner": {
+      "opening": "Openen in ${player}…",
+      "notInstalled": "${player} is niet geïnstalleerd op dit apparaat.",
+      "didNotStart": "${player} is niet gestart.",
+      "playInTortuga": "Afspelen in Tortuga",
+      "cancel": "Annuleren",
+      "dismiss": "Negeren"
+    },
+    "detail": {
+      "playing": "Wordt afgespeeld in ${player} · ${position}",
+      "playingOf": "Wordt afgespeeld in ${player} · ${position} van ${duration}",
+      "paused": "Gepauzeerd in ${player} · ${position}",
+      "pausedOf": "Gepauzeerd in ${player} · ${position} van ${duration}",
+      "finished": "Geopend in ${player}. Heb je ${title} uitgekeken?",
+      "markWatched": "Markeren als bekeken",
+      "notYet": "Nog niet"
+    },
+    "settings": {
+      "player": "Speler",
+      "deviceOnly": "Alleen dit apparaat",
+      "note": "Video's op dit apparaat worden afgespeeld in de speler die je hier kiest. Met Afspelen met… in het menu van een stream kies je een andere voor één video.",
+      "notFound": "${player} (niet gevonden)",
+      "followsProgress": "Gaat verder waar je was gebleven en slaat je voortgang op tijdens het afspelen",
+      "savesOnReturn": "Gaat verder waar je was gebleven en slaat op waar je stopt",
+      "savesOnReturnFromStart": "Begint bij het begin en slaat daarna op waar je stopt of vraagt of je klaar bent met kijken",
+      "asksAfter": "Gaat verder waar je was gebleven en vraagt daarna of je klaar bent met kijken",
+      "asksAfterFromStart": "Opent alleen de video en vraagt daarna of je klaar bent met kijken",
+      "chooserDetail": "Je apparaat vraagt per video welke app die afspeelt",
+      "customHeader": "Eigen spelers",
+      "addCustom": "Eigen speler toevoegen",
+      "deleteNamed": "${name} verwijderen",
+      "form": {
+        "title": "Eigen speler toevoegen",
+        "name": "Naam",
+        "nameHint": "Mijn speler",
+        "program": "Programma",
+        "programHint": "mpv, of het volledige pad van het programma",
+        "arguments": "Argumenten",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} is de link van de video, {title} de titel, {start} het startpunt in seconden en {subtitle} de link van de eerste ondertitel.",
+        "urlTemplate": "URL-sjabloon",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} is de link van de video, gecodeerd voor een URL, en {url_raw} de ongewijzigde link.",
+        "packageName": "Pakketnaam",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Toevoegen",
+        "cancel": "Annuleren",
+        "nameMissing": "Geef de speler een naam.",
+        "programMissing": "Voer het programma in dat moet worden uitgevoerd.",
+        "urlTemplateMissing": "Voer het URL-sjabloon in.",
+        "packageNameMissing": "Voer de pakketnaam van de app in.",
+        "argumentsNeedUrl": "De argumenten moeten {url} bevatten.",
+        "urlTemplateNeedsUrl": "Het URL-sjabloon moet {url} of {url_raw} bevatten.",
+        "packageNameInvalid": "Dit is geen pakketnaam zoals org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Tv-gids",
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
+    "yesterday": "Gisteren",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Nu op tv",
+    "now": "Nu",
+    "noProgrammes": "Geen programma-informatie",
+    "noChannels": "Deze gids heeft geen zenders voor deze dag.",
+    "noGuide": "Geen geïnstalleerde add-on biedt een tv-gids.",
+    "failed": "De gids kon niet worden geladen: ${reason}",
+    "cast": "Met ${names}",
+    "directors": "Regie: ${names}"
+  },
+  "calendar": {
+    "title": "Kalender",
+    "previousMonth": "Vorige maand",
+    "nextMonth": "Volgende maand",
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
+    "emptyLibrary": "Voeg series toe aan je bibliotheek om hier hun afleveringen te zien.",
+    "noAddon": "Geen van je add-ons heeft een kalender voor de series in je bibliotheek.",
+    "emptyMonth": "Geen afleveringen.",
+    "newEpisodes": {
+      "one": "${n} nieuwe aflevering",
+      "other": "${n} nieuwe afleveringen"
+    },
+    "episodes": {
+      "one": "${n} aflevering",
+      "other": "${n} afleveringen"
+    }
+  },
+  "watchlist": {
+    "lists": "Kijklijsten van trackers",
+    "hint": "Elke lijst staat in je account bij die dienst. Je bibliotheek verandert niet.",
+    "add": "Toevoegen aan ${list}",
+    "remove": "Verwijderen uit ${list}",
+    "trakt": "Trakt-kijklijst",
+    "simkl": "Simkl: Wil ik zien",
+    "mdblist": "MDBList-kijklijst",
+    "myAnimeList": "MyAnimeList: Wil ik zien",
+    "aniList": "AniList: Gepland",
+    "saving": "Opslaan…",
+    "queued": "Nog niet verzonden, wordt opnieuw geprobeerd",
+    "failed": "Niet opgeslagen",
+    "addFailed": "Kon ${title} niet toevoegen aan ${list}.",
+    "removeFailed": "Kon ${title} niet verwijderen uit ${list}."
+  },
+  "collections": {
+    "needsAddon": "Vereist de add-on ${name}",
+    "needsCatalog": "${addon} heeft geen catalogus ${catalog}",
+    "needsFilter": "Vereist een filter dat Tortuga niet kan instellen",
+    "traktUnavailable": "Trakt-lijsten zijn niet beschikbaar in deze versie van de app",
+    "tooLarge": "‘${title}’ is te groot om te synchroniseren",
+    "kind": {
+      "tmdbList": "TMDB-lijst",
+      "tmdbCollection": "TMDB-collectie",
+      "tmdbCompany": "TMDB-studio",
+      "tmdbNetwork": "TMDB-zender",
+      "tmdbDiscover": "TMDB Ontdekken",
+      "tmdbPerson": "TMDB-persoon",
+      "tmdbDirector": "TMDB-regisseur",
+      "letterboxd": "Letterboxd",
+      "unknown": "Onbekende aanbieder ‘${name}’"
+    },
+    "summary": {
+      "adds": {
+        "one": "Voegt ${n} collectie toe",
+        "other": "Voegt ${n} collecties toe"
+      },
+      "replaces": {
+        "one": "Vervangt ${n} collectie met dezelfde id",
+        "other": "Vervangt ${n} collecties met dezelfde id’s"
+      },
+      "needsAddon": {
+        "one": "${n} bron vereist de add-on ${name}",
+        "other": "${n} bronnen vereisen de add-on ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} bron vereist een koppeling met ${service}",
+        "other": "${n} bronnen vereisen een koppeling met ${service}"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} bron weggelaten",
+        "other": "${kind}: ${n} bronnen weggelaten"
+      },
+      "unsupportedHint": "Tortuga leest catalogi van add-ons en lijsten van trackers, niet deze bronnen. Gebruik in plaats daarvan een catalogus van een add-on, zoals die van AIOMetadata of MDBList.",
+      "folderDropped": "Map ‘${folder}’ in ‘${collection}’ weggelaten: geen van de bronnen is leesbaar",
+      "collectionDropped": "Collectie ‘${title}’ weggelaten: geen van de mappen is leesbaar",
+      "tooLarge": "Collectie ‘${title}’ niet geïmporteerd: ze is te groot om te synchroniseren"
+    },
+    "refused": {
+      "notJson": "Dit is geen collectiebestand: het is geen JSON.",
+      "notList": "Dit is geen collectiebestand: het bevat geen lijst met collecties.",
+      "empty": "Dit bestand bevat geen collecties.",
+      "collectionInvalid": "Collectie ${position} in het bestand is niet leesbaar.",
+      "collectionNoId": "Collectie ${position} in het bestand heeft geen id.",
+      "collectionNoTitle": "Collectie ${id} heeft geen titel.",
+      "duplicateCollection": "Twee collecties in het bestand hebben de id ${id}.",
+      "noFolders": "Collectie ‘${collection}’ heeft geen lijst met mappen.",
+      "folderInvalid": "Map ${position} van ‘${collection}’ is niet leesbaar.",
+      "folderNoId": "Map ${position} van ‘${collection}’ heeft geen id.",
+      "folderNoTitle": "Map ${id} van ‘${collection}’ heeft geen titel.",
+      "duplicateFolder": "Twee mappen van ‘${collection}’ hebben de id ${id}.",
+      "noSources": "Map ‘${folder}’ van ‘${collection}’ heeft geen lijst met bronnen.",
+      "unknownShape": "Map ‘${folder}’ van ‘${collection}’ heeft een onbekende tegelvorm: ${shape}.",
+      "sourceInvalid": "Bron ${position} van map ‘${folder}’ in ‘${collection}’ is onvolledig."
+    },
+    "row": "Collectie",
+    "rowSource": {
+      "one": "Collectie · ${n} map",
+      "other": "Collectie · ${n} mappen"
+    },
+    "folder": {
+      "all": "Alle",
+      "empty": "Geen titels hier",
+      "goToTrackers": "Naar Trackers",
+      "goToAddons": "Naar Add-ons"
+    },
+    "importing": {
+      "title": "Collecties importeren",
+      "note": "Een collectiebestand uit Nuvio of AIOMetadata: voer de link in of open het bestand. Een collectie met dezelfde id als een van jouw collecties vervangt die.",
+      "urlLabel": "Link",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Ophalen",
+      "openFile": "Bestand openen",
+      "confirm": "Importeren",
+      "done": "Klaar",
+      "rowNew": {
+        "one": "Nieuw · ${n} map",
+        "other": "Nieuw · ${n} mappen"
+      },
+      "rowReplaces": {
+        "one": "Vervangt de jouwe · ${n} map",
+        "other": "Vervangt de jouwe · ${n} mappen"
+      },
+      "imported": {
+        "one": "${n} collectie geïmporteerd",
+        "other": "${n} collecties geïmporteerd"
+      },
+      "notWeb": "Voer een link in die begint met http:// of https://.",
+      "tooLarge": "Dit bestand is groter dan 4 MB.",
+      "httpError": "De link antwoordde met fout ${status}.",
+      "timeout": "De link antwoordde niet op tijd.",
+      "unreachable": "De link is niet bereikbaar. Controleer de link en je verbinding.",
+      "unreadable": "Dit bestand kan niet als tekst worden gelezen.",
+      "failed": "De collecties konden niet worden opgeslagen."
+    },
+    "editor": {
+      "newHeading": "Nieuwe collectie",
+      "editHeading": "Collectie bewerken",
+      "titleLabel": "Titel",
+      "view": "Weergave",
+      "viewHint": "Hoe een map zijn bronnen toont",
+      "viewTabs": "Tabbladen",
+      "viewRows": "Rijen",
+      "viewFollow": "Zoals de app",
+      "allTab": "Tabblad Alle",
+      "allTabHint": "Een eerste tabblad met de titels van alle bronnen",
+      "foldersHeader": "Mappen",
+      "addFolder": "Map toevoegen",
+      "noFolders": "Nog geen mappen",
+      "sources": {
+        "one": "${n} bron",
+        "other": "${n} bronnen"
+      },
+      "save": "Opslaan",
+      "newFolder": "Nieuwe map",
+      "folderTitleLabel": "Titel",
+      "shape": "Vorm van de tegel",
+      "shapePoster": "Poster",
+      "shapeLandscape": "Liggend",
+      "shapeSquare": "Vierkant",
+      "coverLabel": "Link naar de omslagafbeelding",
+      "coverHint": "https://…",
+      "hideTitle": "Titel verbergen",
+      "hideTitleHint": "De tegel toont alleen de omslag",
+      "sourcesHeader": "Bronnen",
+      "addSource": "Bron toevoegen",
+      "noSources": "Nog geen bronnen",
+      "deleteNamed": "${name} verwijderen",
+      "removeNamed": "${name} weghalen",
+      "noTitle": "Geef de collectie een titel.",
+      "noFolder": "Voeg een map toe aan de collectie.",
+      "folderNoTitle": "Geef map ${position} een titel.",
+      "folderNoSource": "Voeg een bron toe aan ‘${folder}’.",
+      "saveFailed": "De collectie kon niet worden opgeslagen.",
+      "discardTitle": "Wijzigingen weggooien?",
+      "discard": "Weggooien",
+      "keepEditing": "Verder bewerken",
+      "picker": {
+        "addons": "Catalogi van add-ons",
+        "trackers": "Trackers",
+        "noAddons": "Geen enkele geïnstalleerde add-on heeft een catalogus om toe te voegen.",
+        "noTrackers": "Koppel een tracker via Instellingen → Trackers om de lijsten toe te voegen.",
+        "listsFailed": "De lijsten van ${service} kunnen nu niet worden gelezen.",
+        "byLink": "Een lijst van ${service} via de link",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Toevoegen",
+        "notAList": "Dit is geen link naar een lijst van ${service}.",
+        "notFound": "${service} heeft geen lijst op deze link.",
+        "unreachable": "${service} is nu niet bereikbaar."
+      }
+    }
+  }
+}

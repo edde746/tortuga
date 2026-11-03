@@ -1,0 +1,151 @@
+{
+  "store_settings": {
+    "app_category": "Video Players & Editors",
+    "contact_email": "support@usetortuga.app",
+    "contact_website": "https://usetortuga.app/",
+    "privacy_policy": "https://usetortuga.app/privacy/"
+  },
+  "app_access": {
+    "restricted": true,
+    "name": "Reviewer Google account",
+    "username": "demo@usetortuga.app",
+    "password": "{reviewer_password}",
+    "instructions": "Sign in with Google with the reviewer account in the sign-in details (demo@usetortuga.app). On a TV, choose Sign in with Google, then on a phone or computer signed in to that account go to the address the TV shows and enter its code. To see something play, open Settings, then Addons, choose Install addon, enter https://usetortuga.app/demo/manifest.json, then Continue and Install. On Home, in the Tortuga demo row, open Tears of Steel, choose Play and pick the Tortuga demo stream."
+  },
+  "ads": {
+    "contains_ads": false
+  },
+  "advertising_id": {
+    "uses_advertising_id": false
+  },
+  "target_audience": {
+    "age_groups": [
+      "13-15",
+      "16-17",
+      "18 and over"
+    ],
+    "appeals_to_children": false
+  },
+  "news_app": false,
+  "government_app": false,
+  "financial_features": [],
+  "health_features": [],
+  "content_rating_iarc": {
+    "category": "All other app types (a media player; the app has no content of its own)",
+    "violence": false,
+    "fear": false,
+    "sexuality": false,
+    "language": false,
+    "controlled_substances": false,
+    "crude_humour": false,
+    "gambling": false,
+    "discrimination": false,
+    "users_interact": true,
+    "users_interact_why": "Watch together: people in a room see each other's profile names and what plays. No chat, voice or images.",
+    "shares_location": false,
+    "digital_purchases": false,
+    "unrestricted_internet": true,
+    "unrestricted_internet_why": "Addons installed from any link supply catalogs, artwork and streams the app does not control.",
+    "web_browser_or_search_engine": false
+  },
+  "data_safety": {
+    "collects_or_shares": true,
+    "encrypted_in_transit": true,
+    "account_creation": "OAuth (Sign in with Google, Apple, GitHub)",
+    "delete_account_in_app": "Settings > Account > Delete account",
+    "delete_account_url": "https://usetortuga.app/support/#delete",
+    "partial_deletion": true,
+    "shared": [],
+    "shared_why": "Nothing goes to a third party except at the user's request (addons they install, trackers they connect, watch-together rooms they open), which Play exempts from sharing. Crash reports go only to the developer's own crash-report server (self-hosted Bugs, an open-source error tracker).",
+    "collected": [
+      {
+        "type": "Personal info: Name",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "App functionality"
+        ],
+        "what": "profile names"
+      },
+      {
+        "type": "Personal info: Email address",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "Account management"
+        ],
+        "what": "the sign-in provider's verified email, when it shares one"
+      },
+      {
+        "type": "Personal info: User IDs",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "Account management",
+          "App functionality"
+        ],
+        "what": "the provider's identifier for the user, the account ID, the username at a connected tracker"
+      },
+      {
+        "type": "App activity: Other actions",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "App functionality"
+        ],
+        "what": "library, watch progress, watched marks, the stream picked for each video; while the profile's Suggest a stream setting is on (off by default), the streams picked by hand, each with the parsed descriptions of the streams shown around it (no links), the kind of device, whether the network was metered, what the screen and decoders handle and how playback went, to suggest a stream"
+      },
+      {
+        "type": "App activity: Other user-generated content",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "App functionality"
+        ],
+        "what": "profiles (name, avatar, PIN hash), each profile's addons with their links, profile settings"
+      },
+      {
+        "type": "Device or other IDs",
+        "required": true,
+        "ephemeral": false,
+        "purposes": [
+          "Account management"
+        ],
+        "what": "each signed-in device's session, with the device name and platform"
+      },
+      {
+        "type": "App info and performance: Crash logs",
+        "required": false,
+        "ephemeral": false,
+        "purposes": [
+          "Analytics"
+        ],
+        "what": "when the app crashes (also in native code), stops responding, or a fault stops one part of it while the rest keeps running: the error, its stack trace and the app's events before it, with every link cut to its origin and no account or device ID; release builds only, on by default, off with Settings > This device > Privacy > Send crash reports"
+      },
+      {
+        "type": "App info and performance: Diagnostics",
+        "required": false,
+        "ephemeral": false,
+        "purposes": [
+          "App functionality",
+          "Analytics"
+        ],
+        "what": "in each crash report: the app's version, the device's model, Android version, language and time zone, its memory, storage, battery and screen, and whether the app was in front; while the profile's Suggest a stream setting is on (off by default), with each stream picked by hand: the kind of device, what its screen and decoders handle, and whether the playback stalled or failed, to suggest a stream"
+      }
+    ],
+    "not_collected": [
+      "Location",
+      "Financial info",
+      "Health and fitness",
+      "Messages",
+      "Photos and videos",
+      "Audio",
+      "Files and docs",
+      "Calendar",
+      "Contacts",
+      "Web browsing",
+      "In-app search history (recent searches stay on the device)",
+      "Installed apps"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+Działa z dodatkami Stremio: dodatek zainstalujesz za pomocą jego linku
+Strona główna, Odkrywaj i Szukaj we wszystkich dodatkach
+Źródła tytułu pogrupowane według dodatków
+Odtwarza za pomocą mpv, z HDR10 i Dolby Vision, jeśli twój komputer i ekran je obsługują
+Wbudowane napisy i napisy z dodatków; wybór dźwięku i napisów zostaje zachowany w następnym odcinku
+Pomijanie czołówek, podsumowań i napisów końcowych
+„Kontynuuj oglądanie”, postęp i oznaczenia obejrzanych tytułów
+Pobieranie do oglądania offline
+Wspólne oglądanie z synchronizacją odtwarzania, każdy przez własne dodatki
+Profile z własnymi dodatkami, biblioteką i ustawieniami oraz opcjonalnym kodem PIN
+Synchronizacja między urządzeniami po zalogowaniu przez Apple, Google lub GitHub
+Trakt, Simkl, MDBList, MyAnimeList i AniList
+Skróty klawiszowe, klawisze multimedialne i sterowanie multimediami w systemie Windows
+21 języków

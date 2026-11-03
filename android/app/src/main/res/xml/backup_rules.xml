@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and older. The secret store (shared secrets/AndroidSecretStore) is sealed under a Keystore key that never
+     leaves this device, so a backed-up copy would be unreadable anywhere else: keep it out of backups. It is the only
+     Keystore-sealed data. Everything else goes, on purpose: the database (tortuga.db, its -wal and -shm),
+     addon links and the keys in them included, so a restored device has its addons back and signs in again. Downloads
+     (noBackupFilesDir) and the caches never go. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="com.edde746.tortuga.secrets.xml" />
+</full-backup-content>

@@ -1,0 +1,432 @@
+package com.edde746.tortuga.presentation.player
+
+import com.edde746.tortuga.input.InputEvent
+import com.edde746.tortuga.input.InputKey
+import com.edde746.tortuga.input.KeyModifiers
+import com.edde746.tortuga.input.PlayerCommand
+import com.edde746.tortuga.input.PlayerMenu
+import com.edde746.tortuga.playback.AudioInfo
+import com.edde746.tortuga.playback.Chapter
+import com.edde746.tortuga.playback.DynamicRange
+import com.edde746.tortuga.playback.Track
+import com.edde746.tortuga.playback.TrackKind
+import com.edde746.tortuga.playback.VideoInfo
+import com.edde746.tortuga.playback.subtitles.ExternalSubtitle
+import com.edde746.tortuga.strings.T
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.seconds
+
+class MenusTest {
+    private val tracks = listOf(
+        Track(1, TrackKind.VIDEO, null, null, "hevc", selected = true, external = false),
+        Track(1, TrackKind.AUDIO, null, "eng", "eac3", selected = true, external = false, isDefault = true, channels = 6),
+        Track(2, TrackKind.AUDIO, "Commentary", "jpn", "aac", selected = false, external = false, channels = 2),
+        Track(3, TrackKind.AUDIO, "English", "eng", "truehd", selected = false, external = false, visualImpaired = true, channels = 8),
+        Track(1, TrackKind.SUBTITLE, "German (Forced)", "ger", "ass", selected = false, external = false, forced = true),
+        Track(2, TrackKind.SUBTITLE, null, "en", "subrip", selected = false, external = true, hearingImpaired = true),
+        Track(3, TrackKind.SUBTITLE, null, "und", "hdmv_pgs_subtitle", selected = false, external = false),
+    )
+
+    @Test
+    fun trackMenusNameTheLanguageThenTheDetails() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        assertEquals(
+            listOf(
+                TrackItem(1, "English", "E-AC3 · 5.1 · Default", selected = true),
+                TrackItem(2, "Japanese", "\u2068Commentary\u2069 · AAC · Stereo", selected = false),
+                TrackItem(3, "English", "Audio description · TrueHD · 7.1", selected = false),
+            ),
+            state.audioTracks,
+        )
+        assertEquals(
+            listOf(
+                TrackItem(null, "Off", null, selected = true),
+                TrackItem(1, "German", "\u2068German (Forced)\u2069 · ASS", selected = false),
+                TrackItem(2, "English", "SDH · SRT · External", selected = false),
+                TrackItem(3, "Track 3", "PGS", selected = false),
+            ),
+            state.subtitleTracks,
+        )
+    }
+
+    @Test
+    fun choosingATrackClosesItsMenuAndShowsBeforeTheEngineReports() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        engine.echo = false
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 2))
+        assertEquals(listOf<Pair<TrackKind, Long?>>(TrackKind.SUBTITLE to 2L), engine.selections)
+        assertEquals(listOf<Pair<TrackKind, Long?>>(TrackKind.SUBTITLE to 2L), session.trackPicks, "the session hears the user's pick")
+        assertNull(state.menu)
+        assertEquals(listOf(false, false, true, false), state.subtitleTracks.map { it.selected })
+        // A menu choice needs no message: the menu showed it.
+        assertNull(state.osd)
+    }
+
+    @Test
+    fun aSecondActionOnATrackShowsItAsTheSecondSubtitleAndAgainTakesItAway() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 2))
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+
+        dispatch(PlayerCommand.ToggleSecondSubtitle(3))
+        assertEquals(PlayerMenu.SUBTITLES, state.menu, "the menu stays open, showing the mark")
+        assertEquals(listOf<Long?>(3), engine.secondSelections)
+        assertEquals(listOf<Long?>(3), session.secondSubtitlePicks, "the session hears the user's pick")
+        assertEquals(listOf(false, false, true, false), state.subtitleTracks.map { it.selected })
+        assertEquals(listOf(false, false, false, true), state.subtitleTracks.map { it.second })
+
+        dispatch(PlayerCommand.ToggleSecondSubtitle(3))
+        assertEquals(PlayerMenu.SUBTITLES, state.menu)
+        assertEquals(listOf<Long?>(3, null), engine.secondSelections, "the second's own row takes it away")
+        assertEquals(listOf<Long?>(3, null), session.secondSubtitlePicks)
+        assertTrue(state.subtitleTracks.none { it.second })
+    }
+
+    @Test
+    fun theSecondActionOnOffTakesTheSecondAwayAndOnTheSubtitleDoesNothing() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.ToggleSecondSubtitle(null))
+        assertEquals(emptyList(), engine.secondSelections, "no second to take away")
+
+        // With subtitles off a track can still be the second.
+        dispatch(PlayerCommand.ToggleSecondSubtitle(1))
+        assertEquals(listOf<Long?>(1), engine.secondSelections)
+        dispatch(PlayerCommand.ToggleSecondSubtitle(null))
+        assertEquals(listOf<Long?>(1, null), engine.secondSelections, "Off takes the second away")
+        assertEquals(listOf<Pair<TrackKind, Long?>>(), engine.selections, "and leaves the subtitle as it is")
+
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 2))
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.ToggleSecondSubtitle(2))
+        assertEquals(listOf<Long?>(1, null), engine.secondSelections, "the subtitle's track is no second one")
+        assertEquals(PlayerMenu.SUBTITLES, state.menu)
+        assertTrue(state.subtitleTracks.none { it.second })
+    }
+
+    @Test
+    fun pickingTheSecondsTrackSwapsItAndOffTurnsBothOff() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 2))
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.ToggleSecondSubtitle(3))
+
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 3))
+        assertNull(state.menu)
+        assertEquals(listOf<Long?>(3, null), engine.secondSelections, "the second lets its track go before the subtitle takes it")
+        assertEquals(listOf<Long?>(3, null), session.secondSubtitlePicks)
+        assertEquals(listOf(false, false, false, true), state.subtitleTracks.map { it.selected })
+        assertTrue(state.subtitleTracks.none { it.second })
+
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.ToggleSecondSubtitle(1))
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, null))
+        assertNull(state.menu)
+        assertEquals(listOf<Long?>(3, null, 1, null), engine.secondSelections, "Off turns the second off too")
+        assertEquals(listOf(true, false, false, false), state.subtitleTracks.map { it.selected })
+        assertTrue(state.subtitleTracks.none { it.second })
+    }
+
+    @Test
+    fun theSecondsMarkShowsBeforeTheEngineReports() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        engine.echo = false
+        dispatch(PlayerCommand.ToggleSecondSubtitle(1))
+        assertEquals(listOf(false, true, false, false), state.subtitleTracks.map { it.second })
+        dispatch(PlayerCommand.ToggleSecondSubtitle(1))
+        assertEquals(listOf<Long?>(1, null), engine.secondSelections, "the pending second's row takes it away")
+        assertTrue(state.subtitleTracks.none { it.second })
+        assertTrue(state.audioTracks.none { it.second })
+    }
+
+    @Test
+    fun cyclingSubtitlesGoesThroughOffAndBuildsOnPendingChoices() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        engine.echo = false
+        press(InputKey.S)
+        assertEquals("Subtitles: German", state.osd)
+        press(InputKey.S)
+        press(InputKey.S)
+        press(InputKey.S)
+        assertEquals("Subtitles off", state.osd)
+        assertEquals(listOf(1L, 2L, 3L, null), engine.selections.map { it.second })
+        press(InputKey.S)
+        assertEquals(1L, engine.selections.last().second)
+        advance(1.5.seconds)
+        assertNull(state.osd)
+    }
+
+    @Test
+    fun cyclingAudioWraps() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        press(InputKey.A)
+        press(InputKey.A)
+        assertEquals("Audio: English", state.osd)
+        press(InputKey.A)
+        assertEquals(listOf(2L, 3L, 1L), engine.selections.map { it.second })
+        assertEquals(listOf(true, false, false), state.audioTracks.map { it.selected })
+    }
+
+    @Test
+    fun moreSubtitlesGoByLanguageAndOneChosenIsAddedAndClosesTheMenu() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        sessionInfo {
+            it.copy(
+                moreSubtitles = listOf(
+                    ExternalSubtitle("https://subs.example/ja.srt", "ja", "OpenSubtitles"),
+                    ExternalSubtitle("https://subs.example/text.srt", null, "Português"),
+                    ExternalSubtitle("https://subs.example/en2.srt", "en", "OpenSubtitles 2"),
+                    ExternalSubtitle("https://subs.example/en3.srt", "en", "OpenSubtitles 3"),
+                    ExternalSubtitle("https://subs.example/de.srt", "de", "OpenSubtitles"),
+                ),
+            )
+        }
+        // The languages the menu has first, then the others by name; no language code last.
+        assertEquals(
+            listOf(Triple("en", "English", "2"), Triple("de", "German", "1"), Triple("ja", "Japanese", "1"), Triple("", "Other", "1")),
+            state.moreSubtitles.map { Triple(it.key, it.label, it.count) },
+        )
+        assertEquals("5", state.moreSubtitlesCount)
+
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SUBTITLES))
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.MORE_SUBTITLES))
+        dispatch(PlayerCommand.OpenSubtitleLanguage("en"))
+        assertEquals(PlayerMenu.SUBTITLE_LANGUAGE, state.menu)
+        assertEquals(listOf("OpenSubtitles 2", "OpenSubtitles 3"), state.subtitleLanguage?.subtitles?.map { it.label })
+        dispatch(PlayerCommand.Back)
+        assertEquals(PlayerMenu.MORE_SUBTITLES, state.menu)
+        dispatch(PlayerCommand.Back)
+        assertEquals(PlayerMenu.SUBTITLES, state.menu)
+
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.MORE_SUBTITLES))
+        dispatch(PlayerCommand.OpenSubtitleLanguage(""))
+        dispatch(state.subtitleLanguage!!.subtitles.single().command)
+        assertEquals(listOf("https://subs.example/text.srt"), session.addedSubtitles)
+        assertNull(state.menu)
+    }
+
+    @Test
+    fun speedMenuAndSpeedKeysStayWithinTheOptions() = playerTest {
+        playing()
+        assertEquals(
+            listOf("0.25×", "0.5×", "0.75×", "Normal", "1.25×", "1.5×", "1.75×", "2×"),
+            state.speeds.map { it.label },
+        )
+        assertEquals("Normal", state.speeds.single { it.selected }.label)
+        press(InputKey.BRACKET_RIGHT)
+        assertEquals("Speed 1.25×", state.osd)
+        assertEquals("1.25×", state.speedLabel)
+        repeat(6) { press(InputKey.BRACKET_LEFT) }
+        assertEquals(listOf(1.25, 1.0, 0.75, 0.5, 0.25), engine.speeds)
+        press(InputKey.BACKSPACE)
+        assertEquals("Normal", state.speedLabel)
+
+        dispatch(PlayerCommand.OpenMenu(PlayerMenu.SPEED))
+        assertEquals(3, state.selectedEntry, "the menu opens on Normal")
+        dispatch(PlayerCommand.SetSpeed(1.5))
+        assertNull(state.menu)
+        assertEquals(0, state.selectedEntry, "no menu, no entry")
+        assertEquals("1.5×", state.speeds.single { it.selected }.label)
+    }
+
+    @Test
+    fun delayStepsAddUpExactlyAndStayWithinTheRange() = playerTest {
+        playing()
+        engine.echo = false
+        repeat(3) { press(InputKey.X) }
+        assertEquals(listOf(0.1, 0.2, 0.3), engine.subtitleDelays)
+        assertEquals("+0.3 s", state.subtitleDelay.label)
+        assertEquals("Subtitle delay +0.3 s", state.osd)
+        assertTrue(state.subtitleDelay.canReset)
+
+        dispatch(PlayerCommand.SetSubtitleDelay(59.95))
+        dispatch(PlayerCommand.AdjustSubtitleDelay(0.1))
+        assertEquals(60.0, engine.subtitleDelays.last())
+        assertFalse(state.subtitleDelay.canIncrease)
+        assertTrue(state.subtitleDelay.canDecrease)
+
+        dispatch(PlayerCommand.SetSubtitleDelay(-500.0))
+        assertEquals(-60.0, engine.subtitleDelays.last())
+        assertEquals("−60.0 s", state.subtitleDelay.label)
+        assertFalse(state.subtitleDelay.canDecrease)
+
+        input(InputEvent.KeyDown(InputKey.MINUS, KeyModifiers(ctrl = true)))
+        input(InputEvent.KeyDown(InputKey.MINUS, KeyModifiers(meta = true), repeat = true))
+        assertEquals(listOf(-0.1, -0.2), engine.audioDelays)
+        assertEquals("−0.2 s", state.audioDelay.label)
+        dispatch(PlayerCommand.SetAudioDelay(0.0))
+        assertEquals("0.0 s", state.audioDelay.label)
+        assertFalse(state.audioDelay.canReset)
+    }
+
+    /**
+     * Each delay control names itself, its − and + by the way they move it, and its page; its buttons send a step each
+     * way and Reset zero. Reset is offered at every delay, enabled only while the delay isn't zero.
+     */
+    @Test
+    fun aDelayControlCarriesItsNamesItsStepsAndAResetEnabledAwayFromZero() = playerTest {
+        playing()
+        val text = T.player.menu
+        for (kind in listOf(TrackKind.SUBTITLE, TrackKind.AUDIO)) {
+            val subtitles = kind == TrackKind.SUBTITLE
+            fun delay() = if (subtitles) state.subtitleDelay else state.audioDelay
+            fun sent() = if (subtitles) engine.subtitleDelays else engine.audioDelays
+            val page = if (subtitles) PlayerMenu.SUBTITLE_DELAY else PlayerMenu.AUDIO_DELAY
+            val title = if (subtitles) text.subtitleDelay else text.audioDelay
+            assertEquals(page, delay().menu)
+            assertEquals(title, delay().title)
+            assertEquals(title, state.menuTitle(page), "the page is titled by its delay")
+            assertEquals(
+                if (subtitles) text.subtitleDelayEarlier to text.subtitleDelayLater else text.audioDelayEarlier to text.audioDelayLater,
+                delay().decreaseLabel to delay().increaseLabel,
+            )
+            assertEquals("0.0 s", delay().label)
+            assertFalse(delay().canReset, "$kind at zero: Reset shows disabled")
+
+            dispatch(PlayerCommand.OpenMenu(page))
+            dispatch(delay().increase)
+            dispatch(delay().increase)
+            dispatch(delay().decrease)
+            assertEquals(listOf(0.1, 0.2, 0.1), sent())
+            assertEquals("+0.1 s", delay().label)
+            assertTrue(delay().canReset, "$kind moved: Reset is enabled")
+            dispatch(delay().reset)
+            assertEquals(0.0, sent().last())
+            assertEquals("0.0 s", delay().label)
+            assertFalse(delay().canReset, "$kind reset: Reset shows disabled again")
+            assertEquals(page, state.menu, "the page stays open")
+            dispatch(PlayerCommand.CloseMenu)
+        }
+    }
+
+    @Test
+    fun volumeStaysInRangeAndTurningItUpUnmutes() = playerTest {
+        playing()
+        engineState { it.copy(volume = 97.0) }
+        press(InputKey.UP)
+        press(InputKey.UP)
+        assertEquals(listOf(100.0, 100.0), engine.volumes)
+        assertEquals("100%", state.volume.label)
+        assertEquals("Volume 100%", state.osd)
+
+        press(InputKey.M)
+        assertEquals("Muted", state.volume.label)
+        assertTrue(state.volume.muted)
+        press(InputKey.DOWN)
+        assertTrue(state.volume.muted)
+        input(InputEvent.Wheel(steps = 2.0))
+        assertEquals(listOf(true, false), engine.mutes)
+        assertEquals(VolumeState(percent = 100, fraction = 1f, muted = false, label = "100%"), state.volume)
+        input(InputEvent.Wheel(steps = -30.0))
+        assertEquals(0.0, engine.volumes.last())
+    }
+
+    @Test
+    fun theInfoPanelDescribesVideoAudioDecoderAndCache() = playerTest {
+        playing()
+        engineState {
+            it.copy(
+                tracks = tracks,
+                video = VideoInfo(3840, 2160, "hevc", 23.976, DynamicRange.DOLBY_VISION, doviProfile = 8),
+                audio = AudioInfo("truehd", 8, 48000),
+                hwdec = "videotoolbox",
+                cacheEndSeconds = 112.4,
+            )
+        }
+        assertTrue(state.info.isEmpty())
+        press(InputKey.I)
+        assertEquals(
+            listOf(
+                InfoSection(
+                    InfoSectionId.VIDEO,
+                    "Video",
+                    listOf(
+                        InfoRow("Codec", "HEVC"),
+                        InfoRow("Resolution", "3840×2160 · 23.976 fps"),
+                        InfoRow("Dynamic range", "Dolby Vision profile 8"),
+                        InfoRow("Decoder", "Hardware (VideoToolbox)"),
+                    ),
+                ),
+                InfoSection(
+                    InfoSectionId.AUDIO,
+                    "Audio",
+                    listOf(
+                        InfoRow("Codec", "TrueHD"),
+                        InfoRow("Channels", "7.1"),
+                        InfoRow("Sample rate", "48 kHz"),
+                        InfoRow("Track", "English"),
+                    ),
+                ),
+                InfoSection(InfoSectionId.SUBTITLES, "Subtitles", listOf(InfoRow("Track", "Off"))),
+                InfoSection(InfoSectionId.NETWORK, "Network", listOf(InfoRow("Cache", "12 s"))),
+            ),
+            state.info,
+        )
+        engineState {
+            it.copy(
+                video = VideoInfo(1920, 1080, "h264", 25.0, DynamicRange.HDR10),
+                audio = AudioInfo(null, null, 44100),
+                hwdec = "no",
+                cacheEndSeconds = null,
+            )
+        }
+        val video = state.info.single { it.id == InfoSectionId.VIDEO }.rows
+        assertEquals(InfoRow("Codec", "H.264"), video.first())
+        assertEquals(InfoRow("Decoder", "Software"), video.last())
+        // The selected audio track fills in what audio-params doesn't report.
+        assertEquals(
+            listOf(InfoRow("Codec", "E-AC3"), InfoRow("Channels", "5.1"), InfoRow("Sample rate", "44.1 kHz"), InfoRow("Track", "English")),
+            state.info.single { it.id == InfoSectionId.AUDIO }.rows,
+        )
+    }
+
+    @Test
+    fun theEngineReadsStatsOnlyWhileTheInfoShows() = playerTest {
+        playing()
+        assertEquals(emptyList(), engine.statsWanted, "nothing is read before the info opens")
+        press(InputKey.I)
+        assertEquals(listOf(true), engine.statsWanted)
+        engineState { it.copy(positionSeconds = 101.0) }
+        assertEquals(listOf(true), engine.statsWanted, "asked once, not on every state")
+        press(InputKey.I)
+        assertEquals(listOf(true, false), engine.statsWanted)
+        assertTrue(state.info.isEmpty())
+        press(InputKey.I)
+        store.release()
+        assertEquals(listOf(true, false, true, false), engine.statsWanted, "a released player stops the reading")
+    }
+
+    @Test
+    fun chapterKeysJumpBetweenChapterStarts() = playerTest {
+        playing(position = 100.0, duration = 600.0)
+        engineState { it.copy(chapters = listOf(Chapter("Intro", 0.0), Chapter(null, 90.0), Chapter("Credits", 540.0))) }
+        press(InputKey.PAGE_UP)
+        assertEquals(540.0 to true, engine.seeks.last())
+        assertEquals("Chapter: \u2068Credits\u2069", state.osd, "the chapter's title isolated")
+        position(541.0)
+        // Just past a chapter start, "previous" goes to the chapter before.
+        press(InputKey.PAGE_DOWN)
+        assertEquals(90.0 to true, engine.seeks.last())
+        assertEquals("Chapter 2", state.osd)
+        position(120.0)
+        press(InputKey.PAGE_DOWN)
+        assertEquals(90.0 to true, engine.seeks.last())
+        press(InputKey.PAGE_UP)
+        press(InputKey.PAGE_UP)
+        assertEquals(listOf(540.0, 90.0, 90.0, 540.0), engine.seeks.map { it.first })
+    }
+}

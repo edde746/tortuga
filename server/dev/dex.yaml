@@ -1,0 +1,54 @@
+# Dex as a local OpenID Connect provider for development (compose.dev.yaml): stands in for Apple, Google or a
+# self-hoster's Authentik/Keycloak, so sign-in works end to end without any provider registration.
+# Development only: static users and a public client, tokens in memory.
+# The image renders this file with gomplate: compose.dev.yaml sets DEX_ISSUER to the address Dex is published on.
+issuer: {{ getenv "DEX_ISSUER" "http://127.0.0.1:5556/dex" }}
+
+storage:
+  type: memory
+
+web:
+  http: 0.0.0.0:5556
+
+expiry:
+  idTokens: 10m
+
+oauth2:
+  skipApprovalScreen: true
+  # Scripts sign in with the resource-owner password grant against the local user store (scripts/smoke.sh).
+  passwordConnector: local
+
+enablePasswordDB: true
+
+staticPasswords:
+  # Password: "password" for every user. Parallel harness runs sign in as different users so each gets its own account.
+  - email: alice@example.com
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: alice
+    userID: 08a8684b-db88-4b73-90a9-3cd1661f5466
+  - email: apple@example.com
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: apple
+    userID: 5f0c2b9e-6a41-4d7a-9c2e-1b7a3f8d4e01
+  - email: android@example.com
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: android
+    userID: 5f0c2b9e-6a41-4d7a-9c2e-1b7a3f8d4e02
+  - email: desktop@example.com
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: desktop
+    userID: 5f0c2b9e-6a41-4d7a-9c2e-1b7a3f8d4e03
+  - email: tv@example.com
+    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+    username: tv
+    userID: 5f0c2b9e-6a41-4d7a-9c2e-1b7a3f8d4e04
+
+staticClients:
+  # What the apps use against a self-hosted OIDC provider: a public client, with authorization code + PKCE and a
+  # loopback redirect (phones, desktop), or the device flow (TVs, Apple devices; Dex needs its callback listed here).
+  - id: tortuga-dev
+    name: Tortuga (development)
+    public: true
+    redirectURIs:
+      - http://127.0.0.1:53682/callback
+      - /device/callback

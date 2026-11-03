@@ -1,0 +1,35 @@
+{
+  "properties": {
+    "category": "Entertainment",
+    "accesses_personal_information": true,
+    "accesses_personal_information_why": "Sign-in creates a Tortuga account (the sign-in provider's ID for the user, a verified email when it shares one). Crash reports (sent when the app crashes or a fault stops one part of it), on by default and off in Settings > This device > Privacy, carry the error and the device's model and system, no account or device ID; the privacy policy describes both.",
+    "privacy_policy": "https://usetortuga.app/privacy/",
+    "website": "https://usetortuga.app/",
+    "support_contact": "support@usetortuga.app"
+  },
+  "age_rating": {
+    "certificate": "IARC: enter the rating ID from Play's IARC certificate, or answer as google-play/forms.json content_rating_iarc and the follow-ups below",
+    "shared_user_generated_content_primary": false,
+    "shared_user_generated_content_primary_why": "A video player: what people share is Watch together's room state (a profile's name and what plays), around playback.",
+    "public_nudity": false,
+    "public_real_graphic_violence": false,
+    "public_why": "The app has no content of its own: catalogs and streams come from addons the user installs, and the demo addon links public-domain and Blender films.",
+    "users_can_block_users_or_content": true,
+    "users_can_block_why": "Content: a kids profile shows titles up to the age a parent sets and hides the titles the parent blocks. People: no block list; in Watch together the host can remove a person from the room and lock it to new people.",
+    "users_can_report_users_or_content": false,
+    "chat_moderated": false,
+    "chat_why": "No chat: Watch together carries no messages, voice or images, only the room's playback and each person's profile name.",
+    "interactions_limited_to_invited_friends": true,
+    "interactions_why": "A Watch together room is joined only with its 6-character code or invite link, which the host passes on; there is no list or search of rooms, and the host can lock the room.",
+    "cash_rewards_gift_cards_crypto_or_nfts": false,
+    "news_or_education": false,
+    "promotes_age_restricted_products": false
+  },
+  "product_declarations": {
+    "accessibility_guidelines_tested": false,
+    "pen_and_ink": false,
+    "installs_to_alternate_drives": true,
+    "available_on_xbox": false
+  },
+  "notes_for_certification": "Choose Sign in with Google and, in the browser that opens, sign in with the reviewer account: email demo@usetortuga.app, password {reviewer_password}. Nothing plays until an addon with streams is installed. To see something play, open Settings, then Addons, choose Install addon, enter https://usetortuga.app/demo/manifest.json, then Continue and Install. On Home, the last row is Tortuga demo: open Tears of Steel, choose Play and pick the Tortuga demo stream (it plays from download.blender.org); Night of the Living Dead (1968) plays from the Internet Archive. Support: support@usetortuga.app."
+}

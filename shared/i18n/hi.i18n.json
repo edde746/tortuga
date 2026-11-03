@@ -1,0 +1,2066 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "अपडेट जाँचें…",
+    "launchFailed": "Tortuga शुरू नहीं हो सका।",
+    "startup": {
+      "database": "डेटाबेस खुल रहा है…",
+      "migration": "डेटाबेस अपडेट हो रहा है…",
+      "account": "आपका खाता लोड हो रहा है…",
+      "profiles": "प्रोफ़ाइलें लोड हो रही हैं…"
+    },
+    "localNetworkUsage": "Tortuga आपके लोकल नेटवर्क का इस्तेमाल ऐडऑन, मीडिया और घर पर चलाए जा रहे आपके सिंक सर्वर तक पहुँचने के लिए करता है।"
+  },
+  "player": {
+    "nowPlaying": "अभी चल रहा है",
+    "buffering": "बफ़र हो रहा है…",
+    "position": "${position} / ${duration}",
+    "timeline": "प्लेबैक पोज़िशन",
+    "play": "चलाएँ",
+    "pause": "रोकें",
+    "resolving": "स्ट्रीम तैयार हो रही है…",
+    "opening": "खुल रहा है…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "लाइव",
+      "position": "लाइव · ${time} देखा गया",
+      "behind": "लाइव · ${time} पीछे",
+      "goToLive": "लाइव पर जाएँ"
+    },
+    "nextEpisode": "अगला एपिसोड",
+    "previousEpisode": "पिछला एपिसोड",
+    "lock": {
+      "button": "स्क्रीन लॉक करें",
+      "tapToUnlock": "अनलॉक करने के लिए टैप करें",
+      "tapAgainToUnlock": "अनलॉक करने के लिए फिर से टैप करें"
+    },
+    "format": {
+      "seconds": "${value} सेकंड",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "सामान्य",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "वॉल्यूम",
+      "level": "${percent}%",
+      "muted": "म्यूट है",
+      "mute": "म्यूट करें",
+      "unmute": "अनम्यूट करें"
+    },
+    "menu": {
+      "audio": "ऑडियो",
+      "subtitles": "सबटाइटल",
+      "speed": "प्लेबैक स्पीड",
+      "subtitleDelay": "सबटाइटल डिले",
+      "audioDelay": "ऑडियो डिले",
+      "moreSubtitles": "और सबटाइटल",
+      "reset": "रीसेट करें",
+      "subtitleDelayEarlier": "सबटाइटल डिले: पहले",
+      "subtitleDelayLater": "सबटाइटल डिले: बाद में",
+      "audioDelayEarlier": "ऑडियो डिले: पहले",
+      "audioDelayLater": "ऑडियो डिले: बाद में"
+    },
+    "track": {
+      "off": "बंद",
+      "numbered": "ट्रैक ${number}",
+      "defaultTrack": "डिफ़ॉल्ट",
+      "forced": "फ़ोर्स्ड",
+      "sdh": "SDH",
+      "audioDescription": "ऑडियो विवरण",
+      "external": "बाहरी",
+      "second": "दूसरा सबटाइटल",
+      "showAsSecond": "दूसरे सबटाइटल के रूप में दिखाएँ",
+      "removeSecond": "दूसरा सबटाइटल हटाएँ",
+      "otherLanguage": "अन्य",
+      "mono": "मोनो",
+      "stereo": "स्टीरियो",
+      "channels": {
+        "one": "${n} चैनल",
+        "other": "${n} चैनल"
+      }
+    },
+    "info": {
+      "title": "प्लेबैक जानकारी",
+      "tab": "जानकारी",
+      "resolution": "रिज़ॉल्यूशन",
+      "video": "वीडियो",
+      "dynamicRange": "डायनैमिक रेंज",
+      "audio": "ऑडियो",
+      "decoder": "डिकोडर",
+      "cache": "कैश",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "हार्डवेयर (${name})",
+      "softwareDecoder": "सॉफ़्टवेयर",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision प्रोफ़ाइल ${profile}",
+      "stream": "स्ट्रीम",
+      "addon": "ऐडऑन",
+      "pickedBy": "किसने चुना",
+      "autoPlayFirstMatch": "ऑटो-प्ले, पहला मिलान",
+      "autoPlayLastLink": "ऑटो-प्ले, पिछली बार वाली ही स्ट्रीम",
+      "source": "सोर्स",
+      "downloaded": "डाउनलोड किया गया",
+      "name": "नाम",
+      "file": "फ़ाइल",
+      "container": "कंटेनर",
+      "fileSize": "साइज़",
+      "bitrate": "बिटरेट",
+      "codec": "कोडेक",
+      "pixelFormat": "पिक्सल फ़ॉर्मैट",
+      "bitDepth": "${bits}-बिट",
+      "color": "रंग",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} निट्स",
+      "mastering": "मास्टरिंग डिस्प्ले",
+      "nitsRange": "${min}–${max} निट्स",
+      "droppedFrames": "ड्रॉप हुए फ़्रेम",
+      "droppedFramesValue": "${output} (डिकोडर ${decoder})",
+      "delayedFrames": "डिले हुए फ़्रेम",
+      "output": "आउटपुट",
+      "hertz": "${value} Hz",
+      "channels": "चैनल",
+      "sampleRate": "सैंपल रेट",
+      "track": "ट्रैक",
+      "secondTrack": "दूसरा ट्रैक",
+      "passthrough": "पासथ्रू (${format})",
+      "spatialAudio": "स्पेशियल ऑडियो",
+      "rendering": "रेंडरिंग",
+      "surround": "सराउंड",
+      "subtitles": "सबटाइटल",
+      "format": "फ़ॉर्मैट",
+      "embedded": "एम्बेडेड",
+      "delay": "डिले",
+      "network": "नेटवर्क",
+      "downloadSpeed": "डाउनलोड स्पीड",
+      "buffering": "बफ़र हो रहा है",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "इंट्रो स्किप करें",
+      "recap": "रीकैप स्किप करें",
+      "credits": "क्रेडिट स्किप करें"
+    },
+    "prompt": {
+      "playNext": "अगला एपिसोड चलाएँ: ${episode}",
+      "countdown": {
+        "one": "${n} सेकंड में अपने आप",
+        "other": "${n} सेकंड में अपने आप"
+      }
+    },
+    "options": {
+      "title": "विकल्प",
+      "videoFit": "आस्पेक्ट रेशियो",
+      "fit": {
+        "contain": "लेटरबॉक्स",
+        "cover": "स्क्रीन भरें",
+        "fill": "स्ट्रेच करें"
+      },
+      "zoom": "ज़ूम",
+      "percent": "${percent}%",
+      "resetZoom": "रीसेट करें",
+      "shaders": "शेडर",
+      "shader": {
+        "nvscalerDetail": "ज़्यादा साफ़ वीडियो के लिए NVIDIA इमेज स्केलिंग",
+        "neutral": "न्यूट्रल",
+        "denoise": "नॉइज़ हटाएँ",
+        "denoiseSharpen": "नॉइज़ हटाएँ + शार्प करें",
+        "fast": "तेज़",
+        "highQuality": "उच्च गुणवत्ता",
+        "modeDetail": "${quality} · मोड ${mode}",
+        "customDetail": "कस्टम GLSL शेडर",
+        "importShader": "शेडर इम्पोर्ट करें",
+        "imported": "शेडर इम्पोर्ट हो गया",
+        "importFailed": "शेडर इम्पोर्ट नहीं हो सका",
+        "deleteLabel": "${name} हटाएँ",
+        "deleteTitle": "${name} हटाएँ?",
+        "delete": "हटाएँ",
+        "cancel": "रद्द करें"
+      },
+      "sleepTimer": "स्लीप टाइमर",
+      "sleepEndOfVideo": "इस वीडियो के ख़त्म होने पर",
+      "sleepMinutes": {
+        "one": "${n} मिनट",
+        "other": "${n} मिनट"
+      },
+      "sleepLeft": "${time} बाकी",
+      "autoPlayNext": "अगला एपिसोड अपने-आप चलाएँ",
+      "audioOutput": "ऑडियो आउटपुट",
+      "systemOutput": "सिस्टम डिफ़ॉल्ट",
+      "audioNormalization": "वॉल्यूम बराबर रखें",
+      "audioChannels": "ऑडियो चैनल",
+      "channels": {
+        "original": "मूल",
+        "originalDetail": "ट्रैक के सभी चैनल चलाएँ",
+        "surround51": "5.1 तक",
+        "surround51Detail": "सिर्फ़ 5.1 सपोर्ट करने वाले टीवी और रिसीवर के लिए 7.1 को 5.1 में मिक्स करें",
+        "stereo": "स्टीरियो",
+        "stereoDetail": "स्टीरियो स्पीकर या हेडफ़ोन के लिए दो चैनल में मिक्स करें"
+      },
+      "on": "चालू",
+      "off": "बंद"
+    },
+    "stillWatching": {
+      "title": "अभी भी देख रहे हैं?",
+      "countdown": {
+        "one": "${n} सेकंड में रुक जाएगा",
+        "other": "${n} सेकंड में रुक जाएगा"
+      },
+      "keepWatching": "जारी रखें",
+      "pause": "रोकें"
+    },
+    "error": {
+      "title": "यह स्ट्रीम नहीं चल सकती",
+      "resolveTimeout": "स्ट्रीम शुरू होने में बहुत समय लगा।",
+      "expired": "स्ट्रीम लिंक की समय-सीमा ख़त्म हो गई है।",
+      "notFound": "यह स्ट्रीम अब उपलब्ध नहीं है।",
+      "http": "सर्वर ने HTTP ${status} से जवाब दिया।",
+      "cantOpen": "स्ट्रीम खोली नहीं जा सकी।",
+      "unsupportedFormat": "यह स्ट्रीम ऐसे फ़ॉर्मैट में है जिसे प्लेयर पढ़ नहीं सकता।",
+      "cantDecode": "प्लेयर इस स्ट्रीम का वीडियो या ऑडियो नहीं चला सका।",
+      "engineFailed": "किसी गड़बड़ी के कारण प्लेयर रुक गया।",
+      "retry": "फिर से कोशिश करें",
+      "nextStream": "अगली स्ट्रीम आज़माएँ",
+      "close": "बंद करें",
+      "alternatives": {
+        "one": "${n} और स्ट्रीम उपलब्ध है",
+        "other": "${n} और स्ट्रीम उपलब्ध हैं"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "यह एपिसोड नहीं है",
+      "titleMovie": "यह फ़िल्म नहीं है",
+      "titleVideo": "यह वीडियो नहीं है",
+      "sent": "ऐडऑन ने स्ट्रीम की जगह एक त्रुटि वीडियो भेजा।",
+      "byUrl": "इसका लिंक किसी ऐडऑन के त्रुटि वीडियो में से एक है।",
+      "bySize": "फ़ाइल ${served} की है, जबकि स्ट्रीम ने ${size} बताया था।",
+      "byDuration": "यह ${length} का है, जबकि पिछली बार चलाने पर यह वीडियो ${known} का था।",
+      "kept": "आपकी प्रगति सुरक्षित है।",
+      "chooseStream": "दूसरी स्ट्रीम चुनें",
+      "watch": "संदेश देखें"
+    },
+    "osd": {
+      "volume": "वॉल्यूम ${level}",
+      "brightness": "ब्राइटनेस ${level}",
+      "speed": "स्पीड ${speed}",
+      "subtitleDelay": "सबटाइटल डिले ${delay}",
+      "audioDelay": "ऑडियो डिले ${delay}",
+      "audioTrack": "ऑडियो: ${track}",
+      "subtitleTrack": "सबटाइटल: ${track}",
+      "subtitlesOff": "सबटाइटल बंद",
+      "chapter": "चैप्टर: ${title}",
+      "chapterNumbered": "चैप्टर ${number}",
+      "zoom": "ज़ूम ${percent}",
+      "shader": "शेडर: ${name}",
+      "shadersOff": "शेडर बंद"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": "."
+    }
+  },
+  "streams": {
+    "resolving": "स्ट्रीम खुल रही है…",
+    "resolveFailed": {
+      "http": "स्ट्रीम के सर्वर ने HTTP ${status} से जवाब दिया",
+      "timeout": "स्ट्रीम के सर्वर ने जवाब देने में बहुत समय लगाया",
+      "network": "स्ट्रीम के सर्वर से कनेक्ट नहीं हो सका",
+      "unsupportedUrl": "इस स्ट्रीम का लिंक खोला नहीं जा सकता",
+      "tooManyRedirects": "इस स्ट्रीम का लिंक बहुत बार रीडायरेक्ट होता है",
+      "unexpected": "इस स्ट्रीम को खोलते समय इस ऐप में एक त्रुटि आई"
+    },
+    "badge": {
+      "instant": "तुरंत",
+      "notInstant": "तुरंत नहीं"
+    },
+    "lastUsed": "पिछली बार चलाई गई",
+    "external": "ऐप के बाहर खुलती है",
+    "unplayable": {
+      "one": "${n} स्ट्रीम इस ऐप में नहीं चल सकती",
+      "other": "${n} स्ट्रीम इस ऐप में नहीं चल सकतीं"
+    },
+    "empty": "कोई स्ट्रीम नहीं मिली",
+    "all": "सभी",
+    "refresh": "रीफ़्रेश करें",
+    "retryNamed": "${name} के लिए फिर से कोशिश करें",
+    "filters": {
+      "hidden": {
+        "one": "${n} स्ट्रीम आपके फ़िल्टर से छिपी है",
+        "other": "${n} स्ट्रीम आपके फ़िल्टर से छिपी हैं"
+      },
+      "showing": {
+        "one": "आपके फ़िल्टर से छिपी ${n} स्ट्रीम दिखाई जा रही है",
+        "other": "आपके फ़िल्टर से छिपी ${n} स्ट्रीम दिखाई जा रही हैं"
+      },
+      "show": "दिखाएँ",
+      "hide": "छिपाएँ",
+      "rowNote": "आपके फ़िल्टर से छिपी"
+    },
+    "sort": {
+      "title": "क्रम",
+      "addonOrder": "ऐडऑन का क्रम",
+      "resolution": "रिज़ॉल्यूशन",
+      "source": "सोर्स की क्वालिटी",
+      "sizeLargest": "सबसे बड़ी फ़ाइल पहले",
+      "sizeSmallest": "सबसे छोटी फ़ाइल पहले",
+      "cached": "तुरंत वाली पहले"
+    },
+    "autoPlay": {
+      "noMatch": "ऑटो-प्ले को आपके फ़िल्टर से मेल खाती कोई स्ट्रीम नहीं मिली।",
+      "failed": "ऑटो-प्ले की चुनी गई स्ट्रीम शुरू नहीं हुई। कोई दूसरी चुनें।"
+    },
+    "download": {
+      "notice": "डाउनलोड करने के लिए स्ट्रीम चुनें।",
+      "action": "डाउनलोड करें",
+      "actionNamed": "${name} डाउनलोड करें",
+      "queued": "“डाउनलोड” में जोड़ा गया",
+      "failed": "डाउनलोड नहीं जोड़ा जा सका।"
+    },
+    "suggested": {
+      "label": "सुझाया गया",
+      "reason": "आपकी हाल की पसंद जैसा: ${features}",
+      "audio": "${language} ऑडियो",
+      "subtitles": "${language} सबटाइटल",
+      "smaller": "छोटी फ़ाइलें",
+      "larger": "बड़ी फ़ाइलें"
+    }
+  },
+  "detail": {
+    "loadFailed": "जानकारी लोड नहीं हो सकी।",
+    "notFound": "किसी भी ऐडऑन में इस टाइटल की जानकारी नहीं है।",
+    "noAddons": "इंस्टॉल किए गए किसी भी ऐडऑन में इस टाइटल की जानकारी नहीं है।",
+    "noAnimeAddon": "इंस्टॉल किए गए किसी भी ऐडऑन में इस ऐनिमे की जानकारी नहीं है। इसे खोलने के लिए कोई ऐनिमे ऐडऑन इंस्टॉल करें।",
+    "animeListsUnavailable": "एनीमे सूचियाँ लोड नहीं हुईं, इसलिए इस एनीमे को किसी टाइटल से नहीं जोड़ा जा सका। अपना कनेक्शन जाँचें और फिर से कोशिश करें।",
+    "findingAnime": "एनीमे सूचियों में यह एनीमे खोजा जा रहा है…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} घं॰ ${minutes} मि॰",
+      "hours": "${hours} घं॰",
+      "minutes": "${minutes} मि॰"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes समीक्षक",
+        "rottenTomatoesAudience": "Rotten Tomatoes दर्शक",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} प्रतिशत"
+    },
+    "userRating": {
+      "rateLabel": "इस टाइटल को रेट करें",
+      "label": "आपकी रेटिंग: ${score}",
+      "range": "${low}–${high}",
+      "title": "आपकी रेटिंग",
+      "hint": "आपका स्कोर नीचे दी गई हर सेवा को भेजा जाता है।",
+      "clear": "रेटिंग हटाएँ",
+      "checking": "जाँच हो रही है…",
+      "notRated": "रेट नहीं किया",
+      "unreadable": "जाँच नहीं हो सकी",
+      "saving": "सहेजा जा रहा है…",
+      "saved": "सहेजा गया",
+      "removed": "हटाया गया",
+      "queued": "अभी नहीं भेजा गया, फिर कोशिश होगी",
+      "failed": "सहेजा नहीं गया"
+    },
+    "links": {
+      "genres": "शैलियाँ",
+      "cast": "कलाकार",
+      "directors": "निर्देशक",
+      "writers": "लेखक",
+      "website": "वेबसाइट"
+    },
+    "facts": {
+      "title": "जानकारी",
+      "released": "रिलीज़",
+      "runtime": "अवधि",
+      "country": "देश",
+      "language": "भाषा",
+      "awards": "पुरस्कार",
+      "source": "विवरण का स्रोत",
+      "failed": "यहाँ से लोड नहीं हो सका"
+    },
+    "trailer": "ट्रेलर",
+    "trailerNumbered": "ट्रेलर ${number}",
+    "trailers": "ट्रेलर",
+    "share": "शेयर करें",
+    "season": "सीज़न ${number}",
+    "specials": "स्पेशल",
+    "episodeNumbered": "एपिसोड ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "कलाकार: ${names}",
+    "castAndCrew": "कलाकार और क्रू",
+    "airs": "${date} को आएगा",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "जन॰",
+      "feb": "फ़र॰",
+      "mar": "मार्च",
+      "apr": "अप्रैल",
+      "may": "मई",
+      "jun": "जून",
+      "jul": "जुल॰",
+      "aug": "अग॰",
+      "sep": "सित॰",
+      "oct": "अक्तू॰",
+      "nov": "नव॰",
+      "dec": "दिस॰"
+    },
+    "play": "चलाएँ",
+    "playEpisode": "${episode} चलाएँ",
+    "resume": "${time} से जारी रखें",
+    "resumeEpisode": "${episode} · ${time} से जारी रखें",
+    "addToLibrary": "लाइब्रेरी में जोड़ें",
+    "removeFromLibrary": "लाइब्रेरी से हटाएँ",
+    "markWatched": "देखा गया मार्क करें",
+    "markUnwatched": "अनदेखा मार्क करें",
+    "markAllWatched": "सभी एपिसोड देखे गए मार्क करें",
+    "markAllUnwatched": "सभी एपिसोड अनदेखे मार्क करें",
+    "markSeasonWatched": "सीज़न देखा गया मार्क करें",
+    "markSeasonUnwatched": "सीज़न अनदेखा मार्क करें",
+    "watched": "देखा गया",
+    "overviewHidden": "विवरण छिपा है",
+    "moreActions": "और विकल्प",
+    "moreActionsNamed": "${name} के लिए और विकल्प",
+    "showMore": "ज़्यादा",
+    "showLess": "कम",
+    "findingStream": "स्ट्रीम ढूँढी जा रही है…",
+    "chooseStream": "स्ट्रीम चुनें",
+    "download": {
+      "download": "डाउनलोड करें",
+      "queued": "कतार में",
+      "waitingForWifi": "Wi-Fi का इंतज़ार है",
+      "downloading": "डाउनलोड हो रहा है ${percent}%",
+      "downloadingStarted": "डाउनलोड हो रहा है…",
+      "paused": "रुका हुआ",
+      "failed": "डाउनलोड नहीं हो सका",
+      "partial": "${total} में से ${done} डाउनलोड किए गए",
+      "downloaded": "डाउनलोड किया गया",
+      "menuTitle": "डाउनलोड",
+      "allSeasons": "सभी सीज़न",
+      "pick": {
+        "all": "सभी एपिसोड",
+        "unwatched": "अनदेखे एपिसोड",
+        "next5": "अगले 5 अनदेखे",
+        "next10": "अगले 10 अनदेखे"
+      },
+      "keepSynced": "सिंक रखें",
+      "keepSyncedCount": {
+        "one": "${n} अनदेखा एपिसोड रखें",
+        "other": "${n} अनदेखे एपिसोड रखें"
+      },
+      "keepSyncedAll": "सभी अनदेखे एपिसोड रखें",
+      "manage": "डाउनलोड मैनेज करें",
+      "pauseAll": "डाउनलोड रोकें",
+      "resumeAll": "डाउनलोड जारी रखें",
+      "deleteSeason": "इस सीज़न के डाउनलोड मिटाएँ",
+      "deleteAll": "सभी डाउनलोड मिटाएँ",
+      "queuedEpisodes": {
+        "one": "${n} एपिसोड “डाउनलोड” में जोड़ा गया",
+        "other": "${n} एपिसोड “डाउनलोड” में जोड़े गए"
+      },
+      "nothingQueued": "हर एपिसोड पहले से डाउनलोड हो चुका है या कतार में है।",
+      "failedToQueue": "डाउनलोड नहीं जोड़े जा सके।",
+      "episode": {
+        "download": "एपिसोड डाउनलोड करें",
+        "pause": "डाउनलोड रोकें",
+        "resume": "डाउनलोड जारी रखें",
+        "retry": "फिर से डाउनलोड करें",
+        "pickStream": "स्ट्रीम चुनें",
+        "cancel": "डाउनलोड रद्द करें",
+        "delete": "डाउनलोड मिटाएँ",
+        "queued": "कतार में",
+        "downloading": "${percent}%",
+        "paused": "रुका हुआ",
+        "failed": "डाउनलोड नहीं हो सका",
+        "downloaded": "डाउनलोड किया गया"
+      }
+    },
+    "related": {
+      "title": "इसके जैसे और",
+      "noneFound": "कोई मिलते-जुलते शीर्षक नहीं मिले।"
+    }
+  },
+  "library": {
+    "title": "लाइब्रेरी",
+    "continueWatching": "देखना जारी रखें",
+    "sort": {
+      "lastWatched": "हाल ही में देखे गए",
+      "added": "हाल ही में जोड़े गए",
+      "name": "टाइटल A–Z",
+      "nameReverse": "टाइटल Z–A",
+      "timesWatched": "सबसे ज़्यादा देखे गए",
+      "watched": "देखे गए पहले",
+      "notWatched": "अनदेखे पहले"
+    },
+    "sortBy": "क्रमबद्ध करें",
+    "sortByNamed": "क्रमबद्ध करें: ${name}",
+    "empty": "यहाँ अभी कुछ नहीं है। टाइटल के जानकारी पेज से उन्हें लाइब्रेरी में जोड़ें।",
+    "emptyContinueWatching": "जारी रखने के लिए कुछ नहीं है। टाइटल देखना शुरू करते ही वे यहाँ दिखेंगे।",
+    "emptyType": "यहाँ इस तरह का कुछ नहीं है।",
+    "watched": "देखा गया"
+  },
+  "mediaMenu": {
+    "markWatched": "देखा गया मार्क करें",
+    "markUnwatched": "अनदेखा मार्क करें",
+    "removeFromContinueWatching": "“देखना जारी रखें” से हटाएँ",
+    "details": "जानकारी पेज पर जाएँ",
+    "addToLibrary": "लाइब्रेरी में जोड़ें",
+    "removeFromLibrary": "लाइब्रेरी से हटाएँ",
+    "playFromStart": "शुरुआत से चलाएँ",
+    "markSeasonWatched": "सीज़न देखा गया मार्क करें",
+    "markSeasonUnwatched": "सीज़न अनदेखा मार्क करें",
+    "chooseStream": "स्ट्रीम चुनें",
+    "download": "डाउनलोड करें",
+    "pauseDownload": "डाउनलोड रोकें",
+    "resumeDownload": "डाउनलोड जारी रखें",
+    "retryDownload": "फिर से डाउनलोड करें",
+    "cancelDownload": "डाउनलोड रद्द करें",
+    "deleteDownload": "डाउनलोड मिटाएँ",
+    "pickStream": "स्ट्रीम चुनें",
+    "trailer": "ट्रेलर",
+    "markFailed": "${title} को मार्क नहीं किया जा सका: इसकी जानकारी लोड नहीं हुई। कनेक्शन जाँचें और फिर से कोशिश करें।"
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "इंस्टॉल किए गए ऐडऑन पढ़े नहीं जा सके। फिर से कोशिश करने के लिए Tortuga को रीस्टार्ट करें।",
+    "error": {
+      "invalidTransportUrl": "यह ऐडऑन लिंक नहीं है। ऐडऑन लिंक /manifest.json पर ख़त्म होते हैं।",
+      "timeout": "ऐडऑन ने जवाब देने में बहुत समय लगाया।",
+      "network": "ऐडऑन तक नहीं पहुँचा जा सका।",
+      "http": "ऐडऑन ने एरर लौटाया (HTTP ${status})।",
+      "invalidResponse": "ऐडऑन ने ऐसा जवाब भेजा जिसे यह ऐप पढ़ नहीं सकता।",
+      "unexpectedResponse": "ऐडऑन ने माँगे गए जवाब से अलग तरह का जवाब भेजा।",
+      "emptyContent": "कुछ नहीं मिला।",
+      "invalidManifest": "ऐडऑन का मेनिफ़ेस्ट अमान्य है।",
+      "configurationRequired": "इस ऐडऑन को इंस्टॉल करने से पहले कॉन्फ़िगर करना होगा।",
+      "alreadyInstalled": "यह ऐडऑन पहले से इंस्टॉल है।",
+      "notInstalled": "यह ऐडऑन इंस्टॉल नहीं है।",
+      "protectedAddon": "यह ऐडऑन बिल्ट-इन है और इसे हटाया या बंद नहीं किया जा सकता।"
+    },
+    "title": "ऐडऑन",
+    "allTypes": "सभी",
+    "empty": "कोई ऐडऑन इंस्टॉल नहीं है।",
+    "emptyFiltered": "इस टाइप का कोई ऐडऑन इंस्टॉल नहीं है।",
+    "builtIn": "बिल्ट-इन",
+    "builtInExplanation": "यह ऐडऑन बिल्ट-इन है और इसे हटाया या बंद नहीं किया जा सकता।",
+    "cancel": "रद्द करें",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "ऊपर ले जाएँ",
+    "moveUpNamed": "${name} को ऊपर ले जाएँ",
+    "moveDown": "नीचे ले जाएँ",
+    "moveDownNamed": "${name} को नीचे ले जाएँ",
+    "dragToReorderNamed": "${name} का क्रम बदलें",
+    "enabledNamed": "${name} का उपयोग करें",
+    "close": "बंद करें",
+    "version": "वर्शन ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "कैटलॉग",
+      "meta": "जानकारी",
+      "stream": "स्ट्रीम",
+      "subtitles": "सबटाइटल",
+      "addonCatalog": "ऐडऑन कैटलॉग",
+      "player": "प्लेबैक गतिविधि",
+      "library": "लाइब्रेरी गतिविधि"
+    },
+    "remove": {
+      "title": "${name} हटाएँ?",
+      "message": "इसे हर डिवाइस पर इस प्रोफ़ाइल से हटा दिया जाएगा, साथ ही वे सेटिंग भी जिनके साथ इसे कॉन्फ़िगर किया गया था।",
+      "confirm": "हटाएँ"
+    },
+    "details": {
+      "types": "टाइप",
+      "resources": "क्या देता है",
+      "catalogs": "कैटलॉग",
+      "contact": "संपर्क",
+      "configure": "कॉन्फ़िगर करें",
+      "remove": "हटाएँ",
+      "enabled": "इस ऐडऑन का उपयोग करें",
+      "enabledOff": "बंद: Tortuga इससे कुछ नहीं माँगता और इसके कैटलॉग नहीं दिखाता।",
+      "shareTitle": "ऐडऑन लिंक",
+      "shareWarning": "इस लिंक में उन अकाउंट की कुंजियाँ हो सकती हैं जिनके साथ यह ऐडऑन कॉन्फ़िगर किया गया था। इसे सिर्फ़ भरोसेमंद लोगों के साथ शेयर करें।",
+      "revealLink": "लिंक दिखाएँ",
+      "hideLink": "लिंक छिपाएँ",
+      "copyLink": "लिंक कॉपी करें",
+      "linkCopied": "लिंक कॉपी हो गया।"
+    },
+    "watchActivity": {
+      "title": "देखने की गतिविधि भेजें",
+      "explanation": "यह ऐडऑन आपकी देखने की गतिविधि पाता है: आप क्या चलाते, रोकते और बंद करते हैं, अपनी लाइब्रेरी में क्या जोड़ते या उससे हटाते हैं, और क्या देखा गया मार्क करते हैं।",
+      "agree": "मैं सहमत हूँ कि यह ऐडऑन मेरी देखने की गतिविधि पाए",
+      "notAllowed": "जब तक आप अनुमति न दें, इसे देखने की कोई गतिविधि नहीं मिलती"
+    },
+    "install": {
+      "action": "ऐडऑन इंस्टॉल करें",
+      "title": "ऐडऑन इंस्टॉल करें",
+      "linkHint": "ऐडऑन लिंक, जो /manifest.json पर ख़त्म होता हो",
+      "submit": "जारी रखें",
+      "confirm": "इंस्टॉल करें",
+      "update": "अपडेट करें",
+      "configure": "कॉन्फ़िगर करें",
+      "configureFirst": "इस ऐडऑन को इंस्टॉल करने से पहले कॉन्फ़िगर करना होगा। इसे कॉन्फ़िगर करें, फिर इसके पेज से इंस्टॉल करें।",
+      "alreadyInstalled": "यह ऐडऑन पहले से इंस्टॉल है।",
+      "updateDetails": "पहले से इंस्टॉल है। इससे इसकी जानकारी अपडेट होगी।",
+      "updateVersion": "पहले से इंस्टॉल है। इससे यह वर्शन ${version} पर अपडेट होगा।",
+      "adult": "इस ऐडऑन को वयस्क सामग्री के रूप में मार्क किया गया है।",
+      "installed": "${name} इंस्टॉल हो गया।",
+      "updated": "${name} अपडेट हो गया।",
+      "done": "हो गया"
+    },
+    "browse": {
+      "title": "ब्राउज़ करें",
+      "installed": "इंस्टॉल किए गए",
+      "installedNote": "इंस्टॉल है"
+    }
+  },
+  "settings": {
+    "title": "सेटिंग",
+    "automatic": "ऑटोमैटिक",
+    "listSeparator": ", ",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "increaseNamed": "${name} बढ़ाएँ",
+    "decreaseNamed": "${name} घटाएँ",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "one": "${n} सेकंड",
+        "other": "${n} सेकंड"
+      }
+    },
+    "time": {
+      "justNow": "अभी-अभी",
+      "minutesAgo": {
+        "one": "${n} मिनट पहले",
+        "other": "${n} मिनट पहले"
+      },
+      "hoursAgo": {
+        "one": "${n} घंटा पहले",
+        "other": "${n} घंटे पहले"
+      },
+      "daysAgo": {
+        "one": "${n} दिन पहले",
+        "other": "${n} दिन पहले"
+      },
+      "monthsAgo": {
+        "one": "${n} महीना पहले",
+        "other": "${n} महीने पहले"
+      },
+      "yearsAgo": {
+        "one": "${n} साल पहले",
+        "other": "${n} साल पहले"
+      }
+    },
+    "sections": {
+      "playback": "प्लेबैक",
+      "playbackSummary": "भाषाएँ, देखा गया मानने की सीमा, अगला एपिसोड और स्किप",
+      "device": "यह डिवाइस",
+      "deviceSummary": "डिकोडिंग, HDR, फ़्रेम रेट, ऑडियो, कैश और क्रैश रिपोर्ट",
+      "subtitles": "सबटाइटल",
+      "subtitlesSummary": "इस डिवाइस पर साइज़, रंग, आउटलाइन और पोज़िशन",
+      "addons": "ऐडऑन",
+      "addonsSummary": {
+        "one": "${n} ऐडऑन इंस्टॉल है",
+        "other": "${n} ऐडऑन इंस्टॉल हैं"
+      },
+      "addonsSummaryLoading": "इंस्टॉल किए गए ऐडऑन",
+      "home": "होम",
+      "homeSummary": "होम पर कौन-सी पंक्तियाँ दिखें, और उनका क्रम",
+      "appearance": "रूप-रंग",
+      "appearanceSummary": "भाषा, पोस्टर और देखे गए टाइटल",
+      "trackers": "ट्रैकर",
+      "trackersSummary": "स्क्रॉबलिंग, देखने का इतिहास और सूचियाँ",
+      "trackersConnected": "${services} से कनेक्ट है",
+      "account": "अकाउंट",
+      "about": "परिचय",
+      "downloads": "डाउनलोड",
+      "downloadsSummary": "लोकेशन, सिर्फ़ Wi-Fi और स्टोरेज",
+      "data": "एक्सपोर्ट और इंपोर्ट",
+      "dataSummary": "आपकी प्रोफ़ाइल का डेटा फ़ाइल में, और फ़ाइल से वापस"
+    },
+    "profile": {
+      "locked": "PIN से लॉक है",
+      "unlocked": "कोई PIN नहीं",
+      "edit": "प्रोफ़ाइल एडिट करें",
+      "manage": "प्रोफ़ाइल बदलें या मैनेज करें"
+    },
+    "about": {
+      "version": "वर्शन ${version}",
+      "license": "Tortuga का लाइसेंस GNU General Public License वर्शन 3 है। आप इसे चला सकते हैं, इसका अध्ययन कर सकते हैं, इसे शेयर कर सकते हैं और बदल सकते हैं, और जो भी आपको इसकी कॉपी दे, उसे आपको इसका सोर्स कोड भी देना होगा।",
+      "source": "सोर्स कोड",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga, Trakt का उपयोग करता है, लेकिन Trakt द्वारा समर्थित या प्रमाणित नहीं है।",
+      "notices": "थर्ड-पार्टी सॉफ़्टवेयर",
+      "noticeLink": "प्रोजेक्ट पेज"
+    },
+    "appearance": {
+      "interfaceLanguage": "ऐप की भाषा",
+      "interfaceLanguageHint": "ऐप के मेन्यू और मैसेज की भाषा",
+      "interfaceLanguageSystem": "सिस्टम डिफ़ॉल्ट",
+      "blurUnwatched": "बिना देखे एपिसोड धुंधले करें",
+      "blurUnwatchedHint": "जो एपिसोड आपने शुरू नहीं किए, उनकी तस्वीरें धुंधली करें और विवरण छिपाएँ, ताकि वे कुछ न बताएँ",
+      "hideWatched": "देखे गए टाइटल छिपाएँ",
+      "hideWatchedHint": "जो फ़िल्में और सीरीज़ आप पूरी कर चुके हैं, उन्हें होम की पंक्तियों और एक्सप्लोर से हटाएँ। नया एपिसोड आने पर सीरीज़ लौट आती है",
+      "hidePosterCaptions": "पोस्टर के नीचे टाइटल छिपाएँ",
+      "hidePosterCaptionsHint": "सिर्फ़ तस्वीर दिखाएँ। देखना जारी रखें में एपिसोड और बचा समय दिखता रहता है",
+      "posterTemplate": "पोस्टर URL टेम्पलेट",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} और {tvdb_id} हर टाइटल की ID हैं, {type} movie या series",
+      "posterTemplateNone": "ऐडऑन के पोस्टर",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "यह http या https पता नहीं है, इसलिए अनदेखा किया जाता है"
+    },
+    "home": {
+      "note": "चुनें कि होम पर कौन-सी पंक्तियाँ दिखें और किस क्रम में। ये सेटिंग इस प्रोफ़ाइल की हैं और आपके दूसरे डिवाइस पर सिंक होती हैं।",
+      "continueWatchingHint": "हमेशा पहली पंक्ति",
+      "rowsHeader": "पंक्तियाँ",
+      "empty": "किसी भी इंस्टॉल किए गए ऐडऑन में होम के लिए कैटलॉग नहीं है।",
+      "reset": "डिफ़ॉल्ट पर रीसेट करें",
+      "moveUp": "ऊपर ले जाएँ",
+      "moveUpNamed": "${name} को ऊपर ले जाएँ",
+      "moveDown": "नीचे ले जाएँ",
+      "moveDownNamed": "${name} को नीचे ले जाएँ",
+      "dragToReorder": "क्रम बदलने के लिए खींचें",
+      "dragToReorderNamed": "${name} का क्रम बदलें",
+      "newCollection": "नया कलेक्शन",
+      "importCollections": "कलेक्शन इंपोर्ट करें",
+      "exportCollections": "कलेक्शन एक्सपोर्ट करें",
+      "edit": "बदलें",
+      "delete": "मिटाएँ",
+      "deleteTitle": "“${title}” मिटाएँ?",
+      "deleteMessage": "यह कलेक्शन आपके सभी डिवाइस पर इस प्रोफ़ाइल से हट जाएगा।"
+    },
+    "playback": {
+      "title": "प्लेबैक",
+      "note": "ये सेटिंग इस प्रोफ़ाइल की हैं और आपके दूसरे डिवाइस पर सिंक होती हैं।",
+      "languagesHeader": "भाषाएँ",
+      "audioLanguages": "ऑडियो की भाषाएँ",
+      "audioLanguagesHint": "कौन-सा ऑडियो ट्रैक चले, पसंद के क्रम में",
+      "audioLanguagesNone": "वीडियो का डिफ़ॉल्ट",
+      "audioLanguagesExplanation": "वीडियो इनमें से उस पहली भाषा में चलता है जो उसमें मौजूद हो। कोई भाषा न चुनने पर वह अपने डिफ़ॉल्ट ऑडियो ट्रैक में चलता है।",
+      "subtitleLanguages": "सबटाइटल की भाषाएँ",
+      "subtitleLanguagesHint": "कौन-से सबटाइटल चालू हों, पसंद के क्रम में",
+      "subtitleLanguagesNone": "बंद",
+      "subtitleLanguagesExplanation": "वीडियो में इनमें से जो भाषा सबसे पहले मिले, उसके सबटाइटल चालू हो जाते हैं। कोई भाषा न चुनने पर सबटाइटल बंद रहते हैं, जब तक वीडियो में फ़ोर्स्ड सबटाइटल न हों।",
+      "secondSubtitleLanguage": "दूसरे सबटाइटल की भाषा",
+      "secondSubtitleLanguageHint": "पहले सबटाइटल के साथ तस्वीर के ऊपर दिखता है",
+      "secondSubtitleLanguageExplanation": "इस भाषा के सबटाइटल पहले सबटाइटल के साथ तस्वीर के ऊपर दिखते हैं। कोई भाषा न चुनने पर दूसरा सबटाइटल तभी दिखता है जब उसे प्लेयर में चुना जाए।",
+      "secondSubtitleLanguageNone": "बंद",
+      "showSubtitles": "सबटाइटल दिखाएँ",
+      "showSubtitlesHint": "हमेशा: बोली जा रही भाषा में भी सबटाइटल, पहले SDH",
+      "showSubtitlesFollowAudio": "ऑडियो के अनुसार",
+      "showSubtitlesAlways": "हमेशा",
+      "chosenHeader": "आपकी भाषाएँ",
+      "availableHeader": "भाषा जोड़ें",
+      "searchLanguages": "भाषाएँ खोजें",
+      "noLanguageMatches": "कोई भाषा मेल नहीं खाती।",
+      "playbackHeader": "प्लेबैक",
+      "watchedThreshold": "देखा गया मानने की सीमा",
+      "watchedThresholdHint": "वीडियो में कहाँ तक पहुँचने पर उसे देखा गया माना जाए और देखना जारी रखें में अगला एपिसोड आए",
+      "bingeWatching": "अगला एपिसोड चलाएँ",
+      "bingeWatchingHint": "एपिसोड ख़त्म होने पर अगला शुरू करें, जहाँ तक हो सके उसी सोर्स से",
+      "upNextCountdown": "अगले एपिसोड का काउंटडाउन",
+      "upNextCountdownHint": "अगले एपिसोड का प्रॉम्प्ट उसे शुरू करने से पहले कितनी देर रुके",
+      "upNextImmediately": "तुरंत शुरू करें",
+      "seekShort": "छोटा स्किप",
+      "seekShortHint": "ऐरो की, रिमोट और प्लेयर के स्किप बटन",
+      "seekLong": "लंबा स्किप",
+      "seekLongHint": "ऐरो की के साथ Shift, और देर तक दबाने पर",
+      "videoClick": "वीडियो पर क्लिक",
+      "videoClickHint": "डबल क्लिक से अब भी फ़ुल स्क्रीन चालू और बंद होती है",
+      "videoClickPause": "रोकें और चलाएँ",
+      "videoClickControls": "कंट्रोल दिखाएँ या छिपाएँ",
+      "moveUp": "ऊपर ले जाएँ",
+      "moveUpNamed": "${name} को ऊपर ले जाएँ",
+      "moveDown": "नीचे ले जाएँ",
+      "moveDownNamed": "${name} को नीचे ले जाएँ",
+      "removeLanguage": "हटाएँ",
+      "removeLanguageNamed": "${name} हटाएँ",
+      "dragToReorderNamed": "${name} का क्रम बदलें",
+      "skipping": {
+        "header": "स्किप",
+        "footer": "इंट्रो, रीकैप और क्रेडिट वीडियो के चैप्टर के नामों से पहचाने जाते हैं, इसलिए सिर्फ़ नाम वाले चैप्टर वाले वीडियो में ही इन्हें स्किप करने का विकल्प मिलता है। ऑटोमैटिक स्किप से पहले बटन पर काउंटडाउन चलता है, और प्लेयर पर आप कुछ भी करें तो वह रुक जाता है।",
+        "intros": "इंट्रो",
+        "introsHint": "ओपनिंग गाने और टाइटल सीक्वेंस",
+        "recaps": "रीकैप",
+        "recapsHint": "एपिसोड की शुरुआत में “अब तक आपने देखा…”",
+        "credits": "क्रेडिट",
+        "creditsHint": "एंड क्रेडिट और अगले एपिसोड की झलकियाँ; अगले एपिसोड का प्रॉम्प्ट इन्हीं के साथ शुरू होता है",
+        "off": "बंद",
+        "button": "बटन दिखाएँ",
+        "auto": "अपने-आप स्किप करें"
+      },
+      "streams": {
+        "header": "स्ट्रीम",
+        "footer": "फ़िल्टर हर स्ट्रीम सूची पर लागू होते हैं। सूची बताती है कि वे कितनी स्ट्रीम छिपाते हैं, और उन्हें फिर भी दिखा सकती है।",
+        "autoPlay": "अपने-आप चलाएँ",
+        "autoPlayHint": "“चलाएँ”, “जारी रखें”, किसी एपिसोड और अगले एपिसोड पर स्ट्रीम सूची न दिखाएँ; क्रम लगा हो तो सभी ऐडऑन के जवाब का इंतज़ार करता है",
+        "suggestions": "स्ट्रीम सुझाएँ",
+        "suggestionsHint": "सीखता है कि इस प्रोफ़ाइल पर आप कौन-सी स्ट्रीम चुनते हैं और सूची में एक को चिह्नित करता है",
+        "autoPlayOff": "बंद",
+        "autoPlayFirstMatch": "फ़िल्टर पास करने वाली पहली स्ट्रीम",
+        "autoPlayReuseLastLink": "पिछली बार वाली ही स्ट्रीम, वरना फ़िल्टर पास करने वाली पहली",
+        "qualities": "क्वालिटी",
+        "qualitiesHint": "स्ट्रीम सूचियों में कौन-से रिज़ॉल्यूशन दिखें",
+        "qualitiesAll": "सभी",
+        "qualitiesNone": "कोई नहीं",
+        "qualitiesAllBut": "${hidden} को छोड़कर सभी",
+        "qualitySd": "SD",
+        "qualityUnknown": "अज्ञात",
+        "ranges": "डायनामिक रेंज",
+        "rangesHint": "स्ट्रीम सूचियों में SDR, HDR और Dolby Vision में से कौन-से दिखें",
+        "codecs": "वीडियो कोडेक",
+        "codecsHint": "स्ट्रीम सूचियों में कौन-से वीडियो कोडेक दिखें",
+        "minSize": "न्यूनतम आकार",
+        "minSizeHint": "छोटी फ़ाइलों की स्ट्रीम छिपाता है; जिस स्ट्रीम में आकार नहीं लिखा, वह रहती है",
+        "maxSize": "अधिकतम आकार",
+        "maxSizeHint": "बड़ी फ़ाइलों की स्ट्रीम छिपाता है; जिस स्ट्रीम में आकार नहीं लिखा, वह रहती है",
+        "sizeAny": "कोई भी आकार",
+        "includePattern": "सिर्फ़ मेल खाती स्ट्रीम",
+        "includePatternHint": "एक रेगुलर एक्सप्रेशन, जिसे हर स्ट्रीम के नाम, विवरण और फ़ाइल नाम से मिलाया जाता है (केस अनदेखा करके)",
+        "includePatternNone": "कोई भी स्ट्रीम",
+        "includePlaceholder": "जैसे 1080p|2160p",
+        "excludePattern": "मेल खाती स्ट्रीम छिपाएँ",
+        "excludePatternHint": "ऊपर वाले पैटर्न से ज़्यादा प्राथमिकता",
+        "excludePatternNone": "कोई नहीं",
+        "excludePlaceholder": "जैसे HDTV|XviD",
+        "invalidPattern": "यह मान्य रेगुलर एक्सप्रेशन नहीं है, इसलिए इसे अनदेखा किया गया है",
+        "save": "सेव करें",
+        "clear": "साफ़ करें"
+      }
+    },
+    "device": {
+      "title": "यह डिवाइस",
+      "note": "ये सेटिंग सिर्फ़ इस डिवाइस पर लागू होती हैं और सिंक नहीं होतीं।",
+      "videoHeader": "वीडियो",
+      "hardwareDecoding": "हार्डवेयर डिकोडिंग",
+      "hardwareDecodingHint": "ग्राफ़िक्स हार्डवेयर से वीडियो डिकोड करें। वीडियो में गड़बड़ी दिखे तो इसे बंद करें।",
+      "hdr": "HDR",
+      "hdrHint": "डिस्प्ले सपोर्ट करे तो HDR वीडियो को HDR में चलाएँ। बंद होने पर उसे SDR में बदला जाता है।",
+      "matchFrameRate": "फ़्रेम रेट बदलना लागू करें",
+      "matchFrameRateHint": "सिस्टम ऐसा न करे तब भी डिस्प्ले को वीडियो के फ़्रेम रेट पर स्विच करें। हर स्विच पर स्क्रीन एक पल के लिए काली हो जाती है।",
+      "audioHeader": "ऑडियो",
+      "audioPassthrough": "ऑडियो पासथ्रू",
+      "audioPassthroughHint": "सराउंड साउंड (Dolby Digital, DTS, TrueHD) को बिना डिकोड किए रिसीवर पर भेजें",
+      "audioPassthroughHintApple": "Dolby Digital और Dolby Digital Plus, Atmos सहित, सिस्टम के Dolby डिकोडर को भेजें; DTS और TrueHD मल्टीचैनल PCM के रूप में चलते हैं। आवाज़ न आए तो इसे बंद करें।",
+      "audioPassthroughHintAppleSpatial": "Dolby Digital और Dolby Digital Plus, Atmos सहित, सिस्टम के Dolby डिकोडर को भेजें, और TrueHD Atmos और DTS:X को स्पेशियल ऑडियो के रूप में चलाएँ; बाकी DTS और TrueHD ट्रैक मल्टीचैनल PCM के रूप में चलते हैं। आवाज़ न आए तो इसे बंद करें।",
+      "audioPassthroughNormalized": "जब तक वॉल्यूम बराबर रखना चालू है, तब तक बंद",
+      "gesturesHeader": "जेस्चर",
+      "swipeGestures": "ब्राइटनेस और वॉल्यूम के लिए स्वाइप",
+      "swipeGesturesHint": "ब्राइटनेस के लिए वीडियो के बाएँ आधे हिस्से पर, वॉल्यूम के लिए दाएँ आधे हिस्से पर ऊपर या नीचे स्वाइप करें।",
+      "streamingHeader": "स्ट्रीमिंग",
+      "cacheSize": "रीड-अहेड कैश",
+      "cacheSizeHint": "प्लेबैक से पहले स्ट्रीम का कितना हिस्सा लोड किया जाए",
+      "discordHeader": "Discord",
+      "discordPresence": "दिखाएँ कि आप क्या देख रहे हैं",
+      "discordPresenceHint": "वीडियो चलते समय आपके Discord दोस्तों को शीर्षक और एपिसोड दिखता है। Discord इस कंप्यूटर पर चालू होना चाहिए।",
+      "privacyHeader": "निजता",
+      "crashReports": "क्रैश रिपोर्ट भेजें",
+      "crashReportsHint": "ऐप क्रैश होने या उसका कोई हिस्सा विफल होने पर क्या गड़बड़ हुई यह भेजें, आपके ऐडऑन लिंक या अकाउंट कभी नहीं"
+    },
+    "subtitles": {
+      "title": "सबटाइटल",
+      "note": "ये सेटिंग सिर्फ़ इस डिवाइस पर लागू होती हैं और सिंक नहीं होतीं। ये SRT जैसे सादे टेक्स्ट वाले सबटाइटल की स्टाइल तय करती हैं; स्टाइल वाले सबटाइटल अपना लुक बनाए रखते हैं, जब तक आप उन पर भी यह स्टाइल लागू न करें।",
+      "previewText": "सबटाइटल ऐसे दिखते हैं",
+      "textHeader": "टेक्स्ट",
+      "size": "साइज़",
+      "textColor": "रंग",
+      "bold": "बोल्ड",
+      "outlineHeader": "आउटलाइन और बैकग्राउंड",
+      "outline": "आउटलाइन",
+      "outlineColor": "आउटलाइन का रंग",
+      "background": "बैकग्राउंड",
+      "backgroundHint": "टेक्स्ट के पीछे एक बॉक्स, और वह कितना अपारदर्शी हो",
+      "backgroundOff": "बंद",
+      "positionHeader": "पोज़िशन",
+      "position": "ऊँचाई",
+      "positionHint": "सबटाइटल तस्वीर के निचले किनारे से कितना ऊपर रहें",
+      "positionBottom": "सबसे नीचे",
+      "styledHeader": "स्टाइल वाले सबटाइटल",
+      "styledOverride": "स्टाइल वाले सबटाइटल पर लागू करें",
+      "styledOverrideHint": "ASS और SSA सबटाइटल अपनी स्टाइल की जगह यह स्टाइल लेते हैं। साइन और इफ़ेक्ट ग़लत दिख सकते हैं।",
+      "outlines": {
+        "none": "कोई नहीं",
+        "thin": "पतली",
+        "thick": "मोटी"
+      },
+      "colors": {
+        "white": "सफ़ेद",
+        "yellow": "पीला",
+        "green": "हरा",
+        "cyan": "सियान",
+        "gray": "ग्रे",
+        "black": "काला"
+      }
+    },
+    "account": {
+      "title": "अकाउंट",
+      "syncLabel": "सिंक",
+      "syncNow": "अभी सिंक करें",
+      "lastSynced": "${time} सिंक हुआ",
+      "serverLabel": "सिंक सर्वर",
+      "identitiesHeader": "साइन-इन के तरीके",
+      "linkIdentity": "साइन-इन तरीका जोड़ें",
+      "devicesHeader": "डिवाइस",
+      "thisDevice": "यह डिवाइस",
+      "activeNow": "अभी सक्रिय",
+      "lastActive": "${time} सक्रिय",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} साइन आउट हो गया।",
+      "identityRemoved": "${provider} साइन-इन हटा दिया गया।",
+      "cancel": "रद्द करें",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "सिंगल साइन-ऑन"
+      },
+      "link": {
+        "start": "नया डिवाइस लिंक करें",
+        "title": "डिवाइस लिंक करें",
+        "instructions": "नए डिवाइस पर, किसी दूसरे डिवाइस से लिंक करने का विकल्प चुनें। फिर उस पर दिख रहा कोड डालें, या उसका QR कोड स्कैन करें।",
+        "codeHint": "ABCD-EFGH",
+        "submit": "जारी रखें",
+        "question": "“${name}” लिंक करें?",
+        "consequence": "यह डिवाइस इस अकाउंट में साइन इन हो जाएगा, इसकी प्रोफ़ाइल, ऐडऑन और लाइब्रेरी के साथ।",
+        "approve": "लिंक करें",
+        "reject": "लिंक न करें",
+        "approved": "${name} लिंक हो गया। यह अपना सेटअप ख़ुद पूरा कर लेगा।",
+        "rejected": "${name} लिंक नहीं किया गया।",
+        "expired": "कोड की समय-सीमा ख़त्म हो गई। नए डिवाइस पर फिर से शुरू करें।",
+        "done": "हो गया"
+      },
+      "signOut": {
+        "action": "साइन आउट करें",
+        "title": "साइन आउट करें?",
+        "message": "प्रोफ़ाइल, ऐडऑन, लाइब्रेरी और डाउनलोड इस डिवाइस से हटा दिए जाएँगे। डाउनलोड के अलावा बाकी सब अकाउंट में बना रहेगा: इसे वापस पाने के लिए फिर से साइन इन करें।",
+        "confirm": "साइन आउट करें"
+      },
+      "delete": {
+        "action": "अकाउंट मिटाएँ",
+        "explanation": "अकाउंट और उसका सारा सिंक किया गया डेटा सर्वर से मिटा देता है।",
+        "title": "अकाउंट मिटाएँ?",
+        "message": "अकाउंट और उसकी प्रोफ़ाइल, ऐडऑन, लाइब्रेरी और इतिहास सर्वर से हमेशा के लिए मिटा दिए जाएँगे, और हर डिवाइस साइन आउट हो जाएगा। इसे पहले जैसा नहीं किया जा सकता।",
+        "confirm": "अकाउंट मिटाएँ"
+      },
+      "revoke": {
+        "title": "${name} को साइन आउट करें?",
+        "message": "${name} साइन आउट हो जाएगा और अकाउंट के डिवाइस से हट जाएगा। इसे बाद में फिर से लिंक किया जा सकता है।",
+        "messageThisDevice": "आप यही डिवाइस इस्तेमाल कर रहे हैं। यह साइन आउट हो जाएगा, और इसकी प्रोफ़ाइल, ऐडऑन, लाइब्रेरी और डाउनलोड इससे हटा दिए जाएँगे। डाउनलोड के अलावा बाकी सब अकाउंट में बना रहेगा।",
+        "confirm": "डिवाइस साइन आउट करें",
+        "confirmNamed": "डिवाइस साइन आउट करें: ${name}"
+      },
+      "unsynced": {
+        "title": "जो बदलाव सिंक नहीं हुए, उन्हें मिटाएँ?",
+        "message": {
+          "one": "इस डिवाइस पर किया गया ${n} बदलाव, जैसे देखने की प्रगति या लाइब्रेरी में कोई संपादन, अकाउंट तक नहीं पहुँचा है। अभी साइन आउट करने पर यह हमेशा के लिए मिट जाएगा। रद्द करें चुनने पर यह यहीं रहेगा और यह डिवाइस साइन इन रहेगा।",
+          "other": "इस डिवाइस पर किए गए ${n} बदलाव, जैसे देखने की प्रगति या लाइब्रेरी में संपादन, अकाउंट तक नहीं पहुँचे हैं। अभी साइन आउट करने पर ये हमेशा के लिए मिट जाएँगे। रद्द करें चुनने पर ये यहीं रहेंगे और यह डिवाइस साइन इन रहेगा।"
+        },
+        "confirm": "साइन आउट करें और मिटाएँ"
+      },
+      "unlink": {
+        "title": "${provider} साइन-इन हटाएँ?",
+        "message": "आप अब ${provider} से इस अकाउंट में साइन इन नहीं कर पाएँगे।",
+        "confirm": "हटाएँ",
+        "action": "${name} साइन-इन हटाएँ"
+      }
+    },
+    "trackers": {
+      "title": "ट्रैकर",
+      "note": "कनेक्ट की गई सेवाओं को पता चलता है कि यह प्रोफ़ाइल क्या देखती है: देखने की प्रगति, और देखे गए मार्क किए गए टाइटल। किसी सेवा को कनेक्ट या डिस्कनेक्ट करने का असर आपके सभी डिवाइस पर इस प्रोफ़ाइल के लिए होता है; नीचे दिए गए स्विच सिर्फ़ इस डिवाइस पर लागू होते हैं।",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "कनेक्ट है",
+      "connectedAs": "${user} के रूप में कनेक्ट है",
+      "notConnected": "कनेक्ट नहीं है",
+      "unavailable": "ऐप के इस वर्शन में उपलब्ध नहीं",
+      "connect": "कनेक्ट करें",
+      "connectNamed": "${name} कनेक्ट करें",
+      "disconnect": "डिस्कनेक्ट करें",
+      "disconnectNamed": "${name} डिस्कनेक्ट करें",
+      "scrobble": "आप जो देखते हैं, वह भेजें",
+      "scrobbleHint": "देखने की प्रगति और देखे गए टाइटल ${service} पर भेजे जाते हैं",
+      "filtersHeader": "क्या भेजें",
+      "movies": "फ़िल्में",
+      "series": "सीरीज़",
+      "anime": "एनिमे",
+      "queued": {
+        "one": "${n} बदलाव भेजा जाना बाकी है",
+        "other": "${n} बदलाव भेजे जाने बाकी हैं"
+      },
+      "notSent": {
+        "one": "${n} बदलाव भेजा नहीं जा सका (आख़िरी: ${reason})",
+        "other": "${n} बदलाव भेजे नहीं जा सके (आख़िरी: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} ने त्रुटि ${status} लौटाई",
+        "refused": "${service} ने इसे अस्वीकार कर दिया",
+        "unreadable": "इसे पढ़ा नहीं जा सका"
+      },
+      "connectTitle": "${service} कनेक्ट करें",
+      "starting": "${service} से संपर्क किया जा रहा है…",
+      "waiting": "${service} पर Tortuga को अनुमति देने का इंतज़ार है…",
+      "linkInstructions": "अपने ब्राउज़र में ${service} पर साइन इन करें और Tortuga को अनुमति दें।",
+      "linkScan": "या अपने फ़ोन से QR कोड स्कैन करें और वहाँ साइन इन करें।",
+      "openInBrowser": "ब्राउज़र में खोलें",
+      "expired": "कोड इस्तेमाल होने से पहले ही उसकी समय-सीमा ख़त्म हो गई।",
+      "declined": "${service} ने कनेक्शन की अनुमति नहीं दी।",
+      "unreachable": "${service} तक नहीं पहुँचा जा सका। कनेक्शन जाँचें और फिर से कोशिश करें।",
+      "serverUnreachable": "आपके Tortuga सर्वर तक नहीं पहुँचा जा सका। कनेक्शन जाँचें और फिर से कोशिश करें।",
+      "needsAccount": "${service} कनेक्ट करने के लिए Tortuga अकाउंट चाहिए। पहले अपने अकाउंट में साइन इन करें।",
+      "busy": "${service} अभी व्यस्त है। एक मिनट बाद फिर से कोशिश करें।",
+      "refused": "${service} ने साइन-इन अस्वीकार कर दिया।",
+      "failed": "${service} कनेक्ट नहीं हो सका।",
+      "retry": "फिर से कोशिश करें",
+      "connectedNotice": "${service} से ${user} के रूप में कनेक्ट हो गया।",
+      "connectedNoticeNoName": "${service} से कनेक्ट हो गया।",
+      "disconnectTitle": "${service} डिस्कनेक्ट करें?",
+      "disconnectMessage": "यह प्रोफ़ाइल आपके सभी डिवाइस पर देखी गई चीज़ें ${service} पर भेजना बंद कर देगी, और भेजे जाने के लिए बाकी बदलाव हटा दिए जाएँगे। आपके ${service} अकाउंट में पहले से मौजूद सब कुछ बना रहेगा।",
+      "disconnectedNotice": "${service} से डिस्कनेक्ट हो गया।",
+      "actionFailed": "यह काम नहीं हुआ। फिर से कोशिश करें।"
+    },
+    "downloads": {
+      "title": "डाउनलोड",
+      "note": "ये सेटिंग सिर्फ़ इस डिवाइस पर लागू होती हैं और सिंक नहीं होतीं।",
+      "location": {
+        "title": "लोकेशन",
+        "hint": "नए डाउनलोड कहाँ सेव हों। पहले से सेव किए गए डाउनलोड जहाँ हैं, वहीं रहते हैं।",
+        "deviceStorage": "डिवाइस स्टोरेज",
+        "external": "बाहरी स्टोरेज",
+        "change": "फ़ोल्डर बदलें"
+      },
+      "transferHeader": "डाउनलोडिंग",
+      "wifiOnly": "सिर्फ़ Wi-Fi पर डाउनलोड करें",
+      "wifiOnlyHint": "मोबाइल डेटा जैसे सीमित डेटा वाले नेटवर्क पर डाउनलोड रुके रहते हैं",
+      "atOnce": "एक साथ डाउनलोड",
+      "atOnceHint": "एक ही समय पर कितने डाउनलोड चलें",
+      "autoRemoveWatched": "देखे गए डाउनलोड मिटाएँ",
+      "autoRemoveWatchedHint": "डाउनलोड देख लेने के बाद मिटा दिया जाता है, चलते समय कभी नहीं",
+      "subtitleLanguages": "सेव होने वाले सबटाइटल",
+      "subtitleLanguagesHint": "इन भाषाओं के सबटाइटल हर डाउनलोड के साथ सेव होते हैं",
+      "subtitleLanguagesProfile": "आपकी सबटाइटल की भाषाएँ: ${languages}",
+      "subtitleLanguagesProfileNone": "आपकी सबटाइटल की भाषाएँ: कोई नहीं",
+      "subtitleLanguagesExplanation": "इन भाषाओं के सबटाइटल हर डाउनलोड के साथ सेव होते हैं, ताकि वे बिना कनेक्शन के भी दिखें।",
+      "useProfileLanguages": "मेरी सबटाइटल की भाषाएँ इस्तेमाल करें",
+      "storageHeader": "स्टोरेज",
+      "deleteAll": "सभी डाउनलोड मिटाएँ",
+      "deleteAllTitle": "सभी डाउनलोड मिटाएँ?",
+      "deleteAllText": "इस डिवाइस पर हर प्रोफ़ाइल के सभी डाउनलोड मिटा दिए जाएँगे।",
+      "deleteAllConfirm": "सभी मिटाएँ"
+    },
+    "data": {
+      "exportHeader": "एक्सपोर्ट",
+      "categories": {
+        "addons": "ऐडऑन",
+        "addonsHint": "इंस्टॉल किए गए ऐडऑन, उनके क्रम और लिंक के साथ",
+        "library": "लाइब्रेरी",
+        "libraryHint": "आपके सेव किए गए टाइटल",
+        "progress": "देखने की प्रगति",
+        "progressHint": "आप कहाँ रुके थे, और आपने क्या देखा",
+        "settings": "प्रोफ़ाइल सेटिंग",
+        "settingsHint": "प्लेबैक, स्ट्रीम, होम की पंक्तियाँ और सिंक होने वाली बाकी सेटिंग",
+        "streams": "स्ट्रीम इतिहास",
+        "streamsHint": "हर वीडियो के लिए आख़िरी बार चली स्ट्रीम"
+      },
+      "profilesHeader": "प्रोफ़ाइल",
+      "privateNote": "इस फ़ाइल में आपके ऐडऑन लिंक और स्ट्रीम इतिहास होते हैं, जिनमें API कुंजियाँ हो सकती हैं। इसे निजी रखें: जिसके पास भी यह फ़ाइल होगी, वह इनका इस्तेमाल कर सकता है।",
+      "exportNote": "PIN, ट्रैकर अकाउंट, डाउनलोड और इस डिवाइस की सेटिंग कभी भी फ़ाइल में शामिल नहीं होते।",
+      "exportAction": "फ़ाइल में एक्सपोर्ट करें",
+      "saved": "फ़ाइल ${name} सेव हो गई।",
+      "saveFailed": "फ़ाइल सेव नहीं हो सकी।",
+      "exportFailed": "एक्सपोर्ट नहीं हो सका।",
+      "importHeader": "इंपोर्ट",
+      "importNote": "Tortuga से एक्सपोर्ट की गई फ़ाइल खोलता है। हर आइटम के लिए नया डेटा रखा जाता है, और इस डिवाइस से कुछ भी नहीं मिटाया जाता।",
+      "importAction": "फ़ाइल से इंपोर्ट करें",
+      "reviewTitle": "इंपोर्ट",
+      "source": "${date} को Tortuga ${version} से एक्सपोर्ट की गई",
+      "sourceUndated": "Tortuga ${version} से एक्सपोर्ट की गई",
+      "dataHeader": "डेटा",
+      "counts": {
+        "addons": {
+          "one": "${n} ऐडऑन",
+          "other": "${n} ऐडऑन"
+        },
+        "titles": {
+          "one": "${n} टाइटल",
+          "other": "${n} टाइटल"
+        },
+        "progress": {
+          "one": "${n} टाइटल की प्रगति",
+          "other": "${n} टाइटल की प्रगति"
+        },
+        "settings": {
+          "one": "${n} सेटिंग",
+          "other": "${n} सेटिंग"
+        },
+        "streams": {
+          "one": "${n} स्ट्रीम",
+          "other": "${n} स्ट्रीम"
+        },
+        "profiles": {
+          "one": "${n} प्रोफ़ाइल",
+          "other": "${n} प्रोफ़ाइल"
+        }
+      },
+      "into": "इस प्रोफ़ाइल में",
+      "intoSame": "इस अकाउंट की ${name} प्रोफ़ाइल में",
+      "newProfile": "नई प्रोफ़ाइल",
+      "importConfirm": "इंपोर्ट करें",
+      "imported": "इंपोर्ट पूरा हुआ: ${changes}।",
+      "nothingNew": "इंपोर्ट करने के लिए कुछ नया नहीं है: फ़ाइल में मौजूद सब कुछ यहाँ पहले से है।",
+      "notTortuga": "यह फ़ाइल Tortuga से एक्सपोर्ट की गई फ़ाइल नहीं है। कुछ भी इंपोर्ट नहीं हुआ।",
+      "newer": "यह फ़ाइल Tortuga के नए वर्शन की है। Tortuga अपडेट करें, फिर इसे दोबारा इंपोर्ट करें।",
+      "damaged": "यह फ़ाइल ख़राब या अधूरी है। कुछ भी इंपोर्ट नहीं हुआ।",
+      "clockAhead": "इस फ़ाइल में दर्ज समय इस डिवाइस की घड़ी से बहुत आगे है। दोनों डिवाइस पर तारीख और समय जाँचें, फिर इसे दोबारा इंपोर्ट करें। कुछ भी इंपोर्ट नहीं हुआ।",
+      "importFailed": "इंपोर्ट नहीं हो सका।",
+      "unreadable": "फ़ाइल खोली नहीं जा सकी। कुछ भी इंपोर्ट नहीं हुआ।"
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "अप टू डेट",
+      "syncing": "सिंक हो रहा है…",
+      "offline": "ऑफ़लाइन। कनेक्शन वापस आने पर बदलाव सिंक होंगे।",
+      "signedOut": "साइन आउट है",
+      "failed": {
+        "server": "सिंक सर्वर में समस्या आई। जल्द ही फिर से कोशिश की जाएगी।",
+        "rateLimited": "सिंक सर्वर ने रफ़्तार कम करने को कहा। जल्द ही फिर से कोशिश की जाएगी।",
+        "quotaExceeded": "अकाउंट का स्टोरेज भर गया है, इसलिए बदलाव सिंक नहीं हो रहे।",
+        "tooLarge": "कुछ बदलाव सिंक करने के लिए बहुत बड़े हैं।",
+        "addonsTooLarge": "एक प्रोफ़ाइल के ऐडऑन सिंक करने के लिए बहुत बड़े हैं। जो ऐडऑन वह इस्तेमाल नहीं करती, उन्हें हटाएँ।",
+        "clockWrong": "कुछ बदलाव सिंक नहीं हो सकते। अपने डिवाइसों पर तारीख और समय जाँचें।",
+        "unknown": "सिंक नहीं हो सका। जल्द ही फिर से कोशिश की जाएगी।"
+      }
+    },
+    "error": {
+      "network": "सिंक सर्वर तक नहीं पहुँचा जा सका। कनेक्शन जाँचें और फिर से कोशिश करें।",
+      "server": "सिंक सर्वर में समस्या आई। बाद में फिर से कोशिश करें।",
+      "rateLimited": "बहुत ज़्यादा कोशिशें। थोड़ी देर रुककर फिर से कोशिश करें।",
+      "invalidServerUrl": "यह सर्वर का पता नहीं है। https://sync.example.com जैसा पता डालें।",
+      "insecureServerUrl": "इंटरनेट पर किसी सर्वर के लिए https इस्तेमाल करें। सादा http सिर्फ़ आपके अपने नेटवर्क के सर्वर के लिए काम करता है।",
+      "notTortugaServer": "इस पते पर किसी Tortuga सिंक सर्वर ने जवाब नहीं दिया।",
+      "incompatibleServer": "यह सर्वर Tortuga सिंक का पुराना वर्शन चलाता है और इसका इस्तेमाल नहीं किया जा सकता।",
+      "providerNotEnabled": "यह सर्वर साइन इन करने का यह तरीका नहीं देता।",
+      "signInRejected": "साइन इन नहीं हो सका। फिर से कोशिश करें।",
+      "appleCodeRejected": "Apple ने साइन-इन स्वीकार नहीं किया। फिर से कोशिश करें।",
+      "providerUnavailable": "साइन-इन सेवा तक नहीं पहुँचा जा सका। बाद में फिर से कोशिश करें।",
+      "signInCancelled": "साइन-इन रद्द कर दिया गया।",
+      "signInExpired": "साइन इन में बहुत समय लग गया। फिर से शुरू करें।",
+      "identityInUse": "यह साइन-इन पहले से किसी दूसरे Tortuga अकाउंट से जुड़ा है।",
+      "lastIdentity": "इस अकाउंट में साइन इन करने का यही एक तरीका है, इसलिए इसे हटाया नहीं जा सकता।",
+      "sessionEnded": "यह डिवाइस साइन आउट हो गया। फिर से साइन इन करें।",
+      "sessionUnreadable": "इस डिवाइस का साइन-इन सिस्टम के सुरक्षित स्टोरेज से पढ़ा नहीं जा सका। फिर से कोशिश करने के लिए Tortuga को रीस्टार्ट करें।",
+      "notSignedIn": "पहले साइन इन करें।",
+      "notFound": "यह अब सर्वर पर मौजूद नहीं है।",
+      "linkCodeInvalid": "कोड में 8 अक्षर और अंक होते हैं, जैसे ABCD-EFGH।",
+      "linkNotFound": "इस कोड के साथ कोई डिवाइस इंतज़ार नहीं कर रहा। कोड जाँचें, या नए डिवाइस पर फिर से शुरू करें।",
+      "linkOtherServer": "दूसरा डिवाइस किसी अलग सिंक सर्वर का इस्तेमाल करता है।",
+      "linkFailed": "लिंक पूरा नहीं हो सका। फिर से शुरू करें।",
+      "tooLarge": "यह सिंक सर्वर के लिए बहुत बड़ा है।",
+      "quotaExceeded": "अकाउंट का स्टोरेज भर गया है।",
+      "unsynced": {
+        "one": "इस डिवाइस पर किया गया ${n} बदलाव अभी तक अपने अकाउंट में सिंक नहीं हुआ है।",
+        "other": "इस डिवाइस पर किए गए ${n} बदलाव अभी तक अपने अकाउंट में सिंक नहीं हुए हैं।"
+      },
+      "unexpected": "कुछ गड़बड़ हो गई। फिर से कोशिश करें।"
+    },
+    "deletion": {
+      "done": "अकाउंट और उसका डेटा मिटा दिया गया है।",
+      "appleRevoked": "अकाउंट और उसका डेटा मिटा दिया गया है, और Tortuga अब आपकी Apple ID का इस्तेमाल नहीं करता।",
+      "appleManual": "अकाउंट और उसका डेटा मिटा दिया गया है। पूरा करने के लिए, सेटिंग्ज़ → Apple ID → Apple से साइन इन करें में जाकर Tortuga को हटाएँ।",
+      "githubManual": "आप ${address} पर जाकर अपने GitHub अकाउंट से Tortuga को हटा सकते हैं।"
+    },
+    "switchAccount": {
+      "title": "जो बदलाव सिंक नहीं हुए, उन्हें मिटाएँ?",
+      "message": {
+        "one": "यह उस अकाउंट से अलग अकाउंट है जिसमें यह डिवाइस साइन इन था। पिछले अकाउंट में यहाँ किया गया ${n} बदलाव, जैसे देखने की प्रगति या लाइब्रेरी में कोई संपादन, उस तक कभी नहीं पहुँचा। साइन इन करने पर यह हमेशा के लिए मिट जाएगा, साथ ही इस डिवाइस पर मौजूद पिछले अकाउंट का बाकी डेटा भी, डाउनलोड समेत।",
+        "other": "यह उस अकाउंट से अलग अकाउंट है जिसमें यह डिवाइस साइन इन था। पिछले अकाउंट में यहाँ किए गए ${n} बदलाव, जैसे देखने की प्रगति या लाइब्रेरी में संपादन, उस तक कभी नहीं पहुँचे। साइन इन करने पर ये हमेशा के लिए मिट जाएँगे, साथ ही इस डिवाइस पर मौजूद पिछले अकाउंट का बाकी डेटा भी, डाउनलोड समेत।"
+      },
+      "confirm": "मिटाएँ और साइन इन करें",
+      "cancel": "रद्द करें",
+      "kept": "साइन इन नहीं हुआ। ये बदलाव इस डिवाइस पर तब तक रहेंगे, जब तक आप उस अकाउंट में साइन इन नहीं करते जिसमें ये किए गए थे।"
+    },
+    "browser": {
+      "signedIn": "साइन इन हो गया। आप यह टैब बंद करके Tortuga पर वापस जा सकते हैं।",
+      "failed": "साइन-इन पूरा नहीं हुआ। Tortuga पर वापस जाएँ और फिर से कोशिश करें।"
+    },
+    "signIn": {
+      "title": "Tortuga में साइन इन करें",
+      "intro": "Tortuga अकाउंट आपकी प्रोफ़ाइल, ऐडऑन और लाइब्रेरी को हर डिवाइस पर सिंक रखता है।",
+      "apple": "Apple से साइन इन करें",
+      "google": "Google से साइन इन करें",
+      "github": "GitHub से साइन इन करें",
+      "oidc": "${name} से साइन इन करें",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "दूसरे डिवाइस से लिंक करें",
+      "linkDeviceHint": "किसी फ़ोन या कंप्यूटर पर पहले से साइन इन हैं? तो कोड से यह डिवाइस लिंक करें।",
+      "server": "सर्वर: ${server}",
+      "useOwnServer": "अपना सर्वर इस्तेमाल करें",
+      "useHostedServer": "Tortuga सर्वर इस्तेमाल करें",
+      "serverField": "सर्वर का पता",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "जारी रखें",
+      "checkingServer": "सर्वर जाँचा जा रहा है…",
+      "loadingOptions": "साइन-इन के विकल्प लोड हो रहे हैं…",
+      "noOptions": "यह सर्वर इस डिवाइस पर साइन इन करने का कोई तरीका नहीं देता। इसके बजाय किसी साइन-इन किए हुए डिवाइस से इसे लिंक करें।",
+      "retry": "फिर से कोशिश करें",
+      "starting": "साइन-इन शुरू हो रहा है…",
+      "native": "${provider} से साइन इन हो रहा है…",
+      "browser": "ब्राउज़र में जारी रखें। वहाँ साइन इन होते ही यह स्क्रीन आगे बढ़ जाएगी।",
+      "finishing": "साइन-इन पूरा हो रहा है…",
+      "cancel": "रद्द करें",
+      "deviceCode": {
+        "instructions": "किसी फ़ोन या कंप्यूटर पर ${url} पर जाएँ और यह कोड डालें:",
+        "scan": "या अपने फ़ोन से QR कोड स्कैन करें।",
+        "qrDescription": "फ़ोन से स्कैन करने के लिए QR कोड",
+        "expires": "कोड ${time} में ख़त्म हो जाएगा।",
+        "waiting": "आपके साइन इन करने का इंतज़ार है…"
+      }
+    },
+    "link": {
+      "title": "यह डिवाइस लिंक करें",
+      "instructions": "जिस डिवाइस पर साइन इन है, उस पर सेटिंग, फिर अकाउंट, फिर “नया डिवाइस लिंक करें” खोलें। वहाँ यह QR कोड स्कैन करें या कोड डालें।",
+      "qrDescription": "साइन-इन किए हुए डिवाइस पर स्कैन करने के लिए QR कोड",
+      "starting": "कोड लिया जा रहा है…",
+      "expires": "कोड ${time} में ख़त्म हो जाएगा।",
+      "waiting": "दूसरे डिवाइस पर मंज़ूरी का इंतज़ार है…",
+      "rejected": "दूसरे डिवाइस ने लिंक अस्वीकार कर दिया।",
+      "expired": "कोड इस्तेमाल होने से पहले ही उसकी समय-सीमा ख़त्म हो गई।",
+      "newCode": "नया कोड लें"
+    },
+    "identityLink": {
+      "title": "साइन-इन तरीका जोड़ें",
+      "intro": "साइन इन करने का एक और तरीका लिंक करें, ताकि एक अकाउंट खोने पर भी आपकी पहुँच बनी रहे।",
+      "allLinked": "यह डिवाइस साइन-इन के जितने तरीके देता है, वे सभी पहले से लिंक हैं।",
+      "linking": "लिंक हो रहा है…"
+    }
+  },
+  "profiles": {
+    "title": "कौन देख रहा है?",
+    "manageTitle": "प्रोफ़ाइल मैनेज करें",
+    "manage": "प्रोफ़ाइल मैनेज करें",
+    "done": "हो गया",
+    "add": "प्रोफ़ाइल जोड़ें",
+    "empty": "शुरू करने के लिए एक प्रोफ़ाइल बनाएँ।",
+    "loading": "आपकी प्रोफ़ाइल लोड हो रही हैं…",
+    "current": "मौजूदा प्रोफ़ाइल",
+    "switchProfile": "प्रोफ़ाइल बदलें",
+    "pin": {
+      "title": "${name} का PIN डालें",
+      "wrong": "ग़लत PIN। फिर से कोशिश करें।",
+      "lockedOut": "बहुत ज़्यादा कोशिशें। ${time} में फिर से कोशिश करें।",
+      "cancel": "रद्द करें",
+      "backspace": "आख़िरी अंक मिटाएँ",
+      "entered": "${total} में से ${count} अंक डाले गए"
+    },
+    "editor": {
+      "newTitle": "नई प्रोफ़ाइल",
+      "editTitle": "प्रोफ़ाइल एडिट करें",
+      "name": "नाम",
+      "nameRequired": "नाम डालें।",
+      "nameTooLong": {
+        "one": "नाम में ज़्यादा से ज़्यादा ${n} अक्षर हो सकता है।",
+        "other": "नाम में ज़्यादा से ज़्यादा ${n} अक्षर हो सकते हैं।"
+      },
+      "avatar": "अवतार",
+      "pinOff": "कोई PIN नहीं",
+      "pinOn": "PIN से लॉक है",
+      "setPin": "PIN सेट करें",
+      "changePin": "PIN बदलें",
+      "removePin": "PIN हटाएँ",
+      "pinEnter": "4 अंकों का PIN डालें",
+      "pinConfirm": "PIN फिर से डालें",
+      "pinMismatch": "PIN मेल नहीं खाए। नया PIN डालें।",
+      "pinNote": "PIN आपके डिवाइस पर दूसरों को इस प्रोफ़ाइल से दूर रखता है। यह एक लॉक है, पासवर्ड नहीं।",
+      "save": "सेव करें",
+      "create": "प्रोफ़ाइल बनाएँ",
+      "cancel": "रद्द करें",
+      "delete": "प्रोफ़ाइल मिटाएँ",
+      "deleteConfirm": "${name} मिटाएँ? इसके ऐडऑन, लाइब्रेरी और इतिहास हर डिवाइस से मिटा दिए जाएँगे। इसे पहले जैसा नहीं किया जा सकता।",
+      "deleteAction": "मिटाएँ",
+      "saveFailed": "प्रोफ़ाइल सेव नहीं हो सकी। फिर से कोशिश करें।",
+      "kids": {
+        "title": "बच्चों की प्रोफ़ाइल",
+        "subtitle": "सिर्फ़ आपके चुने हुए स्तर तक की उम्र के लिए सुझाए गए टाइटल दिखाती है। ज़्यादातर सुझाई गई उम्रें अनुमान हैं, आधिकारिक रेटिंग नहीं।",
+        "needsParent": "पहले किसी वयस्क प्रोफ़ाइल पर PIN सेट करें: बच्चों की प्रोफ़ाइल से बाहर निकलने पर वह माँगा जाता है।",
+        "newOnly": "सिर्फ़ नई प्रोफ़ाइल ही बच्चों की प्रोफ़ाइल बन सकती है।",
+        "capTitle": "सबसे ऊँची सुझाई गई उम्र",
+        "capLittle": "छोटे बच्चे",
+        "capLittleAges": "सुझाई गई उम्र 0+",
+        "capKids": "बच्चे",
+        "capKidsAges": "छोटे बच्चे, साथ में सुझाई गई उम्र 6+",
+        "capTeen": "किशोर",
+        "capTeenAges": "बच्चे, साथ में सुझाई गई उम्र 12+",
+        "allowUnrated": "बिना रेटिंग वाले टाइटल की अनुमति दें",
+        "allowUnratedNote": "बिना सुझाई गई उम्र वाले टाइटल। जब तक यह बंद है, माता-पिता इन्हें एक-एक करके अनुमति देते हैं।",
+        "homeRows": "होम की पंक्तियाँ",
+        "homeRowsNote": "वैकल्पिक। इन पंक्तियों के टाइटल को भी सबसे ऊँची सुझाई गई उम्र के भीतर होना चाहिए।",
+        "familyMovies": "फ़ैमिली फ़िल्में",
+        "familySeries": "फ़ैमिली सीरीज़",
+        "addonMissing": "इसका ऐडऑन इस प्रोफ़ाइल पर इंस्टॉल नहीं है।",
+        "allowed": "अनुमति वाले टाइटल",
+        "allowedNone": "अभी कोई नहीं। माता-पिता किसी टाइटल को उसके पेज से अनुमति देते हैं।",
+        "blocked": "ब्लॉक किए गए टाइटल",
+        "blockedNone": "अभी कोई नहीं। माता-पिता किसी टाइटल को उसके पेज से ब्लॉक करते हैं।",
+        "remove": "${title} हटाएँ",
+        "leaving": "इस प्रोफ़ाइल से बाहर निकलने पर माता-पिता का PIN माँगा जाता है।",
+        "off": "लिंक, ऐडऑन और ज़्यादातर सेटिंग्स बंद हैं।",
+        "addons": "वीडियो इस प्रोफ़ाइल के ऐडऑन से आते हैं। Tortuga उनकी जाँच नहीं करता।"
+      }
+    },
+    "avatar": {
+      "graphite": "ग्रेफ़ाइट",
+      "slate": "स्लेटी",
+      "silver": "चाँदी",
+      "ivory": "आइवरी",
+      "sand": "रेत",
+      "clay": "मिट्टी",
+      "rose": "गुलाबी",
+      "plum": "जामुनी",
+      "dusk": "साँझ",
+      "sea": "समुद्र",
+      "sage": "सेज",
+      "moss": "काई"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "इस प्रोफ़ाइल पर उपलब्ध नहीं",
+      "suggested": "सुझाई गई उम्र ${age}+",
+      "byAddon": "इसका ऐडऑन इसे बड़ी उम्र के दर्शकों के लिए बताता है",
+      "notRated": "कोई सुझाई गई उम्र नहीं",
+      "byParent": "माता-पिता ने ब्लॉक किया",
+      "unchecked": "इसकी सुझाई गई उम्र जाँची नहीं जा सकी। बाद में फिर से कोशिश करें।",
+      "ask": "माता-पिता से पूछें"
+    },
+    "block": "इस प्रोफ़ाइल पर ब्लॉक करें",
+    "pin": {
+      "title": "माता-पिता का PIN डालें",
+      "allow": "इस प्रोफ़ाइल पर ${title} की अनुमति देने के लिए",
+      "allowThis": "इस प्रोफ़ाइल पर इस शीर्षक की अनुमति देने के लिए",
+      "block": "इस प्रोफ़ाइल पर ${title} को ब्लॉक करने के लिए",
+      "leave": "इस प्रोफ़ाइल से बाहर निकलने के लिए",
+      "settings": "ये सेटिंग्स खोलने के लिए"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "सभी",
+      "movie": "फ़िल्में",
+      "series": "सीरीज़",
+      "channel": "चैनल",
+      "tv": "टीवी चैनल",
+      "other": "अन्य"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "फिर से कोशिश करें",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "सभी देखें",
+      "downloading": "डाउनलोड हो रहे हैं: ${count}, ${percent}%",
+      "downloadingUnsized": "डाउनलोड हो रहे हैं: ${count}",
+      "empty": "अभी दिखाने के लिए कुछ नहीं है। इस पेज को भरने के लिए कैटलॉग वाले ऐडऑन इंस्टॉल करें।",
+      "allHidden": "होम की सभी पंक्तियाँ छिपी हुई हैं। सेटिंग → होम में जाकर उन्हें फिर से दिखाएँ।"
+    },
+    "continueWatching": {
+      "title": "देखना जारी रखें",
+      "episode": "एपिसोड ${episode}",
+      "upNext": "अगला",
+      "minutesLeft": "${minutes} मि॰ बाकी",
+      "hoursLeft": "${hours} घं॰ बाकी",
+      "hoursMinutesLeft": "${hours} घं॰ ${minutes} मि॰ बाकी",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "वॉचलिस्ट",
+      "recommended": "सुझाए गए",
+      "trending": "ट्रेंडिंग",
+      "planToWatch": "देखने की योजना",
+      "planning": "योजना में",
+      "airing": "अभी प्रसारित",
+      "list": "सूची",
+      "unreachable": "${service} तक नहीं पहुँचा जा सका।",
+      "signedOut": "${service} ने आपको साइन आउट कर दिया। सेटिंग में इसे फिर से कनेक्ट करें।",
+      "failed": "${service} ने उम्मीद के मुताबिक जवाब नहीं दिया।"
+    },
+    "discover": {
+      "type": "टाइप",
+      "catalog": "कैटलॉग",
+      "genre": "शैली",
+      "all": "सभी",
+      "empty": "इस कैटलॉग में दिखाने के लिए कुछ नहीं है।",
+      "noCatalogs": "किसी भी इंस्टॉल किए गए ऐडऑन में ब्राउज़ करने के लिए कैटलॉग नहीं है।",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "फ़िल्में, सीरीज़ और बहुत कुछ खोजें",
+      "recent": "हाल की खोजें",
+      "clearRecent": "साफ़ करें",
+      "removeRecentNamed": "${name} हटाएँ",
+      "noResults": "“${query}” के लिए कोई नतीजा नहीं",
+      "noCatalogs": "इंस्टॉल किए गए ऐडऑन में से कोई भी खोज नहीं कर सकता।",
+      "clearQuery": "खोज साफ़ करें",
+      "hint": "अपने ऐडऑन के कैटलॉग में फ़िल्में, सीरीज़ और बहुत कुछ ढूँढें।"
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "होम",
+      "discover": "एक्सप्लोर",
+      "search": "खोजें",
+      "library": "लाइब्रेरी",
+      "settings": "सेटिंग"
+    },
+    "shortLabel": {
+      "board": "होम",
+      "library": "लाइब्रेरी",
+      "search": "खोजें",
+      "settings": "सेटिंग"
+    },
+    "back": "वापस",
+    "retry": "फिर से कोशिश करें",
+    "close": "बंद करें",
+    "dismiss": "ख़ारिज करें",
+    "qrFailed": "यह लिंक QR कोड के रूप में नहीं दिखाया जा सकता।",
+    "openOnPhone": {
+      "title": "अपने फ़ोन पर खोलें",
+      "message": "यह डिवाइस यह लिंक नहीं खोल सकता। इसे वहाँ खोलने के लिए अपने फ़ोन के कैमरे से कोड स्कैन करें।",
+      "qrDescription": "लिंक का QR कोड"
+    },
+    "player": {
+      "close": "प्लेयर बंद करें",
+      "fullscreen": "फ़ुल स्क्रीन",
+      "exitFullscreen": "फ़ुल स्क्रीन से बाहर निकलें",
+      "rewind": "पीछे करें",
+      "fastForward": "आगे करें",
+      "pictureInPicture": "पिक्चर-इन-पिक्चर"
+    },
+    "menu": {
+      "playback": "प्लेबैक",
+      "nextSubtitles": "अगला सबटाइटल ट्रैक",
+      "nextAudio": "अगला ऑडियो ट्रैक"
+    }
+  },
+  "watch": {
+    "title": "साथ में देखें",
+    "intro": "दोस्तों के साथ सिंक में देखें, हर कोई अपने-अपने डिवाइस पर। सभी एक ही टाइटल अपने-अपने ऐडऑन से चलाते हैं। रूम शुरू करने के लिए, प्लेयर के विकल्पों में साथ में देखें चुनें।",
+    "controlMode": {
+      "hostOnly": "कंट्रोल सिर्फ़ मेरे पास",
+      "hostOnlyDetail": "आपके चलाने, रोकने या आगे-पीछे करने पर सभी आपके साथ चलते हैं",
+      "anyone": "कंट्रोल सबके पास",
+      "anyoneDetail": "रूम में कोई भी चला, रोक या आगे-पीछे कर सकता है"
+    },
+    "joinTitle": "रूम में शामिल हों",
+    "joinHint": "कोड या इनवाइट लिंक",
+    "joinLabel": "शामिल हों",
+    "joinInvalid": "6 अक्षरों का रूम कोड या इनवाइट लिंक डालें",
+    "recentTitle": "हाल के रूम",
+    "recentUsed": "${time} इस्तेमाल हुआ",
+    "removeRecentNamed": "${name} हटाएँ",
+    "invite": {
+      "title": "रूम ${code} में शामिल हों? यह ${server} पर है, आपके रिले सर्वर पर नहीं।",
+      "join": "शामिल हों",
+      "leaveTitle": "रूम ${code} में शामिल होने के लिए यह रूम छोड़ें? वह ${server} पर है, आपके रिले सर्वर पर नहीं।",
+      "leaveHostTitle": "रूम ${code} में शामिल होने के लिए यह रूम छोड़ें? वह ${server} पर है, आपके रिले सर्वर पर नहीं। यह रूम चलता रहेगा और अगला प्रतिभागी होस्ट बनेगा।"
+    },
+    "relay": {
+      "checking": "रिले जाँचा जा रहा है…",
+      "unreachable": "${server} पर रिले तक नहीं पहुँचा जा सका।",
+      "retry": "फिर से कोशिश करें",
+      "title": "रिले सर्वर",
+      "hint": "वह रिले जो “साथ में देखें” के रूम को कनेक्ट करता है। Open Watch Party के पब्लिक रिले इस्तेमाल करने के लिए इसे ख़ाली छोड़ें।",
+      "hosted": "Open Watch Party के पब्लिक रिले",
+      "placeholder": "https://relay.example.com",
+      "invalid": "http:// या https:// से शुरू होने वाला रिले का पता डालें",
+      "save": "सेव करें",
+      "reset": "पब्लिक रिले इस्तेमाल करें"
+    },
+    "busy": {
+      "creating": "रूम शुरू हो रहा है…",
+      "joining": "रूम में शामिल हो रहे हैं…"
+    },
+    "dismiss": "ख़ारिज करें",
+    "room": {
+      "codeLabel": "रूम कोड",
+      "copyCode": "कोड कॉपी करें",
+      "codeCopied": "कोड कॉपी हो गया",
+      "share": "इनवाइट शेयर करें",
+      "shareText": "Tortuga पर मेरे साथ देखें: ${link} खोलें या रूम कोड ${code} डालें।",
+      "scan": "शामिल होने के लिए फ़ोन से स्कैन करें",
+      "youHost": "आप होस्ट हैं",
+      "hostedBy": "होस्ट: ${name}",
+      "hostOnly": "प्लेबैक का कंट्रोल सिर्फ़ होस्ट के पास",
+      "anyone": "प्लेबैक का कंट्रोल सबके पास",
+      "reconnecting": "फिर से कनेक्ट हो रहा है…",
+      "hostReconnecting": "${name} के फिर से कनेक्ट होने का इंतज़ार है…",
+      "nowPlaying": "चल रहा है: ${title}",
+      "nowPlayingEpisode": "चल रहा है: ${title} · ${episode}",
+      "idleHost": "कुछ चलाएँ: रूम में सभी उसे आपके साथ चलाएँगे।",
+      "idleGuest": "${name} के कुछ चलाने का इंतज़ार है।",
+      "participants": {
+        "one": "${n} प्रतिभागी",
+        "other": "${n} प्रतिभागी"
+      },
+      "you": "${name} (आप)",
+      "hostBadge": "होस्ट",
+      "makeHost": "होस्ट बनाएँ",
+      "makeHostNamed": "${name} को होस्ट बनाएँ",
+      "joinPlayback": "प्लेबैक में शामिल हों",
+      "leave": "रूम छोड़ें",
+      "leaveTitle": "रूम छोड़ें?",
+      "leaveConfirm": "छोड़ें",
+      "end": "रूम बंद करें",
+      "endTitle": "सभी के लिए रूम बंद करें?",
+      "endConfirm": "रूम बंद करें",
+      "cancel": "रद्द करें",
+      "leaveHostTitle": "रूम छोड़ें? रूम चलता रहेगा और अगला प्रतिभागी होस्ट बनेगा।",
+      "kickNamed": "${name} को हटाएँ",
+      "kickTitle": "${name} को रूम से हटाएँ?",
+      "kickConfirm": "हटाएँ",
+      "lock": "रूम लॉक करें",
+      "lockDetail": "कोई नया व्यक्ति शामिल नहीं हो सकता",
+      "controlTitle": "प्लेबैक का कंट्रोल किसके पास"
+    },
+    "status": {
+      "ready": "तैयार",
+      "loading": "लोड हो रहा है",
+      "matching": "फ़ाइल ढूँढी जा रही है",
+      "buffering": "बफ़र हो रहा है",
+      "sameLength": "लंबाई बराबर (${delta})",
+      "longer": "${delta} लंबी",
+      "shorter": "${delta} छोटी",
+      "noStream": "कोई स्ट्रीम नहीं मिली",
+      "searchFailed": "ऐडऑन में खोज विफल रही",
+      "notPlaying": "प्लेयर में नहीं",
+      "away": "डिस्कनेक्ट है",
+      "declined": "नहीं चला रहे",
+      "offset": "ऑफ़सेट ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} सेकंड",
+      "minutes": "${minutes} मिनट ${seconds} सेकंड"
+    },
+    "player": {
+      "optionRoom": "रूम ${code}",
+      "startTitle": "जो चल रहा है, उसके साथ रूम शुरू करें",
+      "liveNoRoom": "लाइव स्ट्रीम साथ में नहीं देखी जा सकती",
+      "watching": {
+        "one": "${n} व्यक्ति देख रहा है",
+        "other": "${n} लोग साथ में देख रहे हैं"
+      },
+      "hostBadge": "होस्ट",
+      "waiting": "${names} का इंतज़ार है…",
+      "waitingMore": {
+        "other": "${names} और ${n} अन्य का इंतज़ार है…"
+      },
+      "syncing": "सिंक हो रहा है…",
+      "matchingStart": "${name} की फ़ाइल से मेल खाती फ़ाइल ढूँढी जा रही है…",
+      "longer": "आपकी फ़ाइल ${name} की फ़ाइल से ${delta} लंबी है",
+      "shorter": "आपकी फ़ाइल ${name} की फ़ाइल से ${delta} छोटी है",
+      "mismatchDetail": "यह कोई दूसरा कट हो सकता है, इसलिए हो सकता है कि आपकी पोज़िशन मेल न खाएँ।",
+      "playAnyway": "फिर भी चलाएँ",
+      "chooseStream": "दूसरी स्ट्रीम चुनें",
+      "noStream": "आपके किसी भी ऐडऑन में ${title} के लिए स्ट्रीम नहीं है।",
+      "searchFailed": "आपके कुछ ऐडऑन में ${title} नहीं खोजा जा सका।",
+      "chooseAStream": "स्ट्रीम चुनें",
+      "pickFailed": "वह स्ट्रीम नहीं खुली।",
+      "hostControls": "इस रूम में प्लेबैक का कंट्रोल सिर्फ़ ${name} के पास है",
+      "hostControlsUnnamed": "इस रूम में प्लेबैक का कंट्रोल सिर्फ़ होस्ट के पास है",
+      "pausedHere": "इस डिवाइस पर रोका गया है। रूम तक पहुँचने के लिए चलाएँ दबाएँ।",
+      "dontPlay": "न चलाएँ",
+      "declined": "आप ${title} नहीं चला रहे हैं।",
+      "offsetTitle": "ऑफ़सेट",
+      "offsetDetail": "आपकी फ़ाइल को रूम की फ़ाइल के मुक़ाबले खिसकाता है, ऐसे कट के लिए जो पहले या बाद में शुरू होता है।",
+      "offsetReset": "रीसेट करें"
+    },
+    "toast": {
+      "joined": "${name} शामिल हुए",
+      "left": "${name} ने रूम छोड़ दिया",
+      "paused": "${name} ने रोक दिया",
+      "resumed": "${name} ने फिर से चलाया",
+      "seeked": "${name} ने पोज़िशन बदल दी",
+      "speed": "${name} ने स्पीड ${speed} कर दी",
+      "buffering": "${name} के यहाँ बफ़रिंग हो रही है",
+      "hostChanged": "अब ${name} होस्ट हैं",
+      "becameHost": "अब आप होस्ट हैं",
+      "media": "${name} ने ${title} शुरू किया",
+      "forbidden": "यह सिर्फ़ होस्ट कर सकते हैं"
+    },
+    "failure": {
+      "create": "रूम शुरू नहीं हो सका। फिर से कोशिश करें।",
+      "join": "रूम में शामिल नहीं हो सके। फिर से कोशिश करें।",
+      "share": "यह वीडियो रूम के साथ शेयर नहीं हो सका। दूसरी स्ट्रीम आज़माएँ।",
+      "live": "लाइव स्ट्रीम साथ में नहीं देखी जा सकती। रूम किसी वीडियो का इंतज़ार कर रहा है।",
+      "roomNotFound": "इस कोड वाला कोई रूम नहीं है।",
+      "roomFull": "वह रूम भर गया है।",
+      "rateLimited": "बहुत ज़्यादा कोशिशें। एक मिनट रुककर फिर से कोशिश करें।",
+      "connection": "रिले तक नहीं पहुँचा जा सका। कनेक्शन जाँचें।",
+      "sessionLost": "रूम से कनेक्शन टूट गया।",
+      "ended": "होस्ट ने रूम बंद कर दिया।",
+      "roomLocked": "वह रूम लॉक है।",
+      "relayFull": "रिले भर गया है। बाद में फिर से कोशिश करें।",
+      "blocked": "यह रिले Tortuga को स्वीकार नहीं करता।",
+      "kicked": "होस्ट ने आपको रूम से हटा दिया।",
+      "expired": "रूम की समय-सीमा ख़त्म हो गई।",
+      "replaced": "आप इस रूम में किसी दूसरे डिवाइस पर शामिल हुए हैं।"
+    }
+  },
+  "downloads": {
+    "title": "डाउनलोड",
+    "empty": "अभी तक कुछ भी डाउनलोड नहीं किया गया है। फ़िल्में और एपिसोड बिना कनेक्शन के देखने के लिए उन्हें उनके पेज से डाउनलोड करें।",
+    "offline": "आप ऑफ़लाइन हैं। ऑनलाइन वापस आते ही डाउनलोड जारी हो जाएँगे।",
+    "storage": "${used} इस्तेमाल हुआ · ${free} ख़ाली",
+    "storageUsed": "${used} इस्तेमाल हुआ",
+    "pauseAll": "सभी रोकें",
+    "resumeAll": "सभी जारी रखें",
+    "actionFailed": "डाउनलोड नहीं बदला जा सका। फिर से कोशिश करें।",
+    "actionsFailed": "डाउनलोड नहीं बदले जा सके। फिर से कोशिश करें।",
+    "episodes": {
+      "one": "${n} एपिसोड",
+      "other": "${n} एपिसोड"
+    },
+    "videos": {
+      "one": "${n} वीडियो",
+      "other": "${n} वीडियो"
+    },
+    "otherVideos": "अन्य वीडियो",
+    "summary": "${count} · ${size}",
+    "progress": "${total} में से ${done}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "कतार में",
+      "waitingForWifi": "Wi-Fi का इंतज़ार है",
+      "waitingForNetwork": "कनेक्शन का इंतज़ार है",
+      "resolving": "तैयार हो रहा है…",
+      "downloading": "डाउनलोड हो रहा है",
+      "downloadingPercent": "डाउनलोड हो रहा है · ${percent}%",
+      "paused": "रुका हुआ",
+      "failed": "नहीं हो सका",
+      "completed": "डाउनलोड किया गया",
+      "cancelled": "रद्द किया गया"
+    },
+    "action": {
+      "play": "चलाएँ",
+      "pause": "रोकें",
+      "resume": "जारी रखें",
+      "retry": "फिर से कोशिश करें",
+      "pickStream": "स्ट्रीम चुनें",
+      "cancel": "डाउनलोड रद्द करें",
+      "delete": "डाउनलोड मिटाएँ",
+      "deleteGroup": "ये डाउनलोड मिटाएँ",
+      "openDetail": "जानकारी पेज पर जाएँ"
+    },
+    "deleteConfirm": {
+      "title": "${name} के ${count} मिटाएँ?",
+      "message": "दोबारा डाउनलोड करने में समय लगता है और कनेक्शन चाहिए।",
+      "confirm": "मिटाएँ",
+      "cancel": "रद्द करें"
+    },
+    "keepSynced": {
+      "title": "सिंक रखें",
+      "note": "यहाँ की हर सीरीज़ के अगले अनदेखे एपिसोड इस डिवाइस पर डाउनलोड रहते हैं, और आपके एक एपिसोड देखने के बाद नया एपिसोड डाउनलोड हो जाता है।",
+      "empty": "कोई भी सीरीज़ सिंक नहीं रखी जा रही है। किसी सीरीज़ के डाउनलोड मेन्यू में चुनें कि कितने अनदेखे एपिसोड रखने हैं।",
+      "series": {
+        "one": "${n} सीरीज़",
+        "other": "${n} सीरीज़"
+      },
+      "manage": "“सिंक रखें” मैनेज करें",
+      "pauseRule": "${title} रोकें",
+      "resumeRule": "${title} जारी रखें",
+      "stopRule": "${title} को सिंक रखना बंद करें",
+      "status": {
+        "downloading": {
+          "one": "${n} एपिसोड डाउनलोड हो रहा है",
+          "other": "${n} एपिसोड डाउनलोड हो रहे हैं"
+        },
+        "failed": {
+          "one": "${n} एपिसोड डाउनलोड नहीं हो सका",
+          "other": "${n} एपिसोड डाउनलोड नहीं हो सके"
+        },
+        "downloaded": {
+          "one": "${n} एपिसोड डाउनलोड किया गया",
+          "other": "${n} एपिसोड डाउनलोड किए गए"
+        },
+        "downloadedNone": "कोई एपिसोड डाउनलोड नहीं किया गया"
+      },
+      "stop": {
+        "title": "${title} को सिंक रखना बंद करें?",
+        "message": {
+          "one": "“डाउनलोड” में ${n} एपिसोड “सिंक रखें” से आया है। क्या इसे भी मिटाएँ?",
+          "other": "“डाउनलोड” में ${n} एपिसोड “सिंक रखें” से आए हैं। क्या इन्हें भी मिटाएँ?"
+        },
+        "messageNone": "अब और एपिसोड डाउनलोड नहीं होंगे।",
+        "keep": "डाउनलोड रखें",
+        "delete": "डाउनलोड मिटाएँ",
+        "confirm": "बंद करें",
+        "cancel": "रद्द करें"
+      },
+      "notice": {
+        "one": "“सिंक रखें” ने ${title} का ${n} एपिसोड जोड़ा",
+        "other": "“सिंक रखें” ने ${title} के ${n} एपिसोड जोड़े"
+      },
+      "noticeSeveral": {
+        "one": "“सिंक रखें” ने ${n} एपिसोड जोड़ा",
+        "other": "“सिंक रखें” ने ${n} एपिसोड जोड़े"
+      },
+      "actionFailed": "“सिंक रखें” नहीं बदला जा सका। फिर से कोशिश करें।"
+    },
+    "failure": {
+      "noStream": "इस एपिसोड के लिए कोई स्ट्रीम नहीं चुनी जा सकी। ख़ुद एक चुनें।",
+      "noStreamInstant": "इस एपिसोड के लिए कोई तुरंत चलने वाली स्ट्रीम नहीं चुनी जा सकी। ख़ुद एक चुनें।",
+      "network": "कनेक्शन नहीं हो सका।",
+      "http": "सर्वर ने HTTP ${status} से जवाब दिया।",
+      "streamGone": "लिंक की समय-सीमा ख़त्म हो गई है और उसका ऐडऑन अब यह स्ट्रीम नहीं देता।",
+      "diskFull": "डिवाइस में जगह ख़त्म हो गई। डाउनलोड रुक गए।",
+      "notEnoughSpace": "इस डाउनलोड के लिए काफ़ी ख़ाली जगह नहीं है।",
+      "sizeMismatch": "डाउनलोड की गई फ़ाइल अधूरी है।",
+      "unsupported": "यह स्ट्रीम डाउनलोड नहीं की जा सकती।",
+      "locationUnavailable": "डाउनलोड की लोकेशन उपलब्ध नहीं है।",
+      "fileMissing": "डाउनलोड की गई फ़ाइल मौजूद नहीं है।",
+      "storage": "डिवाइस के स्टोरेज ने जवाब नहीं दिया।"
+    },
+    "notification": {
+      "channel": "डाउनलोड",
+      "title": "${title} डाउनलोड हो रहा है",
+      "count": {
+        "one": "${n} डाउनलोड",
+        "other": "${n} डाउनलोड"
+      },
+      "progress": "${percent}%",
+      "preparing": "डाउनलोड तैयार हो रहा है…",
+      "waiting": "Wi-Fi का इंतज़ार है",
+      "paused": "रुका हुआ",
+      "pause": "रोकें",
+      "resume": "जारी रखें",
+      "cancel": "रद्द करें",
+      "failed": "डाउनलोड नहीं हो सका: ${title}",
+      "completed": "${title} डाउनलोड हो गया"
+    }
+  },
+  "offline": {
+    "title": "आप ऑफ़लाइन हैं",
+    "text": "ब्राउज़ करने के लिए इंटरनेट से कनेक्ट करें। आपके डाउनलोड बिना कनेक्शन के भी चलते हैं।",
+    "textNoDownloads": "ब्राउज़ करने के लिए इंटरनेट से कनेक्ट करें।",
+    "openDownloads": "“डाउनलोड” पर जाएँ",
+    "detail": "आपके डाउनलोड के साथ सेव की गई जानकारी दिखाई जा रही है।"
+  },
+  "playerApps": {
+    "chooser": "हर बार पूछें",
+    "tortuga": "Tortuga",
+    "playWith": "इसमें चलाएँ…",
+    "banner": {
+      "opening": "${player} में खुल रहा है…",
+      "notInstalled": "${player} इस डिवाइस पर इंस्टॉल नहीं है।",
+      "didNotStart": "${player} शुरू नहीं हुआ।",
+      "playInTortuga": "Tortuga में चलाएँ",
+      "cancel": "रद्द करें",
+      "dismiss": "ख़ारिज करें"
+    },
+    "detail": {
+      "playing": "${player} में चल रहा है · ${position}",
+      "playingOf": "${player} में चल रहा है · ${duration} में से ${position}",
+      "paused": "${player} में रुका हुआ · ${position}",
+      "pausedOf": "${player} में रुका हुआ · ${duration} में से ${position}",
+      "finished": "${player} में खोला गया। क्या आपने ${title} देख लिया?",
+      "markWatched": "देखा गया मार्क करें",
+      "notYet": "अभी नहीं"
+    },
+    "settings": {
+      "player": "प्लेयर",
+      "deviceOnly": "सिर्फ़ यह डिवाइस",
+      "note": "इस डिवाइस पर वीडियो यहाँ चुने गए प्लेयर में चलते हैं। स्ट्रीम के मेन्यू में “इसमें चलाएँ…” से किसी एक वीडियो के लिए दूसरा प्लेयर चुना जा सकता है।",
+      "notFound": "${player} (नहीं मिला)",
+      "followsProgress": "जहाँ छोड़ा था वहीं से जारी रखता है और चलते समय आपकी प्रगति सेव करता है",
+      "savesOnReturn": "जहाँ छोड़ा था वहीं से जारी रखता है और जहाँ आपने रोका, वह जगह सेव करता है",
+      "savesOnReturnFromStart": "शुरुआत से चलाता है, फिर जहाँ आपने रोका वह जगह सेव करता है या पूछता है कि आपने पूरा देख लिया या नहीं",
+      "asksAfter": "जहाँ छोड़ा था वहीं से जारी रखता है, फिर पूछता है कि आपने पूरा देख लिया या नहीं",
+      "asksAfterFromStart": "सिर्फ़ वीडियो खोलता है, फिर पूछता है कि आपने पूरा देख लिया या नहीं",
+      "chooserDetail": "आपका डिवाइस हर वीडियो के लिए पूछता है कि उसे कौन-सा ऐप चलाए",
+      "customHeader": "कस्टम प्लेयर",
+      "addCustom": "कस्टम प्लेयर जोड़ें",
+      "deleteNamed": "${name} मिटाएँ",
+      "form": {
+        "title": "कस्टम प्लेयर जोड़ें",
+        "name": "नाम",
+        "nameHint": "मेरा प्लेयर",
+        "program": "प्रोग्राम",
+        "programHint": "mpv, या प्रोग्राम का पूरा पाथ",
+        "arguments": "आर्गुमेंट",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} वीडियो का लिंक है, {title} उसका टाइटल, {start} वह जगह जहाँ से वह शुरू होता है (सेकंड में), और {subtitle} पहले सबटाइटल का लिंक।",
+        "urlTemplate": "URL टेम्पलेट",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} वीडियो का लिंक है, जो URL के लिए एन्कोड किया गया है, और {url_raw} वही लिंक जैसा का तैसा।",
+        "packageName": "पैकेज का नाम",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "जोड़ें",
+        "cancel": "रद्द करें",
+        "nameMissing": "प्लेयर को एक नाम दें।",
+        "programMissing": "चलाने के लिए प्रोग्राम डालें।",
+        "urlTemplateMissing": "URL टेम्पलेट डालें।",
+        "packageNameMissing": "ऐप का पैकेज नाम डालें।",
+        "argumentsNeedUrl": "आर्गुमेंट में {url} होना ज़रूरी है।",
+        "urlTemplateNeedsUrl": "URL टेम्पलेट में {url} या {url_raw} होना ज़रूरी है।",
+        "packageNameInvalid": "यह पैकेज नाम नहीं है। पैकेज नाम org.videolan.vlc जैसा होता है।"
+      }
+    }
+  },
+  "guide": {
+    "title": "टीवी गाइड",
+    "today": "आज",
+    "tomorrow": "कल",
+    "yesterday": "बीता कल",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "अभी चल रहा है",
+    "now": "अभी",
+    "noProgrammes": "कार्यक्रम की कोई जानकारी नहीं",
+    "noChannels": "इस गाइड में इस दिन के लिए कोई चैनल नहीं है।",
+    "noGuide": "इंस्टॉल किया गया कोई भी ऐडऑन टीवी गाइड नहीं देता।",
+    "failed": "गाइड लोड नहीं हो सकी: ${reason}",
+    "cast": "कलाकार: ${names}",
+    "directors": "निर्देशक: ${names}"
+  },
+  "calendar": {
+    "title": "कैलेंडर",
+    "previousMonth": "पिछला महीना",
+    "nextMonth": "अगला महीना",
+    "today": "आज",
+    "tomorrow": "कल",
+    "emptyLibrary": "यहाँ एपिसोड देखने के लिए अपनी लाइब्रेरी में सीरीज़ जोड़ें।",
+    "noAddon": "आपके किसी भी ऐडऑन में आपकी लाइब्रेरी की सीरीज़ के लिए कैलेंडर नहीं है।",
+    "emptyMonth": "कोई एपिसोड नहीं।",
+    "newEpisodes": {
+      "one": "${n} नया एपिसोड",
+      "other": "${n} नए एपिसोड"
+    },
+    "episodes": {
+      "one": "${n} एपिसोड",
+      "other": "${n} एपिसोड"
+    }
+  },
+  "watchlist": {
+    "lists": "ट्रैकर की वॉचलिस्ट",
+    "hint": "हर सूची उस सेवा पर आपके खाते में रहती है। आपकी लाइब्रेरी नहीं बदलती।",
+    "add": "${list} में जोड़ें",
+    "remove": "${list} से हटाएँ",
+    "trakt": "Trakt वॉचलिस्ट",
+    "simkl": "Simkl: देखने की योजना",
+    "mdblist": "MDBList वॉचलिस्ट",
+    "myAnimeList": "MyAnimeList: देखने की योजना",
+    "aniList": "AniList: योजना में",
+    "saving": "सहेजा जा रहा है…",
+    "queued": "अभी नहीं भेजा गया, फिर कोशिश होगी",
+    "failed": "सहेजा नहीं गया",
+    "addFailed": "${title} को ${list} में नहीं जोड़ा जा सका।",
+    "removeFailed": "${title} को ${list} से नहीं हटाया जा सका।"
+  },
+  "collections": {
+    "needsAddon": "ऐडऑन ${name} चाहिए",
+    "needsCatalog": "${addon} में कैटलॉग ${catalog} नहीं है",
+    "needsFilter": "ऐसा फ़िल्टर चाहिए जो Tortuga सेट नहीं कर सकता",
+    "traktUnavailable": "ऐप के इस वर्शन में Trakt सूचियाँ उपलब्ध नहीं हैं",
+    "tooLarge": "“${title}” सिंक करने के लिए बहुत बड़ा है",
+    "kind": {
+      "tmdbList": "TMDB सूची",
+      "tmdbCollection": "TMDB कलेक्शन",
+      "tmdbCompany": "TMDB कंपनी",
+      "tmdbNetwork": "TMDB नेटवर्क",
+      "tmdbDiscover": "TMDB डिस्कवर",
+      "tmdbPerson": "TMDB व्यक्ति",
+      "tmdbDirector": "TMDB निर्देशक",
+      "letterboxd": "Letterboxd",
+      "unknown": "अज्ञात प्रदाता “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "one": "${n} कलेक्शन जोड़ता है",
+        "other": "${n} कलेक्शन जोड़ता है"
+      },
+      "replaces": {
+        "one": "उसी आईडी वाले ${n} कलेक्शन की जगह लेता है",
+        "other": "उन्हीं आईडी वाले ${n} कलेक्शन की जगह लेता है"
+      },
+      "needsAddon": {
+        "one": "${n} स्रोत को ऐडऑन ${name} चाहिए",
+        "other": "${n} स्रोतों को ऐडऑन ${name} चाहिए"
+      },
+      "needsTracker": {
+        "one": "${n} स्रोत के लिए ${service} कनेक्ट होना चाहिए",
+        "other": "${n} स्रोतों के लिए ${service} कनेक्ट होना चाहिए"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} स्रोत छोड़ा गया",
+        "other": "${kind}: ${n} स्रोत छोड़े गए"
+      },
+      "unsupportedHint": "Tortuga ऐडऑन के कैटलॉग और ट्रैकर की सूचियाँ पढ़ता है, ये स्रोत नहीं। इनकी जगह किसी ऐडऑन का कैटलॉग इस्तेमाल करें, जैसे AIOMetadata या MDBList का।",
+      "folderDropped": "“${collection}” का फ़ोल्डर “${folder}” छोड़ा गया: उसका कोई भी स्रोत पढ़ा नहीं जा सकता",
+      "collectionDropped": "कलेक्शन “${title}” छोड़ा गया: उसका कोई भी फ़ोल्डर पढ़ा नहीं जा सकता",
+      "tooLarge": "कलेक्शन “${title}” इंपोर्ट नहीं हुआ: यह सिंक करने के लिए बहुत बड़ा है"
+    },
+    "refused": {
+      "notJson": "यह कलेक्शन फ़ाइल नहीं है: यह JSON नहीं है।",
+      "notList": "यह कलेक्शन फ़ाइल नहीं है: इसमें कलेक्शन की कोई सूची नहीं है।",
+      "empty": "इस फ़ाइल में कोई कलेक्शन नहीं है।",
+      "collectionInvalid": "फ़ाइल का कलेक्शन ${position} पढ़ा नहीं जा सकता।",
+      "collectionNoId": "फ़ाइल के कलेक्शन ${position} की कोई आईडी नहीं है।",
+      "collectionNoTitle": "कलेक्शन ${id} का कोई शीर्षक नहीं है।",
+      "duplicateCollection": "फ़ाइल के दो कलेक्शन की आईडी ${id} है।",
+      "noFolders": "कलेक्शन “${collection}” में फ़ोल्डर की कोई सूची नहीं है।",
+      "folderInvalid": "“${collection}” का फ़ोल्डर ${position} पढ़ा नहीं जा सकता।",
+      "folderNoId": "“${collection}” के फ़ोल्डर ${position} की कोई आईडी नहीं है।",
+      "folderNoTitle": "“${collection}” के फ़ोल्डर ${id} का कोई शीर्षक नहीं है।",
+      "duplicateFolder": "“${collection}” के दो फ़ोल्डर की आईडी ${id} है।",
+      "noSources": "“${collection}” के फ़ोल्डर “${folder}” में स्रोतों की कोई सूची नहीं है।",
+      "unknownShape": "“${collection}” के फ़ोल्डर “${folder}” का टाइल आकार अज्ञात है: ${shape}।",
+      "sourceInvalid": "“${collection}” के फ़ोल्डर “${folder}” का स्रोत ${position} अधूरा है।"
+    },
+    "row": "कलेक्शन",
+    "rowSource": {
+      "one": "कलेक्शन · ${n} फ़ोल्डर",
+      "other": "कलेक्शन · ${n} फ़ोल्डर"
+    },
+    "folder": {
+      "all": "सभी",
+      "empty": "यहाँ कोई टाइटल नहीं है",
+      "goToTrackers": "ट्रैकर पर जाएँ",
+      "goToAddons": "ऐडऑन पर जाएँ"
+    },
+    "importing": {
+      "title": "कलेक्शन इंपोर्ट करें",
+      "note": "Nuvio या AIOMetadata की कलेक्शन फ़ाइल: उसका लिंक डालें या फ़ाइल खोलें। आपके किसी कलेक्शन जैसी ही आईडी वाला कलेक्शन उसकी जगह ले लेता है।",
+      "urlLabel": "लिंक",
+      "urlHint": "https://…/collections.json",
+      "fetch": "लाएँ",
+      "openFile": "फ़ाइल खोलें",
+      "confirm": "इंपोर्ट करें",
+      "done": "हो गया",
+      "rowNew": {
+        "one": "नया · ${n} फ़ोल्डर",
+        "other": "नया · ${n} फ़ोल्डर"
+      },
+      "rowReplaces": {
+        "one": "आपके कलेक्शन की जगह लेगा · ${n} फ़ोल्डर",
+        "other": "आपके कलेक्शन की जगह लेगा · ${n} फ़ोल्डर"
+      },
+      "imported": {
+        "one": "${n} कलेक्शन इंपोर्ट किया गया",
+        "other": "${n} कलेक्शन इंपोर्ट किए गए"
+      },
+      "notWeb": "ऐसा लिंक डालें जो http:// या https:// से शुरू हो।",
+      "tooLarge": "यह फ़ाइल 4 MB से बड़ी है।",
+      "httpError": "लिंक ने त्रुटि ${status} के साथ जवाब दिया।",
+      "timeout": "लिंक ने समय पर जवाब नहीं दिया।",
+      "unreachable": "लिंक तक नहीं पहुँचा जा सकता। लिंक और अपना कनेक्शन जाँचें।",
+      "unreadable": "इस फ़ाइल को टेक्स्ट के रूप में नहीं पढ़ा जा सकता।",
+      "failed": "कलेक्शन सेव नहीं हो सके।"
+    },
+    "editor": {
+      "newHeading": "नया कलेक्शन",
+      "editHeading": "कलेक्शन बदलें",
+      "titleLabel": "शीर्षक",
+      "view": "व्यू",
+      "viewHint": "फ़ोल्डर अपने स्रोत कैसे दिखाता है",
+      "viewTabs": "टैब",
+      "viewRows": "पंक्तियाँ",
+      "viewFollow": "ऐप के अनुसार",
+      "allTab": "“सभी” टैब",
+      "allTabHint": "पहला टैब, जिसमें हर स्रोत के टाइटल हों",
+      "foldersHeader": "फ़ोल्डर",
+      "addFolder": "फ़ोल्डर जोड़ें",
+      "noFolders": "अभी कोई फ़ोल्डर नहीं",
+      "sources": {
+        "one": "${n} स्रोत",
+        "other": "${n} स्रोत"
+      },
+      "save": "सेव करें",
+      "newFolder": "नया फ़ोल्डर",
+      "folderTitleLabel": "शीर्षक",
+      "shape": "टाइल का आकार",
+      "shapePoster": "पोस्टर",
+      "shapeLandscape": "लैंडस्केप",
+      "shapeSquare": "वर्गाकार",
+      "coverLabel": "कवर इमेज का लिंक",
+      "coverHint": "https://…",
+      "hideTitle": "शीर्षक छिपाएँ",
+      "hideTitleHint": "टाइल सिर्फ़ अपना कवर दिखाती है",
+      "sourcesHeader": "स्रोत",
+      "addSource": "स्रोत जोड़ें",
+      "noSources": "अभी कोई स्रोत नहीं",
+      "deleteNamed": "${name} मिटाएँ",
+      "removeNamed": "${name} हटाएँ",
+      "noTitle": "कलेक्शन को शीर्षक दें।",
+      "noFolder": "कलेक्शन में एक फ़ोल्डर जोड़ें।",
+      "folderNoTitle": "फ़ोल्डर ${position} को शीर्षक दें।",
+      "folderNoSource": "“${folder}” में एक स्रोत जोड़ें।",
+      "saveFailed": "कलेक्शन सेव नहीं हो सका।",
+      "discardTitle": "बदलाव छोड़ दें?",
+      "discard": "छोड़ें",
+      "keepEditing": "संपादन जारी रखें",
+      "picker": {
+        "addons": "ऐडऑन कैटलॉग",
+        "trackers": "ट्रैकर",
+        "noAddons": "किसी भी इंस्टॉल किए गए ऐडऑन में जोड़ने लायक कैटलॉग नहीं है।",
+        "noTrackers": "किसी ट्रैकर की सूचियाँ जोड़ने के लिए उसे सेटिंग → ट्रैकर में कनेक्ट करें।",
+        "listsFailed": "अभी ${service} की सूचियाँ पढ़ी नहीं जा सकतीं।",
+        "byLink": "लिंक से ${service} की कोई सूची",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "जोड़ें",
+        "notAList": "यह ${service} की किसी सूची का लिंक नहीं है।",
+        "notFound": "इस लिंक पर ${service} की कोई सूची नहीं है।",
+        "unreachable": "अभी ${service} तक नहीं पहुँचा जा सकता।"
+      }
+    }
+  }
+}

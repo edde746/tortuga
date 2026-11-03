@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose draws everything. The window shows the theme's background (ui-compose TortugaColors.Background, black)
+         behind the system bars, and the video view paints its own black. -->
+    <style name="Theme.Tortuga" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/tortuga_background</item>
+    </style>
+
+    <color name="tortuga_background">#FF000000</color>
+</resources>

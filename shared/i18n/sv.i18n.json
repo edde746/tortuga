@@ -1,0 +1,2066 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Sök efter uppdateringar…",
+    "launchFailed": "Tortuga kunde inte starta.",
+    "startup": {
+      "database": "Öppnar databasen…",
+      "migration": "Uppdaterar databasen…",
+      "account": "Läser in ditt konto…",
+      "profiles": "Läser in profiler…"
+    },
+    "localNetworkUsage": "Tortuga använder ditt lokala nätverk för att nå tillägg, media och en synkroniseringsserver som du kör hemma."
+  },
+  "player": {
+    "nowPlaying": "Spelas nu",
+    "buffering": "Buffrar…",
+    "position": "${position} / ${duration}",
+    "timeline": "Uppspelningsposition",
+    "play": "Spela upp",
+    "pause": "Pausa",
+    "resolving": "Förbereder ström…",
+    "opening": "Öppnar…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LIVE",
+      "position": "Live · tittat ${time}",
+      "behind": "Live · ${time} efter",
+      "goToLive": "Gå till live"
+    },
+    "nextEpisode": "Nästa avsnitt",
+    "previousEpisode": "Föregående avsnitt",
+    "lock": {
+      "button": "Lås skärm",
+      "tapToUnlock": "Tryck för att låsa upp",
+      "tapAgainToUnlock": "Tryck igen för att låsa upp"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volym",
+      "level": "${percent} %",
+      "muted": "Ljud av",
+      "mute": "Stäng av ljud",
+      "unmute": "Slå på ljud"
+    },
+    "menu": {
+      "audio": "Ljud",
+      "subtitles": "Undertexter",
+      "speed": "Uppspelningshastighet",
+      "subtitleDelay": "Undertextfördröjning",
+      "audioDelay": "Ljudfördröjning",
+      "moreSubtitles": "Fler undertexter",
+      "reset": "Återställ",
+      "subtitleDelayEarlier": "Undertextfördröjning: tidigare",
+      "subtitleDelayLater": "Undertextfördröjning: senare",
+      "audioDelayEarlier": "Ljudfördröjning: tidigare",
+      "audioDelayLater": "Ljudfördröjning: senare"
+    },
+    "track": {
+      "off": "Av",
+      "numbered": "Spår ${number}",
+      "defaultTrack": "Standard",
+      "forced": "Tvingad",
+      "sdh": "SDH",
+      "audioDescription": "Syntolkning",
+      "external": "Extern",
+      "second": "Andra undertext",
+      "showAsSecond": "Visa som andra undertext",
+      "removeSecond": "Ta bort andra undertext",
+      "otherLanguage": "Övriga",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} kanal",
+        "other": "${n} kanaler"
+      }
+    },
+    "info": {
+      "title": "Uppspelningsinfo",
+      "tab": "Info",
+      "resolution": "Upplösning",
+      "video": "Video",
+      "dynamicRange": "Dynamiskt omfång",
+      "audio": "Ljud",
+      "decoder": "Avkodare",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hårdvara (${name})",
+      "softwareDecoder": "Mjukvara",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision-profil ${profile}",
+      "stream": "Ström",
+      "addon": "Tillägg",
+      "pickedBy": "Vald av",
+      "autoPlayFirstMatch": "Autouppspelning, första träff",
+      "autoPlayLastLink": "Autouppspelning, samma ström som förra gången",
+      "source": "Källa",
+      "downloaded": "Nedladdad",
+      "name": "Namn",
+      "file": "Fil",
+      "container": "Container",
+      "fileSize": "Storlek",
+      "bitrate": "Bithastighet",
+      "codec": "Codec",
+      "pixelFormat": "Pixelformat",
+      "bitDepth": "${bits} bitar",
+      "color": "Färg",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nits",
+      "mastering": "Masteringskärm",
+      "nitsRange": "${min}–${max} nits",
+      "droppedFrames": "Tappade bildrutor",
+      "droppedFramesValue": "${output} (avkodare ${decoder})",
+      "delayedFrames": "Försenade bildrutor",
+      "output": "Utgång",
+      "hertz": "${value} Hz",
+      "channels": "Kanaler",
+      "sampleRate": "Samplingsfrekvens",
+      "track": "Spår",
+      "secondTrack": "Andra spår",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Rumsligt ljud",
+      "rendering": "Rendering",
+      "surround": "Surround",
+      "subtitles": "Undertexter",
+      "format": "Format",
+      "embedded": "Inbäddad",
+      "delay": "Fördröjning",
+      "network": "Nätverk",
+      "downloadSpeed": "Nedladdningshastighet",
+      "buffering": "Buffrar",
+      "percent": "${value} %",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Hoppa över intro",
+      "recap": "Hoppa över sammanfattning",
+      "credits": "Hoppa över eftertexter"
+    },
+    "prompt": {
+      "playNext": "Spela upp nästa avsnitt: ${episode}",
+      "countdown": {
+        "one": "Automatiskt om ${n} sekund",
+        "other": "Automatiskt om ${n} sekunder"
+      }
+    },
+    "options": {
+      "title": "Fler reglage",
+      "videoFit": "Bildformat",
+      "fit": {
+        "contain": "Anpassa",
+        "cover": "Fyll skärmen",
+        "fill": "Sträck ut"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent} %",
+      "resetZoom": "Återställ",
+      "shaders": "Shaders",
+      "shader": {
+        "nvscalerDetail": "NVIDIA-bildskalning för skarpare video",
+        "neutral": "Neutral",
+        "denoise": "Brusreducering",
+        "denoiseSharpen": "Brusreducering + skärpa",
+        "fast": "Snabb",
+        "highQuality": "Hög kvalitet",
+        "modeDetail": "${quality} · Läge ${mode}",
+        "customDetail": "Egen GLSL-shader",
+        "importShader": "Importera shader",
+        "imported": "Shadern har importerats",
+        "importFailed": "Det gick inte att importera shadern",
+        "deleteLabel": "Ta bort ${name}",
+        "deleteTitle": "Ta bort ${name}?",
+        "delete": "Ta bort",
+        "cancel": "Avbryt"
+      },
+      "sleepTimer": "Insomningstimer",
+      "sleepEndOfVideo": "Slutet av videon",
+      "sleepMinutes": {
+        "one": "${n} minut",
+        "other": "${n} minuter"
+      },
+      "sleepLeft": "${time} kvar",
+      "autoPlayNext": "Spela upp nästa avsnitt automatiskt",
+      "audioOutput": "Ljudutgång",
+      "systemOutput": "Systemstandard",
+      "audioNormalization": "Normalisera ljudnivå",
+      "audioChannels": "Ljudkanaler",
+      "channels": {
+        "original": "Original",
+        "originalDetail": "Spela upp alla kanaler i spåret",
+        "surround51": "Upp till 5.1",
+        "surround51Detail": "Mixa ned 7.1 till 5.1 för TV-apparater och receivrar som bara stöder 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Mixa ned till två kanaler för stereohögtalare eller hörlurar"
+      },
+      "on": "På",
+      "off": "Av"
+    },
+    "stillWatching": {
+      "title": "Tittar du fortfarande?",
+      "countdown": {
+        "one": "Pausar om ${n} sekund",
+        "other": "Pausar om ${n} sekunder"
+      },
+      "keepWatching": "Fortsätt",
+      "pause": "Pausa"
+    },
+    "error": {
+      "title": "Strömmen kan inte spelas upp",
+      "resolveTimeout": "Strömmen tog för lång tid att starta.",
+      "expired": "Strömmens länk har gått ut.",
+      "notFound": "Strömmen är inte längre tillgänglig.",
+      "http": "Servern svarade med HTTP ${status}.",
+      "cantOpen": "Strömmen kunde inte öppnas.",
+      "unsupportedFormat": "Strömmen har ett format som spelaren inte kan läsa.",
+      "cantDecode": "Spelaren kunde inte spela upp strömmens bild eller ljud.",
+      "engineFailed": "Spelaren stoppades av ett fel.",
+      "retry": "Försök igen",
+      "nextStream": "Prova nästa ström",
+      "close": "Stäng",
+      "alternatives": {
+        "one": "Ytterligare ${n} ström tillgänglig",
+        "other": "Ytterligare ${n} strömmar tillgängliga"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Det här är inte avsnittet",
+      "titleMovie": "Det här är inte filmen",
+      "titleVideo": "Det här är inte videon",
+      "sent": "Tillägget skickade en felvideo i stället för strömmen.",
+      "byUrl": "Länken är en av ett tilläggs felvideor.",
+      "bySize": "Filen är ${served}, men strömmen angav ${size}.",
+      "byDuration": "Den är ${length} lång, men den här videon var ${known} när du spelade den senast.",
+      "kept": "Ditt tittarförlopp finns kvar.",
+      "chooseStream": "Välj en annan ström",
+      "watch": "Visa meddelandet"
+    },
+    "osd": {
+      "volume": "Volym ${level}",
+      "brightness": "Ljusstyrka ${level}",
+      "speed": "Hastighet ${speed}",
+      "subtitleDelay": "Undertextfördröjning ${delay}",
+      "audioDelay": "Ljudfördröjning ${delay}",
+      "audioTrack": "Ljud: ${track}",
+      "subtitleTrack": "Undertexter: ${track}",
+      "subtitlesOff": "Undertexter av",
+      "chapter": "Kapitel: ${title}",
+      "chapterNumbered": "Kapitel ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shaders: ${name}",
+      "shadersOff": "Shaders av"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} kB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Öppnar ström…",
+    "resolveFailed": {
+      "http": "Strömmens server svarade med HTTP ${status}",
+      "timeout": "Strömmens server tog för lång tid att svara",
+      "network": "Kunde inte ansluta till strömmens server",
+      "unsupportedUrl": "Den här strömmens länk kan inte öppnas",
+      "tooManyRedirects": "Den här strömmens länk omdirigerar för många gånger",
+      "unexpected": "Appen stötte på ett fel när den här strömmen skulle öppnas"
+    },
+    "badge": {
+      "instant": "Direkt",
+      "notInstant": "Inte direkt"
+    },
+    "lastUsed": "Senast spelad",
+    "external": "Öppnas utanför appen",
+    "unplayable": {
+      "one": "${n} ström som appen inte kan spela upp",
+      "other": "${n} strömmar som appen inte kan spela upp"
+    },
+    "empty": "Inga strömmar hittades",
+    "all": "Alla",
+    "refresh": "Uppdatera",
+    "retryNamed": "Försök igen: ${name}",
+    "filters": {
+      "hidden": {
+        "one": "${n} ström dold av dina filter",
+        "other": "${n} strömmar dolda av dina filter"
+      },
+      "showing": {
+        "one": "Visar ${n} ström som dina filter döljer",
+        "other": "Visar ${n} strömmar som dina filter döljer"
+      },
+      "show": "Visa",
+      "hide": "Dölj",
+      "rowNote": "Dold av dina filter"
+    },
+    "sort": {
+      "title": "Sortera",
+      "addonOrder": "Tilläggens ordning",
+      "resolution": "Upplösning",
+      "source": "Källkvalitet",
+      "sizeLargest": "Största först",
+      "sizeSmallest": "Minsta först",
+      "cached": "Direkt först"
+    },
+    "autoPlay": {
+      "noMatch": "Autouppspelningen hittade ingen ström som klarar dina filter.",
+      "failed": "Strömmen som autouppspelningen valde startade inte. Välj en annan."
+    },
+    "download": {
+      "notice": "Välj strömmen som ska laddas ned.",
+      "action": "Ladda ned",
+      "actionNamed": "Ladda ned ${name}",
+      "queued": "Tillagd i Nedladdningar",
+      "failed": "Kunde inte lägga till nedladdningen."
+    },
+    "suggested": {
+      "label": "Förslag",
+      "reason": "Som dina senaste val: ${features}",
+      "audio": "ljud: ${language}",
+      "subtitles": "undertexter: ${language}",
+      "smaller": "mindre filer",
+      "larger": "större filer"
+    }
+  },
+  "detail": {
+    "loadFailed": "Kunde inte läsa in informationen.",
+    "notFound": "Inget tillägg har information om den här titeln.",
+    "noAddons": "Inget av de installerade tilläggen har information om den här titeln.",
+    "noAnimeAddon": "Inget av de installerade tilläggen har information om den här animen. Installera ett animetillägg för att öppna den.",
+    "animeListsUnavailable": "Animelistorna kunde inte läsas in, så den här animen kan inte kopplas till en titel. Kontrollera anslutningen och försök igen.",
+    "findingAnime": "Söker efter den här animen i animelistorna…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} tim ${minutes} min",
+      "hours": "${hours} tim",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes-kritiker",
+        "rottenTomatoesAudience": "Rotten Tomatoes-publik",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} procent"
+    },
+    "userRating": {
+      "rateLabel": "Betygsätt den här titeln",
+      "label": "Ditt betyg: ${score}",
+      "range": "${low}–${high}",
+      "title": "Ditt betyg",
+      "hint": "Ditt betyg skickas till varje tjänst nedan.",
+      "clear": "Ta bort betyg",
+      "checking": "Kontrollerar…",
+      "notRated": "Inget betyg",
+      "unreadable": "Kunde inte kontrollera",
+      "saving": "Sparar…",
+      "saved": "Sparat",
+      "removed": "Borttaget",
+      "queued": "Inte skickat än, försöker igen",
+      "failed": "Inte sparat"
+    },
+    "links": {
+      "genres": "Genrer",
+      "cast": "Skådespelare",
+      "directors": "Regi",
+      "writers": "Manus",
+      "website": "Webbplats"
+    },
+    "facts": {
+      "title": "Information",
+      "released": "Premiär",
+      "runtime": "Speltid",
+      "country": "Land",
+      "language": "Språk",
+      "awards": "Utmärkelser",
+      "source": "Detaljer från",
+      "failed": "Kunde inte läsas in från"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailrar",
+    "share": "Dela",
+    "season": "Säsong ${number}",
+    "specials": "Specialavsnitt",
+    "episodeNumbered": "Avsnitt ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Med ${names}",
+    "castAndCrew": "Skådespelare och team",
+    "airs": "Sänds ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "jan.",
+      "feb": "feb.",
+      "mar": "mars",
+      "apr": "apr.",
+      "may": "maj",
+      "jun": "juni",
+      "jul": "juli",
+      "aug": "aug.",
+      "sep": "sep.",
+      "oct": "okt.",
+      "nov": "nov.",
+      "dec": "dec."
+    },
+    "play": "Spela upp",
+    "playEpisode": "Spela upp ${episode}",
+    "resume": "Fortsätt från ${time}",
+    "resumeEpisode": "Fortsätt ${episode} · ${time}",
+    "addToLibrary": "Lägg till i biblioteket",
+    "removeFromLibrary": "Ta bort från biblioteket",
+    "markWatched": "Markera som sedd",
+    "markUnwatched": "Markera som osedd",
+    "markAllWatched": "Markera alla avsnitt som sedda",
+    "markAllUnwatched": "Markera alla avsnitt som osedda",
+    "markSeasonWatched": "Markera säsongen som sedd",
+    "markSeasonUnwatched": "Markera säsongen som osedd",
+    "watched": "Sedd",
+    "overviewHidden": "Beskrivningen är dold",
+    "moreActions": "Fler åtgärder",
+    "moreActionsNamed": "Fler åtgärder för ${name}",
+    "showMore": "Mer",
+    "showLess": "Mindre",
+    "findingStream": "Söker ström…",
+    "chooseStream": "Välj en ström",
+    "download": {
+      "download": "Ladda ned",
+      "queued": "I kö",
+      "waitingForWifi": "Väntar på Wi-Fi",
+      "downloading": "Laddar ned ${percent} %",
+      "downloadingStarted": "Laddar ned…",
+      "paused": "Pausad",
+      "failed": "Nedladdningen misslyckades",
+      "partial": "${done} av ${total} nedladdade",
+      "downloaded": "Nedladdad",
+      "menuTitle": "Ladda ned",
+      "allSeasons": "Alla säsonger",
+      "pick": {
+        "all": "Alla avsnitt",
+        "unwatched": "Osedda avsnitt",
+        "next5": "Nästa 5 osedda",
+        "next10": "Nästa 10 osedda"
+      },
+      "keepSynced": "Håll synkroniserad",
+      "keepSyncedCount": {
+        "one": "Behåll ${n} osett avsnitt",
+        "other": "Behåll ${n} osedda avsnitt"
+      },
+      "keepSyncedAll": "Behåll alla osedda avsnitt",
+      "manage": "Hantera nedladdningar",
+      "pauseAll": "Pausa nedladdningarna",
+      "resumeAll": "Fortsätt nedladdningarna",
+      "deleteSeason": "Radera säsongens nedladdningar",
+      "deleteAll": "Radera alla nedladdningar",
+      "queuedEpisodes": {
+        "one": "${n} avsnitt tillagt i Nedladdningar",
+        "other": "${n} avsnitt tillagda i Nedladdningar"
+      },
+      "nothingQueued": "Alla avsnitt är redan nedladdade eller i kö.",
+      "failedToQueue": "Kunde inte lägga till nedladdningarna.",
+      "episode": {
+        "download": "Ladda ned avsnittet",
+        "pause": "Pausa nedladdningen",
+        "resume": "Fortsätt nedladdningen",
+        "retry": "Försök ladda ned igen",
+        "pickStream": "Välj en ström",
+        "cancel": "Avbryt nedladdningen",
+        "delete": "Radera nedladdningen",
+        "queued": "I kö",
+        "downloading": "${percent} %",
+        "paused": "Pausad",
+        "failed": "Nedladdningen misslyckades",
+        "downloaded": "Nedladdat"
+      }
+    },
+    "related": {
+      "title": "Liknande titlar",
+      "noneFound": "Inga liknande titlar hittades."
+    }
+  },
+  "library": {
+    "title": "Bibliotek",
+    "continueWatching": "Fortsätt titta",
+    "sort": {
+      "lastWatched": "Senast sedda",
+      "added": "Senast tillagda",
+      "name": "Titel A–Ö",
+      "nameReverse": "Titel Ö–A",
+      "timesWatched": "Mest sedda",
+      "watched": "Sedda först",
+      "notWatched": "Osedda först"
+    },
+    "sortBy": "Sortera efter",
+    "sortByNamed": "Sortera efter: ${name}",
+    "empty": "Inget här än. Lägg till titlar i biblioteket från deras informationssida.",
+    "emptyContinueWatching": "Inget att fortsätta med. Titlar visas här när du börjar titta på dem.",
+    "emptyType": "Inget av den här typen här.",
+    "watched": "Sedd"
+  },
+  "mediaMenu": {
+    "markWatched": "Markera som sedd",
+    "markUnwatched": "Markera som osedd",
+    "removeFromContinueWatching": "Ta bort från Fortsätt titta",
+    "details": "Gå till informationssidan",
+    "addToLibrary": "Lägg till i biblioteket",
+    "removeFromLibrary": "Ta bort från biblioteket",
+    "playFromStart": "Spela upp från början",
+    "markSeasonWatched": "Markera säsongen som sedd",
+    "markSeasonUnwatched": "Markera säsongen som osedd",
+    "chooseStream": "Välj en ström",
+    "download": "Ladda ned",
+    "pauseDownload": "Pausa nedladdningen",
+    "resumeDownload": "Fortsätt nedladdningen",
+    "retryDownload": "Försök ladda ned igen",
+    "cancelDownload": "Avbryt nedladdningen",
+    "deleteDownload": "Radera nedladdningen",
+    "pickStream": "Välj en ström",
+    "trailer": "Trailer",
+    "markFailed": "Kunde inte markera ${title}: informationen lästes inte in. Kontrollera anslutningen och försök igen."
+  },
+  "session": {
+    "episode": "S${season}:A${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "De installerade tilläggen kunde inte läsas. Starta om Tortuga för att försöka igen.",
+    "error": {
+      "invalidTransportUrl": "Det här är ingen tilläggslänk. Tilläggslänkar slutar på /manifest.json.",
+      "timeout": "Tillägget tog för lång tid att svara.",
+      "network": "Kunde inte nå tillägget.",
+      "http": "Tillägget returnerade ett fel (HTTP ${status}).",
+      "invalidResponse": "Tillägget skickade ett svar som appen inte kan läsa.",
+      "unexpectedResponse": "Tillägget skickade en annan typ av svar än den som begärdes.",
+      "emptyContent": "Inget hittades.",
+      "invalidManifest": "Tilläggets manifest är ogiltigt.",
+      "configurationRequired": "Tillägget måste konfigureras innan det kan installeras.",
+      "alreadyInstalled": "Tillägget är redan installerat.",
+      "notInstalled": "Tillägget är inte installerat.",
+      "protectedAddon": "Tillägget är inbyggt och kan inte tas bort eller stängas av."
+    },
+    "title": "Tillägg",
+    "allTypes": "Alla",
+    "empty": "Inga tillägg installerade.",
+    "emptyFiltered": "Inget installerat tillägg har den här typen.",
+    "builtIn": "Inbyggt",
+    "builtInExplanation": "Tillägget är inbyggt och kan inte tas bort eller stängas av.",
+    "cancel": "Avbryt",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Flytta upp",
+    "moveUpNamed": "Flytta upp ${name}",
+    "moveDown": "Flytta ned",
+    "moveDownNamed": "Flytta ned ${name}",
+    "dragToReorderNamed": "Ändra ordning för ${name}",
+    "enabledNamed": "Använd ${name}",
+    "close": "Stäng",
+    "version": "Version ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Kataloger",
+      "meta": "Information",
+      "stream": "Strömmar",
+      "subtitles": "Undertexter",
+      "addonCatalog": "Tilläggskataloger",
+      "player": "Uppspelningsaktivitet",
+      "library": "Biblioteksaktivitet"
+    },
+    "remove": {
+      "title": "Ta bort ${name}?",
+      "message": "Det tas bort från den här profilen på alla enheter, tillsammans med inställningarna det konfigurerades med.",
+      "confirm": "Ta bort"
+    },
+    "details": {
+      "types": "Typer",
+      "resources": "Erbjuder",
+      "catalogs": "Kataloger",
+      "contact": "Kontakt",
+      "configure": "Konfigurera",
+      "remove": "Ta bort",
+      "enabled": "Använd det här tillägget",
+      "enabledOff": "Av: Tortuga ber det inte om något och visar inte dess kataloger.",
+      "shareTitle": "Tilläggslänk",
+      "shareWarning": "Länken kan innehålla nycklarna till de konton som tillägget konfigurerades med. Dela den bara med personer du litar på.",
+      "revealLink": "Visa länk",
+      "hideLink": "Dölj länk",
+      "copyLink": "Kopiera länk",
+      "linkCopied": "Länken har kopierats."
+    },
+    "watchActivity": {
+      "title": "Skicka tittaraktivitet",
+      "explanation": "Det här tillägget tar emot din tittaraktivitet: vad du spelar upp, pausar och stoppar, vad du lägger till i eller tar bort från biblioteket och vad du markerar som sett.",
+      "agree": "Jag godkänner att det här tillägget tar emot min tittaraktivitet",
+      "notAllowed": "Får ingen tittaraktivitet förrän du tillåter det"
+    },
+    "install": {
+      "action": "Installera tillägg",
+      "title": "Installera ett tillägg",
+      "linkHint": "Tilläggslänk som slutar på /manifest.json",
+      "submit": "Fortsätt",
+      "confirm": "Installera",
+      "update": "Uppdatera",
+      "configure": "Konfigurera",
+      "configureFirst": "Tillägget måste konfigureras innan det kan installeras. Konfigurera det och installera det sedan från dess sida.",
+      "alreadyInstalled": "Tillägget är redan installerat.",
+      "updateDetails": "Installerat. Det här uppdaterar dess information.",
+      "updateVersion": "Installerat. Det här uppdaterar det till version ${version}.",
+      "adult": "Tillägget är märkt som vuxeninnehåll.",
+      "installed": "${name} har installerats.",
+      "updated": "${name} har uppdaterats.",
+      "done": "Klar"
+    },
+    "browse": {
+      "title": "Bläddra",
+      "installed": "Installerade",
+      "installedNote": "Installerat"
+    }
+  },
+  "settings": {
+    "title": "Inställningar",
+    "automatic": "Automatiskt",
+    "listSeparator": ", ",
+    "cancel": "Avbryt",
+    "close": "Stäng",
+    "increaseNamed": "Öka ${name}",
+    "decreaseNamed": "Minska ${name}",
+    "value": {
+      "percent": "${value} %",
+      "seconds": {
+        "one": "${n} sekund",
+        "other": "${n} sekunder"
+      }
+    },
+    "time": {
+      "justNow": "nyss",
+      "minutesAgo": {
+        "one": "för ${n} minut sedan",
+        "other": "för ${n} minuter sedan"
+      },
+      "hoursAgo": {
+        "one": "för ${n} timme sedan",
+        "other": "för ${n} timmar sedan"
+      },
+      "daysAgo": {
+        "one": "för ${n} dag sedan",
+        "other": "för ${n} dagar sedan"
+      },
+      "monthsAgo": {
+        "one": "för ${n} månad sedan",
+        "other": "för ${n} månader sedan"
+      },
+      "yearsAgo": {
+        "one": "för ${n} år sedan",
+        "other": "för ${n} år sedan"
+      }
+    },
+    "sections": {
+      "playback": "Uppspelning",
+      "playbackSummary": "Språk, gräns för sett, nästa avsnitt och hoppa över",
+      "device": "Den här enheten",
+      "deviceSummary": "Avkodning, HDR, bildfrekvens, ljud, cache och kraschrapporter",
+      "subtitles": "Undertexter",
+      "subtitlesSummary": "Storlek, färg, kontur och position på den här enheten",
+      "addons": "Tillägg",
+      "addonsSummary": {
+        "one": "${n} tillägg installerat",
+        "other": "${n} tillägg installerade"
+      },
+      "addonsSummaryLoading": "Installerade tillägg",
+      "home": "Hem",
+      "homeSummary": "Vilka rader som visas på Hem och i vilken ordning",
+      "appearance": "Utseende",
+      "appearanceSummary": "Språk, affischer och sedda titlar",
+      "trackers": "Spårning",
+      "trackersSummary": "Scrobbling, tittarhistorik och listor",
+      "trackersConnected": "Ansluten till ${services}",
+      "account": "Konto",
+      "about": "Om",
+      "downloads": "Nedladdningar",
+      "downloadsSummary": "Plats, bara Wi-Fi och lagring",
+      "data": "Export och import",
+      "dataSummary": "Profilernas data till en fil och tillbaka"
+    },
+    "profile": {
+      "locked": "Låst med PIN-kod",
+      "unlocked": "Ingen PIN-kod",
+      "edit": "Redigera profil",
+      "manage": "Byt eller hantera profiler"
+    },
+    "about": {
+      "version": "Version ${version}",
+      "license": "Tortuga är licensierad under GNU General Public License, version 3. Du får köra, studera, dela och ändra den, och alla som ger dig en kopia måste erbjuda dig källkoden.",
+      "source": "Källkod",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga använder Trakt men är inte godkänd eller certifierad av Trakt.",
+      "notices": "Programvara från tredje part",
+      "noticeLink": "Projektsida"
+    },
+    "appearance": {
+      "interfaceLanguage": "Appens språk",
+      "interfaceLanguageHint": "Språket i appens menyer och meddelanden",
+      "interfaceLanguageSystem": "Systemstandard",
+      "blurUnwatched": "Gör osedda avsnitt suddiga",
+      "blurUnwatchedHint": "Gör bilderna suddiga och dölj beskrivningarna för avsnitt du inte har börjat på, så att de inte avslöjar något",
+      "hideWatched": "Dölj sedda titlar",
+      "hideWatchedHint": "Utelämna filmer och serier du har sett klart från Hems rader och Upptäck. En serie kommer tillbaka när ett nytt avsnitt har kommit",
+      "hidePosterCaptions": "Dölj titlar under affischer",
+      "hidePosterCaptionsHint": "Visa bara bilden. Fortsätt titta behåller avsnittet och tiden som är kvar",
+      "posterTemplate": "URL-mall för affischer",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} och {tvdb_id} står för varje titels ID, {type} för movie eller series",
+      "posterTemplateNone": "Tilläggens affischer",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Inte en http- eller https-adress, så den ignoreras"
+    },
+    "home": {
+      "note": "Välj vilka rader som visas på Hem och i vilken ordning. De hör till den här profilen och synkroniseras till dina andra enheter.",
+      "continueWatchingHint": "Alltid första raden",
+      "rowsHeader": "Rader",
+      "empty": "Inget installerat tillägg har en katalog för Hem.",
+      "reset": "Återställ standard",
+      "moveUp": "Flytta upp",
+      "moveUpNamed": "Flytta upp ${name}",
+      "moveDown": "Flytta ned",
+      "moveDownNamed": "Flytta ned ${name}",
+      "dragToReorder": "Dra för att ändra ordning",
+      "dragToReorderNamed": "Ändra ordning för ${name}",
+      "newCollection": "Ny samling",
+      "importCollections": "Importera samlingar",
+      "exportCollections": "Exportera samlingar",
+      "edit": "Redigera",
+      "delete": "Radera",
+      "deleteTitle": "Radera ”${title}”?",
+      "deleteMessage": "Samlingen tas bort från den här profilen på alla dina enheter."
+    },
+    "playback": {
+      "title": "Uppspelning",
+      "note": "De här inställningarna hör till den här profilen och synkroniseras till dina andra enheter.",
+      "languagesHeader": "Språk",
+      "audioLanguages": "Ljudspråk",
+      "audioLanguagesHint": "Vilket ljudspår som spelas, i prioritetsordning",
+      "audioLanguagesNone": "Videons standard",
+      "audioLanguagesExplanation": "En video spelas upp på det första av de här språken som den har. Om inget språk är valt spelas videons standardljudspår.",
+      "subtitleLanguages": "Undertextspråk",
+      "subtitleLanguagesHint": "Vilka undertexter som slås på, i prioritetsordning",
+      "subtitleLanguagesNone": "Av",
+      "subtitleLanguagesExplanation": "Undertexter slås på i det första av de här språken som videon har. Om inget språk är valt förblir undertexterna avstängda, om inte videon tvingar fram dem.",
+      "secondSubtitleLanguage": "Språk för andra undertext",
+      "secondSubtitleLanguageHint": "Visas överst i bilden tillsammans med den första",
+      "secondSubtitleLanguageExplanation": "Undertexter på det här språket visas överst i bilden, tillsammans med de första undertexterna. Om inget språk är valt visas ingen andra undertext, om den inte väljs i spelaren.",
+      "secondSubtitleLanguageNone": "Av",
+      "showSubtitles": "Visa undertexter",
+      "showSubtitlesHint": "Alltid: undertexter även på det talade språket, SDH först",
+      "showSubtitlesFollowAudio": "Efter ljudet",
+      "showSubtitlesAlways": "Alltid",
+      "chosenHeader": "Dina språk",
+      "availableHeader": "Lägg till ett språk",
+      "searchLanguages": "Sök språk",
+      "noLanguageMatches": "Inga språk matchar.",
+      "playbackHeader": "Uppspelning",
+      "watchedThreshold": "Räknas som sedd efter",
+      "watchedThresholdHint": "Var i en video den räknas som sedd och Fortsätt titta går vidare till nästa avsnitt",
+      "bingeWatching": "Spela upp nästa avsnitt",
+      "bingeWatchingHint": "När ett avsnitt slutar startar nästa, från samma källa om möjligt",
+      "upNextCountdown": "Nedräkning till nästa avsnitt",
+      "upNextCountdownHint": "Hur länge frågan om nästa avsnitt väntar innan det startar",
+      "upNextImmediately": "Starta direkt",
+      "seekShort": "Kort hopp",
+      "seekShortHint": "Piltangenterna, fjärrkontrollen och spelarens hoppknappar",
+      "seekLong": "Långt hopp",
+      "seekLongHint": "Skift med piltangenterna, och långa tryck",
+      "videoClick": "Klick på videon",
+      "videoClickHint": "Ett dubbelklick växlar fortfarande till och från helskärm",
+      "videoClickPause": "Pausa och spela upp",
+      "videoClickControls": "Visa eller dölj kontrollerna",
+      "moveUp": "Flytta upp",
+      "moveUpNamed": "Flytta upp ${name}",
+      "moveDown": "Flytta ned",
+      "moveDownNamed": "Flytta ned ${name}",
+      "removeLanguage": "Ta bort",
+      "removeLanguageNamed": "Ta bort ${name}",
+      "dragToReorderNamed": "Ändra ordning för ${name}",
+      "skipping": {
+        "header": "Hoppa över",
+        "footer": "Intron, sammanfattningar och eftertexter hittas via namnen på videons kapitel, så bara videor med namngivna kapitel erbjuder att hoppa över dem. Innan något hoppas över automatiskt räknar knappen först ned, och allt du gör i spelaren stoppar nedräkningen.",
+        "intros": "Intron",
+        "introsHint": "Ledmotiv och förtexter",
+        "recaps": "Sammanfattningar",
+        "recapsHint": "”Tidigare i…” i början av ett avsnitt",
+        "credits": "Eftertexter",
+        "creditsHint": "Eftertexter och smygtittar på nästa avsnitt; frågan om nästa avsnitt visas när de börjar",
+        "off": "Av",
+        "button": "Visa knapp",
+        "auto": "Hoppa över automatiskt"
+      },
+      "streams": {
+        "header": "Strömmar",
+        "footer": "Filtren gäller alla strömlistor. Listorna visar hur många strömmar som döljs och kan visa dem ändå.",
+        "autoPlay": "Spela upp automatiskt",
+        "autoPlayHint": "Hoppar över strömlistan för Spela upp, Fortsätt, ett avsnitt och nästa avsnitt; med en sortering väntar den tills alla tillägg har svarat",
+        "suggestions": "Föreslå en ström",
+        "suggestionsHint": "Lär sig vilka strömmar du väljer på den här profilen och markerar en i listan",
+        "autoPlayOff": "Av",
+        "autoPlayFirstMatch": "Första strömmen som klarar filtren",
+        "autoPlayReuseLastLink": "Samma ström som förra gången, annars den första som klarar filtren",
+        "qualities": "Kvaliteter",
+        "qualitiesHint": "Vilka upplösningar strömlistorna visar",
+        "qualitiesAll": "Alla",
+        "qualitiesNone": "Inga",
+        "qualitiesAllBut": "Alla utom ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Okänd",
+        "ranges": "Dynamiskt omfång",
+        "rangesHint": "Vilka av SDR, HDR och Dolby Vision strömlistorna visar",
+        "codecs": "Videokodekar",
+        "codecsHint": "Vilka videokodekar strömlistorna visar",
+        "minSize": "Minsta storlek",
+        "minSizeHint": "Döljer strömmar med mindre filer; en utan angiven storlek stannar",
+        "maxSize": "Största storlek",
+        "maxSizeHint": "Döljer strömmar med större filer; en utan angiven storlek stannar",
+        "sizeAny": "Valfri storlek",
+        "includePattern": "Bara strömmar som matchar",
+        "includePatternHint": "Ett reguljärt uttryck som matchas mot varje ströms namn, beskrivning och filnamn, utan hänsyn till skiftläge",
+        "includePatternNone": "Alla strömmar",
+        "includePlaceholder": "t.ex. 1080p|2160p",
+        "excludePattern": "Dölj strömmar som matchar",
+        "excludePatternHint": "Har företräde framför mönstret ovan",
+        "excludePatternNone": "Inga",
+        "excludePlaceholder": "t.ex. HDTV|XviD",
+        "invalidPattern": "Inte ett giltigt reguljärt uttryck, så det ignoreras",
+        "save": "Spara",
+        "clear": "Rensa"
+      }
+    },
+    "device": {
+      "title": "Den här enheten",
+      "note": "De här inställningarna gäller bara den här enheten och synkroniseras inte.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Hårdvaruavkodning",
+      "hardwareDecodingHint": "Avkoda video med grafikhårdvaran. Stäng av om videor visar störningar.",
+      "hdr": "HDR",
+      "hdrHint": "Spela upp HDR-video i HDR när skärmen stöder det. Av konverterar den till SDR.",
+      "matchFrameRate": "Tvinga byte av bildfrekvens",
+      "matchFrameRateHint": "Byt skärmens bildfrekvens till videons även där systemet inte skulle göra det. Skärmen blir svart en kort stund vid varje byte.",
+      "audioHeader": "Ljud",
+      "audioPassthrough": "Ljud-passthrough",
+      "audioPassthroughHint": "Skicka surroundljud (Dolby Digital, DTS, TrueHD) oavkodat till receivern",
+      "audioPassthroughHintApple": "Skicka Dolby Digital och Dolby Digital Plus, även Atmos, till systemets Dolby-avkodare; DTS och TrueHD spelas som flerkanals-PCM. Stäng av om det inte hörs något ljud.",
+      "audioPassthroughHintAppleSpatial": "Skicka Dolby Digital och Dolby Digital Plus, även Atmos, till systemets Dolby-avkodare och spela TrueHD Atmos och DTS:X som rumsligt ljud; andra DTS- och TrueHD-spår spelas som flerkanals-PCM. Stäng av om det inte hörs något ljud.",
+      "audioPassthroughNormalized": "Av så länge ljudnivån normaliseras",
+      "gesturesHeader": "Gester",
+      "swipeGestures": "Svep för ljusstyrka och volym",
+      "swipeGesturesHint": "Svep uppåt eller nedåt på videons vänstra halva för ljusstyrkan, på den högra för volymen.",
+      "streamingHeader": "Strömning",
+      "cacheSize": "Förinläsningscache",
+      "cacheSizeHint": "Hur mycket av en ström som läses in före uppspelningen",
+      "discordHeader": "Discord",
+      "discordPresence": "Visa vad du tittar på",
+      "discordPresenceHint": "Dina Discord-vänner ser titeln och avsnittet medan en video spelas. Discord måste vara igång på den här datorn.",
+      "privacyHeader": "Integritet",
+      "crashReports": "Skicka kraschrapporter",
+      "crashReportsHint": "Skickar vad som gick fel när appen kraschar eller en del av den slutar fungera, aldrig dina tilläggslänkar eller konton"
+    },
+    "subtitles": {
+      "title": "Undertexter",
+      "note": "De här inställningarna gäller bara den här enheten och synkroniseras inte. De formaterar undertexter i ren text, som SRT. Formaterade undertexter behåller sitt eget utseende om du inte tillämpar stilen på dem också.",
+      "previewText": "Så här ser undertexterna ut",
+      "textHeader": "Text",
+      "size": "Storlek",
+      "textColor": "Färg",
+      "bold": "Fetstil",
+      "outlineHeader": "Kontur och bakgrund",
+      "outline": "Kontur",
+      "outlineColor": "Konturfärg",
+      "background": "Bakgrund",
+      "backgroundHint": "En ruta bakom texten och hur ogenomskinlig den är",
+      "backgroundOff": "Av",
+      "positionHeader": "Position",
+      "position": "Höjd",
+      "positionHint": "Hur högt över bildens nederkant undertexterna placeras",
+      "positionBottom": "Längst ned",
+      "styledHeader": "Formaterade undertexter",
+      "styledOverride": "Använd på formaterade undertexter",
+      "styledOverrideHint": "ASS- och SSA-undertexter får den här stilen i stället för sin egen. Skyltar och effekter kan se fel ut.",
+      "outlines": {
+        "none": "Ingen",
+        "thin": "Tunn",
+        "thick": "Tjock"
+      },
+      "colors": {
+        "white": "Vit",
+        "yellow": "Gul",
+        "green": "Grön",
+        "cyan": "Cyan",
+        "gray": "Grå",
+        "black": "Svart"
+      }
+    },
+    "account": {
+      "title": "Konto",
+      "syncLabel": "Synkronisering",
+      "syncNow": "Synkronisera nu",
+      "lastSynced": "Senast synkroniserad ${time}",
+      "serverLabel": "Synkroniseringsserver",
+      "identitiesHeader": "Inloggningar",
+      "linkIdentity": "Lägg till inloggning",
+      "devicesHeader": "Enheter",
+      "thisDevice": "Den här enheten",
+      "activeNow": "Aktiv nu",
+      "lastActive": "Aktiv ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} har loggats ut.",
+      "identityRemoved": "Inloggningen med ${provider} har tagits bort.",
+      "cancel": "Avbryt",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Enkel inloggning"
+      },
+      "link": {
+        "start": "Länka en ny enhet",
+        "title": "Länka en enhet",
+        "instructions": "På den nya enheten väljer du att länka den från en annan enhet. Ange sedan koden som visas där, eller skanna QR-koden.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Fortsätt",
+        "question": "Länka ”${name}”?",
+        "consequence": "Den loggas in på det här kontot, med dess profiler, tillägg och bibliotek.",
+        "approve": "Länka",
+        "reject": "Länka inte",
+        "approved": "${name} är länkad. Den slutför konfigureringen själv.",
+        "rejected": "${name} länkades inte.",
+        "expired": "Koden har gått ut. Börja om på den nya enheten.",
+        "done": "Klar"
+      },
+      "signOut": {
+        "action": "Logga ut",
+        "title": "Logga ut?",
+        "message": "Profiler, tillägg, bibliotek och nedladdningar tas bort från den här enheten. Allt utom nedladdningarna finns kvar i kontot: logga in igen för att få tillbaka det.",
+        "confirm": "Logga ut"
+      },
+      "delete": {
+        "action": "Radera konto",
+        "explanation": "Raderar kontot och all dess synkroniserade data från servern.",
+        "title": "Radera kontot?",
+        "message": "Kontot och dess profiler, tillägg, bibliotek och historik raderas permanent från servern, och alla enheter loggas ut. Det går inte att ångra.",
+        "confirm": "Radera konto"
+      },
+      "revoke": {
+        "title": "Logga ut ${name}?",
+        "message": "${name} loggas ut och lämnar kontots enheter. Den kan länkas igen senare.",
+        "messageThisDevice": "Det här är enheten du använder. Den loggas ut, och dess profiler, tillägg, bibliotek och nedladdningar tas bort från den. Allt utom nedladdningarna finns kvar i kontot.",
+        "confirm": "Logga ut enheten",
+        "confirmNamed": "Logga ut enheten: ${name}"
+      },
+      "unsynced": {
+        "title": "Radera ändringar som inte har synkroniserats?",
+        "message": {
+          "one": "${n} ändring som gjorts på den här enheten, till exempel tittarförlopp eller en ändring i biblioteket, har inte nått kontot. Om du loggar ut nu raderas den permanent. Med Avbryt finns den kvar här och enheten förblir inloggad.",
+          "other": "${n} ändringar som gjorts på den här enheten, till exempel tittarförlopp eller ändringar i biblioteket, har inte nått kontot. Om du loggar ut nu raderas de permanent. Med Avbryt finns de kvar här och enheten förblir inloggad."
+        },
+        "confirm": "Logga ut och radera"
+      },
+      "unlink": {
+        "title": "Ta bort inloggningen med ${provider}?",
+        "message": "Du kan inte längre logga in på det här kontot med ${provider}.",
+        "confirm": "Ta bort",
+        "action": "Ta bort inloggningen med ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Spårning",
+      "note": "Anslutna tjänster får veta vad den här profilen ser: tittarförlopp och titlar som markerats som sedda. Att ansluta eller koppla från en tjänst gäller den här profilen på alla dina enheter; reglagen nedan gäller bara den här enheten.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Ansluten",
+      "connectedAs": "Ansluten som ${user}",
+      "notConnected": "Inte ansluten",
+      "unavailable": "Inte tillgängligt i den här versionen av appen",
+      "connect": "Anslut",
+      "connectNamed": "Anslut ${name}",
+      "disconnect": "Koppla från",
+      "disconnectNamed": "Koppla från ${name}",
+      "scrobble": "Skicka det du tittar på",
+      "scrobbleHint": "Tittarförlopp och sedda titlar skickas till ${service}",
+      "filtersHeader": "Vad som skickas",
+      "movies": "Filmer",
+      "series": "Serier",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} ändring väntar på att skickas",
+        "other": "${n} ändringar väntar på att skickas"
+      },
+      "notSent": {
+        "one": "${n} ändring kunde inte skickas (senast: ${reason})",
+        "other": "${n} ändringar kunde inte skickas (senast: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} svarade med fel ${status}",
+        "refused": "${service} nekade den",
+        "unreadable": "den gick inte att läsa"
+      },
+      "connectTitle": "Anslut ${service}",
+      "starting": "Kontaktar ${service}…",
+      "waiting": "Väntar på att du tillåter Tortuga på ${service}…",
+      "linkInstructions": "Logga in på ${service} i webbläsaren och tillåt Tortuga.",
+      "linkScan": "Eller skanna QR-koden med telefonen och logga in där.",
+      "openInBrowser": "Öppna i webbläsaren",
+      "expired": "Koden gick ut innan den användes.",
+      "declined": "${service} tillät inte anslutningen.",
+      "unreachable": "Kunde inte nå ${service}. Kontrollera anslutningen och försök igen.",
+      "serverUnreachable": "Kunde inte nå din Tortuga-server. Kontrollera anslutningen och försök igen.",
+      "needsAccount": "För att ansluta ${service} behövs ett Tortuga-konto. Logga in på ditt konto först.",
+      "busy": "${service} är upptagen. Försök igen om en minut.",
+      "refused": "${service} nekade inloggningen.",
+      "failed": "Det gick inte att ansluta ${service}.",
+      "retry": "Försök igen",
+      "connectedNotice": "Ansluten till ${service} som ${user}.",
+      "connectedNoticeNoName": "Ansluten till ${service}.",
+      "disconnectTitle": "Koppla från ${service}?",
+      "disconnectMessage": "Den här profilen slutar skicka det den ser till ${service} på alla dina enheter, och ändringar som väntar på att skickas slängs. Ditt ${service}-konto behåller allt det redan har.",
+      "disconnectedNotice": "Frånkopplad från ${service}.",
+      "actionFailed": "Det fungerade inte. Försök igen."
+    },
+    "downloads": {
+      "title": "Nedladdningar",
+      "note": "De här inställningarna gäller bara den här enheten och synkroniseras inte.",
+      "location": {
+        "title": "Plats",
+        "hint": "Var nya nedladdningar sparas. Nedladdningar som redan har sparats ligger kvar där de är.",
+        "deviceStorage": "Intern lagring",
+        "external": "Extern lagring",
+        "change": "Byt mapp"
+      },
+      "transferHeader": "Nedladdning",
+      "wifiOnly": "Ladda ned bara via Wi-Fi",
+      "wifiOnlyHint": "Nedladdningar väntar medan nätverket har datapriser, som mobildata",
+      "atOnce": "Samtidiga nedladdningar",
+      "atOnceHint": "Hur många nedladdningar som pågår samtidigt",
+      "autoRemoveWatched": "Radera sedda nedladdningar",
+      "autoRemoveWatchedHint": "En nedladdning raderas när den har setts, aldrig medan den spelas",
+      "subtitleLanguages": "Undertexter att spara",
+      "subtitleLanguagesHint": "Undertexter på de här språken sparas med varje nedladdning",
+      "subtitleLanguagesProfile": "Dina undertextspråk: ${languages}",
+      "subtitleLanguagesProfileNone": "Dina undertextspråk: inga",
+      "subtitleLanguagesExplanation": "Undertexter på de här språken sparas med varje nedladdning, så att de visas utan anslutning.",
+      "useProfileLanguages": "Använd mina undertextspråk",
+      "storageHeader": "Lagring",
+      "deleteAll": "Radera alla nedladdningar",
+      "deleteAllTitle": "Radera alla nedladdningar?",
+      "deleteAllText": "Det här raderar alla nedladdningar på den här enheten, för alla profiler.",
+      "deleteAllConfirm": "Radera alla"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Tillägg",
+        "addonsHint": "Installerade tillägg i sin ordning, med sina länkar",
+        "library": "Bibliotek",
+        "libraryHint": "Titlarna du har sparat",
+        "progress": "Tittarförlopp",
+        "progressHint": "Var du slutade och vad du har sett",
+        "settings": "Profilinställningar",
+        "settingsHint": "Uppspelning, strömmar, rader på Hem och de andra inställningarna som synkroniseras",
+        "streams": "Strömhistorik",
+        "streamsHint": "Strömmen som senast spelades upp för varje video"
+      },
+      "profilesHeader": "Profiler",
+      "privateNote": "Filen innehåller dina tilläggslänkar och din strömhistorik, som kan innehålla API-nycklar. Håll den privat: alla som har filen kan använda dem.",
+      "exportNote": "PIN-koder, spårningskonton, nedladdningar och den här enhetens inställningar finns aldrig med i filen.",
+      "exportAction": "Exportera till en fil",
+      "saved": "${name} har sparats.",
+      "saveFailed": "Filen kunde inte sparas.",
+      "exportFailed": "Exporten misslyckades.",
+      "importHeader": "Import",
+      "importNote": "Öppnar en fil som har exporterats från Tortuga. Nyare data går före, objekt för objekt, och inget på den här enheten raderas.",
+      "importAction": "Importera från en fil",
+      "reviewTitle": "Import",
+      "source": "Exporterad ${date} med Tortuga ${version}",
+      "sourceUndated": "Exporterad med Tortuga ${version}",
+      "dataHeader": "Data",
+      "counts": {
+        "addons": {
+          "one": "${n} tillägg",
+          "other": "${n} tillägg"
+        },
+        "titles": {
+          "one": "${n} titel",
+          "other": "${n} titlar"
+        },
+        "progress": {
+          "one": "förlopp för ${n} titel",
+          "other": "förlopp för ${n} titlar"
+        },
+        "settings": {
+          "one": "${n} inställning",
+          "other": "${n} inställningar"
+        },
+        "streams": {
+          "one": "${n} ström",
+          "other": "${n} strömmar"
+        },
+        "profiles": {
+          "one": "${n} profil",
+          "other": "${n} profiler"
+        }
+      },
+      "into": "Till",
+      "intoSame": "Till ${name} på det här kontot",
+      "newProfile": "En ny profil",
+      "importConfirm": "Importera",
+      "imported": "Importen är klar: ${changes}.",
+      "nothingNew": "Inget nytt att importera: allt i filen fanns redan här.",
+      "notTortuga": "Filen är ingen export från Tortuga. Inget importerades.",
+      "newer": "Filen kommer från en nyare version av Tortuga. Uppdatera Tortuga och importera den sedan igen.",
+      "damaged": "Filen är skadad eller ofullständig. Inget importerades.",
+      "clockAhead": "Tiderna i filen ligger långt före den här enhetens klocka. Kontrollera datum och tid på båda enheterna och importera sedan filen igen. Inget importerades.",
+      "importFailed": "Importen misslyckades.",
+      "unreadable": "Filen kunde inte öppnas. Inget importerades."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Uppdaterat",
+      "syncing": "Synkroniserar…",
+      "offline": "Offline. Ändringar synkroniseras när anslutningen är tillbaka.",
+      "signedOut": "Utloggad",
+      "failed": {
+        "server": "Synkroniseringsservern fick ett problem. Försöker igen snart.",
+        "rateLimited": "Synkroniseringsservern bad om lägre takt. Försöker igen snart.",
+        "quotaExceeded": "Kontots lagringsutrymme är fullt, så ändringar synkroniseras inte.",
+        "tooLarge": "Vissa ändringar är för stora för att synkroniseras.",
+        "addonsTooLarge": "En profils tillägg är för stora för att synkroniseras. Ta bort tillägg som den inte använder.",
+        "clockWrong": "Vissa ändringar kan inte synkroniseras. Kontrollera datum och tid på dina enheter.",
+        "unknown": "Kunde inte synkronisera. Försöker igen snart."
+      }
+    },
+    "error": {
+      "network": "Kunde inte nå synkroniseringsservern. Kontrollera anslutningen och försök igen.",
+      "server": "Synkroniseringsservern fick ett problem. Försök igen senare.",
+      "rateLimited": "För många försök. Vänta en stund och försök igen.",
+      "invalidServerUrl": "Det här är ingen serveradress. Ange en som https://sync.example.com.",
+      "insecureServerUrl": "Använd https för en server på internet. Vanlig http fungerar bara för en server i ditt eget nätverk.",
+      "notTortugaServer": "Ingen Tortuga-synkroniseringsserver svarade på den här adressen.",
+      "incompatibleServer": "Servern kör en äldre version av Tortuga-synkronisering och kan inte användas.",
+      "providerNotEnabled": "Servern erbjuder inte det här inloggningssättet.",
+      "signInRejected": "Inloggningen gick inte igenom. Försök igen.",
+      "appleCodeRejected": "Apple godkände inte inloggningen. Försök igen.",
+      "providerUnavailable": "Det gick inte att nå inloggningstjänsten. Försök igen senare.",
+      "signInCancelled": "Inloggningen avbröts.",
+      "signInExpired": "Inloggningen tog för lång tid. Börja om.",
+      "identityInUse": "Inloggningen tillhör redan ett annat Tortuga-konto.",
+      "lastIdentity": "Det här är kontots enda inloggningssätt, så det kan inte tas bort.",
+      "sessionEnded": "Enheten har loggats ut. Logga in igen.",
+      "sessionUnreadable": "Enhetens inloggning kunde inte läsas från systemets säkra lagring. Starta om Tortuga för att försöka igen.",
+      "notSignedIn": "Logga in först.",
+      "notFound": "Det här finns inte längre på servern.",
+      "linkCodeInvalid": "Koder har 8 bokstäver och siffror, som ABCD-EFGH.",
+      "linkNotFound": "Ingen enhet väntar med den här koden. Kontrollera koden eller börja om på den nya enheten.",
+      "linkOtherServer": "Den andra enheten använder en annan synkroniseringsserver.",
+      "linkFailed": "Länkningen kunde inte slutföras. Börja om.",
+      "tooLarge": "Det här är för stort för synkroniseringsservern.",
+      "quotaExceeded": "Kontots lagringsutrymme är fullt.",
+      "unsynced": {
+        "one": "${n} ändring som gjorts på den här enheten har inte synkroniserats med sitt konto än.",
+        "other": "${n} ändringar som gjorts på den här enheten har inte synkroniserats med sitt konto än."
+      },
+      "unexpected": "Något gick fel. Försök igen."
+    },
+    "deletion": {
+      "done": "Kontot och dess data har raderats.",
+      "appleRevoked": "Kontot och dess data har raderats, och Tortuga använder inte längre ditt Apple-ID.",
+      "appleManual": "Kontot och dess data har raderats. Slutför genom att ta bort Tortuga under Inställningar → Apple-ID → Logga in med Apple.",
+      "githubManual": "Du kan ta bort Tortuga från ditt GitHub-konto på ${address}."
+    },
+    "switchAccount": {
+      "title": "Radera ändringar som inte har synkroniserats?",
+      "message": {
+        "one": "Det här är ett annat konto än det som enheten var inloggad på. ${n} ändring som gjorts här under det andra kontot, till exempel tittarförlopp eller en ändring i biblioteket, nådde aldrig fram till det. Inloggningen raderar den permanent, tillsammans med resten av det kontots data på den här enheten, nedladdningarna inräknade.",
+        "other": "Det här är ett annat konto än det som enheten var inloggad på. ${n} ändringar som gjorts här under det andra kontot, till exempel tittarförlopp eller ändringar i biblioteket, nådde aldrig fram till det. Inloggningen raderar dem permanent, tillsammans med resten av det kontots data på den här enheten, nedladdningarna inräknade."
+      },
+      "confirm": "Radera och logga in",
+      "cancel": "Avbryt",
+      "kept": "Inte inloggad. Ändringarna finns kvar på den här enheten tills du loggar in på kontot där de gjordes."
+    },
+    "browser": {
+      "signedIn": "Inloggad. Du kan stänga den här fliken och gå tillbaka till Tortuga.",
+      "failed": "Inloggningen slutfördes inte. Gå tillbaka till Tortuga och försök igen."
+    },
+    "signIn": {
+      "title": "Logga in på Tortuga",
+      "intro": "Med ett Tortuga-konto hålls dina profiler, tillägg och bibliotek synkroniserade på alla enheter.",
+      "apple": "Logga in med Apple",
+      "google": "Logga in med Google",
+      "github": "Logga in med GitHub",
+      "oidc": "Logga in med ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Länka från en annan enhet",
+      "linkDeviceHint": "Redan inloggad på en telefon eller dator? Länka den här enheten med en kod i stället.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Använd din egen server",
+      "useHostedServer": "Använd Tortugas server",
+      "serverField": "Serveradress",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Fortsätt",
+      "checkingServer": "Kontrollerar servern…",
+      "loadingOptions": "Läser in inloggningsalternativ…",
+      "noOptions": "Servern erbjuder inget sätt att logga in på den här enheten. Länka den från en inloggad enhet i stället.",
+      "retry": "Försök igen",
+      "starting": "Startar inloggning…",
+      "native": "Loggar in med ${provider}…",
+      "browser": "Fortsätt i webbläsaren. Skärmen går vidare när du har loggat in där.",
+      "finishing": "Slutför inloggning…",
+      "cancel": "Avbryt",
+      "deviceCode": {
+        "instructions": "Gå till ${url} på en telefon eller dator och ange den här koden:",
+        "scan": "Eller skanna QR-koden med telefonen.",
+        "qrDescription": "QR-kod att skanna med telefonen",
+        "expires": "Koden går ut om ${time}.",
+        "waiting": "Väntar på att du loggar in…"
+      }
+    },
+    "link": {
+      "title": "Länka den här enheten",
+      "instructions": "På en inloggad enhet öppnar du Inställningar, sedan Konto och sedan Länka en ny enhet. Skanna den här QR-koden där eller ange koden.",
+      "qrDescription": "QR-kod att skanna på den inloggade enheten",
+      "starting": "Hämtar en kod…",
+      "expires": "Koden går ut om ${time}.",
+      "waiting": "Väntar på godkännande på den andra enheten…",
+      "rejected": "Den andra enheten avböjde länkningen.",
+      "expired": "Koden gick ut innan den användes.",
+      "newCode": "Hämta en ny kod"
+    },
+    "identityLink": {
+      "title": "Lägg till inloggningssätt",
+      "intro": "Länka ett annat sätt att logga in, så att du inte blir utelåst om du förlorar ett konto.",
+      "allLinked": "Alla inloggningssätt som den här enheten erbjuder är redan länkade.",
+      "linking": "Länkar…"
+    }
+  },
+  "profiles": {
+    "title": "Vem tittar?",
+    "manageTitle": "Hantera profiler",
+    "manage": "Hantera profiler",
+    "done": "Klar",
+    "add": "Lägg till profil",
+    "empty": "Skapa en profil för att komma igång.",
+    "loading": "Läser in dina profiler…",
+    "current": "Aktuell profil",
+    "switchProfile": "Byt profil",
+    "pin": {
+      "title": "Ange PIN-koden för ${name}",
+      "wrong": "Fel PIN-kod. Försök igen.",
+      "lockedOut": "För många försök. Försök igen om ${time}.",
+      "cancel": "Avbryt",
+      "backspace": "Radera sista siffran",
+      "entered": "${count} av ${total} siffror angivna"
+    },
+    "editor": {
+      "newTitle": "Ny profil",
+      "editTitle": "Redigera profil",
+      "name": "Namn",
+      "nameRequired": "Ange ett namn.",
+      "nameTooLong": {
+        "one": "Ett namn får ha högst ${n} tecken.",
+        "other": "Ett namn får ha högst ${n} tecken."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Ingen PIN-kod",
+      "pinOn": "Låst med PIN-kod",
+      "setPin": "Ställ in PIN-kod",
+      "changePin": "Ändra PIN-kod",
+      "removePin": "Ta bort PIN-kod",
+      "pinEnter": "Ange en fyrsiffrig PIN-kod",
+      "pinConfirm": "Ange PIN-koden igen",
+      "pinMismatch": "PIN-koderna matchade inte. Ange en ny.",
+      "pinNote": "En PIN-kod håller andra borta från den här profilen på dina enheter. Den är ett lås, inte ett lösenord.",
+      "save": "Spara",
+      "create": "Skapa profil",
+      "cancel": "Avbryt",
+      "delete": "Radera profil",
+      "deleteConfirm": "Radera ${name}? Profilens tillägg, bibliotek och historik raderas på alla enheter. Det går inte att ångra.",
+      "deleteAction": "Radera",
+      "saveFailed": "Kunde inte spara profilen. Försök igen.",
+      "kids": {
+        "title": "Barnprofil",
+        "subtitle": "Visar bara titlar som föreslås för åldrar upp till nivån du väljer. De flesta föreslagna åldrar är uppskattningar, inte officiella åldersgränser.",
+        "needsParent": "Ställ först in en PIN-kod på en vuxenprofil: den behövs för att lämna en barnprofil.",
+        "newOnly": "Bara en ny profil kan bli en barnprofil.",
+        "capTitle": "Högsta föreslagna ålder",
+        "capLittle": "Små barn",
+        "capLittleAges": "Föreslagen 0+",
+        "capKids": "Barn",
+        "capKidsAges": "Små barn, plus föreslagen 6+",
+        "capTeen": "Tonåringar",
+        "capTeenAges": "Barn, plus föreslagen 12+",
+        "allowUnrated": "Tillåt oklassade titlar",
+        "allowUnratedNote": "Titlar som saknar föreslagen ålder. Så länge detta är av tillåter en förälder dem en i taget.",
+        "homeRows": "Rader på Hem",
+        "homeRowsNote": "Valfritt. Titlar i de här raderna måste ändå rymmas inom den högsta föreslagna åldern.",
+        "familyMovies": "Familjefilmer",
+        "familySeries": "Familjeserier",
+        "addonMissing": "Dess tillägg är inte installerat i den här profilen.",
+        "allowed": "Tillåtna titlar",
+        "allowedNone": "Inga än. En förälder tillåter en titel från dess sida.",
+        "blocked": "Blockerade titlar",
+        "blockedNone": "Inga än. En förälder blockerar en titel från dess sida.",
+        "remove": "Ta bort ${title}",
+        "leaving": "För att lämna den här profilen behövs en förälders PIN-kod.",
+        "off": "Länkar, tillägg och de flesta inställningar är avstängda.",
+        "addons": "Videor kommer från den här profilens tillägg. Tortuga kontrollerar dem inte."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafit",
+      "slate": "Skiffer",
+      "silver": "Silver",
+      "ivory": "Elfenben",
+      "sand": "Sand",
+      "clay": "Lera",
+      "rose": "Ros",
+      "plum": "Plommon",
+      "dusk": "Skymning",
+      "sea": "Hav",
+      "sage": "Salvia",
+      "moss": "Mossa"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Inte tillgänglig på den här profilen",
+      "suggested": "Föreslagen ${age}+",
+      "byAddon": "Dess tillägg anger den för äldre tittare",
+      "notRated": "Ingen föreslagen ålder",
+      "byParent": "Blockerad av en förälder",
+      "unchecked": "Den föreslagna åldern kunde inte kontrolleras. Försök igen senare.",
+      "ask": "Fråga en förälder"
+    },
+    "block": "Blockera på den här profilen",
+    "pin": {
+      "title": "Ange en förälders PIN-kod",
+      "allow": "För att tillåta ${title} på den här profilen",
+      "allowThis": "För att tillåta den här titeln på den här profilen",
+      "block": "För att blockera ${title} på den här profilen",
+      "leave": "För att lämna den här profilen",
+      "settings": "För att öppna de här inställningarna"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Alla",
+      "movie": "Filmer",
+      "series": "Serier",
+      "channel": "Kanaler",
+      "tv": "TV-kanaler",
+      "other": "Övrigt"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Försök igen",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Visa alla",
+      "downloading": "Laddar ned: ${count}, ${percent} %",
+      "downloadingUnsized": "Laddar ned: ${count}",
+      "empty": "Inget att visa än. Installera tillägg med kataloger för att fylla sidan.",
+      "allHidden": "Alla rader på Hem är dolda. Visa dem igen under Inställningar → Hem."
+    },
+    "continueWatching": {
+      "title": "Fortsätt titta",
+      "episode": "Avsnitt ${episode}",
+      "upNext": "Härnäst",
+      "minutesLeft": "${minutes} min kvar",
+      "hoursLeft": "${hours} tim kvar",
+      "hoursMinutesLeft": "${hours} tim ${minutes} min kvar",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Bevakningslista",
+      "recommended": "Rekommenderat",
+      "trending": "Trendar",
+      "planToWatch": "Planerar att se",
+      "planning": "Planerat",
+      "airing": "Sänds nu",
+      "list": "Lista",
+      "unreachable": "Kunde inte nå ${service}.",
+      "signedOut": "${service} loggade ut dig. Anslut igen i Inställningar.",
+      "failed": "${service} svarade inte som väntat."
+    },
+    "discover": {
+      "type": "Typ",
+      "catalog": "Katalog",
+      "genre": "Genre",
+      "all": "Alla",
+      "empty": "Katalogen har inget att visa.",
+      "noCatalogs": "Inget av de installerade tilläggen har en katalog att bläddra i.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Sök filmer, serier och mer",
+      "recent": "Senaste sökningar",
+      "clearRecent": "Rensa",
+      "removeRecentNamed": "Ta bort ${name}",
+      "noResults": "Inga resultat för ”${query}”",
+      "noCatalogs": "Inget av de installerade tilläggen kan söka.",
+      "clearQuery": "Rensa sökning",
+      "hint": "Hitta filmer, serier och mer i dina tilläggs kataloger."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Hem",
+      "discover": "Upptäck",
+      "search": "Sök",
+      "library": "Bibliotek",
+      "settings": "Inställningar"
+    },
+    "shortLabel": {
+      "board": "Hem",
+      "library": "Bibliotek",
+      "search": "Sök",
+      "settings": "Alternativ"
+    },
+    "back": "Tillbaka",
+    "retry": "Försök igen",
+    "close": "Stäng",
+    "dismiss": "Stäng",
+    "qrFailed": "Den här länken kan inte visas som en QR-kod.",
+    "openOnPhone": {
+      "title": "Öppna på telefonen",
+      "message": "Den här enheten kan inte öppna länken. Skanna koden med telefonens kamera för att öppna den där.",
+      "qrDescription": "QR-kod för länken"
+    },
+    "player": {
+      "close": "Stäng spelaren",
+      "fullscreen": "Helskärm",
+      "exitFullscreen": "Avsluta helskärm",
+      "rewind": "Spola tillbaka",
+      "fastForward": "Spola framåt",
+      "pictureInPicture": "Bild-i-bild"
+    },
+    "menu": {
+      "playback": "Uppspelning",
+      "nextSubtitles": "Nästa undertextspår",
+      "nextAudio": "Nästa ljudspår"
+    }
+  },
+  "watch": {
+    "title": "Titta tillsammans",
+    "intro": "Titta i synk med vänner, var och en på sin egen enhet. Alla spelar upp samma titel från sina egna tillägg. Starta ett rum i spelaren genom att välja Fler reglage och sedan Titta tillsammans.",
+    "controlMode": {
+      "hostOnly": "Bara jag styr",
+      "hostOnlyDetail": "Alla följer med när du spelar upp, pausar eller spolar",
+      "anyone": "Alla styr",
+      "anyoneDetail": "Vem som helst i rummet kan spela upp, pausa eller spola"
+    },
+    "joinTitle": "Gå med i ett rum",
+    "joinHint": "Kod eller inbjudningslänk",
+    "joinLabel": "Gå med",
+    "joinInvalid": "Ange en rumskod på 6 tecken eller en inbjudningslänk",
+    "recentTitle": "Senaste rum",
+    "recentUsed": "Senast använt ${time}",
+    "removeRecentNamed": "Ta bort ${name}",
+    "invite": {
+      "title": "Gå med i rum ${code}? Det finns på ${server}, inte på din reläserver.",
+      "join": "Gå med",
+      "leaveTitle": "Lämna rummet för att gå med i rum ${code}? Det finns på ${server}, inte på din reläserver.",
+      "leaveHostTitle": "Lämna rummet för att gå med i rum ${code}? Det finns på ${server}, inte på din reläserver. Det här rummet fortsätter med nästa deltagare som värd."
+    },
+    "relay": {
+      "checking": "Kontrollerar reläservern…",
+      "unreachable": "Kan inte nå reläservern på ${server}.",
+      "retry": "Försök igen",
+      "title": "Reläserver",
+      "hint": "Reläservern som kopplar ihop rummen i Titta tillsammans. Lämna tomt för att använda de offentliga reläservrarna från Open Watch Party.",
+      "hosted": "Offentliga reläservrar från Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Ange en reläserveradress som börjar med http:// eller https://",
+      "save": "Spara",
+      "reset": "Använd de offentliga reläservrarna"
+    },
+    "busy": {
+      "creating": "Startar ett rum…",
+      "joining": "Går med i rummet…"
+    },
+    "dismiss": "Stäng",
+    "room": {
+      "codeLabel": "Rumskod",
+      "copyCode": "Kopiera kod",
+      "codeCopied": "Koden har kopierats",
+      "share": "Dela inbjudan",
+      "shareText": "Titta med mig på Tortuga: öppna ${link} eller ange rumskoden ${code}.",
+      "scan": "Skanna med en telefon för att gå med",
+      "youHost": "Du är värd",
+      "hostedBy": "Värd: ${name}",
+      "hostOnly": "Bara värden styr uppspelningen",
+      "anyone": "Alla styr uppspelningen",
+      "reconnecting": "Återansluter…",
+      "hostReconnecting": "Väntar på att ${name} återansluter…",
+      "nowPlaying": "Spelar upp ${title}",
+      "nowPlayingEpisode": "Spelar upp ${title} · ${episode}",
+      "idleHost": "Spela upp något, så spelar alla i rummet det med dig.",
+      "idleGuest": "Väntar på att ${name} spelar upp något.",
+      "participants": {
+        "one": "${n} deltagare",
+        "other": "${n} deltagare"
+      },
+      "you": "${name} (du)",
+      "hostBadge": "Värd",
+      "makeHost": "Gör till värd",
+      "makeHostNamed": "Gör ${name} till värd",
+      "joinPlayback": "Gå med i uppspelningen",
+      "leave": "Lämna rummet",
+      "leaveTitle": "Lämna rummet?",
+      "leaveConfirm": "Lämna",
+      "end": "Avsluta rummet",
+      "endTitle": "Avsluta rummet för alla?",
+      "endConfirm": "Avsluta rummet",
+      "cancel": "Avbryt",
+      "leaveHostTitle": "Lämna rummet? Det fortsätter med nästa deltagare som värd.",
+      "kickNamed": "Ta bort ${name}",
+      "kickTitle": "Ta bort ${name} från rummet?",
+      "kickConfirm": "Ta bort",
+      "lock": "Lås rummet",
+      "lockDetail": "Ingen ny kan gå med",
+      "controlTitle": "Vem som styr uppspelningen"
+    },
+    "status": {
+      "ready": "Redo",
+      "loading": "Läser in",
+      "matching": "Söker fil",
+      "buffering": "Buffrar",
+      "sameLength": "Samma längd (${delta})",
+      "longer": "${delta} längre",
+      "shorter": "${delta} kortare",
+      "noStream": "Ingen ström hittades",
+      "searchFailed": "Sökningen i tillägg misslyckades",
+      "notPlaying": "Inte i spelaren",
+      "away": "Frånkopplad",
+      "declined": "Spelar inte upp",
+      "offset": "Förskjutning ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Rum ${code}",
+      "startTitle": "Starta ett rum med det som spelas",
+      "liveNoRoom": "En livesändning kan inte ses tillsammans",
+      "watching": {
+        "one": "${n} tittar",
+        "other": "${n} tittar tillsammans"
+      },
+      "hostBadge": "VÄRD",
+      "waiting": "Väntar på ${names}…",
+      "waitingMore": {
+        "other": "Väntar på ${names} och ${n} till…"
+      },
+      "syncing": "Synkroniserar…",
+      "matchingStart": "Söker en fil som matchar den ${name} har…",
+      "longer": "Din fil är ${delta} längre än den ${name} har",
+      "shorter": "Din fil är ${delta} kortare än den ${name} har",
+      "mismatchDetail": "Det kan vara en annan version, så era positioner kanske inte stämmer överens.",
+      "playAnyway": "Spela upp ändå",
+      "chooseStream": "Välj en annan ström",
+      "noStream": "Inget av dina tillägg har en ström för ${title}.",
+      "searchFailed": "Det gick inte att söka efter ${title} i några av dina tillägg.",
+      "chooseAStream": "Välj en ström",
+      "pickFailed": "Den strömmen gick inte att öppna.",
+      "hostControls": "Bara ${name} styr uppspelningen i det här rummet",
+      "hostControlsUnnamed": "Bara värden styr uppspelningen i det här rummet",
+      "pausedHere": "Pausat på den här enheten. Tryck på Spela upp för att komma ikapp rummet.",
+      "dontPlay": "Spela inte upp",
+      "declined": "Du spelar inte upp ${title}.",
+      "offsetTitle": "Förskjutning",
+      "offsetDetail": "Förskjuter din fil mot rummets, för en version som börjar tidigare eller senare.",
+      "offsetReset": "Återställ"
+    },
+    "toast": {
+      "joined": "${name} gick med",
+      "left": "${name} lämnade rummet",
+      "paused": "${name} pausade",
+      "resumed": "${name} fortsatte uppspelningen",
+      "seeked": "${name} hoppade till en annan position",
+      "speed": "${name} ändrade hastigheten till ${speed}",
+      "buffering": "${name} buffrar",
+      "hostChanged": "${name} är värd nu",
+      "becameHost": "Du är värd nu",
+      "media": "${name} startade ${title}",
+      "forbidden": "Bara värden kan göra det"
+    },
+    "failure": {
+      "create": "Kunde inte starta ett rum. Försök igen.",
+      "join": "Kunde inte gå med i rummet. Försök igen.",
+      "share": "Kunde inte dela videon med rummet. Prova en annan ström.",
+      "live": "En livesändning kan inte ses tillsammans. Rummet väntar på en video.",
+      "roomNotFound": "Det finns inget rum med den koden.",
+      "roomFull": "Rummet är fullt.",
+      "rateLimited": "För många försök. Vänta en minut och försök sedan igen.",
+      "connection": "Kan inte nå reläservern. Kontrollera anslutningen.",
+      "sessionLost": "Anslutningen till rummet bröts.",
+      "ended": "Värden avslutade rummet.",
+      "roomLocked": "Rummet är låst.",
+      "relayFull": "Reläservern är full. Försök igen senare.",
+      "blocked": "Reläservern tar inte emot Tortuga.",
+      "kicked": "Värden tog bort dig från rummet.",
+      "expired": "Rummet har gått ut.",
+      "replaced": "Du gick med i rummet på en annan enhet."
+    }
+  },
+  "downloads": {
+    "title": "Nedladdningar",
+    "empty": "Inget har laddats ned än. Ladda ned filmer och avsnitt från deras sidor för att se dem utan anslutning.",
+    "offline": "Du är offline. Nedladdningarna fortsätter när du är online igen.",
+    "storage": "${used} används · ${free} ledigt",
+    "storageUsed": "${used} används",
+    "pauseAll": "Pausa alla",
+    "resumeAll": "Fortsätt alla",
+    "actionFailed": "Kunde inte ändra nedladdningen. Försök igen.",
+    "actionsFailed": "Kunde inte ändra nedladdningarna. Försök igen.",
+    "episodes": {
+      "one": "${n} avsnitt",
+      "other": "${n} avsnitt"
+    },
+    "videos": {
+      "one": "${n} video",
+      "other": "${n} videor"
+    },
+    "otherVideos": "Andra videor",
+    "summary": "${count} · ${size}",
+    "progress": "${done} av ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "I kö",
+      "waitingForWifi": "Väntar på Wi-Fi",
+      "waitingForNetwork": "Väntar på anslutning",
+      "resolving": "Förbereder…",
+      "downloading": "Laddar ned",
+      "downloadingPercent": "Laddar ned · ${percent} %",
+      "paused": "Pausad",
+      "failed": "Misslyckades",
+      "completed": "Nedladdad",
+      "cancelled": "Avbruten"
+    },
+    "action": {
+      "play": "Spela upp",
+      "pause": "Pausa",
+      "resume": "Fortsätt",
+      "retry": "Försök igen",
+      "pickStream": "Välj en ström",
+      "cancel": "Avbryt nedladdningen",
+      "delete": "Radera nedladdningen",
+      "deleteGroup": "Radera nedladdningarna",
+      "openDetail": "Gå till informationssidan"
+    },
+    "deleteConfirm": {
+      "title": "Radera ${count} av ${name}?",
+      "message": "Att ladda ned igen tar tid och kräver en anslutning.",
+      "confirm": "Radera",
+      "cancel": "Avbryt"
+    },
+    "keepSynced": {
+      "title": "Håll synkroniserad",
+      "note": "För varje serie här hålls nästa osedda avsnitt nedladdade på den här enheten. När du har sett ett laddas ett nytt ned.",
+      "empty": "Inga serier hålls synkroniserade. Välj i nedladdningsmenyn för en serie hur många osedda avsnitt som ska behållas.",
+      "series": {
+        "one": "${n} serie",
+        "other": "${n} serier"
+      },
+      "manage": "Hantera ”Håll synkroniserad”",
+      "pauseRule": "Pausa ${title}",
+      "resumeRule": "Fortsätt ${title}",
+      "stopRule": "Sluta synkronisera ${title}",
+      "status": {
+        "downloading": {
+          "one": "Laddar ned ${n} avsnitt",
+          "other": "Laddar ned ${n} avsnitt"
+        },
+        "failed": {
+          "one": "${n} avsnitt misslyckades",
+          "other": "${n} avsnitt misslyckades"
+        },
+        "downloaded": {
+          "one": "${n} avsnitt nedladdat",
+          "other": "${n} avsnitt nedladdade"
+        },
+        "downloadedNone": "Inga avsnitt nedladdade"
+      },
+      "stop": {
+        "title": "Sluta synkronisera ${title}?",
+        "message": {
+          "one": "${n} avsnitt i Nedladdningar kom från ”Håll synkroniserad”. Radera det också?",
+          "other": "${n} avsnitt i Nedladdningar kom från ”Håll synkroniserad”. Radera dem också?"
+        },
+        "messageNone": "Inga fler avsnitt laddas ned.",
+        "keep": "Behåll nedladdningarna",
+        "delete": "Radera nedladdningarna",
+        "confirm": "Stoppa",
+        "cancel": "Avbryt"
+      },
+      "notice": {
+        "one": "”Håll synkroniserad” lade till ${n} avsnitt av ${title}",
+        "other": "”Håll synkroniserad” lade till ${n} avsnitt av ${title}"
+      },
+      "noticeSeveral": {
+        "one": "”Håll synkroniserad” lade till ${n} avsnitt",
+        "other": "”Håll synkroniserad” lade till ${n} avsnitt"
+      },
+      "actionFailed": "Kunde inte ändra ”Håll synkroniserad”. Försök igen."
+    },
+    "failure": {
+      "noStream": "Ingen ström kunde väljas för det här avsnittet. Välj en själv.",
+      "noStreamInstant": "Ingen direktström kunde väljas för det här avsnittet. Välj en själv.",
+      "network": "Anslutningen misslyckades.",
+      "http": "Servern svarade med HTTP ${status}.",
+      "streamGone": "Länken har gått ut och tillägget erbjuder inte längre den här strömmen.",
+      "diskFull": "Enheten fick slut på utrymme. Nedladdningarna stoppades.",
+      "notEnoughSpace": "Det finns inte tillräckligt med ledigt utrymme för den här nedladdningen.",
+      "sizeMismatch": "Den nedladdade filen är ofullständig.",
+      "unsupported": "Den här strömmen kan inte laddas ned.",
+      "locationUnavailable": "Nedladdningsplatsen är inte tillgänglig.",
+      "fileMissing": "Den nedladdade filen saknas.",
+      "storage": "Enhetens lagring svarade inte."
+    },
+    "notification": {
+      "channel": "Nedladdningar",
+      "title": "Laddar ned ${title}",
+      "count": {
+        "one": "${n} nedladdning",
+        "other": "${n} nedladdningar"
+      },
+      "progress": "${percent} %",
+      "preparing": "Förbereder nedladdning…",
+      "waiting": "Väntar på Wi-Fi",
+      "paused": "Pausad",
+      "pause": "Pausa",
+      "resume": "Fortsätt",
+      "cancel": "Avbryt",
+      "failed": "Nedladdningen misslyckades: ${title}",
+      "completed": "${title} har laddats ned"
+    }
+  },
+  "offline": {
+    "title": "Du är offline",
+    "text": "Anslut till internet för att bläddra. Dina nedladdningar kan spelas upp utan anslutning.",
+    "textNoDownloads": "Anslut till internet för att bläddra.",
+    "openDownloads": "Gå till Nedladdningar",
+    "detail": "Visar informationen som sparades med dina nedladdningar."
+  },
+  "playerApps": {
+    "chooser": "Fråga varje gång",
+    "tortuga": "Tortuga",
+    "playWith": "Spela upp med…",
+    "banner": {
+      "opening": "Öppnar i ${player}…",
+      "notInstalled": "${player} är inte installerad på den här enheten.",
+      "didNotStart": "${player} startade inte.",
+      "playInTortuga": "Spela upp i Tortuga",
+      "cancel": "Avbryt",
+      "dismiss": "Stäng"
+    },
+    "detail": {
+      "playing": "Spelas upp i ${player} · ${position}",
+      "playingOf": "Spelas upp i ${player} · ${position} av ${duration}",
+      "paused": "Pausad i ${player} · ${position}",
+      "pausedOf": "Pausad i ${player} · ${position} av ${duration}",
+      "finished": "Öppnades i ${player}. Har du sett klart ${title}?",
+      "markWatched": "Markera som sedd",
+      "notYet": "Inte än"
+    },
+    "settings": {
+      "player": "Spelare",
+      "deviceOnly": "Bara den här enheten",
+      "note": "Videor på den här enheten spelas upp i spelaren som väljs här. Med Spela upp med… i en ströms meny väljer du en annan för en enskild video.",
+      "notFound": "${player} (hittades inte)",
+      "followsProgress": "Fortsätter där du slutade och sparar förloppet under uppspelningen",
+      "savesOnReturn": "Fortsätter där du slutade och sparar var du stannade",
+      "savesOnReturnFromStart": "Börjar från början och sparar sedan var du stannade eller frågar om du har sett klart",
+      "asksAfter": "Fortsätter där du slutade och frågar sedan om du har sett klart",
+      "asksAfterFromStart": "Öppnar bara videon och frågar sedan om du har sett klart",
+      "chooserDetail": "Din enhet frågar för varje video vilken app som ska spela upp den",
+      "customHeader": "Egna spelare",
+      "addCustom": "Lägg till egen spelare",
+      "deleteNamed": "Radera ${name}",
+      "form": {
+        "title": "Lägg till egen spelare",
+        "name": "Namn",
+        "nameHint": "Min spelare",
+        "program": "Program",
+        "programHint": "mpv, eller programmets fullständiga sökväg",
+        "arguments": "Argument",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} är videons länk, {title} dess titel, {start} var den startar i sekunder och {subtitle} länken till den första undertexten.",
+        "urlTemplate": "URL-mall",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} är videons länk, kodad för en URL, och {url_raw} länken som den är.",
+        "packageName": "Paketnamn",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Lägg till",
+        "cancel": "Avbryt",
+        "nameMissing": "Ge spelaren ett namn.",
+        "programMissing": "Ange programmet som ska köras.",
+        "urlTemplateMissing": "Ange URL-mallen.",
+        "packageNameMissing": "Ange appens paketnamn.",
+        "argumentsNeedUrl": "Argumenten måste innehålla {url}.",
+        "urlTemplateNeedsUrl": "URL-mallen måste innehålla {url} eller {url_raw}.",
+        "packageNameInvalid": "Det här är inget paketnamn som t.ex. org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Tv-tablå",
+    "today": "I dag",
+    "tomorrow": "I morgon",
+    "yesterday": "I går",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Sänds nu",
+    "now": "Nu",
+    "noProgrammes": "Ingen programinformation",
+    "noChannels": "Den här tablån har inga kanaler för den här dagen.",
+    "noGuide": "Inget installerat tillägg erbjuder en tv-tablå.",
+    "failed": "Det gick inte att läsa in tablån: ${reason}",
+    "cast": "Med ${names}",
+    "directors": "Regi: ${names}"
+  },
+  "calendar": {
+    "title": "Kalender",
+    "previousMonth": "Föregående månad",
+    "nextMonth": "Nästa månad",
+    "today": "Idag",
+    "tomorrow": "I morgon",
+    "emptyLibrary": "Lägg till serier i ditt bibliotek för att se deras avsnitt här.",
+    "noAddon": "Inget av dina tillägg har en kalender för serierna i ditt bibliotek.",
+    "emptyMonth": "Inga avsnitt.",
+    "newEpisodes": {
+      "one": "${n} nytt avsnitt",
+      "other": "${n} nya avsnitt"
+    },
+    "episodes": {
+      "one": "${n} avsnitt",
+      "other": "${n} avsnitt"
+    }
+  },
+  "watchlist": {
+    "lists": "Spårningstjänsternas listor",
+    "hint": "Varje lista finns på ditt konto hos den tjänsten. Ditt bibliotek ändras inte.",
+    "add": "Lägg till i ${list}",
+    "remove": "Ta bort från ${list}",
+    "trakt": "Trakt-bevakningslista",
+    "simkl": "Simkl: Planerar att se",
+    "mdblist": "MDBList-bevakningslista",
+    "myAnimeList": "MyAnimeList: Planerar att se",
+    "aniList": "AniList: Planerat",
+    "saving": "Sparar…",
+    "queued": "Inte skickat än, försöker igen",
+    "failed": "Inte sparat",
+    "addFailed": "Det gick inte att lägga till ${title} i ${list}.",
+    "removeFailed": "Det gick inte att ta bort ${title} från ${list}."
+  },
+  "collections": {
+    "needsAddon": "Kräver tillägget ${name}",
+    "needsCatalog": "${addon} har ingen katalog ${catalog}",
+    "needsFilter": "Kräver ett filter som Tortuga inte kan ställa in",
+    "traktUnavailable": "Trakt-listor är inte tillgängliga i den här versionen av appen",
+    "tooLarge": "”${title}” är för stor för att synkroniseras",
+    "kind": {
+      "tmdbList": "TMDB-lista",
+      "tmdbCollection": "TMDB-samling",
+      "tmdbCompany": "TMDB-bolag",
+      "tmdbNetwork": "TMDB-kanal",
+      "tmdbDiscover": "TMDB Upptäck",
+      "tmdbPerson": "TMDB-person",
+      "tmdbDirector": "TMDB-regissör",
+      "letterboxd": "Letterboxd",
+      "unknown": "Okänd leverantör ”${name}”"
+    },
+    "summary": {
+      "adds": {
+        "one": "Lägger till ${n} samling",
+        "other": "Lägger till ${n} samlingar"
+      },
+      "replaces": {
+        "one": "Ersätter ${n} samling med samma id",
+        "other": "Ersätter ${n} samlingar med samma id"
+      },
+      "needsAddon": {
+        "one": "${n} källa kräver tillägget ${name}",
+        "other": "${n} källor kräver tillägget ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} källa kräver att ${service} är anslutet",
+        "other": "${n} källor kräver att ${service} är anslutet"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} källa utelämnad",
+        "other": "${kind}: ${n} källor utelämnade"
+      },
+      "unsupportedHint": "Tortuga läser tilläggens kataloger och trackers listor, inte de här källorna. Använd en tilläggskatalog i stället, till exempel AIOMetadatas eller MDBLists.",
+      "folderDropped": "Mappen ”${folder}” i ”${collection}” utelämnad: ingen av dess källor kan läsas",
+      "collectionDropped": "Samlingen ”${title}” utelämnad: ingen av dess mappar kan läsas",
+      "tooLarge": "Samlingen ”${title}” importerades inte: den är för stor för att synkroniseras"
+    },
+    "refused": {
+      "notJson": "Det här är ingen samlingsfil: den är inte JSON.",
+      "notList": "Det här är ingen samlingsfil: den innehåller ingen lista med samlingar.",
+      "empty": "Filen innehåller inga samlingar.",
+      "collectionInvalid": "Samling ${position} i filen kan inte läsas.",
+      "collectionNoId": "Samling ${position} i filen har inget id.",
+      "collectionNoTitle": "Samlingen ${id} har ingen titel.",
+      "duplicateCollection": "Två samlingar i filen har id:t ${id}.",
+      "noFolders": "Samlingen ”${collection}” har ingen lista med mappar.",
+      "folderInvalid": "Mapp ${position} i ”${collection}” kan inte läsas.",
+      "folderNoId": "Mapp ${position} i ”${collection}” har inget id.",
+      "folderNoTitle": "Mappen ${id} i ”${collection}” har ingen titel.",
+      "duplicateFolder": "Två mappar i ”${collection}” har id:t ${id}.",
+      "noSources": "Mappen ”${folder}” i ”${collection}” har ingen lista med källor.",
+      "unknownShape": "Mappen ”${folder}” i ”${collection}” har en okänd rutform: ${shape}.",
+      "sourceInvalid": "Källa ${position} i mappen ”${folder}” i ”${collection}” är ofullständig."
+    },
+    "row": "Samling",
+    "rowSource": {
+      "one": "Samling · ${n} mapp",
+      "other": "Samling · ${n} mappar"
+    },
+    "folder": {
+      "all": "Alla",
+      "empty": "Inga titlar här",
+      "goToTrackers": "Gå till Spårning",
+      "goToAddons": "Gå till Tillägg"
+    },
+    "importing": {
+      "title": "Importera samlingar",
+      "note": "En samlingsfil från Nuvio eller AIOMetadata: ange länken eller öppna filen. En samling med samma id som en av dina ersätter den.",
+      "urlLabel": "Länk",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Hämta",
+      "openFile": "Öppna fil",
+      "confirm": "Importera",
+      "done": "Klar",
+      "rowNew": {
+        "one": "Ny · ${n} mapp",
+        "other": "Ny · ${n} mappar"
+      },
+      "rowReplaces": {
+        "one": "Ersätter din · ${n} mapp",
+        "other": "Ersätter din · ${n} mappar"
+      },
+      "imported": {
+        "one": "${n} samling importerad",
+        "other": "${n} samlingar importerade"
+      },
+      "notWeb": "Ange en länk som börjar med http:// eller https://.",
+      "tooLarge": "Filen är större än 4 MB.",
+      "httpError": "Länken svarade med fel ${status}.",
+      "timeout": "Länken svarade inte i tid.",
+      "unreachable": "Länken går inte att nå. Kontrollera den och din anslutning.",
+      "unreadable": "Filen går inte att läsa som text.",
+      "failed": "Samlingarna kunde inte sparas."
+    },
+    "editor": {
+      "newHeading": "Ny samling",
+      "editHeading": "Redigera samling",
+      "titleLabel": "Titel",
+      "view": "Visning",
+      "viewHint": "Hur en mapp visar sina källor",
+      "viewTabs": "Flikar",
+      "viewRows": "Rader",
+      "viewFollow": "Som appen",
+      "allTab": "Fliken Alla",
+      "allTabHint": "En första flik med titlarna från alla källor",
+      "foldersHeader": "Mappar",
+      "addFolder": "Lägg till mapp",
+      "noFolders": "Inga mappar än",
+      "sources": {
+        "one": "${n} källa",
+        "other": "${n} källor"
+      },
+      "save": "Spara",
+      "newFolder": "Ny mapp",
+      "folderTitleLabel": "Titel",
+      "shape": "Rutans form",
+      "shapePoster": "Affisch",
+      "shapeLandscape": "Liggande",
+      "shapeSquare": "Kvadrat",
+      "coverLabel": "Länk till omslagsbild",
+      "coverHint": "https://…",
+      "hideTitle": "Dölj titeln",
+      "hideTitleHint": "Rutan visar bara sitt omslag",
+      "sourcesHeader": "Källor",
+      "addSource": "Lägg till källa",
+      "noSources": "Inga källor än",
+      "deleteNamed": "Radera ${name}",
+      "removeNamed": "Ta bort ${name}",
+      "noTitle": "Ge samlingen en titel.",
+      "noFolder": "Lägg till en mapp i samlingen.",
+      "folderNoTitle": "Ge mapp ${position} en titel.",
+      "folderNoSource": "Lägg till en källa i ”${folder}”.",
+      "saveFailed": "Samlingen kunde inte sparas.",
+      "discardTitle": "Släng ändringarna?",
+      "discard": "Släng",
+      "keepEditing": "Fortsätt redigera",
+      "picker": {
+        "addons": "Tilläggens kataloger",
+        "trackers": "Spårning",
+        "noAddons": "Inget installerat tillägg har någon katalog att lägga till.",
+        "noTrackers": "Anslut en tjänst under Inställningar → Spårning för att lägga till dess listor.",
+        "listsFailed": "${service}s listor går inte att läsa just nu.",
+        "byLink": "En lista på ${service} via länk",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Lägg till",
+        "notAList": "Det här är ingen länk till en lista på ${service}.",
+        "notFound": "${service} har ingen lista på den här länken.",
+        "unreachable": "${service} går inte att nå just nu."
+      }
+    }
+  }
+}

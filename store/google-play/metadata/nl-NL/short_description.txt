@@ -1,0 +1,1 @@
+Een videospeler die werkt met Stremio-add-ons, op telefoons, tablets en tv's.

@@ -1,0 +1,1 @@
+Videospelare som fungerar med Stremio-tillägg, för telefon, surfplatta och TV.

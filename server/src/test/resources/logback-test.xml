@@ -1,0 +1,13 @@
+<!-- Tests log plain text, warnings and errors only, so failures stay readable. -->
+<configuration>
+    <appender name="text" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level %logger{24} [%X{requestId:-}] %X{accountId:-} %kvp %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.testcontainers" level="WARN"/>
+    <logger name="tc" level="WARN"/>
+    <root level="WARN">
+        <appender-ref ref="text"/>
+    </root>
+</configuration>

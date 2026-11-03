@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Addons, their streams and local servers are often plain HTTP, and their hosts are not knowable at build time. The
+         sync server is held to HTTPS off the local network by the shared core (SyncApi.kt normalizeServerUrl). -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

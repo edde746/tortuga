@@ -1,0 +1,2066 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Nach Updates suchen …",
+    "launchFailed": "Tortuga konnte nicht gestartet werden.",
+    "startup": {
+      "database": "Datenbank wird geöffnet …",
+      "migration": "Datenbank wird aktualisiert …",
+      "account": "Konto wird geladen …",
+      "profiles": "Profile werden geladen …"
+    },
+    "localNetworkUsage": "Tortuga verwendet Ihr lokales Netzwerk, um Add-ons, Medien und einen Sync-Server zu erreichen, den Sie zu Hause betreiben."
+  },
+  "player": {
+    "nowPlaying": "Läuft gerade",
+    "buffering": "Wird gepuffert …",
+    "position": "${position} / ${duration}",
+    "timeline": "Wiedergabeposition",
+    "play": "Abspielen",
+    "pause": "Pause",
+    "resolving": "Stream wird vorbereitet …",
+    "opening": "Wird geöffnet …",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LIVE",
+      "position": "Live · ${time} gesehen",
+      "behind": "Live · ${time} zeitversetzt",
+      "goToLive": "Zur Live-Übertragung"
+    },
+    "nextEpisode": "Nächste Folge",
+    "previousEpisode": "Vorherige Folge",
+    "lock": {
+      "button": "Bildschirm sperren",
+      "tapToUnlock": "Zum Entsperren tippen",
+      "tapAgainToUnlock": "Zum Entsperren erneut tippen"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Lautstärke",
+      "level": "${percent} %",
+      "muted": "Stumm",
+      "mute": "Ton aus",
+      "unmute": "Ton an"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Untertitel",
+      "speed": "Geschwindigkeit",
+      "subtitleDelay": "Untertitelversatz",
+      "audioDelay": "Audioversatz",
+      "moreSubtitles": "Weitere Untertitel",
+      "reset": "Zurücksetzen",
+      "subtitleDelayEarlier": "Untertitelversatz: früher",
+      "subtitleDelayLater": "Untertitelversatz: später",
+      "audioDelayEarlier": "Audioversatz: früher",
+      "audioDelayLater": "Audioversatz: später"
+    },
+    "track": {
+      "off": "Aus",
+      "numbered": "Spur ${number}",
+      "defaultTrack": "Standard",
+      "forced": "Erzwungen",
+      "sdh": "SDH",
+      "audioDescription": "Audiodeskription",
+      "external": "Extern",
+      "second": "Zweite Untertitel",
+      "showAsSecond": "Als zweite Untertitel anzeigen",
+      "removeSecond": "Zweite Untertitel entfernen",
+      "otherLanguage": "Andere",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} Kanal",
+        "other": "${n} Kanäle"
+      }
+    },
+    "info": {
+      "title": "Wiedergabeinfos",
+      "tab": "Info",
+      "resolution": "Auflösung",
+      "video": "Video",
+      "dynamicRange": "Dynamikumfang",
+      "audio": "Audio",
+      "decoder": "Decoder",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hardware (${name})",
+      "softwareDecoder": "Software",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision, Profil ${profile}",
+      "stream": "Stream",
+      "addon": "Add-on",
+      "pickedBy": "Gewählt von",
+      "autoPlayFirstMatch": "Automatisch, erster Treffer",
+      "autoPlayLastLink": "Automatisch, derselbe Stream wie beim letzten Mal",
+      "source": "Quelle",
+      "downloaded": "Heruntergeladen",
+      "name": "Name",
+      "file": "Datei",
+      "container": "Container",
+      "fileSize": "Größe",
+      "bitrate": "Bitrate",
+      "codec": "Codec",
+      "pixelFormat": "Pixelformat",
+      "bitDepth": "${bits} Bit",
+      "color": "Farbe",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} Nits",
+      "mastering": "Mastering-Display",
+      "nitsRange": "${min}–${max} Nits",
+      "droppedFrames": "Ausgelassene Frames",
+      "droppedFramesValue": "${output} (Decoder ${decoder})",
+      "delayedFrames": "Verspätete Frames",
+      "output": "Ausgabe",
+      "hertz": "${value} Hz",
+      "channels": "Kanäle",
+      "sampleRate": "Abtastrate",
+      "track": "Spur",
+      "secondTrack": "Zweite Spur",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "3D-Audio",
+      "rendering": "Rendering",
+      "surround": "Surround",
+      "subtitles": "Untertitel",
+      "format": "Format",
+      "embedded": "Eingebettet",
+      "delay": "Versatz",
+      "network": "Netzwerk",
+      "downloadSpeed": "Downloadgeschwindigkeit",
+      "buffering": "Wird gepuffert",
+      "percent": "${value} %",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Intro überspringen",
+      "recap": "Rückblick überspringen",
+      "credits": "Abspann überspringen"
+    },
+    "prompt": {
+      "playNext": "Nächste Folge abspielen: ${episode}",
+      "countdown": {
+        "one": "Automatisch in ${n} Sekunde",
+        "other": "Automatisch in ${n} Sekunden"
+      }
+    },
+    "options": {
+      "title": "Weitere Steuerelemente",
+      "videoFit": "Seitenverhältnis",
+      "fit": {
+        "contain": "Einpassen",
+        "cover": "Bildschirm füllen",
+        "fill": "Strecken"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent} %",
+      "resetZoom": "Zurücksetzen",
+      "shaders": "Shader",
+      "shader": {
+        "nvscalerDetail": "NVIDIA-Bildskalierung für schärferes Video",
+        "neutral": "Neutral",
+        "denoise": "Rauschreduzierung",
+        "denoiseSharpen": "Rauschreduzierung + Schärfen",
+        "fast": "Schnell",
+        "highQuality": "Hohe Qualität",
+        "modeDetail": "${quality} · Modus ${mode}",
+        "customDetail": "Eigener GLSL-Shader",
+        "importShader": "Shader importieren",
+        "imported": "Shader importiert",
+        "importFailed": "Shader konnte nicht importiert werden",
+        "deleteLabel": "${name} löschen",
+        "deleteTitle": "${name} löschen?",
+        "delete": "Löschen",
+        "cancel": "Abbrechen"
+      },
+      "sleepTimer": "Sleep-Timer",
+      "sleepEndOfVideo": "Ende des aktuellen Videos",
+      "sleepMinutes": {
+        "one": "${n} Minute",
+        "other": "${n} Minuten"
+      },
+      "sleepLeft": "Noch ${time}",
+      "autoPlayNext": "Nächste Folge automatisch abspielen",
+      "audioOutput": "Audioausgabe",
+      "systemOutput": "Systemstandard",
+      "audioNormalization": "Lautstärke normalisieren",
+      "audioChannels": "Audiokanäle",
+      "channels": {
+        "original": "Original",
+        "originalDetail": "Alle Kanäle der Spur wiedergeben",
+        "surround51": "Bis zu 5.1",
+        "surround51Detail": "7.1 auf 5.1 heruntermischen für Fernseher und Receiver, die nur 5.1 unterstützen",
+        "stereo": "Stereo",
+        "stereoDetail": "Auf zwei Kanäle heruntermischen für Stereolautsprecher oder Kopfhörer"
+      },
+      "on": "An",
+      "off": "Aus"
+    },
+    "stillWatching": {
+      "title": "Schauen Sie noch?",
+      "countdown": {
+        "one": "Pausiert in ${n} Sekunde",
+        "other": "Pausiert in ${n} Sekunden"
+      },
+      "keepWatching": "Weiterschauen",
+      "pause": "Pause"
+    },
+    "error": {
+      "title": "Stream kann nicht abgespielt werden",
+      "resolveTimeout": "Der Stream hat zu lange zum Starten gebraucht.",
+      "expired": "Der Stream-Link ist abgelaufen.",
+      "notFound": "Der Stream ist nicht mehr verfügbar.",
+      "http": "Der Server hat mit HTTP ${status} geantwortet.",
+      "cantOpen": "Der Stream konnte nicht geöffnet werden.",
+      "unsupportedFormat": "Der Stream hat ein Format, das der Player nicht lesen kann.",
+      "cantDecode": "Der Player konnte Bild oder Ton dieses Streams nicht abspielen.",
+      "engineFailed": "Die Wiedergabe wurde wegen eines Fehlers abgebrochen.",
+      "retry": "Wiederholen",
+      "nextStream": "Nächster Stream",
+      "close": "Schließen",
+      "alternatives": {
+        "one": "${n} weiterer Stream verfügbar",
+        "other": "${n} weitere Streams verfügbar"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Das ist nicht die Folge",
+      "titleMovie": "Das ist nicht der Film",
+      "titleVideo": "Das ist nicht das Video",
+      "sent": "Das Add-on hat statt des Streams ein Fehlervideo geschickt.",
+      "byUrl": "Der Link gehört zu den Fehlervideos eines Add-ons.",
+      "bySize": "Die Datei ist ${served} groß, der Stream gab ${size} an.",
+      "byDuration": "Es dauert ${length}, dieses Video dauerte beim letzten Abspielen ${known}.",
+      "kept": "Der Fortschritt bleibt erhalten.",
+      "chooseStream": "Anderen Stream auswählen",
+      "watch": "Nachricht ansehen"
+    },
+    "osd": {
+      "volume": "Lautstärke ${level}",
+      "brightness": "Helligkeit ${level}",
+      "speed": "Geschwindigkeit ${speed}",
+      "subtitleDelay": "Untertitelversatz ${delay}",
+      "audioDelay": "Audioversatz ${delay}",
+      "audioTrack": "Audio: ${track}",
+      "subtitleTrack": "Untertitel: ${track}",
+      "subtitlesOff": "Untertitel aus",
+      "chapter": "Kapitel: ${title}",
+      "chapterNumbered": "Kapitel ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shader: ${name}",
+      "shadersOff": "Shader aus"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Stream wird geöffnet …",
+    "resolveFailed": {
+      "http": "Der Server des Streams hat mit HTTP ${status} geantwortet",
+      "timeout": "Der Server des Streams hat nicht rechtzeitig geantwortet",
+      "network": "Keine Verbindung zum Server des Streams möglich",
+      "unsupportedUrl": "Der Link dieses Streams kann nicht geöffnet werden",
+      "tooManyRedirects": "Der Link dieses Streams leitet zu oft weiter",
+      "unexpected": "Diese App ist beim Öffnen dieses Streams auf einen Fehler gestoßen"
+    },
+    "badge": {
+      "instant": "Sofort",
+      "notInstant": "Nicht sofort"
+    },
+    "lastUsed": "Zuletzt abgespielt",
+    "external": "Wird außerhalb der App geöffnet",
+    "unplayable": {
+      "one": "${n} Stream, den diese App nicht abspielen kann",
+      "other": "${n} Streams, die diese App nicht abspielen kann"
+    },
+    "empty": "Keine Streams gefunden",
+    "all": "Alle",
+    "refresh": "Aktualisieren",
+    "retryNamed": "${name} erneut versuchen",
+    "filters": {
+      "hidden": {
+        "one": "${n} Stream durch Ihre Filter ausgeblendet",
+        "other": "${n} Streams durch Ihre Filter ausgeblendet"
+      },
+      "showing": {
+        "one": "${n} von Ihren Filtern ausgeblendeter Stream wird angezeigt",
+        "other": "${n} von Ihren Filtern ausgeblendete Streams werden angezeigt"
+      },
+      "show": "Anzeigen",
+      "hide": "Ausblenden",
+      "rowNote": "Durch Ihre Filter ausgeblendet"
+    },
+    "sort": {
+      "title": "Sortieren",
+      "addonOrder": "Reihenfolge der Add-ons",
+      "resolution": "Auflösung",
+      "source": "Quellqualität",
+      "sizeLargest": "Größte Datei zuerst",
+      "sizeSmallest": "Kleinste Datei zuerst",
+      "cached": "Sofort zuerst"
+    },
+    "autoPlay": {
+      "noMatch": "Die automatische Wiedergabe hat keinen Stream gefunden, der Ihre Filter erfüllt.",
+      "failed": "Der automatisch gewählte Stream ist nicht gestartet. Wählen Sie einen anderen."
+    },
+    "download": {
+      "notice": "Wählen Sie den Stream aus, der heruntergeladen werden soll.",
+      "action": "Herunterladen",
+      "actionNamed": "${name} herunterladen",
+      "queued": "Zu den Downloads hinzugefügt",
+      "failed": "Der Download konnte nicht hinzugefügt werden."
+    },
+    "suggested": {
+      "label": "Vorschlag",
+      "reason": "Passend zu Ihrer bisherigen Auswahl: ${features}",
+      "audio": "Ton: ${language}",
+      "subtitles": "Untertitel: ${language}",
+      "smaller": "kleinere Dateien",
+      "larger": "größere Dateien"
+    }
+  },
+  "detail": {
+    "loadFailed": "Die Details konnten nicht geladen werden.",
+    "notFound": "Kein Add-on hat Details zu diesem Titel.",
+    "noAddons": "Keines der installierten Add-ons hat Details zu diesem Titel.",
+    "noAnimeAddon": "Keines der installierten Add-ons hat Details zu diesem Anime. Installieren Sie ein Anime-Add-on, um diesen Titel zu öffnen.",
+    "animeListsUnavailable": "Die Anime-Listen wurden nicht geladen, daher lässt sich dieser Anime keinem Titel zuordnen. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+    "findingAnime": "Anime wird in den Anime-Listen gesucht …",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} Std. ${minutes} Min.",
+      "hours": "${hours} Std.",
+      "minutes": "${minutes} Min."
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes (Kritiker)",
+        "rottenTomatoesAudience": "Rotten Tomatoes (Publikum)",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} Prozent"
+    },
+    "userRating": {
+      "rateLabel": "Diesen Titel bewerten",
+      "label": "Ihre Bewertung: ${score}",
+      "range": "${low}–${high}",
+      "title": "Ihre Bewertung",
+      "hint": "Ihre Bewertung geht an jeden Dienst unten.",
+      "clear": "Bewertung entfernen",
+      "checking": "Wird geprüft…",
+      "notRated": "Nicht bewertet",
+      "unreadable": "Prüfung nicht möglich",
+      "saving": "Wird gespeichert…",
+      "saved": "Gespeichert",
+      "removed": "Entfernt",
+      "queued": "Noch nicht gesendet, wird wiederholt",
+      "failed": "Nicht gespeichert"
+    },
+    "links": {
+      "genres": "Genres",
+      "cast": "Besetzung",
+      "directors": "Regie",
+      "writers": "Drehbuch",
+      "website": "Website"
+    },
+    "facts": {
+      "title": "Informationen",
+      "released": "Erschienen",
+      "runtime": "Laufzeit",
+      "country": "Land",
+      "language": "Sprache",
+      "awards": "Auszeichnungen",
+      "source": "Details von",
+      "failed": "Nicht geladen von"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailer",
+    "share": "Teilen",
+    "season": "Staffel ${number}",
+    "specials": "Specials",
+    "episodeNumbered": "Folge ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Mit ${names}",
+    "castAndCrew": "Besetzung & Crew",
+    "airs": "Erscheint am ${date}",
+    "date": "${day}. ${month} ${year}",
+    "month": {
+      "jan": "Jan.",
+      "feb": "Feb.",
+      "mar": "März",
+      "apr": "Apr.",
+      "may": "Mai",
+      "jun": "Juni",
+      "jul": "Juli",
+      "aug": "Aug.",
+      "sep": "Sept.",
+      "oct": "Okt.",
+      "nov": "Nov.",
+      "dec": "Dez."
+    },
+    "play": "Abspielen",
+    "playEpisode": "${episode} abspielen",
+    "resume": "Fortsetzen ab ${time}",
+    "resumeEpisode": "${episode} fortsetzen · ${time}",
+    "addToLibrary": "Zur Bibliothek hinzufügen",
+    "removeFromLibrary": "Aus der Bibliothek entfernen",
+    "markWatched": "Als gesehen markieren",
+    "markUnwatched": "Als nicht gesehen markieren",
+    "markAllWatched": "Alle Folgen als gesehen markieren",
+    "markAllUnwatched": "Alle Folgen als nicht gesehen markieren",
+    "markSeasonWatched": "Staffel als gesehen markieren",
+    "markSeasonUnwatched": "Staffel als nicht gesehen markieren",
+    "watched": "Gesehen",
+    "overviewHidden": "Beschreibung ausgeblendet",
+    "moreActions": "Weitere Aktionen",
+    "moreActionsNamed": "Weitere Aktionen für ${name}",
+    "showMore": "Mehr",
+    "showLess": "Weniger",
+    "findingStream": "Stream wird gesucht …",
+    "chooseStream": "Stream auswählen",
+    "download": {
+      "download": "Herunterladen",
+      "queued": "In der Warteschlange",
+      "waitingForWifi": "Warten auf Wi-Fi",
+      "downloading": "${percent} % heruntergeladen",
+      "downloadingStarted": "Wird heruntergeladen …",
+      "paused": "Pausiert",
+      "failed": "Download fehlgeschlagen",
+      "partial": "${done} von ${total} heruntergeladen",
+      "downloaded": "Heruntergeladen",
+      "menuTitle": "Herunterladen",
+      "allSeasons": "Alle Staffeln",
+      "pick": {
+        "all": "Alle Folgen",
+        "unwatched": "Ungesehene Folgen",
+        "next5": "Nächste 5 ungesehene Folgen",
+        "next10": "Nächste 10 ungesehene Folgen"
+      },
+      "keepSynced": "Synchron halten",
+      "keepSyncedCount": {
+        "one": "${n} ungesehene Folge bereithalten",
+        "other": "${n} ungesehene Folgen bereithalten"
+      },
+      "keepSyncedAll": "Alle ungesehenen Folgen bereithalten",
+      "manage": "Downloads verwalten",
+      "pauseAll": "Downloads pausieren",
+      "resumeAll": "Downloads fortsetzen",
+      "deleteSeason": "Downloads dieser Staffel löschen",
+      "deleteAll": "Alle Downloads löschen",
+      "queuedEpisodes": {
+        "one": "${n} Folge zu den Downloads hinzugefügt",
+        "other": "${n} Folgen zu den Downloads hinzugefügt"
+      },
+      "nothingQueued": "Alle Folgen sind bereits heruntergeladen oder in der Warteschlange.",
+      "failedToQueue": "Die Downloads konnten nicht hinzugefügt werden.",
+      "episode": {
+        "download": "Folge herunterladen",
+        "pause": "Download pausieren",
+        "resume": "Download fortsetzen",
+        "retry": "Download wiederholen",
+        "pickStream": "Stream auswählen",
+        "cancel": "Download abbrechen",
+        "delete": "Download löschen",
+        "queued": "In der Warteschlange",
+        "downloading": "${percent} %",
+        "paused": "Pausiert",
+        "failed": "Download fehlgeschlagen",
+        "downloaded": "Heruntergeladen"
+      }
+    },
+    "related": {
+      "title": "Ähnliche Titel",
+      "noneFound": "Keine ähnlichen Titel gefunden."
+    }
+  },
+  "library": {
+    "title": "Bibliothek",
+    "continueWatching": "Weiterschauen",
+    "sort": {
+      "lastWatched": "Zuletzt angesehen",
+      "added": "Zuletzt hinzugefügt",
+      "name": "Titel A–Z",
+      "nameReverse": "Titel Z–A",
+      "timesWatched": "Am häufigsten gesehen",
+      "watched": "Gesehene zuerst",
+      "notWatched": "Ungesehene zuerst"
+    },
+    "sortBy": "Sortieren nach",
+    "sortByNamed": "Sortieren nach: ${name}",
+    "empty": "Noch nichts hier. Fügen Sie Titel über ihre Detailseite zur Bibliothek hinzu.",
+    "emptyContinueWatching": "Nichts zum Weiterschauen. Titel erscheinen hier, sobald Sie mit dem Ansehen beginnen.",
+    "emptyType": "Hier gibt es nichts von diesem Typ.",
+    "watched": "Gesehen"
+  },
+  "mediaMenu": {
+    "markWatched": "Als gesehen markieren",
+    "markUnwatched": "Als nicht gesehen markieren",
+    "removeFromContinueWatching": "Aus „Weiterschauen“ entfernen",
+    "details": "Zu den Details",
+    "addToLibrary": "Zur Bibliothek hinzufügen",
+    "removeFromLibrary": "Aus der Bibliothek entfernen",
+    "playFromStart": "Von vorn abspielen",
+    "markSeasonWatched": "Staffel als gesehen markieren",
+    "markSeasonUnwatched": "Staffel als nicht gesehen markieren",
+    "chooseStream": "Stream auswählen",
+    "download": "Herunterladen",
+    "pauseDownload": "Download pausieren",
+    "resumeDownload": "Download fortsetzen",
+    "retryDownload": "Download wiederholen",
+    "cancelDownload": "Download abbrechen",
+    "deleteDownload": "Download löschen",
+    "pickStream": "Stream auswählen",
+    "trailer": "Trailer",
+    "markFailed": "${title} konnte nicht markiert werden: Die Details wurden nicht geladen. Prüfen Sie die Verbindung und versuchen Sie es erneut."
+  },
+  "session": {
+    "episode": "S${season} F${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Die installierten Add-ons konnten nicht gelesen werden. Starten Sie Tortuga neu, um es erneut zu versuchen.",
+    "error": {
+      "invalidTransportUrl": "Das ist kein Add-on-Link. Add-on-Links enden auf /manifest.json.",
+      "timeout": "Das Add-on hat nicht rechtzeitig geantwortet.",
+      "network": "Das Add-on ist nicht erreichbar.",
+      "http": "Das Add-on hat einen Fehler gemeldet (HTTP ${status}).",
+      "invalidResponse": "Das Add-on hat eine Antwort gesendet, die diese App nicht lesen kann.",
+      "unexpectedResponse": "Das Add-on hat eine andere Art von Antwort gesendet als angefordert.",
+      "emptyContent": "Nichts gefunden.",
+      "invalidManifest": "Das Manifest des Add-ons ist ungültig.",
+      "configurationRequired": "Dieses Add-on muss vor der Installation konfiguriert werden.",
+      "alreadyInstalled": "Dieses Add-on ist bereits installiert.",
+      "notInstalled": "Dieses Add-on ist nicht installiert.",
+      "protectedAddon": "Dieses Add-on ist integriert und kann weder entfernt noch ausgeschaltet werden."
+    },
+    "title": "Add-ons",
+    "allTypes": "Alle",
+    "empty": "Keine Add-ons installiert.",
+    "emptyFiltered": "Kein installiertes Add-on hat diesen Typ.",
+    "builtIn": "Integriert",
+    "builtInExplanation": "Dieses Add-on ist integriert und kann weder entfernt noch ausgeschaltet werden.",
+    "cancel": "Abbrechen",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Nach oben",
+    "moveUpNamed": "${name} nach oben verschieben",
+    "moveDown": "Nach unten",
+    "moveDownNamed": "${name} nach unten verschieben",
+    "dragToReorderNamed": "${name} neu anordnen",
+    "enabledNamed": "${name} verwenden",
+    "close": "Schließen",
+    "version": "Version ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Kataloge",
+      "meta": "Details",
+      "stream": "Streams",
+      "subtitles": "Untertitel",
+      "addonCatalog": "Add-on-Kataloge",
+      "player": "Wiedergabeaktivität",
+      "library": "Bibliotheksaktivität"
+    },
+    "remove": {
+      "title": "${name} entfernen?",
+      "message": "Das Add-on wird auf allen Geräten aus diesem Profil entfernt – samt den Einstellungen, mit denen es konfiguriert wurde.",
+      "confirm": "Entfernen"
+    },
+    "details": {
+      "types": "Typen",
+      "resources": "Bietet",
+      "catalogs": "Kataloge",
+      "contact": "Kontakt",
+      "configure": "Konfigurieren",
+      "remove": "Entfernen",
+      "enabled": "Dieses Add-on verwenden",
+      "enabledOff": "Aus: Tortuga fragt es nach nichts und zeigt seine Kataloge nicht.",
+      "shareTitle": "Add-on-Link",
+      "shareWarning": "Dieser Link kann die Schlüssel der Konten enthalten, mit denen das Add-on konfiguriert wurde. Teilen Sie ihn nur mit Personen, denen Sie vertrauen.",
+      "revealLink": "Link anzeigen",
+      "hideLink": "Link ausblenden",
+      "copyLink": "Link kopieren",
+      "linkCopied": "Link kopiert."
+    },
+    "watchActivity": {
+      "title": "Sehaktivität senden",
+      "explanation": "Dieses Add-on erhält Ihre Sehaktivität: was Sie abspielen, pausieren und stoppen, was Sie Ihrer Bibliothek hinzufügen oder daraus entfernen und was Sie als gesehen markieren.",
+      "agree": "Ich bin einverstanden, dass dieses Add-on meine Sehaktivität erhält",
+      "notAllowed": "Erhält keine Sehaktivität, bis Sie es erlauben"
+    },
+    "install": {
+      "action": "Add-on installieren",
+      "title": "Add-on installieren",
+      "linkHint": "Add-on-Link, endet auf /manifest.json",
+      "submit": "Weiter",
+      "confirm": "Installieren",
+      "update": "Aktualisieren",
+      "configure": "Konfigurieren",
+      "configureFirst": "Dieses Add-on muss vor der Installation konfiguriert werden. Konfigurieren Sie es und installieren Sie es dann über seine Seite.",
+      "alreadyInstalled": "Dieses Add-on ist bereits installiert.",
+      "updateDetails": "Installiert. Damit werden seine Details aktualisiert.",
+      "updateVersion": "Installiert. Damit wird es auf Version ${version} aktualisiert.",
+      "adult": "Dieses Add-on ist als Inhalt für Erwachsene gekennzeichnet.",
+      "installed": "${name} wurde installiert.",
+      "updated": "${name} wurde aktualisiert.",
+      "done": "Fertig"
+    },
+    "browse": {
+      "title": "Durchsuchen",
+      "installed": "Installiert",
+      "installedNote": "Installiert"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "automatic": "Automatisch",
+    "listSeparator": ", ",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "increaseNamed": "${name} erhöhen",
+    "decreaseNamed": "${name} verringern",
+    "value": {
+      "percent": "${value} %",
+      "seconds": {
+        "one": "${n} Sekunde",
+        "other": "${n} Sekunden"
+      }
+    },
+    "time": {
+      "justNow": "gerade eben",
+      "minutesAgo": {
+        "one": "vor ${n} Minute",
+        "other": "vor ${n} Minuten"
+      },
+      "hoursAgo": {
+        "one": "vor ${n} Stunde",
+        "other": "vor ${n} Stunden"
+      },
+      "daysAgo": {
+        "one": "vor ${n} Tag",
+        "other": "vor ${n} Tagen"
+      },
+      "monthsAgo": {
+        "one": "vor ${n} Monat",
+        "other": "vor ${n} Monaten"
+      },
+      "yearsAgo": {
+        "one": "vor ${n} Jahr",
+        "other": "vor ${n} Jahren"
+      }
+    },
+    "sections": {
+      "playback": "Wiedergabe",
+      "playbackSummary": "Sprachen, Gesehen-Schwelle, nächste Folge und Überspringen",
+      "device": "Dieses Gerät",
+      "deviceSummary": "Decodierung, HDR, Bildrate, Audio, Cache und Absturzberichte",
+      "subtitles": "Untertitel",
+      "subtitlesSummary": "Größe, Farbe, Kontur und Position auf diesem Gerät",
+      "addons": "Add-ons",
+      "addonsSummary": {
+        "one": "${n} Add-on installiert",
+        "other": "${n} Add-ons installiert"
+      },
+      "addonsSummaryLoading": "Installierte Add-ons",
+      "home": "Startseite",
+      "homeSummary": "Welche Reihen die Startseite zeigt und in welcher Reihenfolge",
+      "appearance": "Darstellung",
+      "appearanceSummary": "Sprache, Poster und gesehene Titel",
+      "trackers": "Tracker",
+      "trackersSummary": "Scrobbling, Verlauf und Listen",
+      "trackersConnected": "Verbunden mit ${services}",
+      "account": "Konto",
+      "about": "Über",
+      "downloads": "Downloads",
+      "downloadsSummary": "Speicherort, Download nur über Wi-Fi und Speicherplatz",
+      "data": "Export und Import",
+      "dataSummary": "Daten Ihrer Profile in eine Datei und zurück"
+    },
+    "profile": {
+      "locked": "Mit PIN gesperrt",
+      "unlocked": "Keine PIN",
+      "edit": "Profil bearbeiten",
+      "manage": "Profile wechseln oder verwalten"
+    },
+    "about": {
+      "version": "Version ${version}",
+      "license": "Tortuga steht unter der GNU General Public License, Version 3. Sie dürfen das Programm ausführen, untersuchen, weitergeben und verändern, und wer Ihnen eine Kopie gibt, muss Ihnen auch den Quellcode anbieten.",
+      "source": "Quellcode",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga verwendet Trakt, wird aber von Trakt weder befürwortet noch zertifiziert.",
+      "notices": "Software von Drittanbietern",
+      "noticeLink": "Projektseite"
+    },
+    "appearance": {
+      "interfaceLanguage": "App-Sprache",
+      "interfaceLanguageHint": "Die Sprache der Menüs und Meldungen der App",
+      "interfaceLanguageSystem": "Systemstandard",
+      "blurUnwatched": "Ungesehene Folgen verwischen",
+      "blurUnwatchedHint": "Die Bilder von Folgen, die du noch nicht begonnen hast, verwischen und ihre Beschreibungen ausblenden, damit sie nichts verraten",
+      "hideWatched": "Gesehene Titel ausblenden",
+      "hideWatchedHint": "Filme und Serien, die du fertig geschaut hast, aus den Reihen der Startseite und aus Entdecken weglassen. Eine Serie kehrt zurück, sobald eine neue Folge erscheint",
+      "hidePosterCaptions": "Titel unter Postern ausblenden",
+      "hidePosterCaptionsHint": "Nur das Bild zeigen. Weiterschauen behält Folge und Restzeit",
+      "posterTemplate": "Poster-URL-Vorlage",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} und {tvdb_id} stehen für die IDs des Titels, {type} für movie oder series",
+      "posterTemplateNone": "Poster der Addons",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Keine http- oder https-Adresse, daher ignoriert"
+    },
+    "home": {
+      "note": "Wählen Sie, welche Reihen die Startseite zeigt und in welcher Reihenfolge. Diese Auswahl gehört zu diesem Profil und wird mit Ihren anderen Geräten synchronisiert.",
+      "continueWatchingHint": "Immer die erste Reihe",
+      "rowsHeader": "Reihen",
+      "empty": "Kein installiertes Add-on hat einen Katalog für die Startseite.",
+      "reset": "Auf Standard zurücksetzen",
+      "moveUp": "Nach oben",
+      "moveUpNamed": "${name} nach oben verschieben",
+      "moveDown": "Nach unten",
+      "moveDownNamed": "${name} nach unten verschieben",
+      "dragToReorder": "Zum Neuordnen ziehen",
+      "dragToReorderNamed": "${name} neu anordnen",
+      "newCollection": "Neue Sammlung",
+      "importCollections": "Sammlungen importieren",
+      "exportCollections": "Sammlungen exportieren",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "deleteTitle": "„${title}“ löschen?",
+      "deleteMessage": "Die Sammlung wird aus diesem Profil auf all Ihren Geräten entfernt."
+    },
+    "playback": {
+      "title": "Wiedergabe",
+      "note": "Diese Einstellungen gehören zu diesem Profil und werden mit Ihren anderen Geräten synchronisiert.",
+      "languagesHeader": "Sprachen",
+      "audioLanguages": "Audiosprachen",
+      "audioLanguagesHint": "Welche Tonspur abgespielt wird, nach Priorität",
+      "audioLanguagesNone": "Standard des Videos",
+      "audioLanguagesExplanation": "Ein Video wird in der ersten dieser Sprachen abgespielt, die es enthält. Ist keine ausgewählt, wird seine Standard-Tonspur abgespielt.",
+      "subtitleLanguages": "Untertitelsprachen",
+      "subtitleLanguagesHint": "Welche Untertitel eingeschaltet werden, nach Priorität",
+      "subtitleLanguagesNone": "Aus",
+      "subtitleLanguagesExplanation": "Untertitel in der ersten dieser Sprachen, die ein Video enthält, werden eingeschaltet. Ist keine ausgewählt, bleiben Untertitel aus, außer das Video erzwingt sie.",
+      "secondSubtitleLanguage": "Sprache der zweiten Untertitel",
+      "secondSubtitleLanguageHint": "Oben im Bild, zusammen mit den ersten",
+      "secondSubtitleLanguageExplanation": "Untertitel in dieser Sprache erscheinen oben im Bild, zusammen mit den ersten Untertiteln. Ist keine ausgewählt, erscheinen keine zweiten Untertitel, außer sie werden im Player gewählt.",
+      "secondSubtitleLanguageNone": "Aus",
+      "showSubtitles": "Untertitel anzeigen",
+      "showSubtitlesHint": "Immer: Untertitel auch in der gesprochenen Sprache, SDH zuerst",
+      "showSubtitlesFollowAudio": "Nach Audio",
+      "showSubtitlesAlways": "Immer",
+      "chosenHeader": "Ihre Sprachen",
+      "availableHeader": "Sprache hinzufügen",
+      "searchLanguages": "Sprachen suchen",
+      "noLanguageMatches": "Keine passende Sprache.",
+      "playbackHeader": "Wiedergabe",
+      "watchedThreshold": "Gilt als gesehen ab",
+      "watchedThresholdHint": "Ab welcher Stelle ein Video als gesehen zählt und „Weiterschauen“ zur nächsten Folge wechselt",
+      "bingeWatching": "Nächste Folge abspielen",
+      "bingeWatchingHint": "Wenn eine Folge endet, die nächste starten – wenn möglich aus derselben Quelle",
+      "upNextCountdown": "Countdown zur nächsten Folge",
+      "upNextCountdownHint": "Wie lange der Hinweis zur nächsten Folge wartet, bevor sie startet",
+      "upNextImmediately": "Sofort starten",
+      "seekShort": "Kurzer Sprung",
+      "seekShortHint": "Pfeiltasten, Fernbedienung und die Sprungtasten des Players",
+      "seekLong": "Langer Sprung",
+      "seekLongHint": "Umschalttaste mit Pfeiltasten sowie langes Drücken",
+      "videoClick": "Klick auf das Video",
+      "videoClickHint": "Ein Doppelklick wechselt weiterhin ins Vollbild und zurück",
+      "videoClickPause": "Pausieren und abspielen",
+      "videoClickControls": "Bedienelemente ein- oder ausblenden",
+      "moveUp": "Nach oben",
+      "moveUpNamed": "${name} nach oben verschieben",
+      "moveDown": "Nach unten",
+      "moveDownNamed": "${name} nach unten verschieben",
+      "removeLanguage": "Entfernen",
+      "removeLanguageNamed": "${name} entfernen",
+      "dragToReorderNamed": "${name} neu anordnen",
+      "skipping": {
+        "header": "Überspringen",
+        "footer": "Intros, Rückblicke und Abspann werden an den Kapitelnamen eines Videos erkannt, daher bieten nur Videos mit benannten Kapiteln an, sie zu überspringen. Vor dem automatischen Überspringen läuft ein Countdown auf der Schaltfläche, den jede Bedienung des Players abbricht.",
+        "intros": "Intros",
+        "introsHint": "Titelsongs und Vorspann",
+        "recaps": "Rückblicke",
+        "recapsHint": "„Was bisher geschah …“ am Anfang einer Folge",
+        "credits": "Abspann",
+        "creditsHint": "Abspann und Vorschau auf die nächste Folge; mit ihnen erscheint der Hinweis zur nächsten Folge",
+        "off": "Aus",
+        "button": "Schaltfläche anzeigen",
+        "auto": "Automatisch überspringen"
+      },
+      "streams": {
+        "header": "Streams",
+        "footer": "Die Filter gelten für alle Stream-Listen. Diese zeigen an, wie viele Streams ausgeblendet sind, und können sie trotzdem einblenden.",
+        "autoPlay": "Automatisch abspielen",
+        "autoPlayHint": "Überspringt die Stream-Liste bei „Abspielen“, „Fortsetzen“, einer Folge und der nächsten Folge; mit einer Sortierung wartet es, bis alle Add-ons geantwortet haben",
+        "suggestions": "Stream vorschlagen",
+        "suggestionsHint": "Lernt, welche Streams Sie in diesem Profil wählen, und markiert einen in der Liste",
+        "autoPlayOff": "Aus",
+        "autoPlayFirstMatch": "Erster Stream, der die Filter erfüllt",
+        "autoPlayReuseLastLink": "Derselbe Stream wie beim letzten Mal, sonst der erste passende",
+        "qualities": "Qualitäten",
+        "qualitiesHint": "Welche Auflösungen die Stream-Listen zeigen",
+        "qualitiesAll": "Alle",
+        "qualitiesNone": "Keine",
+        "qualitiesAllBut": "Alle außer ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Unbekannt",
+        "ranges": "Dynamikumfang",
+        "rangesHint": "Welche von SDR, HDR und Dolby Vision die Stream-Listen zeigen",
+        "codecs": "Videocodecs",
+        "codecsHint": "Welche Videocodecs die Stream-Listen zeigen",
+        "minSize": "Mindestgröße",
+        "minSizeHint": "Blendet Streams kleinerer Dateien aus; einer ohne Größenangabe bleibt",
+        "maxSize": "Höchstgröße",
+        "maxSizeHint": "Blendet Streams größerer Dateien aus; einer ohne Größenangabe bleibt",
+        "sizeAny": "Beliebige Größe",
+        "includePattern": "Nur passende Streams",
+        "includePatternHint": "Ein regulärer Ausdruck, der mit Name, Beschreibung und Dateiname jedes Streams abgeglichen wird, ohne Beachtung der Groß- und Kleinschreibung",
+        "includePatternNone": "Alle Streams",
+        "includePlaceholder": "z. B. 1080p|2160p",
+        "excludePattern": "Passende Streams ausblenden",
+        "excludePatternHint": "Hat Vorrang vor dem Muster oben",
+        "excludePatternNone": "Keine",
+        "excludePlaceholder": "z. B. HDTV|XviD",
+        "invalidPattern": "Kein gültiger regulärer Ausdruck, wird daher ignoriert",
+        "save": "Speichern",
+        "clear": "Leeren"
+      }
+    },
+    "device": {
+      "title": "Dieses Gerät",
+      "note": "Diese Einstellungen gelten nur für dieses Gerät und werden nicht synchronisiert.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Hardware-Decodierung",
+      "hardwareDecodingHint": "Videos mit der Grafikhardware decodieren. Schalten Sie dies aus, wenn Videos Bildfehler zeigen.",
+      "hdr": "HDR",
+      "hdrHint": "HDR-Videos in HDR abspielen, wenn das Display es unterstützt. Ist dies aus, werden sie in SDR umgewandelt.",
+      "matchFrameRate": "Bildratenwechsel erzwingen",
+      "matchFrameRateHint": "Das Display auf die Bildrate des Videos umschalten, auch wo das System es nicht täte. Bei jedem Wechsel wird der Bildschirm kurz schwarz.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Audio-Passthrough",
+      "audioPassthroughHint": "Surround-Ton (Dolby Digital, DTS, TrueHD) undecodiert an den Receiver senden",
+      "audioPassthroughHintApple": "Dolby Digital und Dolby Digital Plus, auch Atmos, an den Dolby-Decoder des Systems senden; DTS und TrueHD werden als Mehrkanal-PCM wiedergegeben. Ausschalten, wenn kein Ton zu hören ist.",
+      "audioPassthroughHintAppleSpatial": "Dolby Digital und Dolby Digital Plus, auch Atmos, an den Dolby-Decoder des Systems senden und TrueHD Atmos und DTS:X als 3D-Audio wiedergeben; andere DTS- und TrueHD-Spuren werden als Mehrkanal-PCM wiedergegeben. Ausschalten, wenn kein Ton zu hören ist.",
+      "audioPassthroughNormalized": "Aus, solange die Lautstärke normalisiert wird",
+      "gesturesHeader": "Gesten",
+      "swipeGestures": "Helligkeit und Lautstärke per Wischen",
+      "swipeGesturesHint": "Auf der linken Hälfte des Videos nach oben oder unten wischen ändert die Helligkeit, auf der rechten die Lautstärke.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Vorlade-Cache",
+      "cacheSizeHint": "Wie viel eines Streams im Voraus geladen wird",
+      "discordHeader": "Discord",
+      "discordPresence": "Anzeigen, was Sie ansehen",
+      "discordPresenceHint": "Ihre Discord-Freunde sehen Titel und Folge, während ein Video läuft. Discord muss auf diesem Computer laufen.",
+      "privacyHeader": "Datenschutz",
+      "crashReports": "Absturzberichte senden",
+      "crashReportsHint": "Sendet bei einem Absturz oder wenn ein Teil der App versagt, was schiefgelaufen ist, nie Ihre Add-on-Links oder Konten"
+    },
+    "subtitles": {
+      "title": "Untertitel",
+      "note": "Diese Einstellungen gelten nur für dieses Gerät und werden nicht synchronisiert. Sie gestalten reine Text-Untertitel wie SRT; formatierte Untertitel behalten ihr eigenes Aussehen, sofern Sie den Stil nicht auch auf sie anwenden.",
+      "previewText": "So sehen Untertitel aus",
+      "textHeader": "Text",
+      "size": "Größe",
+      "textColor": "Farbe",
+      "bold": "Fett",
+      "outlineHeader": "Kontur und Hintergrund",
+      "outline": "Kontur",
+      "outlineColor": "Konturfarbe",
+      "background": "Hintergrund",
+      "backgroundHint": "Ein Kasten hinter dem Text und dessen Deckkraft",
+      "backgroundOff": "Aus",
+      "positionHeader": "Position",
+      "position": "Höhe",
+      "positionHint": "Wie weit über dem unteren Bildrand die Untertitel stehen",
+      "positionBottom": "Unten",
+      "styledHeader": "Formatierte Untertitel",
+      "styledOverride": "Auf formatierte Untertitel anwenden",
+      "styledOverrideHint": "ASS- und SSA-Untertitel übernehmen diesen Stil statt ihres eigenen. Schrifteinblendungen und Effekte können dann falsch aussehen.",
+      "outlines": {
+        "none": "Keine",
+        "thin": "Dünn",
+        "thick": "Dick"
+      },
+      "colors": {
+        "white": "Weiß",
+        "yellow": "Gelb",
+        "green": "Grün",
+        "cyan": "Cyan",
+        "gray": "Grau",
+        "black": "Schwarz"
+      }
+    },
+    "account": {
+      "title": "Konto",
+      "syncLabel": "Synchronisierung",
+      "syncNow": "Jetzt synchronisieren",
+      "lastSynced": "Zuletzt synchronisiert: ${time}",
+      "serverLabel": "Sync-Server",
+      "identitiesHeader": "Anmeldemethoden",
+      "linkIdentity": "Anmeldemethode hinzufügen",
+      "devicesHeader": "Geräte",
+      "thisDevice": "Dieses Gerät",
+      "activeNow": "Jetzt aktiv",
+      "lastActive": "Aktiv ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} wurde abgemeldet.",
+      "identityRemoved": "Die Anmeldung über ${provider} wurde entfernt.",
+      "cancel": "Abbrechen",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Single Sign-on"
+      },
+      "link": {
+        "start": "Neues Gerät verknüpfen",
+        "title": "Gerät verknüpfen",
+        "instructions": "Wählen Sie auf dem neuen Gerät die Verknüpfung über ein anderes Gerät. Geben Sie dann den angezeigten Code ein oder scannen Sie den QR-Code.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Weiter",
+        "question": "„${name}“ verknüpfen?",
+        "consequence": "Das Gerät wird bei diesem Konto angemeldet – mit dessen Profilen, Add-ons und Bibliothek.",
+        "approve": "Verknüpfen",
+        "reject": "Nicht verknüpfen",
+        "approved": "${name} ist verknüpft und schließt die Einrichtung selbst ab.",
+        "rejected": "${name} wurde nicht verknüpft.",
+        "expired": "Der Code ist abgelaufen. Beginnen Sie auf dem neuen Gerät erneut.",
+        "done": "Fertig"
+      },
+      "signOut": {
+        "action": "Abmelden",
+        "title": "Abmelden?",
+        "message": "Profile, Add-ons, Bibliothek und Downloads werden von diesem Gerät entfernt. Alles außer den Downloads bleibt im Konto erhalten: Melden Sie sich erneut an, um es zurückzuholen.",
+        "confirm": "Abmelden"
+      },
+      "delete": {
+        "action": "Konto löschen",
+        "explanation": "Löscht das Konto und alle synchronisierten Daten vom Server.",
+        "title": "Konto löschen?",
+        "message": "Das Konto samt Profilen, Add-ons, Bibliothek und Verlauf wird endgültig vom Server gelöscht, und alle Geräte werden abgemeldet. Dies kann nicht rückgängig gemacht werden.",
+        "confirm": "Konto löschen"
+      },
+      "revoke": {
+        "title": "${name} abmelden?",
+        "message": "${name} wird abgemeldet und aus den Geräten des Kontos entfernt. Es kann später erneut verknüpft werden.",
+        "messageThisDevice": "Das ist das Gerät, das Sie gerade verwenden. Es wird abgemeldet, und seine Profile, Add-ons, Bibliothek und Downloads werden davon entfernt. Alles außer den Downloads bleibt im Konto erhalten.",
+        "confirm": "Gerät abmelden",
+        "confirmNamed": "Gerät abmelden: ${name}"
+      },
+      "unsynced": {
+        "title": "Nicht synchronisierte Änderungen löschen?",
+        "message": {
+          "one": "${n} Änderung auf diesem Gerät, etwa Wiedergabefortschritt oder eine Bibliotheksänderung, hat das Konto nicht erreicht. Wenn Sie sich jetzt abmelden, wird sie endgültig gelöscht. Mit „Abbrechen“ bleibt sie hier, und dieses Gerät bleibt angemeldet.",
+          "other": "${n} Änderungen auf diesem Gerät, etwa Wiedergabefortschritt oder Bibliotheksänderungen, haben das Konto nicht erreicht. Wenn Sie sich jetzt abmelden, werden sie endgültig gelöscht. Mit „Abbrechen“ bleiben sie hier, und dieses Gerät bleibt angemeldet."
+        },
+        "confirm": "Abmelden und löschen"
+      },
+      "unlink": {
+        "title": "Anmeldung über ${provider} entfernen?",
+        "message": "Sie können sich dann nicht mehr mit ${provider} bei diesem Konto anmelden.",
+        "confirm": "Entfernen",
+        "action": "Anmeldung über ${name} entfernen"
+      }
+    },
+    "trackers": {
+      "title": "Tracker",
+      "note": "Verbundene Dienste erfahren, was dieses Profil ansieht: Wiedergabefortschritt und als gesehen markierte Titel. Das Verbinden oder Trennen eines Dienstes gilt für dieses Profil auf allen Ihren Geräten; die Schalter darunter gelten nur für dieses Gerät.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Verbunden",
+      "connectedAs": "Verbunden als ${user}",
+      "notConnected": "Nicht verbunden",
+      "unavailable": "In dieser App-Version nicht verfügbar",
+      "connect": "Verbinden",
+      "connectNamed": "${name} verbinden",
+      "disconnect": "Trennen",
+      "disconnectNamed": "${name} trennen",
+      "scrobble": "Gesehenes senden",
+      "scrobbleHint": "Wiedergabefortschritt und gesehene Titel werden an ${service} gesendet",
+      "filtersHeader": "Was gesendet wird",
+      "movies": "Filme",
+      "series": "Serien",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} Änderung wartet auf das Senden",
+        "other": "${n} Änderungen warten auf das Senden"
+      },
+      "notSent": {
+        "one": "${n} Änderung konnte nicht gesendet werden (zuletzt: ${reason})",
+        "other": "${n} Änderungen konnten nicht gesendet werden (zuletzt: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} antwortete mit Fehler ${status}",
+        "refused": "${service} hat sie abgelehnt",
+        "unreadable": "sie war nicht lesbar"
+      },
+      "connectTitle": "${service} verbinden",
+      "starting": "${service} wird kontaktiert …",
+      "waiting": "Warten auf Ihre Freigabe für Tortuga bei ${service} …",
+      "linkInstructions": "Melden Sie sich im Browser bei ${service} an und erlauben Sie Tortuga den Zugriff.",
+      "linkScan": "Oder scannen Sie den QR-Code mit Ihrem Smartphone und melden Sie sich dort an.",
+      "openInBrowser": "Im Browser öffnen",
+      "expired": "Der Code ist abgelaufen, bevor er verwendet wurde.",
+      "declined": "${service} hat die Verbindung nicht zugelassen.",
+      "unreachable": "${service} ist nicht erreichbar. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+      "serverUnreachable": "Ihr Tortuga-Server ist nicht erreichbar. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+      "needsAccount": "Zum Verbinden von ${service} brauchen Sie ein Tortuga-Konto. Melden Sie sich zuerst bei Ihrem Konto an.",
+      "busy": "${service} ist ausgelastet. Versuchen Sie es in einer Minute erneut.",
+      "refused": "${service} hat die Anmeldung abgelehnt.",
+      "failed": "Die Verbindung mit ${service} hat nicht funktioniert.",
+      "retry": "Erneut versuchen",
+      "connectedNotice": "Mit ${service} als ${user} verbunden.",
+      "connectedNoticeNoName": "Mit ${service} verbunden.",
+      "disconnectTitle": "${service} trennen?",
+      "disconnectMessage": "Dieses Profil sendet auf keinem Ihrer Geräte mehr an ${service}, was es ansieht, und noch nicht gesendete Änderungen werden verworfen. Ihr ${service}-Konto behält alles, was es bereits hat.",
+      "disconnectedNotice": "Von ${service} getrennt.",
+      "actionFailed": "Das hat nicht funktioniert. Versuchen Sie es erneut."
+    },
+    "downloads": {
+      "title": "Downloads",
+      "note": "Diese Einstellungen gelten nur für dieses Gerät und werden nicht synchronisiert.",
+      "location": {
+        "title": "Speicherort",
+        "hint": "Wo neue Downloads gespeichert werden. Bereits gespeicherte Downloads bleiben, wo sie sind.",
+        "deviceStorage": "Interner Speicher",
+        "external": "Externer Speicher",
+        "change": "Ordner ändern"
+      },
+      "transferHeader": "Herunterladen",
+      "wifiOnly": "Nur über Wi-Fi herunterladen",
+      "wifiOnlyHint": "Downloads warten bei Verbindungen mit begrenztem Datenvolumen, etwa mobilen Daten",
+      "atOnce": "Gleichzeitige Downloads",
+      "atOnceHint": "Wie viele Downloads gleichzeitig laufen",
+      "autoRemoveWatched": "Gesehene Downloads löschen",
+      "autoRemoveWatchedHint": "Ein Download wird gelöscht, sobald er gesehen wurde – nie während der Wiedergabe",
+      "subtitleLanguages": "Zu speichernde Untertitel",
+      "subtitleLanguagesHint": "Untertitel in diesen Sprachen werden mit jedem Download gespeichert",
+      "subtitleLanguagesProfile": "Ihre Untertitelsprachen: ${languages}",
+      "subtitleLanguagesProfileNone": "Ihre Untertitelsprachen: keine",
+      "subtitleLanguagesExplanation": "Untertitel in diesen Sprachen werden mit jedem Download gespeichert, damit sie auch ohne Verbindung angezeigt werden.",
+      "useProfileLanguages": "Meine Untertitelsprachen verwenden",
+      "storageHeader": "Speicher",
+      "deleteAll": "Alle Downloads löschen",
+      "deleteAllTitle": "Alle Downloads löschen?",
+      "deleteAllText": "Alle Downloads auf diesem Gerät werden gelöscht – für alle Profile.",
+      "deleteAllConfirm": "Alle löschen"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Add-ons",
+        "addonsHint": "Installierte Add-ons in ihrer Reihenfolge, mit ihren Links",
+        "library": "Bibliothek",
+        "libraryHint": "Die Titel, die Sie gespeichert haben",
+        "progress": "Wiedergabefortschritt",
+        "progressHint": "Wo Sie aufgehört haben und was Sie gesehen haben",
+        "settings": "Profileinstellungen",
+        "settingsHint": "Wiedergabe, Streams, Reihen der Startseite und die anderen synchronisierten Einstellungen",
+        "streams": "Stream-Verlauf",
+        "streamsHint": "Der zuletzt abgespielte Stream jedes Videos"
+      },
+      "profilesHeader": "Profile",
+      "privateNote": "Die Datei enthält Ihre Add-on-Links und den Stream-Verlauf, die API-Schlüssel enthalten können. Behalten Sie die Datei für sich: Wer sie hat, kann diese Schlüssel verwenden.",
+      "exportNote": "PINs, Tracker-Konten, Downloads und die Einstellungen dieses Geräts sind nie in der Datei enthalten.",
+      "exportAction": "In Datei exportieren",
+      "saved": "${name} wurde gespeichert.",
+      "saveFailed": "Die Datei konnte nicht gespeichert werden.",
+      "exportFailed": "Der Export ist fehlgeschlagen.",
+      "importHeader": "Import",
+      "importNote": "Öffnet eine aus Tortuga exportierte Datei. Neuere Daten haben Eintrag für Eintrag Vorrang, und auf diesem Gerät wird nichts gelöscht.",
+      "importAction": "Aus Datei importieren",
+      "reviewTitle": "Import",
+      "source": "Exportiert am ${date} mit Tortuga ${version}",
+      "sourceUndated": "Exportiert mit Tortuga ${version}",
+      "dataHeader": "Daten",
+      "counts": {
+        "addons": {
+          "one": "${n} Add-on",
+          "other": "${n} Add-ons"
+        },
+        "titles": {
+          "one": "${n} Titel",
+          "other": "${n} Titel"
+        },
+        "progress": {
+          "one": "Fortschritt bei ${n} Titel",
+          "other": "Fortschritt bei ${n} Titeln"
+        },
+        "settings": {
+          "one": "${n} Einstellung",
+          "other": "${n} Einstellungen"
+        },
+        "streams": {
+          "one": "${n} Stream",
+          "other": "${n} Streams"
+        },
+        "profiles": {
+          "one": "${n} Profil",
+          "other": "${n} Profile"
+        }
+      },
+      "into": "Zielprofil",
+      "intoSame": "In das Profil ${name} in diesem Konto",
+      "newProfile": "Neues Profil",
+      "importConfirm": "Importieren",
+      "imported": "Import abgeschlossen: ${changes}.",
+      "nothingNew": "Nichts Neues zu importieren: Alles aus der Datei war bereits vorhanden.",
+      "notTortuga": "Diese Datei ist kein Tortuga-Export. Es wurde nichts importiert.",
+      "newer": "Diese Datei stammt aus einer neueren Version von Tortuga. Aktualisieren Sie Tortuga und importieren Sie die Datei dann erneut.",
+      "damaged": "Diese Datei ist beschädigt oder unvollständig. Es wurde nichts importiert.",
+      "clockAhead": "Die Zeitangaben dieser Datei liegen weit vor der Uhr dieses Geräts. Prüfen Sie Datum und Uhrzeit auf beiden Geräten und importieren Sie die Datei dann erneut. Es wurde nichts importiert.",
+      "importFailed": "Der Import ist fehlgeschlagen.",
+      "unreadable": "Die Datei konnte nicht geöffnet werden. Es wurde nichts importiert."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Aktuell",
+      "syncing": "Wird synchronisiert …",
+      "offline": "Offline. Änderungen werden synchronisiert, sobald die Verbindung wieder besteht.",
+      "signedOut": "Abgemeldet",
+      "failed": {
+        "server": "Der Sync-Server hatte ein Problem. Neuer Versuch in Kürze.",
+        "rateLimited": "Der Sync-Server bittet um weniger Anfragen. Neuer Versuch in Kürze.",
+        "quotaExceeded": "Der Speicher des Kontos ist voll, daher werden Änderungen nicht synchronisiert.",
+        "tooLarge": "Einige Änderungen sind zu groß zum Synchronisieren.",
+        "addonsTooLarge": "Die Add-ons eines Profils sind zu groß zum Synchronisieren. Entfernen Sie Add-ons, die es nicht nutzt.",
+        "clockWrong": "Einige Änderungen können nicht synchronisiert werden. Prüfen Sie Datum und Uhrzeit Ihrer Geräte.",
+        "unknown": "Synchronisierung fehlgeschlagen. Neuer Versuch in Kürze."
+      }
+    },
+    "error": {
+      "network": "Der Sync-Server ist nicht erreichbar. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+      "server": "Der Sync-Server hatte ein Problem. Versuchen Sie es später erneut.",
+      "rateLimited": "Zu viele Versuche. Warten Sie einen Moment und versuchen Sie es erneut.",
+      "invalidServerUrl": "Das ist keine Serveradresse. Geben Sie eine Adresse wie https://sync.example.com ein.",
+      "insecureServerUrl": "Verwenden Sie https für einen Server im Internet. Einfaches http funktioniert nur für einen Server in Ihrem eigenen Netzwerk.",
+      "notTortugaServer": "Unter dieser Adresse antwortet kein Tortuga-Sync-Server.",
+      "incompatibleServer": "Dieser Server verwendet eine ältere Version von Tortuga Sync und kann nicht genutzt werden.",
+      "providerNotEnabled": "Dieser Server bietet diese Anmeldemethode nicht an.",
+      "signInRejected": "Die Anmeldung hat nicht geklappt. Versuchen Sie es erneut.",
+      "appleCodeRejected": "Apple hat die Anmeldung nicht akzeptiert. Versuchen Sie es erneut.",
+      "providerUnavailable": "Der Anmeldedienst ist nicht erreichbar. Versuchen Sie es später erneut.",
+      "signInCancelled": "Die Anmeldung wurde abgebrochen.",
+      "signInExpired": "Die Anmeldung hat zu lange gedauert. Beginnen Sie erneut.",
+      "identityInUse": "Diese Anmeldung gehört bereits zu einem anderen Tortuga-Konto.",
+      "lastIdentity": "Das ist die einzige Anmeldemethode des Kontos und kann daher nicht entfernt werden.",
+      "sessionEnded": "Dieses Gerät wurde abgemeldet. Melden Sie sich erneut an.",
+      "sessionUnreadable": "Die Anmeldung dieses Geräts konnte nicht aus dem sicheren Speicher des Systems gelesen werden. Starten Sie Tortuga neu, um es erneut zu versuchen.",
+      "notSignedIn": "Melden Sie sich zuerst an.",
+      "notFound": "Das gibt es auf dem Server nicht mehr.",
+      "linkCodeInvalid": "Codes bestehen aus 8 Buchstaben und Ziffern, z. B. ABCD-EFGH.",
+      "linkNotFound": "Kein Gerät wartet mit diesem Code. Prüfen Sie den Code oder beginnen Sie auf dem neuen Gerät erneut.",
+      "linkOtherServer": "Das andere Gerät verwendet einen anderen Sync-Server.",
+      "linkFailed": "Die Verknüpfung konnte nicht abgeschlossen werden. Beginnen Sie erneut.",
+      "tooLarge": "Das ist zu groß für den Sync-Server.",
+      "quotaExceeded": "Der Speicher des Kontos ist voll.",
+      "unsynced": {
+        "one": "${n} Änderung auf diesem Gerät wurde noch nicht mit ihrem Konto synchronisiert.",
+        "other": "${n} Änderungen auf diesem Gerät wurden noch nicht mit ihrem Konto synchronisiert."
+      },
+      "unexpected": "Etwas ist schiefgelaufen. Versuchen Sie es erneut."
+    },
+    "deletion": {
+      "done": "Das Konto und seine Daten wurden gelöscht.",
+      "appleRevoked": "Das Konto und seine Daten wurden gelöscht, und Tortuga verwendet Ihre Apple-ID nicht mehr.",
+      "appleManual": "Das Konto und seine Daten wurden gelöscht. Entfernen Sie zum Abschluss Tortuga unter Einstellungen → Apple-ID → Mit Apple anmelden.",
+      "githubManual": "Tortuga können Sie unter ${address} aus Ihrem GitHub-Konto entfernen."
+    },
+    "switchAccount": {
+      "title": "Nicht synchronisierte Änderungen löschen?",
+      "message": {
+        "one": "Das ist ein anderes Konto als das, bei dem dieses Gerät angemeldet war. ${n} Änderung, die hier in jenem Konto vorgenommen wurde, etwa Wiedergabefortschritt oder eine Bibliotheksänderung, hat es nie erreicht. Die Anmeldung löscht sie endgültig, zusammen mit den übrigen Daten jenes Kontos auf diesem Gerät, die Downloads eingeschlossen.",
+        "other": "Das ist ein anderes Konto als das, bei dem dieses Gerät angemeldet war. ${n} Änderungen, die hier in jenem Konto vorgenommen wurden, etwa Wiedergabefortschritt oder Bibliotheksänderungen, haben es nie erreicht. Die Anmeldung löscht sie endgültig, zusammen mit den übrigen Daten jenes Kontos auf diesem Gerät, die Downloads eingeschlossen."
+      },
+      "confirm": "Löschen und anmelden",
+      "cancel": "Abbrechen",
+      "kept": "Nicht angemeldet. Die Änderungen bleiben auf diesem Gerät, bis Sie sich bei dem Konto anmelden, in dem sie vorgenommen wurden."
+    },
+    "browser": {
+      "signedIn": "Angemeldet. Sie können diesen Tab schließen und zu Tortuga zurückkehren.",
+      "failed": "Die Anmeldung wurde nicht abgeschlossen. Kehren Sie zu Tortuga zurück und versuchen Sie es erneut."
+    },
+    "signIn": {
+      "title": "Bei Tortuga anmelden",
+      "intro": "Mit einem Tortuga-Konto bleiben Ihre Profile, Add-ons und Bibliothek auf allen Geräten synchron.",
+      "apple": "Mit Apple anmelden",
+      "google": "Mit Google anmelden",
+      "github": "Mit GitHub anmelden",
+      "oidc": "Mit ${name} anmelden",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Mit anderem Gerät verknüpfen",
+      "linkDeviceHint": "Schon auf einem Smartphone oder Computer angemeldet? Verknüpfen Sie dieses Gerät stattdessen mit einem Code.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Eigenen Server verwenden",
+      "useHostedServer": "Tortuga-Server verwenden",
+      "serverField": "Serveradresse",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Weiter",
+      "checkingServer": "Server wird geprüft …",
+      "loadingOptions": "Anmeldeoptionen werden geladen …",
+      "noOptions": "Dieser Server bietet auf diesem Gerät keine Anmeldemethode an. Verknüpfen Sie es stattdessen über ein angemeldetes Gerät.",
+      "retry": "Erneut versuchen",
+      "starting": "Anmeldung wird gestartet …",
+      "native": "Anmeldung über ${provider} …",
+      "browser": "Fahren Sie im Browser fort. Dieser Bildschirm geht automatisch weiter, sobald Sie dort angemeldet sind.",
+      "finishing": "Anmeldung wird abgeschlossen …",
+      "cancel": "Abbrechen",
+      "deviceCode": {
+        "instructions": "Rufen Sie auf einem Smartphone oder Computer ${url} auf und geben Sie diesen Code ein:",
+        "scan": "Oder scannen Sie den QR-Code mit Ihrem Smartphone.",
+        "qrDescription": "QR-Code zum Scannen mit dem Smartphone",
+        "expires": "Der Code läuft in ${time} ab.",
+        "waiting": "Warten auf Ihre Anmeldung …"
+      }
+    },
+    "link": {
+      "title": "Dieses Gerät verknüpfen",
+      "instructions": "Öffnen Sie auf einem angemeldeten Gerät Einstellungen, dann Konto, dann „Neues Gerät verknüpfen“. Scannen Sie dort diesen QR-Code oder geben Sie den Code ein.",
+      "qrDescription": "QR-Code zum Scannen auf dem angemeldeten Gerät",
+      "starting": "Code wird abgerufen …",
+      "expires": "Der Code läuft in ${time} ab.",
+      "waiting": "Warten auf Bestätigung auf dem anderen Gerät …",
+      "rejected": "Das andere Gerät hat die Verknüpfung abgelehnt.",
+      "expired": "Der Code ist abgelaufen, bevor er verwendet wurde.",
+      "newCode": "Neuen Code anfordern"
+    },
+    "identityLink": {
+      "title": "Anmeldemethode hinzufügen",
+      "intro": "Verknüpfen Sie eine weitere Anmeldemethode, damit Sie nicht ausgesperrt werden, wenn Sie den Zugang zu einem Konto verlieren.",
+      "allLinked": "Alle Anmeldemethoden, die dieses Gerät anbietet, sind bereits verknüpft.",
+      "linking": "Wird verknüpft …"
+    }
+  },
+  "profiles": {
+    "title": "Wer schaut gerade?",
+    "manageTitle": "Profile verwalten",
+    "manage": "Profile verwalten",
+    "done": "Fertig",
+    "add": "Profil hinzufügen",
+    "empty": "Erstellen Sie ein Profil, um loszulegen.",
+    "loading": "Ihre Profile werden geladen …",
+    "current": "Aktuelles Profil",
+    "switchProfile": "Profil wechseln",
+    "pin": {
+      "title": "PIN für ${name} eingeben",
+      "wrong": "Falsche PIN. Versuchen Sie es erneut.",
+      "lockedOut": "Zu viele Versuche. Versuchen Sie es in ${time} erneut.",
+      "cancel": "Abbrechen",
+      "backspace": "Letzte Ziffer löschen",
+      "entered": "${count} von ${total} Ziffern eingegeben"
+    },
+    "editor": {
+      "newTitle": "Neues Profil",
+      "editTitle": "Profil bearbeiten",
+      "name": "Name",
+      "nameRequired": "Geben Sie einen Namen ein.",
+      "nameTooLong": {
+        "one": "Ein Name darf höchstens ${n} Zeichen haben.",
+        "other": "Ein Name darf höchstens ${n} Zeichen haben."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Keine PIN",
+      "pinOn": "Mit PIN gesperrt",
+      "setPin": "PIN festlegen",
+      "changePin": "PIN ändern",
+      "removePin": "PIN entfernen",
+      "pinEnter": "Geben Sie eine 4-stellige PIN ein",
+      "pinConfirm": "Geben Sie die PIN erneut ein",
+      "pinMismatch": "Die PINs stimmen nicht überein. Geben Sie eine neue ein.",
+      "pinNote": "Eine PIN hält andere auf Ihren Geräten von diesem Profil fern. Sie ist eine Sperre, kein Passwort.",
+      "save": "Speichern",
+      "create": "Profil erstellen",
+      "cancel": "Abbrechen",
+      "delete": "Profil löschen",
+      "deleteConfirm": "${name} löschen? Add-ons, Bibliothek und Verlauf des Profils werden auf allen Geräten gelöscht. Dies kann nicht rückgängig gemacht werden.",
+      "deleteAction": "Löschen",
+      "saveFailed": "Das Profil konnte nicht gespeichert werden. Versuchen Sie es erneut.",
+      "kids": {
+        "title": "Kinderprofil",
+        "subtitle": "Zeigt nur Titel, die bis zur gewählten Stufe empfohlen sind. Die meisten empfohlenen Altersangaben sind Schätzungen, keine offiziellen Einstufungen.",
+        "needsParent": "Legen Sie zuerst eine PIN für ein Erwachsenenprofil fest: Wer ein Kinderprofil verlässt, muss sie eingeben.",
+        "newOnly": "Nur ein neues Profil kann ein Kinderprofil werden.",
+        "capTitle": "Höchstes empfohlenes Alter",
+        "capLittle": "Kleine",
+        "capLittleAges": "Empfohlen 0+",
+        "capKids": "Kinder",
+        "capKidsAges": "Kleine, dazu empfohlen 6+",
+        "capTeen": "Jugendliche",
+        "capTeenAges": "Kinder, dazu empfohlen 12+",
+        "allowUnrated": "Titel ohne Einstufung erlauben",
+        "allowUnratedNote": "Titel ohne empfohlenes Alter. Solange dies aus ist, erlaubt ein Elternteil sie einzeln.",
+        "homeRows": "Reihen der Startseite",
+        "homeRowsNote": "Optional. Auch Titel in diesen Reihen müssen zum höchsten empfohlenen Alter passen.",
+        "familyMovies": "Familienfilme",
+        "familySeries": "Familienserien",
+        "addonMissing": "Sein Add-on ist in diesem Profil nicht installiert.",
+        "allowed": "Erlaubte Titel",
+        "allowedNone": "Noch keine. Ein Elternteil erlaubt einen Titel auf seiner Seite.",
+        "blocked": "Gesperrte Titel",
+        "blockedNone": "Noch keine. Ein Elternteil sperrt einen Titel auf seiner Seite.",
+        "remove": "${title} entfernen",
+        "leaving": "Wer dieses Profil verlässt, muss die PIN eines Elternteils eingeben.",
+        "off": "Links, Add-ons und die meisten Einstellungen sind aus.",
+        "addons": "Videos kommen aus den Add-ons dieses Profils. Tortuga prüft sie nicht."
+      }
+    },
+    "avatar": {
+      "graphite": "Graphit",
+      "slate": "Schiefer",
+      "silver": "Silber",
+      "ivory": "Elfenbein",
+      "sand": "Sand",
+      "clay": "Lehm",
+      "rose": "Rosé",
+      "plum": "Pflaume",
+      "dusk": "Dämmerung",
+      "sea": "Meer",
+      "sage": "Salbei",
+      "moss": "Moos"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Auf diesem Profil nicht verfügbar",
+      "suggested": "Empfohlen ${age}+",
+      "byAddon": "Sein Add-on stuft ihn für Ältere ein",
+      "notRated": "Kein empfohlenes Alter",
+      "byParent": "Von einem Elternteil gesperrt",
+      "unchecked": "Das empfohlene Alter konnte nicht geprüft werden. Versuchen Sie es später erneut.",
+      "ask": "Elternteil fragen"
+    },
+    "block": "Auf diesem Profil sperren",
+    "pin": {
+      "title": "PIN eines Elternteils eingeben",
+      "allow": "Um ${title} auf diesem Profil zu erlauben",
+      "allowThis": "Um diesen Titel auf diesem Profil zu erlauben",
+      "block": "Um ${title} auf diesem Profil zu sperren",
+      "leave": "Um dieses Profil zu verlassen",
+      "settings": "Um diese Einstellungen zu öffnen"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Alle",
+      "movie": "Filme",
+      "series": "Serien",
+      "channel": "Kanäle",
+      "tv": "TV-Sender",
+      "other": "Sonstige"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Wiederholen",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Alle anzeigen",
+      "downloading": "Wird heruntergeladen: ${count}, ${percent} %",
+      "downloadingUnsized": "Wird heruntergeladen: ${count}",
+      "empty": "Noch nichts zu sehen. Installieren Sie Add-ons mit Katalogen, um diese Seite zu füllen.",
+      "allHidden": "Alle Reihen der Startseite sind ausgeblendet. Unter Einstellungen → Startseite blenden Sie sie wieder ein."
+    },
+    "continueWatching": {
+      "title": "Weiterschauen",
+      "episode": "Folge ${episode}",
+      "upNext": "Als Nächstes",
+      "minutesLeft": "Noch ${minutes} Min.",
+      "hoursLeft": "Noch ${hours} Std.",
+      "hoursMinutesLeft": "Noch ${hours} Std. ${minutes} Min.",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Merkliste",
+      "recommended": "Empfohlen",
+      "trending": "Im Trend",
+      "planToWatch": "Geplant",
+      "planning": "In Planung",
+      "airing": "Läuft aktuell",
+      "list": "Liste",
+      "unreachable": "${service} ist nicht erreichbar.",
+      "signedOut": "${service} hat Sie abgemeldet. Verbinden Sie es in den Einstellungen erneut.",
+      "failed": "${service} hat nicht wie erwartet geantwortet."
+    },
+    "discover": {
+      "type": "Typ",
+      "catalog": "Katalog",
+      "genre": "Genre",
+      "all": "Alle",
+      "empty": "In diesem Katalog gibt es nichts zu sehen.",
+      "noCatalogs": "Keines der installierten Add-ons hat einen Katalog zum Stöbern.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Filme, Serien und mehr suchen",
+      "recent": "Letzte Suchanfragen",
+      "clearRecent": "Löschen",
+      "removeRecentNamed": "${name} entfernen",
+      "noResults": "Keine Ergebnisse für „${query}“",
+      "noCatalogs": "Keines der installierten Add-ons unterstützt die Suche.",
+      "clearQuery": "Suche löschen",
+      "hint": "Finden Sie Filme, Serien und mehr in den Katalogen Ihrer Add-ons."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Startseite",
+      "discover": "Entdecken",
+      "search": "Suche",
+      "library": "Bibliothek",
+      "settings": "Einstellungen"
+    },
+    "shortLabel": {
+      "board": "Startseite",
+      "library": "Bibliothek",
+      "search": "Suche",
+      "settings": "Optionen"
+    },
+    "back": "Zurück",
+    "retry": "Wiederholen",
+    "close": "Schließen",
+    "dismiss": "Ausblenden",
+    "qrFailed": "Dieser Link lässt sich nicht als QR-Code anzeigen.",
+    "openOnPhone": {
+      "title": "Auf dem Smartphone öffnen",
+      "message": "Dieses Gerät kann diesen Link nicht öffnen. Scannen Sie den Code mit der Kamera Ihres Smartphones, um ihn dort zu öffnen.",
+      "qrDescription": "QR-Code des Links"
+    },
+    "player": {
+      "close": "Player schließen",
+      "fullscreen": "Vollbild",
+      "exitFullscreen": "Vollbild beenden",
+      "rewind": "Zurückspulen",
+      "fastForward": "Vorspulen",
+      "pictureInPicture": "Bild-in-Bild"
+    },
+    "menu": {
+      "playback": "Wiedergabe",
+      "nextSubtitles": "Nächste Untertitelspur",
+      "nextAudio": "Nächste Tonspur"
+    }
+  },
+  "watch": {
+    "title": "Gemeinsam schauen",
+    "intro": "Schauen Sie synchron mit Freunden, jeder auf dem eigenen Gerät. Alle spielen denselben Titel über ihre eigenen Add-ons ab. Einen Raum erstellen Sie im Player über „Weitere Steuerelemente“ und dann „Gemeinsam schauen“.",
+    "controlMode": {
+      "hostOnly": "Nur ich steuere",
+      "hostOnlyDetail": "Alle folgen, wenn Sie abspielen, pausieren oder spulen",
+      "anyone": "Alle steuern",
+      "anyoneDetail": "Jeder im Raum kann abspielen, pausieren oder spulen"
+    },
+    "joinTitle": "Raum beitreten",
+    "joinHint": "Code oder Einladungslink",
+    "joinLabel": "Beitreten",
+    "joinInvalid": "Geben Sie einen 6-stelligen Raumcode oder einen Einladungslink ein",
+    "recentTitle": "Letzte Räume",
+    "recentUsed": "Zuletzt genutzt ${time}",
+    "removeRecentNamed": "${name} entfernen",
+    "invite": {
+      "title": "Raum ${code} beitreten? Er liegt auf ${server}, nicht auf Ihrem Relay-Server.",
+      "join": "Beitreten",
+      "leaveTitle": "Raum verlassen, um Raum ${code} beizutreten? Er liegt auf ${server}, nicht auf Ihrem Relay-Server.",
+      "leaveHostTitle": "Raum verlassen, um Raum ${code} beizutreten? Er liegt auf ${server}, nicht auf Ihrem Relay-Server. Dieser Raum läuft mit dem nächsten Teilnehmer als Host weiter."
+    },
+    "relay": {
+      "checking": "Relay wird geprüft …",
+      "unreachable": "Das Relay unter ${server} ist nicht erreichbar.",
+      "retry": "Erneut versuchen",
+      "title": "Relay-Server",
+      "hint": "Das Relay, das die Räume für „Gemeinsam schauen“ verbindet. Lassen Sie das Feld leer, um die öffentlichen Relays von Open Watch Party zu verwenden.",
+      "hosted": "Öffentliche Relays von Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Geben Sie eine Relay-Adresse ein, die mit http:// oder https:// beginnt",
+      "save": "Speichern",
+      "reset": "Öffentliche Relays verwenden"
+    },
+    "busy": {
+      "creating": "Raum wird erstellt …",
+      "joining": "Beitritt zum Raum …"
+    },
+    "dismiss": "Ausblenden",
+    "room": {
+      "codeLabel": "Raumcode",
+      "copyCode": "Code kopieren",
+      "codeCopied": "Code kopiert",
+      "share": "Einladung teilen",
+      "shareText": "Schau mit mir zusammen in Tortuga: Öffne ${link} oder gib den Raumcode ${code} ein.",
+      "scan": "Zum Beitreten mit dem Smartphone scannen",
+      "youHost": "Sie sind der Host",
+      "hostedBy": "Host: ${name}",
+      "hostOnly": "Nur der Host steuert die Wiedergabe",
+      "anyone": "Alle steuern die Wiedergabe",
+      "reconnecting": "Verbindung wird wiederhergestellt …",
+      "hostReconnecting": "Warten, bis ${name} wieder verbunden ist …",
+      "nowPlaying": "Läuft: ${title}",
+      "nowPlayingEpisode": "Läuft: ${title} · ${episode}",
+      "idleHost": "Spielen Sie etwas ab: Alle im Raum schauen es mit Ihnen.",
+      "idleGuest": "Warten, bis ${name} etwas abspielt.",
+      "participants": {
+        "one": "${n} Teilnehmer",
+        "other": "${n} Teilnehmer"
+      },
+      "you": "${name} (Sie)",
+      "hostBadge": "Host",
+      "makeHost": "Zum Host machen",
+      "makeHostNamed": "${name} zum Host machen",
+      "joinPlayback": "Mitschauen",
+      "leave": "Raum verlassen",
+      "leaveTitle": "Raum verlassen?",
+      "leaveConfirm": "Verlassen",
+      "end": "Raum schließen",
+      "endTitle": "Raum für alle schließen?",
+      "endConfirm": "Raum schließen",
+      "cancel": "Abbrechen",
+      "leaveHostTitle": "Raum verlassen? Er läuft mit dem nächsten Teilnehmer als Host weiter.",
+      "kickNamed": "${name} entfernen",
+      "kickTitle": "${name} aus dem Raum entfernen?",
+      "kickConfirm": "Entfernen",
+      "lock": "Raum sperren",
+      "lockDetail": "Niemand Neues kann beitreten",
+      "controlTitle": "Wer die Wiedergabe steuert"
+    },
+    "status": {
+      "ready": "Bereit",
+      "loading": "Wird geladen",
+      "matching": "Datei wird gesucht",
+      "buffering": "Wird gepuffert",
+      "sameLength": "Gleiche Länge (${delta})",
+      "longer": "${delta} länger",
+      "shorter": "${delta} kürzer",
+      "noStream": "Kein Stream gefunden",
+      "searchFailed": "Suche in Add-ons fehlgeschlagen",
+      "notPlaying": "Nicht im Player",
+      "away": "Verbindung getrennt",
+      "declined": "Spielt nicht ab",
+      "offset": "Versatz ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} Min. ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Raum ${code}",
+      "startTitle": "Raum mit dem laufenden Titel erstellen",
+      "liveNoRoom": "Ein Livestream kann nicht gemeinsam geschaut werden",
+      "watching": {
+        "one": "${n} schaut zu",
+        "other": "${n} schauen gemeinsam"
+      },
+      "hostBadge": "HOST",
+      "waiting": "Warten auf ${names} …",
+      "waitingMore": {
+        "other": "Warten auf ${names} und ${n} weitere …"
+      },
+      "syncing": "Wird synchronisiert …",
+      "matchingStart": "Suche nach einer Datei, die zu der von ${name} passt …",
+      "longer": "Ihre Datei ist ${delta} länger als die von ${name}",
+      "shorter": "Ihre Datei ist ${delta} kürzer als die von ${name}",
+      "mismatchDetail": "Möglicherweise ist es eine andere Fassung, sodass Ihre Positionen nicht übereinstimmen könnten.",
+      "playAnyway": "Trotzdem abspielen",
+      "chooseStream": "Anderen Stream auswählen",
+      "noStream": "Keines Ihrer Add-ons hat einen Stream für ${title}.",
+      "searchFailed": "Einige Ihrer Add-ons konnten nicht nach ${title} durchsucht werden.",
+      "chooseAStream": "Stream auswählen",
+      "pickFailed": "Dieser Stream konnte nicht geöffnet werden.",
+      "hostControls": "Nur ${name} steuert in diesem Raum die Wiedergabe",
+      "hostControlsUnnamed": "Nur der Host steuert in diesem Raum die Wiedergabe",
+      "pausedHere": "Auf diesem Gerät pausiert. Drücken Sie auf Abspielen, um zum Raum aufzuschließen.",
+      "dontPlay": "Nicht abspielen",
+      "declined": "Sie spielen ${title} nicht ab.",
+      "offsetTitle": "Versatz",
+      "offsetDetail": "Verschiebt Ihre Datei gegenüber der des Raums, für eine Fassung, die früher oder später beginnt.",
+      "offsetReset": "Zurücksetzen"
+    },
+    "toast": {
+      "joined": "${name} ist beigetreten",
+      "left": "${name} hat den Raum verlassen",
+      "paused": "${name} hat pausiert",
+      "resumed": "${name} spielt weiter",
+      "seeked": "${name} ist an eine andere Stelle gesprungen",
+      "speed": "${name} hat die Geschwindigkeit auf ${speed} gesetzt",
+      "buffering": "${name} puffert",
+      "hostChanged": "${name} ist jetzt der Host",
+      "becameHost": "Sie sind jetzt der Host",
+      "media": "${name} hat ${title} gestartet",
+      "forbidden": "Das kann nur der Host"
+    },
+    "failure": {
+      "create": "Der Raum konnte nicht erstellt werden. Versuchen Sie es erneut.",
+      "join": "Der Beitritt zum Raum ist fehlgeschlagen. Versuchen Sie es erneut.",
+      "share": "Dieses Video konnte nicht mit dem Raum geteilt werden. Versuchen Sie einen anderen Stream.",
+      "live": "Ein Livestream kann nicht gemeinsam geschaut werden. Der Raum wartet auf ein Video.",
+      "roomNotFound": "Es gibt keinen Raum mit diesem Code.",
+      "roomFull": "Dieser Raum ist voll.",
+      "rateLimited": "Zu viele Versuche. Warten Sie eine Minute und versuchen Sie es dann erneut.",
+      "connection": "Das Relay ist nicht erreichbar. Prüfen Sie die Verbindung.",
+      "sessionLost": "Die Verbindung zum Raum ist abgebrochen.",
+      "ended": "Der Host hat den Raum geschlossen.",
+      "roomLocked": "Dieser Raum ist gesperrt.",
+      "relayFull": "Das Relay ist voll. Versuchen Sie es später erneut.",
+      "blocked": "Dieses Relay akzeptiert Tortuga nicht.",
+      "kicked": "Der Host hat Sie aus dem Raum entfernt.",
+      "expired": "Der Raum ist abgelaufen.",
+      "replaced": "Sie sind diesem Raum auf einem anderen Gerät beigetreten."
+    }
+  },
+  "downloads": {
+    "title": "Downloads",
+    "empty": "Noch nichts heruntergeladen. Laden Sie Filme und Folgen über ihre Detailseite herunter, um sie ohne Verbindung anzusehen.",
+    "offline": "Sie sind offline. Downloads werden fortgesetzt, sobald Sie wieder online sind.",
+    "storage": "${used} belegt · ${free} frei",
+    "storageUsed": "${used} belegt",
+    "pauseAll": "Alle pausieren",
+    "resumeAll": "Alle fortsetzen",
+    "actionFailed": "Der Download konnte nicht geändert werden. Versuchen Sie es erneut.",
+    "actionsFailed": "Die Downloads konnten nicht geändert werden. Versuchen Sie es erneut.",
+    "episodes": {
+      "one": "${n} Folge",
+      "other": "${n} Folgen"
+    },
+    "videos": {
+      "one": "${n} Video",
+      "other": "${n} Videos"
+    },
+    "otherVideos": "Weitere Videos",
+    "summary": "${count} · ${size}",
+    "progress": "${done} von ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "In der Warteschlange",
+      "waitingForWifi": "Warten auf Wi-Fi",
+      "waitingForNetwork": "Warten auf Verbindung",
+      "resolving": "Wird vorbereitet …",
+      "downloading": "Wird heruntergeladen",
+      "downloadingPercent": "Wird heruntergeladen · ${percent} %",
+      "paused": "Pausiert",
+      "failed": "Fehlgeschlagen",
+      "completed": "Heruntergeladen",
+      "cancelled": "Abgebrochen"
+    },
+    "action": {
+      "play": "Abspielen",
+      "pause": "Pausieren",
+      "resume": "Fortsetzen",
+      "retry": "Wiederholen",
+      "pickStream": "Stream auswählen",
+      "cancel": "Download abbrechen",
+      "delete": "Download löschen",
+      "deleteGroup": "Downloads löschen",
+      "openDetail": "Zu den Details"
+    },
+    "deleteConfirm": {
+      "title": "${count} von ${name} löschen?",
+      "message": "Erneutes Herunterladen braucht Zeit und eine Verbindung.",
+      "confirm": "Löschen",
+      "cancel": "Abbrechen"
+    },
+    "keepSynced": {
+      "title": "Synchron halten",
+      "note": "Für jede Serie hier bleiben die nächsten ungesehenen Folgen auf diesem Gerät heruntergeladen. Sobald Sie eine ansehen, wird eine weitere geladen.",
+      "empty": "Keine Serie wird synchron gehalten. Wählen Sie im Download-Menü einer Serie, wie viele ungesehene Folgen bereitgehalten werden sollen.",
+      "series": {
+        "one": "${n} Serie",
+        "other": "${n} Serien"
+      },
+      "manage": "„Synchron halten“ verwalten",
+      "pauseRule": "${title} pausieren",
+      "resumeRule": "${title} fortsetzen",
+      "stopRule": "${title} nicht mehr synchron halten",
+      "status": {
+        "downloading": {
+          "one": "${n} Folge wird heruntergeladen",
+          "other": "${n} Folgen werden heruntergeladen"
+        },
+        "failed": {
+          "one": "${n} Folge fehlgeschlagen",
+          "other": "${n} Folgen fehlgeschlagen"
+        },
+        "downloaded": {
+          "one": "${n} Folge heruntergeladen",
+          "other": "${n} Folgen heruntergeladen"
+        },
+        "downloadedNone": "Keine Folgen heruntergeladen"
+      },
+      "stop": {
+        "title": "${title} nicht mehr synchron halten?",
+        "message": {
+          "one": "${n} Folge in den Downloads stammt von „Synchron halten“. Ebenfalls löschen?",
+          "other": "${n} Folgen in den Downloads stammen von „Synchron halten“. Ebenfalls löschen?"
+        },
+        "messageNone": "Es werden keine weiteren Folgen heruntergeladen.",
+        "keep": "Downloads behalten",
+        "delete": "Downloads löschen",
+        "confirm": "Beenden",
+        "cancel": "Abbrechen"
+      },
+      "notice": {
+        "one": "„Synchron halten“ hat ${n} Folge von ${title} hinzugefügt",
+        "other": "„Synchron halten“ hat ${n} Folgen von ${title} hinzugefügt"
+      },
+      "noticeSeveral": {
+        "one": "„Synchron halten“ hat ${n} Folge hinzugefügt",
+        "other": "„Synchron halten“ hat ${n} Folgen hinzugefügt"
+      },
+      "actionFailed": "„Synchron halten“ konnte nicht geändert werden. Versuchen Sie es erneut."
+    },
+    "failure": {
+      "noStream": "Für diese Folge konnte kein Stream ausgewählt werden. Wählen Sie selbst einen aus.",
+      "noStreamInstant": "Für diese Folge konnte kein sofort verfügbarer Stream ausgewählt werden. Wählen Sie selbst einen aus.",
+      "network": "Die Verbindung ist fehlgeschlagen.",
+      "http": "Der Server hat mit HTTP ${status} geantwortet.",
+      "streamGone": "Der Link ist abgelaufen, und sein Add-on bietet diesen Stream nicht mehr an.",
+      "diskFull": "Auf dem Gerät ist kein Speicherplatz mehr frei. Die Downloads wurden angehalten.",
+      "notEnoughSpace": "Für diesen Download ist nicht genug Speicherplatz frei.",
+      "sizeMismatch": "Die heruntergeladene Datei ist unvollständig.",
+      "unsupported": "Dieser Stream kann nicht heruntergeladen werden.",
+      "locationUnavailable": "Der Speicherort für Downloads ist nicht verfügbar.",
+      "fileMissing": "Die heruntergeladene Datei fehlt.",
+      "storage": "Der Gerätespeicher hat nicht reagiert."
+    },
+    "notification": {
+      "channel": "Downloads",
+      "title": "${title} wird heruntergeladen",
+      "count": {
+        "one": "${n} Download",
+        "other": "${n} Downloads"
+      },
+      "progress": "${percent} %",
+      "preparing": "Download wird vorbereitet …",
+      "waiting": "Warten auf Wi-Fi",
+      "paused": "Pausiert",
+      "pause": "Pausieren",
+      "resume": "Fortsetzen",
+      "cancel": "Abbrechen",
+      "failed": "Download fehlgeschlagen: ${title}",
+      "completed": "${title} wurde heruntergeladen"
+    }
+  },
+  "offline": {
+    "title": "Sie sind offline",
+    "text": "Stellen Sie eine Internetverbindung her, um zu stöbern. Ihre Downloads lassen sich auch ohne Verbindung abspielen.",
+    "textNoDownloads": "Stellen Sie eine Internetverbindung her, um zu stöbern.",
+    "openDownloads": "Zu den Downloads",
+    "detail": "Angezeigt werden die mit Ihren Downloads gespeicherten Details."
+  },
+  "playerApps": {
+    "chooser": "Jedes Mal fragen",
+    "tortuga": "Tortuga",
+    "playWith": "Abspielen mit …",
+    "banner": {
+      "opening": "Wird in ${player} geöffnet …",
+      "notInstalled": "${player} ist auf diesem Gerät nicht installiert.",
+      "didNotStart": "${player} ist nicht gestartet.",
+      "playInTortuga": "In Tortuga abspielen",
+      "cancel": "Abbrechen",
+      "dismiss": "Ausblenden"
+    },
+    "detail": {
+      "playing": "Läuft in ${player} · ${position}",
+      "playingOf": "Läuft in ${player} · ${position} von ${duration}",
+      "paused": "Pausiert in ${player} · ${position}",
+      "pausedOf": "Pausiert in ${player} · ${position} von ${duration}",
+      "finished": "In ${player} geöffnet. Haben Sie ${title} zu Ende geschaut?",
+      "markWatched": "Als gesehen markieren",
+      "notYet": "Noch nicht"
+    },
+    "settings": {
+      "player": "Player",
+      "deviceOnly": "Nur dieses Gerät",
+      "note": "Videos auf diesem Gerät werden im hier gewählten Player abgespielt. Über „Abspielen mit …“ im Menü eines Streams wählen Sie für ein einzelnes Video einen anderen.",
+      "notFound": "${player} (nicht gefunden)",
+      "followsProgress": "Macht weiter, wo Sie aufgehört haben, und speichert Ihren Fortschritt während der Wiedergabe",
+      "savesOnReturn": "Macht weiter, wo Sie aufgehört haben, und speichert, wo Sie stoppen",
+      "savesOnReturnFromStart": "Beginnt von vorn und speichert dann, wo Sie stoppen, oder fragt, ob Sie zu Ende geschaut haben",
+      "asksAfter": "Macht weiter, wo Sie aufgehört haben, und fragt danach, ob Sie zu Ende geschaut haben",
+      "asksAfterFromStart": "Öffnet nur das Video und fragt danach, ob Sie zu Ende geschaut haben",
+      "chooserDetail": "Ihr Gerät fragt bei jedem Video, mit welcher App es abgespielt wird",
+      "customHeader": "Eigene Player",
+      "addCustom": "Eigenen Player hinzufügen",
+      "deleteNamed": "${name} löschen",
+      "form": {
+        "title": "Eigenen Player hinzufügen",
+        "name": "Name",
+        "nameHint": "Mein Player",
+        "program": "Programm",
+        "programHint": "mpv oder der vollständige Pfad des Programms",
+        "arguments": "Argumente",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} ist der Link des Videos, {title} sein Titel, {start} die Startposition in Sekunden und {subtitle} der Link des ersten Untertitels.",
+        "urlTemplate": "URL-Vorlage",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} ist der Link des Videos, für eine URL codiert, und {url_raw} der unveränderte Link.",
+        "packageName": "Paketname",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Hinzufügen",
+        "cancel": "Abbrechen",
+        "nameMissing": "Geben Sie dem Player einen Namen.",
+        "programMissing": "Geben Sie das auszuführende Programm ein.",
+        "urlTemplateMissing": "Geben Sie die URL-Vorlage ein.",
+        "packageNameMissing": "Geben Sie den Paketnamen der App ein.",
+        "argumentsNeedUrl": "Die Argumente müssen {url} enthalten.",
+        "urlTemplateNeedsUrl": "Die URL-Vorlage muss {url} oder {url_raw} enthalten.",
+        "packageNameInvalid": "Das ist kein Paketname wie z. B. org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "TV-Programm",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "yesterday": "Gestern",
+    "day": "${weekday} ${day}.",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Läuft gerade",
+    "now": "Jetzt",
+    "noProgrammes": "Keine Sendungsinformationen",
+    "noChannels": "Dieses Programm hat für diesen Tag keine Sender.",
+    "noGuide": "Kein installiertes Add-on bietet ein TV-Programm an.",
+    "failed": "Das TV-Programm konnte nicht geladen werden: ${reason}",
+    "cast": "Mit ${names}",
+    "directors": "Regie: ${names}"
+  },
+  "calendar": {
+    "title": "Kalender",
+    "previousMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "emptyLibrary": "Füge Serien zu deiner Bibliothek hinzu, um hier ihre Folgen zu sehen.",
+    "noAddon": "Keines deiner Add-ons hat einen Kalender für die Serien in deiner Bibliothek.",
+    "emptyMonth": "Keine Folgen.",
+    "newEpisodes": {
+      "one": "${n} neue Folge",
+      "other": "${n} neue Folgen"
+    },
+    "episodes": {
+      "one": "${n} Folge",
+      "other": "${n} Folgen"
+    }
+  },
+  "watchlist": {
+    "lists": "Merklisten der Tracker",
+    "hint": "Jede Liste liegt in Ihrem Konto beim jeweiligen Dienst. Ihre Bibliothek ändert sich nicht.",
+    "add": "Zu „${list}“ hinzufügen",
+    "remove": "Aus „${list}“ entfernen",
+    "trakt": "Trakt-Merkliste",
+    "simkl": "Simkl: Geplant",
+    "mdblist": "MDBList-Merkliste",
+    "myAnimeList": "MyAnimeList: Geplant",
+    "aniList": "AniList: In Planung",
+    "saving": "Wird gespeichert…",
+    "queued": "Noch nicht gesendet, wird wiederholt",
+    "failed": "Nicht gespeichert",
+    "addFailed": "${title} konnte nicht zu „${list}“ hinzugefügt werden.",
+    "removeFailed": "${title} konnte nicht aus „${list}“ entfernt werden."
+  },
+  "collections": {
+    "needsAddon": "Benötigt das Add-on ${name}",
+    "needsCatalog": "${addon} hat keinen Katalog ${catalog}",
+    "needsFilter": "Benötigt einen Filter, den Tortuga nicht setzen kann",
+    "traktUnavailable": "Trakt-Listen sind in dieser App-Version nicht verfügbar",
+    "tooLarge": "„${title}“ ist zu groß zum Synchronisieren",
+    "kind": {
+      "tmdbList": "TMDB-Liste",
+      "tmdbCollection": "TMDB-Sammlung",
+      "tmdbCompany": "TMDB-Studio",
+      "tmdbNetwork": "TMDB-Sender",
+      "tmdbDiscover": "TMDB-Entdecken",
+      "tmdbPerson": "TMDB-Person",
+      "tmdbDirector": "TMDB-Regie",
+      "letterboxd": "Letterboxd",
+      "unknown": "Unbekannter Anbieter „${name}“"
+    },
+    "summary": {
+      "adds": {
+        "one": "Fügt ${n} Sammlung hinzu",
+        "other": "Fügt ${n} Sammlungen hinzu"
+      },
+      "replaces": {
+        "one": "Ersetzt ${n} Sammlung mit derselben ID",
+        "other": "Ersetzt ${n} Sammlungen mit denselben IDs"
+      },
+      "needsAddon": {
+        "one": "${n} Quelle benötigt das Add-on ${name}",
+        "other": "${n} Quellen benötigen das Add-on ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} Quelle benötigt eine Verbindung mit ${service}",
+        "other": "${n} Quellen benötigen eine Verbindung mit ${service}"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} Quelle ausgelassen",
+        "other": "${kind}: ${n} Quellen ausgelassen"
+      },
+      "unsupportedHint": "Tortuga liest Add-on-Kataloge und Listen von Trackern, nicht diese Quellen. Verwenden Sie stattdessen einen Add-on-Katalog, etwa von AIOMetadata oder MDBList.",
+      "folderDropped": "Ordner „${folder}“ in „${collection}“ ausgelassen: Keine seiner Quellen ist lesbar",
+      "collectionDropped": "Sammlung „${title}“ ausgelassen: Keiner ihrer Ordner ist lesbar",
+      "tooLarge": "Sammlung „${title}“ nicht importiert: Sie ist zu groß zum Synchronisieren"
+    },
+    "refused": {
+      "notJson": "Das ist keine Sammlungsdatei: Sie ist kein JSON.",
+      "notList": "Das ist keine Sammlungsdatei: Sie enthält keine Liste von Sammlungen.",
+      "empty": "Diese Datei enthält keine Sammlungen.",
+      "collectionInvalid": "Sammlung ${position} der Datei ist nicht lesbar.",
+      "collectionNoId": "Sammlung ${position} der Datei hat keine ID.",
+      "collectionNoTitle": "Sammlung ${id} hat keinen Titel.",
+      "duplicateCollection": "Zwei Sammlungen der Datei haben die ID ${id}.",
+      "noFolders": "Sammlung „${collection}“ hat keine Liste von Ordnern.",
+      "folderInvalid": "Ordner ${position} von „${collection}“ ist nicht lesbar.",
+      "folderNoId": "Ordner ${position} von „${collection}“ hat keine ID.",
+      "folderNoTitle": "Ordner ${id} von „${collection}“ hat keinen Titel.",
+      "duplicateFolder": "Zwei Ordner von „${collection}“ haben die ID ${id}.",
+      "noSources": "Ordner „${folder}“ von „${collection}“ hat keine Liste von Quellen.",
+      "unknownShape": "Ordner „${folder}“ von „${collection}“ hat eine unbekannte Kachelform: ${shape}.",
+      "sourceInvalid": "Quelle ${position} von Ordner „${folder}“ in „${collection}“ ist unvollständig."
+    },
+    "row": "Sammlung",
+    "rowSource": {
+      "one": "Sammlung · ${n} Ordner",
+      "other": "Sammlung · ${n} Ordner"
+    },
+    "folder": {
+      "all": "Alle",
+      "empty": "Hier gibt es keine Titel",
+      "goToTrackers": "Zu den Trackern",
+      "goToAddons": "Zu den Add-ons"
+    },
+    "importing": {
+      "title": "Sammlungen importieren",
+      "note": "Eine Sammlungsdatei aus Nuvio oder AIOMetadata: Geben Sie ihren Link ein oder öffnen Sie die Datei. Eine Sammlung mit derselben ID wie eine Ihrer Sammlungen ersetzt diese.",
+      "urlLabel": "Link",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Abrufen",
+      "openFile": "Datei öffnen",
+      "confirm": "Importieren",
+      "done": "Fertig",
+      "rowNew": {
+        "one": "Neu · ${n} Ordner",
+        "other": "Neu · ${n} Ordner"
+      },
+      "rowReplaces": {
+        "one": "Ersetzt Ihre · ${n} Ordner",
+        "other": "Ersetzt Ihre · ${n} Ordner"
+      },
+      "imported": {
+        "one": "${n} Sammlung importiert",
+        "other": "${n} Sammlungen importiert"
+      },
+      "notWeb": "Geben Sie einen Link ein, der mit http:// oder https:// beginnt.",
+      "tooLarge": "Diese Datei ist größer als 4 MB.",
+      "httpError": "Der Link antwortete mit Fehler ${status}.",
+      "timeout": "Der Link hat nicht rechtzeitig geantwortet.",
+      "unreachable": "Der Link ist nicht erreichbar. Prüfen Sie ihn und Ihre Verbindung.",
+      "unreadable": "Diese Datei lässt sich nicht als Text lesen.",
+      "failed": "Die Sammlungen konnten nicht gespeichert werden."
+    },
+    "editor": {
+      "newHeading": "Neue Sammlung",
+      "editHeading": "Sammlung bearbeiten",
+      "titleLabel": "Titel",
+      "view": "Ansicht",
+      "viewHint": "Wie ein Ordner seine Quellen zeigt",
+      "viewTabs": "Tabs",
+      "viewRows": "Reihen",
+      "viewFollow": "Wie in der App",
+      "allTab": "Tab „Alle“",
+      "allTabHint": "Ein erster Tab mit den Titeln aller Quellen",
+      "foldersHeader": "Ordner",
+      "addFolder": "Ordner hinzufügen",
+      "noFolders": "Noch keine Ordner",
+      "sources": {
+        "one": "${n} Quelle",
+        "other": "${n} Quellen"
+      },
+      "save": "Speichern",
+      "newFolder": "Neuer Ordner",
+      "folderTitleLabel": "Titel",
+      "shape": "Kachelform",
+      "shapePoster": "Poster",
+      "shapeLandscape": "Querformat",
+      "shapeSquare": "Quadrat",
+      "coverLabel": "Link zum Titelbild",
+      "coverHint": "https://…",
+      "hideTitle": "Titel ausblenden",
+      "hideTitleHint": "Die Kachel zeigt nur ihr Titelbild",
+      "sourcesHeader": "Quellen",
+      "addSource": "Quelle hinzufügen",
+      "noSources": "Noch keine Quellen",
+      "deleteNamed": "${name} löschen",
+      "removeNamed": "${name} entfernen",
+      "noTitle": "Geben Sie der Sammlung einen Titel.",
+      "noFolder": "Fügen Sie der Sammlung einen Ordner hinzu.",
+      "folderNoTitle": "Geben Sie Ordner ${position} einen Titel.",
+      "folderNoSource": "Fügen Sie „${folder}“ eine Quelle hinzu.",
+      "saveFailed": "Die Sammlung konnte nicht gespeichert werden.",
+      "discardTitle": "Änderungen verwerfen?",
+      "discard": "Verwerfen",
+      "keepEditing": "Weiter bearbeiten",
+      "picker": {
+        "addons": "Add-on-Kataloge",
+        "trackers": "Tracker",
+        "noAddons": "Kein installiertes Add-on hat einen Katalog zum Hinzufügen.",
+        "noTrackers": "Verbinden Sie einen Tracker unter Einstellungen → Tracker, um seine Listen hinzuzufügen.",
+        "listsFailed": "Die Listen von ${service} können gerade nicht gelesen werden.",
+        "byLink": "Eine ${service}-Liste per Link",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Hinzufügen",
+        "notAList": "Das ist kein Link zu einer ${service}-Liste.",
+        "notFound": "${service} hat unter diesem Link keine Liste.",
+        "unreachable": "${service} ist gerade nicht erreichbar."
+      }
+    }
+  }
+}

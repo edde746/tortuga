@@ -1,0 +1,14 @@
+Kompatibel mit Stremio-Add-ons: Add-on über seinen Link installieren
+Startseite, „Entdecken“ und Suche über alle Add-ons
+Die Streams eines Titels, nach Add-on gruppiert
+Wiedergabe mit mpv, mit HDR10 und Dolby Vision, sofern Ihr Computer und Ihr Bildschirm sie unterstützen
+Eingebettete und Add-on-Untertitel; Ihre Audio- und Untertitelauswahl wird für die nächste Folge übernommen
+Intros, Rückblicke und Abspann überspringen
+„Weiterschauen“, Fortschritt und Gesehen-Markierungen
+Downloads zum Offline-Schauen
+„Gemeinsam schauen“: synchron, alle über ihre eigenen Add-ons
+Profile mit eigenen Add-ons, eigener Bibliothek und eigenen Einstellungen sowie optionaler PIN
+Synchronisierung auf allen Ihren Geräten per Anmeldung mit Apple, Google oder GitHub
+Trakt, Simkl, MDBList, MyAnimeList und AniList
+Tastenkürzel, Medientasten und die Windows-Mediensteuerung
+21 Sprachen

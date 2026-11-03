@@ -1,0 +1,266 @@
+[
+  {
+    "id": "collection-f2f3cd6d",
+    "title": "Series Studios",
+    "folders": [
+      {
+        "id": "folder-bb8e685d",
+        "title": "Studio 1",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f1-artartartartartarta.png",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog1"
+          }
+        ],
+        "focusGifEnabled": false
+      },
+      {
+        "id": "folder-c4dfc40e",
+        "title": "Studio 2",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f2-artartartartartarta.png",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog2"
+          }
+        ],
+        "focusGifEnabled": false
+      },
+      {
+        "id": "folder-292968bc",
+        "title": "Studio 3",
+        "hideTitle": false,
+        "tileShape": "POSTER",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f3-artartartartartarta.jpg",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog3"
+          }
+        ],
+        "focusGifEnabled": false
+      },
+      {
+        "id": "folder-7b37fd87",
+        "title": "Studio 4",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f4-artartartartartarta.png",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog4"
+          }
+        ],
+        "focusGifEnabled": false
+      },
+      {
+        "id": "folder-54f511bd",
+        "title": "Studio 5",
+        "hideTitle": false,
+        "tileShape": "POSTER",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f5-artartartartartarta.png",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog5"
+          }
+        ],
+        "focusGifEnabled": false
+      },
+      {
+        "id": "folder-9345a2f5",
+        "title": "Studio 6",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": null,
+        "coverImageUrl": "https://example.com/pack-legacy-streaming/covers/c1-f6.png",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.library",
+            "catalogId": "example.catalog6"
+          }
+        ],
+        "focusGifEnabled": false
+      }
+    ],
+    "pinToTop": true,
+    "viewMode": "TABBED_GRID",
+    "showAllTab": true,
+    "backdropImageUrl": null
+  },
+  {
+    "id": "collection-5e795c73",
+    "title": "Movie Studios",
+    "folders": [
+      {
+        "id": "folder-b056d63f",
+        "title": "Studio 1",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c2-f1-artartartartartart.gif",
+        "coverImageUrl": null,
+        "catalogSources": [
+          {
+            "type": "movie",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog1"
+          }
+        ],
+        "focusGifEnabled": true
+      },
+      {
+        "id": "folder-3a295aec",
+        "title": "Studio 2",
+        "hideTitle": false,
+        "tileShape": "POSTER",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c2-f2-artartartartartartartartartartartartartartartartartartartartartartartartarta.gifv",
+        "coverImageUrl": null,
+        "catalogSources": [
+          {
+            "type": "movie",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog2"
+          }
+        ],
+        "focusGifEnabled": true
+      },
+      {
+        "id": "folder-a3ba8981",
+        "title": "Studio 3",
+        "hideTitle": false,
+        "tileShape": "POSTER",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c2-f3-artartartartartartartartartartartartartartartartartartartartartartartartarta.gifv",
+        "coverImageUrl": null,
+        "catalogSources": [
+          {
+            "type": "movie",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog3"
+          }
+        ],
+        "focusGifEnabled": true
+      },
+      {
+        "id": "folder-4a2136af",
+        "title": "Studio 4",
+        "hideTitle": false,
+        "tileShape": "LANDSCAPE",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c2-f4-artartartartartartar.gif",
+        "coverImageUrl": null,
+        "catalogSources": [
+          {
+            "type": "movie",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog4"
+          }
+        ],
+        "focusGifEnabled": true
+      },
+      {
+        "id": "folder-dfcf45cc",
+        "title": "Studio 5",
+        "hideTitle": false,
+        "tileShape": "POSTER",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c2-f5-a.gif",
+        "coverImageUrl": null,
+        "catalogSources": [
+          {
+            "type": "movie",
+            "genre": null,
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog5"
+          }
+        ],
+        "focusGifEnabled": true
+      }
+    ],
+    "pinToTop": false,
+    "viewMode": "TABBED_GRID",
+    "showAllTab": true,
+    "backdropImageUrl": null
+  },
+  {
+    "id": "pack-a-c3",
+    "title": "Regional",
+    "folders": [
+      {
+        "id": "pack-a-c3-f1",
+        "title": "Regional 1",
+        "hideTitle": false,
+        "tileShape": "Landscape",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c3-f1.gif",
+        "coverImageUrl": "",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.library",
+            "catalogId": "example.catalog7"
+          }
+        ],
+        "focusGifEnabled": true
+      },
+      {
+        "id": "pack-a-c3-f2",
+        "title": "Regional 2",
+        "hideTitle": false,
+        "tileShape": "Landscape",
+        "coverEmoji": null,
+        "focusGifUrl": "https://example.com/pack-legacy-streaming/focus/c3-f2.gif",
+        "coverImageUrl": "",
+        "catalogSources": [
+          {
+            "type": "series",
+            "genre": null,
+            "addonId": "org.example.library",
+            "catalogId": "example.catalog8"
+          }
+        ],
+        "focusGifEnabled": true
+      }
+    ],
+    "pinToTop": false,
+    "viewMode": "TABBED_GRID",
+    "showAllTab": true,
+    "backdropImageUrl": null
+  }
+]

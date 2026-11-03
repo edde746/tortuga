@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "id": "tt9000000",
+    "type": "series",
+    "name": "Video edge cases",
+    "videos": [
+      {"id": "tt9000000:1:2", "title": "Second", "season": 1, "episode": 2, "released": "2020-01-08T00:00:00.000Z"},
+      {"id": "tt9000000:1:1", "name": "First (legacy name)", "season": 1, "episode": 1, "released": "2020-01-01T00:00:00Z"},
+      {"id": "tt9000000:0:1", "title": "Special", "season": 0, "episode": 1},
+      {"id": "tt9000000:1:1", "title": "Duplicate id, dropped by uniqueness"},
+      {"title": "No id"},
+      {"id": "tt9000000:2:1", "title": "Bad date", "season": 2, "episode": 1, "released": "soon"},
+      {"id": "extra-late", "title": "String season", "season": "1", "episode": 3, "released": "2021-05-05T00:00:00Z"},
+      {"id": "extra-early", "title": "Undated with a single stream", "stream": {"ytId": "abc123"}},
+      {"id": "extra-dated", "title": "Dated", "released": "2019-12-31T23:00:00+01:00", "streams": [{"url": "https://cdn.example.com/x.mkv"}, {"broken": true}]}
+    ]
+  }
+}

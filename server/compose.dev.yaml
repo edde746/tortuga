@@ -1,0 +1,142 @@
+# Development and end-to-end testing, on top of compose.yaml:
+#
+#   docker compose -f server/compose.yaml -f server/compose.dev.yaml --profile backup up -d --build
+#
+# Adds Dex (a local OpenID Connect provider, dev/dex.yaml) as the server's OIDC sign-in, a fake GitHub
+# (dev/fake_github.py) as its GitHub sign-in, the fake tracker server (tools/media/test_trackers.py) as
+# MyAnimeList and AniList for its tracker sign-in relay, MinIO as the backup target, and a throwaway data key.
+# scripts/smoke.sh drives the whole stack. Not for production: fixed dev credentials, in-memory Dex, fake GitHub and
+# fake trackers, MinIO on a tmpfs.
+#
+# Dex's issuer is http://127.0.0.1:${DEX_HTTP_PORT}/dex, the address it is published on: one URL that every client
+# resolves, whether on this host or on a phone, emulator or simulator that reaches the host's port through
+# `adb reverse` or an SSH tunnel to the same port. The server container can't reach that address (its own
+# 127.0.0.1), so it checks tokens for that issuer and fetches Dex's keys inside the compose network. The fake GitHub
+# is published the same way on 127.0.0.1:${GITHUB_HTTP_PORT}, the address apps and browsers use; the server calls its
+# API and exchanges web-flow codes inside the compose network. So is the fake tracker server, on
+# 127.0.0.1:${TRACKERS_HTTP_PORT}: the relay sends browsers to its authorization pages there and exchanges their codes
+# inside the compose network, and the server's own address for browsers (the relay's links and callback) is
+# http://127.0.0.1:${TORTUGA_HTTP_PORT}.
+#
+# The data key: instead of compose.yaml's key file on the host, dev-data-key writes 32 random bytes into the
+# dev-data-key volume on first start, and the server reads them from there. The key lives and dies with the stack's
+# other volumes (`down -v`), so the database and its key always belong together.
+services:
+  dev-data-key:
+    image: postgres:18-alpine
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        set -e
+        if [ ! -s /keys/data.key ]; then
+          head -c 32 /dev/urandom > /keys/data.key.new
+          mv /keys/data.key.new /keys/data.key
+        fi
+        chown 10001:10001 /keys/data.key
+        chmod 0400 /keys/data.key
+    volumes:
+      - dev-data-key:/keys
+
+  server:
+    depends_on:
+      dex:
+        condition: service_started
+      github:
+        condition: service_started
+      trackers:
+        condition: service_started
+      dev-data-key:
+        condition: service_completed_successfully
+    environment:
+      TORTUGA_DATA_KEY_FILE: /run/tortuga-dev-key/data.key
+      TORTUGA_OIDC_ISSUER: http://127.0.0.1:${DEX_HTTP_PORT:-5556}/dex
+      TORTUGA_OIDC_JWKS_URL: http://dex:5556/dex/keys
+      TORTUGA_OIDC_CLIENT_IDS: tortuga-dev
+      TORTUGA_OIDC_NAME: Dex
+      # The fake GitHub's OAuth App (dev/fake_github.py): fixed dev credentials, not a secret.
+      TORTUGA_GITHUB_CLIENT_ID: tortuga-dev-github
+      TORTUGA_GITHUB_CLIENT_SECRET: tortuga-dev-github-secret
+      TORTUGA_GITHUB_URL: http://127.0.0.1:${GITHUB_HTTP_PORT:-5557}
+      TORTUGA_GITHUB_API_URL: http://github:5557
+      TORTUGA_GITHUB_TOKEN_URL: http://github:5557/login/oauth/access_token
+      TORTUGA_LOG_FORMAT: text
+      # The tracker OAuth relay's MyAnimeList and AniList clients at the fake tracker server (the trackers service,
+      # whose --anilist-secret default is dev/anilist-client-secret's): fixed dev credentials, not secrets. The relay's
+      # links and callback are the server as browsers reach it; it sends them to the fake's authorization pages as they
+      # reach it, and exchanges the codes inside the compose network.
+      TORTUGA_PUBLIC_URL: http://127.0.0.1:${TORTUGA_HTTP_PORT:-8080}
+      TORTUGA_MAL_CLIENT_ID: tortuga-dev-mal
+      TORTUGA_ANILIST_CLIENT_ID: tortuga-dev-anilist
+      TORTUGA_ANILIST_CLIENT_SECRET_FILE: /run/tortuga-dev/anilist-client-secret
+      TORTUGA_DEV_TRACKER_OAUTH_URL: http://trackers:8772
+      TORTUGA_DEV_TRACKER_OAUTH_BROWSER_URL: http://127.0.0.1:${TRACKERS_HTTP_PORT:-5558}
+      # The fake tracker server (tools/media/test_trackers.py) that tracker refreshes and revokes go to instead of
+      # the services, as the server container reaches it (e.g. http://host.docker.internal:8772); empty: the services.
+      TORTUGA_DEV_TRACKERS_URL: ${TORTUGA_DEV_TRACKERS_URL:-}
+    # Docker Engine on Linux (WSL's included) has no host.docker.internal of its own: host-gateway maps it to the host.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # The key comes from the volume, not from compose.yaml's secret.
+    secrets: !reset []
+    volumes:
+      - dev-data-key:/run/tortuga-dev-key:ro
+      - ./dev/anilist-client-secret:/run/tortuga-dev/anilist-client-secret:ro
+
+  dex:
+    image: ghcr.io/dexidp/dex:v2.45.1
+    command: ["dex", "serve", "/etc/dex/config.yaml"]
+    # A host that keeps the stack up restarts it with Docker, as compose.yaml's services.
+    restart: unless-stopped
+    environment:
+      # dev/dex.yaml reads it (the image renders its config with gomplate).
+      DEX_ISSUER: http://127.0.0.1:${DEX_HTTP_PORT:-5556}/dex
+    volumes:
+      - ./dev/dex.yaml:/etc/dex/config.yaml:ro
+    ports:
+      - "127.0.0.1:${DEX_HTTP_PORT:-5556}:5556"
+
+  github:
+    image: python:3.14-alpine
+    command: ["python3", "/srv/fake_github.py", "5557", "0.0.0.0"]
+    restart: unless-stopped
+    volumes:
+      - ./dev/fake_github.py:/srv/fake_github.py:ro
+    ports:
+      - "127.0.0.1:${GITHUB_HTTP_PORT:-5557}:5557"
+
+  trackers:
+    image: python:3.14-alpine
+    command: ["python3", "/srv/test_trackers.py", "--port", "8772"]
+    restart: unless-stopped
+    volumes:
+      # Its posters are test_addon.py's gradients (art_png).
+      - ../tools/media/test_trackers.py:/srv/test_trackers.py:ro
+      - ../tools/media/test_addon.py:/srv/test_addon.py:ro
+    ports:
+      - "127.0.0.1:${TRACKERS_HTTP_PORT:-5558}:8772"
+
+  minio:
+    # MinIO's own images are no longer published; Chainguard builds it from source.
+    image: cgr.dev/chainguard/minio@sha256:6a1d0b45c8669726bba580ced0bfa4cb9fdeed1ed636dfabd81d1577beb6937b
+    command: ["server", "/data"]
+    environment:
+      MINIO_ROOT_USER: tortuga-dev
+      MINIO_ROOT_PASSWORD: tortuga-dev-secret
+    tmpfs:
+      - /data
+    ports:
+      - "127.0.0.1:${MINIO_HTTP_PORT:-9000}:9000"
+
+  backup:
+    depends_on:
+      minio:
+        condition: service_started
+    environment:
+      BACKUP_S3_ENDPOINT: http://minio:9000
+      BACKUP_S3_PROVIDER: Minio
+      BACKUP_S3_BUCKET: tortuga-backups
+      BACKUP_S3_ACCESS_KEY_ID: tortuga-dev
+      BACKUP_S3_SECRET_ACCESS_KEY: tortuga-dev-secret
+
+volumes:
+  dev-data-key:

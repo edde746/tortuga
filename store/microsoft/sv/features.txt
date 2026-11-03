@@ -1,0 +1,14 @@
+Fungerar med Stremio-tillägg: installera ett tillägg via dess länk
+Hem, Upptäck och Sök i alla tillägg
+En titels strömmar grupperade per tillägg
+Uppspelning med mpv, med HDR10 och Dolby Vision där din dator och skärm stöder det
+Inbäddade undertexter och undertexter från tillägg; dina val av ljud och undertexter följer med till nästa avsnitt
+Hoppa över intron, sammanfattningar och eftertexter
+Fortsätt titta, tittarförlopp och markering av sedda titlar
+Nedladdningar för att titta offline
+Titta tillsammans i synk, var och en via sina egna tillägg
+Profiler med egna tillägg, eget bibliotek och egna inställningar samt valfri PIN-kod
+Synkronisering mellan dina enheter med inloggning via Apple, Google eller GitHub
+Trakt, Simkl, MDBList, MyAnimeList och AniList
+Kortkommandon, medietangenter och mediekontrollerna i Windows
+21 språk

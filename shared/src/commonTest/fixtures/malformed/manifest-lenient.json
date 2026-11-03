@@ -1,0 +1,26 @@
+{
+  "id": "org.example.lenient",
+  "version": "1.2.3-beta.1+build.5",
+  "name": "Lenient manifest",
+  "logo": "",
+  "background": "not a url",
+  "types": ["movie", "series"],
+  "idPrefixes": null,
+  "resources": [
+    "catalog",
+    {"name": "meta", "types": ["movie"], "idPrefixes": ["tt"]},
+    42,
+    {"types": ["series"]},
+    {"name": "stream", "types": null, "idPrefixes": []},
+    {"name": "subtitles", "types": ["series"]}
+  ],
+  "catalogs": [
+    {"id": "top", "type": "movie", "name": "Top", "extra": [{"name": "genre", "options": ["Drama"], "optionsLimit": 1}, {"name": "skip", "isRequired": true, "options": ["0"]}, {"name": "genre"}]},
+    {"id": "top", "type": "movie", "name": "Duplicate, dropped"},
+    {"id": "legacy", "type": "series", "extraSupported": ["search", "genre", "search"], "extraRequired": ["genre", "notSupported"]},
+    {"id": "fallback", "type": "movie", "extra": [{"options": ["no name"]}], "extraSupported": ["search"]},
+    {"id": "required-search", "type": "movie", "extra": [{"name": "search", "isRequired": true}]},
+    {"type": "movie", "name": "No id"}
+  ],
+  "behaviorHints": {"configurable": true, "adult": null}
+}

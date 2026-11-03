@@ -1,0 +1,137 @@
+# Tortuga sync server for self-hosting: the server and Postgres, plus an optional backup job.
+#
+#   cp server/.env.example server/.env    # set POSTGRES_PASSWORD (or POSTGRES_PASSWORD_FILE) at least
+#   (umask 077; set -C; openssl rand 32 > server/tortuga-data.key) && sudo chown 10001 server/tortuga-data.key
+#   docker compose -f server/compose.yaml up -d
+#   docker compose -f server/compose.yaml --profile backup up -d    # with scheduled backups
+#
+# The data key (tortuga-data.key) seals synced records at rest; back it up apart from the database backups, which
+# don't contain it and can't be read without it (server/README.md). Every setting is an environment variable;
+# server/README.md lists them. Put the server behind a TLS reverse proxy and set TORTUGA_TRUST_FORWARDED_HEADERS=true
+# there.
+name: tortuga
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: tortuga
+      POSTGRES_USER: tortuga
+      # Either form, not both (each secret below likewise). A _FILE path is inside the containers: mount the file there
+      # in Postgres, the server and the backup job (compose.hosted.yaml does).
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
+      POSTGRES_PASSWORD_FILE: ${POSTGRES_PASSWORD_FILE:-}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tortuga -d tortuga"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  server:
+    image: ${TORTUGA_IMAGE:-tortuga-server:local}
+    build:
+      context: ..
+      dockerfile: server/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      TORTUGA_DATABASE_URL: jdbc:postgresql://postgres:5432/tortuga
+      TORTUGA_DATABASE_USER: tortuga
+      TORTUGA_DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-}
+      TORTUGA_DATABASE_PASSWORD_FILE: ${POSTGRES_PASSWORD_FILE:-}
+      TORTUGA_DATABASE_POOL_SIZE: ${TORTUGA_DATABASE_POOL_SIZE:-}
+      TORTUGA_DATA_KEY_FILE: /run/secrets/tortuga-data-key
+      TORTUGA_PUBLIC_URL: ${TORTUGA_PUBLIC_URL:-}
+      TORTUGA_TRUST_FORWARDED_HEADERS: ${TORTUGA_TRUST_FORWARDED_HEADERS:-false}
+      # logback reads these two: an empty value isn't its default, so compose passes the defaults.
+      TORTUGA_LOG_FORMAT: ${TORTUGA_LOG_FORMAT:-json}
+      TORTUGA_LOG_LEVEL: ${TORTUGA_LOG_LEVEL:-INFO}
+      TORTUGA_ACCESS_TOKEN_TTL_SECONDS: ${TORTUGA_ACCESS_TOKEN_TTL_SECONDS:-}
+      TORTUGA_SESSION_IDLE_DAYS: ${TORTUGA_SESSION_IDLE_DAYS:-}
+      TORTUGA_ACCOUNT_QUOTA_BYTES: ${TORTUGA_ACCOUNT_QUOTA_BYTES:-}
+      # Pushes are refused while the database's disk has less than TORTUGA_DATABASE_MIN_FREE_MB free (unset: 2048), so
+      # no account can fill the disk Postgres needs (server/README.md, Configuration). The server reads the free space
+      # of Postgres's volume, mounted below read-only.
+      TORTUGA_DATABASE_DISK_PATH: /var/lib/tortuga/database
+      TORTUGA_DATABASE_MIN_FREE_MB: ${TORTUGA_DATABASE_MIN_FREE_MB:-}
+      # Sign-in. Apple and Google accept the official apps' tokens by default; see server/README.md.
+      TORTUGA_APPLE_ENABLED: ${TORTUGA_APPLE_ENABLED:-true}
+      TORTUGA_APPLE_CLIENT_IDS: ${TORTUGA_APPLE_CLIENT_IDS:-}
+      TORTUGA_APPLE_SERVICES_ID: ${TORTUGA_APPLE_SERVICES_ID:-}
+      # Hosted instance only: Tortuga's Sign in with Apple key (token revocation) and the web-flow return page.
+      TORTUGA_APPLE_TEAM_ID: ${TORTUGA_APPLE_TEAM_ID:-}
+      TORTUGA_APPLE_KEY_ID: ${TORTUGA_APPLE_KEY_ID:-}
+      TORTUGA_APPLE_PRIVATE_KEY: ${TORTUGA_APPLE_PRIVATE_KEY:-}
+      TORTUGA_APPLE_PRIVATE_KEY_FILE: ${TORTUGA_APPLE_PRIVATE_KEY_FILE:-}
+      TORTUGA_APPLE_WEB_RETURN: ${TORTUGA_APPLE_WEB_RETURN:-false}
+      TORTUGA_GOOGLE_CLIENT_IDS: ${TORTUGA_GOOGLE_CLIENT_IDS:-}
+      TORTUGA_OIDC_ISSUER: ${TORTUGA_OIDC_ISSUER:-}
+      TORTUGA_OIDC_CLIENT_IDS: ${TORTUGA_OIDC_CLIENT_IDS:-}
+      TORTUGA_OIDC_NAME: ${TORTUGA_OIDC_NAME:-}
+      TORTUGA_OIDC_JWKS_URL: ${TORTUGA_OIDC_JWKS_URL:-}
+      # Sign in with GitHub: your GitHub OAuth App's client ID and secret, both or neither (server/README.md).
+      TORTUGA_GITHUB_CLIENT_ID: ${TORTUGA_GITHUB_CLIENT_ID:-}
+      TORTUGA_GITHUB_CLIENT_SECRET: ${TORTUGA_GITHUB_CLIENT_SECRET:-}
+      TORTUGA_GITHUB_CLIENT_SECRET_FILE: ${TORTUGA_GITHUB_CLIENT_SECRET_FILE:-}
+      TORTUGA_GITHUB_URL: ${TORTUGA_GITHUB_URL:-}
+      TORTUGA_GITHUB_API_URL: ${TORTUGA_GITHUB_API_URL:-}
+      TORTUGA_GITHUB_TOKEN_URL: ${TORTUGA_GITHUB_TOKEN_URL:-}
+      # Hosted instance only: the tracker OAuth relay's MyAnimeList and AniList clients (needs TORTUGA_PUBLIC_URL).
+      TORTUGA_MAL_CLIENT_ID: ${TORTUGA_MAL_CLIENT_ID:-}
+      TORTUGA_MAL_CLIENT_SECRET: ${TORTUGA_MAL_CLIENT_SECRET:-}
+      TORTUGA_MAL_CLIENT_SECRET_FILE: ${TORTUGA_MAL_CLIENT_SECRET_FILE:-}
+      TORTUGA_ANILIST_CLIENT_ID: ${TORTUGA_ANILIST_CLIENT_ID:-}
+      TORTUGA_ANILIST_CLIENT_SECRET: ${TORTUGA_ANILIST_CLIENT_SECRET:-}
+      TORTUGA_ANILIST_CLIENT_SECRET_FILE: ${TORTUGA_ANILIST_CLIENT_SECRET_FILE:-}
+      # The change notice streams held at once (server/README.md); unset: 3,000.
+      TORTUGA_MAX_EVENT_STREAMS: ${TORTUGA_MAX_EVENT_STREAMS:-}
+    ports:
+      - "${TORTUGA_BIND:-127.0.0.1}:${TORTUGA_HTTP_PORT:-8080}:8080"
+    # Only for its free space (the server's user can't read Postgres's files).
+    volumes:
+      - postgres-data:/var/lib/tortuga/database:ro
+    # Mounted at /run/secrets/tortuga-data-key.
+    secrets:
+      - tortuga-data-key
+    restart: unless-stopped
+
+  # Optional: `--profile backup`. Dumps are encrypted with age to BACKUP_AGE_RECIPIENTS before upload.
+  backup:
+    profiles: [backup]
+    image: ${TORTUGA_BACKUP_IMAGE:-tortuga-backup:local}
+    build:
+      context: backup
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGHOST: postgres
+      PGUSER: tortuga
+      PGPASSWORD: ${POSTGRES_PASSWORD:-}
+      PGPASSWORD_FILE: ${POSTGRES_PASSWORD_FILE:-}
+      PGDATABASE: tortuga
+      BACKUP_S3_ENDPOINT: ${BACKUP_S3_ENDPOINT:-}
+      BACKUP_S3_REGION: ${BACKUP_S3_REGION:-us-east-1}
+      BACKUP_S3_PROVIDER: ${BACKUP_S3_PROVIDER:-Other}
+      BACKUP_S3_BUCKET: ${BACKUP_S3_BUCKET:-}
+      BACKUP_S3_PREFIX: ${BACKUP_S3_PREFIX-tortuga/}
+      BACKUP_S3_ACCESS_KEY_ID: ${BACKUP_S3_ACCESS_KEY_ID:-}
+      BACKUP_S3_SECRET_ACCESS_KEY: ${BACKUP_S3_SECRET_ACCESS_KEY:-}
+      BACKUP_S3_SECRET_ACCESS_KEY_FILE: ${BACKUP_S3_SECRET_ACCESS_KEY_FILE:-}
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-17 3 * * *}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-30}
+      BACKUP_AGE_RECIPIENTS: ${BACKUP_AGE_RECIPIENTS:-}
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+
+secrets:
+  # The server's data key: 32 random bytes that seal synced records at rest. It stays on the host, outside the
+  # database and its backups (server/README.md). Default server/tortuga-data.key; elsewhere: TORTUGA_DATA_KEY_PATH.
+  tortuga-data-key:
+    file: ${TORTUGA_DATA_KEY_PATH:-./tortuga-data.key}

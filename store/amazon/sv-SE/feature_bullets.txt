@@ -1,0 +1,5 @@
+Spelar upp dina tilläggs strömmar med mpv, med HDR10, Dolby Vision och ljud-passthrough där din utrustning stöder det
+Fortsätt titta, tittarförlopp, markering av sedda titlar och nästa avsnitt från samma källa
+Hoppa över intron, sammanfattningar och eftertexter; dina val av ljud och undertexter följer med till nästa avsnitt
+Titta tillsammans i synk med vänner, var och en via sina egna tillägg
+Profiler, tillägg, bibliotek och förlopp synkroniseras mellan dina enheter

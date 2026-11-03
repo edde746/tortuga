@@ -1,0 +1,1 @@
+Een videospeler die werkt met Stremio-add-ons. De add-ons die je installeert, leveren de catalogi en de streams, en Tortuga speelt ze af. Tortuga biedt zelf geen content aan.

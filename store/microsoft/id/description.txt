@@ -1,0 +1,34 @@
+Tortuga adalah pemutar video yang bekerja dengan add-on Stremio. Add-on yang Anda pasang menyediakan katalog dan stream, lalu Tortuga memutarnya. Tortuga tidak menyediakan konten sendiri.
+
+Cara kerjanya
+• Pasang add-on melalui tautannya. Katalog, hasil pencarian, halaman judul, dan stream berasal dari add-on Anda, dan permintaan Anda langsung dikirim ke add-on tersebut.
+• Beranda menampilkan Lanjutkan Menonton dan katalog add-on Anda. Di Jelajahi, Anda dapat memfilter menurut jenis dan genre. Di Cari, pencarian mencakup semua add-on.
+• Stream untuk film atau episode dikelompokkan per add-on. Pilih salah satu, lalu video langsung diputar.
+
+Pemutar
+• Memutar video dengan mpv, termasuk HDR10 dan Dolby Vision bila komputer dan layar Anda mendukungnya.
+• Subtitel tertanam dan subtitel dari add-on, dicocokkan dengan file. Pilihan audio dan subtitel Anda terbawa ke episode berikutnya.
+• Bab di bilah progres. Lewati intro, rekap, dan kredit dengan tombol atau secara otomatis.
+• Hitung mundur episode berikutnya, episode sebelumnya dan berikutnya, kecepatan putar, serta penundaan subtitel dan audio.
+• Pintasan keyboard, tombol media, dan kontrol media Windows.
+• Lebih suka pemutar lain? Kirim video ke aplikasi pemutar lain di komputer Anda.
+
+Pustaka Anda
+• Progres dan tanda sudah ditonton, dengan Lanjutkan Menonton di Beranda untuk kembali ke tontonan Anda.
+• Tortuga mengingat stream yang Anda pilih dan memutar episode berikutnya dari sumber yang sama.
+• Unduhan: simpan film dan episode beserta subtitelnya untuk ditonton secara offline. Tortuga dapat terus melengkapi unduhan serial dengan episode berikutnya yang belum ditonton.
+
+Tonton Bersama
+Buat ruang, lalu bagikan kodenya atau tautan undangan. Pemutaran tetap sinkron, dan setiap orang memutar judul melalui add-on mereka sendiri.
+
+Akun dan profil Anda
+• Masuk dengan Apple, Google, atau GitHub. Profil, add-on, pustaka, progres, dan pengaturan profil Anda disinkronkan di semua perangkat Anda. Tautkan TV dengan kode QR atau kode singkat.
+• Satu profil untuk setiap orang di rumah, masing-masing dengan add-on, pustaka, dan pengaturannya sendiri. PIN bersifat opsional.
+• Hubungkan Trakt, Simkl, MDBList, MyAnimeList, atau AniList untuk pelacakan tontonan, riwayat tontonan, rating, dan daftar.
+• Sinkronisasi berjalan di server Tortuga, atau di server yang Anda jalankan sendiri.
+
+Tortuga adalah perangkat lunak sumber terbuka berlisensi GPL-3.0 dan tersedia dalam 21 bahasa. Tanpa iklan, tanpa analitik.
+
+Pemutar dalam tangkapan layar menampilkan cuplikan singkat dari Spring (2019), Coffee Run (2020), Sprite Fright (2021), dan Wing It! (2023) karya Blender Studio, (CC) Blender Foundation | studio.blender.org, dilisensikan di bawah CC BY 4.0.
+
+Tortuga menggunakan Trakt, tetapi tidak didukung atau disertifikasi oleh Trakt.

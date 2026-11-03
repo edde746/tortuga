@@ -1,0 +1,2013 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "アップデートを確認…",
+    "launchFailed": "Tortugaを起動できませんでした。",
+    "startup": {
+      "database": "データベースを開いています…",
+      "migration": "データベースを更新しています…",
+      "account": "アカウントを読み込んでいます…",
+      "profiles": "プロフィールを読み込んでいます…"
+    },
+    "localNetworkUsage": "Tortugaはローカルネットワークを使用して、アドオン、メディア、自宅で運用している同期サーバーに接続します。"
+  },
+  "player": {
+    "nowPlaying": "再生中",
+    "buffering": "バッファリング中…",
+    "position": "${position} / ${duration}",
+    "timeline": "再生位置",
+    "play": "再生",
+    "pause": "一時停止",
+    "resolving": "ストリームを準備しています…",
+    "opening": "開いています…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "ライブ",
+      "position": "ライブ · ${time}視聴",
+      "behind": "ライブ · ${time}遅れ",
+      "goToLive": "ライブに戻る"
+    },
+    "nextEpisode": "次のエピソード",
+    "previousEpisode": "前のエピソード",
+    "lock": {
+      "button": "画面をロック",
+      "tapToUnlock": "タップしてロック解除",
+      "tapAgainToUnlock": "もう一度タップしてロック解除"
+    },
+    "format": {
+      "seconds": "${value}秒",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "標準",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "音量",
+      "level": "${percent}%",
+      "muted": "ミュート中",
+      "mute": "ミュート",
+      "unmute": "ミュート解除"
+    },
+    "menu": {
+      "audio": "音声",
+      "subtitles": "字幕",
+      "speed": "再生速度",
+      "subtitleDelay": "字幕の遅延",
+      "audioDelay": "音声の遅延",
+      "moreSubtitles": "その他の字幕",
+      "reset": "リセット",
+      "subtitleDelayEarlier": "字幕の遅延：早める",
+      "subtitleDelayLater": "字幕の遅延：遅らせる",
+      "audioDelayEarlier": "音声の遅延：早める",
+      "audioDelayLater": "音声の遅延：遅らせる"
+    },
+    "track": {
+      "off": "オフ",
+      "numbered": "トラック${number}",
+      "defaultTrack": "デフォルト",
+      "forced": "強制",
+      "sdh": "SDH",
+      "audioDescription": "音声ガイド",
+      "external": "外部",
+      "second": "2つ目の字幕",
+      "showAsSecond": "2つ目の字幕として表示",
+      "removeSecond": "2つ目の字幕を解除",
+      "otherLanguage": "その他",
+      "mono": "モノラル",
+      "stereo": "ステレオ",
+      "channels": {
+        "other": "${n}チャンネル"
+      }
+    },
+    "info": {
+      "title": "再生情報",
+      "tab": "情報",
+      "resolution": "解像度",
+      "video": "映像",
+      "dynamicRange": "ダイナミックレンジ",
+      "audio": "音声",
+      "decoder": "デコーダー",
+      "cache": "キャッシュ",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "ハードウェア（${name}）",
+      "softwareDecoder": "ソフトウェア",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision プロファイル${profile}",
+      "stream": "ストリーム",
+      "addon": "アドオン",
+      "pickedBy": "選択方法",
+      "autoPlayFirstMatch": "自動再生（最初の一致）",
+      "autoPlayLastLink": "自動再生（前回と同じストリーム）",
+      "source": "ソース",
+      "downloaded": "ダウンロード済み",
+      "name": "名前",
+      "file": "ファイル",
+      "container": "コンテナ",
+      "fileSize": "サイズ",
+      "bitrate": "ビットレート",
+      "codec": "コーデック",
+      "pixelFormat": "ピクセル形式",
+      "bitDepth": "${bits}ビット",
+      "color": "色",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall}ニト",
+      "mastering": "マスタリングディスプレイ",
+      "nitsRange": "${min}〜${max}ニト",
+      "droppedFrames": "ドロップしたフレーム",
+      "droppedFramesValue": "${output}（デコーダー ${decoder}）",
+      "delayedFrames": "遅延したフレーム",
+      "output": "出力",
+      "hertz": "${value} Hz",
+      "channels": "チャンネル",
+      "sampleRate": "サンプルレート",
+      "track": "トラック",
+      "secondTrack": "2つ目のトラック",
+      "passthrough": "パススルー（${format}）",
+      "spatialAudio": "空間オーディオ",
+      "rendering": "レンダリング",
+      "surround": "サラウンド",
+      "subtitles": "字幕",
+      "format": "形式",
+      "embedded": "内蔵",
+      "delay": "遅延",
+      "network": "ネットワーク",
+      "downloadSpeed": "ダウンロード速度",
+      "buffering": "バッファリング中",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "イントロをスキップ",
+      "recap": "あらすじをスキップ",
+      "credits": "クレジットをスキップ"
+    },
+    "prompt": {
+      "playNext": "次のエピソードを再生：${episode}",
+      "countdown": {
+        "other": "${n}秒後に自動で実行"
+      }
+    },
+    "options": {
+      "title": "オプション",
+      "videoFit": "アスペクト比",
+      "fit": {
+        "contain": "レターボックス",
+        "cover": "画面いっぱい",
+        "fill": "引き伸ばし"
+      },
+      "zoom": "ズーム",
+      "percent": "${percent}%",
+      "resetZoom": "リセット",
+      "shaders": "シェーダー",
+      "shader": {
+        "nvscalerDetail": "NVIDIA画像スケーリングで映像をより鮮明にします",
+        "neutral": "ニュートラル",
+        "denoise": "ノイズ除去",
+        "denoiseSharpen": "ノイズ除去 + シャープ",
+        "fast": "高速",
+        "highQuality": "高品質",
+        "modeDetail": "${quality} · モード ${mode}",
+        "customDetail": "カスタムGLSLシェーダー",
+        "importShader": "シェーダーをインポート",
+        "imported": "シェーダーをインポートしました",
+        "importFailed": "シェーダーをインポートできませんでした",
+        "deleteLabel": "${name}を削除",
+        "deleteTitle": "${name}を削除しますか？",
+        "delete": "削除",
+        "cancel": "キャンセル"
+      },
+      "sleepTimer": "スリープタイマー",
+      "sleepEndOfVideo": "この動画の終了時",
+      "sleepMinutes": {
+        "other": "${n}分"
+      },
+      "sleepLeft": "残り${time}",
+      "autoPlayNext": "次のエピソードを自動再生",
+      "audioOutput": "音声出力",
+      "systemOutput": "システムのデフォルト",
+      "audioNormalization": "音量の均一化",
+      "audioChannels": "音声チャンネル",
+      "channels": {
+        "original": "オリジナル",
+        "originalDetail": "トラックのすべてのチャンネルを再生",
+        "surround51": "最大5.1ch",
+        "surround51Detail": "5.1chまで対応のテレビやAVアンプ向けに、7.1chを5.1chにダウンミックス",
+        "stereo": "ステレオ",
+        "stereoDetail": "ステレオスピーカーやヘッドホン向けに、2チャンネルにダウンミックス"
+      },
+      "on": "オン",
+      "off": "オフ"
+    },
+    "stillWatching": {
+      "title": "まだ視聴中ですか？",
+      "countdown": {
+        "other": "${n}秒後に一時停止"
+      },
+      "keepWatching": "視聴を続ける",
+      "pause": "一時停止"
+    },
+    "error": {
+      "title": "このストリームを再生できません",
+      "resolveTimeout": "ストリームの開始に時間がかかりすぎました。",
+      "expired": "ストリームのリンクの有効期限が切れています。",
+      "notFound": "このストリームは利用できなくなりました。",
+      "http": "サーバーからHTTP ${status}が返されました。",
+      "cantOpen": "ストリームを開けませんでした。",
+      "unsupportedFormat": "このストリームはプレーヤーが読み込めない形式です。",
+      "cantDecode": "プレーヤーがこのストリームの映像または音声を再生できませんでした。",
+      "engineFailed": "エラーのためプレーヤーが停止しました。",
+      "retry": "再試行",
+      "nextStream": "次のストリームを試す",
+      "close": "閉じる",
+      "alternatives": {
+        "other": "ほかに${n}件のストリームがあります"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "これはエピソードではありません",
+      "titleMovie": "これは映画ではありません",
+      "titleVideo": "これは動画ではありません",
+      "sent": "アドオンがストリームの代わりにエラー動画を送ってきました。",
+      "byUrl": "リンクがアドオンのエラー動画のものです。",
+      "bySize": "ファイルは${served}ですが、ストリームの表示は${size}でした。",
+      "byDuration": "長さは${length}ですが、前回再生したときこの動画は${known}でした。",
+      "kept": "視聴の進捗はそのまま残っています。",
+      "chooseStream": "別のストリームを選択",
+      "watch": "メッセージを見る"
+    },
+    "osd": {
+      "volume": "音量 ${level}",
+      "brightness": "明るさ ${level}",
+      "speed": "速度 ${speed}",
+      "subtitleDelay": "字幕の遅延 ${delay}",
+      "audioDelay": "音声の遅延 ${delay}",
+      "audioTrack": "音声：${track}",
+      "subtitleTrack": "字幕：${track}",
+      "subtitlesOff": "字幕オフ",
+      "chapter": "チャプター：${title}",
+      "chapterNumbered": "チャプター${number}",
+      "zoom": "ズーム ${percent}",
+      "shader": "シェーダー：${name}",
+      "shadersOff": "シェーダーオフ"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": "."
+    }
+  },
+  "streams": {
+    "resolving": "ストリームを開いています…",
+    "resolveFailed": {
+      "http": "ストリームのサーバーからHTTP ${status}が返されました",
+      "timeout": "ストリームのサーバーの応答に時間がかかりすぎました",
+      "network": "ストリームのサーバーに接続できませんでした",
+      "unsupportedUrl": "このストリームのリンクは開けません",
+      "tooManyRedirects": "このストリームのリンクはリダイレクトが多すぎます",
+      "unexpected": "このストリームを開くときに、このアプリでエラーが発生しました"
+    },
+    "badge": {
+      "instant": "即時再生",
+      "notInstant": "即時再生不可"
+    },
+    "lastUsed": "前回再生",
+    "external": "アプリ外で開きます",
+    "unplayable": {
+      "other": "このアプリで再生できないストリーム：${n}件"
+    },
+    "empty": "ストリームが見つかりません",
+    "all": "すべて",
+    "refresh": "更新",
+    "retryNamed": "${name}を再試行",
+    "filters": {
+      "hidden": {
+        "other": "フィルターで${n}件のストリームを非表示中"
+      },
+      "showing": {
+        "other": "フィルターで非表示の${n}件のストリームを表示中"
+      },
+      "show": "表示",
+      "hide": "非表示",
+      "rowNote": "フィルターで非表示"
+    },
+    "sort": {
+      "title": "並べ替え",
+      "addonOrder": "アドオンの順",
+      "resolution": "解像度",
+      "source": "ソースの品質",
+      "sizeLargest": "サイズの大きい順",
+      "sizeSmallest": "サイズの小さい順",
+      "cached": "即時再生を先に"
+    },
+    "autoPlay": {
+      "noMatch": "フィルターを通過するストリームが自動再生で見つかりませんでした。",
+      "failed": "自動再生で選ばれたストリームを開始できませんでした。別のストリームを選んでください。"
+    },
+    "download": {
+      "notice": "ダウンロードするストリームを選択してください。",
+      "action": "ダウンロード",
+      "actionNamed": "${name}をダウンロード",
+      "queued": "ダウンロードに追加しました",
+      "failed": "ダウンロードを追加できませんでした。"
+    },
+    "suggested": {
+      "label": "おすすめ",
+      "reason": "最近の選択に近い: ${features}",
+      "audio": "${language}音声",
+      "subtitles": "${language}字幕",
+      "smaller": "小さいファイル",
+      "larger": "大きいファイル"
+    }
+  },
+  "detail": {
+    "loadFailed": "詳細を読み込めませんでした。",
+    "notFound": "このタイトルの詳細を提供するアドオンがありません。",
+    "noAddons": "インストール済みのアドオンには、このタイトルの詳細がありません。",
+    "noAnimeAddon": "インストール済みのアドオンには、このアニメの詳細がありません。開くには、アニメ用のアドオンをインストールしてください。",
+    "animeListsUnavailable": "アニメリストを読み込めなかったため、このアニメを作品に結び付けられません。接続を確認して、もう一度お試しください。",
+    "findingAnime": "アニメリストでこのアニメを探しています…",
+    "sourceError": "${addon}：${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": "、",
+    "runtime": {
+      "hoursMinutes": "${hours}時間${minutes}分",
+      "hours": "${hours}時間",
+      "minutes": "${minutes}分"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes（批評家）",
+        "rottenTomatoesAudience": "Rotten Tomatoes（観客）",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value}パーセント"
+    },
+    "userRating": {
+      "rateLabel": "このタイトルを評価",
+      "label": "あなたの評価: ${score}",
+      "range": "${low}–${high}",
+      "title": "あなたの評価",
+      "hint": "評価は下の各サービスに送信されます。",
+      "clear": "評価を削除",
+      "checking": "確認中…",
+      "notRated": "未評価",
+      "unreadable": "確認できません",
+      "saving": "保存中…",
+      "saved": "保存しました",
+      "removed": "削除しました",
+      "queued": "未送信、あとで再試行します",
+      "failed": "保存できませんでした"
+    },
+    "links": {
+      "genres": "ジャンル",
+      "cast": "キャスト",
+      "directors": "監督",
+      "writers": "脚本",
+      "website": "公式サイト"
+    },
+    "facts": {
+      "title": "情報",
+      "released": "公開日",
+      "runtime": "再生時間",
+      "country": "国",
+      "language": "言語",
+      "awards": "受賞歴",
+      "source": "詳細の提供元",
+      "failed": "読み込めなかったアドオン"
+    },
+    "trailer": "予告編",
+    "trailerNumbered": "予告編${number}",
+    "trailers": "予告編",
+    "share": "共有",
+    "season": "シーズン${number}",
+    "specials": "スペシャル",
+    "episodeNumbered": "第${number}話",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}〜${last}",
+    "withCast": "出演：${names}",
+    "castAndCrew": "キャスト・スタッフ",
+    "airs": "${date}配信予定",
+    "date": "${year}年${month}${day}日",
+    "month": {
+      "jan": "1月",
+      "feb": "2月",
+      "mar": "3月",
+      "apr": "4月",
+      "may": "5月",
+      "jun": "6月",
+      "jul": "7月",
+      "aug": "8月",
+      "sep": "9月",
+      "oct": "10月",
+      "nov": "11月",
+      "dec": "12月"
+    },
+    "play": "再生",
+    "playEpisode": "${episode}を再生",
+    "resume": "${time}から再開",
+    "resumeEpisode": "${episode} · ${time}から再開",
+    "addToLibrary": "ライブラリに追加",
+    "removeFromLibrary": "ライブラリから削除",
+    "markWatched": "視聴済みにする",
+    "markUnwatched": "未視聴にする",
+    "markAllWatched": "全エピソードを視聴済みにする",
+    "markAllUnwatched": "全エピソードを未視聴にする",
+    "markSeasonWatched": "シーズンを視聴済みにする",
+    "markSeasonUnwatched": "シーズンを未視聴にする",
+    "watched": "視聴済み",
+    "overviewHidden": "あらすじは非表示",
+    "moreActions": "その他の操作",
+    "moreActionsNamed": "${name}のその他の操作",
+    "showMore": "もっと見る",
+    "showLess": "折りたたむ",
+    "findingStream": "ストリームを探しています…",
+    "chooseStream": "ストリームを選択",
+    "download": {
+      "download": "ダウンロード",
+      "queued": "待機中",
+      "waitingForWifi": "Wi-Fi接続待ち",
+      "downloading": "ダウンロード中 ${percent}%",
+      "downloadingStarted": "ダウンロード中…",
+      "paused": "一時停止中",
+      "failed": "ダウンロード失敗",
+      "partial": "${total}件中${done}件をダウンロード済み",
+      "downloaded": "ダウンロード済み",
+      "menuTitle": "ダウンロード",
+      "allSeasons": "すべてのシーズン",
+      "pick": {
+        "all": "すべてのエピソード",
+        "unwatched": "未視聴のエピソード",
+        "next5": "未視聴の次の5エピソード",
+        "next10": "未視聴の次の10エピソード"
+      },
+      "keepSynced": "自動同期",
+      "keepSyncedCount": {
+        "other": "未視聴の${n}エピソードを保持"
+      },
+      "keepSyncedAll": "未視聴のエピソードをすべて保持",
+      "manage": "ダウンロードを管理",
+      "pauseAll": "ダウンロードを一時停止",
+      "resumeAll": "ダウンロードを再開",
+      "deleteSeason": "このシーズンのダウンロードを削除",
+      "deleteAll": "すべてのダウンロードを削除",
+      "queuedEpisodes": {
+        "other": "${n}エピソードをダウンロードに追加しました"
+      },
+      "nothingQueued": "すべてのエピソードがダウンロード済みか待機中です。",
+      "failedToQueue": "ダウンロードを追加できませんでした。",
+      "episode": {
+        "download": "エピソードをダウンロード",
+        "pause": "ダウンロードを一時停止",
+        "resume": "ダウンロードを再開",
+        "retry": "ダウンロードを再試行",
+        "pickStream": "ストリームを選択",
+        "cancel": "ダウンロードをキャンセル",
+        "delete": "ダウンロードを削除",
+        "queued": "待機中",
+        "downloading": "${percent}%",
+        "paused": "一時停止中",
+        "failed": "ダウンロード失敗",
+        "downloaded": "ダウンロード済み"
+      }
+    },
+    "related": {
+      "title": "類似作品",
+      "noneFound": "類似作品は見つかりませんでした。"
+    }
+  },
+  "library": {
+    "title": "ライブラリ",
+    "continueWatching": "視聴中",
+    "sort": {
+      "lastWatched": "最近視聴した順",
+      "added": "最近追加した順",
+      "name": "タイトル順（A–Z）",
+      "nameReverse": "タイトル順（Z–A）",
+      "timesWatched": "視聴回数順",
+      "watched": "視聴済みを先に",
+      "notWatched": "未視聴を先に"
+    },
+    "sortBy": "並べ替え",
+    "sortByNamed": "並べ替え：${name}",
+    "empty": "まだ何もありません。タイトルの詳細画面からライブラリに追加できます。",
+    "emptyContinueWatching": "視聴中のタイトルはありません。視聴を始めると、ここに表示されます。",
+    "emptyType": "この種類のタイトルはありません。",
+    "watched": "視聴済み"
+  },
+  "mediaMenu": {
+    "markWatched": "視聴済みにする",
+    "markUnwatched": "未視聴にする",
+    "removeFromContinueWatching": "視聴中から削除",
+    "details": "詳細を表示",
+    "addToLibrary": "ライブラリに追加",
+    "removeFromLibrary": "ライブラリから削除",
+    "playFromStart": "最初から再生",
+    "markSeasonWatched": "シーズンを視聴済みにする",
+    "markSeasonUnwatched": "シーズンを未視聴にする",
+    "chooseStream": "ストリームを選択",
+    "download": "ダウンロード",
+    "pauseDownload": "ダウンロードを一時停止",
+    "resumeDownload": "ダウンロードを再開",
+    "retryDownload": "ダウンロードを再試行",
+    "cancelDownload": "ダウンロードをキャンセル",
+    "deleteDownload": "ダウンロードを削除",
+    "pickStream": "ストリームを選択",
+    "trailer": "予告編",
+    "markFailed": "詳細を読み込めなかったため、${title}をマークできませんでした。接続を確認して、もう一度お試しください。"
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "インストール済みのアドオンを読み取れませんでした。Tortugaを再起動して、もう一度お試しください。",
+    "error": {
+      "invalidTransportUrl": "アドオンのリンクではありません。アドオンのリンクは「/manifest.json」で終わります。",
+      "timeout": "アドオンの応答に時間がかかりすぎました。",
+      "network": "アドオンに接続できませんでした。",
+      "http": "アドオンがエラーを返しました（HTTP ${status}）。",
+      "invalidResponse": "アドオンから、このアプリで読み取れない応答が返されました。",
+      "unexpectedResponse": "アドオンから、要求とは異なる種類の応答が返されました。",
+      "emptyContent": "見つかりませんでした。",
+      "invalidManifest": "アドオンのマニフェストが無効です。",
+      "configurationRequired": "このアドオンはインストールする前に設定が必要です。",
+      "alreadyInstalled": "このアドオンはすでにインストールされています。",
+      "notInstalled": "このアドオンはインストールされていません。",
+      "protectedAddon": "このアドオンは組み込みのため、削除もオフにもできません。"
+    },
+    "title": "アドオン",
+    "allTypes": "すべて",
+    "empty": "インストール済みのアドオンはありません。",
+    "emptyFiltered": "この種類のアドオンはインストールされていません。",
+    "builtIn": "組み込み",
+    "builtInExplanation": "このアドオンは組み込みのため、削除もオフにもできません。",
+    "cancel": "キャンセル",
+    "listSeparator": "、",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "上へ移動",
+    "moveUpNamed": "${name}を上へ移動",
+    "moveDown": "下へ移動",
+    "moveDownNamed": "${name}を下へ移動",
+    "dragToReorderNamed": "${name}を並べ替え",
+    "enabledNamed": "${name}を使用",
+    "close": "閉じる",
+    "version": "バージョン${version}",
+    "catalog": "${name}（${type}）",
+    "resource": {
+      "catalog": "カタログ",
+      "meta": "詳細",
+      "stream": "ストリーム",
+      "subtitles": "字幕",
+      "addonCatalog": "アドオンカタログ",
+      "player": "再生アクティビティ",
+      "library": "ライブラリアクティビティ"
+    },
+    "remove": {
+      "title": "${name}を削除しますか？",
+      "message": "すべてのデバイスで、このプロフィールからアドオンとその設定内容が削除されます。",
+      "confirm": "削除"
+    },
+    "details": {
+      "types": "種類",
+      "resources": "提供内容",
+      "catalogs": "カタログ",
+      "contact": "連絡先",
+      "configure": "設定",
+      "remove": "削除",
+      "enabled": "このアドオンを使用",
+      "enabledOff": "オフ：Tortugaはこのアドオンに何も要求せず、カタログも表示しません。",
+      "shareTitle": "アドオンのリンク",
+      "shareWarning": "このリンクには、このアドオンに設定したアカウントのキーが含まれている場合があります。信頼できる相手にのみ共有してください。",
+      "revealLink": "リンクを表示",
+      "hideLink": "リンクを隠す",
+      "copyLink": "リンクをコピー",
+      "linkCopied": "リンクをコピーしました。"
+    },
+    "watchActivity": {
+      "title": "視聴アクティビティを送信",
+      "explanation": "このアドオンはあなたの視聴アクティビティを受け取ります：再生・一時停止・停止したもの、ライブラリに追加・削除したもの、視聴済みにしたもの。",
+      "agree": "このアドオンが私の視聴アクティビティを受け取ることに同意します",
+      "notAllowed": "許可するまで視聴アクティビティは送られません"
+    },
+    "install": {
+      "action": "アドオンをインストール",
+      "title": "アドオンのインストール",
+      "linkHint": "アドオンのリンク（「/manifest.json」で終わるもの）",
+      "submit": "続ける",
+      "confirm": "インストール",
+      "update": "アップデート",
+      "configure": "設定",
+      "configureFirst": "このアドオンはインストールする前に設定が必要です。設定してから、アドオンのページでインストールしてください。",
+      "alreadyInstalled": "このアドオンはすでにインストールされています。",
+      "updateDetails": "インストール済みです。詳細情報が更新されます。",
+      "updateVersion": "インストール済みです。バージョン${version}にアップデートされます。",
+      "adult": "このアドオンは成人向けコンテンツに指定されています。",
+      "installed": "${name}をインストールしました。",
+      "updated": "${name}をアップデートしました。",
+      "done": "完了"
+    },
+    "browse": {
+      "title": "ブラウズ",
+      "installed": "インストール済み",
+      "installedNote": "インストール済み"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "automatic": "自動",
+    "listSeparator": "、",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "increaseNamed": "${name}を増やす",
+    "decreaseNamed": "${name}を減らす",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "other": "${n}秒"
+      }
+    },
+    "time": {
+      "justNow": "たった今",
+      "minutesAgo": {
+        "other": "${n}分前"
+      },
+      "hoursAgo": {
+        "other": "${n}時間前"
+      },
+      "daysAgo": {
+        "other": "${n}日前"
+      },
+      "monthsAgo": {
+        "other": "${n}か月前"
+      },
+      "yearsAgo": {
+        "other": "${n}年前"
+      }
+    },
+    "sections": {
+      "playback": "再生",
+      "playbackSummary": "言語、視聴済みの基準、次のエピソード、スキップ",
+      "device": "このデバイス",
+      "deviceSummary": "デコード、HDR、フレームレート、音声、キャッシュ、クラッシュレポート",
+      "subtitles": "字幕",
+      "subtitlesSummary": "このデバイスでのサイズ、色、縁取り、位置",
+      "addons": "アドオン",
+      "addonsSummary": {
+        "other": "${n}個のアドオンをインストール済み"
+      },
+      "addonsSummaryLoading": "インストール済みのアドオン",
+      "home": "ホーム",
+      "homeSummary": "ホームに表示する行とその順序",
+      "appearance": "外観",
+      "appearanceSummary": "言語、ポスター、視聴済みのタイトル",
+      "trackers": "連携サービス",
+      "trackersSummary": "視聴状況の送信、視聴履歴、リスト",
+      "trackersConnected": "${services}と連携中",
+      "account": "アカウント",
+      "about": "このアプリについて",
+      "downloads": "ダウンロード",
+      "downloadsSummary": "保存先、Wi-Fi接続時のみ、ストレージ",
+      "data": "エクスポートとインポート",
+      "dataSummary": "プロフィールのデータをファイルに保存・復元"
+    },
+    "profile": {
+      "locked": "PINでロック中",
+      "unlocked": "PINなし",
+      "edit": "プロフィールを編集",
+      "manage": "プロフィールの切り替え・管理"
+    },
+    "about": {
+      "version": "バージョン${version}",
+      "license": "Tortugaは、GNU General Public License バージョン3に基づいてライセンスされています。実行、研究、共有、改変を行うことができ、コピーを渡す人は誰でも、あなたにそのソースコードを提供しなければなりません。",
+      "source": "ソースコード",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "TortugaはTraktを使用していますが、Traktによる推奨や認定を受けたものではありません。",
+      "notices": "サードパーティソフトウェア",
+      "noticeLink": "プロジェクトページ"
+    },
+    "appearance": {
+      "interfaceLanguage": "アプリの言語",
+      "interfaceLanguageHint": "アプリのメニューやメッセージの言語",
+      "interfaceLanguageSystem": "システムのデフォルト",
+      "blurUnwatched": "未視聴のエピソードをぼかす",
+      "blurUnwatchedHint": "まだ見始めていないエピソードの画像をぼかし、あらすじを隠して、内容がわからないようにします",
+      "hideWatched": "視聴済みのタイトルを隠す",
+      "hideWatchedHint": "見終わった映画とシリーズをホームの列と「見つける」から外します。新しいエピソードが出たシリーズは戻ります",
+      "hidePosterCaptions": "ポスターの下のタイトルを隠す",
+      "hidePosterCaptionsHint": "画像だけを表示します。「視聴中」はエピソードと残り時間を表示したままです",
+      "posterTemplate": "ポスターURLテンプレート",
+      "posterTemplateHint": "{imdb_id}、{tmdb_id}、{tvdb_id} は各タイトルのID、{type} は movie または series に置き換わります",
+      "posterTemplateNone": "アドオンのポスター",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "http または https のアドレスではないため無視されます"
+    },
+    "home": {
+      "note": "ホームに表示する行とその順序を選びます。この設定はこのプロフィール専用で、ほかのデバイスと同期されます。",
+      "continueWatchingHint": "常に最初の行",
+      "rowsHeader": "行",
+      "empty": "ホーム用のカタログを持つアドオンがインストールされていません。",
+      "reset": "デフォルトに戻す",
+      "moveUp": "上へ移動",
+      "moveUpNamed": "${name}を上へ移動",
+      "moveDown": "下へ移動",
+      "moveDownNamed": "${name}を下へ移動",
+      "dragToReorder": "ドラッグして並べ替え",
+      "dragToReorderNamed": "${name}を並べ替え",
+      "newCollection": "新しいコレクション",
+      "importCollections": "コレクションをインポート",
+      "exportCollections": "コレクションをエクスポート",
+      "edit": "編集",
+      "delete": "削除",
+      "deleteTitle": "「${title}」を削除しますか？",
+      "deleteMessage": "このコレクションは、すべてのデバイスでこのプロフィールから削除されます。"
+    },
+    "playback": {
+      "title": "再生",
+      "note": "これらの設定はこのプロフィール専用で、ほかのデバイスと同期されます。",
+      "languagesHeader": "言語",
+      "audioLanguages": "音声の言語",
+      "audioLanguagesHint": "再生する音声トラック（優先順）",
+      "audioLanguagesNone": "動画のデフォルト",
+      "audioLanguagesExplanation": "動画は、これらの言語のうち最初に含まれている言語で再生されます。何も選択しない場合は、デフォルトの音声トラックで再生されます。",
+      "subtitleLanguages": "字幕の言語",
+      "subtitleLanguagesHint": "オンにする字幕（優先順）",
+      "subtitleLanguagesNone": "オフ",
+      "subtitleLanguagesExplanation": "動画に含まれるこれらの言語のうち、最初の言語の字幕がオンになります。何も選択しない場合、動画で強制されない限り字幕はオフのままです。",
+      "secondSubtitleLanguage": "2つ目の字幕の言語",
+      "secondSubtitleLanguageHint": "1つ目の字幕と一緒に画面上部に表示",
+      "secondSubtitleLanguageExplanation": "この言語の字幕が、1つ目の字幕と一緒に画面の上部に表示されます。何も選択しない場合、プレーヤーで選ばない限り2つ目の字幕は表示されません。",
+      "secondSubtitleLanguageNone": "オフ",
+      "showSubtitles": "字幕の表示",
+      "showSubtitlesHint": "常に：話されている言語でも字幕を表示し、SDHを優先",
+      "showSubtitlesFollowAudio": "音声に合わせる",
+      "showSubtitlesAlways": "常に",
+      "chosenHeader": "選択した言語",
+      "availableHeader": "言語を追加",
+      "searchLanguages": "言語を検索",
+      "noLanguageMatches": "一致する言語はありません。",
+      "playbackHeader": "再生",
+      "watchedThreshold": "視聴済みの基準",
+      "watchedThresholdHint": "動画のどこまで進んだら視聴済みにし、「視聴中」を次のエピソードに進めるか",
+      "bingeWatching": "次のエピソードを再生",
+      "bingeWatchingHint": "エピソードが終わったら、次のエピソードを開始します（可能な場合は同じソースから）",
+      "upNextCountdown": "次のエピソードまでのカウントダウン",
+      "upNextCountdownHint": "次のエピソードの案内を表示してから再生を開始するまでの時間",
+      "upNextImmediately": "すぐに開始",
+      "seekShort": "短いスキップ",
+      "seekShortHint": "矢印キー、リモコン、プレーヤーのスキップボタン",
+      "seekLong": "長いスキップ",
+      "seekLongHint": "Shift＋矢印キー、および長押し",
+      "videoClick": "動画のクリック",
+      "videoClickHint": "ダブルクリックでは引き続きフルスクリーンを開始／終了",
+      "videoClickPause": "一時停止と再生",
+      "videoClickControls": "コントロールの表示／非表示",
+      "moveUp": "上へ移動",
+      "moveUpNamed": "${name}を上へ移動",
+      "moveDown": "下へ移動",
+      "moveDownNamed": "${name}を下へ移動",
+      "removeLanguage": "削除",
+      "removeLanguageNamed": "${name}を削除",
+      "dragToReorderNamed": "${name}を並べ替え",
+      "skipping": {
+        "header": "スキップ",
+        "footer": "イントロ、あらすじ、クレジットは動画のチャプター名から判別されるため、スキップできるのはチャプターに名前が付いている動画だけです。自動スキップでは、まずボタン上でカウントダウンが行われ、プレーヤーで何か操作すると中止されます。",
+        "intros": "イントロ",
+        "introsHint": "オープニング曲やタイトルシーケンス",
+        "recaps": "あらすじ",
+        "recapsHint": "エピソード冒頭の「前回のあらすじ」",
+        "credits": "クレジット",
+        "creditsHint": "エンドクレジットや次回予告。クレジットが始まると次のエピソードの案内が表示されます",
+        "off": "オフ",
+        "button": "ボタンを表示",
+        "auto": "自動でスキップ"
+      },
+      "streams": {
+        "header": "ストリーム",
+        "footer": "フィルターはすべてのストリーム一覧に適用されます。一覧には非表示にしたストリームの数が表示され、それらを表示することもできます。",
+        "autoPlay": "自動再生",
+        "autoPlayHint": "「再生」「再開」、エピソードの選択、次のエピソードで、ストリーム一覧を表示せずに再生します。並べ替え中は、すべてのアドオンの応答を待ってから再生します",
+        "suggestions": "ストリームを提案",
+        "suggestionsHint": "このプロフィールで選んだストリームから学習し、リストの1つに印を付けます",
+        "autoPlayOff": "オフ",
+        "autoPlayFirstMatch": "フィルターを通過した最初のストリーム",
+        "autoPlayReuseLastLink": "前回と同じストリーム（なければフィルターを通過した最初のもの）",
+        "qualities": "画質",
+        "qualitiesHint": "ストリーム一覧に表示する解像度",
+        "qualitiesAll": "すべて",
+        "qualitiesNone": "なし",
+        "qualitiesAllBut": "${hidden}以外すべて",
+        "qualitySd": "SD",
+        "qualityUnknown": "不明",
+        "ranges": "ダイナミックレンジ",
+        "rangesHint": "ストリーム一覧に表示する SDR、HDR、Dolby Vision",
+        "codecs": "映像コーデック",
+        "codecsHint": "ストリーム一覧に表示する映像コーデック",
+        "minSize": "最小サイズ",
+        "minSizeHint": "これより小さいファイルのストリームを非表示にします。サイズの記載がないものは残ります",
+        "maxSize": "最大サイズ",
+        "maxSizeHint": "これより大きいファイルのストリームを非表示にします。サイズの記載がないものは残ります",
+        "sizeAny": "指定なし",
+        "includePattern": "一致するストリームのみ",
+        "includePatternHint": "各ストリームの名前、説明、ファイル名に照合する正規表現（大文字・小文字は区別しません）",
+        "includePatternNone": "すべてのストリーム",
+        "includePlaceholder": "例：1080p|2160p",
+        "excludePattern": "一致するストリームを非表示",
+        "excludePatternHint": "上のパターンより優先されます",
+        "excludePatternNone": "なし",
+        "excludePlaceholder": "例：HDTV|XviD",
+        "invalidPattern": "正規表現として無効なため、無視されます",
+        "save": "保存",
+        "clear": "クリア"
+      }
+    },
+    "device": {
+      "title": "このデバイス",
+      "note": "これらの設定はこのデバイスにのみ適用され、同期されません。",
+      "videoHeader": "映像",
+      "hardwareDecoding": "ハードウェアデコード",
+      "hardwareDecodingHint": "グラフィックハードウェアで動画をデコードします。映像が乱れる場合はオフにしてください。",
+      "hdr": "HDR",
+      "hdrHint": "ディスプレイが対応している場合、HDR動画をHDRで再生します。オフにするとSDRに変換されます。",
+      "matchFrameRate": "フレームレートの切り替えを強制",
+      "matchFrameRateHint": "システムが切り替えない場合でも、ディスプレイを動画のフレームレートに切り替えます。切り替えのたびに画面が一瞬暗くなります。",
+      "audioHeader": "音声",
+      "audioPassthrough": "音声パススルー",
+      "audioPassthroughHint": "サラウンド音声（Dolby Digital、DTS、TrueHD）をデコードせずにレシーバーへ送ります",
+      "audioPassthroughHintApple": "Dolby DigitalとDolby Digital Plus（Atmosを含む）をシステムのDolbyデコーダーへ送ります。DTSとTrueHDはマルチチャンネルPCMで再生されます。音が出ない場合はオフにしてください。",
+      "audioPassthroughHintAppleSpatial": "Dolby DigitalとDolby Digital Plus（Atmosを含む）をシステムのDolbyデコーダーへ送り、TrueHD AtmosとDTS:Xを空間オーディオで再生します。そのほかのDTSとTrueHDのトラックはマルチチャンネルPCMで再生されます。音が出ない場合はオフにしてください。",
+      "audioPassthroughNormalized": "音量の均一化がオンの間はオフ",
+      "gesturesHeader": "ジェスチャー",
+      "swipeGestures": "スワイプで明るさと音量を調整",
+      "swipeGesturesHint": "動画の左半分を上下にスワイプすると明るさを、右半分では音量を調整します。",
+      "streamingHeader": "ストリーミング",
+      "cacheSize": "先読みキャッシュ",
+      "cacheSizeHint": "再生位置より先に読み込んでおくストリームの量",
+      "discordHeader": "Discord",
+      "discordPresence": "視聴中の作品を表示",
+      "discordPresenceHint": "動画の再生中、Discordのフレンドにタイトルとエピソードが表示されます。このパソコンでDiscordが起動している必要があります。",
+      "privacyHeader": "プライバシー",
+      "crashReports": "クラッシュレポートを送信",
+      "crashReportsHint": "アプリがクラッシュしたときや一部が動かなくなったときに原因を送信します。アドオンのリンクやアカウントは送信しません"
+    },
+    "subtitles": {
+      "title": "字幕",
+      "note": "これらの設定はこのデバイスにのみ適用され、同期されません。SRTなどのプレーンテキスト字幕のスタイルを設定します。スタイル付き字幕は、このスタイルを適用しない限り独自の見た目のままです。",
+      "previewText": "字幕はこのように表示されます",
+      "textHeader": "テキスト",
+      "size": "サイズ",
+      "textColor": "色",
+      "bold": "太字",
+      "outlineHeader": "縁取りと背景",
+      "outline": "縁取り",
+      "outlineColor": "縁取りの色",
+      "background": "背景",
+      "backgroundHint": "テキストの背後に表示するボックスとその不透明度",
+      "backgroundOff": "オフ",
+      "positionHeader": "位置",
+      "position": "高さ",
+      "positionHint": "映像の下端から字幕までの距離",
+      "positionBottom": "最下部",
+      "styledHeader": "スタイル付き字幕",
+      "styledOverride": "スタイル付き字幕にも適用",
+      "styledOverrideHint": "ASSおよびSSA字幕に、独自のスタイルの代わりにこのスタイルを適用します。看板の文字やエフェクトが正しく表示されない場合があります。",
+      "outlines": {
+        "none": "なし",
+        "thin": "細い",
+        "thick": "太い"
+      },
+      "colors": {
+        "white": "白",
+        "yellow": "黄",
+        "green": "緑",
+        "cyan": "シアン",
+        "gray": "グレー",
+        "black": "黒"
+      }
+    },
+    "account": {
+      "title": "アカウント",
+      "syncLabel": "同期",
+      "syncNow": "今すぐ同期",
+      "lastSynced": "最終同期：${time}",
+      "serverLabel": "同期サーバー",
+      "identitiesHeader": "サインイン方法",
+      "linkIdentity": "サインイン方法を追加",
+      "devicesHeader": "デバイス",
+      "thisDevice": "このデバイス",
+      "activeNow": "現在使用中",
+      "lastActive": "最終利用：${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name}をサインアウトしました。",
+      "identityRemoved": "${provider}のサインインを削除しました。",
+      "cancel": "キャンセル",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "シングルサインオン"
+      },
+      "link": {
+        "start": "新しいデバイスをリンク",
+        "title": "デバイスをリンク",
+        "instructions": "新しいデバイスで、別のデバイスからリンクする方法を選びます。次に、表示されたコードを入力するか、QRコードをスキャンしてください。",
+        "codeHint": "ABCD-EFGH",
+        "submit": "続ける",
+        "question": "「${name}」をリンクしますか？",
+        "consequence": "このデバイスがこのアカウントにサインインし、プロフィール、アドオン、ライブラリを利用できるようになります。",
+        "approve": "リンク",
+        "reject": "リンクしない",
+        "approved": "${name}をリンクしました。セットアップは自動的に完了します。",
+        "rejected": "${name}はリンクされませんでした。",
+        "expired": "コードの有効期限が切れました。新しいデバイスでもう一度やり直してください。",
+        "done": "完了"
+      },
+      "signOut": {
+        "action": "サインアウト",
+        "title": "サインアウトしますか？",
+        "message": "プロフィール、アドオン、ライブラリ、ダウンロードはこのデバイスから削除されます。ダウンロード以外はアカウントに残るため、再度サインインすれば元に戻ります。",
+        "confirm": "サインアウト"
+      },
+      "delete": {
+        "action": "アカウントを削除",
+        "explanation": "アカウントと、同期されたすべてのデータをサーバーから削除します。",
+        "title": "アカウントを削除しますか？",
+        "message": "アカウントとそのプロフィール、アドオン、ライブラリ、履歴はサーバーから完全に削除され、すべてのデバイスがサインアウトされます。この操作は取り消せません。",
+        "confirm": "アカウントを削除"
+      },
+      "revoke": {
+        "title": "${name}をサインアウトしますか？",
+        "message": "${name}はサインアウトされ、アカウントのデバイスから外れます。後でもう一度リンクできます。",
+        "messageThisDevice": "現在使用しているデバイスです。サインアウトされ、プロフィール、アドオン、ライブラリ、ダウンロードがこのデバイスから削除されます。ダウンロード以外はアカウントに残ります。",
+        "confirm": "デバイスをサインアウト",
+        "confirmNamed": "デバイスをサインアウト：${name}"
+      },
+      "unsynced": {
+        "title": "同期されていない変更を削除しますか？",
+        "message": {
+          "other": "このデバイスで行われた${n}件の変更（視聴の進捗やライブラリの編集など）が、アカウントに届いていません。今サインアウトすると、完全に削除されます。「キャンセル」を選ぶと、変更はこのデバイスに残り、サインインしたままになります。"
+        },
+        "confirm": "サインアウトして削除"
+      },
+      "unlink": {
+        "title": "${provider}のサインインを削除しますか？",
+        "message": "${provider}でこのアカウントにサインインできなくなります。",
+        "confirm": "削除",
+        "action": "${name}のサインインを削除"
+      }
+    },
+    "trackers": {
+      "title": "連携サービス",
+      "note": "連携したサービスには、このプロフィールが視聴した内容（視聴の進捗と、視聴済みにしたタイトル）が送信されます。サービスの連携と連携解除はすべてのデバイスのこのプロフィールに適用されますが、下のスイッチはこのデバイスにのみ適用されます。",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "連携済み",
+      "connectedAs": "${user}として連携中",
+      "notConnected": "未連携",
+      "unavailable": "このバージョンのアプリでは利用できません",
+      "connect": "連携",
+      "connectNamed": "${name}と連携",
+      "disconnect": "連携解除",
+      "disconnectNamed": "${name}との連携を解除",
+      "scrobble": "視聴内容を送信",
+      "scrobbleHint": "視聴の進捗と視聴済みのタイトルを${service}に送信します",
+      "filtersHeader": "送信する内容",
+      "movies": "映画",
+      "series": "シリーズ",
+      "anime": "アニメ",
+      "queued": {
+        "other": "送信待ちの変更：${n}件"
+      },
+      "notSent": {
+        "other": "送信できなかった変更：${n}件（最後：${reason}）"
+      },
+      "notSentReason": {
+        "answered": "${service}がエラー${status}を返しました",
+        "refused": "${service}に拒否されました",
+        "unreadable": "読み取れませんでした"
+      },
+      "connectTitle": "${service}と連携",
+      "starting": "${service}に接続しています…",
+      "waiting": "${service}でTortugaが許可されるのを待っています…",
+      "linkInstructions": "ブラウザで${service}にサインインし、Tortugaを許可してください。",
+      "linkScan": "または、スマートフォンでQRコードをスキャンしてサインインしてください。",
+      "openInBrowser": "ブラウザで開く",
+      "expired": "コードが使用される前に有効期限が切れました。",
+      "declined": "${service}で連携が許可されませんでした。",
+      "unreachable": "${service}に接続できませんでした。接続を確認して、もう一度お試しください。",
+      "serverUnreachable": "ご利用のTortugaサーバーに接続できませんでした。接続を確認して、もう一度お試しください。",
+      "needsAccount": "${service}と連携するには、Tortugaアカウントが必要です。先にアカウントにサインインしてください。",
+      "busy": "${service}が混み合っています。しばらくしてからもう一度お試しください。",
+      "refused": "${service}がサインインを拒否しました。",
+      "failed": "${service}と連携できませんでした。",
+      "retry": "再試行",
+      "connectedNotice": "${user}として${service}と連携しました。",
+      "connectedNoticeNoName": "${service}と連携しました。",
+      "disconnectTitle": "${service}との連携を解除しますか？",
+      "disconnectMessage": "このプロフィールが視聴した内容は、どのデバイスからも${service}に送信されなくなり、送信待ちの変更は破棄されます。${service}アカウントにある既存のデータはそのまま残ります。",
+      "disconnectedNotice": "${service}との連携を解除しました。",
+      "actionFailed": "操作できませんでした。もう一度お試しください。"
+    },
+    "downloads": {
+      "title": "ダウンロード",
+      "note": "これらの設定はこのデバイスにのみ適用され、同期されません。",
+      "location": {
+        "title": "保存先",
+        "hint": "新しいダウンロードの保存先です。保存済みのダウンロードは移動されません。",
+        "deviceStorage": "内部ストレージ",
+        "external": "外部ストレージ",
+        "change": "フォルダを変更"
+      },
+      "transferHeader": "ダウンロード",
+      "wifiOnly": "Wi-Fi接続時のみダウンロード",
+      "wifiOnlyHint": "モバイルデータ通信など従量制のネットワークでは、ダウンロードを待機します",
+      "atOnce": "同時ダウンロード数",
+      "atOnceHint": "同時に転送するダウンロードの数",
+      "autoRemoveWatched": "視聴済みのダウンロードを削除",
+      "autoRemoveWatchedHint": "視聴し終えたダウンロードを削除します。再生中に削除されることはありません",
+      "subtitleLanguages": "保存する字幕",
+      "subtitleLanguagesHint": "これらの言語の字幕が、各ダウンロードと一緒に保存されます",
+      "subtitleLanguagesProfile": "あなたの字幕の言語：${languages}",
+      "subtitleLanguagesProfileNone": "あなたの字幕の言語：なし",
+      "subtitleLanguagesExplanation": "これらの言語の字幕が各ダウンロードと一緒に保存されるため、オフラインでも表示されます。",
+      "useProfileLanguages": "自分の字幕の言語を使用",
+      "storageHeader": "ストレージ",
+      "deleteAll": "すべてのダウンロードを削除",
+      "deleteAllTitle": "すべてのダウンロードを削除しますか？",
+      "deleteAllText": "このデバイス上の、すべてのプロフィールのダウンロードが削除されます。",
+      "deleteAllConfirm": "すべて削除"
+    },
+    "data": {
+      "exportHeader": "エクスポート",
+      "categories": {
+        "addons": "アドオン",
+        "addonsHint": "インストール済みのアドオンとその順序、リンク",
+        "library": "ライブラリ",
+        "libraryHint": "保存したタイトル",
+        "progress": "視聴の進捗",
+        "progressHint": "再生を止めた位置と、視聴済みのタイトル",
+        "settings": "プロフィールの設定",
+        "settingsHint": "再生、ストリーム、ホームの行など、同期される設定",
+        "streams": "ストリームの履歴",
+        "streamsHint": "各動画で最後に再生したストリーム"
+      },
+      "profilesHeader": "プロフィール",
+      "privateNote": "このファイルにはアドオンのリンクとストリームの履歴が含まれ、APIキーが入っている場合があります。ファイルを持っている人は誰でもそれらを使用できるため、他人に渡さないでください。",
+      "exportNote": "PIN、連携サービスのアカウント、ダウンロード、このデバイスの設定はファイルに含まれません。",
+      "exportAction": "ファイルにエクスポート",
+      "saved": "${name}を保存しました。",
+      "saveFailed": "ファイルを保存できませんでした。",
+      "exportFailed": "エクスポートできませんでした。",
+      "importHeader": "インポート",
+      "importNote": "Tortugaからエクスポートしたファイルを開きます。項目ごとに新しいほうのデータが優先され、このデバイス上のデータは何も削除されません。",
+      "importAction": "ファイルからインポート",
+      "reviewTitle": "インポート",
+      "source": "${date}にTortuga ${version}でエクスポート",
+      "sourceUndated": "Tortuga ${version}でエクスポート",
+      "dataHeader": "データ",
+      "counts": {
+        "addons": {
+          "other": "${n}個のアドオン"
+        },
+        "titles": {
+          "other": "${n}件のタイトル"
+        },
+        "progress": {
+          "other": "${n}タイトル分の視聴の進捗"
+        },
+        "settings": {
+          "other": "${n}件の設定"
+        },
+        "streams": {
+          "other": "${n}件のストリーム"
+        },
+        "profiles": {
+          "other": "${n}件のプロフィール"
+        }
+      },
+      "into": "インポート先",
+      "intoSame": "このアカウントの${name}にインポート",
+      "newProfile": "新しいプロフィール",
+      "importConfirm": "インポート",
+      "imported": "インポートが完了しました：${changes}。",
+      "nothingNew": "インポートする新しいデータはありません。ファイルの内容はすべてこのデバイスにあります。",
+      "notTortuga": "このファイルはTortugaのエクスポートファイルではありません。何もインポートされていません。",
+      "newer": "このファイルは新しいバージョンのTortugaで作成されています。Tortugaをアップデートしてから、もう一度インポートしてください。",
+      "damaged": "このファイルは破損しているか、不完全です。何もインポートされていません。",
+      "clockAhead": "このファイルの時刻が、このデバイスの時計より大幅に進んでいます。両方のデバイスの日付と時刻を確認してから、もう一度インポートしてください。何もインポートされていません。",
+      "importFailed": "インポートできませんでした。",
+      "unreadable": "ファイルを開けませんでした。何もインポートされていません。"
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "最新の状態",
+      "syncing": "同期中…",
+      "offline": "オフラインです。接続が回復すると変更が同期されます。",
+      "signedOut": "サインアウト済み",
+      "failed": {
+        "server": "同期サーバーで問題が発生しました。まもなく再試行します。",
+        "rateLimited": "同期サーバーから頻度を下げるよう求められました。まもなく再試行します。",
+        "quotaExceeded": "アカウントのストレージがいっぱいのため、変更を同期できません。",
+        "tooLarge": "一部の変更はサイズが大きすぎるため同期できません。",
+        "addonsTooLarge": "あるプロフィールのアドオンはサイズが大きすぎるため同期できません。使っていないアドオンを削除してください。",
+        "clockWrong": "一部の変更を同期できません。お使いのデバイスの日付と時刻を確認してください。",
+        "unknown": "同期できませんでした。まもなく再試行します。"
+      }
+    },
+    "error": {
+      "network": "同期サーバーに接続できませんでした。接続を確認して、もう一度お試しください。",
+      "server": "同期サーバーで問題が発生しました。後でもう一度お試しください。",
+      "rateLimited": "試行回数が多すぎます。しばらく待ってから、もう一度お試しください。",
+      "invalidServerUrl": "サーバーのアドレスではありません。https://sync.example.com のような形式で入力してください。",
+      "insecureServerUrl": "インターネット上のサーバーには https を使用してください。暗号化されていない http は、自分のネットワーク内のサーバーでのみ使えます。",
+      "notTortugaServer": "このアドレスではTortugaの同期サーバーが応答しませんでした。",
+      "incompatibleServer": "このサーバーは古いバージョンのTortuga同期を実行しているため、使用できません。",
+      "providerNotEnabled": "このサーバーはこのサインイン方法に対応していません。",
+      "signInRejected": "サインインできませんでした。もう一度お試しください。",
+      "appleCodeRejected": "Appleでサインインが承認されませんでした。もう一度お試しください。",
+      "providerUnavailable": "サインインサービスに接続できませんでした。後でもう一度お試しください。",
+      "signInCancelled": "サインインがキャンセルされました。",
+      "signInExpired": "サインインに時間がかかりすぎました。最初からやり直してください。",
+      "identityInUse": "このサインイン方法は、すでに別のTortugaアカウントで使用されています。",
+      "lastIdentity": "このアカウントで唯一のサインイン方法のため、削除できません。",
+      "sessionEnded": "このデバイスはサインアウトされました。もう一度サインインしてください。",
+      "sessionUnreadable": "このデバイスのサインイン情報を、システムの安全なストレージから読み取れませんでした。Tortugaを再起動して、もう一度お試しください。",
+      "notSignedIn": "先にサインインしてください。",
+      "notFound": "サーバー上に存在しなくなりました。",
+      "linkCodeInvalid": "コードは「ABCD-EFGH」のような8文字の英数字です。",
+      "linkNotFound": "このコードで待機中のデバイスはありません。コードを確認するか、新しいデバイスでやり直してください。",
+      "linkOtherServer": "もう一方のデバイスは別の同期サーバーを使用しています。",
+      "linkFailed": "リンクを完了できませんでした。最初からやり直してください。",
+      "tooLarge": "同期サーバーで扱うにはサイズが大きすぎます。",
+      "quotaExceeded": "アカウントのストレージがいっぱいです。",
+      "unsynced": {
+        "other": "このデバイスで行われた${n}件の変更が、まだアカウントに同期されていません。"
+      },
+      "unexpected": "問題が発生しました。もう一度お試しください。"
+    },
+    "deletion": {
+      "done": "アカウントとそのデータを削除しました。",
+      "appleRevoked": "アカウントとそのデータを削除しました。TortugaによるApple IDの使用も停止されました。",
+      "appleManual": "アカウントとそのデータを削除しました。最後に、「設定」→「Apple ID」→「Appleでサインイン」でTortugaを削除してください。",
+      "githubManual": "${address} でGitHubアカウントからTortugaを削除できます。"
+    },
+    "switchAccount": {
+      "title": "同期されていない変更を削除しますか？",
+      "message": {
+        "other": "このアカウントは、このデバイスがサインインしていたアカウントとは異なります。以前のアカウントでここで行われた${n}件の変更（視聴の進捗やライブラリの編集など）は、そのアカウントに届いていません。サインインすると、これらの変更は、このデバイス上にある以前のアカウントの他のデータ（ダウンロードを含む）とともに完全に削除されます。"
+      },
+      "confirm": "削除してサインイン",
+      "cancel": "キャンセル",
+      "kept": "サインインしていません。変更は、それが行われたアカウントにサインインするまで、このデバイスに残ります。"
+    },
+    "browser": {
+      "signedIn": "サインインしました。このタブを閉じてTortugaに戻ってください。",
+      "failed": "サインインが完了しませんでした。Tortugaに戻って、もう一度お試しください。"
+    },
+    "signIn": {
+      "title": "Tortugaにサインイン",
+      "intro": "Tortugaアカウントがあれば、プロフィール、アドオン、ライブラリをすべてのデバイスで同期できます。",
+      "apple": "Appleでサインイン",
+      "google": "Googleでサインイン",
+      "github": "GitHubでサインイン",
+      "oidc": "${name}でサインイン",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "別のデバイスからリンク",
+      "linkDeviceHint": "スマートフォンやパソコンでサインイン済みの場合は、コードを使ってこのデバイスをリンクできます。",
+      "server": "サーバー：${server}",
+      "useOwnServer": "独自のサーバーを使用",
+      "useHostedServer": "Tortugaのサーバーを使用",
+      "serverField": "サーバーのアドレス",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "続ける",
+      "checkingServer": "サーバーを確認しています…",
+      "loadingOptions": "サインイン方法を読み込んでいます…",
+      "noOptions": "このサーバーには、このデバイスで使えるサインイン方法がありません。サインイン済みのデバイスからリンクしてください。",
+      "retry": "再試行",
+      "starting": "サインインを開始しています…",
+      "native": "${provider}でサインインしています…",
+      "browser": "ブラウザで続けてください。ブラウザでサインインが完了すると、この画面は自動的に進みます。",
+      "finishing": "サインインを完了しています…",
+      "cancel": "キャンセル",
+      "deviceCode": {
+        "instructions": "スマートフォンやパソコンで${url}にアクセスし、次のコードを入力してください：",
+        "scan": "または、スマートフォンでQRコードをスキャンしてください。",
+        "qrDescription": "スマートフォンでスキャンするQRコード",
+        "expires": "コードの有効期限まであと${time}です。",
+        "waiting": "サインインを待っています…"
+      }
+    },
+    "link": {
+      "title": "このデバイスをリンク",
+      "instructions": "サインイン済みのデバイスで「設定」→「アカウント」→「新しいデバイスをリンク」を開き、このQRコードをスキャンするか、コードを入力してください。",
+      "qrDescription": "サインイン済みのデバイスでスキャンするQRコード",
+      "starting": "コードを取得しています…",
+      "expires": "コードの有効期限まであと${time}です。",
+      "waiting": "もう一方のデバイスでの承認を待っています…",
+      "rejected": "もう一方のデバイスでリンクが拒否されました。",
+      "expired": "コードが使用される前に有効期限が切れました。",
+      "newCode": "新しいコードを取得"
+    },
+    "identityLink": {
+      "title": "サインイン方法を追加",
+      "intro": "別のサインイン方法をリンクしておけば、1つのアカウントが使えなくなってもサインインできます。",
+      "allLinked": "このデバイスで使えるサインイン方法は、すべてリンク済みです。",
+      "linking": "リンクしています…"
+    }
+  },
+  "profiles": {
+    "title": "どなたが視聴しますか？",
+    "manageTitle": "プロフィールの管理",
+    "manage": "プロフィールを管理",
+    "done": "完了",
+    "add": "プロフィールを追加",
+    "empty": "プロフィールを作成して始めましょう。",
+    "loading": "プロフィールを読み込んでいます…",
+    "current": "現在のプロフィール",
+    "switchProfile": "プロフィールを切り替え",
+    "pin": {
+      "title": "${name}のPINを入力",
+      "wrong": "PINが違います。もう一度お試しください。",
+      "lockedOut": "試行回数が多すぎます。${time}後にもう一度お試しください。",
+      "cancel": "キャンセル",
+      "backspace": "最後の数字を削除",
+      "entered": "${total}桁中${count}桁を入力済み"
+    },
+    "editor": {
+      "newTitle": "新しいプロフィール",
+      "editTitle": "プロフィールを編集",
+      "name": "名前",
+      "nameRequired": "名前を入力してください。",
+      "nameTooLong": {
+        "other": "名前は${n}文字以内で入力してください。"
+      },
+      "avatar": "アバター",
+      "pinOff": "PINなし",
+      "pinOn": "PINでロック中",
+      "setPin": "PINを設定",
+      "changePin": "PINを変更",
+      "removePin": "PINを削除",
+      "pinEnter": "4桁のPINを入力",
+      "pinConfirm": "PINをもう一度入力",
+      "pinMismatch": "PINが一致しませんでした。新しいPINを入力してください。",
+      "pinNote": "PINを設定すると、あなたのデバイスでほかの人がこのプロフィールを使えなくなります。パスワードではなく、簡易的なロックです。",
+      "save": "保存",
+      "create": "プロフィールを作成",
+      "cancel": "キャンセル",
+      "delete": "プロフィールを削除",
+      "deleteConfirm": "${name}を削除しますか？アドオン、ライブラリ、履歴がすべてのデバイスから削除されます。この操作は取り消せません。",
+      "deleteAction": "削除",
+      "saveFailed": "プロフィールを保存できませんでした。もう一度お試しください。",
+      "kids": {
+        "title": "キッズプロフィール",
+        "subtitle": "選んだレベルまでの年齢に推奨される作品だけを表示します。推奨年齢の多くは推定であり、公式のレーティングではありません。",
+        "needsParent": "先に大人のプロフィールにPINを設定してください。キッズプロフィールを出るときに必要です。",
+        "newOnly": "キッズプロフィールにできるのは新しいプロフィールだけです。",
+        "capTitle": "推奨年齢の上限",
+        "capLittle": "幼児",
+        "capLittleAges": "推奨 0+",
+        "capKids": "キッズ",
+        "capKidsAges": "幼児に加えて推奨 6+",
+        "capTeen": "ティーン",
+        "capTeenAges": "キッズに加えて推奨 12+",
+        "allowUnrated": "レーティングのない作品を許可",
+        "allowUnratedNote": "推奨年齢がない作品です。オフの間は、保護者が1作品ずつ許可します。",
+        "homeRows": "ホームの行",
+        "homeRowsNote": "任意です。これらの行の作品も推奨年齢の上限内である必要があります。",
+        "familyMovies": "ファミリー映画",
+        "familySeries": "ファミリーシリーズ",
+        "addonMissing": "このプロフィールにはそのアドオンがインストールされていません。",
+        "allowed": "許可した作品",
+        "allowedNone": "まだありません。保護者は作品のページから許可できます。",
+        "blocked": "ブロックした作品",
+        "blockedNone": "まだありません。保護者は作品のページからブロックできます。",
+        "remove": "${title}を削除",
+        "leaving": "このプロフィールを出るには保護者のPINが必要です。",
+        "off": "リンク、アドオン、ほとんどの設定はオフです。",
+        "addons": "動画はこのプロフィールのアドオンから届きます。Tortugaはその内容を確認しません。"
+      }
+    },
+    "avatar": {
+      "graphite": "グラファイト",
+      "slate": "スレート",
+      "silver": "シルバー",
+      "ivory": "アイボリー",
+      "sand": "サンド",
+      "clay": "クレイ",
+      "rose": "ローズ",
+      "plum": "プラム",
+      "dusk": "トワイライト",
+      "sea": "マリン",
+      "sage": "セージ",
+      "moss": "モス"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "このプロフィールでは視聴できません",
+      "suggested": "推奨 ${age}+",
+      "byAddon": "アドオンではより年上の視聴者向けとされています",
+      "notRated": "推奨年齢なし",
+      "byParent": "保護者がブロックしました",
+      "unchecked": "推奨年齢を確認できませんでした。後でもう一度お試しください。",
+      "ask": "保護者に頼む"
+    },
+    "block": "このプロフィールでブロック",
+    "pin": {
+      "title": "保護者のPINを入力",
+      "allow": "${title}をこのプロフィールで許可します",
+      "allowThis": "このタイトルをこのプロフィールで許可します",
+      "block": "${title}をこのプロフィールでブロックします",
+      "leave": "このプロフィールを出ます",
+      "settings": "この設定を開きます"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "すべて",
+      "movie": "映画",
+      "series": "シリーズ",
+      "channel": "チャンネル",
+      "tv": "TVチャンネル",
+      "other": "その他"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "再試行",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "すべて表示",
+      "downloading": "ダウンロード中: ${count}件、${percent}%",
+      "downloadingUnsized": "ダウンロード中: ${count}件",
+      "empty": "まだ表示するものがありません。カタログ付きのアドオンをインストールすると、このページに表示されます。",
+      "allHidden": "ホームの行がすべて非表示になっています。「設定」→「ホーム」で再表示できます。"
+    },
+    "continueWatching": {
+      "title": "視聴中",
+      "episode": "第${episode}話",
+      "upNext": "次のエピソード",
+      "minutesLeft": "残り${minutes}分",
+      "hoursLeft": "残り${hours}時間",
+      "hoursMinutesLeft": "残り${hours}時間${minutes}分",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "ウォッチリスト",
+      "recommended": "おすすめ",
+      "trending": "トレンド",
+      "planToWatch": "視聴予定",
+      "planning": "視聴予定",
+      "airing": "放送中",
+      "list": "リスト",
+      "unreachable": "${service}に接続できませんでした。",
+      "signedOut": "${service}からサインアウトされました。「設定」でもう一度連携してください。",
+      "failed": "${service}から予期しない応答がありました。"
+    },
+    "discover": {
+      "type": "種類",
+      "catalog": "カタログ",
+      "genre": "ジャンル",
+      "all": "すべて",
+      "empty": "このカタログには表示するものがありません。",
+      "noCatalogs": "閲覧できるカタログを持つアドオンがインストールされていません。",
+      "selection": "${picker}：${selection}"
+    },
+    "search": {
+      "placeholder": "映画、シリーズなどを検索",
+      "recent": "最近の検索",
+      "clearRecent": "クリア",
+      "removeRecentNamed": "${name}を削除",
+      "noResults": "「${query}」の検索結果はありません",
+      "noCatalogs": "検索に対応したアドオンがインストールされていません。",
+      "clearQuery": "検索をクリア",
+      "hint": "アドオンのカタログから映画、シリーズなどを探せます。"
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "ホーム",
+      "discover": "見つける",
+      "search": "検索",
+      "library": "ライブラリ",
+      "settings": "設定"
+    },
+    "shortLabel": {
+      "board": "ホーム",
+      "library": "ライブラリ",
+      "search": "検索",
+      "settings": "設定"
+    },
+    "back": "戻る",
+    "retry": "再試行",
+    "close": "閉じる",
+    "dismiss": "閉じる",
+    "qrFailed": "このリンクはQRコードとして表示できません。",
+    "openOnPhone": {
+      "title": "スマートフォンで開く",
+      "message": "このデバイスではこのリンクを開けません。スマートフォンのカメラでコードを読み取って開いてください。",
+      "qrDescription": "リンクのQRコード"
+    },
+    "player": {
+      "close": "プレーヤーを閉じる",
+      "fullscreen": "フルスクリーン",
+      "exitFullscreen": "フルスクリーンを終了",
+      "rewind": "巻き戻し",
+      "fastForward": "早送り",
+      "pictureInPicture": "ピクチャ・イン・ピクチャ"
+    },
+    "menu": {
+      "playback": "再生",
+      "nextSubtitles": "次の字幕トラック",
+      "nextAudio": "次の音声トラック"
+    }
+  },
+  "watch": {
+    "title": "一緒に見る",
+    "intro": "友達と、それぞれのデバイスでタイミングを合わせて視聴できます。全員が自分のアドオンから同じタイトルを再生します。ルームを作成するには、プレーヤーのオプションで「一緒に見る」を選びます。",
+    "controlMode": {
+      "hostOnly": "自分だけが操作",
+      "hostOnlyDetail": "あなたが再生・一時停止・再生位置の移動をすると、全員がそれに合わせます",
+      "anyone": "全員が操作",
+      "anyoneDetail": "ルームの誰もが再生・一時停止・再生位置の移動を行えます"
+    },
+    "joinTitle": "ルームに参加",
+    "joinHint": "コードまたは招待リンク",
+    "joinLabel": "参加",
+    "joinInvalid": "6文字のルームコードまたは招待リンクを入力してください",
+    "recentTitle": "最近のルーム",
+    "recentUsed": "最終利用：${time}",
+    "removeRecentNamed": "${name}を削除",
+    "invite": {
+      "title": "ルーム${code}に参加しますか？${server}上のルームで、お使いのリレーサーバー上ではありません。",
+      "join": "参加",
+      "leaveTitle": "ルームから退出してルーム${code}に参加しますか？${server}上のルームで、お使いのリレーサーバー上ではありません。",
+      "leaveHostTitle": "ルームから退出してルーム${code}に参加しますか？${server}上のルームで、お使いのリレーサーバー上ではありません。このルームは次の参加者をホストにして続きます。"
+    },
+    "relay": {
+      "checking": "リレーサーバーを確認しています…",
+      "unreachable": "${server} のリレーサーバーに接続できません。",
+      "retry": "再試行",
+      "title": "リレーサーバー",
+      "hint": "「一緒に見る」のルームをつなぐリレーサーバーです。空欄にすると、Open Watch Partyの公開リレーサーバーを使用します。",
+      "hosted": "Open Watch Partyの公開リレーサーバー",
+      "placeholder": "https://relay.example.com",
+      "invalid": "http:// または https:// で始まるリレーサーバーのアドレスを入力してください",
+      "save": "保存",
+      "reset": "公開リレーサーバーを使用"
+    },
+    "busy": {
+      "creating": "ルームを作成しています…",
+      "joining": "ルームに参加しています…"
+    },
+    "dismiss": "閉じる",
+    "room": {
+      "codeLabel": "ルームコード",
+      "copyCode": "コードをコピー",
+      "codeCopied": "コードをコピーしました",
+      "share": "招待を共有",
+      "shareText": "Tortugaで一緒に見ましょう。${link} を開くか、ルームコード ${code} を入力してください。",
+      "scan": "スマートフォンでスキャンして参加",
+      "youHost": "あなたがホストです",
+      "hostedBy": "ホスト：${name}",
+      "hostOnly": "再生を操作できるのはホストだけです",
+      "anyone": "全員が再生を操作できます",
+      "reconnecting": "再接続しています…",
+      "hostReconnecting": "${name}の再接続を待っています…",
+      "nowPlaying": "${title}を再生中",
+      "nowPlayingEpisode": "${title} · ${episode}を再生中",
+      "idleHost": "何かを再生すると、ルームの全員が一緒に再生します。",
+      "idleGuest": "${name}が再生を始めるのを待っています。",
+      "participants": {
+        "other": "参加者${n}人"
+      },
+      "you": "${name}（あなた）",
+      "hostBadge": "ホスト",
+      "makeHost": "ホストにする",
+      "makeHostNamed": "${name}をホストにする",
+      "joinPlayback": "再生に参加",
+      "leave": "ルームから退出",
+      "leaveTitle": "ルームから退出しますか？",
+      "leaveConfirm": "退出",
+      "end": "ルームを終了",
+      "endTitle": "ルームを終了して全員を退出させますか？",
+      "endConfirm": "ルームを終了",
+      "cancel": "キャンセル",
+      "leaveHostTitle": "ルームから退出しますか？ルームは次の参加者をホストにして続きます。",
+      "kickNamed": "${name}を退出させる",
+      "kickTitle": "${name}をルームから退出させますか？",
+      "kickConfirm": "退出させる",
+      "lock": "ルームをロック",
+      "lockDetail": "新しい参加者は参加できません",
+      "controlTitle": "再生を操作できる人"
+    },
+    "status": {
+      "ready": "準備完了",
+      "loading": "読み込み中",
+      "matching": "ファイルを検索中",
+      "buffering": "バッファリング中",
+      "sameLength": "同じ長さ（${delta}）",
+      "longer": "${delta}長い",
+      "shorter": "${delta}短い",
+      "noStream": "ストリームが見つかりません",
+      "searchFailed": "アドオンの検索に失敗しました",
+      "notPlaying": "プレーヤーを開いていません",
+      "away": "接続が切れています",
+      "declined": "再生していません",
+      "offset": "オフセット ${delta}"
+    },
+    "delta": {
+      "seconds": "${value}秒",
+      "minutes": "${minutes}分${seconds}秒"
+    },
+    "player": {
+      "optionRoom": "ルーム ${code}",
+      "startTitle": "再生中のタイトルでルームを作成",
+      "liveNoRoom": "ライブ配信は一緒に見られません",
+      "watching": {
+        "other": "${n}人が視聴中"
+      },
+      "hostBadge": "ホスト",
+      "waiting": "${names}を待っています…",
+      "waitingMore": {
+        "other": "${names}とほか${n}人を待っています…"
+      },
+      "syncing": "同期中…",
+      "matchingStart": "${name}のファイルに一致するファイルを探しています…",
+      "longer": "あなたのファイルは${name}のファイルより${delta}長いです",
+      "shorter": "あなたのファイルは${name}のファイルより${delta}短いです",
+      "mismatchDetail": "別の編集版の可能性があるため、再生位置がずれる場合があります。",
+      "playAnyway": "このまま再生",
+      "chooseStream": "別のストリームを選択",
+      "noStream": "インストール済みのアドオンには、${title}のストリームがありません。",
+      "searchFailed": "一部のアドオンで${title}を検索できませんでした。",
+      "chooseAStream": "ストリームを選択",
+      "pickFailed": "選択したストリームを開けませんでした。",
+      "hostControls": "このルームで再生を操作できるのは${name}だけです",
+      "hostControlsUnnamed": "このルームで再生を操作できるのはホストだけです",
+      "pausedHere": "このデバイスで一時停止中です。再生を押すとルームに追いつきます。",
+      "dontPlay": "再生しない",
+      "declined": "${title}を再生していません。",
+      "offsetTitle": "オフセット",
+      "offsetDetail": "ルームのファイルに対して自分のファイルをずらします。開始位置が早い、または遅い編集版に使います。",
+      "offsetReset": "リセット"
+    },
+    "toast": {
+      "joined": "${name}が参加しました",
+      "left": "${name}が退出しました",
+      "paused": "${name}が一時停止しました",
+      "resumed": "${name}が再生を再開しました",
+      "seeked": "${name}が再生位置を移動しました",
+      "speed": "${name}が再生速度を${speed}に変更しました",
+      "buffering": "${name}がバッファリング中です",
+      "hostChanged": "${name}がホストになりました",
+      "becameHost": "あなたがホストになりました",
+      "media": "${name}が${title}の再生を始めました",
+      "forbidden": "ホストだけが操作できます"
+    },
+    "failure": {
+      "create": "ルームを作成できませんでした。もう一度お試しください。",
+      "join": "ルームに参加できませんでした。もう一度お試しください。",
+      "share": "この動画をルームと共有できませんでした。別のストリームをお試しください。",
+      "live": "ライブ配信は一緒に見られません。ルームは動画を待っています。",
+      "roomNotFound": "このコードのルームはありません。",
+      "roomFull": "このルームは満員です。",
+      "rateLimited": "試行回数が多すぎます。1分ほど待ってから、もう一度お試しください。",
+      "connection": "リレーサーバーに接続できません。ネットワーク接続を確認してください。",
+      "sessionLost": "ルームとの接続が切れました。",
+      "ended": "ホストがルームを終了しました。",
+      "roomLocked": "このルームはロックされています。",
+      "relayFull": "リレーサーバーが満杯です。しばらくしてからもう一度お試しください。",
+      "blocked": "このリレーサーバーはTortugaを受け付けていません。",
+      "kicked": "ホストによってルームから退出させられました。",
+      "expired": "ルームの有効期限が切れました。",
+      "replaced": "別のデバイスでこのルームに参加しました。"
+    }
+  },
+  "downloads": {
+    "title": "ダウンロード",
+    "empty": "ダウンロードしたものはまだありません。映画やエピソードをそれぞれのページからダウンロードすると、オフラインで視聴できます。",
+    "offline": "オフラインです。接続が回復するとダウンロードが再開されます。",
+    "storage": "使用済み${used} · 空き${free}",
+    "storageUsed": "使用済み${used}",
+    "pauseAll": "すべて一時停止",
+    "resumeAll": "すべて再開",
+    "actionFailed": "ダウンロードを変更できませんでした。もう一度お試しください。",
+    "actionsFailed": "ダウンロードを変更できませんでした。もう一度お試しください。",
+    "episodes": {
+      "other": "${n}エピソード"
+    },
+    "videos": {
+      "other": "${n}本の動画"
+    },
+    "otherVideos": "その他の動画",
+    "summary": "${count} · ${size}",
+    "progress": "${done} / ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "待機中",
+      "waitingForWifi": "Wi-Fi接続待ち",
+      "waitingForNetwork": "ネットワーク接続待ち",
+      "resolving": "準備中…",
+      "downloading": "ダウンロード中",
+      "downloadingPercent": "ダウンロード中 · ${percent}%",
+      "paused": "一時停止中",
+      "failed": "失敗",
+      "completed": "ダウンロード済み",
+      "cancelled": "キャンセル済み"
+    },
+    "action": {
+      "play": "再生",
+      "pause": "一時停止",
+      "resume": "再開",
+      "retry": "再試行",
+      "pickStream": "ストリームを選択",
+      "cancel": "ダウンロードをキャンセル",
+      "delete": "ダウンロードを削除",
+      "deleteGroup": "ダウンロードをまとめて削除",
+      "openDetail": "詳細を表示"
+    },
+    "deleteConfirm": {
+      "title": "${name}の${count}を削除しますか？",
+      "message": "もう一度ダウンロードするには時間とネットワーク接続が必要です。",
+      "confirm": "削除",
+      "cancel": "キャンセル"
+    },
+    "keepSynced": {
+      "title": "自動同期",
+      "note": "ここにある各シリーズは、次の未視聴エピソードがこのデバイスにダウンロードされたまま保たれ、1つ視聴するたびに補充されます。",
+      "empty": "自動同期しているシリーズはありません。シリーズのダウンロードメニューで、保持する未視聴エピソードの数を選んでください。",
+      "series": {
+        "other": "${n}シリーズ"
+      },
+      "manage": "自動同期を管理",
+      "pauseRule": "${title}を一時停止",
+      "resumeRule": "${title}を再開",
+      "stopRule": "${title}の自動同期を停止",
+      "status": {
+        "downloading": {
+          "other": "${n}エピソードをダウンロード中"
+        },
+        "failed": {
+          "other": "${n}エピソードが失敗"
+        },
+        "downloaded": {
+          "other": "${n}エピソードをダウンロード済み"
+        },
+        "downloadedNone": "ダウンロード済みのエピソードはありません"
+      },
+      "stop": {
+        "title": "${title}の自動同期を停止しますか？",
+        "message": {
+          "other": "「ダウンロード」にある${n}エピソードは自動同期で追加されたものです。これも削除しますか？"
+        },
+        "messageNone": "今後エピソードはダウンロードされません。",
+        "keep": "ダウンロードを残す",
+        "delete": "ダウンロードを削除",
+        "confirm": "停止",
+        "cancel": "キャンセル"
+      },
+      "notice": {
+        "other": "自動同期で${title}の${n}エピソードを追加しました"
+      },
+      "noticeSeveral": {
+        "other": "自動同期で${n}エピソードを追加しました"
+      },
+      "actionFailed": "自動同期を変更できませんでした。もう一度お試しください。"
+    },
+    "failure": {
+      "noStream": "このエピソードのストリームを選べませんでした。手動で選択してください。",
+      "noStreamInstant": "このエピソードの即時再生ストリームを選べませんでした。手動で選択してください。",
+      "network": "接続に失敗しました。",
+      "http": "サーバーからHTTP ${status}が返されました。",
+      "streamGone": "リンクの有効期限が切れ、アドオンからこのストリームが提供されなくなりました。",
+      "diskFull": "デバイスの空き容量がなくなったため、ダウンロードを停止しました。",
+      "notEnoughSpace": "このダウンロードに必要な空き容量がありません。",
+      "sizeMismatch": "ダウンロードしたファイルが不完全です。",
+      "unsupported": "このストリームはダウンロードできません。",
+      "locationUnavailable": "ダウンロードの保存先を利用できません。",
+      "fileMissing": "ダウンロードしたファイルが見つかりません。",
+      "storage": "デバイスのストレージが応答しませんでした。"
+    },
+    "notification": {
+      "channel": "ダウンロード",
+      "title": "${title}をダウンロード中",
+      "count": {
+        "other": "${n}件のダウンロード"
+      },
+      "progress": "${percent}%",
+      "preparing": "ダウンロードを準備しています…",
+      "waiting": "Wi-Fi接続待ち",
+      "paused": "一時停止中",
+      "pause": "一時停止",
+      "resume": "再開",
+      "cancel": "キャンセル",
+      "failed": "ダウンロードに失敗しました：${title}",
+      "completed": "${title}をダウンロードしました"
+    }
+  },
+  "offline": {
+    "title": "オフラインです",
+    "text": "閲覧するにはインターネットに接続してください。ダウンロードしたものはオフラインでも再生できます。",
+    "textNoDownloads": "閲覧するにはインターネットに接続してください。",
+    "openDownloads": "ダウンロードを開く",
+    "detail": "ダウンロードと一緒に保存された詳細を表示しています。"
+  },
+  "playerApps": {
+    "chooser": "毎回確認する",
+    "tortuga": "Tortuga",
+    "playWith": "プレーヤーを選んで再生…",
+    "banner": {
+      "opening": "${player}で開いています…",
+      "notInstalled": "${player}はこのデバイスにインストールされていません。",
+      "didNotStart": "${player}が起動しませんでした。",
+      "playInTortuga": "Tortugaで再生",
+      "cancel": "キャンセル",
+      "dismiss": "閉じる"
+    },
+    "detail": {
+      "playing": "${player}で再生中 · ${position}",
+      "playingOf": "${player}で再生中 · ${position} / ${duration}",
+      "paused": "${player}で一時停止中 · ${position}",
+      "pausedOf": "${player}で一時停止中 · ${position} / ${duration}",
+      "finished": "${player}で開きました。${title}を見終わりましたか？",
+      "markWatched": "視聴済みにする",
+      "notYet": "まだ"
+    },
+    "settings": {
+      "player": "プレーヤー",
+      "deviceOnly": "このデバイスのみ",
+      "note": "このデバイスの動画は、ここで選んだプレーヤーで再生されます。ストリームのメニューの「プレーヤーを選んで再生…」で、1本の動画だけ別のプレーヤーで再生できます。",
+      "notFound": "${player}（見つかりません）",
+      "followsProgress": "前回の続きから再生し、再生中に視聴の進捗を保存します",
+      "savesOnReturn": "前回の続きから再生し、停止した位置を保存します",
+      "savesOnReturnFromStart": "最初から再生し、停止した位置を保存するか、見終わったかどうかを確認します",
+      "asksAfter": "前回の続きから再生し、その後で見終わったかどうかを確認します",
+      "asksAfterFromStart": "動画を開くだけで、その後で見終わったかどうかを確認します",
+      "chooserDetail": "動画ごとに、再生するアプリをデバイスが確認します",
+      "customHeader": "カスタムプレーヤー",
+      "addCustom": "カスタムプレーヤーを追加",
+      "deleteNamed": "${name}を削除",
+      "form": {
+        "title": "カスタムプレーヤーを追加",
+        "name": "名前",
+        "nameHint": "マイプレーヤー",
+        "program": "プログラム",
+        "programHint": "mpv、またはプログラムのフルパス",
+        "arguments": "引数",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url}は動画のリンク、{title}はタイトル、{start}は再生開始位置（秒）、{subtitle}は最初の字幕のリンクです。",
+        "urlTemplate": "URLテンプレート",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url}はURL用にエンコードされた動画のリンク、{url_raw}はエンコードされていないそのままのリンクです。",
+        "packageName": "パッケージ名",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "追加",
+        "cancel": "キャンセル",
+        "nameMissing": "プレーヤーの名前を入力してください。",
+        "programMissing": "実行するプログラムを入力してください。",
+        "urlTemplateMissing": "URLテンプレートを入力してください。",
+        "packageNameMissing": "アプリのパッケージ名を入力してください。",
+        "argumentsNeedUrl": "引数には{url}が必要です。",
+        "urlTemplateNeedsUrl": "URLテンプレートには{url}または{url_raw}が必要です。",
+        "packageNameInvalid": "パッケージ名ではありません。org.videolan.vlc のような形式で入力してください。"
+      }
+    }
+  },
+  "guide": {
+    "title": "番組表",
+    "today": "今日",
+    "tomorrow": "明日",
+    "yesterday": "昨日",
+    "day": "${day}日(${weekday})",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start}～${end}",
+    "onNow": "放送中",
+    "now": "現在",
+    "noProgrammes": "番組情報はありません",
+    "noChannels": "この番組表には、この日のチャンネルがありません。",
+    "noGuide": "番組表を提供するアドオンがインストールされていません。",
+    "failed": "番組表を読み込めませんでした：${reason}",
+    "cast": "出演：${names}",
+    "directors": "監督：${names}"
+  },
+  "calendar": {
+    "title": "カレンダー",
+    "previousMonth": "前の月",
+    "nextMonth": "次の月",
+    "today": "今日",
+    "tomorrow": "明日",
+    "emptyLibrary": "ライブラリにシリーズを追加すると、ここにエピソードが表示されます。",
+    "noAddon": "ライブラリのシリーズのカレンダーを提供するアドオンがありません。",
+    "emptyMonth": "エピソードはありません。",
+    "newEpisodes": {
+      "other": "新しいエピソード${n}件"
+    },
+    "episodes": {
+      "other": "${n}エピソード"
+    }
+  },
+  "watchlist": {
+    "lists": "連携サービスのウォッチリスト",
+    "hint": "各リストはそのサービスのアカウントにあります。ライブラリは変わりません。",
+    "add": "${list}に追加",
+    "remove": "${list}から削除",
+    "trakt": "Trakt のウォッチリスト",
+    "simkl": "Simkl の視聴予定",
+    "mdblist": "MDBList のウォッチリスト",
+    "myAnimeList": "MyAnimeList の視聴予定",
+    "aniList": "AniList の視聴予定",
+    "saving": "保存中…",
+    "queued": "未送信、あとで再試行します",
+    "failed": "保存できませんでした",
+    "addFailed": "${title}を${list}に追加できませんでした。",
+    "removeFailed": "${title}を${list}から削除できませんでした。"
+  },
+  "collections": {
+    "needsAddon": "アドオン「${name}」が必要です",
+    "needsCatalog": "${addon}にカタログ「${catalog}」がありません",
+    "needsFilter": "Tortugaで設定できないフィルターが必要です",
+    "traktUnavailable": "このバージョンのアプリではTraktのリストを利用できません",
+    "tooLarge": "「${title}」は大きすぎて同期できません",
+    "kind": {
+      "tmdbList": "TMDBリスト",
+      "tmdbCollection": "TMDBコレクション",
+      "tmdbCompany": "TMDB制作会社",
+      "tmdbNetwork": "TMDBネットワーク",
+      "tmdbDiscover": "TMDB発見",
+      "tmdbPerson": "TMDB人物",
+      "tmdbDirector": "TMDB監督",
+      "letterboxd": "Letterboxd",
+      "unknown": "不明な提供元「${name}」"
+    },
+    "summary": {
+      "adds": {
+        "other": "${n}件のコレクションを追加します"
+      },
+      "replaces": {
+        "other": "同じIDの${n}件のコレクションを置き換えます"
+      },
+      "needsAddon": {
+        "other": "${n}件のソースにアドオン「${name}」が必要です"
+      },
+      "needsTracker": {
+        "other": "${n}件のソースに${service}との連携が必要です"
+      },
+      "unsupported": {
+        "other": "${kind}：${n}件のソースを除外しました"
+      },
+      "unsupportedHint": "Tortugaが読み込むのはアドオンのカタログとトラッカーのリストで、これらのソースは読み込めません。代わりにAIOMetadataやMDBListなどのアドオンのカタログを使ってください。",
+      "folderDropped": "「${collection}」のフォルダー「${folder}」を除外しました：読み込めるソースがありません",
+      "collectionDropped": "コレクション「${title}」を除外しました：読み込めるフォルダーがありません",
+      "tooLarge": "コレクション「${title}」はインポートされませんでした：大きすぎて同期できません"
+    },
+    "refused": {
+      "notJson": "コレクションのファイルではありません：JSONではありません。",
+      "notList": "コレクションのファイルではありません：コレクションのリストが含まれていません。",
+      "empty": "このファイルにはコレクションがありません。",
+      "collectionInvalid": "ファイルの${position}番目のコレクションを読み込めません。",
+      "collectionNoId": "ファイルの${position}番目のコレクションにIDがありません。",
+      "collectionNoTitle": "コレクション${id}にタイトルがありません。",
+      "duplicateCollection": "ファイル内の2つのコレクションのIDが同じ${id}です。",
+      "noFolders": "コレクション「${collection}」にフォルダーのリストがありません。",
+      "folderInvalid": "「${collection}」の${position}番目のフォルダーを読み込めません。",
+      "folderNoId": "「${collection}」の${position}番目のフォルダーにIDがありません。",
+      "folderNoTitle": "「${collection}」のフォルダー${id}にタイトルがありません。",
+      "duplicateFolder": "「${collection}」の2つのフォルダーのIDが同じ${id}です。",
+      "noSources": "「${collection}」のフォルダー「${folder}」にソースのリストがありません。",
+      "unknownShape": "「${collection}」のフォルダー「${folder}」のタイルの形が不明です：${shape}。",
+      "sourceInvalid": "「${collection}」のフォルダー「${folder}」の${position}番目のソースが不完全です。"
+    },
+    "row": "コレクション",
+    "rowSource": {
+      "other": "コレクション · ${n}個のフォルダー"
+    },
+    "folder": {
+      "all": "すべて",
+      "empty": "ここには作品がありません",
+      "goToTrackers": "連携サービスへ",
+      "goToAddons": "アドオンへ"
+    },
+    "importing": {
+      "title": "コレクションをインポート",
+      "note": "NuvioまたはAIOMetadataのコレクションファイル：リンクを入力するか、ファイルを開いてください。手持ちのコレクションと同じIDのコレクションは、それを置き換えます。",
+      "urlLabel": "リンク",
+      "urlHint": "https://…/collections.json",
+      "fetch": "取得",
+      "openFile": "ファイルを開く",
+      "confirm": "インポート",
+      "done": "完了",
+      "rowNew": {
+        "other": "新規 · ${n}個のフォルダー"
+      },
+      "rowReplaces": {
+        "other": "既存のものを置き換え · ${n}個のフォルダー"
+      },
+      "imported": {
+        "other": "${n}件のコレクションをインポートしました"
+      },
+      "notWeb": "http:// または https:// で始まるリンクを入力してください。",
+      "tooLarge": "このファイルは4 MBを超えています。",
+      "httpError": "リンクがエラー${status}を返しました。",
+      "timeout": "リンクが時間内に応答しませんでした。",
+      "unreachable": "リンクに接続できません。リンクとネットワーク接続を確認してください。",
+      "unreadable": "このファイルはテキストとして読み込めません。",
+      "failed": "コレクションを保存できませんでした。"
+    },
+    "editor": {
+      "newHeading": "新しいコレクション",
+      "editHeading": "コレクションを編集",
+      "titleLabel": "タイトル",
+      "view": "表示",
+      "viewHint": "フォルダー内のソースの表示方法",
+      "viewTabs": "タブ",
+      "viewRows": "行",
+      "viewFollow": "アプリの設定に従う",
+      "allTab": "「すべて」タブ",
+      "allTabHint": "すべてのソースの作品を表示する最初のタブ",
+      "foldersHeader": "フォルダー",
+      "addFolder": "フォルダーを追加",
+      "noFolders": "フォルダーはまだありません",
+      "sources": {
+        "other": "${n}件のソース"
+      },
+      "save": "保存",
+      "newFolder": "新しいフォルダー",
+      "folderTitleLabel": "タイトル",
+      "shape": "タイルの形",
+      "shapePoster": "ポスター",
+      "shapeLandscape": "横長",
+      "shapeSquare": "正方形",
+      "coverLabel": "カバー画像のリンク",
+      "coverHint": "https://…",
+      "hideTitle": "タイトルを隠す",
+      "hideTitleHint": "タイルにはカバーだけを表示します",
+      "sourcesHeader": "ソース",
+      "addSource": "ソースを追加",
+      "noSources": "ソースはまだありません",
+      "deleteNamed": "${name}を削除",
+      "removeNamed": "${name}を外す",
+      "noTitle": "コレクションにタイトルを付けてください。",
+      "noFolder": "コレクションにフォルダーを追加してください。",
+      "folderNoTitle": "${position}番目のフォルダーにタイトルを付けてください。",
+      "folderNoSource": "「${folder}」にソースを追加してください。",
+      "saveFailed": "コレクションを保存できませんでした。",
+      "discardTitle": "変更を破棄しますか？",
+      "discard": "破棄",
+      "keepEditing": "編集を続ける",
+      "picker": {
+        "addons": "アドオンのカタログ",
+        "trackers": "連携サービス",
+        "noAddons": "追加できるカタログを持つアドオンがインストールされていません。",
+        "noTrackers": "リストを追加するには、設定 → 連携サービスでサービスを連携してください。",
+        "listsFailed": "現在${service}のリストを読み込めません。",
+        "byLink": "リンクで指定する${service}のリスト",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "追加",
+        "notAList": "${service}のリストのリンクではありません。",
+        "notFound": "このリンクに${service}のリストはありません。",
+        "unreachable": "現在${service}に接続できません。"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.edde746.tortuga.dev",
+      "sha256_cert_fingerprints": [
+        "8F:45:68:8E:CC:4A:5E:89:A4:27:0E:76:67:6A:13:ED:51:FC:75:91:BF:45:36:7C:7F:8F:58:CC:FE:2D:28:41"
+      ]
+    }
+  }
+]

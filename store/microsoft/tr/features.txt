@@ -1,0 +1,14 @@
+Stremio eklentileriyle çalışır: Bir eklentiyi bağlantısıyla yükleyin
+Tüm eklentilerde Ana Sayfa, Keşfet ve Ara
+Bir içeriğin akışları eklentiye göre gruplanır
+mpv ile oynatma; bilgisayarınız ve ekranınız destekliyorsa HDR10 ve Dolby Vision ile
+Gömülü ve eklenti altyazıları; ses ve altyazı seçimleriniz sonraki bölüme taşınır
+Girişleri, özetleri ve jenerikleri atlayın
+İzlemeye Devam Et, ilerleme ve izlendi işaretleri
+Çevrimdışı izleme için İndirilenler
+Birlikte izleme: eşzamanlı oynatma, herkes kendi eklentileriyle
+Kendi eklentileri, kitaplığı ve ayarları olan profiller, isteğe bağlı PIN ile
+Apple, Google veya GitHub ile giriş yaparak cihazlarınız arasında eşitleme
+Trakt, Simkl, MDBList, MyAnimeList ve AniList
+Klavye kısayolları, medya tuşları ve Windows medya denetimleri
+21 dil

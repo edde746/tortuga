@@ -1,0 +1,1 @@
+Stremio eklentileriyle çalışan bir video oynatıcı. Yüklediğiniz eklentiler katalogları ve akışları getirir, Tortuga da bunları oynatır. Tortuga kendine ait hiçbir içerik sunmaz.

@@ -1,0 +1,538 @@
+{
+    "about": "Invented stream lists: plain-texts/ (a release name, its size and language flags) and styled-texts/ (a custom formatter's styled Unicode lines), one of each per title; titles, ids and release names are made up, the mix of qualities, sizes and languages is that of real lists.",
+    "titles": [
+        {
+            "type": "movie",
+            "video": "ex0001",
+            "runtime": 142,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0002:1:1",
+            "runtime": 65,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0003",
+            "runtime": 125,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0004",
+            "runtime": 106,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0005",
+            "runtime": 134,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0006",
+            "runtime": 124,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0007",
+            "runtime": 129,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0008",
+            "runtime": 124,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0009",
+            "runtime": 122,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0010:1:1",
+            "runtime": 25,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0011:1:1",
+            "runtime": 25,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0012:1:1",
+            "runtime": 26,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0013:1:1",
+            "runtime": 24,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0014:1:1",
+            "runtime": 25,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0015:1:1",
+            "runtime": 24,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0016:1:1",
+            "runtime": 24,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0017:1:1",
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0018:1:1",
+            "runtime": 24,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0019:1:1",
+            "runtime": 26,
+            "anime": true
+        },
+        {
+            "type": "series",
+            "video": "ex0020:1:1",
+            "runtime": 24,
+            "anime": true
+        },
+        {
+            "type": "movie",
+            "video": "ex0021",
+            "runtime": 107,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0022",
+            "runtime": 126,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0023",
+            "runtime": 109,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0024",
+            "runtime": 109,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0025",
+            "runtime": 111,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0026",
+            "runtime": 96,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0027",
+            "runtime": 145,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0028",
+            "runtime": 132,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0029",
+            "runtime": 157,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0030",
+            "runtime": 114,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0031",
+            "runtime": 111,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0032",
+            "runtime": 107,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0033",
+            "runtime": 146,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0034",
+            "runtime": 112,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0035",
+            "runtime": 129,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0036",
+            "runtime": 100,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0037",
+            "runtime": 32,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0038",
+            "runtime": 95,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0039",
+            "runtime": 101,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0040",
+            "runtime": 157,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0041",
+            "runtime": 123,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0042",
+            "runtime": 96,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0043",
+            "runtime": 130,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0044",
+            "runtime": 131,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0045",
+            "runtime": 97,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0046",
+            "runtime": 112,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0047",
+            "runtime": 97,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0048",
+            "runtime": 98,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0049",
+            "runtime": 111,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0050",
+            "runtime": 110,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0051",
+            "runtime": 130,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0052",
+            "runtime": 108,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0053",
+            "runtime": 111,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0054",
+            "runtime": 128,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0055",
+            "runtime": 104,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0056",
+            "runtime": 91,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0057",
+            "runtime": 100,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0058",
+            "runtime": 131,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0059",
+            "runtime": 112,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0060",
+            "runtime": 138,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0061",
+            "runtime": 112,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0062",
+            "runtime": 108,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0063",
+            "runtime": 112,
+            "anime": false
+        },
+        {
+            "type": "movie",
+            "video": "ex0064",
+            "runtime": 97,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0065:1:1",
+            "runtime": 52,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0066:1:1",
+            "runtime": 50,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0067:1:1",
+            "runtime": 52,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0068:1:1",
+            "runtime": 46,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0069:1:1",
+            "runtime": 58,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0070:1:1",
+            "runtime": 41,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0071:1:1",
+            "runtime": 46,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0072:1:1",
+            "runtime": 50,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0073:1:1",
+            "runtime": 59,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0074:1:1",
+            "runtime": 27,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0075:1:1",
+            "runtime": 27,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0076:1:1",
+            "runtime": 51,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0077:1:1",
+            "runtime": 53,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0078:1:1",
+            "runtime": 231,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0079:1:1",
+            "runtime": 28,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0080:1:1",
+            "runtime": 43,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0081:1:1",
+            "runtime": 53,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0082:1:1",
+            "runtime": 40,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0083:1:1",
+            "runtime": 43,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0084:1:1",
+            "runtime": 43,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0085:1:1",
+            "runtime": 22,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0086:1:1",
+            "runtime": 57,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0087:1:1",
+            "runtime": 69,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0088:1:1",
+            "runtime": 49,
+            "anime": false
+        },
+        {
+            "type": "series",
+            "video": "ex0089:1:1",
+            "runtime": 53,
+            "anime": false
+        }
+    ]
+}

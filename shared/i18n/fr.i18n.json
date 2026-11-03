@@ -1,0 +1,2121 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Rechercher des mises à jour…",
+    "launchFailed": "Impossible de démarrer Tortuga.",
+    "startup": {
+      "database": "Ouverture de la base de données…",
+      "migration": "Mise à jour de la base de données…",
+      "account": "Chargement de votre compte…",
+      "profiles": "Chargement des profils…"
+    },
+    "localNetworkUsage": "Tortuga utilise votre réseau local pour accéder aux add-ons, aux médias et à un serveur de synchronisation que vous hébergez chez vous."
+  },
+  "player": {
+    "nowPlaying": "Lecture en cours",
+    "buffering": "Mise en mémoire tampon…",
+    "position": "${position} / ${duration}",
+    "timeline": "Position de lecture",
+    "play": "Lire",
+    "pause": "Pause",
+    "resolving": "Préparation de la source…",
+    "opening": "Ouverture…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "EN DIRECT",
+      "position": "En direct · regardé ${time}",
+      "behind": "En direct · ${time} de retard",
+      "goToLive": "Revenir au direct"
+    },
+    "nextEpisode": "Épisode suivant",
+    "previousEpisode": "Épisode précédent",
+    "lock": {
+      "button": "Verrouiller l'écran",
+      "tapToUnlock": "Touchez pour déverrouiller",
+      "tapAgainToUnlock": "Touchez à nouveau pour déverrouiller"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normale",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volume",
+      "level": "${percent} %",
+      "muted": "Son coupé",
+      "mute": "Couper le son",
+      "unmute": "Réactiver le son"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Sous-titres",
+      "speed": "Vitesse de lecture",
+      "subtitleDelay": "Décalage des sous-titres",
+      "audioDelay": "Décalage audio",
+      "moreSubtitles": "Plus de sous-titres",
+      "reset": "Réinitialiser",
+      "subtitleDelayEarlier": "Décalage des sous-titres : plus tôt",
+      "subtitleDelayLater": "Décalage des sous-titres : plus tard",
+      "audioDelayEarlier": "Décalage audio : plus tôt",
+      "audioDelayLater": "Décalage audio : plus tard"
+    },
+    "track": {
+      "off": "Désactivés",
+      "numbered": "Piste ${number}",
+      "defaultTrack": "Par défaut",
+      "forced": "Forcés",
+      "sdh": "SDH",
+      "audioDescription": "Audiodescription",
+      "external": "Externe",
+      "second": "Seconds sous-titres",
+      "showAsSecond": "Afficher comme seconds sous-titres",
+      "removeSecond": "Retirer les seconds sous-titres",
+      "otherLanguage": "Autres",
+      "mono": "Mono",
+      "stereo": "Stéréo",
+      "channels": {
+        "one": "${n} canal",
+        "many": "${n} de canaux",
+        "other": "${n} canaux"
+      }
+    },
+    "info": {
+      "title": "Infos de lecture",
+      "tab": "Infos",
+      "resolution": "Résolution",
+      "video": "Vidéo",
+      "dynamicRange": "Plage dynamique",
+      "audio": "Audio",
+      "decoder": "Décodeur",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} i/s",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Matériel (${name})",
+      "softwareDecoder": "Logiciel",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision, profil ${profile}",
+      "stream": "Source",
+      "addon": "Add-on",
+      "pickedBy": "Choisie par",
+      "autoPlayFirstMatch": "Lecture automatique, première correspondance",
+      "autoPlayLastLink": "Lecture automatique, même source que la dernière fois",
+      "source": "Provenance",
+      "downloaded": "Fichier téléchargé",
+      "name": "Nom",
+      "file": "Fichier",
+      "container": "Conteneur",
+      "fileSize": "Taille",
+      "bitrate": "Débit",
+      "codec": "Codec",
+      "pixelFormat": "Format de pixel",
+      "bitDepth": "${bits} bits",
+      "color": "Couleur",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nits",
+      "mastering": "Écran de mastering",
+      "nitsRange": "${min}–${max} nits",
+      "droppedFrames": "Images perdues",
+      "droppedFramesValue": "${output} (décodeur ${decoder})",
+      "delayedFrames": "Images en retard",
+      "output": "Sortie",
+      "hertz": "${value} Hz",
+      "channels": "Canaux",
+      "sampleRate": "Fréquence d’échantillonnage",
+      "track": "Piste",
+      "secondTrack": "Seconde piste",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Audio spatial",
+      "rendering": "Rendu",
+      "surround": "Surround",
+      "subtitles": "Sous-titres",
+      "format": "Format",
+      "embedded": "Intégrée",
+      "delay": "Décalage",
+      "network": "Réseau",
+      "downloadSpeed": "Vitesse de téléchargement",
+      "buffering": "Mise en mémoire tampon",
+      "percent": "${value} %",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Passer l’intro",
+      "recap": "Passer le récapitulatif",
+      "credits": "Passer le générique"
+    },
+    "prompt": {
+      "playNext": "Lire l’épisode suivant : ${episode}",
+      "countdown": {
+        "one": "Automatiquement dans ${n} seconde",
+        "many": "Automatiquement dans ${n} de secondes",
+        "other": "Automatiquement dans ${n} secondes"
+      }
+    },
+    "options": {
+      "title": "Options",
+      "videoFit": "Format d’image",
+      "fit": {
+        "contain": "Bandes noires",
+        "cover": "Remplir l’écran",
+        "fill": "Étirer"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent} %",
+      "resetZoom": "Réinitialiser",
+      "shaders": "Shaders",
+      "shader": {
+        "nvscalerDetail": "Mise à l’échelle NVIDIA pour une vidéo plus nette",
+        "neutral": "Neutre",
+        "denoise": "Réduction du bruit",
+        "denoiseSharpen": "Réduction du bruit + netteté",
+        "fast": "Rapide",
+        "highQuality": "Haute qualité",
+        "modeDetail": "${quality} · Mode ${mode}",
+        "customDetail": "Shader GLSL personnalisé",
+        "importShader": "Importer un shader",
+        "imported": "Shader importé",
+        "importFailed": "Impossible d’importer le shader",
+        "deleteLabel": "Supprimer ${name}",
+        "deleteTitle": "Supprimer ${name} ?",
+        "delete": "Supprimer",
+        "cancel": "Annuler"
+      },
+      "sleepTimer": "Minuteur de veille",
+      "sleepEndOfVideo": "Fin de la vidéo en cours",
+      "sleepMinutes": {
+        "one": "${n} minute",
+        "many": "${n} de minutes",
+        "other": "${n} minutes"
+      },
+      "sleepLeft": "Il reste ${time}",
+      "autoPlayNext": "Lecture automatique de l’épisode suivant",
+      "audioOutput": "Sortie audio",
+      "systemOutput": "Par défaut du système",
+      "audioNormalization": "Normaliser le volume",
+      "audioChannels": "Canaux audio",
+      "channels": {
+        "original": "Original",
+        "originalDetail": "Lire tous les canaux de la piste",
+        "surround51": "Jusqu’à 5.1",
+        "surround51Detail": "Convertir le 7.1 en 5.1 pour les téléviseurs et amplis qui ne gèrent que le 5.1",
+        "stereo": "Stéréo",
+        "stereoDetail": "Réduire à deux canaux pour des enceintes stéréo ou un casque"
+      },
+      "on": "Activé",
+      "off": "Désactivé"
+    },
+    "stillWatching": {
+      "title": "Vous regardez toujours ?",
+      "countdown": {
+        "one": "Pause dans ${n} seconde",
+        "many": "Pause dans ${n} de secondes",
+        "other": "Pause dans ${n} secondes"
+      },
+      "keepWatching": "Continuer",
+      "pause": "Pause"
+    },
+    "error": {
+      "title": "Impossible de lire cette source",
+      "resolveTimeout": "La source a mis trop de temps à démarrer.",
+      "expired": "Le lien de la source a expiré.",
+      "notFound": "La source n’est plus disponible.",
+      "http": "Le serveur a répondu avec le code HTTP ${status}.",
+      "cantOpen": "La source n’a pas pu être ouverte.",
+      "unsupportedFormat": "La source est dans un format que le lecteur ne sait pas lire.",
+      "cantDecode": "Le lecteur n’a pas pu lire la vidéo ou le son de cette source.",
+      "engineFailed": "Le lecteur s’est arrêté à cause d’une erreur.",
+      "retry": "Réessayer",
+      "nextStream": "Essayer la source suivante",
+      "close": "Fermer",
+      "alternatives": {
+        "one": "${n} autre source disponible",
+        "many": "${n} d’autres sources disponibles",
+        "other": "${n} autres sources disponibles"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Ce n'est pas l'épisode",
+      "titleMovie": "Ce n'est pas le film",
+      "titleVideo": "Ce n'est pas la vidéo",
+      "sent": "L'add-on a envoyé une vidéo d'erreur à la place de la source.",
+      "byUrl": "Son lien est l'une des vidéos d'erreur d'un add-on.",
+      "bySize": "Le fichier fait ${served}, alors que la source annonçait ${size}.",
+      "byDuration": "Elle dure ${length}, alors que cette vidéo durait ${known} lors de votre dernière lecture.",
+      "kept": "Votre progression est conservée.",
+      "chooseStream": "Choisir une autre source",
+      "watch": "Voir le message"
+    },
+    "osd": {
+      "volume": "Volume ${level}",
+      "brightness": "Luminosité ${level}",
+      "speed": "Vitesse ${speed}",
+      "subtitleDelay": "Décalage des sous-titres ${delay}",
+      "audioDelay": "Décalage audio ${delay}",
+      "audioTrack": "Audio : ${track}",
+      "subtitleTrack": "Sous-titres : ${track}",
+      "subtitlesOff": "Sous-titres désactivés",
+      "chapter": "Chapitre : ${title}",
+      "chapterNumbered": "Chapitre ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shaders : ${name}",
+      "shadersOff": "Shaders désactivés"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} o",
+      "kilobytes": "${value} Ko",
+      "megabytes": "${value} Mo",
+      "gigabytes": "${value} Go",
+      "terabytes": "${value} To",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Ouverture de la source…",
+    "resolveFailed": {
+      "http": "Le serveur de la source a répondu avec le code HTTP ${status}",
+      "timeout": "Le serveur de la source a mis trop de temps à répondre",
+      "network": "Impossible de se connecter au serveur de la source",
+      "unsupportedUrl": "Le lien de cette source ne peut pas être ouvert",
+      "tooManyRedirects": "Le lien de cette source redirige trop de fois",
+      "unexpected": "Cette application a rencontré une erreur en ouvrant cette source"
+    },
+    "badge": {
+      "instant": "Instantané",
+      "notInstant": "Non instantané"
+    },
+    "lastUsed": "Lue en dernier",
+    "external": "S’ouvre hors de l’application",
+    "unplayable": {
+      "one": "${n} source que cette application ne peut pas lire",
+      "many": "${n} de sources que cette application ne peut pas lire",
+      "other": "${n} sources que cette application ne peut pas lire"
+    },
+    "empty": "Aucune source trouvée",
+    "all": "Tous",
+    "refresh": "Actualiser",
+    "retryNamed": "Réessayer ${name}",
+    "filters": {
+      "hidden": {
+        "one": "${n} source masquée par vos filtres",
+        "many": "${n} de sources masquées par vos filtres",
+        "other": "${n} sources masquées par vos filtres"
+      },
+      "showing": {
+        "one": "Affichage de ${n} source masquée par vos filtres",
+        "many": "Affichage de ${n} de sources masquées par vos filtres",
+        "other": "Affichage de ${n} sources masquées par vos filtres"
+      },
+      "show": "Afficher",
+      "hide": "Masquer",
+      "rowNote": "Masquée par vos filtres"
+    },
+    "sort": {
+      "title": "Trier",
+      "addonOrder": "Ordre des add-ons",
+      "resolution": "Résolution",
+      "source": "Qualité de la source",
+      "sizeLargest": "Plus gros fichiers d'abord",
+      "sizeSmallest": "Plus petits fichiers d'abord",
+      "cached": "Instantanées d'abord"
+    },
+    "autoPlay": {
+      "noMatch": "La lecture automatique n’a trouvé aucune source conforme à vos filtres.",
+      "failed": "La source choisie par la lecture automatique n’a pas démarré. Choisissez-en une autre."
+    },
+    "download": {
+      "notice": "Choisissez la source à télécharger.",
+      "action": "Télécharger",
+      "actionNamed": "Télécharger ${name}",
+      "queued": "Ajouté aux téléchargements",
+      "failed": "Impossible d’ajouter le téléchargement."
+    },
+    "suggested": {
+      "label": "Suggéré",
+      "reason": "Comme vos choix récents : ${features}",
+      "audio": "audio : ${language}",
+      "subtitles": "sous-titres : ${language}",
+      "smaller": "fichiers plus petits",
+      "larger": "fichiers plus gros"
+    }
+  },
+  "detail": {
+    "loadFailed": "Impossible de charger les détails.",
+    "notFound": "Aucun add-on ne fournit de détails pour ce titre.",
+    "noAddons": "Aucun des add-ons installés ne fournit de détails pour ce titre.",
+    "noAnimeAddon": "Aucun des add-ons installés ne fournit de détails pour cet anime. Installez un add-on d’anime pour l’ouvrir.",
+    "animeListsUnavailable": "Les listes d’anime ne se sont pas chargées : impossible d’associer cet anime à un titre. Vérifiez votre connexion et réessayez.",
+    "findingAnime": "Recherche de cet anime dans les listes d’anime…",
+    "sourceError": "${addon} : ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} h ${minutes} min",
+      "hours": "${hours} h",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Critiques Rotten Tomatoes",
+        "rottenTomatoesAudience": "Spectateurs Rotten Tomatoes",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} pour cent"
+    },
+    "userRating": {
+      "rateLabel": "Noter ce titre",
+      "label": "Votre note : ${score}",
+      "range": "${low}–${high}",
+      "title": "Votre note",
+      "hint": "Votre note est envoyée à chaque service ci-dessous.",
+      "clear": "Supprimer la note",
+      "checking": "Vérification…",
+      "notRated": "Non noté",
+      "unreadable": "Vérification impossible",
+      "saving": "Enregistrement…",
+      "saved": "Enregistrée",
+      "removed": "Supprimée",
+      "queued": "Pas encore envoyée, nouvel essai plus tard",
+      "failed": "Non enregistrée"
+    },
+    "links": {
+      "genres": "Genres",
+      "cast": "Distribution",
+      "directors": "Réalisation",
+      "writers": "Scénario",
+      "website": "Site web"
+    },
+    "facts": {
+      "title": "Informations",
+      "released": "Sortie",
+      "runtime": "Durée",
+      "country": "Pays",
+      "language": "Langue",
+      "awards": "Récompenses",
+      "source": "Détails fournis par",
+      "failed": "Échec du chargement depuis"
+    },
+    "trailer": "Bande-annonce",
+    "trailerNumbered": "Bande-annonce ${number}",
+    "trailers": "Bandes-annonces",
+    "share": "Partager",
+    "season": "Saison ${number}",
+    "specials": "Épisodes spéciaux",
+    "episodeNumbered": "Épisode ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Avec ${names}",
+    "castAndCrew": "Distribution et équipe",
+    "airs": "Diffusion le ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "janv.",
+      "feb": "févr.",
+      "mar": "mars",
+      "apr": "avr.",
+      "may": "mai",
+      "jun": "juin",
+      "jul": "juil.",
+      "aug": "août",
+      "sep": "sept.",
+      "oct": "oct.",
+      "nov": "nov.",
+      "dec": "déc."
+    },
+    "play": "Lire",
+    "playEpisode": "Lire ${episode}",
+    "resume": "Reprendre à ${time}",
+    "resumeEpisode": "Reprendre ${episode} · ${time}",
+    "addToLibrary": "Ajouter à la bibliothèque",
+    "removeFromLibrary": "Retirer de la bibliothèque",
+    "markWatched": "Marquer comme vu",
+    "markUnwatched": "Marquer comme non vu",
+    "markAllWatched": "Marquer tous les épisodes comme vus",
+    "markAllUnwatched": "Marquer tous les épisodes comme non vus",
+    "markSeasonWatched": "Marquer la saison comme vue",
+    "markSeasonUnwatched": "Marquer la saison comme non vue",
+    "watched": "Vue",
+    "overviewHidden": "Description masquée",
+    "moreActions": "Plus d’actions",
+    "moreActionsNamed": "Plus d’actions pour ${name}",
+    "showMore": "Plus",
+    "showLess": "Moins",
+    "findingStream": "Recherche d’une source…",
+    "chooseStream": "Choisir une source",
+    "download": {
+      "download": "Télécharger",
+      "queued": "En file d’attente",
+      "waitingForWifi": "En attente du Wi-Fi",
+      "downloading": "Téléchargement ${percent} %",
+      "downloadingStarted": "Téléchargement…",
+      "paused": "En pause",
+      "failed": "Échec du téléchargement",
+      "partial": "${done} sur ${total} téléchargés",
+      "downloaded": "Téléchargé",
+      "menuTitle": "Téléchargement",
+      "allSeasons": "Toutes les saisons",
+      "pick": {
+        "all": "Tous les épisodes",
+        "unwatched": "Épisodes non vus",
+        "next5": "Les 5 prochains non vus",
+        "next10": "Les 10 prochains non vus"
+      },
+      "keepSynced": "Synchronisation automatique",
+      "keepSyncedCount": {
+        "one": "Garder ${n} épisode non vu",
+        "many": "Garder ${n} d’épisodes non vus",
+        "other": "Garder ${n} épisodes non vus"
+      },
+      "keepSyncedAll": "Garder tous les épisodes non vus",
+      "manage": "Gérer les téléchargements",
+      "pauseAll": "Mettre en pause les téléchargements",
+      "resumeAll": "Reprendre les téléchargements",
+      "deleteSeason": "Supprimer les téléchargements de cette saison",
+      "deleteAll": "Supprimer tous les téléchargements",
+      "queuedEpisodes": {
+        "one": "${n} épisode ajouté aux téléchargements",
+        "many": "${n} d’épisodes ajoutés aux téléchargements",
+        "other": "${n} épisodes ajoutés aux téléchargements"
+      },
+      "nothingQueued": "Tous les épisodes sont déjà téléchargés ou en file d’attente.",
+      "failedToQueue": "Impossible d’ajouter les téléchargements.",
+      "episode": {
+        "download": "Télécharger l’épisode",
+        "pause": "Mettre en pause le téléchargement",
+        "resume": "Reprendre le téléchargement",
+        "retry": "Relancer le téléchargement",
+        "pickStream": "Choisir une source",
+        "cancel": "Annuler le téléchargement",
+        "delete": "Supprimer le téléchargement",
+        "queued": "En file d’attente",
+        "downloading": "${percent} %",
+        "paused": "En pause",
+        "failed": "Échec du téléchargement",
+        "downloaded": "Téléchargé"
+      }
+    },
+    "related": {
+      "title": "Titres similaires",
+      "noneFound": "Aucun titre similaire trouvé."
+    }
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "continueWatching": "Continuer à regarder",
+    "sort": {
+      "lastWatched": "Vus récemment",
+      "added": "Ajoutés récemment",
+      "name": "Titre A–Z",
+      "nameReverse": "Titre Z–A",
+      "timesWatched": "Les plus vus",
+      "watched": "Vus d’abord",
+      "notWatched": "Non vus d’abord"
+    },
+    "sortBy": "Trier par",
+    "sortByNamed": "Trier par : ${name}",
+    "empty": "Rien pour l’instant. Ajoutez des titres à la bibliothèque depuis leur fiche.",
+    "emptyContinueWatching": "Rien à reprendre. Les titres apparaissent ici dès que vous commencez à les regarder.",
+    "emptyType": "Rien de ce type ici.",
+    "watched": "Vu"
+  },
+  "mediaMenu": {
+    "markWatched": "Marquer comme vu",
+    "markUnwatched": "Marquer comme non vu",
+    "removeFromContinueWatching": "Retirer de Continuer à regarder",
+    "details": "Voir la fiche",
+    "addToLibrary": "Ajouter à la bibliothèque",
+    "removeFromLibrary": "Retirer de la bibliothèque",
+    "playFromStart": "Lire depuis le début",
+    "markSeasonWatched": "Marquer la saison comme vue",
+    "markSeasonUnwatched": "Marquer la saison comme non vue",
+    "chooseStream": "Choisir une source",
+    "download": "Télécharger",
+    "pauseDownload": "Mettre en pause le téléchargement",
+    "resumeDownload": "Reprendre le téléchargement",
+    "retryDownload": "Relancer le téléchargement",
+    "cancelDownload": "Annuler le téléchargement",
+    "deleteDownload": "Supprimer le téléchargement",
+    "pickStream": "Choisir une source",
+    "trailer": "Bande-annonce",
+    "markFailed": "Impossible de marquer ${title} : ses détails n’ont pas été chargés. Vérifiez la connexion et réessayez."
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Les add-ons installés n’ont pas pu être lus. Redémarrez Tortuga pour réessayer.",
+    "error": {
+      "invalidTransportUrl": "Ce n’est pas un lien d’add-on. Les liens d’add-on se terminent par /manifest.json.",
+      "timeout": "L’add-on a mis trop de temps à répondre.",
+      "network": "Impossible de joindre l’add-on.",
+      "http": "L’add-on a renvoyé une erreur (HTTP ${status}).",
+      "invalidResponse": "L’add-on a envoyé une réponse que cette application ne peut pas lire.",
+      "unexpectedResponse": "L’add-on a envoyé un autre type de réponse que celui demandé.",
+      "emptyContent": "Aucun résultat.",
+      "invalidManifest": "Le manifeste de l’add-on n’est pas valide.",
+      "configurationRequired": "Cet add-on doit être configuré avant de pouvoir être installé.",
+      "alreadyInstalled": "Cet add-on est déjà installé.",
+      "notInstalled": "Cet add-on n’est pas installé.",
+      "protectedAddon": "Cet add-on est intégré et ne peut être ni supprimé ni désactivé."
+    },
+    "title": "Add-ons",
+    "allTypes": "Tous",
+    "empty": "Aucun add-on installé.",
+    "emptyFiltered": "Aucun add-on installé ne propose ce type.",
+    "builtIn": "Intégré",
+    "builtInExplanation": "Cet add-on est intégré et ne peut être ni supprimé ni désactivé.",
+    "cancel": "Annuler",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Monter",
+    "moveUpNamed": "Monter ${name}",
+    "moveDown": "Descendre",
+    "moveDownNamed": "Descendre ${name}",
+    "dragToReorderNamed": "Réorganiser ${name}",
+    "enabledNamed": "Utiliser ${name}",
+    "close": "Fermer",
+    "version": "Version ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Catalogues",
+      "meta": "Détails",
+      "stream": "Sources",
+      "subtitles": "Sous-titres",
+      "addonCatalog": "Catalogues d’add-ons",
+      "player": "Activité de lecture",
+      "library": "Activité de la bibliothèque"
+    },
+    "remove": {
+      "title": "Supprimer ${name} ?",
+      "message": "Il est supprimé de ce profil sur tous les appareils, ainsi que les paramètres avec lesquels il a été configuré.",
+      "confirm": "Supprimer"
+    },
+    "details": {
+      "types": "Types",
+      "resources": "Fournit",
+      "catalogs": "Catalogues",
+      "contact": "Contact",
+      "configure": "Configurer",
+      "remove": "Supprimer",
+      "enabled": "Utiliser cet add-on",
+      "enabledOff": "Désactivé : Tortuga ne lui demande rien et n'affiche pas ses catalogues.",
+      "shareTitle": "Lien de l’add-on",
+      "shareWarning": "Ce lien peut contenir les clés des comptes avec lesquels cet add-on a été configuré. Ne le partagez qu’avec des personnes de confiance.",
+      "revealLink": "Afficher le lien",
+      "hideLink": "Masquer le lien",
+      "copyLink": "Copier le lien",
+      "linkCopied": "Lien copié."
+    },
+    "watchActivity": {
+      "title": "Envoyer l'activité de visionnage",
+      "explanation": "Cet add-on reçoit votre activité de visionnage : ce que vous lancez, mettez en pause et arrêtez, ce que vous ajoutez à votre bibliothèque ou en retirez, et ce que vous marquez comme vu.",
+      "agree": "J'accepte que cet add-on reçoive mon activité de visionnage",
+      "notAllowed": "Ne reçoit aucune activité de visionnage tant que vous ne l'autorisez pas"
+    },
+    "install": {
+      "action": "Installer un add-on",
+      "title": "Installer un add-on",
+      "linkHint": "Lien de l’add-on, se terminant par /manifest.json",
+      "submit": "Continuer",
+      "confirm": "Installer",
+      "update": "Mettre à jour",
+      "configure": "Configurer",
+      "configureFirst": "Cet add-on doit être configuré avant de pouvoir être installé. Configurez-le, puis installez-le depuis sa page.",
+      "alreadyInstalled": "Cet add-on est déjà installé.",
+      "updateDetails": "Déjà installé. Cette action met à jour ses détails.",
+      "updateVersion": "Déjà installé. Cette action le met à jour vers la version ${version}.",
+      "adult": "Cet add-on est signalé comme contenu pour adultes.",
+      "installed": "${name} est installé.",
+      "updated": "${name} a été mis à jour.",
+      "done": "Terminé"
+    },
+    "browse": {
+      "title": "Parcourir",
+      "installed": "Installés",
+      "installedNote": "Installé"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "automatic": "Automatique",
+    "listSeparator": ", ",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "increaseNamed": "Augmenter ${name}",
+    "decreaseNamed": "Diminuer ${name}",
+    "value": {
+      "percent": "${value} %",
+      "seconds": {
+        "one": "${n} seconde",
+        "many": "${n} de secondes",
+        "other": "${n} secondes"
+      }
+    },
+    "time": {
+      "justNow": "à l’instant",
+      "minutesAgo": {
+        "one": "il y a ${n} minute",
+        "many": "il y a ${n} de minutes",
+        "other": "il y a ${n} minutes"
+      },
+      "hoursAgo": {
+        "one": "il y a ${n} heure",
+        "many": "il y a ${n} d’heures",
+        "other": "il y a ${n} heures"
+      },
+      "daysAgo": {
+        "one": "il y a ${n} jour",
+        "many": "il y a ${n} de jours",
+        "other": "il y a ${n} jours"
+      },
+      "monthsAgo": {
+        "one": "il y a ${n} mois",
+        "many": "il y a ${n} de mois",
+        "other": "il y a ${n} mois"
+      },
+      "yearsAgo": {
+        "one": "il y a ${n} an",
+        "many": "il y a ${n} d’années",
+        "other": "il y a ${n} ans"
+      }
+    },
+    "sections": {
+      "playback": "Lecture",
+      "playbackSummary": "Langues, seuil de visionnage, épisode suivant et passer les séquences",
+      "device": "Cet appareil",
+      "deviceSummary": "Décodage, HDR, fréquence d’images, audio, cache et rapports de plantage",
+      "subtitles": "Sous-titres",
+      "subtitlesSummary": "Taille, couleur, contour et position sur cet appareil",
+      "addons": "Add-ons",
+      "addonsSummary": {
+        "one": "${n} add-on installé",
+        "many": "${n} d’add-ons installés",
+        "other": "${n} add-ons installés"
+      },
+      "addonsSummaryLoading": "Add-ons installés",
+      "home": "Accueil",
+      "homeSummary": "Rangées affichées sur l’Accueil et leur ordre",
+      "appearance": "Apparence",
+      "appearanceSummary": "Langue, affiches et titres vus",
+      "trackers": "Services de suivi",
+      "trackersSummary": "Suivi de lecture, historique et listes",
+      "trackersConnected": "Connecté à ${services}",
+      "account": "Compte",
+      "about": "À propos",
+      "downloads": "Téléchargements",
+      "downloadsSummary": "Emplacement, Wi-Fi uniquement et stockage",
+      "data": "Export et import",
+      "dataSummary": "Les données de vos profils dans un fichier, et inversement"
+    },
+    "profile": {
+      "locked": "Verrouillé par un code PIN",
+      "unlocked": "Sans code PIN",
+      "edit": "Modifier le profil",
+      "manage": "Changer de profil ou gérer les profils"
+    },
+    "about": {
+      "version": "Version ${version}",
+      "license": "Tortuga est distribué sous la licence publique générale GNU, version 3. Vous pouvez l’exécuter, l’étudier, le partager et le modifier, et toute personne qui vous en remet une copie doit vous en proposer le code source.",
+      "source": "Code source",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga utilise Trakt, mais n’est ni approuvé ni certifié par Trakt.",
+      "notices": "Logiciels tiers",
+      "noticeLink": "Page du projet"
+    },
+    "appearance": {
+      "interfaceLanguage": "Langue de l’application",
+      "interfaceLanguageHint": "La langue des menus et des messages de l’application",
+      "interfaceLanguageSystem": "Langue du système",
+      "blurUnwatched": "Flouter les épisodes non vus",
+      "blurUnwatchedHint": "Flouter les images et masquer les descriptions des épisodes pas encore commencés, pour qu’ils ne dévoilent rien",
+      "hideWatched": "Masquer les titres vus",
+      "hideWatchedHint": "Retirer des rangées de l’accueil et de Découvrir les films et séries que vous avez terminés. Une série revient dès qu’un nouvel épisode sort",
+      "hidePosterCaptions": "Masquer les titres sous les affiches",
+      "hidePosterCaptionsHint": "N’afficher que l’image. Continuer à regarder garde l’épisode et le temps restant",
+      "posterTemplate": "Modèle d'URL des affiches",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} et {tvdb_id} sont les identifiants de chaque titre, {type} vaut movie ou series",
+      "posterTemplateNone": "Affiches des addons",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Ce n'est pas une adresse http ou https, elle est donc ignorée"
+    },
+    "home": {
+      "note": "Choisissez les rangées affichées sur l’Accueil et leur ordre. Ces choix sont propres à ce profil et sont synchronisés sur vos autres appareils.",
+      "continueWatchingHint": "Toujours la première rangée",
+      "rowsHeader": "Rangées",
+      "empty": "Aucun add-on installé ne propose de catalogue pour l’Accueil.",
+      "reset": "Réinitialiser",
+      "moveUp": "Monter",
+      "moveUpNamed": "Monter ${name}",
+      "moveDown": "Descendre",
+      "moveDownNamed": "Descendre ${name}",
+      "dragToReorder": "Faire glisser pour réorganiser",
+      "dragToReorderNamed": "Réorganiser ${name}",
+      "newCollection": "Nouvelle collection",
+      "importCollections": "Importer des collections",
+      "exportCollections": "Exporter des collections",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "deleteTitle": "Supprimer « ${title} » ?",
+      "deleteMessage": "La collection est retirée de ce profil sur tous vos appareils."
+    },
+    "playback": {
+      "title": "Lecture",
+      "note": "Ces paramètres sont propres à ce profil et sont synchronisés sur vos autres appareils.",
+      "languagesHeader": "Langues",
+      "audioLanguages": "Langues audio",
+      "audioLanguagesHint": "Piste audio lue, par ordre de préférence",
+      "audioLanguagesNone": "Langue par défaut de la vidéo",
+      "audioLanguagesExplanation": "Une vidéo est lue dans la première de ces langues qu’elle propose. Si aucune n’est choisie, sa piste audio par défaut est lue.",
+      "subtitleLanguages": "Langues des sous-titres",
+      "subtitleLanguagesHint": "Sous-titres activés, par ordre de préférence",
+      "subtitleLanguagesNone": "Désactivés",
+      "subtitleLanguagesExplanation": "Les sous-titres dans la première de ces langues que propose une vidéo sont activés. Si aucune n’est choisie, les sous-titres restent désactivés, sauf si la vidéo les impose.",
+      "secondSubtitleLanguage": "Langue des seconds sous-titres",
+      "secondSubtitleLanguageHint": "Affichés en haut de l’image, avec les premiers",
+      "secondSubtitleLanguageExplanation": "Les sous-titres dans cette langue s’affichent en haut de l’image, avec les premiers sous-titres. Si aucune n’est choisie, aucun second sous-titre ne s’affiche, sauf s’il est choisi dans le lecteur.",
+      "secondSubtitleLanguageNone": "Désactivés",
+      "showSubtitles": "Afficher les sous-titres",
+      "showSubtitlesHint": "Toujours : sous-titres aussi dans la langue parlée, SDH d’abord",
+      "showSubtitlesFollowAudio": "Selon l’audio",
+      "showSubtitlesAlways": "Toujours",
+      "chosenHeader": "Vos langues",
+      "availableHeader": "Ajouter une langue",
+      "searchLanguages": "Rechercher une langue",
+      "noLanguageMatches": "Aucune langue ne correspond.",
+      "playbackHeader": "Lecture",
+      "watchedThreshold": "Considéré comme vu après",
+      "watchedThresholdHint": "À partir d’où une vidéo compte comme vue et « Continuer à regarder » passe à l’épisode suivant",
+      "bingeWatching": "Lire l’épisode suivant",
+      "bingeWatchingHint": "À la fin d’un épisode, lancer le suivant, depuis la même source si possible",
+      "upNextCountdown": "Compte à rebours de l’épisode suivant",
+      "upNextCountdownHint": "Délai avant le lancement automatique de l’épisode suivant",
+      "upNextImmediately": "Immédiatement",
+      "seekShort": "Saut court",
+      "seekShortHint": "Touches fléchées, télécommande et boutons de saut du lecteur",
+      "seekLong": "Saut long",
+      "seekLongHint": "Maj avec les touches fléchées, et appuis longs",
+      "videoClick": "Clic sur la vidéo",
+      "videoClickHint": "Un double-clic passe toujours en plein écran et en sort",
+      "videoClickPause": "Pause et lecture",
+      "videoClickControls": "Afficher ou masquer les commandes",
+      "moveUp": "Monter",
+      "moveUpNamed": "Monter ${name}",
+      "moveDown": "Descendre",
+      "moveDownNamed": "Descendre ${name}",
+      "removeLanguage": "Retirer",
+      "removeLanguageNamed": "Retirer ${name}",
+      "dragToReorderNamed": "Réorganiser ${name}",
+      "skipping": {
+        "header": "Passer les séquences",
+        "footer": "Les intros, récapitulatifs et génériques sont repérés d’après les noms des chapitres de la vidéo : seules les vidéos aux chapitres nommés proposent donc de les passer. Avant un passage automatique, un compte à rebours s’affiche sur le bouton, et toute action sur le lecteur l’annule.",
+        "intros": "Intros",
+        "introsHint": "Chansons d’ouverture et génériques de début",
+        "recaps": "Récapitulatifs",
+        "recapsHint": "« Précédemment dans… » au début d’un épisode",
+        "credits": "Génériques",
+        "creditsHint": "Génériques de fin et aperçus de l’épisode suivant ; la proposition de l’épisode suivant s’affiche dès leur début",
+        "off": "Désactivé",
+        "button": "Afficher un bouton",
+        "auto": "Passer automatiquement"
+      },
+      "streams": {
+        "header": "Sources",
+        "footer": "Les filtres s’appliquent à chaque liste de sources, qui indique combien de sources ils masquent et permet de les afficher quand même.",
+        "autoPlay": "Lecture automatique",
+        "autoPlayHint": "Saute la liste de sources pour Lire, Reprendre, un épisode et l’épisode suivant ; avec un tri, attend la réponse de tous les add-ons",
+        "suggestions": "Suggérer une source",
+        "suggestionsHint": "Apprend quelles sources vous choisissez sur ce profil et en signale une dans la liste",
+        "autoPlayOff": "Désactivée",
+        "autoPlayFirstMatch": "Première source conforme aux filtres",
+        "autoPlayReuseLastLink": "Même source que la dernière fois, sinon la première conforme",
+        "qualities": "Qualités",
+        "qualitiesHint": "Résolutions affichées dans les listes de sources",
+        "qualitiesAll": "Toutes",
+        "qualitiesNone": "Aucune",
+        "qualitiesAllBut": "Toutes sauf ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Inconnue",
+        "ranges": "Plage dynamique",
+        "rangesHint": "SDR, HDR et Dolby Vision affichés dans les listes de sources",
+        "codecs": "Codecs vidéo",
+        "codecsHint": "Codecs vidéo affichés dans les listes de sources",
+        "minSize": "Taille minimale",
+        "minSizeHint": "Masque les sources de fichiers plus petits ; une source sans taille indiquée reste",
+        "maxSize": "Taille maximale",
+        "maxSizeHint": "Masque les sources de fichiers plus gros ; une source sans taille indiquée reste",
+        "sizeAny": "Toute taille",
+        "includePattern": "Uniquement les sources correspondant à",
+        "includePatternHint": "Une expression régulière, comparée au nom, à la description et au nom de fichier de chaque source, sans tenir compte de la casse",
+        "includePatternNone": "Toutes les sources",
+        "includePlaceholder": "ex. 1080p|2160p",
+        "excludePattern": "Masquer les sources correspondant à",
+        "excludePatternHint": "Prioritaire sur le motif ci-dessus",
+        "excludePatternNone": "Aucune",
+        "excludePlaceholder": "ex. HDTV|XviD",
+        "invalidPattern": "Expression régulière non valide, elle est donc ignorée",
+        "save": "Enregistrer",
+        "clear": "Effacer"
+      }
+    },
+    "device": {
+      "title": "Cet appareil",
+      "note": "Ces paramètres s’appliquent uniquement à cet appareil et ne sont pas synchronisés.",
+      "videoHeader": "Vidéo",
+      "hardwareDecoding": "Décodage matériel",
+      "hardwareDecodingHint": "Décoder la vidéo avec le processeur graphique. Désactivez cette option si les vidéos présentent des défauts d’affichage.",
+      "hdr": "HDR",
+      "hdrHint": "Lire les vidéos HDR en HDR si l’écran le permet. Si l’option est désactivée, elles sont converties en SDR.",
+      "matchFrameRate": "Forcer le changement de fréquence d’images",
+      "matchFrameRateHint": "Régler l’écran sur la fréquence d’images de la vidéo même quand le système ne le ferait pas. L’écran devient noir un instant à chaque changement.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Passthrough audio",
+      "audioPassthroughHint": "Envoyer le son surround (Dolby Digital, DTS, TrueHD) à l’amplificateur sans le décoder",
+      "audioPassthroughHintApple": "Envoyer le Dolby Digital et le Dolby Digital Plus, Atmos compris, au décodeur Dolby du système ; le DTS et le TrueHD sont lus en PCM multicanal. Désactivez l’option s’il n’y a pas de son.",
+      "audioPassthroughHintAppleSpatial": "Envoyer le Dolby Digital et le Dolby Digital Plus, Atmos compris, au décodeur Dolby du système, et lire le TrueHD Atmos et le DTS:X en audio spatial ; les autres pistes DTS et TrueHD sont lues en PCM multicanal. Désactivez l’option s’il n’y a pas de son.",
+      "audioPassthroughNormalized": "Désactivé tant que la normalisation du volume est activée",
+      "gesturesHeader": "Gestes",
+      "swipeGestures": "Balayer pour la luminosité et le volume",
+      "swipeGesturesHint": "Balayez vers le haut ou le bas sur la moitié gauche de la vidéo pour la luminosité, sur la moitié droite pour le volume.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Cache de préchargement",
+      "cacheSizeHint": "Quantité d’une source chargée à l’avance pendant la lecture",
+      "discordHeader": "Discord",
+      "discordPresence": "Afficher ce que vous regardez",
+      "discordPresenceHint": "Vos amis Discord voient le titre et l’épisode pendant la lecture d’une vidéo. Discord doit être ouvert sur cet ordinateur.",
+      "privacyHeader": "Confidentialité",
+      "crashReports": "Envoyer les rapports de plantage",
+      "crashReportsHint": "Envoie ce qui a échoué lors d’un plantage ou de la panne d’une partie de l’app, jamais les liens de vos add-ons ni vos comptes"
+    },
+    "subtitles": {
+      "title": "Sous-titres",
+      "note": "Ces paramètres s’appliquent uniquement à cet appareil et ne sont pas synchronisés. Ils mettent en forme les sous-titres en texte brut, comme le SRT ; les sous-titres stylisés gardent leur propre apparence, sauf si vous leur appliquez aussi ce style.",
+      "previewText": "Voici l’apparence des sous-titres",
+      "textHeader": "Texte",
+      "size": "Taille",
+      "textColor": "Couleur",
+      "bold": "Gras",
+      "outlineHeader": "Contour et arrière-plan",
+      "outline": "Contour",
+      "outlineColor": "Couleur du contour",
+      "background": "Arrière-plan",
+      "backgroundHint": "Un cadre derrière le texte, et son opacité",
+      "backgroundOff": "Désactivé",
+      "positionHeader": "Position",
+      "position": "Hauteur",
+      "positionHint": "Distance entre les sous-titres et le bas de l’image",
+      "positionBottom": "En bas",
+      "styledHeader": "Sous-titres stylisés",
+      "styledOverride": "Appliquer aux sous-titres stylisés",
+      "styledOverrideHint": "Les sous-titres ASS et SSA adoptent ce style au lieu du leur. Les panneaux et effets peuvent mal s’afficher.",
+      "outlines": {
+        "none": "Aucun",
+        "thin": "Fin",
+        "thick": "Épais"
+      },
+      "colors": {
+        "white": "Blanc",
+        "yellow": "Jaune",
+        "green": "Vert",
+        "cyan": "Cyan",
+        "gray": "Gris",
+        "black": "Noir"
+      }
+    },
+    "account": {
+      "title": "Compte",
+      "syncLabel": "Synchronisation",
+      "syncNow": "Synchroniser",
+      "lastSynced": "Synchronisé ${time}",
+      "serverLabel": "Serveur de synchronisation",
+      "identitiesHeader": "Méthodes de connexion",
+      "linkIdentity": "Ajouter une méthode de connexion",
+      "devicesHeader": "Appareils",
+      "thisDevice": "Cet appareil",
+      "activeNow": "Actif maintenant",
+      "lastActive": "Actif ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} est déconnecté.",
+      "identityRemoved": "La méthode de connexion ${provider} a été supprimée.",
+      "cancel": "Annuler",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Authentification unique"
+      },
+      "link": {
+        "start": "Associer un nouvel appareil",
+        "title": "Associer un appareil",
+        "instructions": "Sur le nouvel appareil, choisissez de l’associer depuis un autre appareil. Saisissez ensuite le code qu’il affiche ou scannez son code QR.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Continuer",
+        "question": "Associer « ${name} » ?",
+        "consequence": "Il sera connecté à ce compte, avec ses profils, ses add-ons et sa bibliothèque.",
+        "approve": "Associer",
+        "reject": "Ne pas associer",
+        "approved": "${name} est associé. Il termine sa configuration tout seul.",
+        "rejected": "${name} n’a pas été associé.",
+        "expired": "Le code a expiré. Recommencez sur le nouvel appareil.",
+        "done": "Terminé"
+      },
+      "signOut": {
+        "action": "Se déconnecter",
+        "title": "Se déconnecter ?",
+        "message": "Les profils, les add-ons, la bibliothèque et les téléchargements sont supprimés de cet appareil. Tout sauf les téléchargements reste dans le compte : reconnectez-vous pour le récupérer.",
+        "confirm": "Se déconnecter"
+      },
+      "delete": {
+        "action": "Supprimer le compte",
+        "explanation": "Supprime du serveur le compte et toutes ses données synchronisées.",
+        "title": "Supprimer le compte ?",
+        "message": "Le compte et ses profils, add-ons, bibliothèque et historique sont définitivement supprimés du serveur, et tous les appareils sont déconnectés. Cette action est irréversible.",
+        "confirm": "Supprimer le compte"
+      },
+      "revoke": {
+        "title": "Déconnecter ${name} ?",
+        "message": "${name} est déconnecté et quitte les appareils du compte. Il pourra être associé de nouveau plus tard.",
+        "messageThisDevice": "C’est l’appareil que vous utilisez. Il est déconnecté, et ses profils, add-ons, bibliothèque et téléchargements en sont supprimés. Tout sauf les téléchargements reste dans le compte.",
+        "confirm": "Déconnecter l’appareil",
+        "confirmNamed": "Déconnecter l’appareil : ${name}"
+      },
+      "unsynced": {
+        "title": "Supprimer les modifications non synchronisées ?",
+        "message": {
+          "one": "${n} modification faite sur cet appareil, comme une progression de lecture ou une modification de la bibliothèque, n’a pas atteint le compte. Si vous vous déconnectez maintenant, elle sera définitivement supprimée. Avec Annuler, elle reste ici et cet appareil reste connecté.",
+          "many": "${n} de modifications faites sur cet appareil, comme la progression de lecture ou des modifications de la bibliothèque, n’ont pas atteint le compte. Si vous vous déconnectez maintenant, elles seront définitivement supprimées. Avec Annuler, elles restent ici et cet appareil reste connecté.",
+          "other": "${n} modifications faites sur cet appareil, comme la progression de lecture ou des modifications de la bibliothèque, n’ont pas atteint le compte. Si vous vous déconnectez maintenant, elles seront définitivement supprimées. Avec Annuler, elles restent ici et cet appareil reste connecté."
+        },
+        "confirm": "Se déconnecter et supprimer"
+      },
+      "unlink": {
+        "title": "Supprimer la méthode de connexion ${provider} ?",
+        "message": "Vous ne pourrez plus vous connecter à ce compte avec ${provider}.",
+        "confirm": "Supprimer",
+        "action": "Supprimer la méthode de connexion ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Services de suivi",
+      "note": "Les services connectés reçoivent ce que ce profil regarde : la progression de lecture et les titres marqués comme vus. Connecter ou déconnecter un service s’applique à ce profil sur tous vos appareils ; les options ci-dessous s’appliquent uniquement à cet appareil.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Connecté",
+      "connectedAs": "Connecté en tant que ${user}",
+      "notConnected": "Non connecté",
+      "unavailable": "Non disponible dans cette version de l’application",
+      "connect": "Connecter",
+      "connectNamed": "Connecter ${name}",
+      "disconnect": "Déconnecter",
+      "disconnectNamed": "Déconnecter ${name}",
+      "scrobble": "Envoyer ce que vous regardez",
+      "scrobbleHint": "La progression de lecture et les titres vus sont envoyés à ${service}",
+      "filtersHeader": "À envoyer",
+      "movies": "Films",
+      "series": "Séries",
+      "anime": "Animés",
+      "queued": {
+        "one": "${n} modification en attente d’envoi",
+        "many": "${n} de modifications en attente d’envoi",
+        "other": "${n} modifications en attente d’envoi"
+      },
+      "notSent": {
+        "one": "${n} modification n’a pas pu être envoyée (dernière : ${reason})",
+        "many": "${n} de modifications n’ont pas pu être envoyées (dernière : ${reason})",
+        "other": "${n} modifications n’ont pas pu être envoyées (dernière : ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} a répondu par l’erreur ${status}",
+        "refused": "${service} l’a refusée",
+        "unreadable": "elle n’a pas pu être lue"
+      },
+      "connectTitle": "Connecter ${service}",
+      "starting": "Connexion à ${service}…",
+      "waiting": "En attente de votre autorisation pour Tortuga sur ${service}…",
+      "linkInstructions": "Connectez-vous à ${service} dans votre navigateur et autorisez Tortuga.",
+      "linkScan": "Ou scannez le code QR avec votre téléphone et connectez-vous depuis celui-ci.",
+      "openInBrowser": "Ouvrir dans le navigateur",
+      "expired": "Le code a expiré avant d’être utilisé.",
+      "declined": "${service} n’a pas autorisé la connexion.",
+      "unreachable": "Impossible de joindre ${service}. Vérifiez la connexion et réessayez.",
+      "serverUnreachable": "Impossible de joindre votre serveur Tortuga. Vérifiez la connexion et réessayez.",
+      "needsAccount": "Connecter ${service} nécessite un compte Tortuga. Connectez-vous d’abord à votre compte.",
+      "busy": "${service} est surchargé. Réessayez dans une minute.",
+      "refused": "${service} a refusé la connexion.",
+      "failed": "La connexion à ${service} a échoué.",
+      "retry": "Réessayer",
+      "connectedNotice": "Connecté à ${service} en tant que ${user}.",
+      "connectedNoticeNoName": "Connecté à ${service}.",
+      "disconnectTitle": "Déconnecter ${service} ?",
+      "disconnectMessage": "Sur tous vos appareils, ce profil n’enverra plus à ${service} ce qu’il regarde, et les modifications en attente d’envoi seront abandonnées. Votre compte ${service} conserve tout ce qu’il contient déjà.",
+      "disconnectedNotice": "Déconnecté de ${service}.",
+      "actionFailed": "L’opération a échoué. Réessayez."
+    },
+    "downloads": {
+      "title": "Téléchargements",
+      "note": "Ces paramètres s’appliquent uniquement à cet appareil et ne sont pas synchronisés.",
+      "location": {
+        "title": "Emplacement",
+        "hint": "Où sont enregistrés les nouveaux téléchargements. Ceux déjà enregistrés restent à leur emplacement actuel.",
+        "deviceStorage": "Stockage interne",
+        "external": "Stockage externe",
+        "change": "Changer de dossier"
+      },
+      "transferHeader": "Téléchargement",
+      "wifiOnly": "Télécharger en Wi-Fi uniquement",
+      "wifiOnlyHint": "Les téléchargements sont mis en attente sur les réseaux facturés à l’usage, comme les données mobiles",
+      "atOnce": "Téléchargements simultanés",
+      "atOnceHint": "Nombre de téléchargements effectués en même temps",
+      "autoRemoveWatched": "Supprimer les téléchargements vus",
+      "autoRemoveWatchedHint": "Un téléchargement est supprimé une fois vu, jamais pendant sa lecture",
+      "subtitleLanguages": "Sous-titres à enregistrer",
+      "subtitleLanguagesHint": "Les sous-titres dans ces langues sont enregistrés avec chaque téléchargement",
+      "subtitleLanguagesProfile": "Vos langues de sous-titres : ${languages}",
+      "subtitleLanguagesProfileNone": "Vos langues de sous-titres : aucune",
+      "subtitleLanguagesExplanation": "Les sous-titres dans ces langues sont enregistrés avec chaque téléchargement, pour s’afficher même sans connexion.",
+      "useProfileLanguages": "Utiliser mes langues de sous-titres",
+      "storageHeader": "Stockage",
+      "deleteAll": "Supprimer tous les téléchargements",
+      "deleteAllTitle": "Supprimer tous les téléchargements ?",
+      "deleteAllText": "Tous les téléchargements de cet appareil seront supprimés, pour tous les profils.",
+      "deleteAllConfirm": "Tout supprimer"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Add-ons",
+        "addonsHint": "Les add-ons installés, dans leur ordre, avec leurs liens",
+        "library": "Bibliothèque",
+        "libraryHint": "Les titres que vous avez enregistrés",
+        "progress": "Progression de lecture",
+        "progressHint": "Où vous en étiez et ce que vous avez regardé",
+        "settings": "Paramètres du profil",
+        "settingsHint": "Lecture, sources, rangées de l’Accueil et les autres paramètres synchronisés",
+        "streams": "Historique des sources",
+        "streamsHint": "La dernière source lue pour chaque vidéo"
+      },
+      "profilesHeader": "Profils",
+      "privateNote": "Le fichier contient les liens de vos add-ons et l’historique des sources, qui peuvent inclure des clés d’API. Gardez-le pour vous : toute personne qui a le fichier peut les utiliser.",
+      "exportNote": "Les codes PIN, les comptes des services de suivi, les téléchargements et les paramètres de cet appareil ne sont jamais inclus dans le fichier.",
+      "exportAction": "Exporter dans un fichier",
+      "saved": "${name} a été enregistré.",
+      "saveFailed": "Impossible d’enregistrer le fichier.",
+      "exportFailed": "L’exportation a échoué.",
+      "importHeader": "Import",
+      "importNote": "Ouvre un fichier exporté depuis Tortuga. Les données les plus récentes l’emportent, élément par élément, et rien n’est supprimé sur cet appareil.",
+      "importAction": "Importer depuis un fichier",
+      "reviewTitle": "Import",
+      "source": "Exporté le ${date} avec Tortuga ${version}",
+      "sourceUndated": "Exporté avec Tortuga ${version}",
+      "dataHeader": "Données",
+      "counts": {
+        "addons": {
+          "one": "${n} add-on",
+          "many": "${n} d’add-ons",
+          "other": "${n} add-ons"
+        },
+        "titles": {
+          "one": "${n} titre",
+          "many": "${n} de titres",
+          "other": "${n} titres"
+        },
+        "progress": {
+          "one": "progression sur ${n} titre",
+          "many": "progression sur ${n} de titres",
+          "other": "progression sur ${n} titres"
+        },
+        "settings": {
+          "one": "${n} paramètre",
+          "many": "${n} de paramètres",
+          "other": "${n} paramètres"
+        },
+        "streams": {
+          "one": "${n} source",
+          "many": "${n} de sources",
+          "other": "${n} sources"
+        },
+        "profiles": {
+          "one": "${n} profil",
+          "many": "${n} de profils",
+          "other": "${n} profils"
+        }
+      },
+      "into": "Vers",
+      "intoSame": "Vers ${name} sur ce compte",
+      "newProfile": "Un nouveau profil",
+      "importConfirm": "Importer",
+      "imported": "Import terminé : ${changes}.",
+      "nothingNew": "Rien de nouveau à importer : tout le contenu du fichier était déjà là.",
+      "notTortuga": "Ce fichier n’est pas un export de Tortuga. Rien n’a été importé.",
+      "newer": "Ce fichier provient d’une version plus récente de Tortuga. Mettez à jour Tortuga, puis importez-le à nouveau.",
+      "damaged": "Ce fichier est endommagé ou incomplet. Rien n’a été importé.",
+      "clockAhead": "Les heures de ce fichier sont très en avance sur l’horloge de cet appareil. Vérifiez la date et l’heure sur les deux appareils, puis importez-le à nouveau. Rien n’a été importé.",
+      "importFailed": "L’importation a échoué.",
+      "unreadable": "Impossible d’ouvrir le fichier. Rien n’a été importé."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "À jour",
+      "syncing": "Synchronisation…",
+      "offline": "Hors ligne. Les modifications seront synchronisées au retour de la connexion.",
+      "signedOut": "Déconnecté",
+      "failed": {
+        "server": "Le serveur de synchronisation a rencontré un problème. Nouvelle tentative sous peu.",
+        "rateLimited": "Le serveur de synchronisation a demandé de ralentir. Nouvelle tentative sous peu.",
+        "quotaExceeded": "L’espace de stockage du compte est plein, les modifications ne sont donc plus synchronisées.",
+        "tooLarge": "Certaines modifications sont trop volumineuses pour être synchronisées.",
+        "addonsTooLarge": "Les add-ons d’un profil sont trop volumineux pour être synchronisés. Supprimez ceux qu’il n’utilise pas.",
+        "clockWrong": "Certaines modifications ne peuvent pas être synchronisées. Vérifiez la date et l’heure de vos appareils.",
+        "unknown": "Échec de la synchronisation. Nouvelle tentative sous peu."
+      }
+    },
+    "error": {
+      "network": "Impossible de joindre le serveur de synchronisation. Vérifiez la connexion et réessayez.",
+      "server": "Le serveur de synchronisation a rencontré un problème. Réessayez plus tard.",
+      "rateLimited": "Trop de tentatives. Patientez un instant et réessayez.",
+      "invalidServerUrl": "Ce n’est pas une adresse de serveur. Saisissez une adresse comme https://sync.example.com.",
+      "insecureServerUrl": "Utilisez https pour un serveur sur Internet. Le http simple ne fonctionne que pour un serveur de votre propre réseau.",
+      "notTortugaServer": "Aucun serveur de synchronisation Tortuga n’a répondu à cette adresse.",
+      "incompatibleServer": "Ce serveur utilise une ancienne version de la synchronisation Tortuga et ne peut pas être utilisé.",
+      "providerNotEnabled": "Ce serveur ne propose pas ce mode de connexion.",
+      "signInRejected": "La connexion n’a pas abouti. Réessayez.",
+      "appleCodeRejected": "Apple n’a pas accepté la connexion. Réessayez.",
+      "providerUnavailable": "Le service de connexion est injoignable. Réessayez plus tard.",
+      "signInCancelled": "La connexion a été annulée.",
+      "signInExpired": "La connexion a pris trop de temps. Recommencez.",
+      "identityInUse": "Cette méthode de connexion appartient déjà à un autre compte Tortuga.",
+      "lastIdentity": "C’est la seule méthode de connexion du compte, elle ne peut donc pas être supprimée.",
+      "sessionEnded": "Cet appareil a été déconnecté. Reconnectez-vous.",
+      "sessionUnreadable": "Les informations de connexion de cet appareil n’ont pas pu être lues depuis le stockage sécurisé du système. Redémarrez Tortuga pour réessayer.",
+      "notSignedIn": "Connectez-vous d’abord.",
+      "notFound": "Cet élément n’existe plus sur le serveur.",
+      "linkCodeInvalid": "Les codes comportent 8 lettres et chiffres, comme ABCD-EFGH.",
+      "linkNotFound": "Aucun appareil n’attend avec ce code. Vérifiez le code ou recommencez sur le nouvel appareil.",
+      "linkOtherServer": "L’autre appareil utilise un autre serveur de synchronisation.",
+      "linkFailed": "L’association n’a pas pu aboutir. Recommencez.",
+      "tooLarge": "Cet élément est trop volumineux pour le serveur de synchronisation.",
+      "quotaExceeded": "L’espace de stockage du compte est plein.",
+      "unsynced": {
+        "one": "${n} modification faite sur cet appareil n’est pas encore synchronisée avec son compte.",
+        "many": "${n} de modifications faites sur cet appareil ne sont pas encore synchronisées avec leur compte.",
+        "other": "${n} modifications faites sur cet appareil ne sont pas encore synchronisées avec leur compte."
+      },
+      "unexpected": "Une erreur s’est produite. Réessayez."
+    },
+    "deletion": {
+      "done": "Le compte et ses données ont été supprimés.",
+      "appleRevoked": "Le compte et ses données ont été supprimés, et Tortuga n’utilise plus votre identifiant Apple.",
+      "appleManual": "Le compte et ses données ont été supprimés. Pour terminer, retirez Tortuga dans Réglages → Identifiant Apple → Se connecter avec Apple.",
+      "githubManual": "Vous pouvez retirer Tortuga de votre compte GitHub sur ${address}."
+    },
+    "switchAccount": {
+      "title": "Supprimer les modifications non synchronisées ?",
+      "message": {
+        "one": "Ce compte n’est pas celui auquel cet appareil était connecté. ${n} modification faite ici avec cet autre compte, comme une progression de lecture ou une modification de la bibliothèque, ne lui est jamais parvenue. La connexion la supprime définitivement, avec le reste des données de cet autre compte sur cet appareil, téléchargements compris.",
+        "many": "Ce compte n’est pas celui auquel cet appareil était connecté. ${n} de modifications faites ici avec cet autre compte, comme la progression de lecture ou des modifications de la bibliothèque, ne lui sont jamais parvenues. La connexion les supprime définitivement, avec le reste des données de cet autre compte sur cet appareil, téléchargements compris.",
+        "other": "Ce compte n’est pas celui auquel cet appareil était connecté. ${n} modifications faites ici avec cet autre compte, comme la progression de lecture ou des modifications de la bibliothèque, ne lui sont jamais parvenues. La connexion les supprime définitivement, avec le reste des données de cet autre compte sur cet appareil, téléchargements compris."
+      },
+      "confirm": "Supprimer et se connecter",
+      "cancel": "Annuler",
+      "kept": "Non connecté. Les modifications restent sur cet appareil jusqu’à ce que vous vous connectiez au compte dans lequel elles ont été faites."
+    },
+    "browser": {
+      "signedIn": "Connexion réussie. Vous pouvez fermer cet onglet et revenir à Tortuga.",
+      "failed": "La connexion n’a pas abouti. Revenez à Tortuga et réessayez."
+    },
+    "signIn": {
+      "title": "Se connecter à Tortuga",
+      "intro": "Un compte Tortuga synchronise vos profils, vos add-ons et votre bibliothèque sur tous vos appareils.",
+      "apple": "Se connecter avec Apple",
+      "google": "Se connecter avec Google",
+      "github": "Se connecter avec GitHub",
+      "oidc": "Se connecter avec ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Associer depuis un autre appareil",
+      "linkDeviceHint": "Déjà connecté sur un téléphone ou un ordinateur ? Associez plutôt cet appareil avec un code.",
+      "server": "Serveur : ${server}",
+      "useOwnServer": "Utiliser votre propre serveur",
+      "useHostedServer": "Utiliser le serveur Tortuga",
+      "serverField": "Adresse du serveur",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Continuer",
+      "checkingServer": "Vérification du serveur…",
+      "loadingOptions": "Chargement des options de connexion…",
+      "noOptions": "Ce serveur ne propose aucun moyen de se connecter sur cet appareil. Associez-le plutôt depuis un appareil connecté.",
+      "retry": "Réessayer",
+      "starting": "Démarrage de la connexion…",
+      "native": "Connexion avec ${provider}…",
+      "browser": "Continuez dans le navigateur. Cet écran passera à la suite dès que vous y serez connecté.",
+      "finishing": "Finalisation de la connexion…",
+      "cancel": "Annuler",
+      "deviceCode": {
+        "instructions": "Sur un téléphone ou un ordinateur, accédez à ${url} et saisissez ce code :",
+        "scan": "Ou scannez le code QR avec votre téléphone.",
+        "qrDescription": "Code QR à scanner avec votre téléphone",
+        "expires": "Le code expire dans ${time}.",
+        "waiting": "En attente de votre connexion…"
+      }
+    },
+    "link": {
+      "title": "Associer cet appareil",
+      "instructions": "Sur un appareil connecté, ouvrez Paramètres, puis Compte, puis Associer un nouvel appareil. Scannez-y ce code QR ou saisissez le code.",
+      "qrDescription": "Code QR à scanner sur l’appareil connecté",
+      "starting": "Obtention d’un code…",
+      "expires": "Le code expire dans ${time}.",
+      "waiting": "En attente d’approbation sur l’autre appareil…",
+      "rejected": "L’autre appareil a refusé l’association.",
+      "expired": "Le code a expiré avant d’être utilisé.",
+      "newCode": "Obtenir un nouveau code"
+    },
+    "identityLink": {
+      "title": "Ajouter une méthode de connexion",
+      "intro": "Associez un autre moyen de vous connecter, pour ne pas perdre l’accès si vous perdez un compte.",
+      "allLinked": "Toutes les méthodes de connexion proposées sur cet appareil sont déjà associées.",
+      "linking": "Association…"
+    }
+  },
+  "profiles": {
+    "title": "Qui regarde ?",
+    "manageTitle": "Gérer les profils",
+    "manage": "Gérer les profils",
+    "done": "Terminé",
+    "add": "Ajouter un profil",
+    "empty": "Créez un profil pour commencer.",
+    "loading": "Chargement de vos profils…",
+    "current": "Profil actuel",
+    "switchProfile": "Changer de profil",
+    "pin": {
+      "title": "Saisissez le code PIN de ${name}",
+      "wrong": "Code PIN incorrect. Réessayez.",
+      "lockedOut": "Trop de tentatives. Réessayez dans ${time}.",
+      "cancel": "Annuler",
+      "backspace": "Effacer le dernier chiffre",
+      "entered": "Chiffres saisis : ${count} sur ${total}"
+    },
+    "editor": {
+      "newTitle": "Nouveau profil",
+      "editTitle": "Modifier le profil",
+      "name": "Nom",
+      "nameRequired": "Saisissez un nom.",
+      "nameTooLong": {
+        "one": "Un nom peut comporter jusqu’à ${n} caractère.",
+        "many": "Un nom peut comporter jusqu’à ${n} de caractères.",
+        "other": "Un nom peut comporter jusqu’à ${n} caractères."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Sans code PIN",
+      "pinOn": "Verrouillé par un code PIN",
+      "setPin": "Définir un code PIN",
+      "changePin": "Modifier le code PIN",
+      "removePin": "Supprimer le code PIN",
+      "pinEnter": "Saisissez un code PIN à 4 chiffres",
+      "pinConfirm": "Saisissez à nouveau le code PIN",
+      "pinMismatch": "Les codes PIN ne correspondent pas. Saisissez-en un nouveau.",
+      "pinNote": "Un code PIN empêche les autres d’accéder à ce profil sur vos appareils. C’est un verrou, pas un mot de passe.",
+      "save": "Enregistrer",
+      "create": "Créer le profil",
+      "cancel": "Annuler",
+      "delete": "Supprimer le profil",
+      "deleteConfirm": "Supprimer ${name} ? Ses add-ons, sa bibliothèque et son historique seront supprimés sur tous les appareils. Cette action est irréversible.",
+      "deleteAction": "Supprimer",
+      "saveFailed": "Impossible d’enregistrer le profil. Réessayez.",
+      "kids": {
+        "title": "Profil enfant",
+        "subtitle": "Affiche seulement les titres suggérés pour les âges jusqu’au niveau choisi. La plupart des âges suggérés sont des estimations, pas des classifications officielles.",
+        "needsParent": "Définissez d’abord un code PIN sur un profil adulte : quitter un profil enfant le demande.",
+        "newOnly": "Seul un nouveau profil peut être un profil enfant.",
+        "capTitle": "Âge suggéré maximal",
+        "capLittle": "Petits",
+        "capLittleAges": "Suggéré 0+",
+        "capKids": "Enfants",
+        "capKidsAges": "Petits, plus suggéré 6+",
+        "capTeen": "Ados",
+        "capTeenAges": "Enfants, plus suggéré 12+",
+        "allowUnrated": "Autoriser les titres non classés",
+        "allowUnratedNote": "Titres sans âge suggéré. Tant que cette option est désactivée, un parent les autorise un par un.",
+        "homeRows": "Rangées de l’Accueil",
+        "homeRowsNote": "Facultatif. Les titres de ces rangées doivent quand même respecter l’âge suggéré maximal.",
+        "familyMovies": "Films familiaux",
+        "familySeries": "Séries familiales",
+        "addonMissing": "Son add-on n’est pas installé sur ce profil.",
+        "allowed": "Titres autorisés",
+        "allowedNone": "Aucun pour l’instant. Un parent autorise un titre depuis sa page.",
+        "blocked": "Titres bloqués",
+        "blockedNone": "Aucun pour l’instant. Un parent bloque un titre depuis sa page.",
+        "remove": "Retirer ${title}",
+        "leaving": "Quitter ce profil demande le code PIN d’un parent.",
+        "off": "Les liens, les add-ons et la plupart des réglages sont désactivés.",
+        "addons": "Les vidéos viennent des add-ons de ce profil. Tortuga ne les vérifie pas."
+      }
+    },
+    "avatar": {
+      "graphite": "Graphite",
+      "slate": "Ardoise",
+      "silver": "Argent",
+      "ivory": "Ivoire",
+      "sand": "Sable",
+      "clay": "Argile",
+      "rose": "Rose",
+      "plum": "Prune",
+      "dusk": "Crépuscule",
+      "sea": "Océan",
+      "sage": "Sauge",
+      "moss": "Mousse"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Indisponible sur ce profil",
+      "suggested": "Suggéré ${age}+",
+      "byAddon": "Son add-on le réserve à un public plus âgé",
+      "notRated": "Aucun âge suggéré",
+      "byParent": "Bloqué par un parent",
+      "unchecked": "Son âge suggéré n’a pas pu être vérifié. Réessayez plus tard.",
+      "ask": "Demander à un parent"
+    },
+    "block": "Bloquer sur ce profil",
+    "pin": {
+      "title": "Saisissez le code PIN d’un parent",
+      "allow": "Pour autoriser ${title} sur ce profil",
+      "allowThis": "Pour autoriser ce titre sur ce profil",
+      "block": "Pour bloquer ${title} sur ce profil",
+      "leave": "Pour quitter ce profil",
+      "settings": "Pour ouvrir ces réglages"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Tout",
+      "movie": "Films",
+      "series": "Séries",
+      "channel": "Chaînes",
+      "tv": "Chaînes TV",
+      "other": "Autres"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Réessayer",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Tout afficher",
+      "downloading": "Téléchargements en cours : ${count}, ${percent} %",
+      "downloadingUnsized": "Téléchargements en cours : ${count}",
+      "empty": "Rien à afficher pour l’instant. Installez des add-ons avec des catalogues pour remplir cette page.",
+      "allHidden": "Toutes les rangées de l’Accueil sont masquées. Vous pouvez les réafficher dans Paramètres → Accueil."
+    },
+    "continueWatching": {
+      "title": "Continuer à regarder",
+      "episode": "Épisode ${episode}",
+      "upNext": "À suivre",
+      "minutesLeft": "Il reste ${minutes} min",
+      "hoursLeft": "Il reste ${hours} h",
+      "hoursMinutesLeft": "Il reste ${hours} h ${minutes} min",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Liste de suivi",
+      "recommended": "Recommandés",
+      "trending": "Tendances",
+      "planToWatch": "À regarder",
+      "planning": "Prévus",
+      "airing": "En diffusion",
+      "list": "Liste",
+      "unreachable": "Impossible de joindre ${service}.",
+      "signedOut": "${service} vous a déconnecté. Reconnectez-le dans Paramètres.",
+      "failed": "${service} n’a pas répondu comme prévu."
+    },
+    "discover": {
+      "type": "Type",
+      "catalog": "Catalogue",
+      "genre": "Genre",
+      "all": "Tous",
+      "empty": "Ce catalogue n’a rien à afficher.",
+      "noCatalogs": "Aucun des add-ons installés ne propose de catalogue à parcourir.",
+      "selection": "${picker} : ${selection}"
+    },
+    "search": {
+      "placeholder": "Rechercher des films, des séries et plus",
+      "recent": "Recherches récentes",
+      "clearRecent": "Effacer",
+      "removeRecentNamed": "Retirer ${name}",
+      "noResults": "Aucun résultat pour « ${query} »",
+      "noCatalogs": "Aucun des add-ons installés ne permet la recherche.",
+      "clearQuery": "Effacer la recherche",
+      "hint": "Trouvez des films, des séries et plus encore dans les catalogues de vos add-ons."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Accueil",
+      "discover": "Découvrir",
+      "search": "Rechercher",
+      "library": "Bibliothèque",
+      "settings": "Paramètres"
+    },
+    "shortLabel": {
+      "board": "Accueil",
+      "library": "Collection",
+      "search": "Recherche",
+      "settings": "Réglages"
+    },
+    "back": "Retour",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "dismiss": "Ignorer",
+    "qrFailed": "Ce lien ne peut pas être affiché sous forme de code QR.",
+    "openOnPhone": {
+      "title": "Ouvrir sur votre téléphone",
+      "message": "Cet appareil ne peut pas ouvrir ce lien. Scannez le code avec l'appareil photo de votre téléphone pour l'y ouvrir.",
+      "qrDescription": "Code QR du lien"
+    },
+    "player": {
+      "close": "Fermer le lecteur",
+      "fullscreen": "Plein écran",
+      "exitFullscreen": "Quitter le plein écran",
+      "rewind": "Retour rapide",
+      "fastForward": "Avance rapide",
+      "pictureInPicture": "Image dans l’image"
+    },
+    "menu": {
+      "playback": "Lecture",
+      "nextSubtitles": "Piste de sous-titres suivante",
+      "nextAudio": "Piste audio suivante"
+    }
+  },
+  "watch": {
+    "title": "Regarder ensemble",
+    "intro": "Regardez en même temps que vos amis, chacun sur son propre appareil. Tout le monde lit le même titre depuis ses propres add-ons. Pour créer un salon, choisissez Regarder ensemble dans les options du lecteur.",
+    "controlMode": {
+      "hostOnly": "Je garde le contrôle",
+      "hostOnlyDetail": "Tout le monde suit quand vous lancez la lecture, mettez en pause ou vous déplacez dans la vidéo",
+      "anyone": "Tout le monde contrôle",
+      "anyoneDetail": "Tous les participants peuvent lancer la lecture, mettre en pause ou se déplacer dans la vidéo"
+    },
+    "joinTitle": "Rejoindre un salon",
+    "joinHint": "Code ou lien d’invitation",
+    "joinLabel": "Rejoindre",
+    "joinInvalid": "Saisissez un code de salon à 6 caractères ou un lien d’invitation",
+    "recentTitle": "Salons récents",
+    "recentUsed": "Utilisé ${time}",
+    "removeRecentNamed": "Retirer ${name}",
+    "invite": {
+      "title": "Rejoindre le salon ${code} ? Il est sur ${server}, pas sur votre serveur relais.",
+      "join": "Rejoindre",
+      "leaveTitle": "Quitter le salon pour rejoindre le salon ${code} ? Il est sur ${server}, pas sur votre serveur relais.",
+      "leaveHostTitle": "Quitter le salon pour rejoindre le salon ${code} ? Il est sur ${server}, pas sur votre serveur relais. Ce salon continue avec le participant suivant comme hôte."
+    },
+    "relay": {
+      "checking": "Vérification du relais…",
+      "unreachable": "Impossible de joindre le relais à l’adresse ${server}.",
+      "retry": "Réessayer",
+      "title": "Serveur relais",
+      "hint": "Le relais qui relie les salons Regarder ensemble. Laissez ce champ vide pour utiliser les relais publics d’Open Watch Party.",
+      "hosted": "Relais publics d’Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Saisissez une adresse de relais commençant par http:// ou https://",
+      "save": "Enregistrer",
+      "reset": "Utiliser les relais publics"
+    },
+    "busy": {
+      "creating": "Création du salon…",
+      "joining": "Connexion au salon…"
+    },
+    "dismiss": "Ignorer",
+    "room": {
+      "codeLabel": "Code du salon",
+      "copyCode": "Copier le code",
+      "codeCopied": "Code copié",
+      "share": "Partager l’invitation",
+      "shareText": "Viens regarder avec moi sur Tortuga : ouvre ${link} ou saisis le code du salon ${code}.",
+      "scan": "Scannez avec un téléphone pour rejoindre le salon",
+      "youHost": "Vous êtes l’hôte",
+      "hostedBy": "Organisé par ${name}",
+      "hostOnly": "Seul l’hôte contrôle la lecture",
+      "anyone": "Tout le monde contrôle la lecture",
+      "reconnecting": "Reconnexion…",
+      "hostReconnecting": "En attente de la reconnexion de ${name}…",
+      "nowPlaying": "En lecture : ${title}",
+      "nowPlayingEpisode": "En lecture : ${title} · ${episode}",
+      "idleHost": "Lancez un titre : tout le salon le regardera avec vous.",
+      "idleGuest": "En attente que ${name} lance un titre.",
+      "participants": {
+        "one": "${n} participant",
+        "many": "${n} de participants",
+        "other": "${n} participants"
+      },
+      "you": "${name} (vous)",
+      "hostBadge": "Hôte",
+      "makeHost": "Désigner comme hôte",
+      "makeHostNamed": "Désigner ${name} comme hôte",
+      "joinPlayback": "Rejoindre la lecture",
+      "leave": "Quitter le salon",
+      "leaveTitle": "Quitter le salon ?",
+      "leaveConfirm": "Quitter",
+      "end": "Fermer le salon",
+      "endTitle": "Fermer le salon pour tout le monde ?",
+      "endConfirm": "Fermer le salon",
+      "cancel": "Annuler",
+      "leaveHostTitle": "Quitter le salon ? Il continue avec le participant suivant comme hôte.",
+      "kickNamed": "Retirer ${name}",
+      "kickTitle": "Retirer ${name} du salon ?",
+      "kickConfirm": "Retirer",
+      "lock": "Verrouiller le salon",
+      "lockDetail": "Plus personne ne peut rejoindre le salon",
+      "controlTitle": "Qui contrôle la lecture"
+    },
+    "status": {
+      "ready": "Prêt",
+      "loading": "Chargement",
+      "matching": "Recherche d’un fichier",
+      "buffering": "Mise en mémoire tampon",
+      "sameLength": "Même durée (${delta})",
+      "longer": "Plus long de ${delta}",
+      "shorter": "Plus court de ${delta}",
+      "noStream": "Aucune source trouvée",
+      "searchFailed": "Échec de la recherche dans les add-ons",
+      "notPlaying": "Hors du lecteur",
+      "away": "Déconnecté",
+      "declined": "Ne regarde pas",
+      "offset": "Décalage ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Salon ${code}",
+      "startTitle": "Créer un salon avec la lecture en cours",
+      "liveNoRoom": "Un direct ne peut pas être regardé ensemble",
+      "watching": {
+        "one": "${n} personne regarde",
+        "many": "${n} de personnes regardent ensemble",
+        "other": "${n} personnes regardent ensemble"
+      },
+      "hostBadge": "HÔTE",
+      "waiting": "En attente de ${names}…",
+      "waitingMore": {
+        "one": "En attente de ${names} et ${n} autre personne…",
+        "many": "En attente de ${names} et ${n} d’autres personnes…",
+        "other": "En attente de ${names} et ${n} autres personnes…"
+      },
+      "syncing": "Synchronisation…",
+      "matchingStart": "Recherche d’un fichier correspondant à celui de ${name}…",
+      "longer": "Votre fichier dure ${delta} de plus que celui de ${name}",
+      "shorter": "Votre fichier dure ${delta} de moins que celui de ${name}",
+      "mismatchDetail": "Il s’agit peut-être d’un autre montage, vos positions risquent donc de ne pas correspondre.",
+      "playAnyway": "Lire quand même",
+      "chooseStream": "Choisir une autre source",
+      "noStream": "Aucun de vos add-ons ne propose de source pour ${title}.",
+      "searchFailed": "Certains de vos add-ons n’ont pas pu être interrogés pour ${title}.",
+      "chooseAStream": "Choisir une source",
+      "pickFailed": "Impossible d’ouvrir cette source.",
+      "hostControls": "Dans ce salon, c’est ${name} qui contrôle la lecture",
+      "hostControlsUnnamed": "Dans ce salon, seul l’hôte contrôle la lecture",
+      "pausedHere": "En pause sur cet appareil. Appuyez sur Lire pour rattraper le salon.",
+      "dontPlay": "Ne pas lire",
+      "declined": "Vous ne regardez pas ${title}.",
+      "offsetTitle": "Décalage",
+      "offsetDetail": "Décale votre fichier par rapport à celui du salon, pour un montage qui commence plus tôt ou plus tard.",
+      "offsetReset": "Réinitialiser"
+    },
+    "toast": {
+      "joined": "${name} a rejoint le salon",
+      "left": "${name} a quitté le salon",
+      "paused": "${name} a mis en pause",
+      "resumed": "${name} a repris la lecture",
+      "seeked": "${name} a changé la position de lecture",
+      "speed": "${name} a réglé la vitesse sur ${speed}",
+      "buffering": "${name} charge la vidéo",
+      "hostChanged": "${name} est maintenant l’hôte",
+      "becameHost": "Vous êtes maintenant l’hôte",
+      "media": "${name} a lancé ${title}",
+      "forbidden": "Seul l’hôte peut faire cela"
+    },
+    "failure": {
+      "create": "Impossible de créer le salon. Réessayez.",
+      "join": "Impossible de rejoindre le salon. Réessayez.",
+      "share": "Impossible de partager cette vidéo avec le salon. Essayez une autre source.",
+      "live": "Un direct ne peut pas être regardé ensemble. Le salon attend une vidéo.",
+      "roomNotFound": "Aucun salon ne correspond à ce code.",
+      "roomFull": "Ce salon est complet.",
+      "rateLimited": "Trop de tentatives. Patientez une minute, puis réessayez.",
+      "connection": "Impossible de joindre le relais. Vérifiez la connexion.",
+      "sessionLost": "La connexion au salon a été perdue.",
+      "ended": "L’hôte a fermé le salon.",
+      "roomLocked": "Ce salon est verrouillé.",
+      "relayFull": "Le relais est complet. Réessayez plus tard.",
+      "blocked": "Ce relais n’accepte pas Tortuga.",
+      "kicked": "L’hôte vous a retiré du salon.",
+      "expired": "Le salon a expiré.",
+      "replaced": "Vous avez rejoint ce salon sur un autre appareil."
+    }
+  },
+  "downloads": {
+    "title": "Téléchargements",
+    "empty": "Aucun téléchargement pour l’instant. Téléchargez des films et des épisodes depuis leur fiche pour les regarder sans connexion.",
+    "offline": "Vous êtes hors ligne. Les téléchargements reprendront au retour de la connexion.",
+    "storage": "${used} utilisés · ${free} disponibles",
+    "storageUsed": "${used} utilisés",
+    "pauseAll": "Tout mettre en pause",
+    "resumeAll": "Tout reprendre",
+    "actionFailed": "Impossible de modifier le téléchargement. Réessayez.",
+    "actionsFailed": "Impossible de modifier les téléchargements. Réessayez.",
+    "episodes": {
+      "one": "${n} épisode",
+      "many": "${n} d’épisodes",
+      "other": "${n} épisodes"
+    },
+    "videos": {
+      "one": "${n} vidéo",
+      "many": "${n} de vidéos",
+      "other": "${n} vidéos"
+    },
+    "otherVideos": "Autres vidéos",
+    "summary": "${count} · ${size}",
+    "progress": "${done} sur ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "En file d’attente",
+      "waitingForWifi": "En attente du Wi-Fi",
+      "waitingForNetwork": "En attente de connexion",
+      "resolving": "Préparation…",
+      "downloading": "Téléchargement en cours",
+      "downloadingPercent": "Téléchargement · ${percent} %",
+      "paused": "En pause",
+      "failed": "Échec",
+      "completed": "Téléchargé",
+      "cancelled": "Annulé"
+    },
+    "action": {
+      "play": "Lire",
+      "pause": "Pause",
+      "resume": "Reprendre",
+      "retry": "Réessayer",
+      "pickStream": "Choisir une source",
+      "cancel": "Annuler le téléchargement",
+      "delete": "Supprimer le téléchargement",
+      "deleteGroup": "Supprimer les téléchargements",
+      "openDetail": "Voir la fiche"
+    },
+    "deleteConfirm": {
+      "title": "Supprimer ${count} de ${name} ?",
+      "message": "Un nouveau téléchargement prend du temps et demande une connexion.",
+      "confirm": "Supprimer",
+      "cancel": "Annuler"
+    },
+    "keepSynced": {
+      "title": "Synchronisation automatique",
+      "note": "Pour chaque série ici, les prochains épisodes non vus restent téléchargés sur cet appareil ; dès que vous en regardez un, un autre est téléchargé.",
+      "empty": "Aucune série en synchronisation automatique. Dans le menu de téléchargement d’une série, choisissez combien d’épisodes non vus garder.",
+      "series": {
+        "one": "${n} série",
+        "many": "${n} de séries",
+        "other": "${n} séries"
+      },
+      "manage": "Gérer la synchronisation automatique",
+      "pauseRule": "Mettre ${title} en pause",
+      "resumeRule": "Reprendre ${title}",
+      "stopRule": "Arrêter la synchronisation de ${title}",
+      "status": {
+        "downloading": {
+          "one": "Téléchargement de ${n} épisode",
+          "many": "Téléchargement de ${n} d’épisodes",
+          "other": "Téléchargement de ${n} épisodes"
+        },
+        "failed": {
+          "one": "${n} épisode en échec",
+          "many": "${n} d’épisodes en échec",
+          "other": "${n} épisodes en échec"
+        },
+        "downloaded": {
+          "one": "${n} épisode téléchargé",
+          "many": "${n} d’épisodes téléchargés",
+          "other": "${n} épisodes téléchargés"
+        },
+        "downloadedNone": "Aucun épisode téléchargé"
+      },
+      "stop": {
+        "title": "Arrêter la synchronisation de ${title} ?",
+        "message": {
+          "one": "${n} épisode dans les téléchargements a été ajouté par la synchronisation automatique. Le supprimer aussi ?",
+          "many": "${n} d’épisodes dans les téléchargements ont été ajoutés par la synchronisation automatique. Les supprimer aussi ?",
+          "other": "${n} épisodes dans les téléchargements ont été ajoutés par la synchronisation automatique. Les supprimer aussi ?"
+        },
+        "messageNone": "Aucun autre épisode ne sera téléchargé.",
+        "keep": "Garder les téléchargements",
+        "delete": "Supprimer les téléchargements",
+        "confirm": "Arrêter",
+        "cancel": "Annuler"
+      },
+      "notice": {
+        "one": "La synchronisation automatique a ajouté ${n} épisode de ${title}",
+        "many": "La synchronisation automatique a ajouté ${n} d’épisodes de ${title}",
+        "other": "La synchronisation automatique a ajouté ${n} épisodes de ${title}"
+      },
+      "noticeSeveral": {
+        "one": "La synchronisation automatique a ajouté ${n} épisode",
+        "many": "La synchronisation automatique a ajouté ${n} d’épisodes",
+        "other": "La synchronisation automatique a ajouté ${n} épisodes"
+      },
+      "actionFailed": "Impossible de modifier la synchronisation automatique. Réessayez."
+    },
+    "failure": {
+      "noStream": "Aucune source n’a pu être choisie pour cet épisode. Choisissez-en une manuellement.",
+      "noStreamInstant": "Aucune source instantanée n’a pu être choisie pour cet épisode. Choisissez-en une manuellement.",
+      "network": "La connexion a échoué.",
+      "http": "Le serveur a répondu avec le code HTTP ${status}.",
+      "streamGone": "Le lien a expiré et son add-on ne propose plus cette source.",
+      "diskFull": "L’appareil n’a plus d’espace libre. Les téléchargements sont arrêtés.",
+      "notEnoughSpace": "Il n’y a pas assez d’espace libre pour ce téléchargement.",
+      "sizeMismatch": "Le fichier téléchargé est incomplet.",
+      "unsupported": "Cette source ne peut pas être téléchargée.",
+      "locationUnavailable": "L’emplacement de téléchargement n’est pas disponible.",
+      "fileMissing": "Le fichier téléchargé est introuvable.",
+      "storage": "Le stockage de l'appareil n'a pas répondu."
+    },
+    "notification": {
+      "channel": "Téléchargements",
+      "title": "Téléchargement de ${title}",
+      "count": {
+        "one": "${n} téléchargement",
+        "many": "${n} de téléchargements",
+        "other": "${n} téléchargements"
+      },
+      "progress": "${percent} %",
+      "preparing": "Préparation du téléchargement…",
+      "waiting": "En attente du Wi-Fi",
+      "paused": "En pause",
+      "pause": "Pause",
+      "resume": "Reprendre",
+      "cancel": "Annuler",
+      "failed": "Échec du téléchargement : ${title}",
+      "completed": "Téléchargement terminé : ${title}"
+    }
+  },
+  "offline": {
+    "title": "Vous êtes hors ligne",
+    "text": "Connectez-vous à Internet pour naviguer. Vos téléchargements se lisent sans connexion.",
+    "textNoDownloads": "Connectez-vous à Internet pour naviguer.",
+    "openDownloads": "Accéder aux téléchargements",
+    "detail": "Affichage des détails enregistrés avec vos téléchargements."
+  },
+  "playerApps": {
+    "chooser": "Toujours demander",
+    "tortuga": "Tortuga",
+    "playWith": "Lire avec…",
+    "banner": {
+      "opening": "Ouverture dans ${player}…",
+      "notInstalled": "${player} n’est pas installé sur cet appareil.",
+      "didNotStart": "${player} ne s’est pas lancé.",
+      "playInTortuga": "Lire dans Tortuga",
+      "cancel": "Annuler",
+      "dismiss": "Ignorer"
+    },
+    "detail": {
+      "playing": "Lecture dans ${player} · ${position}",
+      "playingOf": "Lecture dans ${player} · ${position} sur ${duration}",
+      "paused": "En pause dans ${player} · ${position}",
+      "pausedOf": "En pause dans ${player} · ${position} sur ${duration}",
+      "finished": "Ouvert dans ${player}. Avez-vous fini de regarder ${title} ?",
+      "markWatched": "Marquer comme vu",
+      "notYet": "Pas encore"
+    },
+    "settings": {
+      "player": "Lecteur",
+      "deviceOnly": "Cet appareil uniquement",
+      "note": "Les vidéos de cet appareil sont lues dans le lecteur choisi ici. Lire avec… dans le menu d’une source permet d’en choisir un autre pour une seule vidéo.",
+      "notFound": "${player} (introuvable)",
+      "followsProgress": "Reprend là où vous en étiez et enregistre votre progression pendant la lecture",
+      "savesOnReturn": "Reprend là où vous en étiez et enregistre l’endroit où vous vous arrêtez",
+      "savesOnReturnFromStart": "Démarre au début, puis enregistre l’endroit où vous vous arrêtez ou vous demande si vous avez terminé",
+      "asksAfter": "Reprend là où vous en étiez, puis vous demande si vous avez terminé",
+      "asksAfterFromStart": "Ouvre uniquement la vidéo, puis vous demande si vous avez terminé",
+      "chooserDetail": "Votre appareil demande pour chaque vidéo quelle application doit la lire",
+      "customHeader": "Lecteurs personnalisés",
+      "addCustom": "Ajouter un lecteur personnalisé",
+      "deleteNamed": "Supprimer ${name}",
+      "form": {
+        "title": "Ajouter un lecteur personnalisé",
+        "name": "Nom",
+        "nameHint": "Mon lecteur",
+        "program": "Programme",
+        "programHint": "mpv, ou le chemin complet du programme",
+        "arguments": "Arguments",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} est le lien de la vidéo, {title} son titre, {start} sa position de départ en secondes et {subtitle} le lien du premier sous-titre.",
+        "urlTemplate": "Modèle d’URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} est le lien de la vidéo, encodé pour une URL, et {url_raw} le lien tel quel.",
+        "packageName": "Nom du package",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Ajouter",
+        "cancel": "Annuler",
+        "nameMissing": "Donnez un nom au lecteur.",
+        "programMissing": "Saisissez le programme à exécuter.",
+        "urlTemplateMissing": "Saisissez le modèle d’URL.",
+        "packageNameMissing": "Saisissez le nom du package de l’application.",
+        "argumentsNeedUrl": "Les arguments doivent contenir {url}.",
+        "urlTemplateNeedsUrl": "Le modèle d’URL doit contenir {url} ou {url_raw}.",
+        "packageNameInvalid": "Ce n’est pas un nom de package comme org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Guide TV",
+    "today": "Aujourd’hui",
+    "tomorrow": "Demain",
+    "yesterday": "Hier",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "En cours",
+    "now": "Maintenant",
+    "noProgrammes": "Aucune information sur le programme",
+    "noChannels": "Ce guide n’a aucune chaîne pour ce jour.",
+    "noGuide": "Aucun add-on installé ne propose de guide TV.",
+    "failed": "Impossible de charger le guide : ${reason}",
+    "cast": "Avec ${names}",
+    "directors": "Réalisé par ${names}"
+  },
+  "calendar": {
+    "title": "Calendrier",
+    "previousMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
+    "today": "Aujourd’hui",
+    "tomorrow": "Demain",
+    "emptyLibrary": "Ajoutez des séries à votre bibliothèque pour voir leurs épisodes ici.",
+    "noAddon": "Aucun de vos add-ons n’a de calendrier pour les séries de votre bibliothèque.",
+    "emptyMonth": "Aucun épisode.",
+    "newEpisodes": {
+      "one": "${n} nouvel épisode",
+      "many": "${n} nouveaux épisodes",
+      "other": "${n} nouveaux épisodes"
+    },
+    "episodes": {
+      "one": "${n} épisode",
+      "many": "${n} épisodes",
+      "other": "${n} épisodes"
+    }
+  },
+  "watchlist": {
+    "lists": "Listes des services de suivi",
+    "hint": "Chaque liste est sur votre compte de ce service. Votre bibliothèque ne change pas.",
+    "add": "Ajouter à « ${list} »",
+    "remove": "Retirer de « ${list} »",
+    "trakt": "Liste de suivi Trakt",
+    "simkl": "Simkl : À regarder",
+    "mdblist": "Liste de suivi MDBList",
+    "myAnimeList": "MyAnimeList : À regarder",
+    "aniList": "AniList : Prévus",
+    "saving": "Enregistrement…",
+    "queued": "Pas encore envoyé, nouvel essai plus tard",
+    "failed": "Non enregistré",
+    "addFailed": "Impossible d’ajouter ${title} à « ${list} ».",
+    "removeFailed": "Impossible de retirer ${title} de « ${list} »."
+  },
+  "collections": {
+    "needsAddon": "Nécessite l’add-on ${name}",
+    "needsCatalog": "${addon} n’a pas de catalogue ${catalog}",
+    "needsFilter": "Nécessite un filtre que Tortuga ne peut pas définir",
+    "traktUnavailable": "Les listes Trakt ne sont pas disponibles dans cette version de l’application",
+    "tooLarge": "« ${title} » est trop volumineuse pour être synchronisée",
+    "kind": {
+      "tmdbList": "Liste TMDB",
+      "tmdbCollection": "Collection TMDB",
+      "tmdbCompany": "Société TMDB",
+      "tmdbNetwork": "Chaîne TMDB",
+      "tmdbDiscover": "Découverte TMDB",
+      "tmdbPerson": "Personne TMDB",
+      "tmdbDirector": "Réalisateur TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "Fournisseur inconnu « ${name} »"
+    },
+    "summary": {
+      "adds": {
+        "one": "Ajoute ${n} collection",
+        "many": "Ajoute ${n} de collections",
+        "other": "Ajoute ${n} collections"
+      },
+      "replaces": {
+        "one": "Remplace ${n} collection de même identifiant",
+        "many": "Remplace ${n} de collections de mêmes identifiants",
+        "other": "Remplace ${n} collections de mêmes identifiants"
+      },
+      "needsAddon": {
+        "one": "${n} source nécessite l’add-on ${name}",
+        "many": "${n} de sources nécessitent l’add-on ${name}",
+        "other": "${n} sources nécessitent l’add-on ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} source nécessite de connecter ${service}",
+        "many": "${n} de sources nécessitent de connecter ${service}",
+        "other": "${n} sources nécessitent de connecter ${service}"
+      },
+      "unsupported": {
+        "one": "${kind} : ${n} source ignorée",
+        "many": "${kind} : ${n} de sources ignorées",
+        "other": "${kind} : ${n} sources ignorées"
+      },
+      "unsupportedHint": "Tortuga lit les catalogues d’add-ons et les listes des trackers, pas ces sources. Utilisez plutôt un catalogue d’add-on, comme ceux d’AIOMetadata ou de MDBList.",
+      "folderDropped": "Dossier « ${folder} » de « ${collection} » ignoré : aucune de ses sources n’est lisible",
+      "collectionDropped": "Collection « ${title} » ignorée : aucun de ses dossiers n’est lisible",
+      "tooLarge": "Collection « ${title} » non importée : elle est trop volumineuse pour être synchronisée"
+    },
+    "refused": {
+      "notJson": "Ce n’est pas un fichier de collections : ce n’est pas du JSON.",
+      "notList": "Ce n’est pas un fichier de collections : il ne contient aucune liste de collections.",
+      "empty": "Ce fichier ne contient aucune collection.",
+      "collectionInvalid": "La collection ${position} du fichier est illisible.",
+      "collectionNoId": "La collection ${position} du fichier n’a pas d’identifiant.",
+      "collectionNoTitle": "La collection ${id} n’a pas de titre.",
+      "duplicateCollection": "Deux collections du fichier ont l’identifiant ${id}.",
+      "noFolders": "La collection « ${collection} » n’a pas de liste de dossiers.",
+      "folderInvalid": "Le dossier ${position} de « ${collection} » est illisible.",
+      "folderNoId": "Le dossier ${position} de « ${collection} » n’a pas d’identifiant.",
+      "folderNoTitle": "Le dossier ${id} de « ${collection} » n’a pas de titre.",
+      "duplicateFolder": "Deux dossiers de « ${collection} » ont l’identifiant ${id}.",
+      "noSources": "Le dossier « ${folder} » de « ${collection} » n’a pas de liste de sources.",
+      "unknownShape": "Le dossier « ${folder} » de « ${collection} » a une forme de tuile inconnue : ${shape}.",
+      "sourceInvalid": "La source ${position} du dossier « ${folder} » de « ${collection} » est incomplète."
+    },
+    "row": "Collection",
+    "rowSource": {
+      "one": "Collection · ${n} dossier",
+      "many": "Collection · ${n} de dossiers",
+      "other": "Collection · ${n} dossiers"
+    },
+    "folder": {
+      "all": "Tous",
+      "empty": "Aucun titre ici",
+      "goToTrackers": "Aller aux services de suivi",
+      "goToAddons": "Aller aux add-ons"
+    },
+    "importing": {
+      "title": "Importer des collections",
+      "note": "Un fichier de collections de Nuvio ou d’AIOMetadata : saisissez son lien ou ouvrez le fichier. Une collection qui a le même identifiant qu’une des vôtres la remplace.",
+      "urlLabel": "Lien",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Récupérer",
+      "openFile": "Ouvrir un fichier",
+      "confirm": "Importer",
+      "done": "Terminé",
+      "rowNew": {
+        "one": "Nouvelle · ${n} dossier",
+        "many": "Nouvelle · ${n} de dossiers",
+        "other": "Nouvelle · ${n} dossiers"
+      },
+      "rowReplaces": {
+        "one": "Remplace la vôtre · ${n} dossier",
+        "many": "Remplace la vôtre · ${n} de dossiers",
+        "other": "Remplace la vôtre · ${n} dossiers"
+      },
+      "imported": {
+        "one": "${n} collection importée",
+        "many": "${n} de collections importées",
+        "other": "${n} collections importées"
+      },
+      "notWeb": "Saisissez un lien qui commence par http:// ou https://.",
+      "tooLarge": "Ce fichier dépasse 4 Mo.",
+      "httpError": "Le lien a répondu avec l’erreur ${status}.",
+      "timeout": "Le lien n’a pas répondu à temps.",
+      "unreachable": "Le lien est injoignable. Vérifiez-le ainsi que votre connexion.",
+      "unreadable": "Ce fichier ne peut pas être lu comme du texte.",
+      "failed": "Les collections n’ont pas pu être enregistrées."
+    },
+    "editor": {
+      "newHeading": "Nouvelle collection",
+      "editHeading": "Modifier la collection",
+      "titleLabel": "Titre",
+      "view": "Affichage",
+      "viewHint": "Comment un dossier présente ses sources",
+      "viewTabs": "Onglets",
+      "viewRows": "Rangées",
+      "viewFollow": "Comme l’application",
+      "allTab": "Onglet « Tous »",
+      "allTabHint": "Un premier onglet avec les titres de toutes les sources",
+      "foldersHeader": "Dossiers",
+      "addFolder": "Ajouter un dossier",
+      "noFolders": "Aucun dossier pour l’instant",
+      "sources": {
+        "one": "${n} source",
+        "many": "${n} de sources",
+        "other": "${n} sources"
+      },
+      "save": "Enregistrer",
+      "newFolder": "Nouveau dossier",
+      "folderTitleLabel": "Titre",
+      "shape": "Forme des vignettes",
+      "shapePoster": "Affiche",
+      "shapeLandscape": "Paysage",
+      "shapeSquare": "Carré",
+      "coverLabel": "Lien de l’image de couverture",
+      "coverHint": "https://…",
+      "hideTitle": "Masquer le titre",
+      "hideTitleHint": "La vignette n’affiche que sa couverture",
+      "sourcesHeader": "Sources",
+      "addSource": "Ajouter une source",
+      "noSources": "Aucune source pour l’instant",
+      "deleteNamed": "Supprimer ${name}",
+      "removeNamed": "Retirer ${name}",
+      "noTitle": "Donnez un titre à la collection.",
+      "noFolder": "Ajoutez un dossier à la collection.",
+      "folderNoTitle": "Donnez un titre au dossier ${position}.",
+      "folderNoSource": "Ajoutez une source à « ${folder} ».",
+      "saveFailed": "La collection n’a pas pu être enregistrée.",
+      "discardTitle": "Abandonner les modifications ?",
+      "discard": "Abandonner",
+      "keepEditing": "Continuer à modifier",
+      "picker": {
+        "addons": "Catalogues d’add-ons",
+        "trackers": "Services de suivi",
+        "noAddons": "Aucun add-on installé n’a de catalogue à ajouter.",
+        "noTrackers": "Connectez un service de suivi dans Paramètres → Services de suivi pour ajouter ses listes.",
+        "listsFailed": "Les listes de ${service} ne peuvent pas être lues pour le moment.",
+        "byLink": "Une liste ${service} par son lien",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Ajouter",
+        "notAList": "Ce n’est pas un lien vers une liste ${service}.",
+        "notFound": "${service} n’a aucune liste à ce lien.",
+        "unreachable": "${service} est injoignable pour le moment."
+      }
+    }
+  }
+}

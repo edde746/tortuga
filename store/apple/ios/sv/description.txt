@@ -1,0 +1,34 @@
+Tortuga är en videospelare som fungerar med Stremio-tillägg. Tilläggen du installerar står för katalogerna och strömmarna, och Tortuga spelar upp dem. Tortuga tillhandahåller inget eget innehåll.
+
+SÅ FUNGERAR DET
+• Installera ett tillägg via dess länk. Kataloger, sökresultat, informationssidor och strömmar kommer från dina tillägg, och dina förfrågningar går direkt till dem.
+• Hem visar Fortsätt titta och dina tilläggs kataloger. I Upptäck filtrerar du efter typ och genre. I Sök söker du i alla tillägg.
+• En films eller ett avsnitts strömmar grupperas per tillägg. Välj en så spelas den upp.
+
+SPELAREN
+• Uppspelning med mpv, med HDR10 och Dolby Vision där din iPhone eller iPad stöder det.
+• Inbäddade undertexter och undertexter från tillägg, matchade mot filen. Dina val av ljud och undertexter följer med till nästa avsnitt.
+• Kapitel på tidslinjen. Hoppa över intron, sammanfattningar och eftertexter med en knapp eller automatiskt.
+• Nedräkning till nästa avsnitt, byte till föregående eller nästa avsnitt, uppspelningshastighet samt undertext- och ljudfördröjning.
+• Bild-i-bild.
+• Vill du hellre använda en annan spelare? Skicka videon till en annan spelarapp på din enhet.
+
+DITT BIBLIOTEK
+• Tittarförlopp och markering av sedda titlar, med Fortsätt titta på Hem så att du kommer tillbaka dit du slutade.
+• Tortuga kommer ihåg strömmen du valde och spelar upp nästa avsnitt från samma källa.
+• Nedladdningar: spara filmer och avsnitt med tillhörande undertexter för att titta offline. Tortuga kan hålla en serie uppdaterad med nästa osedda avsnitt.
+
+TITTA TILLSAMMANS
+Starta ett rum och dela rumskoden eller en inbjudningslänk. Uppspelningen hålls i synk, och var och en spelar upp titeln via sina egna tillägg.
+
+DITT KONTO OCH DINA PROFILER
+• Logga in med Apple, Google eller GitHub. Dina profiler, tillägg, bibliotek, förlopp och profilinställningar synkroniseras mellan dina enheter. Länka en Apple TV med en QR-kod eller en kort kod.
+• En profil för varje person i hushållet, var och en med egna tillägg, eget bibliotek och egna inställningar. En PIN-kod är valfri.
+• Anslut Trakt, Simkl, MDBList, MyAnimeList eller AniList för scrobbling, tittarhistorik, betyg och listor.
+• Synkroniseringen körs på Tortugas server eller på en server som du kör själv.
+
+Tortuga är öppen källkod under GPL-3.0 och finns på 21 språk. Ingen reklam, och Tortuga kör inga egna analysverktyg.
+
+Spelaren i skärmbilderna visar korta utdrag ur Spring (2019), Coffee Run (2020), Sprite Fright (2021) och Wing It! (2023) av Blender Studio, (CC) Blender Foundation | studio.blender.org, licensierade under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga använder Trakt men är inte godkänd eller certifierad av Trakt.

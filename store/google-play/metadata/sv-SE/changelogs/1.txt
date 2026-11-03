@@ -1,0 +1,1 @@
+Första versionen av Tortuga: bläddra i dina tilläggs kataloger, spela upp deras strömmar, ladda ned för att titta offline, titta tillsammans och håll profiler, bibliotek och förlopp synkroniserade mellan dina enheter.

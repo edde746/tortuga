@@ -1,0 +1,1 @@
+Videopřehrávač pro telefony, tablety a televizory. Funguje s doplňky Stremio.

@@ -1,0 +1,32 @@
+{
+  "streams": [
+    {"url": "https://cdn.example.com/video.mkv", "name": "Direct", "title": "Legacy title\nsecond line"},
+    {"url": "not a url", "infoHash": "0123456789abcdef0123456789ABCDEF01234567", "fileIdx": 2},
+    {"ytId": "dQw4w9WgXcQ", "description": "Description wins", "title": "over the legacy title"},
+    {"externalUrl": "stremio:///detail/series/tt7366338/tt7366338%3A1%3A1", "name": "Episode page"},
+    {"name": "No source at all"},
+    {"url": "https://cdn.example.com/b.mkv", "behaviorHints": {"bingeGroup": 7}},
+    {"rarUrls": [["https://files.example.com/a.part1.rar", 1048576], ["https://files.example.com/a.part2.rar"]]},
+    {"nzbUrl": "https://files.example.com/a.index", "servers": ["nntps://news.example.com:563/4"]},
+    {
+      "url": "https://cdn.example.com/c.mkv",
+      "subtitles": [
+        {"id": "1", "lang": "eng", "url": "https://subs.example.com/1.srt"},
+        {"id": "2", "lang": "eng"},
+        null
+      ],
+      "behaviorHints": {
+        "notWebReady": null,
+        "bingeGroup": "example|1080p",
+        "proxyHeaders": {"request": {"User-Agent": "Tortuga"}},
+        "videoSize": 1351041024,
+        "videoHash": "8e245d9679d31e12",
+        "filename": "c.mkv",
+        "custom": {"x": 1}
+      }
+    },
+    {"playerFrameUrl": "https://player.example.com/embed/1"},
+    {"androidTvUrl": "https://tv.example.com/x"},
+    {"url": "rtmp://live.example.com/app/stream"}
+  ]
+}

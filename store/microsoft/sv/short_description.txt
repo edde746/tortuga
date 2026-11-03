@@ -1,0 +1,1 @@
+En videospelare som fungerar med Stremio-tillägg. Tilläggen du installerar står för katalogerna och strömmarna, och Tortuga spelar upp dem. Tortuga tillhandahåller inget eget innehåll.

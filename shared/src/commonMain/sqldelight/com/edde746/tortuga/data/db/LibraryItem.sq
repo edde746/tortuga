@@ -1,0 +1,103 @@
+-- Library and watch progress per profile, with Stremio's `libraryItem` field set so a one-time import from a
+-- Stremio account stays possible (stremio-core src/types/library/library_item.rs). Times and
+-- durations are milliseconds, instants epoch milliseconds. Sync columns: see Profile.sq.
+CREATE TABLE library_item (
+    profile_id TEXT NOT NULL,
+    -- `_id`: the meta id.
+    item_id TEXT NOT NULL,
+    type TEXT NOT NULL,
+    name TEXT NOT NULL,
+    poster TEXT,
+    -- `posterShape`: poster, square or landscape.
+    poster_shape TEXT NOT NULL,
+    removed INTEGER AS kotlin.Boolean NOT NULL,
+    temp INTEGER AS kotlin.Boolean NOT NULL,
+    -- `_ctime` and `_mtime`.
+    ctime INTEGER,
+    mtime INTEGER NOT NULL,
+    -- `state`.
+    last_watched INTEGER,
+    time_watched INTEGER NOT NULL,
+    time_offset INTEGER NOT NULL,
+    overall_time_watched INTEGER NOT NULL,
+    times_watched INTEGER NOT NULL,
+    flagged_watched INTEGER NOT NULL,
+    duration INTEGER NOT NULL,
+    video_id TEXT,
+    -- Stremio's watched-videos bitfield, kept verbatim.
+    watched TEXT,
+    no_notif INTEGER AS kotlin.Boolean NOT NULL,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL,
+    PRIMARY KEY (profile_id, item_id)
+);
+
+CREATE INDEX library_item_recent ON library_item(profile_id, mtime);
+
+CREATE INDEX library_item_dirty ON library_item(dirty, hlc);
+
+selectLive:
+SELECT * FROM library_item WHERE profile_id = ? AND item_id = ? AND deleted = 0;
+
+select:
+SELECT * FROM library_item WHERE profile_id = ? AND item_id = ?;
+
+-- Every live item of a profile, for an export (data/transfer/DataTransfer.kt).
+selectAllLive:
+SELECT * FROM library_item WHERE profile_id = ? AND deleted = 0 ORDER BY item_id;
+
+-- The user's library: added, not removed; `other` is Stremio's type for items outside the library.
+selectLibrary:
+SELECT * FROM library_item
+WHERE profile_id = ? AND deleted = 0 AND removed = 0 AND type <> 'other'
+ORDER BY mtime DESC;
+
+-- What a catalog card shows of its title (presentation/board/MetaCard.kt): the titles in the library or watched.
+selectMarks:
+SELECT item_id, removed, times_watched FROM library_item
+WHERE profile_id = ? AND deleted = 0 AND (removed = 0 OR times_watched > 0);
+
+-- The titles watched at least once or with a video marked watched, in the library or not, newest first: what
+-- Settings' "Hide watched titles" reads (presentation/board/FinishedTitles.kt).
+selectWatched:
+SELECT * FROM library_item
+WHERE profile_id = ? AND deleted = 0 AND type NOT IN ('other', 'tv') AND (times_watched > 0 OR watched IS NOT NULL)
+ORDER BY mtime DESC;
+
+-- Stremio's LibraryItem::is_in_continue_watching, without live channels (`tv`), newest first.
+selectContinueWatching:
+SELECT * FROM library_item
+WHERE profile_id = :profileId AND deleted = 0 AND type NOT IN ('other', 'tv') AND (removed = 0 OR temp = 1)
+    AND time_offset > 0
+ORDER BY mtime DESC
+LIMIT :limit;
+
+-- The addon's poster a title's downloads were saved with (Download.sq): what the library keeps of a title whose meta
+-- has the downloaded copy's file for a poster (data/library/LibraryRepository.kt).
+selectDownloadPoster:
+SELECT poster FROM download WHERE meta_id = ? AND poster IS NOT NULL ORDER BY added_at, id LIMIT 1;
+
+upsert:
+INSERT OR REPLACE INTO library_item VALUES ?;
+
+tombstoneProfile:
+UPDATE library_item SET deleted = 1, dirty = 1, hlc = :hlc WHERE profile_id = :profileId AND deleted = 0;
+
+selectDirty:
+SELECT * FROM library_item WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE library_item SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE library_item SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt; see Profile.sq).
+deleteAll:
+DELETE FROM library_item;
+
+forgetServerVersions:
+UPDATE library_item SET server_version = NULL, dirty = 1;

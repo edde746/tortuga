@@ -1,0 +1,2013 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Kiểm tra bản cập nhật…",
+    "launchFailed": "Không thể khởi động Tortuga.",
+    "startup": {
+      "database": "Đang mở cơ sở dữ liệu…",
+      "migration": "Đang cập nhật cơ sở dữ liệu…",
+      "account": "Đang tải tài khoản của bạn…",
+      "profiles": "Đang tải hồ sơ…"
+    },
+    "localNetworkUsage": "Tortuga sử dụng mạng cục bộ của bạn để kết nối với tiện ích, nội dung đa phương tiện và máy chủ đồng bộ mà bạn chạy tại nhà."
+  },
+  "player": {
+    "nowPlaying": "Đang phát",
+    "buffering": "Đang tải…",
+    "position": "${position} / ${duration}",
+    "timeline": "Vị trí phát",
+    "play": "Phát",
+    "pause": "Tạm dừng",
+    "resolving": "Đang chuẩn bị nguồn phát…",
+    "opening": "Đang mở…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "TRỰC TIẾP",
+      "position": "Trực tiếp · đã xem ${time}",
+      "behind": "Trực tiếp · chậm ${time}",
+      "goToLive": "Chuyển đến trực tiếp"
+    },
+    "nextEpisode": "Tập tiếp theo",
+    "previousEpisode": "Tập trước",
+    "lock": {
+      "button": "Khóa màn hình",
+      "tapToUnlock": "Chạm để mở khóa",
+      "tapAgainToUnlock": "Chạm lần nữa để mở khóa"
+    },
+    "format": {
+      "seconds": "${value} giây",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Bình thường",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Âm lượng",
+      "level": "${percent}%",
+      "muted": "Đã tắt tiếng",
+      "mute": "Tắt tiếng",
+      "unmute": "Bật tiếng"
+    },
+    "menu": {
+      "audio": "Âm thanh",
+      "subtitles": "Phụ đề",
+      "speed": "Tốc độ phát",
+      "subtitleDelay": "Độ trễ phụ đề",
+      "audioDelay": "Độ trễ âm thanh",
+      "moreSubtitles": "Thêm phụ đề",
+      "reset": "Đặt lại",
+      "subtitleDelayEarlier": "Độ trễ phụ đề: sớm hơn",
+      "subtitleDelayLater": "Độ trễ phụ đề: muộn hơn",
+      "audioDelayEarlier": "Độ trễ âm thanh: sớm hơn",
+      "audioDelayLater": "Độ trễ âm thanh: muộn hơn"
+    },
+    "track": {
+      "off": "Tắt",
+      "numbered": "Rãnh ${number}",
+      "defaultTrack": "Mặc định",
+      "forced": "Bắt buộc",
+      "sdh": "SDH",
+      "audioDescription": "Mô tả âm thanh",
+      "external": "Bên ngoài",
+      "second": "Phụ đề thứ hai",
+      "showAsSecond": "Hiện làm phụ đề thứ hai",
+      "removeSecond": "Gỡ phụ đề thứ hai",
+      "otherLanguage": "Khác",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "other": "${n} kênh"
+      }
+    },
+    "info": {
+      "title": "Thông tin phát",
+      "tab": "Thông tin",
+      "resolution": "Độ phân giải",
+      "video": "Video",
+      "dynamicRange": "Dải động",
+      "audio": "Âm thanh",
+      "decoder": "Bộ giải mã",
+      "cache": "Bộ nhớ đệm",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Phần cứng (${name})",
+      "softwareDecoder": "Phần mềm",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision profile ${profile}",
+      "stream": "Nguồn phát",
+      "addon": "Tiện ích",
+      "pickedBy": "Cách chọn",
+      "autoPlayFirstMatch": "Tự động phát, nguồn khớp đầu tiên",
+      "autoPlayLastLink": "Tự động phát, nguồn giống lần trước",
+      "source": "Nguồn",
+      "downloaded": "Đã tải xuống",
+      "name": "Tên",
+      "file": "Tệp",
+      "container": "Định dạng chứa",
+      "fileSize": "Dung lượng",
+      "bitrate": "Tốc độ bit",
+      "codec": "Codec",
+      "pixelFormat": "Định dạng điểm ảnh",
+      "bitDepth": "${bits}-bit",
+      "color": "Màu",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nit",
+      "mastering": "Màn hình mastering",
+      "nitsRange": "${min}–${max} nit",
+      "droppedFrames": "Khung hình bị rớt",
+      "droppedFramesValue": "${output} (bộ giải mã ${decoder})",
+      "delayedFrames": "Khung hình bị trễ",
+      "output": "Đầu ra",
+      "hertz": "${value} Hz",
+      "channels": "Kênh",
+      "sampleRate": "Tần số lấy mẫu",
+      "track": "Rãnh",
+      "secondTrack": "Rãnh thứ hai",
+      "passthrough": "Truyền thẳng (${format})",
+      "spatialAudio": "Âm thanh không gian",
+      "rendering": "Kết xuất",
+      "surround": "Âm thanh vòm",
+      "subtitles": "Phụ đề",
+      "format": "Định dạng",
+      "embedded": "Nhúng",
+      "delay": "Độ trễ",
+      "network": "Mạng",
+      "downloadSpeed": "Tốc độ tải xuống",
+      "buffering": "Đang tải",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Bỏ qua phần giới thiệu",
+      "recap": "Bỏ qua phần tóm tắt",
+      "credits": "Bỏ qua phần danh đề"
+    },
+    "prompt": {
+      "playNext": "Phát tập tiếp theo: ${episode}",
+      "countdown": {
+        "other": "Tự động sau ${n} giây"
+      }
+    },
+    "options": {
+      "title": "Tùy chọn",
+      "videoFit": "Tỷ lệ khung hình",
+      "fit": {
+        "contain": "Vừa màn hình",
+        "cover": "Lấp đầy màn hình",
+        "fill": "Kéo giãn"
+      },
+      "zoom": "Thu phóng",
+      "percent": "${percent}%",
+      "resetZoom": "Đặt lại",
+      "shaders": "Shader",
+      "shader": {
+        "nvscalerDetail": "Phóng to hình ảnh của NVIDIA cho video sắc nét hơn",
+        "neutral": "Trung tính",
+        "denoise": "Khử nhiễu",
+        "denoiseSharpen": "Khử nhiễu + làm sắc nét",
+        "fast": "Nhanh",
+        "highQuality": "Chất lượng cao",
+        "modeDetail": "${quality} · Chế độ ${mode}",
+        "customDetail": "Shader GLSL tùy chỉnh",
+        "importShader": "Nhập shader",
+        "imported": "Đã nhập shader",
+        "importFailed": "Không thể nhập shader",
+        "deleteLabel": "Xóa ${name}",
+        "deleteTitle": "Xóa ${name}?",
+        "delete": "Xóa",
+        "cancel": "Hủy"
+      },
+      "sleepTimer": "Hẹn giờ ngủ",
+      "sleepEndOfVideo": "Hết video hiện tại",
+      "sleepMinutes": {
+        "other": "${n} phút"
+      },
+      "sleepLeft": "Còn ${time}",
+      "autoPlayNext": "Tự động phát tập tiếp theo",
+      "audioOutput": "Đầu ra âm thanh",
+      "systemOutput": "Mặc định hệ thống",
+      "audioNormalization": "Chuẩn hóa âm lượng",
+      "audioChannels": "Kênh âm thanh",
+      "channels": {
+        "original": "Gốc",
+        "originalDetail": "Phát mọi kênh trong rãnh âm thanh",
+        "surround51": "Tối đa 5.1",
+        "surround51Detail": "Gộp 7.1 thành 5.1 cho TV và bộ thu chỉ hỗ trợ 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Gộp thành hai kênh cho loa stereo hoặc tai nghe"
+      },
+      "on": "Bật",
+      "off": "Tắt"
+    },
+    "stillWatching": {
+      "title": "Bạn vẫn đang xem chứ?",
+      "countdown": {
+        "other": "Tạm dừng sau ${n} giây"
+      },
+      "keepWatching": "Tiếp tục",
+      "pause": "Tạm dừng"
+    },
+    "error": {
+      "title": "Không thể phát nguồn này",
+      "resolveTimeout": "Nguồn phát mất quá nhiều thời gian để bắt đầu.",
+      "expired": "Liên kết của nguồn phát đã hết hạn.",
+      "notFound": "Nguồn phát không còn khả dụng.",
+      "http": "Máy chủ phản hồi với mã HTTP ${status}.",
+      "cantOpen": "Không thể mở nguồn phát.",
+      "unsupportedFormat": "Nguồn phát có định dạng mà trình phát không đọc được.",
+      "cantDecode": "Trình phát không phát được hình ảnh hoặc âm thanh của nguồn phát này.",
+      "engineFailed": "Trình phát đã dừng do gặp lỗi.",
+      "retry": "Thử lại",
+      "nextStream": "Thử nguồn tiếp theo",
+      "close": "Đóng",
+      "alternatives": {
+        "other": "Còn ${n} nguồn phát khác"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Đây không phải tập phim",
+      "titleMovie": "Đây không phải bộ phim",
+      "titleVideo": "Đây không phải video",
+      "sent": "Tiện ích đã gửi một video báo lỗi thay cho nguồn phát.",
+      "byUrl": "Liên kết của nó là một trong các video báo lỗi của tiện ích.",
+      "bySize": "Tệp có dung lượng ${served}, trong khi nguồn phát ghi ${size}.",
+      "byDuration": "Video dài ${length}, trong khi lần phát gần nhất video này dài ${known}.",
+      "kept": "Tiến độ xem của bạn vẫn được giữ.",
+      "chooseStream": "Chọn nguồn phát khác",
+      "watch": "Xem thông báo"
+    },
+    "osd": {
+      "volume": "Âm lượng ${level}",
+      "brightness": "Độ sáng ${level}",
+      "speed": "Tốc độ ${speed}",
+      "subtitleDelay": "Độ trễ phụ đề ${delay}",
+      "audioDelay": "Độ trễ âm thanh ${delay}",
+      "audioTrack": "Âm thanh: ${track}",
+      "subtitleTrack": "Phụ đề: ${track}",
+      "subtitlesOff": "Đã tắt phụ đề",
+      "chapter": "Chương: ${title}",
+      "chapterNumbered": "Chương ${number}",
+      "zoom": "Thu phóng ${percent}",
+      "shader": "Shader: ${name}",
+      "shadersOff": "Đã tắt shader"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Đang mở nguồn phát…",
+    "resolveFailed": {
+      "http": "Máy chủ của nguồn phát phản hồi với mã HTTP ${status}",
+      "timeout": "Máy chủ của nguồn phát phản hồi quá lâu",
+      "network": "Không thể kết nối với máy chủ của nguồn phát",
+      "unsupportedUrl": "Không thể mở liên kết của nguồn phát này",
+      "tooManyRedirects": "Liên kết của nguồn phát này chuyển hướng quá nhiều lần",
+      "unexpected": "Ứng dụng này gặp lỗi khi mở nguồn phát này"
+    },
+    "badge": {
+      "instant": "Tức thì",
+      "notInstant": "Không tức thì"
+    },
+    "lastUsed": "Phát gần nhất",
+    "external": "Mở bên ngoài ứng dụng",
+    "unplayable": {
+      "other": "${n} nguồn phát mà ứng dụng này không phát được"
+    },
+    "empty": "Không tìm thấy nguồn phát",
+    "all": "Tất cả",
+    "refresh": "Làm mới",
+    "retryNamed": "Thử lại ${name}",
+    "filters": {
+      "hidden": {
+        "other": "${n} nguồn phát bị bộ lọc của bạn ẩn"
+      },
+      "showing": {
+        "other": "Đang hiện ${n} nguồn phát mà bộ lọc của bạn ẩn"
+      },
+      "show": "Hiện",
+      "hide": "Ẩn",
+      "rowNote": "Bị bộ lọc của bạn ẩn"
+    },
+    "sort": {
+      "title": "Sắp xếp",
+      "addonOrder": "Thứ tự tiện ích",
+      "resolution": "Độ phân giải",
+      "source": "Chất lượng nguồn",
+      "sizeLargest": "Lớn nhất trước",
+      "sizeSmallest": "Nhỏ nhất trước",
+      "cached": "Tức thì trước"
+    },
+    "autoPlay": {
+      "noMatch": "Tự động phát không tìm thấy nguồn phát nào khớp với bộ lọc của bạn.",
+      "failed": "Nguồn phát được tự động chọn không bắt đầu được. Hãy chọn nguồn khác."
+    },
+    "download": {
+      "notice": "Chọn nguồn phát để tải xuống.",
+      "action": "Tải xuống",
+      "actionNamed": "Tải xuống ${name}",
+      "queued": "Đã thêm vào mục Tải xuống",
+      "failed": "Không thể thêm vào mục Tải xuống."
+    },
+    "suggested": {
+      "label": "Đề xuất",
+      "reason": "Giống các lựa chọn gần đây của bạn: ${features}",
+      "audio": "âm thanh ${language}",
+      "subtitles": "phụ đề ${language}",
+      "smaller": "tệp nhỏ hơn",
+      "larger": "tệp lớn hơn"
+    }
+  },
+  "detail": {
+    "loadFailed": "Không thể tải thông tin chi tiết.",
+    "notFound": "Không có tiện ích nào có thông tin chi tiết cho nội dung này.",
+    "noAddons": "Không tiện ích nào đã cài có thông tin chi tiết cho nội dung này.",
+    "noAnimeAddon": "Không tiện ích nào đã cài có thông tin chi tiết cho anime này. Hãy cài một tiện ích anime để mở.",
+    "animeListsUnavailable": "Không tải được danh sách anime nên không thể khớp anime này với một tựa phim. Hãy kiểm tra kết nối và thử lại.",
+    "findingAnime": "Đang tìm anime này trong danh sách anime…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} giờ ${minutes} phút",
+      "hours": "${hours} giờ",
+      "minutes": "${minutes} phút"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Giới phê bình Rotten Tomatoes",
+        "rottenTomatoesAudience": "Khán giả Rotten Tomatoes",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} phần trăm"
+    },
+    "userRating": {
+      "rateLabel": "Đánh giá nội dung này",
+      "label": "Đánh giá của bạn: ${score}",
+      "range": "${low}–${high}",
+      "title": "Đánh giá của bạn",
+      "hint": "Điểm của bạn được gửi tới từng dịch vụ bên dưới.",
+      "clear": "Xóa đánh giá",
+      "checking": "Đang kiểm tra…",
+      "notRated": "Chưa đánh giá",
+      "unreadable": "Không kiểm tra được",
+      "saving": "Đang lưu…",
+      "saved": "Đã lưu",
+      "removed": "Đã xóa",
+      "queued": "Chưa gửi, sẽ thử lại",
+      "failed": "Chưa lưu"
+    },
+    "links": {
+      "genres": "Thể loại",
+      "cast": "Diễn viên",
+      "directors": "Đạo diễn",
+      "writers": "Biên kịch",
+      "website": "Trang web"
+    },
+    "facts": {
+      "title": "Thông tin",
+      "released": "Phát hành",
+      "runtime": "Thời lượng",
+      "country": "Quốc gia",
+      "language": "Ngôn ngữ",
+      "awards": "Giải thưởng",
+      "source": "Chi tiết từ",
+      "failed": "Không tải được từ"
+    },
+    "trailer": "Đoạn giới thiệu",
+    "trailerNumbered": "Đoạn giới thiệu ${number}",
+    "trailers": "Đoạn giới thiệu",
+    "share": "Chia sẻ",
+    "season": "Phần ${number}",
+    "specials": "Tập đặc biệt",
+    "episodeNumbered": "Tập ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Diễn viên: ${names}",
+    "castAndCrew": "Diễn viên và đoàn làm phim",
+    "airs": "Lên sóng ${date}",
+    "date": "${day} ${month}, ${year}",
+    "month": {
+      "jan": "thg 1",
+      "feb": "thg 2",
+      "mar": "thg 3",
+      "apr": "thg 4",
+      "may": "thg 5",
+      "jun": "thg 6",
+      "jul": "thg 7",
+      "aug": "thg 8",
+      "sep": "thg 9",
+      "oct": "thg 10",
+      "nov": "thg 11",
+      "dec": "thg 12"
+    },
+    "play": "Phát",
+    "playEpisode": "Phát ${episode}",
+    "resume": "Tiếp tục ${time}",
+    "resumeEpisode": "Tiếp tục ${episode} · ${time}",
+    "addToLibrary": "Thêm vào thư viện",
+    "removeFromLibrary": "Xóa khỏi thư viện",
+    "markWatched": "Đánh dấu đã xem",
+    "markUnwatched": "Đánh dấu chưa xem",
+    "markAllWatched": "Đánh dấu tất cả các tập là đã xem",
+    "markAllUnwatched": "Đánh dấu tất cả các tập là chưa xem",
+    "markSeasonWatched": "Đánh dấu cả phần là đã xem",
+    "markSeasonUnwatched": "Đánh dấu cả phần là chưa xem",
+    "watched": "Đã xem",
+    "overviewHidden": "Đã ẩn mô tả",
+    "moreActions": "Tác vụ khác",
+    "moreActionsNamed": "Tác vụ khác cho ${name}",
+    "showMore": "Xem thêm",
+    "showLess": "Thu gọn",
+    "findingStream": "Đang tìm nguồn phát…",
+    "chooseStream": "Chọn nguồn phát",
+    "download": {
+      "download": "Tải xuống",
+      "queued": "Đang chờ",
+      "waitingForWifi": "Đang chờ Wi-Fi",
+      "downloading": "Đang tải xuống ${percent}%",
+      "downloadingStarted": "Đang tải xuống…",
+      "paused": "Đã tạm dừng",
+      "failed": "Tải xuống không thành công",
+      "partial": "Đã tải xuống ${done}/${total}",
+      "downloaded": "Đã tải xuống",
+      "menuTitle": "Tải xuống",
+      "allSeasons": "Tất cả các phần",
+      "pick": {
+        "all": "Tất cả các tập",
+        "unwatched": "Các tập chưa xem",
+        "next5": "5 tập chưa xem tiếp theo",
+        "next10": "10 tập chưa xem tiếp theo"
+      },
+      "keepSynced": "Luôn đồng bộ",
+      "keepSyncedCount": {
+        "other": "Giữ ${n} tập chưa xem"
+      },
+      "keepSyncedAll": "Giữ mọi tập chưa xem",
+      "manage": "Quản lý nội dung tải xuống",
+      "pauseAll": "Tạm dừng tải xuống",
+      "resumeAll": "Tiếp tục tải xuống",
+      "deleteSeason": "Xóa nội dung tải xuống của phần này",
+      "deleteAll": "Xóa tất cả nội dung tải xuống",
+      "queuedEpisodes": {
+        "other": "Đã thêm ${n} tập vào mục Tải xuống"
+      },
+      "nothingQueued": "Mọi tập đều đã được tải xuống hoặc đang chờ tải xuống.",
+      "failedToQueue": "Không thể thêm các tập vào mục Tải xuống.",
+      "episode": {
+        "download": "Tải xuống tập",
+        "pause": "Tạm dừng tải xuống",
+        "resume": "Tiếp tục tải xuống",
+        "retry": "Thử tải xuống lại",
+        "pickStream": "Chọn nguồn phát",
+        "cancel": "Hủy tải xuống",
+        "delete": "Xóa bản tải xuống",
+        "queued": "Đang chờ",
+        "downloading": "${percent}%",
+        "paused": "Đã tạm dừng",
+        "failed": "Tải xuống không thành công",
+        "downloaded": "Đã tải xuống"
+      }
+    },
+    "related": {
+      "title": "Nội dung tương tự",
+      "noneFound": "Không tìm thấy nội dung tương tự."
+    }
+  },
+  "library": {
+    "title": "Thư viện",
+    "continueWatching": "Tiếp tục xem",
+    "sort": {
+      "lastWatched": "Xem gần đây",
+      "added": "Thêm gần đây",
+      "name": "Tên A–Z",
+      "nameReverse": "Tên Z–A",
+      "timesWatched": "Xem nhiều nhất",
+      "watched": "Đã xem trước",
+      "notWatched": "Chưa xem trước"
+    },
+    "sortBy": "Sắp xếp theo",
+    "sortByNamed": "Sắp xếp theo: ${name}",
+    "empty": "Chưa có gì ở đây. Hãy thêm nội dung vào thư viện từ trang chi tiết.",
+    "emptyContinueWatching": "Chưa có gì để xem tiếp. Nội dung sẽ xuất hiện ở đây khi bạn bắt đầu xem.",
+    "emptyType": "Không có nội dung thuộc loại này.",
+    "watched": "Đã xem"
+  },
+  "mediaMenu": {
+    "markWatched": "Đánh dấu đã xem",
+    "markUnwatched": "Đánh dấu chưa xem",
+    "removeFromContinueWatching": "Xóa khỏi Tiếp tục xem",
+    "details": "Xem chi tiết",
+    "addToLibrary": "Thêm vào thư viện",
+    "removeFromLibrary": "Xóa khỏi thư viện",
+    "playFromStart": "Phát từ đầu",
+    "markSeasonWatched": "Đánh dấu cả phần là đã xem",
+    "markSeasonUnwatched": "Đánh dấu cả phần là chưa xem",
+    "chooseStream": "Chọn nguồn phát",
+    "download": "Tải xuống",
+    "pauseDownload": "Tạm dừng tải xuống",
+    "resumeDownload": "Tiếp tục tải xuống",
+    "retryDownload": "Thử tải xuống lại",
+    "cancelDownload": "Hủy tải xuống",
+    "deleteDownload": "Xóa bản tải xuống",
+    "pickStream": "Chọn nguồn phát",
+    "trailer": "Đoạn giới thiệu",
+    "markFailed": "Không thể đánh dấu ${title}: không tải được thông tin chi tiết. Hãy kiểm tra kết nối mạng và thử lại."
+  },
+  "session": {
+    "episode": "P${season}:T${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Không thể đọc các tiện ích đã cài đặt. Hãy khởi động lại Tortuga để thử lại.",
+    "error": {
+      "invalidTransportUrl": "Đây không phải liên kết tiện ích. Liên kết tiện ích kết thúc bằng /manifest.json.",
+      "timeout": "Tiện ích phản hồi quá lâu.",
+      "network": "Không thể kết nối với tiện ích.",
+      "http": "Tiện ích trả về lỗi (HTTP ${status}).",
+      "invalidResponse": "Tiện ích gửi phản hồi mà ứng dụng này không đọc được.",
+      "unexpectedResponse": "Tiện ích gửi phản hồi khác với loại được yêu cầu.",
+      "emptyContent": "Không tìm thấy gì.",
+      "invalidManifest": "Tệp manifest của tiện ích không hợp lệ.",
+      "configurationRequired": "Cần cấu hình tiện ích này trước khi cài đặt.",
+      "alreadyInstalled": "Tiện ích này đã được cài đặt.",
+      "notInstalled": "Tiện ích này chưa được cài đặt.",
+      "protectedAddon": "Tiện ích này được tích hợp sẵn và không thể gỡ hay tắt."
+    },
+    "title": "Tiện ích",
+    "allTypes": "Tất cả",
+    "empty": "Chưa cài tiện ích nào.",
+    "emptyFiltered": "Không tiện ích nào đã cài có loại này.",
+    "builtIn": "Tích hợp sẵn",
+    "builtInExplanation": "Tiện ích này được tích hợp sẵn và không thể gỡ hay tắt.",
+    "cancel": "Hủy",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Chuyển lên",
+    "moveUpNamed": "Chuyển ${name} lên",
+    "moveDown": "Chuyển xuống",
+    "moveDownNamed": "Chuyển ${name} xuống",
+    "dragToReorderNamed": "Sắp xếp lại ${name}",
+    "enabledNamed": "Dùng ${name}",
+    "close": "Đóng",
+    "version": "Phiên bản ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Danh mục",
+      "meta": "Chi tiết",
+      "stream": "Nguồn phát",
+      "subtitles": "Phụ đề",
+      "addonCatalog": "Danh mục tiện ích",
+      "player": "Hoạt động phát",
+      "library": "Hoạt động thư viện"
+    },
+    "remove": {
+      "title": "Gỡ ${name}?",
+      "message": "Tiện ích sẽ bị gỡ khỏi hồ sơ này trên mọi thiết bị, cùng với các cài đặt đã cấu hình cho nó.",
+      "confirm": "Gỡ"
+    },
+    "details": {
+      "types": "Loại",
+      "resources": "Cung cấp",
+      "catalogs": "Danh mục",
+      "contact": "Liên hệ",
+      "configure": "Cấu hình",
+      "remove": "Gỡ",
+      "enabled": "Dùng tiện ích này",
+      "enabledOff": "Tắt: Tortuga không yêu cầu gì từ tiện ích này và không hiện danh mục của nó.",
+      "shareTitle": "Liên kết tiện ích",
+      "shareWarning": "Liên kết này có thể chứa khóa của các tài khoản đã dùng để cấu hình tiện ích. Chỉ chia sẻ với người bạn tin tưởng.",
+      "revealLink": "Hiện liên kết",
+      "hideLink": "Ẩn liên kết",
+      "copyLink": "Sao chép liên kết",
+      "linkCopied": "Đã sao chép liên kết."
+    },
+    "watchActivity": {
+      "title": "Gửi hoạt động xem",
+      "explanation": "Tiện ích này nhận hoạt động xem của bạn: những gì bạn phát, tạm dừng và dừng, những gì bạn thêm vào hoặc xóa khỏi thư viện, và những gì bạn đánh dấu đã xem.",
+      "agree": "Tôi đồng ý cho tiện ích này nhận hoạt động xem của tôi",
+      "notAllowed": "Không nhận hoạt động xem cho đến khi bạn cho phép"
+    },
+    "install": {
+      "action": "Cài tiện ích",
+      "title": "Cài đặt tiện ích",
+      "linkHint": "Liên kết tiện ích, kết thúc bằng /manifest.json",
+      "submit": "Tiếp tục",
+      "confirm": "Cài đặt",
+      "update": "Cập nhật",
+      "configure": "Cấu hình",
+      "configureFirst": "Cần cấu hình tiện ích này trước khi cài đặt. Hãy cấu hình, rồi cài đặt từ trang của tiện ích.",
+      "alreadyInstalled": "Tiện ích này đã được cài đặt.",
+      "updateDetails": "Đã cài đặt. Thao tác này sẽ cập nhật thông tin của tiện ích.",
+      "updateVersion": "Đã cài đặt. Thao tác này sẽ cập nhật lên phiên bản ${version}.",
+      "adult": "Tiện ích này được đánh dấu là nội dung người lớn.",
+      "installed": "Đã cài đặt ${name}.",
+      "updated": "Đã cập nhật ${name}.",
+      "done": "Xong"
+    },
+    "browse": {
+      "title": "Duyệt",
+      "installed": "Đã cài đặt",
+      "installedNote": "Đã cài đặt"
+    }
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "automatic": "Tự động",
+    "listSeparator": ", ",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "increaseNamed": "Tăng ${name}",
+    "decreaseNamed": "Giảm ${name}",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "other": "${n} giây"
+      }
+    },
+    "time": {
+      "justNow": "vừa xong",
+      "minutesAgo": {
+        "other": "${n} phút trước"
+      },
+      "hoursAgo": {
+        "other": "${n} giờ trước"
+      },
+      "daysAgo": {
+        "other": "${n} ngày trước"
+      },
+      "monthsAgo": {
+        "other": "${n} tháng trước"
+      },
+      "yearsAgo": {
+        "other": "${n} năm trước"
+      }
+    },
+    "sections": {
+      "playback": "Phát lại",
+      "playbackSummary": "Ngôn ngữ, ngưỡng đã xem, tập tiếp theo và bỏ qua",
+      "device": "Thiết bị này",
+      "deviceSummary": "Giải mã, HDR, tốc độ khung hình, âm thanh, bộ nhớ đệm và báo cáo sự cố",
+      "subtitles": "Phụ đề",
+      "subtitlesSummary": "Cỡ chữ, màu, viền và vị trí trên thiết bị này",
+      "addons": "Tiện ích",
+      "addonsSummary": {
+        "other": "Đã cài ${n} tiện ích"
+      },
+      "addonsSummaryLoading": "Tiện ích đã cài",
+      "home": "Trang chủ",
+      "homeSummary": "Các hàng hiển thị trên Trang chủ và thứ tự của chúng",
+      "appearance": "Giao diện",
+      "appearanceSummary": "Ngôn ngữ, áp phích và các phim đã xem",
+      "trackers": "Dịch vụ theo dõi",
+      "trackersSummary": "Ghi nhận lượt xem, lịch sử xem và danh sách",
+      "trackersConnected": "Đã kết nối với ${services}",
+      "account": "Tài khoản",
+      "about": "Giới thiệu",
+      "downloads": "Tải xuống",
+      "downloadsSummary": "Vị trí, chỉ Wi-Fi và bộ nhớ",
+      "data": "Xuất và nhập dữ liệu",
+      "dataSummary": "Lưu dữ liệu hồ sơ của bạn vào tệp và nhập lại"
+    },
+    "profile": {
+      "locked": "Khóa bằng mã PIN",
+      "unlocked": "Không có mã PIN",
+      "edit": "Chỉnh sửa hồ sơ",
+      "manage": "Chuyển hoặc quản lý hồ sơ"
+    },
+    "about": {
+      "version": "Phiên bản ${version}",
+      "license": "Tortuga được cấp phép theo Giấy phép Công cộng GNU (GNU General Public License), phiên bản 3. Bạn có thể chạy, nghiên cứu, chia sẻ và sửa đổi phần mềm, và bất kỳ ai đưa cho bạn một bản sao đều phải cung cấp cho bạn mã nguồn của nó.",
+      "source": "Mã nguồn",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga sử dụng Trakt nhưng không được Trakt bảo trợ hay chứng nhận.",
+      "notices": "Phần mềm bên thứ ba",
+      "noticeLink": "Trang dự án"
+    },
+    "appearance": {
+      "interfaceLanguage": "Ngôn ngữ ứng dụng",
+      "interfaceLanguageHint": "Ngôn ngữ của menu và thông báo trong ứng dụng",
+      "interfaceLanguageSystem": "Mặc định hệ thống",
+      "blurUnwatched": "Làm mờ các tập chưa xem",
+      "blurUnwatchedHint": "Làm mờ hình ảnh và ẩn mô tả của các tập bạn chưa bắt đầu xem để không lộ nội dung",
+      "hideWatched": "Ẩn phim đã xem",
+      "hideWatchedHint": "Bỏ các phim lẻ và phim bộ bạn đã xem hết khỏi các hàng ở Trang chủ và Khám phá. Phim bộ sẽ quay lại khi có tập mới",
+      "hidePosterCaptions": "Ẩn tên bên dưới áp phích",
+      "hidePosterCaptionsHint": "Chỉ hiện hình ảnh. Xem tiếp vẫn giữ tập và thời gian còn lại",
+      "posterTemplate": "Mẫu URL áp phích",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} và {tvdb_id} là ID của từng tựa, {type} là movie hoặc series",
+      "posterTemplateNone": "Áp phích của addon",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Không phải địa chỉ http hay https nên bị bỏ qua"
+    },
+    "home": {
+      "note": "Chọn các hàng hiển thị trên Trang chủ và thứ tự của chúng. Các cài đặt này thuộc về hồ sơ này và được đồng bộ với các thiết bị khác của bạn.",
+      "continueWatchingHint": "Luôn là hàng đầu tiên",
+      "rowsHeader": "Các hàng",
+      "empty": "Không tiện ích nào đã cài có danh mục cho Trang chủ.",
+      "reset": "Khôi phục mặc định",
+      "moveUp": "Chuyển lên",
+      "moveUpNamed": "Chuyển ${name} lên",
+      "moveDown": "Chuyển xuống",
+      "moveDownNamed": "Chuyển ${name} xuống",
+      "dragToReorder": "Kéo để sắp xếp lại",
+      "dragToReorderNamed": "Sắp xếp lại ${name}",
+      "newCollection": "Bộ sưu tập mới",
+      "importCollections": "Nhập bộ sưu tập",
+      "exportCollections": "Xuất bộ sưu tập",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "deleteTitle": "Xóa “${title}”?",
+      "deleteMessage": "Bộ sưu tập sẽ bị xóa khỏi hồ sơ này trên mọi thiết bị của bạn."
+    },
+    "playback": {
+      "title": "Phát lại",
+      "note": "Các cài đặt này thuộc về hồ sơ này và được đồng bộ với các thiết bị khác của bạn.",
+      "languagesHeader": "Ngôn ngữ",
+      "audioLanguages": "Ngôn ngữ âm thanh",
+      "audioLanguagesHint": "Rãnh âm thanh được phát, theo thứ tự ưu tiên",
+      "audioLanguagesNone": "Mặc định của video",
+      "audioLanguagesExplanation": "Video sẽ phát bằng ngôn ngữ đầu tiên trong danh sách này mà video có. Nếu không chọn ngôn ngữ nào, video sẽ phát rãnh âm thanh mặc định.",
+      "subtitleLanguages": "Ngôn ngữ phụ đề",
+      "subtitleLanguagesHint": "Phụ đề được bật, theo thứ tự ưu tiên",
+      "subtitleLanguagesNone": "Tắt",
+      "subtitleLanguagesExplanation": "Phụ đề bằng ngôn ngữ đầu tiên trong danh sách này mà video có sẽ được bật. Nếu không chọn ngôn ngữ nào, phụ đề sẽ tắt trừ khi video bắt buộc hiển thị.",
+      "secondSubtitleLanguage": "Ngôn ngữ phụ đề thứ hai",
+      "secondSubtitleLanguageHint": "Hiển thị ở trên cùng của hình cùng phụ đề thứ nhất",
+      "secondSubtitleLanguageExplanation": "Phụ đề bằng ngôn ngữ này hiển thị ở trên cùng của hình, cùng với phụ đề thứ nhất. Nếu không chọn ngôn ngữ nào, phụ đề thứ hai sẽ không hiển thị trừ khi được chọn trong trình phát.",
+      "secondSubtitleLanguageNone": "Tắt",
+      "showSubtitles": "Hiện phụ đề",
+      "showSubtitlesHint": "Luôn luôn: phụ đề cả cho ngôn ngữ đang nói, ưu tiên SDH",
+      "showSubtitlesFollowAudio": "Theo âm thanh",
+      "showSubtitlesAlways": "Luôn luôn",
+      "chosenHeader": "Ngôn ngữ của bạn",
+      "availableHeader": "Thêm ngôn ngữ",
+      "searchLanguages": "Tìm ngôn ngữ",
+      "noLanguageMatches": "Không có ngôn ngữ phù hợp.",
+      "playbackHeader": "Phát lại",
+      "watchedThreshold": "Tính là đã xem sau",
+      "watchedThresholdHint": "Xem đến đâu thì video được tính là đã xem và Tiếp tục xem chuyển sang tập tiếp theo",
+      "bingeWatching": "Phát tập tiếp theo",
+      "bingeWatchingHint": "Khi một tập kết thúc, bắt đầu tập tiếp theo, từ cùng nguồn nếu có thể",
+      "upNextCountdown": "Đếm ngược tập tiếp theo",
+      "upNextCountdownHint": "Thời gian lời nhắc tập tiếp theo chờ trước khi bắt đầu phát",
+      "upNextImmediately": "Bắt đầu ngay",
+      "seekShort": "Tua ngắn",
+      "seekShortHint": "Phím mũi tên, điều khiển từ xa và nút tua của trình phát",
+      "seekLong": "Tua dài",
+      "seekLongHint": "Shift cùng phím mũi tên, và nhấn giữ",
+      "videoClick": "Nhấp vào video",
+      "videoClickHint": "Nhấp đúp vẫn vào và thoát toàn màn hình",
+      "videoClickPause": "Tạm dừng và phát",
+      "videoClickControls": "Hiện hoặc ẩn các nút điều khiển",
+      "moveUp": "Chuyển lên",
+      "moveUpNamed": "Chuyển ${name} lên",
+      "moveDown": "Chuyển xuống",
+      "moveDownNamed": "Chuyển ${name} xuống",
+      "removeLanguage": "Xóa",
+      "removeLanguageNamed": "Xóa ${name}",
+      "dragToReorderNamed": "Sắp xếp lại ${name}",
+      "skipping": {
+        "header": "Bỏ qua",
+        "footer": "Phần giới thiệu, tóm tắt và danh đề được nhận biết qua tên chương của video, nên chỉ những video có chương được đặt tên mới cho phép bỏ qua. Khi tự động bỏ qua, nút sẽ đếm ngược trước, và mọi thao tác của bạn trên trình phát đều sẽ dừng việc này.",
+        "intros": "Phần giới thiệu",
+        "introsHint": "Nhạc mở đầu và đoạn tiêu đề phim",
+        "recaps": "Phần tóm tắt",
+        "recapsHint": "“Trong tập trước…” ở đầu mỗi tập",
+        "credits": "Danh đề",
+        "creditsHint": "Danh đề cuối phim và đoạn xem trước tập sau; lời nhắc tập tiếp theo xuất hiện khi phần này bắt đầu",
+        "off": "Tắt",
+        "button": "Hiện nút",
+        "auto": "Tự động bỏ qua"
+      },
+      "streams": {
+        "header": "Nguồn phát",
+        "footer": "Bộ lọc áp dụng cho mọi danh sách nguồn phát; danh sách sẽ cho biết số nguồn bị ẩn và vẫn có thể hiện chúng.",
+        "autoPlay": "Tự động phát",
+        "autoPlayHint": "Bỏ qua danh sách nguồn phát khi bấm Phát, Tiếp tục, chọn một tập và sang tập tiếp theo; khi sắp xếp, sẽ chờ mọi tiện ích phản hồi",
+        "suggestions": "Đề xuất nguồn phát",
+        "suggestionsHint": "Học các nguồn phát bạn chọn trên hồ sơ này và đánh dấu một nguồn trong danh sách",
+        "autoPlayOff": "Tắt",
+        "autoPlayFirstMatch": "Nguồn đầu tiên khớp với bộ lọc",
+        "autoPlayReuseLastLink": "Nguồn giống lần trước, nếu không thì nguồn đầu tiên khớp với bộ lọc",
+        "qualities": "Chất lượng",
+        "qualitiesHint": "Các độ phân giải hiển thị trong danh sách nguồn phát",
+        "qualitiesAll": "Tất cả",
+        "qualitiesNone": "Không có",
+        "qualitiesAllBut": "Tất cả trừ ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Không rõ",
+        "ranges": "Dải động",
+        "rangesHint": "Những định dạng SDR, HDR và Dolby Vision hiển thị trong danh sách nguồn phát",
+        "codecs": "Codec video",
+        "codecsHint": "Các codec video hiển thị trong danh sách nguồn phát",
+        "minSize": "Kích thước tối thiểu",
+        "minSizeHint": "Ẩn nguồn phát có tệp nhỏ hơn; nguồn không ghi kích thước vẫn được giữ",
+        "maxSize": "Kích thước tối đa",
+        "maxSizeHint": "Ẩn nguồn phát có tệp lớn hơn; nguồn không ghi kích thước vẫn được giữ",
+        "sizeAny": "Mọi kích thước",
+        "includePattern": "Chỉ nguồn khớp với",
+        "includePatternHint": "Biểu thức chính quy, so khớp với tên, mô tả và tên tệp của từng nguồn phát, không phân biệt chữ hoa/thường",
+        "includePatternNone": "Mọi nguồn phát",
+        "includePlaceholder": "VD: 1080p|2160p",
+        "excludePattern": "Ẩn nguồn khớp với",
+        "excludePatternHint": "Được ưu tiên hơn mẫu ở trên",
+        "excludePatternNone": "Không có",
+        "excludePlaceholder": "VD: HDTV|XviD",
+        "invalidPattern": "Biểu thức chính quy không hợp lệ nên sẽ bị bỏ qua",
+        "save": "Lưu",
+        "clear": "Xóa"
+      }
+    },
+    "device": {
+      "title": "Thiết bị này",
+      "note": "Các cài đặt này chỉ áp dụng cho thiết bị này và không được đồng bộ.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Giải mã phần cứng",
+      "hardwareDecodingHint": "Giải mã video bằng phần cứng đồ họa. Hãy tắt nếu video bị lỗi hình.",
+      "hdr": "HDR",
+      "hdrHint": "Phát video HDR ở chế độ HDR khi màn hình hỗ trợ. Khi tắt, video sẽ được chuyển sang SDR.",
+      "matchFrameRate": "Buộc chuyển tốc độ khung hình",
+      "matchFrameRateHint": "Chuyển màn hình sang tốc độ khung hình của video kể cả khi hệ thống không tự chuyển. Màn hình sẽ tối đen trong giây lát mỗi lần chuyển.",
+      "audioHeader": "Âm thanh",
+      "audioPassthrough": "Truyền thẳng âm thanh",
+      "audioPassthroughHint": "Gửi âm thanh vòm (Dolby Digital, DTS, TrueHD) đến bộ thu mà không giải mã",
+      "audioPassthroughHintApple": "Gửi Dolby Digital và Dolby Digital Plus, kể cả Atmos, đến bộ giải mã Dolby của hệ thống; DTS và TrueHD được phát dưới dạng PCM đa kênh. Hãy tắt nếu không có tiếng.",
+      "audioPassthroughHintAppleSpatial": "Gửi Dolby Digital và Dolby Digital Plus, kể cả Atmos, đến bộ giải mã Dolby của hệ thống và phát TrueHD Atmos và DTS:X dưới dạng âm thanh không gian; các bản âm thanh DTS và TrueHD khác được phát dưới dạng PCM đa kênh. Hãy tắt nếu không có tiếng.",
+      "audioPassthroughNormalized": "Tắt khi đang bật chuẩn hóa âm lượng",
+      "gesturesHeader": "Cử chỉ",
+      "swipeGestures": "Vuốt để chỉnh độ sáng và âm lượng",
+      "swipeGesturesHint": "Vuốt lên hoặc xuống ở nửa trái của video để chỉnh độ sáng, ở nửa phải để chỉnh âm lượng.",
+      "streamingHeader": "Phát trực tuyến",
+      "cacheSize": "Bộ nhớ đệm đọc trước",
+      "cacheSizeHint": "Lượng dữ liệu của nguồn phát được tải sẵn trước vị trí đang phát",
+      "discordHeader": "Discord",
+      "discordPresence": "Hiển thị nội dung bạn đang xem",
+      "discordPresenceHint": "Bạn bè trên Discord thấy tên phim và tập khi video đang phát. Discord phải đang chạy trên máy tính này.",
+      "privacyHeader": "Quyền riêng tư",
+      "crashReports": "Gửi báo cáo sự cố",
+      "crashReportsHint": "Gửi thông tin về lỗi khi ứng dụng hoặc một phần của ứng dụng gặp sự cố, không bao giờ gửi liên kết tiện ích hay tài khoản của bạn"
+    },
+    "subtitles": {
+      "title": "Phụ đề",
+      "note": "Các cài đặt này chỉ áp dụng cho thiết bị này và không được đồng bộ. Chúng định dạng phụ đề văn bản thuần, như SRT; phụ đề có định dạng riêng giữ nguyên giao diện của chúng, trừ khi bạn cũng áp dụng kiểu này cho chúng.",
+      "previewText": "Phụ đề sẽ trông như thế này",
+      "textHeader": "Văn bản",
+      "size": "Cỡ chữ",
+      "textColor": "Màu",
+      "bold": "In đậm",
+      "outlineHeader": "Viền và nền",
+      "outline": "Viền",
+      "outlineColor": "Màu viền",
+      "background": "Nền",
+      "backgroundHint": "Hộp nền phía sau chữ và độ đục của nó",
+      "backgroundOff": "Tắt",
+      "positionHeader": "Vị trí",
+      "position": "Độ cao",
+      "positionHint": "Khoảng cách từ phụ đề đến cạnh dưới của hình",
+      "positionBottom": "Dưới cùng",
+      "styledHeader": "Phụ đề có định dạng",
+      "styledOverride": "Áp dụng cho phụ đề có định dạng",
+      "styledOverrideHint": "Phụ đề ASS và SSA sẽ dùng kiểu này thay cho kiểu riêng. Biển hiệu và hiệu ứng có thể hiển thị sai.",
+      "outlines": {
+        "none": "Không",
+        "thin": "Mỏng",
+        "thick": "Dày"
+      },
+      "colors": {
+        "white": "Trắng",
+        "yellow": "Vàng",
+        "green": "Xanh lá",
+        "cyan": "Xanh lơ",
+        "gray": "Xám",
+        "black": "Đen"
+      }
+    },
+    "account": {
+      "title": "Tài khoản",
+      "syncLabel": "Đồng bộ",
+      "syncNow": "Đồng bộ ngay",
+      "lastSynced": "Đồng bộ lần cuối ${time}",
+      "serverLabel": "Máy chủ đồng bộ",
+      "identitiesHeader": "Phương thức đăng nhập",
+      "linkIdentity": "Thêm phương thức đăng nhập",
+      "devicesHeader": "Thiết bị",
+      "thisDevice": "Thiết bị này",
+      "activeNow": "Đang hoạt động",
+      "lastActive": "Hoạt động ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "Đã đăng xuất ${name}.",
+      "identityRemoved": "Đã xóa phương thức đăng nhập ${provider}.",
+      "cancel": "Hủy",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Đăng nhập một lần"
+      },
+      "link": {
+        "start": "Liên kết thiết bị mới",
+        "title": "Liên kết thiết bị",
+        "instructions": "Trên thiết bị mới, chọn liên kết từ một thiết bị khác. Sau đó nhập mã hiển thị trên thiết bị đó hoặc quét mã QR của nó.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Tiếp tục",
+        "question": "Liên kết “${name}”?",
+        "consequence": "Thiết bị sẽ được đăng nhập vào tài khoản này, cùng với các hồ sơ, tiện ích và thư viện.",
+        "approve": "Liên kết",
+        "reject": "Không liên kết",
+        "approved": "Đã liên kết ${name}. Thiết bị sẽ tự hoàn tất thiết lập.",
+        "rejected": "${name} không được liên kết.",
+        "expired": "Mã đã hết hạn. Hãy bắt đầu lại trên thiết bị mới.",
+        "done": "Xong"
+      },
+      "signOut": {
+        "action": "Đăng xuất",
+        "title": "Đăng xuất?",
+        "message": "Hồ sơ, tiện ích, thư viện và nội dung tải xuống sẽ bị xóa khỏi thiết bị này. Mọi thứ trừ nội dung tải xuống vẫn được lưu trong tài khoản: hãy đăng nhập lại để khôi phục.",
+        "confirm": "Đăng xuất"
+      },
+      "delete": {
+        "action": "Xóa tài khoản",
+        "explanation": "Xóa tài khoản và mọi dữ liệu đã đồng bộ khỏi máy chủ.",
+        "title": "Xóa tài khoản?",
+        "message": "Tài khoản cùng các hồ sơ, tiện ích, thư viện và lịch sử sẽ bị xóa vĩnh viễn khỏi máy chủ, và mọi thiết bị sẽ bị đăng xuất. Không thể hoàn tác thao tác này.",
+        "confirm": "Xóa tài khoản"
+      },
+      "revoke": {
+        "title": "Đăng xuất ${name}?",
+        "message": "${name} sẽ bị đăng xuất và rời khỏi danh sách thiết bị của tài khoản. Bạn có thể liên kết lại sau.",
+        "messageThisDevice": "Đây là thiết bị bạn đang dùng. Thiết bị sẽ bị đăng xuất, và hồ sơ, tiện ích, thư viện cùng nội dung tải xuống sẽ bị xóa khỏi thiết bị. Mọi thứ trừ nội dung tải xuống vẫn được lưu trong tài khoản.",
+        "confirm": "Đăng xuất thiết bị",
+        "confirmNamed": "Đăng xuất thiết bị: ${name}"
+      },
+      "unsynced": {
+        "title": "Xóa các thay đổi chưa được đồng bộ?",
+        "message": {
+          "other": "${n} thay đổi được thực hiện trên thiết bị này, chẳng hạn như tiến độ xem hoặc chỉnh sửa thư viện, chưa đến được tài khoản. Nếu đăng xuất bây giờ, các thay đổi này sẽ bị xóa vĩnh viễn. Nếu chọn Hủy, các thay đổi vẫn ở đây và thiết bị này vẫn đăng nhập."
+        },
+        "confirm": "Đăng xuất và xóa"
+      },
+      "unlink": {
+        "title": "Xóa phương thức đăng nhập ${provider}?",
+        "message": "Bạn sẽ không thể đăng nhập vào tài khoản này bằng ${provider} nữa.",
+        "confirm": "Xóa",
+        "action": "Xóa phương thức đăng nhập ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Dịch vụ theo dõi",
+      "note": "Các dịch vụ đã kết nối sẽ nhận nội dung mà hồ sơ này xem: tiến độ xem và các nội dung được đánh dấu đã xem. Việc kết nối hoặc ngắt kết nối một dịch vụ áp dụng cho hồ sơ này trên tất cả thiết bị của bạn; các công tắc bên dưới chỉ áp dụng cho thiết bị này.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Đã kết nối",
+      "connectedAs": "Đã kết nối với tài khoản ${user}",
+      "notConnected": "Chưa kết nối",
+      "unavailable": "Không khả dụng trong phiên bản ứng dụng này",
+      "connect": "Kết nối",
+      "connectNamed": "Kết nối ${name}",
+      "disconnect": "Ngắt kết nối",
+      "disconnectNamed": "Ngắt kết nối ${name}",
+      "scrobble": "Gửi nội dung bạn xem",
+      "scrobbleHint": "Tiến độ xem và nội dung đã xem được gửi đến ${service}",
+      "filtersHeader": "Nội dung gửi đi",
+      "movies": "Phim",
+      "series": "Phim bộ",
+      "anime": "Anime",
+      "queued": {
+        "other": "${n} thay đổi đang chờ gửi"
+      },
+      "notSent": {
+        "other": "${n} thay đổi không gửi được (gần nhất: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} trả về lỗi ${status}",
+        "refused": "${service} đã từ chối",
+        "unreadable": "không đọc được"
+      },
+      "connectTitle": "Kết nối ${service}",
+      "starting": "Đang liên hệ ${service}…",
+      "waiting": "Đang chờ bạn cho phép Tortuga trên ${service}…",
+      "linkInstructions": "Đăng nhập ${service} trên trình duyệt và cho phép Tortuga.",
+      "linkScan": "Hoặc quét mã QR bằng điện thoại và đăng nhập trên đó.",
+      "openInBrowser": "Mở trong trình duyệt",
+      "expired": "Mã đã hết hạn trước khi được sử dụng.",
+      "declined": "${service} không cho phép kết nối.",
+      "unreachable": "Không thể kết nối với ${service}. Hãy kiểm tra kết nối mạng và thử lại.",
+      "serverUnreachable": "Không thể kết nối với máy chủ Tortuga của bạn. Hãy kiểm tra kết nối mạng và thử lại.",
+      "needsAccount": "Để kết nối ${service}, bạn cần có tài khoản Tortuga. Hãy đăng nhập vào tài khoản của bạn trước.",
+      "busy": "${service} đang bận. Hãy thử lại sau một phút.",
+      "refused": "${service} đã từ chối đăng nhập.",
+      "failed": "Không thể kết nối ${service}.",
+      "retry": "Thử lại",
+      "connectedNotice": "Đã kết nối với ${service} bằng tài khoản ${user}.",
+      "connectedNoticeNoName": "Đã kết nối với ${service}.",
+      "disconnectTitle": "Ngắt kết nối ${service}?",
+      "disconnectMessage": "Hồ sơ này sẽ ngừng gửi nội dung đã xem đến ${service} trên tất cả thiết bị của bạn, và các thay đổi đang chờ gửi sẽ bị hủy. Tài khoản ${service} của bạn vẫn giữ mọi dữ liệu đã có.",
+      "disconnectedNotice": "Đã ngắt kết nối khỏi ${service}.",
+      "actionFailed": "Không thành công. Hãy thử lại."
+    },
+    "downloads": {
+      "title": "Tải xuống",
+      "note": "Các cài đặt này chỉ áp dụng cho thiết bị này và không được đồng bộ.",
+      "location": {
+        "title": "Vị trí",
+        "hint": "Nơi lưu nội dung tải xuống mới. Nội dung đã tải xuống vẫn được giữ nguyên vị trí.",
+        "deviceStorage": "Bộ nhớ trong",
+        "external": "Bộ nhớ ngoài",
+        "change": "Đổi thư mục"
+      },
+      "transferHeader": "Tải xuống",
+      "wifiOnly": "Chỉ tải xuống qua Wi-Fi",
+      "wifiOnlyHint": "Việc tải xuống sẽ tạm chờ khi dùng mạng đo lượng dữ liệu, như dữ liệu di động",
+      "atOnce": "Tải xuống cùng lúc",
+      "atOnceHint": "Số nội dung được tải xuống cùng một lúc",
+      "autoRemoveWatched": "Xóa nội dung tải xuống đã xem",
+      "autoRemoveWatchedHint": "Bản tải xuống sẽ bị xóa sau khi xem xong, không bao giờ bị xóa khi đang phát",
+      "subtitleLanguages": "Phụ đề cần lưu",
+      "subtitleLanguagesHint": "Phụ đề bằng các ngôn ngữ này được lưu cùng mỗi bản tải xuống",
+      "subtitleLanguagesProfile": "Ngôn ngữ phụ đề của bạn: ${languages}",
+      "subtitleLanguagesProfileNone": "Ngôn ngữ phụ đề của bạn: không có",
+      "subtitleLanguagesExplanation": "Phụ đề bằng các ngôn ngữ này được lưu cùng mỗi bản tải xuống để có thể hiển thị khi không có kết nối.",
+      "useProfileLanguages": "Dùng ngôn ngữ phụ đề của tôi",
+      "storageHeader": "Bộ nhớ",
+      "deleteAll": "Xóa tất cả nội dung tải xuống",
+      "deleteAllTitle": "Xóa tất cả nội dung tải xuống?",
+      "deleteAllText": "Thao tác này sẽ xóa mọi nội dung tải xuống trên thiết bị này, của tất cả hồ sơ.",
+      "deleteAllConfirm": "Xóa tất cả"
+    },
+    "data": {
+      "exportHeader": "Xuất dữ liệu",
+      "categories": {
+        "addons": "Tiện ích",
+        "addonsHint": "Các tiện ích đã cài theo đúng thứ tự, kèm liên kết",
+        "library": "Thư viện",
+        "libraryHint": "Các nội dung bạn đã lưu",
+        "progress": "Tiến độ xem",
+        "progressHint": "Chỗ bạn đang xem dở và những gì bạn đã xem",
+        "settings": "Cài đặt hồ sơ",
+        "settingsHint": "Phát lại, nguồn phát, các hàng trên Trang chủ và các cài đặt khác được đồng bộ",
+        "streams": "Lịch sử nguồn phát",
+        "streamsHint": "Nguồn phát được phát gần nhất cho mỗi video"
+      },
+      "profilesHeader": "Hồ sơ",
+      "privateNote": "Tệp này chứa liên kết tiện ích và lịch sử nguồn phát của bạn, có thể bao gồm khóa API. Hãy giữ kín tệp: bất kỳ ai có tệp này đều có thể sử dụng các khóa đó.",
+      "exportNote": "Mã PIN, tài khoản dịch vụ theo dõi, nội dung tải xuống và cài đặt của thiết bị này không bao giờ có trong tệp.",
+      "exportAction": "Xuất ra tệp",
+      "saved": "Đã lưu ${name}.",
+      "saveFailed": "Không thể lưu tệp.",
+      "exportFailed": "Không thể xuất.",
+      "importHeader": "Nhập dữ liệu",
+      "importNote": "Mở một tệp đã xuất từ Tortuga. Với từng mục, dữ liệu mới hơn sẽ được giữ lại, và không có gì trên thiết bị này bị xóa.",
+      "importAction": "Nhập từ tệp",
+      "reviewTitle": "Nhập dữ liệu",
+      "source": "Đã xuất vào ${date} bằng Tortuga ${version}",
+      "sourceUndated": "Đã xuất bằng Tortuga ${version}",
+      "dataHeader": "Dữ liệu",
+      "counts": {
+        "addons": {
+          "other": "${n} tiện ích"
+        },
+        "titles": {
+          "other": "${n} nội dung"
+        },
+        "progress": {
+          "other": "tiến độ xem của ${n} nội dung"
+        },
+        "settings": {
+          "other": "${n} cài đặt"
+        },
+        "streams": {
+          "other": "${n} nguồn phát"
+        },
+        "profiles": {
+          "other": "${n} hồ sơ"
+        }
+      },
+      "into": "Nhập vào",
+      "intoSame": "Vào ${name} trên tài khoản này",
+      "newProfile": "Hồ sơ mới",
+      "importConfirm": "Nhập",
+      "imported": "Đã nhập xong: ${changes}.",
+      "nothingNew": "Không có gì mới để nhập: mọi thứ trong tệp đều đã có ở đây.",
+      "notTortuga": "Tệp này không phải là tệp xuất từ Tortuga. Không có dữ liệu nào được nhập.",
+      "newer": "Tệp này đến từ phiên bản Tortuga mới hơn. Hãy cập nhật Tortuga rồi nhập lại tệp.",
+      "damaged": "Tệp này bị hỏng hoặc không đầy đủ. Không có dữ liệu nào được nhập.",
+      "clockAhead": "Thời gian trong tệp này vượt xa đồng hồ của thiết bị này. Hãy kiểm tra ngày và giờ trên cả hai thiết bị rồi nhập lại tệp. Không có dữ liệu nào được nhập.",
+      "importFailed": "Không thể nhập.",
+      "unreadable": "Không thể mở tệp. Không có dữ liệu nào được nhập."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Đã cập nhật",
+      "syncing": "Đang đồng bộ…",
+      "offline": "Ngoại tuyến. Các thay đổi sẽ được đồng bộ khi có kết nối trở lại.",
+      "signedOut": "Đã đăng xuất",
+      "failed": {
+        "server": "Máy chủ đồng bộ gặp sự cố. Sẽ sớm thử lại.",
+        "rateLimited": "Máy chủ đồng bộ yêu cầu giảm tần suất. Sẽ sớm thử lại.",
+        "quotaExceeded": "Dung lượng lưu trữ của tài khoản đã đầy nên các thay đổi không được đồng bộ.",
+        "tooLarge": "Một số thay đổi quá lớn để đồng bộ.",
+        "addonsTooLarge": "Tiện ích của một hồ sơ quá lớn để đồng bộ. Hãy gỡ các tiện ích mà hồ sơ đó không dùng.",
+        "clockWrong": "Không thể đồng bộ một số thay đổi. Hãy kiểm tra ngày và giờ trên các thiết bị của bạn.",
+        "unknown": "Không thể đồng bộ. Sẽ sớm thử lại."
+      }
+    },
+    "error": {
+      "network": "Không thể kết nối với máy chủ đồng bộ. Hãy kiểm tra kết nối mạng và thử lại.",
+      "server": "Máy chủ đồng bộ gặp sự cố. Hãy thử lại sau.",
+      "rateLimited": "Quá nhiều lần thử. Hãy đợi một lát rồi thử lại.",
+      "invalidServerUrl": "Đây không phải địa chỉ máy chủ. Hãy nhập địa chỉ dạng https://sync.example.com.",
+      "insecureServerUrl": "Hãy dùng https cho máy chủ trên internet. Giao thức http thường chỉ dùng được với máy chủ trong mạng riêng của bạn.",
+      "notTortugaServer": "Không có máy chủ đồng bộ Tortuga nào phản hồi tại địa chỉ này.",
+      "incompatibleServer": "Máy chủ này chạy phiên bản đồng bộ Tortuga cũ hơn và không thể sử dụng.",
+      "providerNotEnabled": "Máy chủ này không hỗ trợ cách đăng nhập này.",
+      "signInRejected": "Đăng nhập không thành công. Hãy thử lại.",
+      "appleCodeRejected": "Apple không chấp nhận đăng nhập. Hãy thử lại.",
+      "providerUnavailable": "Không thể kết nối với dịch vụ đăng nhập. Hãy thử lại sau.",
+      "signInCancelled": "Đã hủy đăng nhập.",
+      "signInExpired": "Đăng nhập mất quá nhiều thời gian. Hãy bắt đầu lại.",
+      "identityInUse": "Phương thức đăng nhập này đã thuộc về một tài khoản Tortuga khác.",
+      "lastIdentity": "Đây là cách đăng nhập duy nhất của tài khoản nên không thể xóa.",
+      "sessionEnded": "Thiết bị này đã bị đăng xuất. Hãy đăng nhập lại.",
+      "sessionUnreadable": "Không thể đọc thông tin đăng nhập của thiết bị này từ bộ nhớ an toàn của hệ thống. Hãy khởi động lại Tortuga để thử lại.",
+      "notSignedIn": "Hãy đăng nhập trước.",
+      "notFound": "Mục này không còn tồn tại trên máy chủ.",
+      "linkCodeInvalid": "Mã gồm 8 chữ cái và chữ số, ví dụ ABCD-EFGH.",
+      "linkNotFound": "Không có thiết bị nào đang chờ với mã này. Hãy kiểm tra mã hoặc bắt đầu lại trên thiết bị mới.",
+      "linkOtherServer": "Thiết bị kia dùng máy chủ đồng bộ khác.",
+      "linkFailed": "Không thể hoàn tất liên kết. Hãy bắt đầu lại.",
+      "tooLarge": "Dữ liệu này quá lớn đối với máy chủ đồng bộ.",
+      "quotaExceeded": "Dung lượng lưu trữ của tài khoản đã đầy.",
+      "unsynced": {
+        "other": "${n} thay đổi được thực hiện trên thiết bị này chưa được đồng bộ với tài khoản của chúng."
+      },
+      "unexpected": "Đã xảy ra lỗi. Hãy thử lại."
+    },
+    "deletion": {
+      "done": "Đã xóa tài khoản và dữ liệu của tài khoản.",
+      "appleRevoked": "Đã xóa tài khoản và dữ liệu của tài khoản, và Tortuga không còn sử dụng ID Apple của bạn.",
+      "appleManual": "Đã xóa tài khoản và dữ liệu của tài khoản. Để hoàn tất, hãy xóa Tortuga trong Cài đặt → ID Apple → Đăng nhập bằng Apple.",
+      "githubManual": "Bạn có thể xóa Tortuga khỏi tài khoản GitHub tại ${address}."
+    },
+    "switchAccount": {
+      "title": "Xóa các thay đổi chưa được đồng bộ?",
+      "message": {
+        "other": "Đây là một tài khoản khác với tài khoản mà thiết bị này đã đăng nhập trước đó. ${n} thay đổi được thực hiện tại đây trong tài khoản trước, chẳng hạn như tiến độ xem hoặc chỉnh sửa thư viện, chưa bao giờ đến được tài khoản đó. Việc đăng nhập sẽ xóa vĩnh viễn các thay đổi này, cùng với phần dữ liệu còn lại của tài khoản trước trên thiết bị này, bao gồm cả nội dung tải xuống."
+      },
+      "confirm": "Xóa và đăng nhập",
+      "cancel": "Hủy",
+      "kept": "Chưa đăng nhập. Các thay đổi vẫn ở trên thiết bị này cho đến khi bạn đăng nhập vào tài khoản nơi chúng được thực hiện."
+    },
+    "browser": {
+      "signedIn": "Đã đăng nhập. Bạn có thể đóng thẻ này và quay lại Tortuga.",
+      "failed": "Đăng nhập chưa hoàn tất. Hãy quay lại Tortuga và thử lại."
+    },
+    "signIn": {
+      "title": "Đăng nhập Tortuga",
+      "intro": "Tài khoản Tortuga giúp đồng bộ hồ sơ, tiện ích và thư viện của bạn trên mọi thiết bị.",
+      "apple": "Đăng nhập bằng Apple",
+      "google": "Đăng nhập bằng Google",
+      "github": "Đăng nhập bằng GitHub",
+      "oidc": "Đăng nhập bằng ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Liên kết từ thiết bị khác",
+      "linkDeviceHint": "Đã đăng nhập trên điện thoại hoặc máy tính? Hãy liên kết thiết bị này bằng mã.",
+      "server": "Máy chủ: ${server}",
+      "useOwnServer": "Dùng máy chủ riêng",
+      "useHostedServer": "Dùng máy chủ Tortuga",
+      "serverField": "Địa chỉ máy chủ",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Tiếp tục",
+      "checkingServer": "Đang kiểm tra máy chủ…",
+      "loadingOptions": "Đang tải các tùy chọn đăng nhập…",
+      "noOptions": "Máy chủ này không có cách đăng nhập nào trên thiết bị này. Hãy liên kết từ một thiết bị đã đăng nhập.",
+      "retry": "Thử lại",
+      "starting": "Đang bắt đầu đăng nhập…",
+      "native": "Đang đăng nhập bằng ${provider}…",
+      "browser": "Tiếp tục trên trình duyệt. Màn hình này sẽ tự chuyển tiếp khi bạn đăng nhập xong ở đó.",
+      "finishing": "Đang hoàn tất đăng nhập…",
+      "cancel": "Hủy",
+      "deviceCode": {
+        "instructions": "Trên điện thoại hoặc máy tính, truy cập ${url} và nhập mã này:",
+        "scan": "Hoặc quét mã QR bằng điện thoại.",
+        "qrDescription": "Mã QR để quét bằng điện thoại",
+        "expires": "Mã sẽ hết hạn sau ${time}.",
+        "waiting": "Đang chờ bạn đăng nhập…"
+      }
+    },
+    "link": {
+      "title": "Liên kết thiết bị này",
+      "instructions": "Trên một thiết bị đã đăng nhập, mở Cài đặt, rồi Tài khoản, rồi Liên kết thiết bị mới. Quét mã QR này hoặc nhập mã tại đó.",
+      "qrDescription": "Mã QR để quét trên thiết bị đã đăng nhập",
+      "starting": "Đang lấy mã…",
+      "expires": "Mã sẽ hết hạn sau ${time}.",
+      "waiting": "Đang chờ phê duyệt trên thiết bị kia…",
+      "rejected": "Thiết bị kia đã từ chối liên kết.",
+      "expired": "Mã đã hết hạn trước khi được sử dụng.",
+      "newCode": "Lấy mã mới"
+    },
+    "identityLink": {
+      "title": "Thêm phương thức đăng nhập",
+      "intro": "Liên kết thêm một cách đăng nhập để không bị khóa ngoài khi mất quyền truy cập một tài khoản.",
+      "allLinked": "Mọi phương thức đăng nhập mà thiết bị này hỗ trợ đều đã được liên kết.",
+      "linking": "Đang liên kết…"
+    }
+  },
+  "profiles": {
+    "title": "Ai đang xem?",
+    "manageTitle": "Quản lý hồ sơ",
+    "manage": "Quản lý hồ sơ",
+    "done": "Xong",
+    "add": "Thêm hồ sơ",
+    "empty": "Tạo một hồ sơ để bắt đầu.",
+    "loading": "Đang tải hồ sơ của bạn…",
+    "current": "Hồ sơ hiện tại",
+    "switchProfile": "Chuyển hồ sơ",
+    "pin": {
+      "title": "Nhập mã PIN của ${name}",
+      "wrong": "Sai mã PIN. Hãy thử lại.",
+      "lockedOut": "Quá nhiều lần thử. Hãy thử lại sau ${time}.",
+      "cancel": "Hủy",
+      "backspace": "Xóa chữ số cuối",
+      "entered": "Đã nhập ${count}/${total} chữ số"
+    },
+    "editor": {
+      "newTitle": "Hồ sơ mới",
+      "editTitle": "Chỉnh sửa hồ sơ",
+      "name": "Tên",
+      "nameRequired": "Hãy nhập tên.",
+      "nameTooLong": {
+        "other": "Tên chỉ được dài tối đa ${n} ký tự."
+      },
+      "avatar": "Ảnh đại diện",
+      "pinOff": "Không có mã PIN",
+      "pinOn": "Khóa bằng mã PIN",
+      "setPin": "Đặt mã PIN",
+      "changePin": "Đổi mã PIN",
+      "removePin": "Xóa mã PIN",
+      "pinEnter": "Nhập mã PIN gồm 4 chữ số",
+      "pinConfirm": "Nhập lại mã PIN",
+      "pinMismatch": "Mã PIN không khớp. Hãy nhập mã mới.",
+      "pinNote": "Mã PIN ngăn người khác truy cập hồ sơ này trên các thiết bị của bạn. Đây là khóa, không phải mật khẩu.",
+      "save": "Lưu",
+      "create": "Tạo hồ sơ",
+      "cancel": "Hủy",
+      "delete": "Xóa hồ sơ",
+      "deleteConfirm": "Xóa ${name}? Tiện ích, thư viện và lịch sử của hồ sơ này sẽ bị xóa trên mọi thiết bị. Không thể hoàn tác thao tác này.",
+      "deleteAction": "Xóa",
+      "saveFailed": "Không thể lưu hồ sơ. Hãy thử lại.",
+      "kids": {
+        "title": "Hồ sơ trẻ em",
+        "subtitle": "Chỉ hiển thị các tựa được đề xuất cho độ tuổi đến mức bạn chọn. Phần lớn độ tuổi đề xuất là ước tính, không phải phân loại chính thức.",
+        "needsParent": "Hãy đặt mã PIN cho một hồ sơ người lớn trước: rời khỏi hồ sơ trẻ em cần mã đó.",
+        "newOnly": "Chỉ một hồ sơ mới tạo có thể trở thành hồ sơ trẻ em.",
+        "capTitle": "Độ tuổi đề xuất cao nhất",
+        "capLittle": "Bé nhỏ",
+        "capLittleAges": "Đề xuất 0+",
+        "capKids": "Trẻ em",
+        "capKidsAges": "Bé nhỏ, thêm đề xuất 6+",
+        "capTeen": "Thiếu niên",
+        "capTeenAges": "Trẻ em, thêm đề xuất 12+",
+        "allowUnrated": "Cho phép tựa chưa phân loại",
+        "allowUnratedNote": "Các tựa không có độ tuổi đề xuất. Khi mục này tắt, phụ huynh cho phép từng tựa một.",
+        "homeRows": "Các hàng trên Trang chủ",
+        "homeRowsNote": "Không bắt buộc. Các tựa trong những hàng này vẫn phải nằm trong độ tuổi đề xuất cao nhất.",
+        "familyMovies": "Phim gia đình",
+        "familySeries": "Phim bộ gia đình",
+        "addonMissing": "Tiện ích của danh mục này chưa được cài trên hồ sơ này.",
+        "allowed": "Tựa được cho phép",
+        "allowedNone": "Chưa có. Phụ huynh cho phép một tựa từ trang của tựa đó.",
+        "blocked": "Tựa bị chặn",
+        "blockedNone": "Chưa có. Phụ huynh chặn một tựa từ trang của tựa đó.",
+        "remove": "Xóa ${title}",
+        "leaving": "Rời khỏi hồ sơ này cần mã PIN của phụ huynh.",
+        "off": "Liên kết, tiện ích và hầu hết cài đặt đã tắt.",
+        "addons": "Video đến từ các tiện ích của hồ sơ này. Tortuga không kiểm tra chúng."
+      }
+    },
+    "avatar": {
+      "graphite": "Than chì",
+      "slate": "Đá phiến",
+      "silver": "Bạc",
+      "ivory": "Ngà",
+      "sand": "Cát",
+      "clay": "Đất sét",
+      "rose": "Hồng",
+      "plum": "Mận",
+      "dusk": "Hoàng hôn",
+      "sea": "Biển",
+      "sage": "Xô thơm",
+      "moss": "Rêu"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Không có trên hồ sơ này",
+      "suggested": "Đề xuất ${age}+",
+      "byAddon": "Tiện ích của nó xếp tựa này cho người xem lớn tuổi hơn",
+      "notRated": "Không có độ tuổi đề xuất",
+      "byParent": "Bị phụ huynh chặn",
+      "unchecked": "Không thể kiểm tra độ tuổi đề xuất. Hãy thử lại sau.",
+      "ask": "Hỏi phụ huynh"
+    },
+    "block": "Chặn trên hồ sơ này",
+    "pin": {
+      "title": "Nhập mã PIN của phụ huynh",
+      "allow": "Để cho phép ${title} trên hồ sơ này",
+      "allowThis": "Để cho phép nội dung này trên hồ sơ này",
+      "block": "Để chặn ${title} trên hồ sơ này",
+      "leave": "Để rời khỏi hồ sơ này",
+      "settings": "Để mở phần cài đặt này"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Tất cả",
+      "movie": "Phim",
+      "series": "Phim bộ",
+      "channel": "Kênh",
+      "tv": "Kênh truyền hình",
+      "other": "Khác"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Thử lại",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Xem tất cả",
+      "downloading": "Đang tải xuống ${count}, ${percent}%",
+      "downloadingUnsized": "Đang tải xuống ${count}",
+      "empty": "Chưa có gì để hiển thị. Hãy cài tiện ích có danh mục để lấp đầy trang này.",
+      "allHidden": "Mọi hàng trên Trang chủ đều bị ẩn. Vào Cài đặt → Trang chủ để hiện lại."
+    },
+    "continueWatching": {
+      "title": "Tiếp tục xem",
+      "episode": "Tập ${episode}",
+      "upNext": "Tiếp theo",
+      "minutesLeft": "Còn ${minutes} phút",
+      "hoursLeft": "Còn ${hours} giờ",
+      "hoursMinutesLeft": "Còn ${hours} giờ ${minutes} phút",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Danh sách xem",
+      "recommended": "Đề xuất",
+      "trending": "Thịnh hành",
+      "planToWatch": "Dự định xem",
+      "planning": "Đang dự định",
+      "airing": "Đang phát sóng",
+      "list": "Danh sách",
+      "unreachable": "Không thể kết nối với ${service}.",
+      "signedOut": "${service} đã đăng xuất bạn. Hãy kết nối lại trong Cài đặt.",
+      "failed": "${service} không phản hồi như mong đợi."
+    },
+    "discover": {
+      "type": "Loại",
+      "catalog": "Danh mục",
+      "genre": "Thể loại",
+      "all": "Tất cả",
+      "empty": "Danh mục này không có gì để hiển thị.",
+      "noCatalogs": "Không tiện ích nào đã cài có danh mục để duyệt.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Tìm phim, phim bộ và nhiều nội dung khác",
+      "recent": "Tìm kiếm gần đây",
+      "clearRecent": "Xóa",
+      "removeRecentNamed": "Xóa ${name}",
+      "noResults": "Không có kết quả cho “${query}”",
+      "noCatalogs": "Không tiện ích nào đã cài hỗ trợ tìm kiếm.",
+      "clearQuery": "Xóa nội dung tìm kiếm",
+      "hint": "Tìm phim, phim bộ và nhiều nội dung khác trong danh mục của các tiện ích."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Trang chủ",
+      "discover": "Khám phá",
+      "search": "Tìm kiếm",
+      "library": "Thư viện",
+      "settings": "Cài đặt"
+    },
+    "shortLabel": {
+      "board": "Trang chủ",
+      "library": "Thư viện",
+      "search": "Tìm kiếm",
+      "settings": "Cài đặt"
+    },
+    "back": "Quay lại",
+    "retry": "Thử lại",
+    "close": "Đóng",
+    "dismiss": "Bỏ qua",
+    "qrFailed": "Không thể hiển thị liên kết này dưới dạng mã QR.",
+    "openOnPhone": {
+      "title": "Mở trên điện thoại",
+      "message": "Thiết bị này không mở được liên kết này. Quét mã bằng camera điện thoại để mở trên đó.",
+      "qrDescription": "Mã QR của liên kết"
+    },
+    "player": {
+      "close": "Đóng trình phát",
+      "fullscreen": "Toàn màn hình",
+      "exitFullscreen": "Thoát toàn màn hình",
+      "rewind": "Tua lại",
+      "fastForward": "Tua nhanh",
+      "pictureInPicture": "Hình trong hình"
+    },
+    "menu": {
+      "playback": "Phát lại",
+      "nextSubtitles": "Rãnh phụ đề tiếp theo",
+      "nextAudio": "Rãnh âm thanh tiếp theo"
+    }
+  },
+  "watch": {
+    "title": "Xem cùng nhau",
+    "intro": "Xem đồng bộ với bạn bè, mỗi người trên thiết bị của mình. Mọi người cùng phát một nội dung từ tiện ích của riêng mình. Để tạo phòng, hãy chọn Xem cùng nhau trong tùy chọn của trình phát.",
+    "controlMode": {
+      "hostOnly": "Chỉ tôi điều khiển",
+      "hostOnlyDetail": "Mọi người sẽ làm theo khi bạn phát, tạm dừng hoặc tua",
+      "anyone": "Mọi người cùng điều khiển",
+      "anyoneDetail": "Bất kỳ ai trong phòng đều có thể phát, tạm dừng hoặc tua"
+    },
+    "joinTitle": "Tham gia phòng",
+    "joinHint": "Mã hoặc liên kết mời",
+    "joinLabel": "Tham gia",
+    "joinInvalid": "Hãy nhập mã phòng gồm 6 ký tự hoặc liên kết mời",
+    "recentTitle": "Phòng gần đây",
+    "recentUsed": "Dùng lần cuối ${time}",
+    "removeRecentNamed": "Xóa ${name}",
+    "invite": {
+      "title": "Tham gia phòng ${code}? Phòng này ở ${server}, không phải máy chủ chuyển tiếp của bạn.",
+      "join": "Tham gia",
+      "leaveTitle": "Rời phòng để tham gia phòng ${code}? Phòng đó ở ${server}, không phải máy chủ chuyển tiếp của bạn.",
+      "leaveHostTitle": "Rời phòng để tham gia phòng ${code}? Phòng đó ở ${server}, không phải máy chủ chuyển tiếp của bạn. Phòng này vẫn tiếp tục với người tham gia tiếp theo làm chủ phòng."
+    },
+    "relay": {
+      "checking": "Đang kiểm tra máy chủ chuyển tiếp…",
+      "unreachable": "Không thể kết nối với máy chủ chuyển tiếp tại ${server}.",
+      "retry": "Thử lại",
+      "title": "Máy chủ chuyển tiếp",
+      "hint": "Máy chủ chuyển tiếp kết nối các phòng xem cùng nhau. Để trống để dùng các máy chủ chuyển tiếp công khai của Open Watch Party.",
+      "hosted": "Máy chủ chuyển tiếp công khai của Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Hãy nhập địa chỉ máy chủ chuyển tiếp bắt đầu bằng http:// hoặc https://",
+      "save": "Lưu",
+      "reset": "Dùng máy chủ chuyển tiếp công khai"
+    },
+    "busy": {
+      "creating": "Đang tạo phòng…",
+      "joining": "Đang tham gia phòng…"
+    },
+    "dismiss": "Bỏ qua",
+    "room": {
+      "codeLabel": "Mã phòng",
+      "copyCode": "Sao chép mã",
+      "codeCopied": "Đã sao chép mã",
+      "share": "Chia sẻ lời mời",
+      "shareText": "Xem cùng mình trên Tortuga nhé: mở ${link} hoặc nhập mã phòng ${code}.",
+      "scan": "Quét bằng điện thoại để tham gia",
+      "youHost": "Bạn là chủ phòng",
+      "hostedBy": "Chủ phòng: ${name}",
+      "hostOnly": "Chỉ chủ phòng điều khiển việc phát",
+      "anyone": "Mọi người cùng điều khiển việc phát",
+      "reconnecting": "Đang kết nối lại…",
+      "hostReconnecting": "Đang chờ ${name} kết nối lại…",
+      "nowPlaying": "Đang phát ${title}",
+      "nowPlayingEpisode": "Đang phát ${title} · ${episode}",
+      "idleHost": "Hãy phát một nội dung: mọi người trong phòng sẽ cùng xem với bạn.",
+      "idleGuest": "Đang chờ ${name} chọn nội dung để phát.",
+      "participants": {
+        "other": "${n} người tham gia"
+      },
+      "you": "${name} (bạn)",
+      "hostBadge": "Chủ phòng",
+      "makeHost": "Đặt làm chủ phòng",
+      "makeHostNamed": "Đặt ${name} làm chủ phòng",
+      "joinPlayback": "Tham gia xem",
+      "leave": "Rời phòng",
+      "leaveTitle": "Rời phòng?",
+      "leaveConfirm": "Rời",
+      "end": "Đóng phòng",
+      "endTitle": "Đóng phòng cho mọi người?",
+      "endConfirm": "Đóng phòng",
+      "cancel": "Hủy",
+      "leaveHostTitle": "Rời phòng? Phòng vẫn tiếp tục với người tham gia tiếp theo làm chủ phòng.",
+      "kickNamed": "Mời ${name} ra khỏi phòng",
+      "kickTitle": "Mời ${name} ra khỏi phòng?",
+      "kickConfirm": "Mời ra",
+      "lock": "Khóa phòng",
+      "lockDetail": "Không ai mới có thể tham gia",
+      "controlTitle": "Ai điều khiển việc phát"
+    },
+    "status": {
+      "ready": "Sẵn sàng",
+      "loading": "Đang chuẩn bị",
+      "matching": "Đang tìm tệp",
+      "buffering": "Đang tải",
+      "sameLength": "Cùng thời lượng (${delta})",
+      "longer": "Dài hơn ${delta}",
+      "shorter": "Ngắn hơn ${delta}",
+      "noStream": "Không tìm thấy nguồn phát",
+      "searchFailed": "Tìm kiếm trong tiện ích thất bại",
+      "notPlaying": "Không trong trình phát",
+      "away": "Mất kết nối",
+      "declined": "Không phát",
+      "offset": "Độ lệch ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} giây",
+      "minutes": "${minutes} phút ${seconds} giây"
+    },
+    "player": {
+      "optionRoom": "Phòng ${code}",
+      "startTitle": "Tạo phòng với nội dung đang phát",
+      "liveNoRoom": "Không thể xem cùng nhau một buổi phát trực tiếp",
+      "watching": {
+        "other": "${n} người đang xem"
+      },
+      "hostBadge": "CHỦ PHÒNG",
+      "waiting": "Đang chờ ${names}…",
+      "waitingMore": {
+        "other": "Đang chờ ${names} và ${n} người khác…"
+      },
+      "syncing": "Đang đồng bộ…",
+      "matchingStart": "Đang tìm tệp khớp với tệp của ${name}…",
+      "longer": "Tệp của bạn dài hơn tệp của ${name} ${delta}",
+      "shorter": "Tệp của bạn ngắn hơn tệp của ${name} ${delta}",
+      "mismatchDetail": "Có thể đây là một phiên bản khác, nên vị trí phát giữa các bạn có thể bị lệch.",
+      "playAnyway": "Vẫn phát",
+      "chooseStream": "Chọn nguồn phát khác",
+      "noStream": "Không tiện ích nào của bạn có nguồn phát cho ${title}.",
+      "searchFailed": "Không thể tìm ${title} trong một số tiện ích của bạn.",
+      "chooseAStream": "Chọn nguồn phát",
+      "pickFailed": "Không mở được nguồn phát đó.",
+      "hostControls": "Chỉ ${name} điều khiển việc phát trong phòng này",
+      "hostControlsUnnamed": "Chỉ chủ phòng điều khiển việc phát trong phòng này",
+      "pausedHere": "Đã tạm dừng trên thiết bị này. Nhấn Phát để bắt kịp phòng.",
+      "dontPlay": "Không phát",
+      "declined": "Bạn không phát ${title}.",
+      "offsetTitle": "Độ lệch",
+      "offsetDetail": "Dịch tệp của bạn so với tệp của phòng, dành cho phiên bản bắt đầu sớm hơn hoặc muộn hơn.",
+      "offsetReset": "Đặt lại"
+    },
+    "toast": {
+      "joined": "${name} đã tham gia",
+      "left": "${name} đã rời đi",
+      "paused": "${name} đã tạm dừng",
+      "resumed": "${name} đã tiếp tục phát",
+      "seeked": "${name} đã tua đến vị trí khác",
+      "speed": "${name} đã đặt tốc độ thành ${speed}",
+      "buffering": "${name} đang tải",
+      "hostChanged": "${name} đã trở thành chủ phòng",
+      "becameHost": "Bạn đã trở thành chủ phòng",
+      "media": "${name} đã bắt đầu phát ${title}",
+      "forbidden": "Chỉ chủ phòng mới làm được việc đó"
+    },
+    "failure": {
+      "create": "Không thể tạo phòng. Hãy thử lại.",
+      "join": "Không thể tham gia phòng. Hãy thử lại.",
+      "share": "Không thể chia sẻ video này với phòng. Hãy thử nguồn phát khác.",
+      "live": "Không thể xem cùng nhau một buổi phát trực tiếp. Phòng đang chờ một video.",
+      "roomNotFound": "Không có phòng nào với mã này.",
+      "roomFull": "Phòng này đã đầy.",
+      "rateLimited": "Quá nhiều lần thử. Hãy đợi một phút rồi thử lại.",
+      "connection": "Không thể kết nối với máy chủ chuyển tiếp. Hãy kiểm tra kết nối mạng.",
+      "sessionLost": "Đã mất kết nối với phòng.",
+      "ended": "Chủ phòng đã đóng phòng.",
+      "roomLocked": "Phòng này đã bị khóa.",
+      "relayFull": "Máy chủ chuyển tiếp đã đầy. Hãy thử lại sau.",
+      "blocked": "Máy chủ chuyển tiếp này không chấp nhận Tortuga.",
+      "kicked": "Chủ phòng đã mời bạn ra khỏi phòng.",
+      "expired": "Phòng đã hết hạn.",
+      "replaced": "Bạn đã tham gia phòng này trên một thiết bị khác."
+    }
+  },
+  "downloads": {
+    "title": "Tải xuống",
+    "empty": "Chưa có nội dung tải xuống nào. Hãy tải xuống phim và các tập từ trang chi tiết để xem khi không có kết nối.",
+    "offline": "Bạn đang ngoại tuyến. Việc tải xuống sẽ tiếp tục khi có kết nối trở lại.",
+    "storage": "Đã dùng ${used} · Còn trống ${free}",
+    "storageUsed": "Đã dùng ${used}",
+    "pauseAll": "Tạm dừng tất cả",
+    "resumeAll": "Tiếp tục tất cả",
+    "actionFailed": "Không thể thay đổi bản tải xuống. Hãy thử lại.",
+    "actionsFailed": "Không thể thay đổi các bản tải xuống. Hãy thử lại.",
+    "episodes": {
+      "other": "${n} tập"
+    },
+    "videos": {
+      "other": "${n} video"
+    },
+    "otherVideos": "Video khác",
+    "summary": "${count} · ${size}",
+    "progress": "${done} / ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "Đang chờ",
+      "waitingForWifi": "Đang chờ Wi-Fi",
+      "waitingForNetwork": "Đang chờ kết nối",
+      "resolving": "Đang chuẩn bị…",
+      "downloading": "Đang tải xuống",
+      "downloadingPercent": "Đang tải xuống · ${percent}%",
+      "paused": "Đã tạm dừng",
+      "failed": "Không thành công",
+      "completed": "Đã tải xuống",
+      "cancelled": "Đã hủy"
+    },
+    "action": {
+      "play": "Phát",
+      "pause": "Tạm dừng",
+      "resume": "Tiếp tục",
+      "retry": "Thử lại",
+      "pickStream": "Chọn nguồn phát",
+      "cancel": "Hủy tải xuống",
+      "delete": "Xóa bản tải xuống",
+      "deleteGroup": "Xóa nội dung tải xuống",
+      "openDetail": "Xem chi tiết"
+    },
+    "deleteConfirm": {
+      "title": "Xóa ${count} của ${name}?",
+      "message": "Tải xuống lại sẽ mất thời gian và cần có kết nối.",
+      "confirm": "Xóa",
+      "cancel": "Hủy"
+    },
+    "keepSynced": {
+      "title": "Luôn đồng bộ",
+      "note": "Mỗi phim bộ ở đây luôn có các tập chưa xem tiếp theo được tải xuống trên thiết bị này, và sẽ tải thêm tập mới sau khi bạn xem một tập.",
+      "empty": "Chưa có phim bộ nào dùng “Luôn đồng bộ”. Trong menu tải xuống của một phim bộ, hãy chọn số tập chưa xem muốn giữ.",
+      "series": {
+        "other": "${n} phim bộ"
+      },
+      "manage": "Quản lý “Luôn đồng bộ”",
+      "pauseRule": "Tạm dừng ${title}",
+      "resumeRule": "Tiếp tục ${title}",
+      "stopRule": "Ngừng đồng bộ ${title}",
+      "status": {
+        "downloading": {
+          "other": "Đang tải xuống ${n} tập"
+        },
+        "failed": {
+          "other": "${n} tập không thành công"
+        },
+        "downloaded": {
+          "other": "Đã tải xuống ${n} tập"
+        },
+        "downloadedNone": "Chưa tải xuống tập nào"
+      },
+      "stop": {
+        "title": "Ngừng đồng bộ ${title}?",
+        "message": {
+          "other": "${n} tập trong mục Tải xuống do “Luôn đồng bộ” thêm vào. Xóa cả các tập này?"
+        },
+        "messageNone": "Sẽ không tải xuống thêm tập nào.",
+        "keep": "Giữ nội dung tải xuống",
+        "delete": "Xóa nội dung tải xuống",
+        "confirm": "Ngừng",
+        "cancel": "Hủy"
+      },
+      "notice": {
+        "other": "“Luôn đồng bộ” đã thêm ${n} tập của ${title}"
+      },
+      "noticeSeveral": {
+        "other": "“Luôn đồng bộ” đã thêm ${n} tập"
+      },
+      "actionFailed": "Không thể thay đổi “Luôn đồng bộ”. Hãy thử lại."
+    },
+    "failure": {
+      "noStream": "Không chọn được nguồn phát nào cho tập này. Hãy tự chọn một nguồn.",
+      "noStreamInstant": "Không chọn được nguồn phát tức thì nào cho tập này. Hãy tự chọn một nguồn.",
+      "network": "Kết nối không thành công.",
+      "http": "Máy chủ phản hồi với mã HTTP ${status}.",
+      "streamGone": "Liên kết đã hết hạn và tiện ích không còn cung cấp nguồn phát này.",
+      "diskFull": "Thiết bị đã hết dung lượng. Đã dừng tải xuống.",
+      "notEnoughSpace": "Không đủ dung lượng trống cho bản tải xuống này.",
+      "sizeMismatch": "Tệp đã tải xuống không đầy đủ.",
+      "unsupported": "Không thể tải xuống nguồn phát này.",
+      "locationUnavailable": "Vị trí tải xuống không khả dụng.",
+      "fileMissing": "Không tìm thấy tệp đã tải xuống.",
+      "storage": "Bộ nhớ của thiết bị không phản hồi."
+    },
+    "notification": {
+      "channel": "Tải xuống",
+      "title": "Đang tải xuống ${title}",
+      "count": {
+        "other": "${n} mục tải xuống"
+      },
+      "progress": "${percent}%",
+      "preparing": "Đang chuẩn bị tải xuống…",
+      "waiting": "Đang chờ Wi-Fi",
+      "paused": "Đã tạm dừng",
+      "pause": "Tạm dừng",
+      "resume": "Tiếp tục",
+      "cancel": "Hủy",
+      "failed": "Tải xuống không thành công: ${title}",
+      "completed": "Đã tải xuống ${title}"
+    }
+  },
+  "offline": {
+    "title": "Bạn đang ngoại tuyến",
+    "text": "Hãy kết nối Internet để duyệt nội dung. Nội dung tải xuống vẫn phát được khi không có kết nối.",
+    "textNoDownloads": "Hãy kết nối Internet để duyệt nội dung.",
+    "openDownloads": "Mở mục Tải xuống",
+    "detail": "Đang hiển thị thông tin chi tiết đã lưu cùng nội dung tải xuống của bạn."
+  },
+  "playerApps": {
+    "chooser": "Hỏi mỗi lần",
+    "tortuga": "Tortuga",
+    "playWith": "Phát bằng…",
+    "banner": {
+      "opening": "Đang mở bằng ${player}…",
+      "notInstalled": "${player} chưa được cài đặt trên thiết bị này.",
+      "didNotStart": "Không khởi động được ${player}.",
+      "playInTortuga": "Phát bằng Tortuga",
+      "cancel": "Hủy",
+      "dismiss": "Bỏ qua"
+    },
+    "detail": {
+      "playing": "Đang phát bằng ${player} · ${position}",
+      "playingOf": "Đang phát bằng ${player} · ${position} / ${duration}",
+      "paused": "Đã tạm dừng trong ${player} · ${position}",
+      "pausedOf": "Đã tạm dừng trong ${player} · ${position} / ${duration}",
+      "finished": "Đã mở bằng ${player}. Bạn đã xem xong ${title} chưa?",
+      "markWatched": "Đánh dấu đã xem",
+      "notYet": "Chưa"
+    },
+    "settings": {
+      "player": "Trình phát",
+      "deviceOnly": "Chỉ thiết bị này",
+      "note": "Video trên thiết bị này sẽ phát bằng trình phát được chọn ở đây. Dùng “Phát bằng…” trong menu của nguồn phát để chọn trình phát khác cho một video.",
+      "notFound": "${player} (không tìm thấy)",
+      "followsProgress": "Tiếp tục từ chỗ đang xem dở và lưu tiến độ trong khi phát",
+      "savesOnReturn": "Tiếp tục từ chỗ đang xem dở và lưu vị trí bạn dừng xem",
+      "savesOnReturnFromStart": "Phát từ đầu, rồi lưu vị trí bạn dừng xem hoặc hỏi bạn đã xem xong chưa",
+      "asksAfter": "Tiếp tục từ chỗ đang xem dở, rồi hỏi bạn đã xem xong chưa",
+      "asksAfterFromStart": "Chỉ mở video, rồi hỏi bạn đã xem xong chưa",
+      "chooserDetail": "Thiết bị sẽ hỏi dùng ứng dụng nào để phát từng video",
+      "customHeader": "Trình phát tùy chỉnh",
+      "addCustom": "Thêm trình phát tùy chỉnh",
+      "deleteNamed": "Xóa ${name}",
+      "form": {
+        "title": "Thêm trình phát tùy chỉnh",
+        "name": "Tên",
+        "nameHint": "Trình phát của tôi",
+        "program": "Chương trình",
+        "programHint": "mpv, hoặc đường dẫn đầy đủ của chương trình",
+        "arguments": "Tham số",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} là liên kết của video, {title} là tiêu đề, {start} là thời điểm bắt đầu tính bằng giây và {subtitle} là liên kết của phụ đề đầu tiên.",
+        "urlTemplate": "Mẫu URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} là liên kết của video đã được mã hóa cho URL, còn {url_raw} là liên kết nguyên dạng.",
+        "packageName": "Tên gói",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Thêm",
+        "cancel": "Hủy",
+        "nameMissing": "Hãy đặt tên cho trình phát.",
+        "programMissing": "Hãy nhập chương trình cần chạy.",
+        "urlTemplateMissing": "Hãy nhập mẫu URL.",
+        "packageNameMissing": "Hãy nhập tên gói của ứng dụng.",
+        "argumentsNeedUrl": "Tham số phải chứa {url}.",
+        "urlTemplateNeedsUrl": "Mẫu URL phải chứa {url} hoặc {url_raw}.",
+        "packageNameInvalid": "Đây không phải tên gói. Hãy nhập tên dạng org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Lịch phát sóng",
+    "today": "Hôm nay",
+    "tomorrow": "Ngày mai",
+    "yesterday": "Hôm qua",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Đang phát sóng",
+    "now": "Bây giờ",
+    "noProgrammes": "Không có thông tin chương trình",
+    "noChannels": "Lịch này không có kênh nào cho ngày này.",
+    "noGuide": "Không có tiện ích đã cài đặt nào cung cấp lịch phát sóng.",
+    "failed": "Không thể tải lịch phát sóng: ${reason}",
+    "cast": "Diễn viên: ${names}",
+    "directors": "Đạo diễn: ${names}"
+  },
+  "calendar": {
+    "title": "Lịch",
+    "previousMonth": "Tháng trước",
+    "nextMonth": "Tháng sau",
+    "today": "Hôm nay",
+    "tomorrow": "Ngày mai",
+    "emptyLibrary": "Thêm phim bộ vào thư viện để xem các tập của chúng tại đây.",
+    "noAddon": "Không tiện ích nào của bạn có lịch cho các phim bộ trong thư viện.",
+    "emptyMonth": "Không có tập nào.",
+    "newEpisodes": {
+      "other": "${n} tập mới"
+    },
+    "episodes": {
+      "other": "${n} tập"
+    }
+  },
+  "watchlist": {
+    "lists": "Danh sách của dịch vụ theo dõi",
+    "hint": "Mỗi danh sách nằm trong tài khoản của bạn ở dịch vụ đó. Thư viện của bạn không đổi.",
+    "add": "Thêm vào ${list}",
+    "remove": "Xóa khỏi ${list}",
+    "trakt": "Danh sách xem Trakt",
+    "simkl": "Dự định xem trên Simkl",
+    "mdblist": "Danh sách xem MDBList",
+    "myAnimeList": "Dự định xem trên MyAnimeList",
+    "aniList": "Đang dự định trên AniList",
+    "saving": "Đang lưu…",
+    "queued": "Chưa gửi, sẽ thử lại",
+    "failed": "Chưa lưu",
+    "addFailed": "Không thể thêm ${title} vào ${list}.",
+    "removeFailed": "Không thể xóa ${title} khỏi ${list}."
+  },
+  "collections": {
+    "needsAddon": "Cần tiện ích ${name}",
+    "needsCatalog": "${addon} không có danh mục ${catalog}",
+    "needsFilter": "Cần một bộ lọc mà Tortuga không đặt được",
+    "traktUnavailable": "Danh sách Trakt không khả dụng trong phiên bản ứng dụng này",
+    "tooLarge": "“${title}” quá lớn để đồng bộ",
+    "kind": {
+      "tmdbList": "Danh sách TMDB",
+      "tmdbCollection": "Bộ sưu tập TMDB",
+      "tmdbCompany": "Hãng phim TMDB",
+      "tmdbNetwork": "Kênh TMDB",
+      "tmdbDiscover": "Khám phá TMDB",
+      "tmdbPerson": "Nhân vật TMDB",
+      "tmdbDirector": "Đạo diễn TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "Nhà cung cấp không xác định “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "other": "Thêm ${n} bộ sưu tập"
+      },
+      "replaces": {
+        "other": "Thay thế ${n} bộ sưu tập có cùng id"
+      },
+      "needsAddon": {
+        "other": "${n} nguồn cần tiện ích ${name}"
+      },
+      "needsTracker": {
+        "other": "${n} nguồn cần kết nối ${service}"
+      },
+      "unsupported": {
+        "other": "${kind}: bỏ qua ${n} nguồn"
+      },
+      "unsupportedHint": "Tortuga đọc danh mục của tiện ích và danh sách của trình theo dõi, không đọc các nguồn này. Hãy dùng danh mục của một tiện ích thay thế, chẳng hạn của AIOMetadata hoặc MDBList.",
+      "folderDropped": "Đã bỏ qua thư mục “${folder}” trong “${collection}”: không đọc được nguồn nào của thư mục",
+      "collectionDropped": "Đã bỏ qua bộ sưu tập “${title}”: không đọc được thư mục nào của bộ sưu tập",
+      "tooLarge": "Không nhập bộ sưu tập “${title}”: quá lớn để đồng bộ"
+    },
+    "refused": {
+      "notJson": "Đây không phải tệp bộ sưu tập: không phải JSON.",
+      "notList": "Đây không phải tệp bộ sưu tập: không chứa danh sách bộ sưu tập.",
+      "empty": "Tệp này không có bộ sưu tập nào.",
+      "collectionInvalid": "Không đọc được bộ sưu tập ${position} trong tệp.",
+      "collectionNoId": "Bộ sưu tập ${position} trong tệp không có id.",
+      "collectionNoTitle": "Bộ sưu tập ${id} không có tiêu đề.",
+      "duplicateCollection": "Hai bộ sưu tập trong tệp có cùng id ${id}.",
+      "noFolders": "Bộ sưu tập “${collection}” không có danh sách thư mục.",
+      "folderInvalid": "Không đọc được thư mục ${position} của “${collection}”.",
+      "folderNoId": "Thư mục ${position} của “${collection}” không có id.",
+      "folderNoTitle": "Thư mục ${id} của “${collection}” không có tiêu đề.",
+      "duplicateFolder": "Hai thư mục của “${collection}” có cùng id ${id}.",
+      "noSources": "Thư mục “${folder}” của “${collection}” không có danh sách nguồn.",
+      "unknownShape": "Thư mục “${folder}” của “${collection}” có hình dạng ô không xác định: ${shape}.",
+      "sourceInvalid": "Nguồn ${position} của thư mục “${folder}” trong “${collection}” không đầy đủ."
+    },
+    "row": "Bộ sưu tập",
+    "rowSource": {
+      "other": "Bộ sưu tập · ${n} thư mục"
+    },
+    "folder": {
+      "all": "Tất cả",
+      "empty": "Không có nội dung nào ở đây",
+      "goToTrackers": "Đi tới Dịch vụ theo dõi",
+      "goToAddons": "Đi tới Tiện ích"
+    },
+    "importing": {
+      "title": "Nhập bộ sưu tập",
+      "note": "Tệp bộ sưu tập từ Nuvio hoặc AIOMetadata: nhập liên kết của tệp hoặc mở tệp. Bộ sưu tập có cùng id với một bộ sưu tập của bạn sẽ thay thế bộ đó.",
+      "urlLabel": "Liên kết",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Tải về",
+      "openFile": "Mở tệp",
+      "confirm": "Nhập",
+      "done": "Xong",
+      "rowNew": {
+        "other": "Mới · ${n} thư mục"
+      },
+      "rowReplaces": {
+        "other": "Thay thế bộ của bạn · ${n} thư mục"
+      },
+      "imported": {
+        "other": "Đã nhập ${n} bộ sưu tập"
+      },
+      "notWeb": "Hãy nhập liên kết bắt đầu bằng http:// hoặc https://.",
+      "tooLarge": "Tệp này lớn hơn 4 MB.",
+      "httpError": "Liên kết trả về lỗi ${status}.",
+      "timeout": "Liên kết không phản hồi kịp.",
+      "unreachable": "Không truy cập được liên kết. Hãy kiểm tra liên kết và kết nối của bạn.",
+      "unreadable": "Không đọc được tệp này dưới dạng văn bản.",
+      "failed": "Không lưu được các bộ sưu tập."
+    },
+    "editor": {
+      "newHeading": "Bộ sưu tập mới",
+      "editHeading": "Sửa bộ sưu tập",
+      "titleLabel": "Tiêu đề",
+      "view": "Chế độ xem",
+      "viewHint": "Cách một thư mục hiển thị các nguồn",
+      "viewTabs": "Thẻ",
+      "viewRows": "Các hàng",
+      "viewFollow": "Theo ứng dụng",
+      "allTab": "Thẻ Tất cả",
+      "allTabHint": "Thẻ đầu tiên chứa nội dung từ mọi nguồn",
+      "foldersHeader": "Thư mục",
+      "addFolder": "Thêm thư mục",
+      "noFolders": "Chưa có thư mục nào",
+      "sources": {
+        "other": "${n} nguồn"
+      },
+      "save": "Lưu",
+      "newFolder": "Thư mục mới",
+      "folderTitleLabel": "Tiêu đề",
+      "shape": "Hình dạng ô",
+      "shapePoster": "Áp phích",
+      "shapeLandscape": "Ngang",
+      "shapeSquare": "Vuông",
+      "coverLabel": "Liên kết ảnh bìa",
+      "coverHint": "https://…",
+      "hideTitle": "Ẩn tiêu đề",
+      "hideTitleHint": "Ô chỉ hiển thị ảnh bìa",
+      "sourcesHeader": "Nguồn",
+      "addSource": "Thêm nguồn",
+      "noSources": "Chưa có nguồn nào",
+      "deleteNamed": "Xóa ${name}",
+      "removeNamed": "Gỡ ${name}",
+      "noTitle": "Hãy đặt tiêu đề cho bộ sưu tập.",
+      "noFolder": "Hãy thêm một thư mục vào bộ sưu tập.",
+      "folderNoTitle": "Hãy đặt tiêu đề cho thư mục ${position}.",
+      "folderNoSource": "Hãy thêm một nguồn vào “${folder}”.",
+      "saveFailed": "Không lưu được bộ sưu tập.",
+      "discardTitle": "Bỏ các thay đổi?",
+      "discard": "Bỏ",
+      "keepEditing": "Tiếp tục chỉnh sửa",
+      "picker": {
+        "addons": "Danh mục của tiện ích",
+        "trackers": "Dịch vụ theo dõi",
+        "noAddons": "Không tiện ích nào đã cài có danh mục để thêm.",
+        "noTrackers": "Hãy kết nối một dịch vụ trong Cài đặt → Dịch vụ theo dõi để thêm danh sách của dịch vụ đó.",
+        "listsFailed": "Hiện không đọc được danh sách của ${service}.",
+        "byLink": "Danh sách ${service} theo liên kết",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Thêm",
+        "notAList": "Đây không phải liên kết tới danh sách ${service}.",
+        "notFound": "${service} không có danh sách nào ở liên kết này.",
+        "unreachable": "Hiện không truy cập được ${service}."
+      }
+    }
+  }
+}

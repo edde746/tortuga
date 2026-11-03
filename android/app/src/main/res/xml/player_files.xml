@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- What PlayerFiles (AndroidPlayerApps) shares with a player app: the downloads, where AndroidDownloads keeps them.
+     Nothing is shared but the URIs a hand-off grants, one by one. -->
+<paths>
+    <!-- Internal storage: noBackupFilesDir's downloads (the product's and a debug launch's dev session's).
+         noBackupFilesDir is filesDir's sibling, which has no element of its own; the paths are canonicalized. -->
+    <files-path name="downloads" path="../no_backup/downloads/" />
+    <files-path name="dev-downloads" path="../no_backup/dev-downloads/" />
+    <!-- Other volumes (SD cards, USB drives): getExternalFilesDirs' directories under /storage/<uuid>/Android/data, which
+         external-files-path doesn't cover (it is the primary volume's only). -->
+    <root-path name="volumes" path="storage/" />
+</paths>

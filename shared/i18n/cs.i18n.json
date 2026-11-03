@@ -1,0 +1,2121 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Zkontrolovat aktualizace…",
+    "launchFailed": "Aplikaci Tortuga se nepodařilo spustit.",
+    "startup": {
+      "database": "Otevírání databáze…",
+      "migration": "Aktualizace databáze…",
+      "account": "Načítání účtu…",
+      "profiles": "Načítání profilů…"
+    },
+    "localNetworkUsage": "Tortuga používá vaši místní síť k připojení k doplňkům, médiím a synchronizačnímu serveru, který provozujete doma."
+  },
+  "player": {
+    "nowPlaying": "Právě hraje",
+    "buffering": "Načítání…",
+    "position": "${position} / ${duration}",
+    "timeline": "Pozice přehrávání",
+    "play": "Přehrát",
+    "pause": "Pozastavit",
+    "resolving": "Příprava streamu…",
+    "opening": "Otevírání…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "ŽIVĚ",
+      "position": "Živě · sledováno ${time}",
+      "behind": "Živě · ${time} pozadu",
+      "goToLive": "Přejít na živé vysílání"
+    },
+    "nextEpisode": "Další epizoda",
+    "previousEpisode": "Předchozí epizoda",
+    "lock": {
+      "button": "Zamknout obrazovku",
+      "tapToUnlock": "Klepnutím odemknete",
+      "tapAgainToUnlock": "Klepněte znovu pro odemknutí"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normální",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Hlasitost",
+      "level": "${percent} %",
+      "muted": "Ztlumeno",
+      "mute": "Ztlumit",
+      "unmute": "Zapnout zvuk"
+    },
+    "menu": {
+      "audio": "Zvuk",
+      "subtitles": "Titulky",
+      "speed": "Rychlost přehrávání",
+      "subtitleDelay": "Zpoždění titulků",
+      "audioDelay": "Zpoždění zvuku",
+      "moreSubtitles": "Další titulky",
+      "reset": "Resetovat",
+      "subtitleDelayEarlier": "Zpoždění titulků: dříve",
+      "subtitleDelayLater": "Zpoždění titulků: později",
+      "audioDelayEarlier": "Zpoždění zvuku: dříve",
+      "audioDelayLater": "Zpoždění zvuku: později"
+    },
+    "track": {
+      "off": "Vypnuto",
+      "numbered": "Stopa ${number}",
+      "defaultTrack": "Výchozí",
+      "forced": "Vynucené",
+      "sdh": "SDH",
+      "audioDescription": "Audiopopis",
+      "external": "Externí",
+      "second": "Druhé titulky",
+      "showAsSecond": "Zobrazit jako druhé titulky",
+      "removeSecond": "Odebrat druhé titulky",
+      "otherLanguage": "Ostatní",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} kanál",
+        "few": "${n} kanály",
+        "other": "${n} kanálů"
+      }
+    },
+    "info": {
+      "title": "Informace o přehrávání",
+      "tab": "Info",
+      "resolution": "Rozlišení",
+      "video": "Video",
+      "dynamicRange": "Dynamický rozsah",
+      "audio": "Zvuk",
+      "decoder": "Dekodér",
+      "cache": "Vyrovnávací paměť",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hardwarový (${name})",
+      "softwareDecoder": "Softwarový",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision, profil ${profile}",
+      "stream": "Stream",
+      "addon": "Doplněk",
+      "pickedBy": "Výběr",
+      "autoPlayFirstMatch": "Automaticky, první shoda",
+      "autoPlayLastLink": "Automaticky, stejný stream jako minule",
+      "source": "Zdroj",
+      "downloaded": "Staženo",
+      "name": "Název",
+      "file": "Soubor",
+      "container": "Kontejner",
+      "fileSize": "Velikost",
+      "bitrate": "Datový tok",
+      "codec": "Kodek",
+      "pixelFormat": "Formát pixelů",
+      "bitDepth": "${bits} bitů",
+      "color": "Barva",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} cd/m²",
+      "mastering": "Masteringový displej",
+      "nitsRange": "${min}–${max} cd/m²",
+      "droppedFrames": "Zahozené snímky",
+      "droppedFramesValue": "${output} (dekodér ${decoder})",
+      "delayedFrames": "Zpožděné snímky",
+      "output": "Výstup",
+      "hertz": "${value} Hz",
+      "channels": "Kanály",
+      "sampleRate": "Vzorkovací frekvence",
+      "track": "Stopa",
+      "secondTrack": "Druhá stopa",
+      "passthrough": "Přímý průchod (${format})",
+      "spatialAudio": "Prostorový zvuk",
+      "rendering": "Vykreslování",
+      "surround": "Surround",
+      "subtitles": "Titulky",
+      "format": "Formát",
+      "embedded": "Interní",
+      "delay": "Zpoždění",
+      "network": "Síť",
+      "downloadSpeed": "Rychlost stahování",
+      "buffering": "Načítání",
+      "percent": "${value} %",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Přeskočit úvod",
+      "recap": "Přeskočit rekapitulaci",
+      "credits": "Přeskočit závěrečné titulky"
+    },
+    "prompt": {
+      "playNext": "Přehrát další epizodu: ${episode}",
+      "countdown": {
+        "one": "Automaticky za ${n} sekundu",
+        "few": "Automaticky za ${n} sekundy",
+        "other": "Automaticky za ${n} sekund"
+      }
+    },
+    "options": {
+      "title": "Možnosti",
+      "videoFit": "Poměr stran",
+      "fit": {
+        "contain": "Přizpůsobit",
+        "cover": "Vyplnit obrazovku",
+        "fill": "Roztáhnout"
+      },
+      "zoom": "Přiblížení",
+      "percent": "${percent} %",
+      "resetZoom": "Resetovat",
+      "shaders": "Shadery",
+      "shader": {
+        "nvscalerDetail": "Škálování obrazu NVIDIA pro ostřejší video",
+        "neutral": "Neutrální",
+        "denoise": "Odšumění",
+        "denoiseSharpen": "Odšumění + doostření",
+        "fast": "Rychlé",
+        "highQuality": "Vysoká kvalita",
+        "modeDetail": "${quality} · Režim ${mode}",
+        "customDetail": "Vlastní shader GLSL",
+        "importShader": "Importovat shader",
+        "imported": "Shader importován",
+        "importFailed": "Shader se nepodařilo importovat",
+        "deleteLabel": "Smazat ${name}",
+        "deleteTitle": "Smazat ${name}?",
+        "delete": "Smazat",
+        "cancel": "Zrušit"
+      },
+      "sleepTimer": "Časovač vypnutí",
+      "sleepEndOfVideo": "Konec aktuálního videa",
+      "sleepMinutes": {
+        "one": "${n} minuta",
+        "few": "${n} minuty",
+        "other": "${n} minut"
+      },
+      "sleepLeft": "Zbývá ${time}",
+      "autoPlayNext": "Automaticky přehrát další epizodu",
+      "audioOutput": "Zvukový výstup",
+      "systemOutput": "Podle systému",
+      "audioNormalization": "Vyrovnat hlasitost",
+      "audioChannels": "Zvukové kanály",
+      "channels": {
+        "original": "Původní",
+        "originalDetail": "Přehrát všechny kanály stopy",
+        "surround51": "Až 5.1",
+        "surround51Detail": "Převést 7.1 na 5.1 pro televizory a receivery, které podporují jen 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Převést na dva kanály pro stereo reproduktory nebo sluchátka"
+      },
+      "on": "Zapnuto",
+      "off": "Vypnuto"
+    },
+    "stillWatching": {
+      "title": "Ještě se díváte?",
+      "countdown": {
+        "one": "Pozastaví se za ${n} sekundu",
+        "few": "Pozastaví se za ${n} sekundy",
+        "other": "Pozastaví se za ${n} sekund"
+      },
+      "keepWatching": "Pokračovat",
+      "pause": "Pozastavit"
+    },
+    "error": {
+      "title": "Tento stream nelze přehrát",
+      "resolveTimeout": "Spuštění streamu trvalo příliš dlouho.",
+      "expired": "Platnost odkazu na stream vypršela.",
+      "notFound": "Stream už není k dispozici.",
+      "http": "Server odpověděl kódem HTTP ${status}.",
+      "cantOpen": "Stream se nepodařilo otevřít.",
+      "unsupportedFormat": "Stream je ve formátu, který přehrávač neumí přečíst.",
+      "cantDecode": "Přehrávač nedokázal přehrát obraz nebo zvuk tohoto streamu.",
+      "engineFailed": "Přehrávač se zastavil kvůli chybě.",
+      "retry": "Zkusit znovu",
+      "nextStream": "Zkusit další stream",
+      "close": "Zavřít",
+      "alternatives": {
+        "one": "K dispozici je ještě ${n} stream",
+        "few": "K dispozici jsou ještě ${n} streamy",
+        "other": "K dispozici je ještě ${n} streamů"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Tohle není epizoda",
+      "titleMovie": "Tohle není film",
+      "titleVideo": "Tohle není video",
+      "sent": "Doplněk místo streamu poslal chybové video.",
+      "byUrl": "Jeho odkaz patří mezi chybová videa doplňku.",
+      "bySize": "Soubor má ${served}, stream přitom uváděl ${size}.",
+      "byDuration": "Trvá ${length}, toto video přitom při posledním přehrání trvalo ${known}.",
+      "kept": "Průběh sledování zůstává zachován.",
+      "chooseStream": "Vybrat jiný stream",
+      "watch": "Přehrát zprávu"
+    },
+    "osd": {
+      "volume": "Hlasitost ${level}",
+      "brightness": "Jas ${level}",
+      "speed": "Rychlost ${speed}",
+      "subtitleDelay": "Zpoždění titulků ${delay}",
+      "audioDelay": "Zpoždění zvuku ${delay}",
+      "audioTrack": "Zvuk: ${track}",
+      "subtitleTrack": "Titulky: ${track}",
+      "subtitlesOff": "Titulky vypnuty",
+      "chapter": "Kapitola: ${title}",
+      "chapterNumbered": "Kapitola ${number}",
+      "zoom": "Přiblížení ${percent}",
+      "shader": "Shadery: ${name}",
+      "shadersOff": "Shadery vypnuty"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} kB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Otevírání streamu…",
+    "resolveFailed": {
+      "http": "Server streamu odpověděl kódem HTTP ${status}",
+      "timeout": "Server streamu neodpověděl včas",
+      "network": "Nelze se připojit k serveru streamu",
+      "unsupportedUrl": "Odkaz na tento stream nelze otevřít",
+      "tooManyRedirects": "Odkaz na tento stream přesměrovává příliš mnohokrát",
+      "unexpected": "Tato aplikace narazila na chybu při otevírání tohoto streamu"
+    },
+    "badge": {
+      "instant": "Okamžitě",
+      "notInstant": "Ne okamžitě"
+    },
+    "lastUsed": "Naposledy přehráno",
+    "external": "Otevře se mimo aplikaci",
+    "unplayable": {
+      "one": "${n} stream, který tato aplikace nepřehraje",
+      "few": "${n} streamy, které tato aplikace nepřehraje",
+      "other": "${n} streamů, které tato aplikace nepřehraje"
+    },
+    "empty": "Žádné streamy nenalezeny",
+    "all": "Vše",
+    "refresh": "Obnovit",
+    "retryNamed": "Zkusit znovu: ${name}",
+    "filters": {
+      "hidden": {
+        "one": "${n} stream skrytý vašimi filtry",
+        "few": "${n} streamy skryté vašimi filtry",
+        "other": "${n} streamů skrytých vašimi filtry"
+      },
+      "showing": {
+        "one": "Zobrazuje se ${n} stream skrytý vašimi filtry",
+        "few": "Zobrazují se ${n} streamy skryté vašimi filtry",
+        "other": "Zobrazuje se ${n} streamů skrytých vašimi filtry"
+      },
+      "show": "Zobrazit",
+      "hide": "Skrýt",
+      "rowNote": "Skryto vašimi filtry"
+    },
+    "sort": {
+      "title": "Řazení",
+      "addonOrder": "Pořadí doplňků",
+      "resolution": "Rozlišení",
+      "source": "Kvalita zdroje",
+      "sizeLargest": "Největší první",
+      "sizeSmallest": "Nejmenší první",
+      "cached": "Okamžité první"
+    },
+    "autoPlay": {
+      "noMatch": "Automatické přehrávání nenašlo žádný stream, který projde vašimi filtry.",
+      "failed": "Stream vybraný automatickým přehráváním se nespustil. Vyberte jiný."
+    },
+    "download": {
+      "notice": "Vyberte stream ke stažení.",
+      "action": "Stáhnout",
+      "actionNamed": "Stáhnout ${name}",
+      "queued": "Přidáno do fronty stahování",
+      "failed": "Stahování se nepodařilo přidat."
+    },
+    "suggested": {
+      "label": "Doporučeno",
+      "reason": "Podobné vašim nedávným volbám: ${features}",
+      "audio": "zvuk: ${language}",
+      "subtitles": "titulky: ${language}",
+      "smaller": "menší soubory",
+      "larger": "větší soubory"
+    }
+  },
+  "detail": {
+    "loadFailed": "Podrobnosti se nepodařilo načíst.",
+    "notFound": "Žádný doplněk nemá podrobnosti k tomuto titulu.",
+    "noAddons": "Žádný z nainstalovaných doplňků nemá podrobnosti k tomuto titulu.",
+    "noAnimeAddon": "Žádný z nainstalovaných doplňků nemá podrobnosti k tomuto anime. Nainstalujte doplněk pro anime a otevřete ho.",
+    "animeListsUnavailable": "Seznamy anime se nenačetly, takže toto anime nelze přiřadit k titulu. Zkontrolujte připojení a zkuste to znovu.",
+    "findingAnime": "Vyhledávání tohoto anime v seznamech anime…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} h ${minutes} min",
+      "hours": "${hours} h",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes – kritici",
+        "rottenTomatoesAudience": "Rotten Tomatoes – diváci",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} procent"
+    },
+    "userRating": {
+      "rateLabel": "Ohodnotit tento titul",
+      "label": "Vaše hodnocení: ${score}",
+      "range": "${low}–${high}",
+      "title": "Vaše hodnocení",
+      "hint": "Vaše hodnocení se odešle do každé služby níže.",
+      "clear": "Odebrat hodnocení",
+      "checking": "Ověřuje se…",
+      "notRated": "Nehodnoceno",
+      "unreadable": "Nelze ověřit",
+      "saving": "Ukládá se…",
+      "saved": "Uloženo",
+      "removed": "Odebráno",
+      "queued": "Zatím neodesláno, zkusí se znovu",
+      "failed": "Neuloženo"
+    },
+    "links": {
+      "genres": "Žánry",
+      "cast": "Obsazení",
+      "directors": "Režie",
+      "writers": "Scénář",
+      "website": "Web"
+    },
+    "facts": {
+      "title": "Informace",
+      "released": "Premiéra",
+      "runtime": "Délka",
+      "country": "Země",
+      "language": "Jazyk",
+      "awards": "Ocenění",
+      "source": "Podrobnosti z",
+      "failed": "Nepodařilo se načíst z"
+    },
+    "trailer": "Upoutávka",
+    "trailerNumbered": "Upoutávka ${number}",
+    "trailers": "Upoutávky",
+    "share": "Sdílet",
+    "season": "Řada ${number}",
+    "specials": "Speciály",
+    "episodeNumbered": "Epizoda ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Hrají: ${names}",
+    "castAndCrew": "Obsazení a tvůrci",
+    "airs": "Vysílání ${date}",
+    "date": "${day}. ${month} ${year}",
+    "month": {
+      "jan": "ledna",
+      "feb": "února",
+      "mar": "března",
+      "apr": "dubna",
+      "may": "května",
+      "jun": "června",
+      "jul": "července",
+      "aug": "srpna",
+      "sep": "září",
+      "oct": "října",
+      "nov": "listopadu",
+      "dec": "prosince"
+    },
+    "play": "Přehrát",
+    "playEpisode": "Přehrát ${episode}",
+    "resume": "Pokračovat od ${time}",
+    "resumeEpisode": "Pokračovat ${episode} · ${time}",
+    "addToLibrary": "Přidat do knihovny",
+    "removeFromLibrary": "Odebrat z knihovny",
+    "markWatched": "Označit jako zhlédnuté",
+    "markUnwatched": "Označit jako nezhlédnuté",
+    "markAllWatched": "Označit všechny epizody jako zhlédnuté",
+    "markAllUnwatched": "Označit všechny epizody jako nezhlédnuté",
+    "markSeasonWatched": "Označit řadu jako zhlédnutou",
+    "markSeasonUnwatched": "Označit řadu jako nezhlédnutou",
+    "watched": "Zhlédnuto",
+    "overviewHidden": "Popis skrytý",
+    "moreActions": "Další akce",
+    "moreActionsNamed": "Další akce pro ${name}",
+    "showMore": "Více",
+    "showLess": "Méně",
+    "findingStream": "Hledání streamu…",
+    "chooseStream": "Vybrat stream",
+    "download": {
+      "download": "Stáhnout",
+      "queued": "Ve frontě",
+      "waitingForWifi": "Čeká se na Wi-Fi",
+      "downloading": "Stahování ${percent} %",
+      "downloadingStarted": "Stahování…",
+      "paused": "Pozastaveno",
+      "failed": "Stahování selhalo",
+      "partial": "Staženo ${done} z ${total}",
+      "downloaded": "Staženo",
+      "menuTitle": "Stáhnout",
+      "allSeasons": "Všechny řady",
+      "pick": {
+        "all": "Všechny epizody",
+        "unwatched": "Nezhlédnuté epizody",
+        "next5": "Dalších 5 nezhlédnutých",
+        "next10": "Dalších 10 nezhlédnutých"
+      },
+      "keepSynced": "Průběžně stahovat",
+      "keepSyncedCount": {
+        "one": "Udržovat ${n} nezhlédnutou epizodu",
+        "few": "Udržovat ${n} nezhlédnuté epizody",
+        "other": "Udržovat ${n} nezhlédnutých epizod"
+      },
+      "keepSyncedAll": "Udržovat všechny nezhlédnuté epizody",
+      "manage": "Spravovat stahování",
+      "pauseAll": "Pozastavit stahování",
+      "resumeAll": "Pokračovat ve stahování",
+      "deleteSeason": "Smazat stažené epizody této řady",
+      "deleteAll": "Smazat všechna stažená videa",
+      "queuedEpisodes": {
+        "one": "${n} epizoda přidána do fronty stahování",
+        "few": "${n} epizody přidány do fronty stahování",
+        "other": "${n} epizod přidáno do fronty stahování"
+      },
+      "nothingQueued": "Všechny epizody už jsou stažené nebo ve frontě.",
+      "failedToQueue": "Stahování se nepodařilo přidat.",
+      "episode": {
+        "download": "Stáhnout epizodu",
+        "pause": "Pozastavit stahování",
+        "resume": "Pokračovat ve stahování",
+        "retry": "Zkusit stáhnout znovu",
+        "pickStream": "Vybrat stream",
+        "cancel": "Zrušit stahování",
+        "delete": "Smazat staženou epizodu",
+        "queued": "Ve frontě",
+        "downloading": "${percent} %",
+        "paused": "Pozastaveno",
+        "failed": "Stahování selhalo",
+        "downloaded": "Staženo"
+      }
+    },
+    "related": {
+      "title": "Podobné tituly",
+      "noneFound": "Nenašly se žádné podobné tituly."
+    }
+  },
+  "library": {
+    "title": "Knihovna",
+    "continueWatching": "Pokračovat ve sledování",
+    "sort": {
+      "lastWatched": "Naposledy sledované",
+      "added": "Naposledy přidané",
+      "name": "Název A–Z",
+      "nameReverse": "Název Z–A",
+      "timesWatched": "Nejsledovanější",
+      "watched": "Nejdřív zhlédnuté",
+      "notWatched": "Nejdřív nezhlédnuté"
+    },
+    "sortBy": "Řadit podle",
+    "sortByNamed": "Řadit podle: ${name}",
+    "empty": "Zatím tu nic není. Tituly přidáte do knihovny z jejich podrobností.",
+    "emptyContinueWatching": "Není v čem pokračovat. Tituly se tu objeví, jakmile je začnete sledovat.",
+    "emptyType": "Nic tohoto typu tu není.",
+    "watched": "Zhlédnuto"
+  },
+  "mediaMenu": {
+    "markWatched": "Označit jako zhlédnuté",
+    "markUnwatched": "Označit jako nezhlédnuté",
+    "removeFromContinueWatching": "Odebrat z Pokračovat ve sledování",
+    "details": "Zobrazit podrobnosti",
+    "addToLibrary": "Přidat do knihovny",
+    "removeFromLibrary": "Odebrat z knihovny",
+    "playFromStart": "Přehrát od začátku",
+    "markSeasonWatched": "Označit řadu jako zhlédnutou",
+    "markSeasonUnwatched": "Označit řadu jako nezhlédnutou",
+    "chooseStream": "Vybrat stream",
+    "download": "Stáhnout",
+    "pauseDownload": "Pozastavit stahování",
+    "resumeDownload": "Pokračovat ve stahování",
+    "retryDownload": "Zkusit stáhnout znovu",
+    "cancelDownload": "Zrušit stahování",
+    "deleteDownload": "Smazat staženou epizodu",
+    "pickStream": "Vybrat stream",
+    "trailer": "Upoutávka",
+    "markFailed": "Titul ${title} se nepodařilo označit: podrobnosti se nenačetly. Zkontrolujte připojení a zkuste to znovu."
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Nainstalované doplňky se nepodařilo načíst. Restartujte aplikaci Tortuga a zkuste to znovu.",
+    "error": {
+      "invalidTransportUrl": "Toto není odkaz na doplněk. Odkazy na doplňky končí na /manifest.json.",
+      "timeout": "Doplněk neodpověděl včas.",
+      "network": "Nepodařilo se spojit s doplňkem.",
+      "http": "Doplněk vrátil chybu (HTTP ${status}).",
+      "invalidResponse": "Doplněk poslal odpověď, kterou tato aplikace neumí přečíst.",
+      "unexpectedResponse": "Doplněk poslal jiný typ odpovědi, než byl požadován.",
+      "emptyContent": "Nic nenalezeno.",
+      "invalidManifest": "Manifest doplňku je neplatný.",
+      "configurationRequired": "Tento doplněk je před instalací nutné nakonfigurovat.",
+      "alreadyInstalled": "Tento doplněk už je nainstalovaný.",
+      "notInstalled": "Tento doplněk není nainstalovaný.",
+      "protectedAddon": "Tento doplněk je vestavěný a nelze ho odebrat ani vypnout."
+    },
+    "title": "Doplňky",
+    "allTypes": "Vše",
+    "empty": "Nejsou nainstalované žádné doplňky.",
+    "emptyFiltered": "Žádný nainstalovaný doplněk nemá tento typ.",
+    "builtIn": "Vestavěný",
+    "builtInExplanation": "Tento doplněk je vestavěný a nelze ho odebrat ani vypnout.",
+    "cancel": "Zrušit",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Posunout nahoru",
+    "moveUpNamed": "Posunout ${name} nahoru",
+    "moveDown": "Posunout dolů",
+    "moveDownNamed": "Posunout ${name} dolů",
+    "dragToReorderNamed": "Změnit pořadí: ${name}",
+    "enabledNamed": "Používat ${name}",
+    "close": "Zavřít",
+    "version": "Verze ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Katalogy",
+      "meta": "Podrobnosti",
+      "stream": "Streamy",
+      "subtitles": "Titulky",
+      "addonCatalog": "Katalogy doplňků",
+      "player": "Aktivita přehrávání",
+      "library": "Aktivita knihovny"
+    },
+    "remove": {
+      "title": "Odebrat ${name}?",
+      "message": "Odebere se z tohoto profilu na všech zařízeních, včetně nastavení, se kterým byl nakonfigurován.",
+      "confirm": "Odebrat"
+    },
+    "details": {
+      "types": "Typy",
+      "resources": "Poskytuje",
+      "catalogs": "Katalogy",
+      "contact": "Kontakt",
+      "configure": "Konfigurovat",
+      "remove": "Odebrat",
+      "enabled": "Používat tento doplněk",
+      "enabledOff": "Vypnuto: Tortuga po něm nic nežádá a nezobrazuje jeho katalogy.",
+      "shareTitle": "Odkaz na doplněk",
+      "shareWarning": "Tento odkaz může obsahovat klíče k účtům, se kterými byl doplněk nakonfigurován. Sdílejte ho jen s lidmi, kterým důvěřujete.",
+      "revealLink": "Zobrazit odkaz",
+      "hideLink": "Skrýt odkaz",
+      "copyLink": "Kopírovat odkaz",
+      "linkCopied": "Odkaz zkopírován."
+    },
+    "watchActivity": {
+      "title": "Odesílat aktivitu sledování",
+      "explanation": "Tento doplněk dostává vaši aktivitu sledování: co přehráváte, pozastavujete a zastavujete, co přidáváte do knihovny nebo z ní odebíráte a co označujete jako zhlédnuté.",
+      "agree": "Souhlasím, že tento doplněk dostává moji aktivitu sledování",
+      "notAllowed": "Nedostává žádnou aktivitu sledování, dokud ji nepovolíte"
+    },
+    "install": {
+      "action": "Nainstalovat doplněk",
+      "title": "Instalace doplňku",
+      "linkHint": "Odkaz na doplněk končící na /manifest.json",
+      "submit": "Pokračovat",
+      "confirm": "Nainstalovat",
+      "update": "Aktualizovat",
+      "configure": "Konfigurovat",
+      "configureFirst": "Tento doplněk je před instalací nutné nakonfigurovat. Nakonfigurujte ho a pak ho nainstalujte z jeho stránky.",
+      "alreadyInstalled": "Tento doplněk už je nainstalovaný.",
+      "updateDetails": "Je nainstalovaný. Tímto aktualizujete jeho údaje.",
+      "updateVersion": "Je nainstalovaný. Tímto ho aktualizujete na verzi ${version}.",
+      "adult": "Tento doplněk je označený jako obsah pro dospělé.",
+      "installed": "Doplněk ${name} byl nainstalován.",
+      "updated": "Doplněk ${name} byl aktualizován.",
+      "done": "Hotovo"
+    },
+    "browse": {
+      "title": "Procházet",
+      "installed": "Nainstalované",
+      "installedNote": "Nainstalováno"
+    }
+  },
+  "settings": {
+    "title": "Nastavení",
+    "automatic": "Automaticky",
+    "listSeparator": ", ",
+    "cancel": "Zrušit",
+    "close": "Zavřít",
+    "increaseNamed": "Zvýšit ${name}",
+    "decreaseNamed": "Snížit ${name}",
+    "value": {
+      "percent": "${value} %",
+      "seconds": {
+        "one": "${n} sekunda",
+        "few": "${n} sekundy",
+        "other": "${n} sekund"
+      }
+    },
+    "time": {
+      "justNow": "právě teď",
+      "minutesAgo": {
+        "one": "před ${n} minutou",
+        "few": "před ${n} minutami",
+        "other": "před ${n} minutami"
+      },
+      "hoursAgo": {
+        "one": "před ${n} hodinou",
+        "few": "před ${n} hodinami",
+        "other": "před ${n} hodinami"
+      },
+      "daysAgo": {
+        "one": "před ${n} dnem",
+        "few": "před ${n} dny",
+        "other": "před ${n} dny"
+      },
+      "monthsAgo": {
+        "one": "před ${n} měsícem",
+        "few": "před ${n} měsíci",
+        "other": "před ${n} měsíci"
+      },
+      "yearsAgo": {
+        "one": "před ${n} rokem",
+        "few": "před ${n} lety",
+        "other": "před ${n} lety"
+      }
+    },
+    "sections": {
+      "playback": "Přehrávání",
+      "playbackSummary": "Jazyky, hranice zhlédnutí, další epizoda a přeskakování",
+      "device": "Toto zařízení",
+      "deviceSummary": "Dekódování, HDR, snímková frekvence, zvuk, vyrovnávací paměť a hlášení o pádech",
+      "subtitles": "Titulky",
+      "subtitlesSummary": "Velikost, barva, obrys a pozice na tomto zařízení",
+      "addons": "Doplňky",
+      "addonsSummary": {
+        "one": "${n} nainstalovaný doplněk",
+        "few": "${n} nainstalované doplňky",
+        "other": "${n} nainstalovaných doplňků"
+      },
+      "addonsSummaryLoading": "Nainstalované doplňky",
+      "home": "Domů",
+      "homeSummary": "Které řádky stránka Domů zobrazuje a v jakém pořadí",
+      "appearance": "Vzhled",
+      "appearanceSummary": "Jazyk, plakáty a zhlédnuté tituly",
+      "trackers": "Sledovací služby",
+      "trackersSummary": "Odesílání sledovaného, historie sledování a seznamy",
+      "trackersConnected": "Připojeno: ${services}",
+      "account": "Účet",
+      "about": "O aplikaci",
+      "downloads": "Stahování",
+      "downloadsSummary": "Umístění, jen přes Wi-Fi a úložiště",
+      "data": "Export a import",
+      "dataSummary": "Data vašich profilů do souboru a zpět"
+    },
+    "profile": {
+      "locked": "Zamčeno PINem",
+      "unlocked": "Bez PINu",
+      "edit": "Upravit profil",
+      "manage": "Přepnout nebo spravovat profily"
+    },
+    "about": {
+      "version": "Verze ${version}",
+      "license": "Tortuga je software šířený pod licencí GNU General Public License verze 3. Můžete ho spouštět, studovat, sdílet a upravovat a každý, kdo vám poskytne jeho kopii, vám musí nabídnout i jeho zdrojový kód.",
+      "source": "Zdrojový kód",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga používá Trakt, ale nemá od Trakt schválení ani certifikaci.",
+      "notices": "Software třetích stran",
+      "noticeLink": "Stránka projektu"
+    },
+    "appearance": {
+      "interfaceLanguage": "Jazyk aplikace",
+      "interfaceLanguageHint": "Jazyk nabídek a zpráv aplikace",
+      "interfaceLanguageSystem": "Podle systému",
+      "blurUnwatched": "Rozmazat nezhlédnuté epizody",
+      "blurUnwatchedHint": "Rozmazat obrázky a skrýt popisy epizod, které jste ještě nezačali, aby nic neprozradily",
+      "hideWatched": "Skrýt zhlédnuté tituly",
+      "hideWatchedHint": "Vynechat filmy a seriály, které jste dokončili, z řad na domovské stránce a z Objevit. Seriál se vrátí, když vyjde nová epizoda",
+      "hidePosterCaptions": "Skrýt názvy pod plakáty",
+      "hidePosterCaptionsHint": "Zobrazit jen obrázek. Pokračovat ve sledování si ponechá epizodu a zbývající čas",
+      "posterTemplate": "Šablona URL plakátů",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} a {tvdb_id} jsou ID každého titulu, {type} je movie nebo series",
+      "posterTemplateNone": "Plakáty z doplňků",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Není to adresa http ani https, takže se ignoruje"
+    },
+    "home": {
+      "note": "Vyberte řádky, které stránka Domů zobrazuje, a jejich pořadí. Patří k tomuto profilu a synchronizují se s vašimi dalšími zařízeními.",
+      "continueWatchingHint": "Vždy první řádek",
+      "rowsHeader": "Řádky",
+      "empty": "Žádný nainstalovaný doplněk nemá katalog pro stránku Domů.",
+      "reset": "Obnovit výchozí",
+      "moveUp": "Posunout nahoru",
+      "moveUpNamed": "Posunout ${name} nahoru",
+      "moveDown": "Posunout dolů",
+      "moveDownNamed": "Posunout ${name} dolů",
+      "dragToReorder": "Přetažením změníte pořadí",
+      "dragToReorderNamed": "Změnit pořadí: ${name}",
+      "newCollection": "Nová kolekce",
+      "importCollections": "Importovat kolekce",
+      "exportCollections": "Exportovat kolekce",
+      "edit": "Upravit",
+      "delete": "Smazat",
+      "deleteTitle": "Smazat „${title}“?",
+      "deleteMessage": "Kolekce zmizí z tohoto profilu na všech vašich zařízeních."
+    },
+    "playback": {
+      "title": "Přehrávání",
+      "note": "Tato nastavení patří k tomuto profilu a synchronizují se s vašimi dalšími zařízeními.",
+      "languagesHeader": "Jazyky",
+      "audioLanguages": "Jazyky zvuku",
+      "audioLanguagesHint": "Která zvuková stopa se přehraje, v pořadí podle preference",
+      "audioLanguagesNone": "Výchozí podle videa",
+      "audioLanguagesExplanation": "Video se přehraje v prvním z těchto jazyků, který má. Pokud žádný nevyberete, přehraje se jeho výchozí zvuková stopa.",
+      "subtitleLanguages": "Jazyky titulků",
+      "subtitleLanguagesHint": "Které titulky se zapnou, v pořadí podle preference",
+      "subtitleLanguagesNone": "Vypnuto",
+      "subtitleLanguagesExplanation": "Zapnou se titulky v prvním z těchto jazyků, který video má. Pokud žádný nevyberete, titulky zůstanou vypnuté, pokud je video nevynutí.",
+      "secondSubtitleLanguage": "Jazyk druhých titulků",
+      "secondSubtitleLanguageHint": "Zobrazí se nahoře v obraze spolu s prvními",
+      "secondSubtitleLanguageExplanation": "Titulky v tomto jazyce se zobrazí nahoře v obraze spolu s prvními titulky. Pokud žádný nevyberete, druhé titulky se nezobrazí, pokud je nevyberete v přehrávači.",
+      "secondSubtitleLanguageNone": "Vypnuto",
+      "showSubtitles": "Zobrazit titulky",
+      "showSubtitlesHint": "Vždy: titulky i v mluveném jazyce, nejdřív SDH",
+      "showSubtitlesFollowAudio": "Podle zvuku",
+      "showSubtitlesAlways": "Vždy",
+      "chosenHeader": "Vaše jazyky",
+      "availableHeader": "Přidat jazyk",
+      "searchLanguages": "Hledat jazyky",
+      "noLanguageMatches": "Žádný jazyk neodpovídá.",
+      "playbackHeader": "Přehrávání",
+      "watchedThreshold": "Zhlédnuto po",
+      "watchedThresholdHint": "Od kterého místa se video počítá jako zhlédnuté a „Pokračovat ve sledování“ přejde na další epizodu",
+      "bingeWatching": "Přehrát další epizodu",
+      "bingeWatchingHint": "Po skončení epizody spustit další, pokud možno ze stejného zdroje",
+      "upNextCountdown": "Odpočet další epizody",
+      "upNextCountdownHint": "Jak dlouho výzva k další epizodě čeká, než ji spustí",
+      "upNextImmediately": "Spustit hned",
+      "seekShort": "Krátký skok",
+      "seekShortHint": "Šipky, dálkový ovladač a tlačítka přeskočení v přehrávači",
+      "seekLong": "Dlouhý skok",
+      "seekLongHint": "Shift se šipkami a dlouhé stisknutí",
+      "videoClick": "Kliknutí na video",
+      "videoClickHint": "Dvojklik dál zapíná a vypíná celou obrazovku",
+      "videoClickPause": "Pozastavit a přehrát",
+      "videoClickControls": "Zobrazit nebo skrýt ovládání",
+      "moveUp": "Posunout nahoru",
+      "moveUpNamed": "Posunout ${name} nahoru",
+      "moveDown": "Posunout dolů",
+      "moveDownNamed": "Posunout ${name} dolů",
+      "removeLanguage": "Odebrat",
+      "removeLanguageNamed": "Odebrat ${name}",
+      "dragToReorderNamed": "Změnit pořadí: ${name}",
+      "skipping": {
+        "header": "Přeskakování",
+        "footer": "Úvody, rekapitulace a závěrečné titulky se rozpoznávají podle názvů kapitol videa, takže jejich přeskočení nabízejí jen videa s pojmenovanými kapitolami. Automatické přeskočení nejprve odpočítává na tlačítku a jakákoli vaše akce v přehrávači ho zastaví.",
+        "intros": "Úvody",
+        "introsHint": "Úvodní znělky a titulkové sekvence",
+        "recaps": "Rekapitulace",
+        "recapsHint": "„V minulých dílech jste viděli…“ na začátku epizody",
+        "credits": "Závěrečné titulky",
+        "creditsHint": "Závěrečné titulky a upoutávky na další epizodu; spolu s nimi se objeví výzva k další epizodě",
+        "off": "Vypnuto",
+        "button": "Zobrazit tlačítko",
+        "auto": "Přeskakovat automaticky"
+      },
+      "streams": {
+        "header": "Streamy",
+        "footer": "Filtry platí pro každý seznam streamů. Ten uvádí, kolik streamů skrývají, a umožňuje je přesto zobrazit.",
+        "autoPlay": "Přehrávat automaticky",
+        "autoPlayHint": "Přeskočí seznam streamů u Přehrát, Pokračovat, u epizody a u další epizody; při řazení počká, až odpoví všechny doplňky",
+        "suggestions": "Doporučit stream",
+        "suggestionsHint": "Učí se, které streamy v tomto profilu vybíráte, a jeden v seznamu označí",
+        "autoPlayOff": "Vypnuto",
+        "autoPlayFirstMatch": "První stream, který projde filtry",
+        "autoPlayReuseLastLink": "Stejný stream jako minule, jinak první, který projde",
+        "qualities": "Kvality",
+        "qualitiesHint": "Která rozlišení seznamy streamů zobrazují",
+        "qualitiesAll": "Všechny",
+        "qualitiesNone": "Žádné",
+        "qualitiesAllBut": "Všechny kromě ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Neznámá",
+        "ranges": "Dynamický rozsah",
+        "rangesHint": "Které z SDR, HDR a Dolby Vision seznamy streamů zobrazují",
+        "codecs": "Video kodeky",
+        "codecsHint": "Které video kodeky seznamy streamů zobrazují",
+        "minSize": "Minimální velikost",
+        "minSizeHint": "Skryje streamy menších souborů; stream bez uvedené velikosti zůstane",
+        "maxSize": "Maximální velikost",
+        "maxSizeHint": "Skryje streamy větších souborů; stream bez uvedené velikosti zůstane",
+        "sizeAny": "Jakákoli velikost",
+        "includePattern": "Jen odpovídající streamy",
+        "includePatternHint": "Regulární výraz porovnávaný s názvem, popisem a názvem souboru každého streamu bez ohledu na velikost písmen",
+        "includePatternNone": "Jakýkoli stream",
+        "includePlaceholder": "např. 1080p|2160p",
+        "excludePattern": "Skrýt odpovídající streamy",
+        "excludePatternHint": "Má přednost před vzorem výše",
+        "excludePatternNone": "Žádný",
+        "excludePlaceholder": "např. HDTV|XviD",
+        "invalidPattern": "Neplatný regulární výraz, proto se ignoruje",
+        "save": "Uložit",
+        "clear": "Vymazat"
+      }
+    },
+    "device": {
+      "title": "Toto zařízení",
+      "note": "Tato nastavení platí jen pro toto zařízení a nesynchronizují se.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Hardwarové dekódování",
+      "hardwareDecodingHint": "Dekódovat video grafickým hardwarem. Pokud se ve videích objevují chyby obrazu, vypněte ho.",
+      "hdr": "HDR",
+      "hdrHint": "Přehrávat HDR video v HDR, pokud ho displej podporuje. Při vypnutí se převede na SDR.",
+      "matchFrameRate": "Vynutit přepínání snímkové frekvence",
+      "matchFrameRateHint": "Přepnout displej na snímkovou frekvenci videa, i když by to systém neudělal. Při každém přepnutí displej na okamžik zčerná.",
+      "audioHeader": "Zvuk",
+      "audioPassthrough": "Přímý průchod zvuku",
+      "audioPassthroughHint": "Posílat prostorový zvuk (Dolby Digital, DTS, TrueHD) do receiveru bez dekódování",
+      "audioPassthroughHintApple": "Posílat Dolby Digital a Dolby Digital Plus, včetně Atmos, do systémového dekodéru Dolby; DTS a TrueHD se přehrávají jako vícekanálové PCM. Pokud není slyšet zvuk, vypněte to.",
+      "audioPassthroughHintAppleSpatial": "Posílat Dolby Digital a Dolby Digital Plus, včetně Atmos, do systémového dekodéru Dolby a přehrávat TrueHD Atmos a DTS:X jako prostorový zvuk; ostatní stopy DTS a TrueHD se přehrávají jako vícekanálové PCM. Pokud není slyšet zvuk, vypněte to.",
+      "audioPassthroughNormalized": "Vypnuto, dokud je zapnuté vyrovnání hlasitosti",
+      "gesturesHeader": "Gesta",
+      "swipeGestures": "Jas a hlasitost přejetím",
+      "swipeGesturesHint": "Přejetím nahoru nebo dolů po levé polovině videa měníte jas, po pravé hlasitost.",
+      "streamingHeader": "Streamování",
+      "cacheSize": "Vyrovnávací paměť",
+      "cacheSizeHint": "Kolik ze streamu se načte s předstihem před přehráváním",
+      "discordHeader": "Discord",
+      "discordPresence": "Zobrazovat, co sledujete",
+      "discordPresenceHint": "Vaši přátelé na Discordu uvidí název a díl, zatímco se video přehrává. Discord musí běžet na tomto počítači.",
+      "privacyHeader": "Soukromí",
+      "crashReports": "Odesílat hlášení o pádech",
+      "crashReportsHint": "Při pádu aplikace nebo selhání její části odešle, co se pokazilo, nikdy ale odkazy doplňků ani účty"
+    },
+    "subtitles": {
+      "title": "Titulky",
+      "note": "Tato nastavení platí jen pro toto zařízení a nesynchronizují se. Upravují vzhled prostých textových titulků, např. SRT; stylované titulky si zachovají vlastní vzhled, pokud styl nepoužijete i na ně.",
+      "previewText": "Takto vypadají titulky",
+      "textHeader": "Text",
+      "size": "Velikost",
+      "textColor": "Barva",
+      "bold": "Tučné",
+      "outlineHeader": "Obrys a pozadí",
+      "outline": "Obrys",
+      "outlineColor": "Barva obrysu",
+      "background": "Pozadí",
+      "backgroundHint": "Rámeček za textem a jeho neprůhlednost",
+      "backgroundOff": "Vypnuto",
+      "positionHeader": "Pozice",
+      "position": "Výška",
+      "positionHint": "Jak vysoko nad spodním okrajem obrazu jsou titulky",
+      "positionBottom": "Dole",
+      "styledHeader": "Stylované titulky",
+      "styledOverride": "Použít na stylované titulky",
+      "styledOverrideHint": "Titulky ASS a SSA použijí tento styl místo vlastního. Nápisy a efekty pak mohou vypadat špatně.",
+      "outlines": {
+        "none": "Žádný",
+        "thin": "Tenký",
+        "thick": "Silný"
+      },
+      "colors": {
+        "white": "Bílá",
+        "yellow": "Žlutá",
+        "green": "Zelená",
+        "cyan": "Azurová",
+        "gray": "Šedá",
+        "black": "Černá"
+      }
+    },
+    "account": {
+      "title": "Účet",
+      "syncLabel": "Synchronizace",
+      "syncNow": "Synchronizovat",
+      "lastSynced": "Naposledy synchronizováno ${time}",
+      "serverLabel": "Synchronizační server",
+      "identitiesHeader": "Způsoby přihlášení",
+      "linkIdentity": "Přidat způsob přihlášení",
+      "devicesHeader": "Zařízení",
+      "thisDevice": "Toto zařízení",
+      "activeNow": "Právě aktivní",
+      "lastActive": "Aktivní ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "Zařízení ${name} bylo odhlášeno.",
+      "identityRemoved": "Přihlášení přes ${provider} bylo odebráno.",
+      "cancel": "Zrušit",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Jednotné přihlášení"
+      },
+      "link": {
+        "start": "Propojit nové zařízení",
+        "title": "Propojit zařízení",
+        "instructions": "Na novém zařízení zvolte propojení z jiného zařízení. Pak zadejte kód, který zobrazí, nebo naskenujte jeho QR kód.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Pokračovat",
+        "question": "Propojit zařízení „${name}“?",
+        "consequence": "Přihlásí se k tomuto účtu včetně jeho profilů, doplňků a knihovny.",
+        "approve": "Propojit",
+        "reject": "Nepropojovat",
+        "approved": "Zařízení ${name} je propojené. Nastavení dokončí samo.",
+        "rejected": "Zařízení ${name} nebylo propojeno.",
+        "expired": "Platnost kódu vypršela. Začněte znovu na novém zařízení.",
+        "done": "Hotovo"
+      },
+      "signOut": {
+        "action": "Odhlásit se",
+        "title": "Odhlásit se?",
+        "message": "Profily, doplňky, knihovna a stažená videa se z tohoto zařízení odstraní. Vše kromě stažených videí zůstane v účtu: po opětovném přihlášení to získáte zpět.",
+        "confirm": "Odhlásit se"
+      },
+      "delete": {
+        "action": "Smazat účet",
+        "explanation": "Smaže účet a všechna jeho synchronizovaná data ze serveru.",
+        "title": "Smazat účet?",
+        "message": "Účet a jeho profily, doplňky, knihovna a historie budou ze serveru trvale smazány a všechna zařízení budou odhlášena. Tuto akci nelze vrátit zpět.",
+        "confirm": "Smazat účet"
+      },
+      "revoke": {
+        "title": "Odhlásit zařízení ${name}?",
+        "message": "Zařízení ${name} bude odhlášeno a odebráno ze zařízení účtu. Později ho lze znovu propojit.",
+        "messageThisDevice": "Toto je zařízení, které právě používáte. Bude odhlášeno a jeho profily, doplňky, knihovna a stažená videa se z něj odstraní. Vše kromě stažených videí zůstane v účtu.",
+        "confirm": "Odhlásit zařízení",
+        "confirmNamed": "Odhlásit zařízení: ${name}"
+      },
+      "unsynced": {
+        "title": "Smazat nesynchronizované změny?",
+        "message": {
+          "one": "${n} změna provedená na tomto zařízení, například průběh sledování nebo úprava knihovny, se nedostala do účtu. Pokud se teď odhlásíte, bude trvale smazána. Když zvolíte Zrušit, zůstane tady a toto zařízení zůstane přihlášené.",
+          "few": "${n} změny provedené na tomto zařízení, například průběh sledování nebo úpravy knihovny, se nedostaly do účtu. Pokud se teď odhlásíte, budou trvale smazány. Když zvolíte Zrušit, zůstanou tady a toto zařízení zůstane přihlášené.",
+          "other": "${n} změn provedených na tomto zařízení, například průběh sledování nebo úpravy knihovny, se nedostalo do účtu. Pokud se teď odhlásíte, budou trvale smazány. Když zvolíte Zrušit, zůstanou tady a toto zařízení zůstane přihlášené."
+        },
+        "confirm": "Odhlásit se a smazat"
+      },
+      "unlink": {
+        "title": "Odebrat přihlášení přes ${provider}?",
+        "message": "Přes ${provider} se už k tomuto účtu nebudete moci přihlásit.",
+        "confirm": "Odebrat",
+        "action": "Odebrat přihlášení přes ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Sledovací služby",
+      "note": "Připojené služby dostávají, co tento profil sleduje: průběh sledování a tituly označené jako zhlédnuté. Připojení nebo odpojení služby platí pro tento profil na všech vašich zařízeních; přepínače níže platí jen pro toto zařízení.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Připojeno",
+      "connectedAs": "Připojeno jako ${user}",
+      "notConnected": "Nepřipojeno",
+      "unavailable": "V této verzi aplikace není k dispozici",
+      "connect": "Připojit",
+      "connectNamed": "Připojit ${name}",
+      "disconnect": "Odpojit",
+      "disconnectNamed": "Odpojit ${name}",
+      "scrobble": "Odesílat, co sledujete",
+      "scrobbleHint": "Průběh sledování a zhlédnuté tituly se odesílají službě ${service}",
+      "filtersHeader": "Co odesílat",
+      "movies": "Filmy",
+      "series": "Seriály",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} změna čeká na odeslání",
+        "few": "${n} změny čekají na odeslání",
+        "other": "${n} změn čeká na odeslání"
+      },
+      "notSent": {
+        "one": "${n} změnu se nepodařilo odeslat (poslední: ${reason})",
+        "few": "${n} změny se nepodařilo odeslat (poslední: ${reason})",
+        "other": "${n} změn se nepodařilo odeslat (poslední: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "služba ${service} odpověděla chybou ${status}",
+        "refused": "služba ${service} ji odmítla",
+        "unreadable": "nešla přečíst"
+      },
+      "connectTitle": "Připojit ${service}",
+      "starting": "Kontaktování služby ${service}…",
+      "waiting": "Čeká se, až ve službě ${service} povolíte aplikaci Tortuga…",
+      "linkInstructions": "Přihlaste se v prohlížeči ke službě ${service} a povolte aplikaci Tortuga.",
+      "linkScan": "Nebo naskenujte QR kód telefonem a přihlaste se tam.",
+      "openInBrowser": "Otevřít v prohlížeči",
+      "expired": "Platnost kódu vypršela dřív, než byl použit.",
+      "declined": "Služba ${service} připojení nepovolila.",
+      "unreachable": "Službu ${service} se nepodařilo kontaktovat. Zkontrolujte připojení a zkuste to znovu.",
+      "serverUnreachable": "Nepodařilo se spojit s vaším serverem Tortuga. Zkontrolujte připojení a zkuste to znovu.",
+      "needsAccount": "Připojení ke službě ${service} vyžaduje účet Tortuga. Nejdřív se přihlaste ke svému účtu.",
+      "busy": "Služba ${service} je přetížená. Zkuste to znovu za minutu.",
+      "refused": "Služba ${service} přihlášení odmítla.",
+      "failed": "Připojení ke službě ${service} se nezdařilo.",
+      "retry": "Zkusit znovu",
+      "connectedNotice": "Připojeno ke službě ${service} jako ${user}.",
+      "connectedNoticeNoName": "Připojeno ke službě ${service}.",
+      "disconnectTitle": "Odpojit službu ${service}?",
+      "disconnectMessage": "Tento profil přestane na všech vašich zařízeních odesílat službě ${service}, co sleduje, a změny čekající na odeslání budou zahozeny. Váš účet ${service} si ponechá vše, co už má.",
+      "disconnectedNotice": "Odpojeno od služby ${service}.",
+      "actionFailed": "Nepovedlo se. Zkuste to znovu."
+    },
+    "downloads": {
+      "title": "Stahování",
+      "note": "Tato nastavení platí jen pro toto zařízení a nesynchronizují se.",
+      "location": {
+        "title": "Umístění",
+        "hint": "Kam se ukládají nová stažená videa. Už uložená videa zůstanou tam, kde jsou.",
+        "deviceStorage": "Interní úložiště",
+        "external": "Externí úložiště",
+        "change": "Změnit složku"
+      },
+      "transferHeader": "Stahování",
+      "wifiOnly": "Stahovat jen přes Wi-Fi",
+      "wifiOnlyHint": "Při měřeném připojení, např. mobilních datech, stahování čeká",
+      "atOnce": "Souběžná stahování",
+      "atOnceHint": "Kolik videí se stahuje současně",
+      "autoRemoveWatched": "Mazat zhlédnutá videa",
+      "autoRemoveWatchedHint": "Stažené video se smaže po zhlédnutí, nikdy ne během přehrávání",
+      "subtitleLanguages": "Titulky k uložení",
+      "subtitleLanguagesHint": "Titulky v těchto jazycích se uloží s každým staženým videem",
+      "subtitleLanguagesProfile": "Vaše jazyky titulků: ${languages}",
+      "subtitleLanguagesProfileNone": "Vaše jazyky titulků: žádné",
+      "subtitleLanguagesExplanation": "Titulky v těchto jazycích se uloží s každým staženým videem, aby se zobrazily i bez připojení.",
+      "useProfileLanguages": "Použít mé jazyky titulků",
+      "storageHeader": "Úložiště",
+      "deleteAll": "Smazat všechna stažená videa",
+      "deleteAllTitle": "Smazat všechna stažená videa?",
+      "deleteAllText": "Smažou se všechna stažená videa na tomto zařízení, a to ve všech profilech.",
+      "deleteAllConfirm": "Smazat vše"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Doplňky",
+        "addonsHint": "Nainstalované doplňky v jejich pořadí, včetně odkazů",
+        "library": "Knihovna",
+        "libraryHint": "Tituly, které jste si uložili",
+        "progress": "Průběh sledování",
+        "progressHint": "Kde jste skončili a co jste zhlédli",
+        "settings": "Nastavení profilu",
+        "settingsHint": "Přehrávání, streamy, řádky stránky Domů a další nastavení, která se synchronizují",
+        "streams": "Historie streamů",
+        "streamsHint": "Naposledy přehraný stream u každého videa"
+      },
+      "profilesHeader": "Profily",
+      "privateNote": "Soubor obsahuje odkazy na vaše doplňky a historii streamů, které mohou obsahovat klíče API. Soubor nikomu nedávejte: kdokoli, kdo ho má, může tyto klíče použít.",
+      "exportNote": "Soubor nikdy neobsahuje PINy, účty sledovacích služeb, stažená videa ani nastavení tohoto zařízení.",
+      "exportAction": "Exportovat do souboru",
+      "saved": "Soubor ${name} byl uložen.",
+      "saveFailed": "Soubor se nepodařilo uložit.",
+      "exportFailed": "Export se nezdařil.",
+      "importHeader": "Import",
+      "importNote": "Otevře soubor exportovaný z aplikace Tortuga. U každé položky zvítězí novější data a z tohoto zařízení se nic nesmaže.",
+      "importAction": "Importovat ze souboru",
+      "reviewTitle": "Import",
+      "source": "Exportováno ${date} aplikací Tortuga ${version}",
+      "sourceUndated": "Exportováno aplikací Tortuga ${version}",
+      "dataHeader": "Data",
+      "counts": {
+        "addons": {
+          "one": "${n} doplněk",
+          "few": "${n} doplňky",
+          "other": "${n} doplňků"
+        },
+        "titles": {
+          "one": "${n} titul",
+          "few": "${n} tituly",
+          "other": "${n} titulů"
+        },
+        "progress": {
+          "one": "průběh u ${n} titulu",
+          "few": "průběh u ${n} titulů",
+          "other": "průběh u ${n} titulů"
+        },
+        "settings": {
+          "one": "${n} nastavení",
+          "few": "${n} nastavení",
+          "other": "${n} nastavení"
+        },
+        "streams": {
+          "one": "${n} stream",
+          "few": "${n} streamy",
+          "other": "${n} streamů"
+        },
+        "profiles": {
+          "one": "${n} profil",
+          "few": "${n} profily",
+          "other": "${n} profilů"
+        }
+      },
+      "into": "Cílový profil",
+      "intoSame": "Do profilu ${name} v tomto účtu",
+      "newProfile": "Nový profil",
+      "importConfirm": "Importovat",
+      "imported": "Import dokončen: ${changes}.",
+      "nothingNew": "Není co importovat: vše ze souboru už tu bylo.",
+      "notTortuga": "Tento soubor není export z aplikace Tortuga. Nic nebylo importováno.",
+      "newer": "Tento soubor pochází z novější verze aplikace Tortuga. Aktualizujte aplikaci Tortuga a pak soubor importujte znovu.",
+      "damaged": "Tento soubor je poškozený nebo neúplný. Nic nebylo importováno.",
+      "clockAhead": "Časy v tomto souboru jsou daleko před hodinami tohoto zařízení. Zkontrolujte datum a čas na obou zařízeních a pak soubor importujte znovu. Nic nebylo importováno.",
+      "importFailed": "Import se nezdařil.",
+      "unreadable": "Soubor se nepodařilo otevřít. Nic nebylo importováno."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Aktuální",
+      "syncing": "Synchronizace…",
+      "offline": "Offline. Změny se synchronizují po obnovení připojení.",
+      "signedOut": "Odhlášeno",
+      "failed": {
+        "server": "Synchronizační server má potíže. Brzy proběhne další pokus.",
+        "rateLimited": "Synchronizační server požádal o zpomalení. Brzy proběhne další pokus.",
+        "quotaExceeded": "Úložiště účtu je plné, změny se proto nesynchronizují.",
+        "tooLarge": "Některé změny jsou pro synchronizaci příliš velké.",
+        "addonsTooLarge": "Doplňky jednoho z profilů jsou pro synchronizaci příliš velké. Odeberte doplňky, které nepoužívá.",
+        "clockWrong": "Některé změny nelze synchronizovat. Zkontrolujte datum a čas na svých zařízeních.",
+        "unknown": "Synchronizace se nezdařila. Brzy proběhne další pokus."
+      }
+    },
+    "error": {
+      "network": "Nepodařilo se spojit se synchronizačním serverem. Zkontrolujte připojení a zkuste to znovu.",
+      "server": "Synchronizační server má potíže. Zkuste to později.",
+      "rateLimited": "Příliš mnoho pokusů. Chvíli počkejte a zkuste to znovu.",
+      "invalidServerUrl": "Toto není adresa serveru. Zadejte adresu ve tvaru https://sync.example.com.",
+      "insecureServerUrl": "Pro server na internetu použijte https. Obyčejné http funguje jen pro server ve vaší vlastní síti.",
+      "notTortugaServer": "Na této adrese neodpověděl žádný synchronizační server Tortuga.",
+      "incompatibleServer": "Tento server používá starší verzi synchronizace Tortuga a nelze ho použít.",
+      "providerNotEnabled": "Tento server tento způsob přihlášení nenabízí.",
+      "signInRejected": "Přihlášení neproběhlo. Zkuste to znovu.",
+      "appleCodeRejected": "Apple přihlášení nepřijal. Zkuste to znovu.",
+      "providerUnavailable": "Přihlašovací služba není dostupná. Zkuste to později.",
+      "signInCancelled": "Přihlášení bylo zrušeno.",
+      "signInExpired": "Přihlášení trvalo příliš dlouho. Začněte znovu.",
+      "identityInUse": "Toto přihlášení už patří jinému účtu Tortuga.",
+      "lastIdentity": "Toto je jediný způsob přihlášení k účtu, proto ho nelze odebrat.",
+      "sessionEnded": "Toto zařízení bylo odhlášeno. Přihlaste se znovu.",
+      "sessionUnreadable": "Přihlašovací údaje tohoto zařízení se nepodařilo načíst ze zabezpečeného úložiště systému. Restartujte aplikaci Tortuga a zkuste to znovu.",
+      "notSignedIn": "Nejdřív se přihlaste.",
+      "notFound": "Toto už na serveru neexistuje.",
+      "linkCodeInvalid": "Kódy mají 8 písmen a číslic, např. ABCD-EFGH.",
+      "linkNotFound": "S tímto kódem nečeká žádné zařízení. Zkontrolujte kód nebo začněte znovu na novém zařízení.",
+      "linkOtherServer": "Druhé zařízení používá jiný synchronizační server.",
+      "linkFailed": "Propojení se nepodařilo dokončit. Začněte znovu.",
+      "tooLarge": "Pro synchronizační server je to příliš velké.",
+      "quotaExceeded": "Úložiště účtu je plné.",
+      "unsynced": {
+        "one": "${n} změna provedená na tomto zařízení se ještě nesynchronizovala do svého účtu.",
+        "few": "${n} změny provedené na tomto zařízení se ještě nesynchronizovaly do svého účtu.",
+        "other": "${n} změn provedených na tomto zařízení se ještě nesynchronizovalo do svého účtu."
+      },
+      "unexpected": "Něco se pokazilo. Zkuste to znovu."
+    },
+    "deletion": {
+      "done": "Účet i jeho data byla smazána.",
+      "appleRevoked": "Účet i jeho data byla smazána a Tortuga už nepoužívá vaše Apple ID.",
+      "appleManual": "Účet i jeho data byla smazána. Nakonec odeberte aplikaci Tortuga v Nastavení → Apple ID → Přihlásit se přes Apple.",
+      "githubManual": "Aplikaci Tortuga můžete ze svého účtu GitHub odebrat na ${address}."
+    },
+    "switchAccount": {
+      "title": "Smazat nesynchronizované změny?",
+      "message": {
+        "one": "Toto je jiný účet než ten, ke kterému bylo toto zařízení přihlášeno. ${n} změna provedená tady v předchozím účtu, například průběh sledování nebo úprava knihovny, se do něj nikdy nedostala. Přihlášení ji trvale smaže spolu se zbytkem dat předchozího účtu na tomto zařízení, včetně stažených videí.",
+        "few": "Toto je jiný účet než ten, ke kterému bylo toto zařízení přihlášeno. ${n} změny provedené tady v předchozím účtu, například průběh sledování nebo úpravy knihovny, se do něj nikdy nedostaly. Přihlášení je trvale smaže spolu se zbytkem dat předchozího účtu na tomto zařízení, včetně stažených videí.",
+        "other": "Toto je jiný účet než ten, ke kterému bylo toto zařízení přihlášeno. ${n} změn provedených tady v předchozím účtu, například průběh sledování nebo úpravy knihovny, se do něj nikdy nedostalo. Přihlášení je trvale smaže spolu se zbytkem dat předchozího účtu na tomto zařízení, včetně stažených videí."
+      },
+      "confirm": "Smazat a přihlásit se",
+      "cancel": "Zrušit",
+      "kept": "Nepřihlášeno. Změny zůstanou na tomto zařízení, dokud se nepřihlásíte k účtu, ve kterém byly provedeny."
+    },
+    "browser": {
+      "signedIn": "Přihlášení proběhlo. Tuto kartu můžete zavřít a vrátit se do aplikace Tortuga.",
+      "failed": "Přihlášení se nedokončilo. Vraťte se do aplikace Tortuga a zkuste to znovu."
+    },
+    "signIn": {
+      "title": "Přihlášení k účtu Tortuga",
+      "intro": "Účet Tortuga udržuje vaše profily, doplňky a knihovnu synchronizované na všech zařízeních.",
+      "apple": "Přihlásit se přes Apple",
+      "google": "Přihlásit se přes Google",
+      "github": "Přihlásit se přes GitHub",
+      "oidc": "Přihlásit se přes ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Propojit z jiného zařízení",
+      "linkDeviceHint": "Už jste přihlášeni na telefonu nebo počítači? Propojte toto zařízení raději pomocí kódu.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Použít vlastní server",
+      "useHostedServer": "Použít server Tortuga",
+      "serverField": "Adresa serveru",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Pokračovat",
+      "checkingServer": "Kontrola serveru…",
+      "loadingOptions": "Načítání možností přihlášení…",
+      "noOptions": "Tento server nenabízí žádný způsob přihlášení na tomto zařízení. Propojte ho raději z přihlášeného zařízení.",
+      "retry": "Zkusit znovu",
+      "starting": "Zahajování přihlášení…",
+      "native": "Přihlašování přes ${provider}…",
+      "browser": "Pokračujte v prohlížeči. Jakmile se tam přihlásíte, tato obrazovka bude pokračovat.",
+      "finishing": "Dokončování přihlášení…",
+      "cancel": "Zrušit",
+      "deviceCode": {
+        "instructions": "Na telefonu nebo počítači přejděte na ${url} a zadejte tento kód:",
+        "scan": "Nebo naskenujte QR kód telefonem.",
+        "qrDescription": "QR kód k naskenování telefonem",
+        "expires": "Platnost kódu vyprší za ${time}.",
+        "waiting": "Čeká se na přihlášení…"
+      }
+    },
+    "link": {
+      "title": "Propojit toto zařízení",
+      "instructions": "Na přihlášeném zařízení otevřete Nastavení, pak Účet a pak Propojit nové zařízení. Tam naskenujte tento QR kód nebo zadejte kód.",
+      "qrDescription": "QR kód k naskenování na přihlášeném zařízení",
+      "starting": "Získávání kódu…",
+      "expires": "Platnost kódu vyprší za ${time}.",
+      "waiting": "Čeká se na schválení na druhém zařízení…",
+      "rejected": "Druhé zařízení propojení odmítlo.",
+      "expired": "Platnost kódu vypršela dřív, než byl použit.",
+      "newCode": "Získat nový kód"
+    },
+    "identityLink": {
+      "title": "Přidat způsob přihlášení",
+      "intro": "Propojte další způsob přihlášení, abyste nepřišli o přístup, když ztratíte jeden účet.",
+      "allLinked": "Všechny způsoby přihlášení, které toto zařízení nabízí, už jsou propojené.",
+      "linking": "Propojování…"
+    }
+  },
+  "profiles": {
+    "title": "Kdo se dívá?",
+    "manageTitle": "Spravovat profily",
+    "manage": "Spravovat profily",
+    "done": "Hotovo",
+    "add": "Přidat profil",
+    "empty": "Začněte vytvořením profilu.",
+    "loading": "Načítání profilů…",
+    "current": "Aktuální profil",
+    "switchProfile": "Přepnout profil",
+    "pin": {
+      "title": "Zadejte PIN pro profil ${name}",
+      "wrong": "Nesprávný PIN. Zkuste to znovu.",
+      "lockedOut": "Příliš mnoho pokusů. Zkuste to znovu za ${time}.",
+      "cancel": "Zrušit",
+      "backspace": "Smazat poslední číslici",
+      "entered": "Zadáno ${count} z ${total} číslic"
+    },
+    "editor": {
+      "newTitle": "Nový profil",
+      "editTitle": "Upravit profil",
+      "name": "Jméno",
+      "nameRequired": "Zadejte jméno.",
+      "nameTooLong": {
+        "one": "Jméno může mít nejvýše ${n} znak.",
+        "few": "Jméno může mít nejvýše ${n} znaky.",
+        "other": "Jméno může mít nejvýše ${n} znaků."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Bez PINu",
+      "pinOn": "Zamčeno PINem",
+      "setPin": "Nastavit PIN",
+      "changePin": "Změnit PIN",
+      "removePin": "Odebrat PIN",
+      "pinEnter": "Zadejte čtyřmístný PIN",
+      "pinConfirm": "Zadejte PIN znovu",
+      "pinMismatch": "PINy se neshodují. Zadejte nový.",
+      "pinNote": "PIN brání ostatním v přístupu k tomuto profilu na vašich zařízeních. Je to zámek, ne heslo.",
+      "save": "Uložit",
+      "create": "Vytvořit profil",
+      "cancel": "Zrušit",
+      "delete": "Smazat profil",
+      "deleteConfirm": "Smazat profil ${name}? Jeho doplňky, knihovna a historie budou smazány na všech zařízeních. Tuto akci nelze vrátit zpět.",
+      "deleteAction": "Smazat",
+      "saveFailed": "Profil se nepodařilo uložit. Zkuste to znovu.",
+      "kids": {
+        "title": "Dětský profil",
+        "subtitle": "Zobrazuje jen tituly doporučené pro věk do úrovně, kterou vyberete. Většina doporučených věků jsou odhady, ne oficiální klasifikace.",
+        "needsParent": "Nejdřív nastavte PIN u profilu dospělého: odchod z dětského profilu ho vyžaduje.",
+        "newOnly": "Dětským profilem může být jen nový profil.",
+        "capTitle": "Nejvyšší doporučený věk",
+        "capLittle": "Nejmenší",
+        "capLittleAges": "Doporučeno 0+",
+        "capKids": "Děti",
+        "capKidsAges": "Nejmenší a navíc doporučeno 6+",
+        "capTeen": "Teenageři",
+        "capTeenAges": "Děti a navíc doporučeno 12+",
+        "allowUnrated": "Povolit tituly bez klasifikace",
+        "allowUnratedNote": "Tituly bez doporučeného věku. Dokud je to vypnuté, rodič je povoluje jeden po druhém.",
+        "homeRows": "Řádky stránky Domů",
+        "homeRowsNote": "Volitelné. Tituly v těchto řádcích musí i tak spadat do nejvyššího doporučeného věku.",
+        "familyMovies": "Rodinné filmy",
+        "familySeries": "Rodinné seriály",
+        "addonMissing": "Jeho doplněk není v tomto profilu nainstalovaný.",
+        "allowed": "Povolené tituly",
+        "allowedNone": "Zatím žádné. Rodič povolí titul na jeho stránce.",
+        "blocked": "Blokované tituly",
+        "blockedNone": "Zatím žádné. Rodič zablokuje titul na jeho stránce.",
+        "remove": "Odebrat ${title}",
+        "leaving": "Odchod z tohoto profilu vyžaduje PIN rodiče.",
+        "off": "Odkazy, doplňky a většina nastavení jsou vypnuté.",
+        "addons": "Videa pocházejí z doplňků tohoto profilu. Tortuga je nekontroluje."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafit",
+      "slate": "Břidlice",
+      "silver": "Stříbro",
+      "ivory": "Slonovina",
+      "sand": "Písek",
+      "clay": "Hlína",
+      "rose": "Růže",
+      "plum": "Švestka",
+      "dusk": "Soumrak",
+      "sea": "Moře",
+      "sage": "Šalvěj",
+      "moss": "Mech"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "V tomto profilu není dostupné",
+      "suggested": "Doporučeno ${age}+",
+      "byAddon": "Jeho doplněk ho určuje starším divákům",
+      "notRated": "Bez doporučeného věku",
+      "byParent": "Zablokoval rodič",
+      "unchecked": "Doporučený věk se nepodařilo ověřit. Zkuste to později.",
+      "ask": "Požádat rodiče"
+    },
+    "block": "Zablokovat v tomto profilu",
+    "pin": {
+      "title": "Zadejte PIN rodiče",
+      "allow": "Pro povolení titulu ${title} v tomto profilu",
+      "allowThis": "Pro povolení tohoto titulu v tomto profilu",
+      "block": "Pro zablokování titulu ${title} v tomto profilu",
+      "leave": "Pro odchod z tohoto profilu",
+      "settings": "Pro otevření tohoto nastavení"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Vše",
+      "movie": "Filmy",
+      "series": "Seriály",
+      "channel": "Kanály",
+      "tv": "TV kanály",
+      "other": "Ostatní"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Zkusit znovu",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Zobrazit vše",
+      "downloading": "Stahování: ${count}, ${percent} %",
+      "downloadingUnsized": "Stahování: ${count}",
+      "empty": "Zatím tu nic není. Tuto stránku zaplníte instalací doplňků s katalogy.",
+      "allHidden": "Všechny řádky stránky Domů jsou skryté. Znovu je zobrazíte v Nastavení → Domů."
+    },
+    "continueWatching": {
+      "title": "Pokračovat ve sledování",
+      "episode": "Epizoda ${episode}",
+      "upNext": "Následuje",
+      "minutesLeft": "Zbývá ${minutes} min",
+      "hoursLeft": "Zbývá ${hours} h",
+      "hoursMinutesLeft": "Zbývá ${hours} h ${minutes} min",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Ke zhlédnutí",
+      "recommended": "Doporučené",
+      "trending": "Populární",
+      "planToWatch": "Chci vidět",
+      "planning": "V plánu",
+      "airing": "Právě se vysílá",
+      "list": "Seznam",
+      "unreachable": "Službu ${service} se nepodařilo kontaktovat.",
+      "signedOut": "Služba ${service} vás odhlásila. Znovu ji připojte v Nastavení.",
+      "failed": "Služba ${service} neodpověděla podle očekávání."
+    },
+    "discover": {
+      "type": "Typ",
+      "catalog": "Katalog",
+      "genre": "Žánr",
+      "all": "Vše",
+      "empty": "Tento katalog nemá co zobrazit.",
+      "noCatalogs": "Žádný z nainstalovaných doplňků nemá katalog k procházení.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Hledat filmy, seriály a další",
+      "recent": "Nedávná hledání",
+      "clearRecent": "Vymazat",
+      "removeRecentNamed": "Odebrat ${name}",
+      "noResults": "Žádné výsledky pro „${query}“",
+      "noCatalogs": "Žádný z nainstalovaných doplňků neumí vyhledávat.",
+      "clearQuery": "Vymazat hledání",
+      "hint": "Hledejte filmy, seriály a další v katalozích svých doplňků."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Domů",
+      "discover": "Objevit",
+      "search": "Hledat",
+      "library": "Knihovna",
+      "settings": "Nastavení"
+    },
+    "shortLabel": {
+      "board": "Domů",
+      "library": "Knihovna",
+      "search": "Hledat",
+      "settings": "Nastavení"
+    },
+    "back": "Zpět",
+    "retry": "Zkusit znovu",
+    "close": "Zavřít",
+    "dismiss": "Zavřít",
+    "qrFailed": "Tento odkaz nelze zobrazit jako QR kód.",
+    "openOnPhone": {
+      "title": "Otevřít v telefonu",
+      "message": "Toto zařízení nemůže tento odkaz otevřít. Naskenujte kód fotoaparátem telefonu a otevřete ho tam.",
+      "qrDescription": "QR kód odkazu"
+    },
+    "player": {
+      "close": "Zavřít přehrávač",
+      "fullscreen": "Celá obrazovka",
+      "exitFullscreen": "Ukončit celou obrazovku",
+      "rewind": "Přetočit zpět",
+      "fastForward": "Přetočit vpřed",
+      "pictureInPicture": "Obraz v obraze"
+    },
+    "menu": {
+      "playback": "Přehrávání",
+      "nextSubtitles": "Další stopa titulků",
+      "nextAudio": "Další zvuková stopa"
+    }
+  },
+  "watch": {
+    "title": "Společné sledování",
+    "intro": "Sledujte s přáteli synchronizovaně, každý na svém zařízení. Všichni přehrávají stejný titul ze svých vlastních doplňků. Místnost vytvoříte v možnostech přehrávače volbou Společné sledování.",
+    "controlMode": {
+      "hostOnly": "Ovládám jen já",
+      "hostOnlyDetail": "Všichni se přizpůsobí, když přehrávání spustíte, pozastavíte nebo přetočíte",
+      "anyone": "Ovládají všichni",
+      "anyoneDetail": "Kdokoli v místnosti může přehrávání spustit, pozastavit nebo přetočit"
+    },
+    "joinTitle": "Připojit se k místnosti",
+    "joinHint": "Kód nebo odkaz s pozvánkou",
+    "joinLabel": "Připojit se",
+    "joinInvalid": "Zadejte šestiznakový kód místnosti nebo odkaz s pozvánkou",
+    "recentTitle": "Nedávné místnosti",
+    "recentUsed": "Použito ${time}",
+    "removeRecentNamed": "Odebrat ${name}",
+    "invite": {
+      "title": "Připojit se k místnosti ${code}? Je na serveru ${server}, ne na vašem přenosovém serveru.",
+      "join": "Připojit se",
+      "leaveTitle": "Opustit místnost a připojit se k místnosti ${code}? Je na serveru ${server}, ne na vašem přenosovém serveru.",
+      "leaveHostTitle": "Opustit místnost a připojit se k místnosti ${code}? Je na serveru ${server}, ne na vašem přenosovém serveru. Tato místnost bude pokračovat dál a hostitelem se stane další účastník."
+    },
+    "relay": {
+      "checking": "Kontrola přenosového serveru…",
+      "unreachable": "Nepodařilo se spojit s přenosovým serverem na adrese ${server}.",
+      "retry": "Zkusit znovu",
+      "title": "Přenosový server",
+      "hint": "Přenosový server, který propojuje místnosti společného sledování. Pokud chcete používat veřejné přenosové servery Open Watch Party, nechte pole prázdné.",
+      "hosted": "Veřejné přenosové servery Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Zadejte adresu přenosového serveru začínající na http:// nebo https://",
+      "save": "Uložit",
+      "reset": "Použít veřejné přenosové servery"
+    },
+    "busy": {
+      "creating": "Vytváření místnosti…",
+      "joining": "Připojování k místnosti…"
+    },
+    "dismiss": "Zavřít",
+    "room": {
+      "codeLabel": "Kód místnosti",
+      "copyCode": "Kopírovat kód",
+      "codeCopied": "Kód zkopírován",
+      "share": "Sdílet pozvánku",
+      "shareText": "Sledujte se mnou v aplikaci Tortuga: otevřete ${link} nebo zadejte kód místnosti ${code}.",
+      "scan": "Naskenujte telefonem a připojte se",
+      "youHost": "Hostitelem jste vy",
+      "hostedBy": "Hostitel: ${name}",
+      "hostOnly": "Přehrávání ovládá jen hostitel",
+      "anyone": "Přehrávání ovládají všichni",
+      "reconnecting": "Obnovování připojení…",
+      "hostReconnecting": "Čeká se, až se ${name} znovu připojí…",
+      "nowPlaying": "Přehrává se ${title}",
+      "nowPlayingEpisode": "Přehrává se ${title} · ${episode}",
+      "idleHost": "Spusťte něco: všichni v místnosti to budou sledovat s vámi.",
+      "idleGuest": "Čeká se, až ${name} něco spustí.",
+      "participants": {
+        "one": "${n} účastník",
+        "few": "${n} účastníci",
+        "other": "${n} účastníků"
+      },
+      "you": "${name} (vy)",
+      "hostBadge": "Hostitel",
+      "makeHost": "Udělat hostitelem",
+      "makeHostNamed": "Udělat hostitelem: ${name}",
+      "joinPlayback": "Připojit se k přehrávání",
+      "leave": "Opustit místnost",
+      "leaveTitle": "Opustit místnost?",
+      "leaveConfirm": "Opustit",
+      "end": "Ukončit místnost",
+      "endTitle": "Ukončit místnost pro všechny?",
+      "endConfirm": "Ukončit místnost",
+      "cancel": "Zrušit",
+      "leaveHostTitle": "Opustit místnost? Bude pokračovat dál a hostitelem se stane další účastník.",
+      "kickNamed": "Odebrat uživatele ${name}",
+      "kickTitle": "Odebrat uživatele ${name} z místnosti?",
+      "kickConfirm": "Odebrat",
+      "lock": "Zamknout místnost",
+      "lockDetail": "Nikdo další se nemůže připojit",
+      "controlTitle": "Kdo ovládá přehrávání"
+    },
+    "status": {
+      "ready": "Připraveno",
+      "loading": "Otevírání",
+      "matching": "Hledání souboru",
+      "buffering": "Načítání",
+      "sameLength": "Stejná délka (${delta})",
+      "longer": "O ${delta} delší",
+      "shorter": "O ${delta} kratší",
+      "noStream": "Žádný stream nenalezen",
+      "searchFailed": "Hledání v doplňcích selhalo",
+      "notPlaying": "Mimo přehrávač",
+      "away": "Odpojeno",
+      "declined": "Nepřehrává",
+      "offset": "Posun ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Místnost ${code}",
+      "startTitle": "Vytvořit místnost s tím, co právě hraje",
+      "liveNoRoom": "Živé vysílání nelze sledovat společně",
+      "watching": {
+        "one": "Sleduje ${n}",
+        "few": "Společně sledují ${n}",
+        "other": "Společně sleduje ${n}"
+      },
+      "hostBadge": "HOSTITEL",
+      "waiting": "Čeká se na: ${names}…",
+      "waitingMore": {
+        "one": "Čeká se na: ${names} a ${n} další…",
+        "few": "Čeká se na: ${names} a ${n} další…",
+        "other": "Čeká se na: ${names} a ${n} dalších…"
+      },
+      "syncing": "Synchronizace…",
+      "matchingStart": "Hledání souboru shodného s tím, který má ${name}…",
+      "longer": "Váš soubor je o ${delta} delší než ten, který má ${name}",
+      "shorter": "Váš soubor je o ${delta} kratší než ten, který má ${name}",
+      "mismatchDetail": "Může jít o jiný sestřih, takže se vaše pozice nemusí shodovat.",
+      "playAnyway": "Přesto přehrát",
+      "chooseStream": "Vybrat jiný stream",
+      "noStream": "Žádný z vašich doplňků nemá stream pro titul ${title}.",
+      "searchFailed": "V některých vašich doplňcích se nepodařilo vyhledat titul ${title}.",
+      "chooseAStream": "Vybrat stream",
+      "pickFailed": "Tento stream se nepodařilo otevřít.",
+      "hostControls": "Přehrávání v této místnosti ovládá jen ${name}",
+      "hostControlsUnnamed": "Přehrávání v této místnosti ovládá jen hostitel",
+      "pausedHere": "Pozastaveno na tomto zařízení. Stiskněte Přehrát a doženete místnost.",
+      "dontPlay": "Nepřehrávat",
+      "declined": "Titul ${title} nepřehráváte.",
+      "offsetTitle": "Posun",
+      "offsetDetail": "Posune váš soubor vůči souboru místnosti, pro sestřih, který začíná dříve nebo později.",
+      "offsetReset": "Resetovat"
+    },
+    "toast": {
+      "joined": "${name} se připojil(a)",
+      "left": "${name} opustil(a) místnost",
+      "paused": "${name} pozastavil(a) přehrávání",
+      "resumed": "${name} obnovil(a) přehrávání",
+      "seeked": "${name} přetočil(a) na jiné místo",
+      "speed": "${name} nastavil(a) rychlost ${speed}",
+      "buffering": "${name} načítá video",
+      "hostChanged": "Hostitelem je teď ${name}",
+      "becameHost": "Hostitelem jste teď vy",
+      "media": "${name} spustil(a) ${title}",
+      "forbidden": "To může jen hostitel"
+    },
+    "failure": {
+      "create": "Místnost se nepodařilo vytvořit. Zkuste to znovu.",
+      "join": "K místnosti se nepodařilo připojit. Zkuste to znovu.",
+      "share": "Toto video se nepodařilo sdílet s místností. Zkuste jiný stream.",
+      "live": "Živé vysílání nelze sledovat společně. Místnost čeká na video.",
+      "roomNotFound": "Místnost s tímto kódem neexistuje.",
+      "roomFull": "Tato místnost je plná.",
+      "rateLimited": "Příliš mnoho pokusů. Minutu počkejte a zkuste to znovu.",
+      "connection": "Nepodařilo se spojit s přenosovým serverem. Zkontrolujte připojení.",
+      "sessionLost": "Připojení k místnosti se přerušilo.",
+      "ended": "Hostitel místnost ukončil.",
+      "roomLocked": "Tato místnost je zamčená.",
+      "relayFull": "Přenosový server je plný. Zkuste to později.",
+      "blocked": "Tento přenosový server nepřijímá aplikaci Tortuga.",
+      "kicked": "Hostitel vás z místnosti odebral.",
+      "expired": "Platnost místnosti vypršela.",
+      "replaced": "K této místnosti jste se připojili na jiném zařízení."
+    }
+  },
+  "downloads": {
+    "title": "Stažené",
+    "empty": "Zatím tu nic není staženo. Filmy a epizody stáhnete z jejich podrobností a pak je můžete sledovat i bez připojení.",
+    "offline": "Jste offline. Stahování bude pokračovat po obnovení připojení.",
+    "storage": "Využito ${used} · volno ${free}",
+    "storageUsed": "Využito ${used}",
+    "pauseAll": "Pozastavit vše",
+    "resumeAll": "Pokračovat ve všech",
+    "actionFailed": "Stahování se nepodařilo změnit. Zkuste to znovu.",
+    "actionsFailed": "Stahování se nepodařilo změnit. Zkuste to znovu.",
+    "episodes": {
+      "one": "${n} epizoda",
+      "few": "${n} epizody",
+      "other": "${n} epizod"
+    },
+    "videos": {
+      "one": "${n} video",
+      "few": "${n} videa",
+      "other": "${n} videí"
+    },
+    "otherVideos": "Další videa",
+    "summary": "${count} · ${size}",
+    "progress": "${done} z ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "Ve frontě",
+      "waitingForWifi": "Čeká se na Wi-Fi",
+      "waitingForNetwork": "Čeká se na připojení",
+      "resolving": "Příprava…",
+      "downloading": "Stahování",
+      "downloadingPercent": "Stahování · ${percent} %",
+      "paused": "Pozastaveno",
+      "failed": "Selhalo",
+      "completed": "Staženo",
+      "cancelled": "Zrušeno"
+    },
+    "action": {
+      "play": "Přehrát",
+      "pause": "Pozastavit",
+      "resume": "Pokračovat",
+      "retry": "Zkusit znovu",
+      "pickStream": "Vybrat stream",
+      "cancel": "Zrušit stahování",
+      "delete": "Smazat stažené video",
+      "deleteGroup": "Smazat stažená videa",
+      "openDetail": "Zobrazit podrobnosti"
+    },
+    "deleteConfirm": {
+      "title": "Smazat stažená videa titulu ${name} (${count})?",
+      "message": "Opětovné stažení zabere čas a vyžaduje připojení.",
+      "confirm": "Smazat",
+      "cancel": "Zrušit"
+    },
+    "keepSynced": {
+      "title": "Průběžně stahovat",
+      "note": "U každého seriálu zde zůstávají další nezhlédnuté epizody stažené na tomto zařízení. Po zhlédnutí jedné se stáhne další.",
+      "empty": "Žádný seriál se průběžně nestahuje. V nabídce stahování seriálu zvolte, kolik nezhlédnutých epizod udržovat.",
+      "series": {
+        "one": "${n} seriál",
+        "few": "${n} seriály",
+        "other": "${n} seriálů"
+      },
+      "manage": "Spravovat „Průběžně stahovat“",
+      "pauseRule": "Pozastavit ${title}",
+      "resumeRule": "Obnovit ${title}",
+      "stopRule": "Přestat průběžně stahovat ${title}",
+      "status": {
+        "downloading": {
+          "one": "Stahuje se ${n} epizoda",
+          "few": "Stahují se ${n} epizody",
+          "other": "Stahuje se ${n} epizod"
+        },
+        "failed": {
+          "one": "${n} epizoda selhala",
+          "few": "${n} epizody selhaly",
+          "other": "${n} epizod selhalo"
+        },
+        "downloaded": {
+          "one": "${n} epizoda stažena",
+          "few": "${n} epizody staženy",
+          "other": "${n} epizod staženo"
+        },
+        "downloadedNone": "Žádné stažené epizody"
+      },
+      "stop": {
+        "title": "Přestat průběžně stahovat ${title}?",
+        "message": {
+          "one": "${n} epizodu v sekci Stažené přidala funkce „Průběžně stahovat“. Smazat i ji?",
+          "few": "${n} epizody v sekci Stažené přidala funkce „Průběžně stahovat“. Smazat i je?",
+          "other": "${n} epizod v sekci Stažené přidala funkce „Průběžně stahovat“. Smazat i je?"
+        },
+        "messageNone": "Další epizody se už stahovat nebudou.",
+        "keep": "Ponechat stažená videa",
+        "delete": "Smazat stažená videa",
+        "confirm": "Přestat",
+        "cancel": "Zrušit"
+      },
+      "notice": {
+        "one": "Funkce „Průběžně stahovat“ přidala ${n} epizodu ze seriálu ${title}",
+        "few": "Funkce „Průběžně stahovat“ přidala ${n} epizody ze seriálu ${title}",
+        "other": "Funkce „Průběžně stahovat“ přidala ${n} epizod ze seriálu ${title}"
+      },
+      "noticeSeveral": {
+        "one": "Funkce „Průběžně stahovat“ přidala ${n} epizodu",
+        "few": "Funkce „Průběžně stahovat“ přidala ${n} epizody",
+        "other": "Funkce „Průběžně stahovat“ přidala ${n} epizod"
+      },
+      "actionFailed": "Funkci „Průběžně stahovat“ se nepodařilo změnit. Zkuste to znovu."
+    },
+    "failure": {
+      "noStream": "Pro tuto epizodu se nepodařilo vybrat žádný stream. Vyberte ho ručně.",
+      "noStreamInstant": "Pro tuto epizodu se nepodařilo vybrat žádný okamžitý stream. Vyberte ho ručně.",
+      "network": "Připojení selhalo.",
+      "http": "Server odpověděl kódem HTTP ${status}.",
+      "streamGone": "Platnost odkazu vypršela a jeho doplněk už tento stream nenabízí.",
+      "diskFull": "V zařízení došlo místo. Stahování se zastavilo.",
+      "notEnoughSpace": "Na toto stahování není dost volného místa.",
+      "sizeMismatch": "Stažený soubor je neúplný.",
+      "unsupported": "Tento stream nelze stáhnout.",
+      "locationUnavailable": "Umístění pro stahování není dostupné.",
+      "fileMissing": "Stažený soubor chybí.",
+      "storage": "Úložiště zařízení neodpovídá."
+    },
+    "notification": {
+      "channel": "Stahování",
+      "title": "Stahuje se ${title}",
+      "count": {
+        "one": "${n} stahování",
+        "few": "${n} stahování",
+        "other": "${n} stahování"
+      },
+      "progress": "${percent} %",
+      "preparing": "Příprava stahování…",
+      "waiting": "Čeká se na Wi-Fi",
+      "paused": "Pozastaveno",
+      "pause": "Pozastavit",
+      "resume": "Pokračovat",
+      "cancel": "Zrušit",
+      "failed": "Stahování selhalo: ${title}",
+      "completed": "Staženo: ${title}"
+    }
+  },
+  "offline": {
+    "title": "Jste offline",
+    "text": "Pro procházení se připojte k internetu. Stažená videa se přehrají i bez připojení.",
+    "textNoDownloads": "Pro procházení se připojte k internetu.",
+    "openDownloads": "Přejít na Stažené",
+    "detail": "Zobrazují se podrobnosti uložené se staženými videi."
+  },
+  "playerApps": {
+    "chooser": "Pokaždé se zeptat",
+    "tortuga": "Tortuga",
+    "playWith": "Přehrát v…",
+    "banner": {
+      "opening": "Otevírání v aplikaci ${player}…",
+      "notInstalled": "Aplikace ${player} není na tomto zařízení nainstalovaná.",
+      "didNotStart": "Aplikace ${player} se nespustila.",
+      "playInTortuga": "Přehrát v aplikaci Tortuga",
+      "cancel": "Zrušit",
+      "dismiss": "Zavřít"
+    },
+    "detail": {
+      "playing": "Přehrává se v aplikaci ${player} · ${position}",
+      "playingOf": "Přehrává se v aplikaci ${player} · ${position} z ${duration}",
+      "paused": "Pozastaveno v aplikaci ${player} · ${position}",
+      "pausedOf": "Pozastaveno v aplikaci ${player} · ${position} z ${duration}",
+      "finished": "Otevřeno v aplikaci ${player}. Dosledovali jste ${title}?",
+      "markWatched": "Označit jako zhlédnuté",
+      "notYet": "Ještě ne"
+    },
+    "settings": {
+      "player": "Přehrávač",
+      "deviceOnly": "Jen pro toto zařízení",
+      "note": "Videa na tomto zařízení se přehrávají v přehrávači vybraném zde. Položkou Přehrát v… v nabídce streamu můžete pro jedno video zvolit jiný.",
+      "notFound": "${player} (nenalezeno)",
+      "followsProgress": "Pokračuje od místa, kde jste skončili, a průběžně ukládá průběh sledování",
+      "savesOnReturn": "Pokračuje od místa, kde jste skončili, a uloží místo, kde přestanete",
+      "savesOnReturnFromStart": "Začne od začátku, pak uloží místo, kde přestanete, nebo se zeptá, zda jste dosledovali",
+      "asksAfter": "Pokračuje od místa, kde jste skončili, pak se zeptá, zda jste dosledovali",
+      "asksAfterFromStart": "Jen otevře video, pak se zeptá, zda jste dosledovali",
+      "chooserDetail": "Zařízení se u každého videa zeptá, kterou aplikací ho přehrát",
+      "customHeader": "Vlastní přehrávače",
+      "addCustom": "Přidat vlastní přehrávač",
+      "deleteNamed": "Smazat ${name}",
+      "form": {
+        "title": "Přidat vlastní přehrávač",
+        "name": "Název",
+        "nameHint": "Můj přehrávač",
+        "program": "Program",
+        "programHint": "mpv nebo úplná cesta k programu",
+        "arguments": "Argumenty",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} je odkaz na video, {title} jeho název, {start} místo začátku v sekundách a {subtitle} odkaz na první titulky.",
+        "urlTemplate": "Šablona URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} je odkaz na video zakódovaný pro URL a {url_raw} odkaz v původní podobě.",
+        "packageName": "Název balíčku",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Přidat",
+        "cancel": "Zrušit",
+        "nameMissing": "Zadejte název přehrávače.",
+        "programMissing": "Zadejte program, který se má spustit.",
+        "urlTemplateMissing": "Zadejte šablonu URL.",
+        "packageNameMissing": "Zadejte název balíčku aplikace.",
+        "argumentsNeedUrl": "Argumenty musí obsahovat {url}.",
+        "urlTemplateNeedsUrl": "Šablona URL musí obsahovat {url} nebo {url_raw}.",
+        "packageNameInvalid": "Toto není název balíčku. Zadejte název ve tvaru org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "TV program",
+    "today": "Dnes",
+    "tomorrow": "Zítra",
+    "yesterday": "Včera",
+    "day": "${weekday} ${day}.",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Právě běží",
+    "now": "Teď",
+    "noProgrammes": "Žádné informace o pořadu",
+    "noChannels": "Tento program nemá pro tento den žádné kanály.",
+    "noGuide": "Žádný nainstalovaný doplněk nenabízí TV program.",
+    "failed": "TV program se nepodařilo načíst: ${reason}",
+    "cast": "Hrají: ${names}",
+    "directors": "Režie: ${names}"
+  },
+  "calendar": {
+    "title": "Kalendář",
+    "previousMonth": "Předchozí měsíc",
+    "nextMonth": "Další měsíc",
+    "today": "Dnes",
+    "tomorrow": "Zítra",
+    "emptyLibrary": "Přidejte seriály do knihovny a uvidíte tu jejich díly.",
+    "noAddon": "Žádný z vašich doplňků nemá kalendář pro seriály ve vaší knihovně.",
+    "emptyMonth": "Žádné díly.",
+    "newEpisodes": {
+      "one": "${n} nový díl",
+      "few": "${n} nové díly",
+      "other": "${n} nových dílů"
+    },
+    "episodes": {
+      "one": "${n} díl",
+      "few": "${n} díly",
+      "other": "${n} dílů"
+    }
+  },
+  "watchlist": {
+    "lists": "Seznamy sledovacích služeb",
+    "hint": "Každý seznam je ve vašem účtu u dané služby. Knihovna se nemění.",
+    "add": "Přidat do seznamu ${list}",
+    "remove": "Odebrat ze seznamu ${list}",
+    "trakt": "Trakt – Ke zhlédnutí",
+    "simkl": "Simkl – Chci vidět",
+    "mdblist": "MDBList – Ke zhlédnutí",
+    "myAnimeList": "MyAnimeList – Chci vidět",
+    "aniList": "AniList – V plánu",
+    "saving": "Ukládá se…",
+    "queued": "Zatím neodesláno, zkusí se znovu",
+    "failed": "Neuloženo",
+    "addFailed": "${title} se nepodařilo přidat do seznamu ${list}.",
+    "removeFailed": "${title} se nepodařilo odebrat ze seznamu ${list}."
+  },
+  "collections": {
+    "needsAddon": "Vyžaduje doplněk ${name}",
+    "needsCatalog": "${addon} nemá katalog ${catalog}",
+    "needsFilter": "Vyžaduje filtr, který Tortuga nedokáže nastavit",
+    "traktUnavailable": "Seznamy Trakt nejsou v této verzi aplikace k dispozici",
+    "tooLarge": "„${title}“ je příliš velká na synchronizaci",
+    "kind": {
+      "tmdbList": "Seznam TMDB",
+      "tmdbCollection": "Kolekce TMDB",
+      "tmdbCompany": "Studio TMDB",
+      "tmdbNetwork": "Stanice TMDB",
+      "tmdbDiscover": "Objevování TMDB",
+      "tmdbPerson": "Osoba TMDB",
+      "tmdbDirector": "Režisér TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "Neznámý poskytovatel „${name}“"
+    },
+    "summary": {
+      "adds": {
+        "one": "Přidá ${n} kolekci",
+        "few": "Přidá ${n} kolekce",
+        "other": "Přidá ${n} kolekcí"
+      },
+      "replaces": {
+        "one": "Nahradí ${n} kolekci se stejným id",
+        "few": "Nahradí ${n} kolekce se stejnými id",
+        "other": "Nahradí ${n} kolekcí se stejnými id"
+      },
+      "needsAddon": {
+        "one": "${n} zdroj vyžaduje doplněk ${name}",
+        "few": "${n} zdroje vyžadují doplněk ${name}",
+        "other": "${n} zdrojů vyžaduje doplněk ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} zdroj vyžaduje připojení ${service}",
+        "few": "${n} zdroje vyžadují připojení ${service}",
+        "other": "${n} zdrojů vyžaduje připojení ${service}"
+      },
+      "unsupported": {
+        "one": "${kind}: vynechán ${n} zdroj",
+        "few": "${kind}: vynechány ${n} zdroje",
+        "other": "${kind}: vynecháno ${n} zdrojů"
+      },
+      "unsupportedHint": "Tortuga čte katalogy doplňků a seznamy trackerů, ne tyto zdroje. Použijte místo nich katalog doplňku, například od AIOMetadata nebo MDBList.",
+      "folderDropped": "Složka „${folder}“ v „${collection}“ vynechána: žádný z jejích zdrojů nelze přečíst",
+      "collectionDropped": "Kolekce „${title}“ vynechána: žádnou z jejích složek nelze přečíst",
+      "tooLarge": "Kolekce „${title}“ nebyla importována: je příliš velká na synchronizaci"
+    },
+    "refused": {
+      "notJson": "Toto není soubor s kolekcemi: není to JSON.",
+      "notList": "Toto není soubor s kolekcemi: neobsahuje seznam kolekcí.",
+      "empty": "Tento soubor neobsahuje žádné kolekce.",
+      "collectionInvalid": "Kolekci ${position} v souboru nelze přečíst.",
+      "collectionNoId": "Kolekce ${position} v souboru nemá id.",
+      "collectionNoTitle": "Kolekce ${id} nemá název.",
+      "duplicateCollection": "Dvě kolekce v souboru mají id ${id}.",
+      "noFolders": "Kolekce „${collection}“ nemá seznam složek.",
+      "folderInvalid": "Složku ${position} v „${collection}“ nelze přečíst.",
+      "folderNoId": "Složka ${position} v „${collection}“ nemá id.",
+      "folderNoTitle": "Složka ${id} v „${collection}“ nemá název.",
+      "duplicateFolder": "Dvě složky v „${collection}“ mají id ${id}.",
+      "noSources": "Složka „${folder}“ v „${collection}“ nemá seznam zdrojů.",
+      "unknownShape": "Složka „${folder}“ v „${collection}“ má neznámý tvar dlaždice: ${shape}.",
+      "sourceInvalid": "Zdroj ${position} složky „${folder}“ v „${collection}“ je neúplný."
+    },
+    "row": "Kolekce",
+    "rowSource": {
+      "one": "Kolekce · ${n} složka",
+      "few": "Kolekce · ${n} složky",
+      "other": "Kolekce · ${n} složek"
+    },
+    "folder": {
+      "all": "Vše",
+      "empty": "Nejsou tu žádné tituly",
+      "goToTrackers": "Přejít na Sledovací služby",
+      "goToAddons": "Přejít na Doplňky"
+    },
+    "importing": {
+      "title": "Importovat kolekce",
+      "note": "Soubor s kolekcemi z Nuvio nebo AIOMetadata: zadejte jeho odkaz nebo soubor otevřete. Kolekce se stejným id jako některá z vašich ji nahradí.",
+      "urlLabel": "Odkaz",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Načíst",
+      "openFile": "Otevřít soubor",
+      "confirm": "Importovat",
+      "done": "Hotovo",
+      "rowNew": {
+        "one": "Nová · ${n} složka",
+        "few": "Nová · ${n} složky",
+        "other": "Nová · ${n} složek"
+      },
+      "rowReplaces": {
+        "one": "Nahradí vaši · ${n} složka",
+        "few": "Nahradí vaši · ${n} složky",
+        "other": "Nahradí vaši · ${n} složek"
+      },
+      "imported": {
+        "one": "Importována ${n} kolekce",
+        "few": "Importovány ${n} kolekce",
+        "other": "Importováno ${n} kolekcí"
+      },
+      "notWeb": "Zadejte odkaz, který začíná http:// nebo https://.",
+      "tooLarge": "Tento soubor je větší než 4 MB.",
+      "httpError": "Odkaz odpověděl chybou ${status}.",
+      "timeout": "Odkaz neodpověděl včas.",
+      "unreachable": "Odkaz není dostupný. Zkontrolujte ho a své připojení.",
+      "unreadable": "Tento soubor nelze přečíst jako text.",
+      "failed": "Kolekce se nepodařilo uložit."
+    },
+    "editor": {
+      "newHeading": "Nová kolekce",
+      "editHeading": "Upravit kolekci",
+      "titleLabel": "Název",
+      "view": "Zobrazení",
+      "viewHint": "Jak složka zobrazuje své zdroje",
+      "viewTabs": "Karty",
+      "viewRows": "Řádky",
+      "viewFollow": "Podle aplikace",
+      "allTab": "Karta Vše",
+      "allTabHint": "První karta s tituly ze všech zdrojů",
+      "foldersHeader": "Složky",
+      "addFolder": "Přidat složku",
+      "noFolders": "Zatím žádné složky",
+      "sources": {
+        "one": "${n} zdroj",
+        "few": "${n} zdroje",
+        "other": "${n} zdrojů"
+      },
+      "save": "Uložit",
+      "newFolder": "Nová složka",
+      "folderTitleLabel": "Název",
+      "shape": "Tvar dlaždice",
+      "shapePoster": "Plakát",
+      "shapeLandscape": "Na šířku",
+      "shapeSquare": "Čtverec",
+      "coverLabel": "Odkaz na obrázek obálky",
+      "coverHint": "https://…",
+      "hideTitle": "Skrýt název",
+      "hideTitleHint": "Dlaždice ukazuje jen obálku",
+      "sourcesHeader": "Zdroje",
+      "addSource": "Přidat zdroj",
+      "noSources": "Zatím žádné zdroje",
+      "deleteNamed": "Smazat ${name}",
+      "removeNamed": "Odebrat ${name}",
+      "noTitle": "Dejte kolekci název.",
+      "noFolder": "Přidejte do kolekce složku.",
+      "folderNoTitle": "Dejte složce ${position} název.",
+      "folderNoSource": "Přidejte zdroj do „${folder}“.",
+      "saveFailed": "Kolekci se nepodařilo uložit.",
+      "discardTitle": "Zahodit změny?",
+      "discard": "Zahodit",
+      "keepEditing": "Pokračovat v úpravách",
+      "picker": {
+        "addons": "Katalogy doplňků",
+        "trackers": "Sledovací služby",
+        "noAddons": "Žádný nainstalovaný doplněk nemá katalog, který by šel přidat.",
+        "noTrackers": "Připojte sledovací službu v Nastavení → Sledovací služby a přidejte její seznamy.",
+        "listsFailed": "Seznamy ze služby ${service} teď nelze načíst.",
+        "byLink": "Seznam ze služby ${service} podle odkazu",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Přidat",
+        "notAList": "Toto není odkaz na seznam ze služby ${service}.",
+        "notFound": "${service} na tomto odkazu žádný seznam nemá.",
+        "unreachable": "${service} teď není dostupná."
+      }
+    }
+  }
+}

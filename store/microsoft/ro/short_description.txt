@@ -1,0 +1,1 @@
+Un player video compatibil cu extensii Stremio. Extensiile pe care le instalezi aduc cataloagele și stream-urile, iar Tortuga le redă. Tortuga nu oferă conținut propriu.

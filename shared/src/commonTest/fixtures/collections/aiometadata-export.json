@@ -1,0 +1,197 @@
+[
+  {
+    "id": "aiom-streaming",
+    "title": "Streaming",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "ROWS",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "aiom-studio-1",
+        "title": "Studio 1",
+        "coverImageUrl": "https://example.com/covers/studio-1.png",
+        "focusGifUrl": null,
+        "focusGifEnabled": true,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": false,
+        "sources": [
+          {
+            "provider": "addon",
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "movie",
+            "catalogId": "example.movies",
+            "catalogName": "Example Movies",
+            "title": "Example Movies",
+            "genre": null
+          },
+          {
+            "provider": "addon",
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "series",
+            "catalogId": "example.series",
+            "catalogName": "Example Series",
+            "title": "Example Series",
+            "genre": null
+          }
+        ],
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "movie",
+            "catalogId": "example.movies",
+            "catalogName": "Example Movies",
+            "title": "Example Movies",
+            "genre": null
+          },
+          {
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "series",
+            "catalogId": "example.series",
+            "catalogName": "Example Series",
+            "title": "Example Series",
+            "genre": null
+          }
+        ],
+        "heroBackdropUrl": null,
+        "heroVideoUrl": null,
+        "titleLogoUrl": null
+      },
+      {
+        "id": "aiom-anime",
+        "title": "Anime Season",
+        "coverImageUrl": null,
+        "focusGifUrl": null,
+        "focusGifEnabled": true,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "sources": [
+          {
+            "provider": "addon",
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "anime",
+            "catalogId": "example.anime",
+            "catalogName": "Example Anime",
+            "title": "Example Anime",
+            "genre": "Action"
+          }
+        ],
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "anime",
+            "catalogId": "example.anime",
+            "catalogName": "Example Anime",
+            "title": "Example Anime",
+            "genre": "Action"
+          }
+        ],
+        "heroBackdropUrl": null,
+        "heroVideoUrl": null,
+        "titleLogoUrl": null
+      },
+      {
+        "id": "aiom-studio-2",
+        "title": "Studio 2",
+        "coverImageUrl": "https://example.com/covers/studio-2.png",
+        "focusGifUrl": null,
+        "focusGifEnabled": true,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": false,
+        "sources": [
+          {
+            "provider": "addon",
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "series",
+            "catalogId": "example.series",
+            "catalogName": "Example Series",
+            "title": "Example Series",
+            "genre": null
+          }
+        ],
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "series",
+            "catalogId": "example.series",
+            "catalogName": "Example Series",
+            "title": "Example Series",
+            "genre": null
+          }
+        ],
+        "heroBackdropUrl": null,
+        "heroVideoUrl": null,
+        "titleLogoUrl": null
+      }
+    ]
+  },
+  {
+    "id": "aiom-genres",
+    "title": "Genres",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "TABBED_GRID",
+    "showAllTab": true,
+    "folders": [
+      {
+        "id": "aiom-horror",
+        "title": "Horror",
+        "coverImageUrl": "https://example.com/covers/horror.png",
+        "focusGifUrl": null,
+        "focusGifEnabled": true,
+        "coverEmoji": null,
+        "tileShape": "SQUARE",
+        "hideTitle": false,
+        "sources": [
+          {
+            "provider": "addon",
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "movie",
+            "catalogId": "example.movies",
+            "catalogName": "Example Movies",
+            "title": "Example Movies",
+            "genre": "Horror"
+          }
+        ],
+        "catalogSources": [
+          {
+            "addonId": "aio-metadata",
+            "addonBaseUrl": null,
+            "addonName": "AIOMetadata",
+            "type": "movie",
+            "catalogId": "example.movies",
+            "catalogName": "Example Movies",
+            "title": "Example Movies",
+            "genre": "Horror"
+          }
+        ],
+        "heroBackdropUrl": null,
+        "heroVideoUrl": null,
+        "titleLogoUrl": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "G88U5B5783.com.edde746.tortuga"
+        ],
+        "components": [
+          {
+            "/": "/t/*",
+            "comment": "A title's link, from the apps' Share"
+          }
+        ]
+      }
+    ]
+  }
+}

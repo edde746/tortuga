@@ -1,0 +1,70 @@
+name: Bug report
+description: Something in Tortuga doesn't work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Configured addon URLs carry keys to your accounts at other services. Replace every addon URL in what you paste
+        here with `<addon>`. Security problems go through SECURITY.md, not an issue.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Android phone or tablet
+        - Android TV, Google TV or Fire TV
+        - Windows
+        - Linux
+        - iPhone
+        - iPad
+        - Mac
+        - Apple TV
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and system version
+      placeholder: Pixel 7, Android 16
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Tortuga version
+      description: Settings, About shows it.
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Build
+      description: The commit you built from (`git rev-parse --short HEAD`), or where your build came from.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: What you did, one step a line, from launching the app.
+      placeholder: |
+        1. Open a series on Home
+        2. Pick the first stream of episode 2
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected and what happened
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        On Windows and Linux, starting Tortuga with `--mpv-log <file>` writes mpv's log, with links redacted, to that
+        file. Check any log for addon URLs and replace them with `<addon>` before you paste it.
+      render: text

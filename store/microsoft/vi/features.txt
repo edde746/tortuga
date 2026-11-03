@@ -1,0 +1,14 @@
+Hoạt động với tiện ích Stremio: cài đặt tiện ích bằng liên kết của tiện ích đó
+Trang chủ, Khám phá và Tìm kiếm trên mọi tiện ích
+Nguồn phát của một nội dung được nhóm theo tiện ích
+Phát video bằng mpv, kèm HDR10 và Dolby Vision nếu máy tính và màn hình của bạn hỗ trợ
+Phụ đề nhúng và phụ đề từ tiện ích; lựa chọn âm thanh và phụ đề của bạn được giữ cho tập tiếp theo
+Bỏ qua phần giới thiệu, phần tóm tắt và danh đề
+Tiếp tục xem, tiến độ xem và dấu đã xem
+Tải xuống để xem ngoại tuyến
+Xem cùng nhau đồng bộ, mỗi người qua tiện ích của riêng mình
+Hồ sơ với tiện ích, thư viện và cài đặt riêng, kèm mã PIN tùy chọn
+Đồng bộ trên các thiết bị khi đăng nhập bằng Apple, Google hoặc GitHub
+Trakt, Simkl, MDBList, MyAnimeList và AniList
+Phím tắt, phím đa phương tiện và điều khiển đa phương tiện của Windows
+21 ngôn ngữ

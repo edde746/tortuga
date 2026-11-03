@@ -1,0 +1,121 @@
+-- One row per connected tracker service and profile: this device's copy of the account's connections, listed by
+-- the account server, with this device's own switches. Tokens never live here: the account
+-- server holds them, and the current access token is in the SecretStore.
+CREATE TABLE tracker_account (
+    profile_id TEXT NOT NULL,
+    -- trakt, simkl, mdblist, mal or anilist.
+    service TEXT NOT NULL,
+    username TEXT,
+    -- JSON array of the granted OAuth scopes.
+    scopes_json TEXT NOT NULL,
+    -- Writes go to the service at all.
+    enabled INTEGER AS kotlin.Boolean NOT NULL,
+    -- Per content type filters: whether the profile's writes about movies, series and anime go to this service.
+    sync_movies INTEGER AS kotlin.Boolean NOT NULL,
+    sync_series INTEGER AS kotlin.Boolean NOT NULL,
+    sync_anime INTEGER AS kotlin.Boolean NOT NULL,
+    -- When the account server stored the sign-in, epoch milliseconds.
+    connected_at INTEGER NOT NULL,
+    PRIMARY KEY (profile_id, service)
+);
+
+selectAccounts:
+SELECT * FROM tracker_account WHERE profile_id = ? ORDER BY connected_at, service;
+
+selectAccount:
+SELECT * FROM tracker_account WHERE profile_id = ? AND service = ?;
+
+-- Every profile's connections on this device, to find tokens nothing uses any more.
+selectConnections:
+SELECT profile_id, service FROM tracker_account;
+
+selectAll:
+SELECT * FROM tracker_account;
+
+upsertAccount:
+INSERT OR REPLACE INTO tracker_account VALUES ?;
+
+deleteAccount:
+DELETE FROM tracker_account WHERE profile_id = ? AND service = ?;
+
+deleteAccountsForProfile:
+DELETE FROM tracker_account WHERE profile_id = ?;
+
+-- Failed tracker writes waiting for a retry: watched and unwatched marks, ratings,
+-- and titles put on or taken off a watchlist. One row per remote thing a write changes (`coalesce_key`): a newer intent
+-- replaces the queued one and moves to the back, so rows replay in the order their surviving intents were expressed. A
+-- write given up on stays as a failed row, never replayed, so the user sees it, until a newer write for its key
+-- replaces it or a write that went through covers it. Device-local.
+CREATE TABLE tracker_write_queue (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    profile_id TEXT NOT NULL,
+    service TEXT NOT NULL,
+    coalesce_key TEXT NOT NULL,
+    -- 1 for a watched write, 0 for its removal (and for a rating); a watchlist write: 1 to put the title on the list,
+    -- 0 to take it off.
+    watched INTEGER AS kotlin.Boolean NOT NULL,
+    -- What the write was built from as JSON: a watched write's TrackerContext, a rating's QueuedRating, a watchlist
+    -- write's QueuedWatchlist (data/tracker/TrackerWriteQueue.kt).
+    context_json TEXT NOT NULL,
+    -- Series-progress services: the progress this write claims. Claims only move forward. NULL otherwise.
+    progress_claim INTEGER,
+    -- When the watch happened, epoch milliseconds, so a late replay is filed under the right date.
+    watched_at INTEGER NOT NULL,
+    -- Failed attempts so far; transient errors don't count.
+    attempts INTEGER NOT NULL,
+    -- A rating: the score, 1–10, or 0 to remove the rating. NULL for a watched or unwatched write.
+    rating INTEGER,
+    -- NULL while the write waits for a retry. A failed write, why it was given up on: 'unreadable' (context_json no
+    -- longer decodes) or 'refused' (the service refused it at every attempt).
+    failure TEXT,
+    -- A refused write: the HTTP status of the service's last answer, when it gave one.
+    failure_status INTEGER,
+    -- A failed write: when it was given up on, epoch milliseconds.
+    failed_at INTEGER,
+    -- 1 for a watchlist write (Trakt's or MDBList's watchlist, Simkl's plan to watch, an anime list's planning).
+    watchlist INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0,
+    UNIQUE (profile_id, service, coalesce_key)
+);
+
+selectQueued:
+SELECT * FROM tracker_write_queue WHERE profile_id = ? AND failure IS NULL ORDER BY id;
+
+-- The key's row, waiting or failed.
+selectQueuedByKey:
+SELECT * FROM tracker_write_queue WHERE profile_id = ? AND service = ? AND coalesce_key = ?;
+
+-- Every row of the profile, waiting (failure NULL) or failed, the failed ones in the order they were given up on.
+selectQueueStates:
+SELECT service, failure, failure_status FROM tracker_write_queue WHERE profile_id = ? ORDER BY failed_at, id;
+
+insertQueued:
+INSERT INTO tracker_write_queue(profile_id, service, coalesce_key, watched, context_json, progress_claim, watched_at, attempts, rating, watchlist)
+VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?, ?);
+
+deleteQueued:
+DELETE FROM tracker_write_queue WHERE id = ?;
+
+deleteQueuedByKey:
+DELETE FROM tracker_write_queue WHERE profile_id = ? AND service = ? AND coalesce_key = ?;
+
+deleteQueuedForService:
+DELETE FROM tracker_write_queue WHERE profile_id = ? AND service = ?;
+
+deleteQueuedForProfile:
+DELETE FROM tracker_write_queue WHERE profile_id = ?;
+
+incrementAttempts:
+UPDATE tracker_write_queue SET attempts = attempts + 1 WHERE id = ? AND failure IS NULL;
+
+selectAttempts:
+SELECT attempts FROM tracker_write_queue WHERE id = ? AND failure IS NULL;
+
+failQueued:
+UPDATE tracker_write_queue SET failure = ?, failure_status = ?, failed_at = ? WHERE id = ? AND failure IS NULL;
+
+-- The account's synced data is dropped (data/sync/SyncStore.kt): connections belong to its profiles.
+deleteAllAccounts:
+DELETE FROM tracker_account;
+
+deleteAllQueued:
+DELETE FROM tracker_write_queue;

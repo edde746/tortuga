@@ -1,0 +1,96 @@
+-- Version 1 → 2: offline downloads (data/db/Download.sq), device-local tables.
+
+CREATE TABLE download (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    -- The meta's type (`movie`, `series`, …); a movie's video id is its meta id.
+    type TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    -- What the screens and the file name show: the movie's or series' name, its year, the episode's own title,
+    -- season and number, and the addon's artwork URLs.
+    title TEXT NOT NULL,
+    year INTEGER,
+    episode_title TEXT,
+    season INTEGER,
+    episode INTEGER,
+    poster TEXT,
+    thumbnail TEXT,
+    -- DownloadStatus by name.
+    status TEXT NOT NULL,
+    -- DownloadFailureKind by name while FAILED, with the server's status for HTTP.
+    failure TEXT,
+    http_status INTEGER,
+    -- The stream it downloads from, as stream_history keeps it, and the addon that offered it; NULL for an episode
+    -- no stream was picked for (NO_STREAM).
+    stream_json TEXT,
+    addon_url TEXT,
+    addon_name TEXT,
+    -- A DownloadLocation id and the video's path under that location's directory; the path is set by the first
+    -- resolve (the extension comes from the file's name). The bytes arrive in `<path>.part` first.
+    location_id TEXT NOT NULL,
+    relative_path TEXT,
+    total_bytes INTEGER,
+    downloaded_bytes INTEGER NOT NULL,
+    -- The ETag, else Last-Modified, the bytes in the .part file came with: `If-Range` on a resume.
+    validator TEXT,
+    -- From the resolve: the file's OpenSubtitles hash and name.
+    video_hash TEXT,
+    filename TEXT,
+    -- The queue's order: higher priority first, then the oldest (added_at, id).
+    priority INTEGER NOT NULL,
+    -- Epoch milliseconds.
+    added_at INTEGER NOT NULL,
+    completed_at INTEGER,
+    -- Failed attempts (network, server errors) since the last success or user action.
+    attempts INTEGER NOT NULL,
+    -- Queued by Keep synced, not by hand.
+    keep_synced INTEGER NOT NULL,
+    -- The platform's transport has the transfer: Apple's background session can finish it while the app is gone.
+    transferring INTEGER NOT NULL,
+    -- The extras saved once the file completed; retried while false.
+    artwork_saved INTEGER NOT NULL,
+    subtitles_saved INTEGER NOT NULL,
+    UNIQUE (meta_id, video_id)
+);
+
+CREATE INDEX download_queue ON download(status, priority, added_at);
+
+CREATE TABLE download_owner (
+    download_id INTEGER NOT NULL,
+    profile_id TEXT NOT NULL,
+    -- Epoch milliseconds; the first owner's subtitle languages are the ones saved.
+    added_at INTEGER NOT NULL,
+    PRIMARY KEY (download_id, profile_id)
+);
+
+CREATE INDEX download_owner_profile ON download_owner(profile_id);
+
+CREATE TABLE download_meta (
+    meta_id TEXT NOT NULL PRIMARY KEY,
+    type TEXT NOT NULL,
+    meta_json TEXT NOT NULL,
+    location_id TEXT NOT NULL,
+    artwork_json TEXT NOT NULL,
+    -- Epoch milliseconds.
+    saved_at INTEGER NOT NULL
+);
+
+CREATE TABLE download_subtitle (
+    download_id INTEGER NOT NULL,
+    -- Under the download's location, like download.relative_path.
+    relative_path TEXT NOT NULL,
+    title TEXT NOT NULL,
+    -- BCP 47 tag; NULL when unknown.
+    language TEXT,
+    PRIMARY KEY (download_id, relative_path)
+);
+
+CREATE TABLE download_sync_rule (
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    type TEXT NOT NULL,
+    episodes INTEGER,
+    -- Epoch milliseconds of the last run; NULL before the first.
+    last_run INTEGER,
+    PRIMARY KEY (profile_id, meta_id)
+);

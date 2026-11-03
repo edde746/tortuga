@@ -1,0 +1,15 @@
+-- Settings of this device only: decoding, display mode and HDR, audio passthrough, cache. Never
+-- synced. The value is JSON; a missing row means the default (data/settings/DeviceSetting.kt).
+CREATE TABLE device_setting (
+    setting_key TEXT NOT NULL PRIMARY KEY,
+    value_json TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM device_setting;
+
+upsert:
+INSERT OR REPLACE INTO device_setting VALUES ?;
+
+delete:
+DELETE FROM device_setting WHERE setting_key = ?;

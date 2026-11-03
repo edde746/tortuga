@@ -1,0 +1,33 @@
+name: Feature request
+description: Something Tortuga doesn't do yet.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you want to do
+      description: The task or situation, in your own words, and what stops you today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: How Tortuga could do it
+    validations:
+      required: false
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Platforms
+      multiple: true
+      options:
+        - Android phone or tablet
+        - Android TV, Google TV or Fire TV
+        - Windows
+        - Linux
+        - iPhone
+        - iPad
+        - Mac
+        - Apple TV
+    validations:
+      required: false

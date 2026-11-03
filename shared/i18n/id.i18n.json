@@ -1,0 +1,2013 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Periksa Pembaruan…",
+    "launchFailed": "Tortuga tidak dapat dimulai.",
+    "startup": {
+      "database": "Membuka database…",
+      "migration": "Memperbarui database…",
+      "account": "Memuat akun Anda…",
+      "profiles": "Memuat profil…"
+    },
+    "localNetworkUsage": "Tortuga menggunakan jaringan lokal Anda untuk menjangkau add-on, media, dan server sinkronisasi yang Anda jalankan di rumah."
+  },
+  "player": {
+    "nowPlaying": "Sedang diputar",
+    "buffering": "Memuat…",
+    "position": "${position} / ${duration}",
+    "timeline": "Posisi pemutaran",
+    "play": "Putar",
+    "pause": "Jeda",
+    "resolving": "Menyiapkan stream…",
+    "opening": "Membuka…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LANGSUNG",
+      "position": "Langsung · ditonton ${time}",
+      "behind": "Langsung · tertinggal ${time}",
+      "goToLive": "Ke siaran langsung"
+    },
+    "nextEpisode": "Episode berikutnya",
+    "previousEpisode": "Episode sebelumnya",
+    "lock": {
+      "button": "Kunci layar",
+      "tapToUnlock": "Ketuk untuk membuka kunci",
+      "tapAgainToUnlock": "Ketuk lagi untuk membuka kunci"
+    },
+    "format": {
+      "seconds": "${value} dtk",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volume",
+      "level": "${percent}%",
+      "muted": "Dibisukan",
+      "mute": "Bisukan",
+      "unmute": "Bunyikan"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Subtitel",
+      "speed": "Kecepatan putar",
+      "subtitleDelay": "Penundaan subtitel",
+      "audioDelay": "Penundaan audio",
+      "moreSubtitles": "Subtitel lainnya",
+      "reset": "Setel ulang",
+      "subtitleDelayEarlier": "Penundaan subtitel: lebih awal",
+      "subtitleDelayLater": "Penundaan subtitel: lebih lambat",
+      "audioDelayEarlier": "Penundaan audio: lebih awal",
+      "audioDelayLater": "Penundaan audio: lebih lambat"
+    },
+    "track": {
+      "off": "Nonaktif",
+      "numbered": "Trek ${number}",
+      "defaultTrack": "Bawaan",
+      "forced": "Dipaksa",
+      "sdh": "SDH",
+      "audioDescription": "Deskripsi audio",
+      "external": "Eksternal",
+      "second": "Subtitel kedua",
+      "showAsSecond": "Tampilkan sebagai subtitel kedua",
+      "removeSecond": "Hapus subtitel kedua",
+      "otherLanguage": "Lainnya",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "other": "${n} saluran"
+      }
+    },
+    "info": {
+      "title": "Info pemutaran",
+      "tab": "Info",
+      "resolution": "Resolusi",
+      "video": "Video",
+      "dynamicRange": "Rentang dinamis",
+      "audio": "Audio",
+      "decoder": "Dekoder",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Perangkat keras (${name})",
+      "softwareDecoder": "Perangkat lunak",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Profil Dolby Vision ${profile}",
+      "stream": "Stream",
+      "addon": "Add-on",
+      "pickedBy": "Dipilih oleh",
+      "autoPlayFirstMatch": "Putar otomatis, kecocokan pertama",
+      "autoPlayLastLink": "Putar otomatis, stream yang sama seperti terakhir kali",
+      "source": "Sumber",
+      "downloaded": "Diunduh",
+      "name": "Nama",
+      "file": "File",
+      "container": "Kontainer",
+      "fileSize": "Ukuran",
+      "bitrate": "Bitrate",
+      "codec": "Codec",
+      "pixelFormat": "Format piksel",
+      "bitDepth": "${bits}-bit",
+      "color": "Warna",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nit",
+      "mastering": "Layar mastering",
+      "nitsRange": "${min}–${max} nit",
+      "droppedFrames": "Frame terlewat",
+      "droppedFramesValue": "${output} (dekoder ${decoder})",
+      "delayedFrames": "Frame tertunda",
+      "output": "Output",
+      "hertz": "${value} Hz",
+      "channels": "Saluran",
+      "sampleRate": "Laju sampel",
+      "track": "Trek",
+      "secondTrack": "Trek kedua",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Audio spasial",
+      "rendering": "Rendering",
+      "surround": "Surround",
+      "subtitles": "Subtitel",
+      "format": "Format",
+      "embedded": "Tertanam",
+      "delay": "Penundaan",
+      "network": "Jaringan",
+      "downloadSpeed": "Kecepatan unduh",
+      "buffering": "Buffering",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Lewati intro",
+      "recap": "Lewati rekap",
+      "credits": "Lewati kredit"
+    },
+    "prompt": {
+      "playNext": "Putar episode berikutnya: ${episode}",
+      "countdown": {
+        "other": "Otomatis dalam ${n} detik"
+      }
+    },
+    "options": {
+      "title": "Opsi",
+      "videoFit": "Rasio aspek",
+      "fit": {
+        "contain": "Paskan",
+        "cover": "Penuhi layar",
+        "fill": "Regangkan"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent}%",
+      "resetZoom": "Setel ulang",
+      "shaders": "Shader",
+      "shader": {
+        "nvscalerDetail": "Penskalaan gambar NVIDIA untuk video yang lebih tajam",
+        "neutral": "Netral",
+        "denoise": "Kurangi derau",
+        "denoiseSharpen": "Kurangi derau + pertajam",
+        "fast": "Cepat",
+        "highQuality": "Kualitas tinggi",
+        "modeDetail": "${quality} · Mode ${mode}",
+        "customDetail": "Shader GLSL kustom",
+        "importShader": "Impor shader",
+        "imported": "Shader diimpor",
+        "importFailed": "Tidak dapat mengimpor shader",
+        "deleteLabel": "Hapus ${name}",
+        "deleteTitle": "Hapus ${name}?",
+        "delete": "Hapus",
+        "cancel": "Batal"
+      },
+      "sleepTimer": "Timer tidur",
+      "sleepEndOfVideo": "Akhir video ini",
+      "sleepMinutes": {
+        "other": "${n} menit"
+      },
+      "sleepLeft": "Sisa ${time}",
+      "autoPlayNext": "Putar otomatis episode berikutnya",
+      "audioOutput": "Output audio",
+      "systemOutput": "Bawaan sistem",
+      "audioNormalization": "Normalisasi volume",
+      "audioChannels": "Saluran audio",
+      "channels": {
+        "original": "Asli",
+        "originalDetail": "Putar semua saluran di trek",
+        "surround51": "Hingga 5.1",
+        "surround51Detail": "Gabungkan 7.1 menjadi 5.1 untuk TV dan receiver yang hanya mendukung 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Gabungkan menjadi dua saluran untuk speaker stereo atau headphone"
+      },
+      "on": "Aktif",
+      "off": "Nonaktif"
+    },
+    "stillWatching": {
+      "title": "Masih menonton?",
+      "countdown": {
+        "other": "Dijeda dalam ${n} detik"
+      },
+      "keepWatching": "Lanjutkan",
+      "pause": "Jeda"
+    },
+    "error": {
+      "title": "Stream ini tidak dapat diputar",
+      "resolveTimeout": "Stream terlalu lama untuk dimulai.",
+      "expired": "Tautan stream sudah kedaluwarsa.",
+      "notFound": "Stream ini sudah tidak tersedia.",
+      "http": "Server merespons dengan HTTP ${status}.",
+      "cantOpen": "Stream tidak dapat dibuka.",
+      "unsupportedFormat": "Stream ini dalam format yang tidak dapat dibaca pemutar.",
+      "cantDecode": "Pemutar tidak dapat memutar video atau audio stream ini.",
+      "engineFailed": "Pemutar berhenti karena terjadi kesalahan.",
+      "retry": "Coba lagi",
+      "nextStream": "Coba stream berikutnya",
+      "close": "Tutup",
+      "alternatives": {
+        "other": "${n} stream lain tersedia"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Ini bukan episodenya",
+      "titleMovie": "Ini bukan filmnya",
+      "titleVideo": "Ini bukan videonya",
+      "sent": "Add-on mengirim video kesalahan sebagai ganti stream.",
+      "byUrl": "Tautannya adalah salah satu video kesalahan add-on.",
+      "bySize": "Ukuran file ${served}, padahal stream menyebut ${size}.",
+      "byDuration": "Durasinya ${length}, padahal video ini berdurasi ${known} saat terakhir diputar.",
+      "kept": "Progres Anda tetap tersimpan.",
+      "chooseStream": "Pilih stream lain",
+      "watch": "Tonton pesannya"
+    },
+    "osd": {
+      "volume": "Volume ${level}",
+      "brightness": "Kecerahan ${level}",
+      "speed": "Kecepatan ${speed}",
+      "subtitleDelay": "Penundaan subtitel ${delay}",
+      "audioDelay": "Penundaan audio ${delay}",
+      "audioTrack": "Audio: ${track}",
+      "subtitleTrack": "Subtitel: ${track}",
+      "subtitlesOff": "Subtitel nonaktif",
+      "chapter": "Bab: ${title}",
+      "chapterNumbered": "Bab ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shader: ${name}",
+      "shadersOff": "Shader nonaktif"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Membuka stream…",
+    "resolveFailed": {
+      "http": "Server stream merespons dengan HTTP ${status}",
+      "timeout": "Server stream terlalu lama merespons",
+      "network": "Tidak dapat terhubung ke server stream",
+      "unsupportedUrl": "Tautan stream ini tidak dapat dibuka",
+      "tooManyRedirects": "Tautan stream ini dialihkan terlalu banyak kali",
+      "unexpected": "Aplikasi ini mengalami kesalahan saat membuka stream ini"
+    },
+    "badge": {
+      "instant": "Instan",
+      "notInstant": "Tidak instan"
+    },
+    "lastUsed": "Terakhir diputar",
+    "external": "Dibuka di luar aplikasi",
+    "unplayable": {
+      "other": "${n} stream tidak dapat diputar aplikasi ini"
+    },
+    "empty": "Stream tidak ditemukan",
+    "all": "Semua",
+    "refresh": "Muat ulang",
+    "retryNamed": "Coba lagi ${name}",
+    "filters": {
+      "hidden": {
+        "other": "${n} stream disembunyikan oleh filter Anda"
+      },
+      "showing": {
+        "other": "Menampilkan ${n} stream yang disembunyikan filter Anda"
+      },
+      "show": "Tampilkan",
+      "hide": "Sembunyikan",
+      "rowNote": "Disembunyikan oleh filter Anda"
+    },
+    "sort": {
+      "title": "Urutkan",
+      "addonOrder": "Urutan add-on",
+      "resolution": "Resolusi",
+      "source": "Kualitas sumber",
+      "sizeLargest": "Ukuran terbesar dulu",
+      "sizeSmallest": "Ukuran terkecil dulu",
+      "cached": "Instan dulu"
+    },
+    "autoPlay": {
+      "noMatch": "Putar otomatis tidak menemukan stream yang lolos filter Anda.",
+      "failed": "Stream yang dipilih putar otomatis tidak dimulai. Pilih stream lain."
+    },
+    "download": {
+      "notice": "Pilih stream yang akan diunduh.",
+      "action": "Unduh",
+      "actionNamed": "Unduh ${name}",
+      "queued": "Ditambahkan ke Unduhan",
+      "failed": "Tidak dapat menambahkan unduhan."
+    },
+    "suggested": {
+      "label": "Disarankan",
+      "reason": "Seperti pilihan terakhir Anda: ${features}",
+      "audio": "audio ${language}",
+      "subtitles": "subtitel ${language}",
+      "smaller": "file lebih kecil",
+      "larger": "file lebih besar"
+    }
+  },
+  "detail": {
+    "loadFailed": "Tidak dapat memuat detail.",
+    "notFound": "Tidak ada add-on yang memiliki detail untuk judul ini.",
+    "noAddons": "Tidak ada add-on terpasang yang memiliki detail untuk judul ini.",
+    "noAnimeAddon": "Tidak ada add-on terpasang yang memiliki detail untuk anime ini. Pasang add-on anime untuk membukanya.",
+    "animeListsUnavailable": "Daftar anime tidak termuat, jadi anime ini tidak dapat dicocokkan dengan judul. Periksa koneksi Anda dan coba lagi.",
+    "findingAnime": "Mencari anime ini di daftar anime…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} jam ${minutes} mnt",
+      "hours": "${hours} jam",
+      "minutes": "${minutes} mnt"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Kritikus Rotten Tomatoes",
+        "rottenTomatoesAudience": "Penonton Rotten Tomatoes",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} persen"
+    },
+    "userRating": {
+      "rateLabel": "Beri rating judul ini",
+      "label": "Rating Anda: ${score}",
+      "range": "${low}–${high}",
+      "title": "Rating Anda",
+      "hint": "Skor Anda dikirim ke setiap layanan di bawah.",
+      "clear": "Hapus rating",
+      "checking": "Memeriksa…",
+      "notRated": "Belum diberi rating",
+      "unreadable": "Tidak dapat diperiksa",
+      "saving": "Menyimpan…",
+      "saved": "Tersimpan",
+      "removed": "Dihapus",
+      "queued": "Belum terkirim, akan dicoba lagi",
+      "failed": "Tidak tersimpan"
+    },
+    "links": {
+      "genres": "Genre",
+      "cast": "Pemeran",
+      "directors": "Sutradara",
+      "writers": "Penulis",
+      "website": "Situs web"
+    },
+    "facts": {
+      "title": "Informasi",
+      "released": "Rilis",
+      "runtime": "Durasi",
+      "country": "Negara",
+      "language": "Bahasa",
+      "awards": "Penghargaan",
+      "source": "Detail dari",
+      "failed": "Gagal dimuat dari"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailer",
+    "share": "Bagikan",
+    "season": "Musim ${number}",
+    "specials": "Spesial",
+    "episodeNumbered": "Episode ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Dibintangi ${names}",
+    "castAndCrew": "Pemeran & kru",
+    "airs": "Tayang ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "Mei",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Agu",
+      "sep": "Sep",
+      "oct": "Okt",
+      "nov": "Nov",
+      "dec": "Des"
+    },
+    "play": "Putar",
+    "playEpisode": "Putar ${episode}",
+    "resume": "Lanjutkan ${time}",
+    "resumeEpisode": "Lanjutkan ${episode} · ${time}",
+    "addToLibrary": "Tambahkan ke pustaka",
+    "removeFromLibrary": "Hapus dari pustaka",
+    "markWatched": "Tandai sudah ditonton",
+    "markUnwatched": "Tandai belum ditonton",
+    "markAllWatched": "Tandai semua episode sudah ditonton",
+    "markAllUnwatched": "Tandai semua episode belum ditonton",
+    "markSeasonWatched": "Tandai musim sudah ditonton",
+    "markSeasonUnwatched": "Tandai musim belum ditonton",
+    "watched": "Sudah ditonton",
+    "overviewHidden": "Deskripsi disembunyikan",
+    "moreActions": "Tindakan lainnya",
+    "moreActionsNamed": "Tindakan lainnya untuk ${name}",
+    "showMore": "Selengkapnya",
+    "showLess": "Lebih sedikit",
+    "findingStream": "Mencari stream…",
+    "chooseStream": "Pilih stream",
+    "download": {
+      "download": "Unduh",
+      "queued": "Dalam antrean",
+      "waitingForWifi": "Menunggu Wi-Fi",
+      "downloading": "Mengunduh ${percent}%",
+      "downloadingStarted": "Mengunduh…",
+      "paused": "Dijeda",
+      "failed": "Unduhan gagal",
+      "partial": "${done} dari ${total} diunduh",
+      "downloaded": "Diunduh",
+      "menuTitle": "Unduh",
+      "allSeasons": "Semua musim",
+      "pick": {
+        "all": "Semua episode",
+        "unwatched": "Episode yang belum ditonton",
+        "next5": "5 berikutnya yang belum ditonton",
+        "next10": "10 berikutnya yang belum ditonton"
+      },
+      "keepSynced": "Tetap sinkron",
+      "keepSyncedCount": {
+        "other": "Simpan ${n} episode yang belum ditonton"
+      },
+      "keepSyncedAll": "Simpan semua episode yang belum ditonton",
+      "manage": "Kelola unduhan",
+      "pauseAll": "Jeda unduhan",
+      "resumeAll": "Lanjutkan unduhan",
+      "deleteSeason": "Hapus unduhan musim ini",
+      "deleteAll": "Hapus semua unduhan",
+      "queuedEpisodes": {
+        "other": "${n} episode ditambahkan ke Unduhan"
+      },
+      "nothingQueued": "Semua episode sudah diunduh atau dalam antrean.",
+      "failedToQueue": "Tidak dapat menambahkan unduhan.",
+      "episode": {
+        "download": "Unduh episode",
+        "pause": "Jeda unduhan",
+        "resume": "Lanjutkan unduhan",
+        "retry": "Coba unduh lagi",
+        "pickStream": "Pilih stream",
+        "cancel": "Batalkan unduhan",
+        "delete": "Hapus unduhan",
+        "queued": "Dalam antrean",
+        "downloading": "${percent}%",
+        "paused": "Dijeda",
+        "failed": "Unduhan gagal",
+        "downloaded": "Diunduh"
+      }
+    },
+    "related": {
+      "title": "Judul serupa",
+      "noneFound": "Tidak ditemukan judul serupa."
+    }
+  },
+  "library": {
+    "title": "Pustaka",
+    "continueWatching": "Lanjutkan Menonton",
+    "sort": {
+      "lastWatched": "Terakhir ditonton",
+      "added": "Terakhir ditambahkan",
+      "name": "Judul A–Z",
+      "nameReverse": "Judul Z–A",
+      "timesWatched": "Paling sering ditonton",
+      "watched": "Sudah ditonton dulu",
+      "notWatched": "Belum ditonton dulu"
+    },
+    "sortBy": "Urutkan menurut",
+    "sortByNamed": "Urutkan menurut: ${name}",
+    "empty": "Belum ada apa pun di sini. Tambahkan judul ke pustaka dari halaman detailnya.",
+    "emptyContinueWatching": "Tidak ada yang bisa dilanjutkan. Judul akan muncul di sini setelah Anda mulai menontonnya.",
+    "emptyType": "Tidak ada konten jenis ini di sini.",
+    "watched": "Sudah ditonton"
+  },
+  "mediaMenu": {
+    "markWatched": "Tandai sudah ditonton",
+    "markUnwatched": "Tandai belum ditonton",
+    "removeFromContinueWatching": "Hapus dari Lanjutkan Menonton",
+    "details": "Buka detail",
+    "addToLibrary": "Tambahkan ke pustaka",
+    "removeFromLibrary": "Hapus dari pustaka",
+    "playFromStart": "Putar dari awal",
+    "markSeasonWatched": "Tandai musim sudah ditonton",
+    "markSeasonUnwatched": "Tandai musim belum ditonton",
+    "chooseStream": "Pilih stream",
+    "download": "Unduh",
+    "pauseDownload": "Jeda unduhan",
+    "resumeDownload": "Lanjutkan unduhan",
+    "retryDownload": "Coba unduh lagi",
+    "cancelDownload": "Batalkan unduhan",
+    "deleteDownload": "Hapus unduhan",
+    "pickStream": "Pilih stream",
+    "trailer": "Trailer",
+    "markFailed": "Tidak dapat menandai ${title}: detailnya tidak dimuat. Periksa koneksi dan coba lagi."
+  },
+  "session": {
+    "episode": "M${season}:E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Add-on yang terpasang tidak dapat dibaca. Mulai ulang Tortuga untuk mencoba lagi.",
+    "error": {
+      "invalidTransportUrl": "Ini bukan tautan add-on. Tautan add-on diakhiri dengan /manifest.json.",
+      "timeout": "Add-on terlalu lama merespons.",
+      "network": "Tidak dapat terhubung ke add-on.",
+      "http": "Add-on mengembalikan kesalahan (HTTP ${status}).",
+      "invalidResponse": "Add-on mengirim respons yang tidak dapat dibaca aplikasi ini.",
+      "unexpectedResponse": "Add-on mengirim jenis respons yang berbeda dari yang diminta.",
+      "emptyContent": "Tidak ada yang ditemukan.",
+      "invalidManifest": "Manifes add-on tidak valid.",
+      "configurationRequired": "Add-on ini harus dikonfigurasi sebelum dapat dipasang.",
+      "alreadyInstalled": "Add-on ini sudah terpasang.",
+      "notInstalled": "Add-on ini belum terpasang.",
+      "protectedAddon": "Add-on ini bawaan dan tidak dapat dihapus atau dimatikan."
+    },
+    "title": "Add-on",
+    "allTypes": "Semua",
+    "empty": "Tidak ada add-on terpasang.",
+    "emptyFiltered": "Tidak ada add-on terpasang dengan jenis ini.",
+    "builtIn": "Bawaan",
+    "builtInExplanation": "Add-on ini bawaan dan tidak dapat dihapus atau dimatikan.",
+    "cancel": "Batal",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Pindahkan ke atas",
+    "moveUpNamed": "Pindahkan ${name} ke atas",
+    "moveDown": "Pindahkan ke bawah",
+    "moveDownNamed": "Pindahkan ${name} ke bawah",
+    "dragToReorderNamed": "Ubah urutan ${name}",
+    "enabledNamed": "Gunakan ${name}",
+    "close": "Tutup",
+    "version": "Versi ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Katalog",
+      "meta": "Detail",
+      "stream": "Stream",
+      "subtitles": "Subtitel",
+      "addonCatalog": "Katalog add-on",
+      "player": "Aktivitas pemutaran",
+      "library": "Aktivitas pustaka"
+    },
+    "remove": {
+      "title": "Hapus ${name}?",
+      "message": "Add-on ini dihapus dari profil ini di semua perangkat, beserta pengaturan yang digunakan untuk mengonfigurasinya.",
+      "confirm": "Hapus"
+    },
+    "details": {
+      "types": "Jenis",
+      "resources": "Menyediakan",
+      "catalogs": "Katalog",
+      "contact": "Kontak",
+      "configure": "Konfigurasi",
+      "remove": "Hapus",
+      "enabled": "Gunakan add-on ini",
+      "enabledOff": "Mati: Tortuga tidak meminta apa pun darinya dan tidak menampilkan katalognya.",
+      "shareTitle": "Tautan add-on",
+      "shareWarning": "Tautan ini dapat berisi kunci akun yang digunakan untuk mengonfigurasi add-on ini. Bagikan hanya kepada orang yang Anda percayai.",
+      "revealLink": "Tampilkan tautan",
+      "hideLink": "Sembunyikan tautan",
+      "copyLink": "Salin tautan",
+      "linkCopied": "Tautan disalin."
+    },
+    "watchActivity": {
+      "title": "Kirim aktivitas tontonan",
+      "explanation": "Add-on ini menerima aktivitas tontonan Anda: apa yang Anda putar, jeda, dan hentikan, apa yang Anda tambahkan ke atau hapus dari pustaka, dan apa yang Anda tandai sudah ditonton.",
+      "agree": "Saya setuju add-on ini menerima aktivitas tontonan saya",
+      "notAllowed": "Tidak menerima aktivitas tontonan sampai Anda mengizinkannya"
+    },
+    "install": {
+      "action": "Pasang add-on",
+      "title": "Pasang add-on",
+      "linkHint": "Tautan add-on, diakhiri dengan /manifest.json",
+      "submit": "Lanjutkan",
+      "confirm": "Pasang",
+      "update": "Perbarui",
+      "configure": "Konfigurasi",
+      "configureFirst": "Add-on ini harus dikonfigurasi sebelum dapat dipasang. Konfigurasikan, lalu pasang dari halamannya.",
+      "alreadyInstalled": "Add-on ini sudah terpasang.",
+      "updateDetails": "Sudah terpasang. Ini akan memperbarui detailnya.",
+      "updateVersion": "Sudah terpasang. Ini akan memperbaruinya ke versi ${version}.",
+      "adult": "Add-on ini ditandai sebagai konten dewasa.",
+      "installed": "${name} berhasil dipasang.",
+      "updated": "${name} berhasil diperbarui.",
+      "done": "Selesai"
+    },
+    "browse": {
+      "title": "Jelajahi",
+      "installed": "Terpasang",
+      "installedNote": "Terpasang"
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "automatic": "Otomatis",
+    "listSeparator": ", ",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "increaseNamed": "Tambah ${name}",
+    "decreaseNamed": "Kurangi ${name}",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "other": "${n} detik"
+      }
+    },
+    "time": {
+      "justNow": "baru saja",
+      "minutesAgo": {
+        "other": "${n} menit lalu"
+      },
+      "hoursAgo": {
+        "other": "${n} jam lalu"
+      },
+      "daysAgo": {
+        "other": "${n} hari lalu"
+      },
+      "monthsAgo": {
+        "other": "${n} bulan lalu"
+      },
+      "yearsAgo": {
+        "other": "${n} tahun lalu"
+      }
+    },
+    "sections": {
+      "playback": "Pemutaran",
+      "playbackSummary": "Bahasa, batas ditonton, episode berikutnya, dan lewati bagian",
+      "device": "Perangkat ini",
+      "deviceSummary": "Dekode, HDR, frame rate, audio, cache, dan laporan crash",
+      "subtitles": "Subtitel",
+      "subtitlesSummary": "Ukuran, warna, garis tepi, dan posisi di perangkat ini",
+      "addons": "Add-on",
+      "addonsSummary": {
+        "other": "${n} add-on terpasang"
+      },
+      "addonsSummaryLoading": "Add-on terpasang",
+      "home": "Beranda",
+      "homeSummary": "Baris yang ditampilkan di Beranda beserta urutannya",
+      "appearance": "Tampilan",
+      "appearanceSummary": "Bahasa, poster, dan judul yang sudah ditonton",
+      "trackers": "Pelacak",
+      "trackersSummary": "Pelacakan tontonan, riwayat, dan daftar",
+      "trackersConnected": "Terhubung ke ${services}",
+      "account": "Akun",
+      "about": "Tentang",
+      "downloads": "Unduhan",
+      "downloadsSummary": "Lokasi, hanya Wi-Fi, dan penyimpanan",
+      "data": "Ekspor dan impor",
+      "dataSummary": "Data profil Anda ke file, dan sebaliknya"
+    },
+    "profile": {
+      "locked": "Dikunci dengan PIN",
+      "unlocked": "Tanpa PIN",
+      "edit": "Edit profil",
+      "manage": "Ganti atau kelola profil"
+    },
+    "about": {
+      "version": "Versi ${version}",
+      "license": "Tortuga dilisensikan di bawah GNU General Public License versi 3. Anda boleh menjalankan, mempelajari, membagikan, dan mengubahnya, dan siapa pun yang memberi Anda salinannya wajib menyediakan kode sumbernya untuk Anda.",
+      "source": "Kode sumber",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga menggunakan Trakt, tetapi tidak didukung atau disertifikasi oleh Trakt.",
+      "notices": "Perangkat lunak pihak ketiga",
+      "noticeLink": "Halaman proyek"
+    },
+    "appearance": {
+      "interfaceLanguage": "Bahasa aplikasi",
+      "interfaceLanguageHint": "Bahasa menu dan pesan aplikasi",
+      "interfaceLanguageSystem": "Bawaan sistem",
+      "blurUnwatched": "Buramkan episode yang belum ditonton",
+      "blurUnwatchedHint": "Buramkan gambar dan sembunyikan deskripsi episode yang belum Anda mulai, agar tidak membocorkan apa pun",
+      "hideWatched": "Sembunyikan judul yang sudah ditonton",
+      "hideWatchedHint": "Keluarkan film dan serial yang sudah Anda selesaikan dari baris Beranda dan Jelajahi. Serial kembali saat episode baru keluar",
+      "hidePosterCaptions": "Sembunyikan judul di bawah poster",
+      "hidePosterCaptionsHint": "Tampilkan gambarnya saja. Lanjutkan Menonton tetap menampilkan episode dan sisa waktu",
+      "posterTemplate": "Template URL poster",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id}, dan {tvdb_id} diganti ID tiap judul, {type} diganti movie atau series",
+      "posterTemplateNone": "Poster dari addon",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Bukan alamat http atau https, jadi diabaikan"
+    },
+    "home": {
+      "note": "Pilih baris yang ditampilkan di Beranda dan urutannya. Pengaturan ini milik profil ini dan disinkronkan ke perangkat Anda yang lain.",
+      "continueWatchingHint": "Selalu baris pertama",
+      "rowsHeader": "Baris",
+      "empty": "Tidak ada add-on terpasang yang memiliki katalog untuk Beranda.",
+      "reset": "Kembalikan ke bawaan",
+      "moveUp": "Pindahkan ke atas",
+      "moveUpNamed": "Pindahkan ${name} ke atas",
+      "moveDown": "Pindahkan ke bawah",
+      "moveDownNamed": "Pindahkan ${name} ke bawah",
+      "dragToReorder": "Seret untuk mengubah urutan",
+      "dragToReorderNamed": "Ubah urutan ${name}",
+      "newCollection": "Koleksi baru",
+      "importCollections": "Impor koleksi",
+      "exportCollections": "Ekspor koleksi",
+      "edit": "Edit",
+      "delete": "Hapus",
+      "deleteTitle": "Hapus “${title}”?",
+      "deleteMessage": "Koleksi ini dihapus dari profil ini di semua perangkat Anda."
+    },
+    "playback": {
+      "title": "Pemutaran",
+      "note": "Pengaturan ini milik profil ini dan disinkronkan ke perangkat Anda yang lain.",
+      "languagesHeader": "Bahasa",
+      "audioLanguages": "Bahasa audio",
+      "audioLanguagesHint": "Trek audio yang diputar, sesuai urutan preferensi",
+      "audioLanguagesNone": "Bawaan video",
+      "audioLanguagesExplanation": "Video diputar dalam bahasa pertama dari daftar ini yang tersedia. Jika tidak ada yang dipilih, video diputar dengan trek audio bawaannya.",
+      "subtitleLanguages": "Bahasa subtitel",
+      "subtitleLanguagesHint": "Subtitel yang diaktifkan, sesuai urutan preferensi",
+      "subtitleLanguagesNone": "Nonaktif",
+      "subtitleLanguagesExplanation": "Subtitel dalam bahasa pertama dari daftar ini yang tersedia di video akan diaktifkan. Jika tidak ada yang dipilih, subtitel tetap nonaktif kecuali video mewajibkannya.",
+      "secondSubtitleLanguage": "Bahasa subtitel kedua",
+      "secondSubtitleLanguageHint": "Ditampilkan di bagian atas gambar bersama subtitel pertama",
+      "secondSubtitleLanguageExplanation": "Subtitel dalam bahasa ini ditampilkan di bagian atas gambar, bersama subtitel pertama. Jika tidak ada yang dipilih, subtitel kedua tidak ditampilkan kecuali dipilih di pemutar.",
+      "secondSubtitleLanguageNone": "Nonaktif",
+      "showSubtitles": "Tampilkan subtitel",
+      "showSubtitlesHint": "Selalu: subtitel juga dalam bahasa yang diucapkan, SDH lebih dulu",
+      "showSubtitlesFollowAudio": "Ikuti audio",
+      "showSubtitlesAlways": "Selalu",
+      "chosenHeader": "Bahasa Anda",
+      "availableHeader": "Tambahkan bahasa",
+      "searchLanguages": "Cari bahasa",
+      "noLanguageMatches": "Tidak ada bahasa yang cocok.",
+      "playbackHeader": "Pemutaran",
+      "watchedThreshold": "Dianggap ditonton setelah",
+      "watchedThresholdHint": "Sejauh mana video diputar sampai dianggap sudah ditonton dan Lanjutkan Menonton pindah ke episode berikutnya",
+      "bingeWatching": "Putar episode berikutnya",
+      "bingeWatchingHint": "Saat episode selesai, mulai episode berikutnya, dari sumber yang sama jika memungkinkan",
+      "upNextCountdown": "Hitung mundur episode berikutnya",
+      "upNextCountdownHint": "Berapa lama prompt episode berikutnya menunggu sebelum memulainya",
+      "upNextImmediately": "Langsung mulai",
+      "seekShort": "Lompat pendek",
+      "seekShortHint": "Tombol panah, remote, dan tombol lompat di pemutar",
+      "seekLong": "Lompat panjang",
+      "seekLongHint": "Shift dengan tombol panah, dan tekan lama",
+      "videoClick": "Klik pada video",
+      "videoClickHint": "Klik dua kali tetap masuk dan keluar dari layar penuh",
+      "videoClickPause": "Jeda dan putar",
+      "videoClickControls": "Tampilkan atau sembunyikan kontrol",
+      "moveUp": "Pindahkan ke atas",
+      "moveUpNamed": "Pindahkan ${name} ke atas",
+      "moveDown": "Pindahkan ke bawah",
+      "moveDownNamed": "Pindahkan ${name} ke bawah",
+      "removeLanguage": "Hapus",
+      "removeLanguageNamed": "Hapus ${name}",
+      "dragToReorderNamed": "Ubah urutan ${name}",
+      "skipping": {
+        "header": "Lewati bagian",
+        "footer": "Intro, rekap, dan kredit dikenali dari nama bab video, jadi hanya video dengan bab bernama yang menawarkan untuk melewatinya. Lewati otomatis menghitung mundur di tombol terlebih dahulu, dan tindakan apa pun yang Anda lakukan di pemutar akan menghentikannya.",
+        "intros": "Intro",
+        "introsHint": "Lagu pembuka dan sekuens judul",
+        "recaps": "Rekap",
+        "recapsHint": "“Sebelumnya di…” di awal episode",
+        "credits": "Kredit",
+        "creditsHint": "Kredit penutup dan cuplikan episode berikutnya; prompt episode berikutnya dimulai bersamanya",
+        "off": "Nonaktif",
+        "button": "Tampilkan tombol",
+        "auto": "Lewati otomatis"
+      },
+      "streams": {
+        "header": "Stream",
+        "footer": "Filter berlaku untuk setiap daftar stream. Daftar tersebut menunjukkan berapa banyak stream yang disembunyikan dan tetap dapat menampilkannya.",
+        "autoPlay": "Putar otomatis",
+        "autoPlayHint": "Melewati daftar stream untuk Putar, Lanjutkan, episode, dan episode berikutnya; dengan urutan, menunggu semua add-on menjawab",
+        "suggestions": "Sarankan stream",
+        "suggestionsHint": "Mempelajari stream yang Anda pilih di profil ini dan menandai salah satunya di daftar",
+        "autoPlayOff": "Nonaktif",
+        "autoPlayFirstMatch": "Stream pertama yang lolos filter",
+        "autoPlayReuseLastLink": "Stream yang sama seperti terakhir kali, atau yang pertama lolos filter",
+        "qualities": "Kualitas",
+        "qualitiesHint": "Resolusi yang ditampilkan di daftar stream",
+        "qualitiesAll": "Semua",
+        "qualitiesNone": "Tidak ada",
+        "qualitiesAllBut": "Semua kecuali ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Tidak diketahui",
+        "ranges": "Rentang dinamis",
+        "rangesHint": "Mana dari SDR, HDR, dan Dolby Vision yang ditampilkan di daftar stream",
+        "codecs": "Codec video",
+        "codecsHint": "Codec video yang ditampilkan di daftar stream",
+        "minSize": "Ukuran minimum",
+        "minSizeHint": "Menyembunyikan stream berkas yang lebih kecil; stream tanpa ukuran tetap ada",
+        "maxSize": "Ukuran maksimum",
+        "maxSizeHint": "Menyembunyikan stream berkas yang lebih besar; stream tanpa ukuran tetap ada",
+        "sizeAny": "Ukuran apa pun",
+        "includePattern": "Hanya stream yang cocok",
+        "includePatternHint": "Ekspresi reguler yang dicocokkan dengan nama, deskripsi, dan nama file setiap stream, tanpa membedakan huruf besar/kecil",
+        "includePatternNone": "Stream apa pun",
+        "includePlaceholder": "mis. 1080p|2160p",
+        "excludePattern": "Sembunyikan stream yang cocok",
+        "excludePatternHint": "Diutamakan di atas pola sebelumnya",
+        "excludePatternNone": "Tidak ada",
+        "excludePlaceholder": "mis. HDTV|XviD",
+        "invalidPattern": "Bukan ekspresi reguler yang valid, jadi diabaikan",
+        "save": "Simpan",
+        "clear": "Kosongkan"
+      }
+    },
+    "device": {
+      "title": "Perangkat ini",
+      "note": "Pengaturan ini hanya berlaku untuk perangkat ini dan tidak disinkronkan.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Dekode perangkat keras",
+      "hardwareDecodingHint": "Dekode video dengan perangkat keras grafis. Nonaktifkan jika tampilan video bermasalah.",
+      "hdr": "HDR",
+      "hdrHint": "Putar video HDR dalam HDR jika layar mendukungnya. Jika nonaktif, video dikonversi ke SDR.",
+      "matchFrameRate": "Paksa ganti frame rate",
+      "matchFrameRateHint": "Ubah layar ke frame rate video meskipun sistem tidak melakukannya. Layar menjadi hitam sesaat setiap kali berganti.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Audio passthrough",
+      "audioPassthroughHint": "Kirim suara surround (Dolby Digital, DTS, TrueHD) ke receiver tanpa didekode",
+      "audioPassthroughHintApple": "Kirim Dolby Digital dan Dolby Digital Plus, termasuk Atmos, ke dekoder Dolby sistem; DTS dan TrueHD diputar sebagai PCM multisaluran. Matikan jika tidak ada suara.",
+      "audioPassthroughHintAppleSpatial": "Kirim Dolby Digital dan Dolby Digital Plus, termasuk Atmos, ke dekoder Dolby sistem, dan putar TrueHD Atmos dan DTS:X sebagai audio spasial; trek DTS dan TrueHD lainnya diputar sebagai PCM multisaluran. Matikan jika tidak ada suara.",
+      "audioPassthroughNormalized": "Nonaktif selama normalisasi volume aktif",
+      "gesturesHeader": "Gestur",
+      "swipeGestures": "Geser untuk kecerahan dan volume",
+      "swipeGesturesHint": "Geser ke atas atau ke bawah di separuh kiri video untuk kecerahan, di separuh kanan untuk volume.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Cache pramuat",
+      "cacheSizeHint": "Seberapa banyak stream yang dimuat lebih dulu sebelum diputar",
+      "discordHeader": "Discord",
+      "discordPresence": "Tampilkan yang sedang Anda tonton",
+      "discordPresenceHint": "Teman Discord Anda melihat judul dan episode saat video diputar. Discord harus berjalan di komputer ini.",
+      "privacyHeader": "Privasi",
+      "crashReports": "Kirim laporan crash",
+      "crashReportsHint": "Kirim apa yang salah saat aplikasi crash atau sebagian darinya gagal, tanpa pernah menyertakan tautan add-on atau akun Anda"
+    },
+    "subtitles": {
+      "title": "Subtitel",
+      "note": "Pengaturan ini hanya berlaku untuk perangkat ini dan tidak disinkronkan. Gaya ini diterapkan ke subtitel teks biasa, seperti SRT; subtitel bergaya tetap memakai tampilannya sendiri kecuali Anda juga menerapkan gaya ini padanya.",
+      "previewText": "Beginilah tampilan subtitel",
+      "textHeader": "Teks",
+      "size": "Ukuran",
+      "textColor": "Warna",
+      "bold": "Tebal",
+      "outlineHeader": "Garis tepi dan latar",
+      "outline": "Garis tepi",
+      "outlineColor": "Warna garis tepi",
+      "background": "Latar",
+      "backgroundHint": "Kotak di belakang teks, dan tingkat kepekatannya",
+      "backgroundOff": "Nonaktif",
+      "positionHeader": "Posisi",
+      "position": "Tinggi",
+      "positionHint": "Seberapa jauh subtitel dari bagian bawah gambar",
+      "positionBottom": "Bawah",
+      "styledHeader": "Subtitel bergaya",
+      "styledOverride": "Terapkan ke subtitel bergaya",
+      "styledOverrideHint": "Subtitel ASS dan SSA memakai gaya ini, bukan gayanya sendiri. Tanda dan efek mungkin terlihat salah.",
+      "outlines": {
+        "none": "Tidak ada",
+        "thin": "Tipis",
+        "thick": "Tebal"
+      },
+      "colors": {
+        "white": "Putih",
+        "yellow": "Kuning",
+        "green": "Hijau",
+        "cyan": "Sian",
+        "gray": "Abu-abu",
+        "black": "Hitam"
+      }
+    },
+    "account": {
+      "title": "Akun",
+      "syncLabel": "Sinkronisasi",
+      "syncNow": "Sinkronkan sekarang",
+      "lastSynced": "Terakhir disinkronkan ${time}",
+      "serverLabel": "Server sinkronisasi",
+      "identitiesHeader": "Metode masuk",
+      "linkIdentity": "Tambahkan metode masuk",
+      "devicesHeader": "Perangkat",
+      "thisDevice": "Perangkat ini",
+      "activeNow": "Aktif sekarang",
+      "lastActive": "Aktif ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} telah dikeluarkan.",
+      "identityRemoved": "Metode masuk ${provider} telah dihapus.",
+      "cancel": "Batal",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Masuk tunggal (SSO)"
+      },
+      "link": {
+        "start": "Tautkan perangkat baru",
+        "title": "Tautkan perangkat",
+        "instructions": "Di perangkat baru, pilih untuk menautkannya dari perangkat lain. Lalu masukkan kode yang ditampilkan, atau pindai kode QR-nya.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Lanjutkan",
+        "question": "Tautkan “${name}”?",
+        "consequence": "Perangkat itu akan masuk ke akun ini, beserta profil, add-on, dan pustakanya.",
+        "approve": "Tautkan",
+        "reject": "Jangan tautkan",
+        "approved": "${name} telah ditautkan. Penyiapannya akan selesai dengan sendirinya.",
+        "rejected": "${name} tidak ditautkan.",
+        "expired": "Kode telah kedaluwarsa. Mulai lagi di perangkat baru.",
+        "done": "Selesai"
+      },
+      "signOut": {
+        "action": "Keluar",
+        "title": "Keluar?",
+        "message": "Profil, add-on, pustaka, dan unduhan akan dihapus dari perangkat ini. Semuanya kecuali unduhan tetap tersimpan di akun: masuk lagi untuk mendapatkannya kembali.",
+        "confirm": "Keluar"
+      },
+      "delete": {
+        "action": "Hapus akun",
+        "explanation": "Menghapus akun dan semua data yang disinkronkan dari server.",
+        "title": "Hapus akun?",
+        "message": "Akun beserta profil, add-on, pustaka, dan riwayatnya akan dihapus permanen dari server, dan semua perangkat akan dikeluarkan. Tindakan ini tidak dapat diurungkan.",
+        "confirm": "Hapus akun"
+      },
+      "revoke": {
+        "title": "Keluarkan ${name}?",
+        "message": "${name} akan dikeluarkan dan tidak lagi menjadi perangkat akun ini. Perangkat ini dapat ditautkan lagi nanti.",
+        "messageThisDevice": "Ini perangkat yang sedang Anda gunakan. Perangkat ini akan dikeluarkan, dan profil, add-on, pustaka, serta unduhannya akan dihapus dari perangkat ini. Semuanya kecuali unduhan tetap tersimpan di akun.",
+        "confirm": "Keluarkan perangkat",
+        "confirmNamed": "Keluarkan perangkat: ${name}"
+      },
+      "unsynced": {
+        "title": "Hapus perubahan yang belum disinkronkan?",
+        "message": {
+          "other": "${n} perubahan yang dibuat di perangkat ini, seperti progres tontonan atau pengeditan pustaka, belum sampai ke akun. Jika Anda keluar sekarang, perubahan tersebut akan dihapus permanen. Jika Anda memilih Batal, perubahan tetap ada di sini dan perangkat ini tetap masuk."
+        },
+        "confirm": "Keluar dan hapus"
+      },
+      "unlink": {
+        "title": "Hapus metode masuk ${provider}?",
+        "message": "Anda tidak dapat lagi masuk ke akun ini dengan ${provider}.",
+        "confirm": "Hapus",
+        "action": "Hapus metode masuk ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Pelacak",
+      "note": "Layanan yang terhubung menerima apa yang ditonton profil ini: progres tontonan dan judul yang ditandai sudah ditonton. Menghubungkan atau memutuskan layanan berlaku untuk profil ini di semua perangkat Anda; sakelar di bawah hanya berlaku untuk perangkat ini.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Terhubung",
+      "connectedAs": "Terhubung sebagai ${user}",
+      "notConnected": "Tidak terhubung",
+      "unavailable": "Tidak tersedia di versi aplikasi ini",
+      "connect": "Hubungkan",
+      "connectNamed": "Hubungkan ${name}",
+      "disconnect": "Putuskan",
+      "disconnectNamed": "Putuskan ${name}",
+      "scrobble": "Kirim tontonan Anda",
+      "scrobbleHint": "Progres tontonan dan judul yang sudah ditonton dikirim ke ${service}",
+      "filtersHeader": "Yang dikirim",
+      "movies": "Film",
+      "series": "Serial",
+      "anime": "Anime",
+      "queued": {
+        "other": "${n} perubahan menunggu dikirim"
+      },
+      "notSent": {
+        "other": "${n} perubahan tidak dapat dikirim (terakhir: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} membalas dengan kesalahan ${status}",
+        "refused": "${service} menolaknya",
+        "unreadable": "tidak dapat dibaca"
+      },
+      "connectTitle": "Hubungkan ${service}",
+      "starting": "Menghubungi ${service}…",
+      "waiting": "Menunggu Anda mengizinkan Tortuga di ${service}…",
+      "linkInstructions": "Masuk ke ${service} di browser Anda dan izinkan Tortuga.",
+      "linkScan": "Atau pindai kode QR dengan ponsel Anda dan masuk di sana.",
+      "openInBrowser": "Buka di browser",
+      "expired": "Kode kedaluwarsa sebelum digunakan.",
+      "declined": "${service} tidak mengizinkan koneksi.",
+      "unreachable": "Tidak dapat terhubung ke ${service}. Periksa koneksi dan coba lagi.",
+      "serverUnreachable": "Tidak dapat terhubung ke server Tortuga Anda. Periksa koneksi dan coba lagi.",
+      "needsAccount": "Menghubungkan ${service} memerlukan akun Tortuga. Masuk ke akun Anda terlebih dahulu.",
+      "busy": "${service} sedang sibuk. Coba lagi dalam satu menit.",
+      "refused": "${service} menolak proses masuk.",
+      "failed": "Gagal menghubungkan ${service}.",
+      "retry": "Coba lagi",
+      "connectedNotice": "Terhubung ke ${service} sebagai ${user}.",
+      "connectedNoticeNoName": "Terhubung ke ${service}.",
+      "disconnectTitle": "Putuskan ${service}?",
+      "disconnectMessage": "Profil ini berhenti mengirim tontonannya ke ${service} di semua perangkat Anda, dan perubahan yang menunggu dikirim akan dibuang. Akun ${service} Anda tetap menyimpan semua yang sudah ada.",
+      "disconnectedNotice": "Terputus dari ${service}.",
+      "actionFailed": "Gagal. Coba lagi."
+    },
+    "downloads": {
+      "title": "Unduhan",
+      "note": "Pengaturan ini hanya berlaku untuk perangkat ini dan tidak disinkronkan.",
+      "location": {
+        "title": "Lokasi",
+        "hint": "Tempat unduhan baru disimpan. Unduhan yang sudah tersimpan tetap di tempatnya.",
+        "deviceStorage": "Penyimpanan internal",
+        "external": "Penyimpanan eksternal",
+        "change": "Ubah folder"
+      },
+      "transferHeader": "Pengunduhan",
+      "wifiOnly": "Unduh hanya via Wi-Fi",
+      "wifiOnlyHint": "Unduhan menunggu selama jaringan berkuota, seperti data seluler",
+      "atOnce": "Unduhan bersamaan",
+      "atOnceHint": "Jumlah unduhan yang berjalan pada waktu yang sama",
+      "autoRemoveWatched": "Hapus unduhan yang sudah ditonton",
+      "autoRemoveWatchedHint": "Unduhan dihapus setelah ditonton, tidak pernah saat sedang diputar",
+      "subtitleLanguages": "Subtitel yang disimpan",
+      "subtitleLanguagesHint": "Subtitel dalam bahasa ini disimpan bersama setiap unduhan",
+      "subtitleLanguagesProfile": "Bahasa subtitel Anda: ${languages}",
+      "subtitleLanguagesProfileNone": "Bahasa subtitel Anda: tidak ada",
+      "subtitleLanguagesExplanation": "Subtitel dalam bahasa ini disimpan bersama setiap unduhan, sehingga tetap tampil tanpa koneksi.",
+      "useProfileLanguages": "Gunakan bahasa subtitel saya",
+      "storageHeader": "Penyimpanan",
+      "deleteAll": "Hapus semua unduhan",
+      "deleteAllTitle": "Hapus semua unduhan?",
+      "deleteAllText": "Ini akan menghapus semua unduhan di perangkat ini, untuk semua profil.",
+      "deleteAllConfirm": "Hapus semua"
+    },
+    "data": {
+      "exportHeader": "Ekspor",
+      "categories": {
+        "addons": "Add-on",
+        "addonsHint": "Add-on terpasang sesuai urutannya, beserta tautannya",
+        "library": "Pustaka",
+        "libraryHint": "Judul yang Anda simpan",
+        "progress": "Progres tontonan",
+        "progressHint": "Tempat Anda berhenti, dan apa yang sudah Anda tonton",
+        "settings": "Pengaturan profil",
+        "settingsHint": "Pemutaran, stream, baris Beranda, dan pengaturan lain yang disinkronkan",
+        "streams": "Riwayat stream",
+        "streamsHint": "Stream yang terakhir diputar untuk setiap video"
+      },
+      "profilesHeader": "Profil",
+      "privateNote": "File ini berisi tautan add-on dan riwayat stream Anda, yang dapat memuat kunci API. Jaga kerahasiaannya: siapa pun yang memiliki file ini dapat menggunakannya.",
+      "exportNote": "PIN, akun pelacak, unduhan, dan pengaturan perangkat ini tidak pernah disertakan dalam file.",
+      "exportAction": "Ekspor ke file",
+      "saved": "File ${name} disimpan.",
+      "saveFailed": "File tidak dapat disimpan.",
+      "exportFailed": "Ekspor gagal.",
+      "importHeader": "Impor",
+      "importNote": "Membuka file yang diekspor dari Tortuga. Data yang lebih baru diutamakan untuk setiap item, dan tidak ada yang dihapus dari perangkat ini.",
+      "importAction": "Impor dari file",
+      "reviewTitle": "Impor",
+      "source": "Diekspor pada ${date} oleh Tortuga ${version}",
+      "sourceUndated": "Diekspor oleh Tortuga ${version}",
+      "dataHeader": "Data",
+      "counts": {
+        "addons": {
+          "other": "${n} add-on"
+        },
+        "titles": {
+          "other": "${n} judul"
+        },
+        "progress": {
+          "other": "progres ${n} judul"
+        },
+        "settings": {
+          "other": "${n} pengaturan"
+        },
+        "streams": {
+          "other": "${n} stream"
+        },
+        "profiles": {
+          "other": "${n} profil"
+        }
+      },
+      "into": "Ke profil",
+      "intoSame": "Ke ${name} di akun ini",
+      "newProfile": "Profil baru",
+      "importConfirm": "Impor",
+      "imported": "Impor selesai: ${changes}.",
+      "nothingNew": "Tidak ada yang baru untuk diimpor: semua isi file sudah ada di sini.",
+      "notTortuga": "File ini bukan hasil ekspor Tortuga. Tidak ada yang diimpor.",
+      "newer": "File ini berasal dari versi Tortuga yang lebih baru. Perbarui Tortuga, lalu impor lagi.",
+      "damaged": "File ini rusak atau tidak lengkap. Tidak ada yang diimpor.",
+      "clockAhead": "Waktu dalam file ini jauh lebih maju daripada jam perangkat ini. Periksa tanggal dan waktu di kedua perangkat, lalu impor lagi. Tidak ada yang diimpor.",
+      "importFailed": "Impor gagal.",
+      "unreadable": "File tidak dapat dibuka. Tidak ada yang diimpor."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Sudah sinkron",
+      "syncing": "Menyinkronkan…",
+      "offline": "Offline. Perubahan akan disinkronkan saat koneksi kembali.",
+      "signedOut": "Belum masuk",
+      "failed": {
+        "server": "Server sinkronisasi mengalami masalah. Akan dicoba lagi sebentar lagi.",
+        "rateLimited": "Server sinkronisasi meminta untuk memperlambat. Akan dicoba lagi sebentar lagi.",
+        "quotaExceeded": "Penyimpanan akun penuh, jadi perubahan tidak disinkronkan.",
+        "tooLarge": "Beberapa perubahan terlalu besar untuk disinkronkan.",
+        "addonsTooLarge": "Add-on salah satu profil terlalu besar untuk disinkronkan. Hapus add-on yang tidak dipakainya.",
+        "clockWrong": "Beberapa perubahan tidak dapat disinkronkan. Periksa tanggal dan waktu di perangkat Anda.",
+        "unknown": "Tidak dapat menyinkronkan. Akan dicoba lagi sebentar lagi."
+      }
+    },
+    "error": {
+      "network": "Tidak dapat terhubung ke server sinkronisasi. Periksa koneksi dan coba lagi.",
+      "server": "Server sinkronisasi mengalami masalah. Coba lagi nanti.",
+      "rateLimited": "Terlalu banyak percobaan. Tunggu sebentar dan coba lagi.",
+      "invalidServerUrl": "Ini bukan alamat server. Masukkan alamat seperti https://sync.example.com.",
+      "insecureServerUrl": "Gunakan https untuk server di internet. Protokol http biasa hanya berfungsi untuk server di jaringan Anda sendiri.",
+      "notTortugaServer": "Tidak ada server sinkronisasi Tortuga yang merespons di alamat ini.",
+      "incompatibleServer": "Server ini menjalankan versi lama sinkronisasi Tortuga dan tidak dapat digunakan.",
+      "providerNotEnabled": "Server ini tidak menyediakan metode masuk ini.",
+      "signInRejected": "Proses masuk tidak berhasil. Coba lagi.",
+      "appleCodeRejected": "Apple tidak menerima proses masuk. Coba lagi.",
+      "providerUnavailable": "Layanan masuk tidak dapat dijangkau. Coba lagi nanti.",
+      "signInCancelled": "Proses masuk dibatalkan.",
+      "signInExpired": "Proses masuk terlalu lama. Mulai lagi.",
+      "identityInUse": "Metode masuk ini sudah digunakan oleh akun Tortuga lain.",
+      "lastIdentity": "Ini satu-satunya metode masuk akun ini, jadi tidak dapat dihapus.",
+      "sessionEnded": "Perangkat ini telah dikeluarkan. Masuk lagi.",
+      "sessionUnreadable": "Data masuk perangkat ini tidak dapat dibaca dari penyimpanan aman sistem. Mulai ulang Tortuga untuk mencoba lagi.",
+      "notSignedIn": "Masuk terlebih dahulu.",
+      "notFound": "Ini sudah tidak ada di server.",
+      "linkCodeInvalid": "Kode terdiri dari 8 huruf dan angka, seperti ABCD-EFGH.",
+      "linkNotFound": "Tidak ada perangkat yang menunggu dengan kode ini. Periksa kodenya, atau mulai lagi di perangkat baru.",
+      "linkOtherServer": "Perangkat lain menggunakan server sinkronisasi yang berbeda.",
+      "linkFailed": "Penautan tidak dapat diselesaikan. Mulai lagi.",
+      "tooLarge": "Ini terlalu besar untuk server sinkronisasi.",
+      "quotaExceeded": "Penyimpanan akun penuh.",
+      "unsynced": {
+        "other": "${n} perubahan yang dibuat di perangkat ini belum disinkronkan ke akunnya."
+      },
+      "unexpected": "Terjadi kesalahan. Coba lagi."
+    },
+    "deletion": {
+      "done": "Akun dan datanya telah dihapus.",
+      "appleRevoked": "Akun dan datanya telah dihapus, dan Tortuga tidak lagi menggunakan Apple ID Anda.",
+      "appleManual": "Akun dan datanya telah dihapus. Untuk menyelesaikan, hapus Tortuga di Pengaturan → Apple ID → Masuk dengan Apple.",
+      "githubManual": "Anda dapat menghapus Tortuga dari akun GitHub Anda di ${address}."
+    },
+    "switchAccount": {
+      "title": "Hapus perubahan yang belum disinkronkan?",
+      "message": {
+        "other": "Akun ini berbeda dari akun yang sebelumnya masuk di perangkat ini. ${n} perubahan yang dibuat di sini dengan akun sebelumnya, seperti progres tontonan atau pengeditan pustaka, tidak pernah sampai ke akun tersebut. Masuk akan menghapusnya secara permanen, bersama data lain milik akun sebelumnya di perangkat ini, termasuk unduhan."
+      },
+      "confirm": "Hapus dan masuk",
+      "cancel": "Batal",
+      "kept": "Belum masuk. Perubahan tetap ada di perangkat ini sampai Anda masuk ke akun tempat perubahan itu dibuat."
+    },
+    "browser": {
+      "signedIn": "Berhasil masuk. Anda dapat menutup tab ini dan kembali ke Tortuga.",
+      "failed": "Proses masuk tidak selesai. Kembali ke Tortuga dan coba lagi."
+    },
+    "signIn": {
+      "title": "Masuk ke Tortuga",
+      "intro": "Akun Tortuga menjaga profil, add-on, dan pustaka Anda tetap sinkron di semua perangkat.",
+      "apple": "Masuk dengan Apple",
+      "google": "Masuk dengan Google",
+      "github": "Masuk dengan GitHub",
+      "oidc": "Masuk dengan ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Tautkan dari perangkat lain",
+      "linkDeviceHint": "Sudah masuk di ponsel atau komputer? Tautkan perangkat ini dengan kode saja.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Gunakan server Anda sendiri",
+      "useHostedServer": "Gunakan server Tortuga",
+      "serverField": "Alamat server",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Lanjutkan",
+      "checkingServer": "Memeriksa server…",
+      "loadingOptions": "Memuat opsi masuk…",
+      "noOptions": "Server ini tidak menyediakan metode masuk di perangkat ini. Tautkan dari perangkat yang sudah masuk.",
+      "retry": "Coba lagi",
+      "starting": "Memulai proses masuk…",
+      "native": "Masuk dengan ${provider}…",
+      "browser": "Lanjutkan di browser. Layar ini akan berlanjut setelah Anda masuk di sana.",
+      "finishing": "Menyelesaikan proses masuk…",
+      "cancel": "Batal",
+      "deviceCode": {
+        "instructions": "Di ponsel atau komputer, buka ${url} dan masukkan kode ini:",
+        "scan": "Atau pindai kode QR dengan ponsel Anda.",
+        "qrDescription": "Kode QR untuk dipindai dengan ponsel Anda",
+        "expires": "Kode kedaluwarsa dalam ${time}.",
+        "waiting": "Menunggu Anda masuk…"
+      }
+    },
+    "link": {
+      "title": "Tautkan perangkat ini",
+      "instructions": "Di perangkat yang sudah masuk, buka Pengaturan, lalu Akun, lalu Tautkan perangkat baru. Pindai kode QR ini di sana atau masukkan kodenya.",
+      "qrDescription": "Kode QR untuk dipindai di perangkat yang sudah masuk",
+      "starting": "Mendapatkan kode…",
+      "expires": "Kode kedaluwarsa dalam ${time}.",
+      "waiting": "Menunggu persetujuan di perangkat lain…",
+      "rejected": "Perangkat lain menolak penautan.",
+      "expired": "Kode kedaluwarsa sebelum digunakan.",
+      "newCode": "Dapatkan kode baru"
+    },
+    "identityLink": {
+      "title": "Tambahkan metode masuk",
+      "intro": "Tautkan metode masuk lain agar Anda tetap bisa masuk meski kehilangan salah satu akun.",
+      "allLinked": "Semua metode masuk yang tersedia di perangkat ini sudah ditautkan.",
+      "linking": "Menautkan…"
+    }
+  },
+  "profiles": {
+    "title": "Siapa yang menonton?",
+    "manageTitle": "Kelola profil",
+    "manage": "Kelola profil",
+    "done": "Selesai",
+    "add": "Tambah profil",
+    "empty": "Buat profil untuk memulai.",
+    "loading": "Memuat profil Anda…",
+    "current": "Profil saat ini",
+    "switchProfile": "Ganti profil",
+    "pin": {
+      "title": "Masukkan PIN untuk ${name}",
+      "wrong": "PIN salah. Coba lagi.",
+      "lockedOut": "Terlalu banyak percobaan. Coba lagi dalam ${time}.",
+      "cancel": "Batal",
+      "backspace": "Hapus digit terakhir",
+      "entered": "${count} dari ${total} digit dimasukkan"
+    },
+    "editor": {
+      "newTitle": "Profil baru",
+      "editTitle": "Edit profil",
+      "name": "Nama",
+      "nameRequired": "Masukkan nama.",
+      "nameTooLong": {
+        "other": "Nama maksimal ${n} karakter."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Tanpa PIN",
+      "pinOn": "Dikunci dengan PIN",
+      "setPin": "Atur PIN",
+      "changePin": "Ubah PIN",
+      "removePin": "Hapus PIN",
+      "pinEnter": "Masukkan PIN 4 digit",
+      "pinConfirm": "Masukkan PIN lagi",
+      "pinMismatch": "PIN tidak cocok. Masukkan PIN baru.",
+      "pinNote": "PIN mencegah orang lain membuka profil ini di perangkat Anda. PIN adalah kunci, bukan sandi.",
+      "save": "Simpan",
+      "create": "Buat profil",
+      "cancel": "Batal",
+      "delete": "Hapus profil",
+      "deleteConfirm": "Hapus ${name}? Add-on, pustaka, dan riwayatnya akan dihapus di semua perangkat. Tindakan ini tidak dapat diurungkan.",
+      "deleteAction": "Hapus",
+      "saveFailed": "Tidak dapat menyimpan profil. Coba lagi.",
+      "kids": {
+        "title": "Profil anak",
+        "subtitle": "Hanya menampilkan judul yang disarankan untuk usia hingga tingkat yang Anda pilih. Sebagian besar usia yang disarankan adalah perkiraan, bukan rating resmi.",
+        "needsParent": "Atur PIN pada profil dewasa terlebih dahulu: keluar dari profil anak memerlukannya.",
+        "newOnly": "Hanya profil baru yang bisa menjadi profil anak.",
+        "capTitle": "Usia tertinggi yang disarankan",
+        "capLittle": "Anak kecil",
+        "capLittleAges": "Disarankan 0+",
+        "capKids": "Anak-anak",
+        "capKidsAges": "Anak kecil, ditambah disarankan 6+",
+        "capTeen": "Remaja",
+        "capTeenAges": "Anak-anak, ditambah disarankan 12+",
+        "allowUnrated": "Izinkan judul tanpa rating",
+        "allowUnratedNote": "Judul tanpa usia yang disarankan. Selama ini nonaktif, orang tua mengizinkannya satu per satu.",
+        "homeRows": "Baris Beranda",
+        "homeRowsNote": "Opsional. Judul di baris ini tetap harus sesuai dengan usia tertinggi yang disarankan.",
+        "familyMovies": "Film keluarga",
+        "familySeries": "Serial keluarga",
+        "addonMissing": "Add-on-nya tidak terpasang di profil ini.",
+        "allowed": "Judul yang diizinkan",
+        "allowedNone": "Belum ada. Orang tua mengizinkan judul dari halamannya.",
+        "blocked": "Judul yang diblokir",
+        "blockedNone": "Belum ada. Orang tua memblokir judul dari halamannya.",
+        "remove": "Hapus ${title}",
+        "leaving": "Keluar dari profil ini memerlukan PIN orang tua.",
+        "off": "Tautan, add-on, dan sebagian besar pengaturan dinonaktifkan.",
+        "addons": "Video berasal dari add-on profil ini. Tortuga tidak memeriksanya."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafit",
+      "slate": "Batu tulis",
+      "silver": "Perak",
+      "ivory": "Gading",
+      "sand": "Pasir",
+      "clay": "Tanah liat",
+      "rose": "Mawar",
+      "plum": "Plum",
+      "dusk": "Senja",
+      "sea": "Laut",
+      "sage": "Sage",
+      "moss": "Lumut"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Tidak tersedia di profil ini",
+      "suggested": "Disarankan ${age}+",
+      "byAddon": "Add-on-nya menilainya untuk penonton yang lebih tua",
+      "notRated": "Tanpa usia yang disarankan",
+      "byParent": "Diblokir oleh orang tua",
+      "unchecked": "Usia yang disarankan tidak dapat diperiksa. Coba lagi nanti.",
+      "ask": "Minta izin orang tua"
+    },
+    "block": "Blokir di profil ini",
+    "pin": {
+      "title": "Masukkan PIN orang tua",
+      "allow": "Untuk mengizinkan ${title} di profil ini",
+      "allowThis": "Untuk mengizinkan judul ini di profil ini",
+      "block": "Untuk memblokir ${title} di profil ini",
+      "leave": "Untuk keluar dari profil ini",
+      "settings": "Untuk membuka pengaturan ini"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Semua",
+      "movie": "Film",
+      "series": "Serial",
+      "channel": "Saluran",
+      "tv": "Saluran TV",
+      "other": "Lainnya"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Coba lagi",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Lihat semua",
+      "downloading": "Mengunduh ${count}, ${percent}%",
+      "downloadingUnsized": "Mengunduh ${count}",
+      "empty": "Belum ada yang bisa ditampilkan. Pasang add-on dengan katalog untuk mengisi halaman ini.",
+      "allHidden": "Semua baris Beranda disembunyikan. Tampilkan lagi di Pengaturan → Beranda."
+    },
+    "continueWatching": {
+      "title": "Lanjutkan Menonton",
+      "episode": "Episode ${episode}",
+      "upNext": "Berikutnya",
+      "minutesLeft": "Sisa ${minutes} mnt",
+      "hoursLeft": "Sisa ${hours} jam",
+      "hoursMinutesLeft": "Sisa ${hours} jam ${minutes} mnt",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Daftar Tontonan",
+      "recommended": "Rekomendasi",
+      "trending": "Sedang tren",
+      "planToWatch": "Ingin ditonton",
+      "planning": "Direncanakan",
+      "airing": "Sedang tayang",
+      "list": "Daftar",
+      "unreachable": "Tidak dapat terhubung ke ${service}.",
+      "signedOut": "${service} mengeluarkan Anda. Hubungkan lagi di Pengaturan.",
+      "failed": "${service} tidak merespons seperti yang diharapkan."
+    },
+    "discover": {
+      "type": "Jenis",
+      "catalog": "Katalog",
+      "genre": "Genre",
+      "all": "Semua",
+      "empty": "Tidak ada yang bisa ditampilkan di katalog ini.",
+      "noCatalogs": "Tidak ada add-on terpasang yang memiliki katalog untuk dijelajahi.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Cari film, serial, dan lainnya",
+      "recent": "Pencarian terbaru",
+      "clearRecent": "Bersihkan",
+      "removeRecentNamed": "Hapus ${name}",
+      "noResults": "Tidak ada hasil untuk “${query}”",
+      "noCatalogs": "Tidak ada add-on terpasang yang dapat melakukan pencarian.",
+      "clearQuery": "Hapus pencarian",
+      "hint": "Temukan film, serial, dan lainnya di katalog add-on Anda."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Beranda",
+      "discover": "Jelajahi",
+      "search": "Cari",
+      "library": "Pustaka",
+      "settings": "Pengaturan"
+    },
+    "shortLabel": {
+      "board": "Beranda",
+      "library": "Pustaka",
+      "search": "Cari",
+      "settings": "Setelan"
+    },
+    "back": "Kembali",
+    "retry": "Coba lagi",
+    "close": "Tutup",
+    "dismiss": "Abaikan",
+    "qrFailed": "Tautan ini tidak dapat ditampilkan sebagai kode QR.",
+    "openOnPhone": {
+      "title": "Buka di ponsel Anda",
+      "message": "Perangkat ini tidak dapat membuka tautan ini. Pindai kode dengan kamera ponsel Anda untuk membukanya di sana.",
+      "qrDescription": "Kode QR tautan"
+    },
+    "player": {
+      "close": "Tutup pemutar",
+      "fullscreen": "Layar penuh",
+      "exitFullscreen": "Keluar dari layar penuh",
+      "rewind": "Mundur",
+      "fastForward": "Maju cepat",
+      "pictureInPicture": "Gambar dalam gambar"
+    },
+    "menu": {
+      "playback": "Pemutaran",
+      "nextSubtitles": "Trek subtitel berikutnya",
+      "nextAudio": "Trek audio berikutnya"
+    }
+  },
+  "watch": {
+    "title": "Tonton Bersama",
+    "intro": "Tonton secara sinkron dengan teman, masing-masing di perangkatnya sendiri. Semua orang memutar judul yang sama dari add-on mereka sendiri. Untuk membuat ruang, pilih Tonton Bersama di opsi pemutar.",
+    "controlMode": {
+      "hostOnly": "Hanya saya yang mengontrol",
+      "hostOnlyDetail": "Semua orang mengikuti saat Anda memutar, menjeda, atau melompat",
+      "anyone": "Semua orang mengontrol",
+      "anyoneDetail": "Siapa pun di ruang ini dapat memutar, menjeda, atau melompat"
+    },
+    "joinTitle": "Gabung ke ruang",
+    "joinHint": "Kode atau tautan undangan",
+    "joinLabel": "Gabung",
+    "joinInvalid": "Masukkan kode ruang 6 karakter atau tautan undangan",
+    "recentTitle": "Ruang terbaru",
+    "recentUsed": "Digunakan ${time}",
+    "removeRecentNamed": "Hapus ${name}",
+    "invite": {
+      "title": "Gabung ke ruang ${code}? Ruang itu ada di ${server}, bukan di server relay Anda.",
+      "join": "Gabung",
+      "leaveTitle": "Keluar dari ruang untuk gabung ke ruang ${code}? Ruang itu ada di ${server}, bukan di server relay Anda.",
+      "leaveHostTitle": "Keluar dari ruang untuk gabung ke ruang ${code}? Ruang itu ada di ${server}, bukan di server relay Anda. Ruang ini tetap berjalan dengan peserta berikutnya sebagai host."
+    },
+    "relay": {
+      "checking": "Memeriksa relay…",
+      "unreachable": "Tidak dapat terhubung ke relay di ${server}.",
+      "retry": "Coba lagi",
+      "title": "Server relay",
+      "hint": "Relay yang menghubungkan ruang Tonton Bersama. Biarkan kosong untuk menggunakan relay publik Open Watch Party.",
+      "hosted": "Relay publik Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Masukkan alamat relay yang diawali dengan http:// atau https://",
+      "save": "Simpan",
+      "reset": "Gunakan relay publik"
+    },
+    "busy": {
+      "creating": "Membuat ruang…",
+      "joining": "Bergabung ke ruang…"
+    },
+    "dismiss": "Abaikan",
+    "room": {
+      "codeLabel": "Kode ruang",
+      "copyCode": "Salin kode",
+      "codeCopied": "Kode disalin",
+      "share": "Bagikan undangan",
+      "shareText": "Tonton bersama saya di Tortuga: buka ${link} atau masukkan kode ruang ${code}.",
+      "scan": "Pindai dengan ponsel untuk bergabung",
+      "youHost": "Anda adalah host",
+      "hostedBy": "Host: ${name}",
+      "hostOnly": "Hanya host yang mengontrol pemutaran",
+      "anyone": "Semua orang mengontrol pemutaran",
+      "reconnecting": "Menghubungkan kembali…",
+      "hostReconnecting": "Menunggu ${name} terhubung kembali…",
+      "nowPlaying": "Memutar ${title}",
+      "nowPlayingEpisode": "Memutar ${title} · ${episode}",
+      "idleHost": "Putar sesuatu: semua orang di ruang ini akan ikut memutarnya bersama Anda.",
+      "idleGuest": "Menunggu ${name} memutar sesuatu.",
+      "participants": {
+        "other": "${n} peserta"
+      },
+      "you": "${name} (Anda)",
+      "hostBadge": "Host",
+      "makeHost": "Jadikan host",
+      "makeHostNamed": "Jadikan ${name} host",
+      "joinPlayback": "Gabung ke pemutaran",
+      "leave": "Keluar dari ruang",
+      "leaveTitle": "Keluar dari ruang?",
+      "leaveConfirm": "Keluar",
+      "end": "Akhiri ruang",
+      "endTitle": "Akhiri ruang untuk semua orang?",
+      "endConfirm": "Akhiri ruang",
+      "cancel": "Batal",
+      "leaveHostTitle": "Keluar dari ruang? Ruang tetap berjalan dengan peserta berikutnya sebagai host.",
+      "kickNamed": "Keluarkan ${name}",
+      "kickTitle": "Keluarkan ${name} dari ruang?",
+      "kickConfirm": "Keluarkan",
+      "lock": "Kunci ruang",
+      "lockDetail": "Tidak ada orang baru yang bisa bergabung",
+      "controlTitle": "Siapa yang mengontrol pemutaran"
+    },
+    "status": {
+      "ready": "Siap",
+      "loading": "Memuat",
+      "matching": "Mencari file",
+      "buffering": "Buffering",
+      "sameLength": "Durasi sama (${delta})",
+      "longer": "${delta} lebih panjang",
+      "shorter": "${delta} lebih pendek",
+      "noStream": "Stream tidak ditemukan",
+      "searchFailed": "Pencarian add-on gagal",
+      "notPlaying": "Tidak di pemutar",
+      "away": "Terputus",
+      "declined": "Tidak memutar",
+      "offset": "Pergeseran ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} dtk",
+      "minutes": "${minutes} mnt ${seconds} dtk"
+    },
+    "player": {
+      "optionRoom": "Ruang ${code}",
+      "startTitle": "Buat ruang dengan yang sedang diputar",
+      "liveNoRoom": "Siaran langsung tidak bisa ditonton bersama",
+      "watching": {
+        "other": "${n} orang menonton"
+      },
+      "hostBadge": "HOST",
+      "waiting": "Menunggu ${names}…",
+      "waitingMore": {
+        "other": "Menunggu ${names} dan ${n} lainnya…"
+      },
+      "syncing": "Menyinkronkan…",
+      "matchingStart": "Mencari file yang cocok dengan milik ${name}…",
+      "longer": "File Anda ${delta} lebih panjang daripada milik ${name}",
+      "shorter": "File Anda ${delta} lebih pendek daripada milik ${name}",
+      "mismatchDetail": "Mungkin ini versi suntingan lain, jadi posisi pemutaran bisa tidak selaras.",
+      "playAnyway": "Tetap putar",
+      "chooseStream": "Pilih stream lain",
+      "noStream": "Tidak ada add-on Anda yang memiliki stream untuk ${title}.",
+      "searchFailed": "Beberapa add-on Anda tidak dapat dicari untuk ${title}.",
+      "chooseAStream": "Pilih stream",
+      "pickFailed": "Stream itu tidak dapat dibuka.",
+      "hostControls": "Hanya ${name} yang mengontrol pemutaran di ruang ini",
+      "hostControlsUnnamed": "Hanya host yang mengontrol pemutaran di ruang ini",
+      "pausedHere": "Dijeda di perangkat ini. Tekan Putar untuk menyusul ruang.",
+      "dontPlay": "Jangan putar",
+      "declined": "Anda tidak memutar ${title}.",
+      "offsetTitle": "Pergeseran",
+      "offsetDetail": "Menggeser file Anda terhadap file ruang, untuk versi suntingan yang dimulai lebih awal atau lebih lambat.",
+      "offsetReset": "Setel ulang"
+    },
+    "toast": {
+      "joined": "${name} bergabung",
+      "left": "${name} keluar",
+      "paused": "${name} menjeda",
+      "resumed": "${name} melanjutkan",
+      "seeked": "${name} melompat ke posisi lain",
+      "speed": "${name} mengubah kecepatan menjadi ${speed}",
+      "buffering": "${name} sedang buffering",
+      "hostChanged": "${name} sekarang menjadi host",
+      "becameHost": "Anda sekarang menjadi host",
+      "media": "${name} memulai ${title}",
+      "forbidden": "Hanya host yang bisa melakukannya"
+    },
+    "failure": {
+      "create": "Tidak dapat membuat ruang. Coba lagi.",
+      "join": "Tidak dapat bergabung ke ruang. Coba lagi.",
+      "share": "Tidak dapat membagikan video ini ke ruang. Coba stream lain.",
+      "live": "Siaran langsung tidak bisa ditonton bersama. Ruang menunggu video.",
+      "roomNotFound": "Tidak ada ruang dengan kode itu.",
+      "roomFull": "Ruang itu sudah penuh.",
+      "rateLimited": "Terlalu banyak percobaan. Tunggu sebentar, lalu coba lagi.",
+      "connection": "Tidak dapat terhubung ke relay. Periksa koneksi.",
+      "sessionLost": "Koneksi ke ruang terputus.",
+      "ended": "Host mengakhiri ruang.",
+      "roomLocked": "Ruang itu terkunci.",
+      "relayFull": "Relay penuh. Coba lagi nanti.",
+      "blocked": "Relay ini tidak menerima Tortuga.",
+      "kicked": "Host mengeluarkan Anda dari ruang.",
+      "expired": "Ruang sudah kedaluwarsa.",
+      "replaced": "Anda bergabung ke ruang ini di perangkat lain."
+    }
+  },
+  "downloads": {
+    "title": "Unduhan",
+    "empty": "Belum ada yang diunduh. Unduh film dan episode dari halamannya untuk menontonnya tanpa koneksi.",
+    "offline": "Anda sedang offline. Unduhan akan berlanjut setelah Anda kembali online.",
+    "storage": "${used} terpakai · ${free} tersedia",
+    "storageUsed": "${used} terpakai",
+    "pauseAll": "Jeda semua",
+    "resumeAll": "Lanjutkan semua",
+    "actionFailed": "Tidak dapat mengubah unduhan. Coba lagi.",
+    "actionsFailed": "Tidak dapat mengubah unduhan. Coba lagi.",
+    "episodes": {
+      "other": "${n} episode"
+    },
+    "videos": {
+      "other": "${n} video"
+    },
+    "otherVideos": "Video lainnya",
+    "summary": "${count} · ${size}",
+    "progress": "${done} dari ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "Dalam antrean",
+      "waitingForWifi": "Menunggu Wi-Fi",
+      "waitingForNetwork": "Menunggu koneksi",
+      "resolving": "Menyiapkan…",
+      "downloading": "Mengunduh",
+      "downloadingPercent": "Mengunduh · ${percent}%",
+      "paused": "Dijeda",
+      "failed": "Gagal",
+      "completed": "Diunduh",
+      "cancelled": "Dibatalkan"
+    },
+    "action": {
+      "play": "Putar",
+      "pause": "Jeda",
+      "resume": "Lanjutkan",
+      "retry": "Coba lagi",
+      "pickStream": "Pilih stream",
+      "cancel": "Batalkan unduhan",
+      "delete": "Hapus unduhan",
+      "deleteGroup": "Hapus unduhan",
+      "openDetail": "Buka detail"
+    },
+    "deleteConfirm": {
+      "title": "Hapus ${count} dari ${name}?",
+      "message": "Mengunduh ulang butuh waktu dan koneksi.",
+      "confirm": "Hapus",
+      "cancel": "Batal"
+    },
+    "keepSynced": {
+      "title": "Tetap sinkron",
+      "note": "Setiap serial di sini menyimpan episode berikutnya yang belum ditonton di perangkat ini, lalu menambah yang baru setiap kali Anda menonton satu.",
+      "empty": "Belum ada serial yang tetap sinkron. Di menu unduh sebuah serial, pilih berapa episode yang belum ditonton untuk disimpan.",
+      "series": {
+        "other": "${n} serial"
+      },
+      "manage": "Kelola “Tetap sinkron”",
+      "pauseRule": "Jeda ${title}",
+      "resumeRule": "Lanjutkan ${title}",
+      "stopRule": "Hentikan sinkronisasi ${title}",
+      "status": {
+        "downloading": {
+          "other": "Mengunduh ${n} episode"
+        },
+        "failed": {
+          "other": "${n} episode gagal"
+        },
+        "downloaded": {
+          "other": "${n} episode diunduh"
+        },
+        "downloadedNone": "Tidak ada episode yang diunduh"
+      },
+      "stop": {
+        "title": "Hentikan sinkronisasi ${title}?",
+        "message": {
+          "other": "${n} episode di Unduhan berasal dari “Tetap sinkron”. Hapus juga?"
+        },
+        "messageNone": "Tidak ada episode lagi yang akan diunduh.",
+        "keep": "Simpan unduhan",
+        "delete": "Hapus unduhan",
+        "confirm": "Hentikan",
+        "cancel": "Batal"
+      },
+      "notice": {
+        "other": "“Tetap sinkron” menambahkan ${n} episode ${title}"
+      },
+      "noticeSeveral": {
+        "other": "“Tetap sinkron” menambahkan ${n} episode"
+      },
+      "actionFailed": "Tidak dapat mengubah “Tetap sinkron”. Coba lagi."
+    },
+    "failure": {
+      "noStream": "Tidak ada stream yang dapat dipilih untuk episode ini. Pilih secara manual.",
+      "noStreamInstant": "Tidak ada stream instan yang dapat dipilih untuk episode ini. Pilih secara manual.",
+      "network": "Koneksi gagal.",
+      "http": "Server merespons dengan HTTP ${status}.",
+      "streamGone": "Tautan sudah kedaluwarsa dan add-on-nya tidak lagi menyediakan stream ini.",
+      "diskFull": "Ruang penyimpanan perangkat habis. Unduhan dihentikan.",
+      "notEnoughSpace": "Ruang kosong tidak cukup untuk unduhan ini.",
+      "sizeMismatch": "File yang diunduh tidak lengkap.",
+      "unsupported": "Stream ini tidak dapat diunduh.",
+      "locationUnavailable": "Lokasi unduhan tidak tersedia.",
+      "fileMissing": "File yang diunduh tidak ada.",
+      "storage": "Penyimpanan perangkat tidak merespons."
+    },
+    "notification": {
+      "channel": "Unduhan",
+      "title": "Mengunduh ${title}",
+      "count": {
+        "other": "${n} unduhan"
+      },
+      "progress": "${percent}%",
+      "preparing": "Menyiapkan unduhan…",
+      "waiting": "Menunggu Wi-Fi",
+      "paused": "Dijeda",
+      "pause": "Jeda",
+      "resume": "Lanjutkan",
+      "cancel": "Batal",
+      "failed": "Unduhan gagal: ${title}",
+      "completed": "${title} selesai diunduh"
+    }
+  },
+  "offline": {
+    "title": "Anda sedang offline",
+    "text": "Hubungkan ke internet untuk menjelajah. Unduhan Anda tetap dapat diputar tanpa koneksi.",
+    "textNoDownloads": "Hubungkan ke internet untuk menjelajah.",
+    "openDownloads": "Buka Unduhan",
+    "detail": "Menampilkan detail yang disimpan bersama unduhan Anda."
+  },
+  "playerApps": {
+    "chooser": "Selalu tanya",
+    "tortuga": "Tortuga",
+    "playWith": "Putar dengan…",
+    "banner": {
+      "opening": "Membuka di ${player}…",
+      "notInstalled": "${player} tidak terpasang di perangkat ini.",
+      "didNotStart": "${player} gagal dimulai.",
+      "playInTortuga": "Putar di Tortuga",
+      "cancel": "Batal",
+      "dismiss": "Abaikan"
+    },
+    "detail": {
+      "playing": "Memutar di ${player} · ${position}",
+      "playingOf": "Memutar di ${player} · ${position} dari ${duration}",
+      "paused": "Dijeda di ${player} · ${position}",
+      "pausedOf": "Dijeda di ${player} · ${position} dari ${duration}",
+      "finished": "Dibuka di ${player}. Sudah selesai menonton ${title}?",
+      "markWatched": "Tandai sudah ditonton",
+      "notYet": "Belum"
+    },
+    "settings": {
+      "player": "Pemutar",
+      "deviceOnly": "Hanya perangkat ini",
+      "note": "Video di perangkat ini diputar di pemutar yang dipilih di sini. “Putar dengan…” di menu stream memilih pemutar lain untuk satu video.",
+      "notFound": "${player} (tidak ditemukan)",
+      "followsProgress": "Melanjutkan dari posisi terakhir dan menyimpan progres Anda selama diputar",
+      "savesOnReturn": "Melanjutkan dari posisi terakhir dan menyimpan posisi saat Anda berhenti",
+      "savesOnReturnFromStart": "Mulai dari awal, lalu menyimpan posisi saat Anda berhenti atau menanyakan apakah Anda sudah selesai",
+      "asksAfter": "Melanjutkan dari posisi terakhir, lalu menanyakan apakah Anda sudah selesai",
+      "asksAfterFromStart": "Hanya membuka video, lalu menanyakan apakah Anda sudah selesai",
+      "chooserDetail": "Perangkat Anda menanyakan aplikasi mana yang memutar setiap video",
+      "customHeader": "Pemutar kustom",
+      "addCustom": "Tambah pemutar kustom",
+      "deleteNamed": "Hapus ${name}",
+      "form": {
+        "title": "Tambah pemutar kustom",
+        "name": "Nama",
+        "nameHint": "Pemutar saya",
+        "program": "Program",
+        "programHint": "mpv, atau jalur lengkap program",
+        "arguments": "Argumen",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} adalah tautan video, {title} judulnya, {start} posisi mulainya dalam detik, dan {subtitle} tautan subtitel pertama.",
+        "urlTemplate": "Template URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} adalah tautan video yang dienkode untuk URL, dan {url_raw} adalah tautan apa adanya.",
+        "packageName": "Nama paket",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Tambah",
+        "cancel": "Batal",
+        "nameMissing": "Beri nama pemutar.",
+        "programMissing": "Masukkan program yang akan dijalankan.",
+        "urlTemplateMissing": "Masukkan template URL.",
+        "packageNameMissing": "Masukkan nama paket aplikasi.",
+        "argumentsNeedUrl": "Argumen harus berisi {url}.",
+        "urlTemplateNeedsUrl": "Template URL harus berisi {url} atau {url_raw}.",
+        "packageNameInvalid": "Itu bukan nama paket yang valid, misalnya org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Panduan TV",
+    "today": "Hari ini",
+    "tomorrow": "Besok",
+    "yesterday": "Kemarin",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Sedang tayang",
+    "now": "Sekarang",
+    "noProgrammes": "Tidak ada info acara",
+    "noChannels": "Panduan ini tidak memiliki saluran untuk hari tersebut.",
+    "noGuide": "Tidak ada add-on terpasang yang menyediakan panduan TV.",
+    "failed": "Panduan tidak dapat dimuat: ${reason}",
+    "cast": "Dibintangi ${names}",
+    "directors": "Disutradarai oleh ${names}"
+  },
+  "calendar": {
+    "title": "Kalender",
+    "previousMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya",
+    "today": "Hari ini",
+    "tomorrow": "Besok",
+    "emptyLibrary": "Tambahkan serial ke pustaka untuk melihat episodenya di sini.",
+    "noAddon": "Tidak ada add-on Anda yang memiliki kalender untuk serial di pustaka Anda.",
+    "emptyMonth": "Tidak ada episode.",
+    "newEpisodes": {
+      "other": "${n} episode baru"
+    },
+    "episodes": {
+      "other": "${n} episode"
+    }
+  },
+  "watchlist": {
+    "lists": "Daftar tontonan pelacak",
+    "hint": "Setiap daftar ada di akun Anda pada layanan itu. Pustaka Anda tidak berubah.",
+    "add": "Tambahkan ke ${list}",
+    "remove": "Hapus dari ${list}",
+    "trakt": "Daftar Tontonan Trakt",
+    "simkl": "Simkl: Ingin ditonton",
+    "mdblist": "Daftar Tontonan MDBList",
+    "myAnimeList": "MyAnimeList: Ingin ditonton",
+    "aniList": "AniList: Direncanakan",
+    "saving": "Menyimpan…",
+    "queued": "Belum terkirim, akan dicoba lagi",
+    "failed": "Tidak tersimpan",
+    "addFailed": "Tidak dapat menambahkan ${title} ke ${list}.",
+    "removeFailed": "Tidak dapat menghapus ${title} dari ${list}."
+  },
+  "collections": {
+    "needsAddon": "Memerlukan add-on ${name}",
+    "needsCatalog": "${addon} tidak punya katalog ${catalog}",
+    "needsFilter": "Memerlukan filter yang tidak bisa diatur Tortuga",
+    "traktUnavailable": "Daftar Trakt tidak tersedia di versi aplikasi ini",
+    "tooLarge": "“${title}” terlalu besar untuk disinkronkan",
+    "kind": {
+      "tmdbList": "Daftar TMDB",
+      "tmdbCollection": "Koleksi TMDB",
+      "tmdbCompany": "Perusahaan TMDB",
+      "tmdbNetwork": "Jaringan TMDB",
+      "tmdbDiscover": "Jelajah TMDB",
+      "tmdbPerson": "Tokoh TMDB",
+      "tmdbDirector": "Sutradara TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "Penyedia tak dikenal “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "other": "Menambahkan ${n} koleksi"
+      },
+      "replaces": {
+        "other": "Mengganti ${n} koleksi dengan id yang sama"
+      },
+      "needsAddon": {
+        "other": "${n} sumber memerlukan add-on ${name}"
+      },
+      "needsTracker": {
+        "other": "${n} sumber memerlukan ${service} terhubung"
+      },
+      "unsupported": {
+        "other": "${kind}: ${n} sumber dilewati"
+      },
+      "unsupportedHint": "Tortuga membaca katalog add-on dan daftar tracker, bukan sumber ini. Gunakan katalog add-on sebagai gantinya, seperti milik AIOMetadata atau MDBList.",
+      "folderDropped": "Folder “${folder}” di “${collection}” dilewati: tidak ada sumbernya yang bisa dibaca",
+      "collectionDropped": "Koleksi “${title}” dilewati: tidak ada foldernya yang bisa dibaca",
+      "tooLarge": "Koleksi “${title}” tidak diimpor: terlalu besar untuk disinkronkan"
+    },
+    "refused": {
+      "notJson": "Ini bukan file koleksi: bukan JSON.",
+      "notList": "Ini bukan file koleksi: tidak berisi daftar koleksi.",
+      "empty": "File ini tidak berisi koleksi.",
+      "collectionInvalid": "Koleksi ${position} dalam file tidak bisa dibaca.",
+      "collectionNoId": "Koleksi ${position} dalam file tidak punya id.",
+      "collectionNoTitle": "Koleksi ${id} tidak punya judul.",
+      "duplicateCollection": "Dua koleksi dalam file punya id ${id}.",
+      "noFolders": "Koleksi “${collection}” tidak punya daftar folder.",
+      "folderInvalid": "Folder ${position} di “${collection}” tidak bisa dibaca.",
+      "folderNoId": "Folder ${position} di “${collection}” tidak punya id.",
+      "folderNoTitle": "Folder ${id} di “${collection}” tidak punya judul.",
+      "duplicateFolder": "Dua folder di “${collection}” punya id ${id}.",
+      "noSources": "Folder “${folder}” di “${collection}” tidak punya daftar sumber.",
+      "unknownShape": "Folder “${folder}” di “${collection}” punya bentuk ubin yang tidak dikenal: ${shape}.",
+      "sourceInvalid": "Sumber ${position} dari folder “${folder}” di “${collection}” tidak lengkap."
+    },
+    "row": "Koleksi",
+    "rowSource": {
+      "other": "Koleksi · ${n} folder"
+    },
+    "folder": {
+      "all": "Semua",
+      "empty": "Tidak ada judul di sini",
+      "goToTrackers": "Buka Pelacak",
+      "goToAddons": "Buka Add-on"
+    },
+    "importing": {
+      "title": "Impor koleksi",
+      "note": "File koleksi dari Nuvio atau AIOMetadata: masukkan tautannya atau buka filenya. Koleksi dengan id yang sama dengan salah satu koleksi Anda akan menggantikannya.",
+      "urlLabel": "Tautan",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Ambil",
+      "openFile": "Buka file",
+      "confirm": "Impor",
+      "done": "Selesai",
+      "rowNew": {
+        "other": "Baru · ${n} folder"
+      },
+      "rowReplaces": {
+        "other": "Menggantikan milik Anda · ${n} folder"
+      },
+      "imported": {
+        "other": "${n} koleksi diimpor"
+      },
+      "notWeb": "Masukkan tautan yang diawali http:// atau https://.",
+      "tooLarge": "File ini lebih besar dari 4 MB.",
+      "httpError": "Tautan menjawab dengan galat ${status}.",
+      "timeout": "Tautan tidak menjawab tepat waktu.",
+      "unreachable": "Tautan tidak dapat dijangkau. Periksa tautan dan koneksi Anda.",
+      "unreadable": "File ini tidak bisa dibaca sebagai teks.",
+      "failed": "Koleksi tidak dapat disimpan."
+    },
+    "editor": {
+      "newHeading": "Koleksi baru",
+      "editHeading": "Edit koleksi",
+      "titleLabel": "Judul",
+      "view": "Tampilan",
+      "viewHint": "Cara folder menampilkan sumbernya",
+      "viewTabs": "Tab",
+      "viewRows": "Baris",
+      "viewFollow": "Ikuti aplikasi",
+      "allTab": "Tab Semua",
+      "allTabHint": "Tab pertama dengan judul dari semua sumber",
+      "foldersHeader": "Folder",
+      "addFolder": "Tambah folder",
+      "noFolders": "Belum ada folder",
+      "sources": {
+        "other": "${n} sumber"
+      },
+      "save": "Simpan",
+      "newFolder": "Folder baru",
+      "folderTitleLabel": "Judul",
+      "shape": "Bentuk ubin",
+      "shapePoster": "Poster",
+      "shapeLandscape": "Lanskap",
+      "shapeSquare": "Persegi",
+      "coverLabel": "Tautan gambar sampul",
+      "coverHint": "https://…",
+      "hideTitle": "Sembunyikan judul",
+      "hideTitleHint": "Ubin hanya menampilkan sampulnya",
+      "sourcesHeader": "Sumber",
+      "addSource": "Tambah sumber",
+      "noSources": "Belum ada sumber",
+      "deleteNamed": "Hapus ${name}",
+      "removeNamed": "Keluarkan ${name}",
+      "noTitle": "Beri judul pada koleksi.",
+      "noFolder": "Tambahkan folder ke koleksi.",
+      "folderNoTitle": "Beri judul pada folder ${position}.",
+      "folderNoSource": "Tambahkan sumber ke “${folder}”.",
+      "saveFailed": "Koleksi tidak dapat disimpan.",
+      "discardTitle": "Buang perubahan?",
+      "discard": "Buang",
+      "keepEditing": "Lanjutkan mengedit",
+      "picker": {
+        "addons": "Katalog add-on",
+        "trackers": "Pelacak",
+        "noAddons": "Tidak ada add-on terpasang yang punya katalog untuk ditambahkan.",
+        "noTrackers": "Hubungkan pelacak di Pengaturan → Pelacak untuk menambahkan daftarnya.",
+        "listsFailed": "Daftar ${service} tidak bisa dibaca sekarang.",
+        "byLink": "Daftar ${service} lewat tautannya",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Tambah",
+        "notAList": "Ini bukan tautan ke daftar ${service}.",
+        "notFound": "${service} tidak punya daftar di tautan ini.",
+        "unreachable": "${service} tidak dapat dijangkau sekarang."
+      }
+    }
+  }
+}

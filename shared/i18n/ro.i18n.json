@@ -1,0 +1,2119 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Caută actualizări…",
+    "launchFailed": "Tortuga nu a putut porni.",
+    "startup": {
+      "database": "Se deschide baza de date…",
+      "migration": "Se actualizează baza de date…",
+      "account": "Se încarcă contul tău…",
+      "profiles": "Se încarcă profilurile…"
+    },
+    "localNetworkUsage": "Tortuga folosește rețeaua locală pentru a accesa extensii, conținut media și un server de sincronizare pe care îl rulezi acasă."
+  },
+  "player": {
+    "nowPlaying": "Se redă acum",
+    "buffering": "Se încarcă…",
+    "position": "${position} / ${duration}",
+    "timeline": "Poziția redării",
+    "play": "Redă",
+    "pause": "Pauză",
+    "resolving": "Se pregătește stream-ul…",
+    "opening": "Se deschide…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LIVE",
+      "position": "Live · urmărit ${time}",
+      "behind": "Live · ${time} în urmă",
+      "goToLive": "Treci la live"
+    },
+    "nextEpisode": "Episodul următor",
+    "previousEpisode": "Episodul anterior",
+    "lock": {
+      "button": "Blochează ecranul",
+      "tapToUnlock": "Atinge pentru deblocare",
+      "tapAgainToUnlock": "Atinge din nou pentru deblocare"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normală",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volum",
+      "level": "${percent}%",
+      "muted": "Fără sunet",
+      "mute": "Oprește sunetul",
+      "unmute": "Pornește sunetul"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Subtitrări",
+      "speed": "Viteză de redare",
+      "subtitleDelay": "Întârziere subtitrări",
+      "audioDelay": "Întârziere audio",
+      "moreSubtitles": "Mai multe subtitrări",
+      "reset": "Resetează",
+      "subtitleDelayEarlier": "Întârziere subtitrări: mai devreme",
+      "subtitleDelayLater": "Întârziere subtitrări: mai târziu",
+      "audioDelayEarlier": "Întârziere audio: mai devreme",
+      "audioDelayLater": "Întârziere audio: mai târziu"
+    },
+    "track": {
+      "off": "Dezactivat",
+      "numbered": "Pista ${number}",
+      "defaultTrack": "Implicită",
+      "forced": "Forțată",
+      "sdh": "SDH",
+      "audioDescription": "Descriere audio",
+      "external": "Externă",
+      "second": "A doua subtitrare",
+      "showAsSecond": "Afișează ca a doua subtitrare",
+      "removeSecond": "Elimină a doua subtitrare",
+      "otherLanguage": "Altele",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} canal",
+        "few": "${n} canale",
+        "other": "${n} de canale"
+      }
+    },
+    "info": {
+      "title": "Informații redare",
+      "tab": "Info",
+      "resolution": "Rezoluție",
+      "video": "Video",
+      "dynamicRange": "Gamă dinamică",
+      "audio": "Audio",
+      "decoder": "Decodor",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hardware (${name})",
+      "softwareDecoder": "Software",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision, profilul ${profile}",
+      "stream": "Stream",
+      "addon": "Extensie",
+      "pickedBy": "Ales prin",
+      "autoPlayFirstMatch": "Redare automată, prima potrivire",
+      "autoPlayLastLink": "Redare automată, același stream ca data trecută",
+      "source": "Sursă",
+      "downloaded": "Descărcat",
+      "name": "Nume",
+      "file": "Fișier",
+      "container": "Container",
+      "fileSize": "Mărime",
+      "bitrate": "Rată de biți",
+      "codec": "Codec",
+      "pixelFormat": "Format pixeli",
+      "bitDepth": "${bits} biți",
+      "color": "Culoare",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} cd/m²",
+      "mastering": "Ecran de masterizare",
+      "nitsRange": "${min}–${max} cd/m²",
+      "droppedFrames": "Cadre pierdute",
+      "droppedFramesValue": "${output} (decodor ${decoder})",
+      "delayedFrames": "Cadre întârziate",
+      "output": "Ieșire",
+      "hertz": "${value} Hz",
+      "channels": "Canale",
+      "sampleRate": "Rată de eșantionare",
+      "track": "Pistă",
+      "secondTrack": "A doua pistă",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Audio spațial",
+      "rendering": "Randare",
+      "surround": "Surround",
+      "subtitles": "Subtitrări",
+      "format": "Format",
+      "embedded": "Încorporată",
+      "delay": "Întârziere",
+      "network": "Rețea",
+      "downloadSpeed": "Viteză de descărcare",
+      "buffering": "Se încarcă",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Omite introducerea",
+      "recap": "Omite rezumatul",
+      "credits": "Omite genericul"
+    },
+    "prompt": {
+      "playNext": "Redă episodul următor: ${episode}",
+      "countdown": {
+        "one": "Automat peste ${n} secundă",
+        "few": "Automat peste ${n} secunde",
+        "other": "Automat peste ${n} de secunde"
+      }
+    },
+    "options": {
+      "title": "Opțiuni",
+      "videoFit": "Raport de aspect",
+      "fit": {
+        "contain": "Cu benzi negre",
+        "cover": "Umple ecranul",
+        "fill": "Întinde"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent}%",
+      "resetZoom": "Resetează",
+      "shaders": "Shadere",
+      "shader": {
+        "nvscalerDetail": "Scalare a imaginii NVIDIA pentru un video mai clar",
+        "neutral": "Neutru",
+        "denoise": "Reducere zgomot",
+        "denoiseSharpen": "Reducere zgomot + claritate",
+        "fast": "Rapid",
+        "highQuality": "Calitate înaltă",
+        "modeDetail": "${quality} · Modul ${mode}",
+        "customDetail": "Shader GLSL personalizat",
+        "importShader": "Importă un shader",
+        "imported": "Shader importat",
+        "importFailed": "Shaderul nu a putut fi importat",
+        "deleteLabel": "Șterge ${name}",
+        "deleteTitle": "Ștergi ${name}?",
+        "delete": "Șterge",
+        "cancel": "Anulează"
+      },
+      "sleepTimer": "Temporizator de oprire",
+      "sleepEndOfVideo": "Sfârșitul videoclipului curent",
+      "sleepMinutes": {
+        "one": "${n} minut",
+        "few": "${n} minute",
+        "other": "${n} de minute"
+      },
+      "sleepLeft": "${time} rămase",
+      "autoPlayNext": "Redă automat episodul următor",
+      "audioOutput": "Ieșire audio",
+      "systemOutput": "Ieșirea implicită",
+      "audioNormalization": "Normalizează volumul",
+      "audioChannels": "Canale audio",
+      "channels": {
+        "original": "Originale",
+        "originalDetail": "Redă toate canalele pistei",
+        "surround51": "Până la 5.1",
+        "surround51Detail": "Reduce 7.1 la 5.1 pentru televizoarele și receiverele care acceptă doar 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Reduce la două canale pentru boxe stereo sau căști"
+      },
+      "on": "Activat",
+      "off": "Dezactivat"
+    },
+    "stillWatching": {
+      "title": "Încă te uiți?",
+      "countdown": {
+        "one": "Pauză peste ${n} secundă",
+        "few": "Pauză peste ${n} secunde",
+        "other": "Pauză peste ${n} de secunde"
+      },
+      "keepWatching": "Continuă",
+      "pause": "Pauză"
+    },
+    "error": {
+      "title": "Stream-ul nu poate fi redat",
+      "resolveTimeout": "Pornirea stream-ului a durat prea mult.",
+      "expired": "Linkul stream-ului a expirat.",
+      "notFound": "Stream-ul nu mai este disponibil.",
+      "http": "Serverul a răspuns cu HTTP ${status}.",
+      "cantOpen": "Stream-ul nu a putut fi deschis.",
+      "unsupportedFormat": "Stream-ul are un format pe care playerul nu îl poate citi.",
+      "cantDecode": "Playerul nu a putut reda imaginea sau sunetul acestui stream.",
+      "engineFailed": "Playerul s-a oprit din cauza unei erori.",
+      "retry": "Reîncearcă",
+      "nextStream": "Încearcă stream-ul următor",
+      "close": "Închide",
+      "alternatives": {
+        "one": "Mai este disponibil ${n} stream",
+        "few": "Mai sunt disponibile ${n} stream-uri",
+        "other": "Mai sunt disponibile ${n} de stream-uri"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Acesta nu e episodul",
+      "titleMovie": "Acesta nu e filmul",
+      "titleVideo": "Acesta nu e videoclipul",
+      "sent": "Extensia a trimis un videoclip de eroare în locul stream-ului.",
+      "byUrl": "Linkul său este unul dintre videoclipurile de eroare ale unei extensii.",
+      "bySize": "Fișierul are ${served}, deși stream-ul indica ${size}.",
+      "byDuration": "Durează ${length}, deși acest videoclip dura ${known} ultima dată când l-ai redat.",
+      "kept": "Progresul tău este păstrat.",
+      "chooseStream": "Alege alt stream",
+      "watch": "Vezi mesajul"
+    },
+    "osd": {
+      "volume": "Volum ${level}",
+      "brightness": "Luminozitate ${level}",
+      "speed": "Viteză: ${speed}",
+      "subtitleDelay": "Întârziere subtitrări ${delay}",
+      "audioDelay": "Întârziere audio ${delay}",
+      "audioTrack": "Audio: ${track}",
+      "subtitleTrack": "Subtitrări: ${track}",
+      "subtitlesOff": "Subtitrări dezactivate",
+      "chapter": "Capitol: ${title}",
+      "chapterNumbered": "Capitolul ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shadere: ${name}",
+      "shadersOff": "Shadere dezactivate"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Se deschide stream-ul…",
+    "resolveFailed": {
+      "http": "Serverul stream-ului a răspuns cu HTTP ${status}",
+      "timeout": "Serverul stream-ului nu a răspuns la timp",
+      "network": "Nu s-a putut face conexiunea cu serverul stream-ului",
+      "unsupportedUrl": "Linkul acestui stream nu poate fi deschis",
+      "tooManyRedirects": "Linkul acestui stream redirecționează de prea multe ori",
+      "unexpected": "Aplicația a întâmpinat o eroare la deschiderea acestui stream"
+    },
+    "badge": {
+      "instant": "Instant",
+      "notInstant": "Non-instant"
+    },
+    "lastUsed": "Redat ultima dată",
+    "external": "Se deschide în afara aplicației",
+    "unplayable": {
+      "one": "${n} stream pe care aplicația nu îl poate reda",
+      "few": "${n} stream-uri pe care aplicația nu le poate reda",
+      "other": "${n} de stream-uri pe care aplicația nu le poate reda"
+    },
+    "empty": "Niciun stream găsit",
+    "all": "Toate",
+    "refresh": "Reîmprospătează",
+    "retryNamed": "Reîncearcă ${name}",
+    "filters": {
+      "hidden": {
+        "one": "${n} stream ascuns de filtrele tale",
+        "few": "${n} stream-uri ascunse de filtrele tale",
+        "other": "${n} de stream-uri ascunse de filtrele tale"
+      },
+      "showing": {
+        "one": "Se afișează ${n} stream ascuns de filtrele tale",
+        "few": "Se afișează ${n} stream-uri ascunse de filtrele tale",
+        "other": "Se afișează ${n} de stream-uri ascunse de filtrele tale"
+      },
+      "show": "Afișează",
+      "hide": "Ascunde",
+      "rowNote": "Ascuns de filtrele tale"
+    },
+    "sort": {
+      "title": "Sortare",
+      "addonOrder": "Ordinea extensiilor",
+      "resolution": "Rezoluție",
+      "source": "Calitatea sursei",
+      "sizeLargest": "Cele mai mari întâi",
+      "sizeSmallest": "Cele mai mici întâi",
+      "cached": "Instant întâi"
+    },
+    "autoPlay": {
+      "noMatch": "Redarea automată nu a găsit niciun stream care să treacă de filtrele tale.",
+      "failed": "Stream-ul ales de redarea automată nu a pornit. Alege altul."
+    },
+    "download": {
+      "notice": "Alege stream-ul de descărcat.",
+      "action": "Descarcă",
+      "actionNamed": "Descarcă ${name}",
+      "queued": "Adăugat la Descărcări",
+      "failed": "Descărcarea nu a putut fi adăugată."
+    },
+    "suggested": {
+      "label": "Sugerat",
+      "reason": "Ca alegerile tale recente: ${features}",
+      "audio": "audio: ${language}",
+      "subtitles": "subtitrări: ${language}",
+      "smaller": "fișiere mai mici",
+      "larger": "fișiere mai mari"
+    }
+  },
+  "detail": {
+    "loadFailed": "Detaliile nu au putut fi încărcate.",
+    "notFound": "Nicio extensie nu are detalii pentru acest titlu.",
+    "noAddons": "Niciuna dintre extensiile instalate nu are detalii pentru acest titlu.",
+    "noAnimeAddon": "Niciuna dintre extensiile instalate nu are detalii pentru acest anime. Instalează o extensie pentru anime ca să-l deschizi.",
+    "animeListsUnavailable": "Listele de anime nu s-au încărcat, așa că acest anime nu poate fi asociat cu un titlu. Verifică conexiunea și încearcă din nou.",
+    "findingAnime": "Se caută acest anime în listele de anime…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} h ${minutes} min",
+      "hours": "${hours} h",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Criticii Rotten Tomatoes",
+        "rottenTomatoesAudience": "Publicul Rotten Tomatoes",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} la sută"
+    },
+    "userRating": {
+      "rateLabel": "Evaluează acest titlu",
+      "label": "Nota ta: ${score}",
+      "range": "${low}–${high}",
+      "title": "Nota ta",
+      "hint": "Nota ta ajunge la fiecare serviciu de mai jos.",
+      "clear": "Elimină nota",
+      "checking": "Se verifică…",
+      "notRated": "Fără notă",
+      "unreadable": "Nu s-a putut verifica",
+      "saving": "Se salvează…",
+      "saved": "Salvată",
+      "removed": "Eliminată",
+      "queued": "Netrimisă încă, se va reîncerca",
+      "failed": "Nesalvată"
+    },
+    "links": {
+      "genres": "Genuri",
+      "cast": "Distribuție",
+      "directors": "Regizori",
+      "writers": "Scenariști",
+      "website": "Site web"
+    },
+    "facts": {
+      "title": "Informații",
+      "released": "Data lansării",
+      "runtime": "Durată",
+      "country": "Țară",
+      "language": "Limbă",
+      "awards": "Premii",
+      "source": "Detalii de la",
+      "failed": "Nu s-a putut încărca de la"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailere",
+    "share": "Distribuie",
+    "season": "Sezonul ${number}",
+    "specials": "Speciale",
+    "episodeNumbered": "Episodul ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Cu ${names}",
+    "castAndCrew": "Distribuție și echipă",
+    "airs": "Apare pe ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "ian.",
+      "feb": "feb.",
+      "mar": "mar.",
+      "apr": "apr.",
+      "may": "mai",
+      "jun": "iun.",
+      "jul": "iul.",
+      "aug": "aug.",
+      "sep": "sept.",
+      "oct": "oct.",
+      "nov": "nov.",
+      "dec": "dec."
+    },
+    "play": "Redă",
+    "playEpisode": "Redă ${episode}",
+    "resume": "Reia de la ${time}",
+    "resumeEpisode": "Reia ${episode} · ${time}",
+    "addToLibrary": "Adaugă în bibliotecă",
+    "removeFromLibrary": "Elimină din bibliotecă",
+    "markWatched": "Marchează ca vizionat",
+    "markUnwatched": "Marchează ca nevizionat",
+    "markAllWatched": "Marchează toate episoadele ca vizionate",
+    "markAllUnwatched": "Marchează toate episoadele ca nevizionate",
+    "markSeasonWatched": "Marchează sezonul ca vizionat",
+    "markSeasonUnwatched": "Marchează sezonul ca nevizionat",
+    "watched": "Vizionat",
+    "overviewHidden": "Descriere ascunsă",
+    "moreActions": "Mai multe acțiuni",
+    "moreActionsNamed": "Mai multe acțiuni pentru ${name}",
+    "showMore": "Mai mult",
+    "showLess": "Mai puțin",
+    "findingStream": "Se caută un stream…",
+    "chooseStream": "Alege un stream",
+    "download": {
+      "download": "Descarcă",
+      "queued": "În coadă",
+      "waitingForWifi": "Se așteaptă Wi-Fi",
+      "downloading": "Se descarcă ${percent}%",
+      "downloadingStarted": "Se descarcă…",
+      "paused": "În pauză",
+      "failed": "Descărcarea a eșuat",
+      "partial": "${done} din ${total} descărcate",
+      "downloaded": "Descărcat",
+      "menuTitle": "Descărcare",
+      "allSeasons": "Toate sezoanele",
+      "pick": {
+        "all": "Toate episoadele",
+        "unwatched": "Episoadele nevizionate",
+        "next5": "Următoarele 5 nevizionate",
+        "next10": "Următoarele 10 nevizionate"
+      },
+      "keepSynced": "Sincronizare automată",
+      "keepSyncedCount": {
+        "one": "Păstrează ${n} episod nevizionat",
+        "few": "Păstrează ${n} episoade nevizionate",
+        "other": "Păstrează ${n} de episoade nevizionate"
+      },
+      "keepSyncedAll": "Păstrează toate episoadele nevizionate",
+      "manage": "Gestionează descărcările",
+      "pauseAll": "Întrerupe descărcările",
+      "resumeAll": "Reia descărcările",
+      "deleteSeason": "Șterge descărcările acestui sezon",
+      "deleteAll": "Șterge toate descărcările",
+      "queuedEpisodes": {
+        "one": "${n} episod adăugat la Descărcări",
+        "few": "${n} episoade adăugate la Descărcări",
+        "other": "${n} de episoade adăugate la Descărcări"
+      },
+      "nothingQueued": "Toate episoadele sunt deja descărcate sau în coadă.",
+      "failedToQueue": "Descărcările nu au putut fi adăugate.",
+      "episode": {
+        "download": "Descarcă episodul",
+        "pause": "Întrerupe descărcarea",
+        "resume": "Reia descărcarea",
+        "retry": "Reîncearcă descărcarea",
+        "pickStream": "Alege un stream",
+        "cancel": "Anulează descărcarea",
+        "delete": "Șterge descărcarea",
+        "queued": "În coadă",
+        "downloading": "${percent}%",
+        "paused": "În pauză",
+        "failed": "Descărcarea a eșuat",
+        "downloaded": "Descărcat"
+      }
+    },
+    "related": {
+      "title": "Titluri similare",
+      "noneFound": "Nu s-au găsit titluri similare."
+    }
+  },
+  "library": {
+    "title": "Bibliotecă",
+    "continueWatching": "Continuă vizionarea",
+    "sort": {
+      "lastWatched": "Vizionate recent",
+      "added": "Adăugate recent",
+      "name": "Titlu A–Z",
+      "nameReverse": "Titlu Z–A",
+      "timesWatched": "Cele mai vizionate",
+      "watched": "Întâi cele vizionate",
+      "notWatched": "Întâi cele nevizionate"
+    },
+    "sortBy": "Sortează după",
+    "sortByNamed": "Sortează după: ${name}",
+    "empty": "Nimic aici deocamdată. Adaugă titluri în bibliotecă din pagina lor de detalii.",
+    "emptyContinueWatching": "Nimic de continuat. Titlurile apar aici după ce începi să le vizionezi.",
+    "emptyType": "Nimic de acest tip aici.",
+    "watched": "Vizionat"
+  },
+  "mediaMenu": {
+    "markWatched": "Marchează ca vizionat",
+    "markUnwatched": "Marchează ca nevizionat",
+    "removeFromContinueWatching": "Elimină din Continuă vizionarea",
+    "details": "Vezi detaliile",
+    "addToLibrary": "Adaugă în bibliotecă",
+    "removeFromLibrary": "Elimină din bibliotecă",
+    "playFromStart": "Redă de la început",
+    "markSeasonWatched": "Marchează sezonul ca vizionat",
+    "markSeasonUnwatched": "Marchează sezonul ca nevizionat",
+    "chooseStream": "Alege un stream",
+    "download": "Descarcă",
+    "pauseDownload": "Întrerupe descărcarea",
+    "resumeDownload": "Reia descărcarea",
+    "retryDownload": "Reîncearcă descărcarea",
+    "cancelDownload": "Anulează descărcarea",
+    "deleteDownload": "Șterge descărcarea",
+    "pickStream": "Alege un stream",
+    "trailer": "Trailer",
+    "markFailed": "${title} nu a putut fi marcat: detaliile nu s-au încărcat. Verifică conexiunea și încearcă din nou."
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Extensiile instalate nu au putut fi citite. Repornește Tortuga ca să încerci din nou.",
+    "error": {
+      "invalidTransportUrl": "Acesta nu este un link de extensie. Linkurile de extensie se termină cu /manifest.json.",
+      "timeout": "Extensia nu a răspuns la timp.",
+      "network": "Extensia nu a putut fi accesată.",
+      "http": "Extensia a returnat o eroare (HTTP ${status}).",
+      "invalidResponse": "Extensia a trimis un răspuns pe care aplicația nu îl poate citi.",
+      "unexpectedResponse": "Extensia a trimis alt tip de răspuns decât cel solicitat.",
+      "emptyContent": "Nu s-a găsit nimic.",
+      "invalidManifest": "Manifestul extensiei nu este valid.",
+      "configurationRequired": "Această extensie trebuie configurată înainte de a putea fi instalată.",
+      "alreadyInstalled": "Această extensie este deja instalată.",
+      "notInstalled": "Această extensie nu este instalată.",
+      "protectedAddon": "Această extensie este integrată și nu poate fi eliminată sau dezactivată."
+    },
+    "title": "Extensii",
+    "allTypes": "Toate",
+    "empty": "Nicio extensie instalată.",
+    "emptyFiltered": "Nicio extensie instalată nu are acest tip.",
+    "builtIn": "Integrată",
+    "builtInExplanation": "Această extensie este integrată și nu poate fi eliminată sau dezactivată.",
+    "cancel": "Anulează",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Mută în sus",
+    "moveUpNamed": "Mută ${name} în sus",
+    "moveDown": "Mută în jos",
+    "moveDownNamed": "Mută ${name} în jos",
+    "dragToReorderNamed": "Reordonează ${name}",
+    "enabledNamed": "Folosește ${name}",
+    "close": "Închide",
+    "version": "Versiunea ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Cataloage",
+      "meta": "Detalii",
+      "stream": "Stream-uri",
+      "subtitles": "Subtitrări",
+      "addonCatalog": "Cataloage de extensii",
+      "player": "Activitate de redare",
+      "library": "Activitatea bibliotecii"
+    },
+    "remove": {
+      "title": "Elimini ${name}?",
+      "message": "Va fi eliminată din acest profil pe toate dispozitivele, împreună cu setările cu care a fost configurată.",
+      "confirm": "Elimină"
+    },
+    "details": {
+      "types": "Tipuri",
+      "resources": "Oferă",
+      "catalogs": "Cataloage",
+      "contact": "Contact",
+      "configure": "Configurează",
+      "remove": "Elimină",
+      "enabled": "Folosește această extensie",
+      "enabledOff": "Dezactivată: Tortuga nu îi cere nimic și nu îi afișează cataloagele.",
+      "shareTitle": "Linkul extensiei",
+      "shareWarning": "Acest link poate conține cheile conturilor cu care a fost configurată extensia. Distribuie-l doar persoanelor în care ai încredere.",
+      "revealLink": "Afișează linkul",
+      "hideLink": "Ascunde linkul",
+      "copyLink": "Copiază linkul",
+      "linkCopied": "Link copiat."
+    },
+    "watchActivity": {
+      "title": "Trimite activitatea de vizionare",
+      "explanation": "Această extensie primește activitatea ta de vizionare: ce redai, pui pe pauză și oprești, ce adaugi în bibliotecă sau elimini din ea și ce marchezi ca vizionat.",
+      "agree": "Sunt de acord ca această extensie să primească activitatea mea de vizionare",
+      "notAllowed": "Nu primește activitate de vizionare până nu o permiți"
+    },
+    "install": {
+      "action": "Instalează extensie",
+      "title": "Instalează o extensie",
+      "linkHint": "Linkul extensiei, terminat în /manifest.json",
+      "submit": "Continuă",
+      "confirm": "Instalează",
+      "update": "Actualizează",
+      "configure": "Configurează",
+      "configureFirst": "Această extensie trebuie configurată înainte de a putea fi instalată. Configureaz-o, apoi instaleaz-o din pagina ei.",
+      "alreadyInstalled": "Această extensie este deja instalată.",
+      "updateDetails": "Este deja instalată. Actualizarea îi reîmprospătează detaliile.",
+      "updateVersion": "Este deja instalată. Actualizarea o aduce la versiunea ${version}.",
+      "adult": "Această extensie este marcată ca având conținut pentru adulți.",
+      "installed": "S-a instalat ${name}.",
+      "updated": "S-a actualizat ${name}.",
+      "done": "Gata"
+    },
+    "browse": {
+      "title": "Răsfoiește",
+      "installed": "Instalate",
+      "installedNote": "Instalat"
+    }
+  },
+  "settings": {
+    "title": "Setări",
+    "automatic": "Automat",
+    "listSeparator": ", ",
+    "cancel": "Anulează",
+    "close": "Închide",
+    "increaseNamed": "Mărește ${name}",
+    "decreaseNamed": "Micșorează ${name}",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "one": "${n} secundă",
+        "few": "${n} secunde",
+        "other": "${n} de secunde"
+      }
+    },
+    "time": {
+      "justNow": "chiar acum",
+      "minutesAgo": {
+        "one": "acum un minut",
+        "few": "acum ${n} minute",
+        "other": "acum ${n} de minute"
+      },
+      "hoursAgo": {
+        "one": "acum o oră",
+        "few": "acum ${n} ore",
+        "other": "acum ${n} de ore"
+      },
+      "daysAgo": {
+        "one": "acum o zi",
+        "few": "acum ${n} zile",
+        "other": "acum ${n} de zile"
+      },
+      "monthsAgo": {
+        "one": "acum o lună",
+        "few": "acum ${n} luni",
+        "other": "acum ${n} de luni"
+      },
+      "yearsAgo": {
+        "one": "acum un an",
+        "few": "acum ${n} ani",
+        "other": "acum ${n} de ani"
+      }
+    },
+    "sections": {
+      "playback": "Redare",
+      "playbackSummary": "Limbi, prag de vizionare, episodul următor și omitere",
+      "device": "Acest dispozitiv",
+      "deviceSummary": "Decodare, HDR, rată de cadre, audio, cache și rapoarte de blocare",
+      "subtitles": "Subtitrări",
+      "subtitlesSummary": "Mărime, culoare, contur și poziție pe acest dispozitiv",
+      "addons": "Extensii",
+      "addonsSummary": {
+        "one": "${n} extensie instalată",
+        "few": "${n} extensii instalate",
+        "other": "${n} de extensii instalate"
+      },
+      "addonsSummaryLoading": "Extensii instalate",
+      "home": "Acasă",
+      "homeSummary": "Ce rânduri apar în Acasă și în ce ordine",
+      "appearance": "Aspect",
+      "appearanceSummary": "Limbă, postere și titluri vizionate",
+      "trackers": "Trackere",
+      "trackersSummary": "Scrobbling, istoricul vizionărilor și liste",
+      "trackersConnected": "Conectat la ${services}",
+      "account": "Cont",
+      "about": "Despre",
+      "downloads": "Descărcări",
+      "downloadsSummary": "Locație, doar prin Wi-Fi și stocare",
+      "data": "Export și import",
+      "dataSummary": "Datele profilurilor tale într-un fișier și înapoi"
+    },
+    "profile": {
+      "locked": "Blocat cu PIN",
+      "unlocked": "Fără PIN",
+      "edit": "Editează profilul",
+      "manage": "Schimbă sau gestionează profilurile"
+    },
+    "about": {
+      "version": "Versiunea ${version}",
+      "license": "Tortuga este distribuit sub licența GNU General Public License, versiunea 3. Îl poți rula, studia, distribui și modifica, iar oricine îți dă o copie trebuie să-ți ofere și codul sursă.",
+      "source": "Cod sursă",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga folosește Trakt, dar nu este aprobat sau certificat de Trakt.",
+      "notices": "Software terț",
+      "noticeLink": "Pagina proiectului"
+    },
+    "appearance": {
+      "interfaceLanguage": "Limba aplicației",
+      "interfaceLanguageHint": "Limba meniurilor și a mesajelor aplicației",
+      "interfaceLanguageSystem": "Limba sistemului",
+      "blurUnwatched": "Estompează episoadele nevizionate",
+      "blurUnwatchedHint": "Estompează imaginile și ascunde descrierile episoadelor pe care nu le-ai început, ca să nu dezvăluie nimic",
+      "hideWatched": "Ascunde titlurile vizionate",
+      "hideWatchedHint": "Scoate din rândurile de pe Acasă și din Descoperă filmele și serialele pe care le-ai terminat. Un serial revine când apare un episod nou",
+      "hidePosterCaptions": "Ascunde titlurile de sub postere",
+      "hidePosterCaptionsHint": "Arată doar imaginea. Continuă vizionarea păstrează episodul și timpul rămas",
+      "posterTemplate": "Șablon URL pentru postere",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} și {tvdb_id} sunt ID-urile fiecărui titlu, {type} este movie sau series",
+      "posterTemplateNone": "Posterele addonurilor",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Nu este o adresă http sau https, deci este ignorată"
+    },
+    "home": {
+      "note": "Alege rândurile afișate în Acasă și ordinea lor. Ele aparțin acestui profil și se sincronizează pe celelalte dispozitive.",
+      "continueWatchingHint": "Mereu primul rând",
+      "rowsHeader": "Rânduri",
+      "empty": "Nicio extensie instalată nu are un catalog pentru Acasă.",
+      "reset": "Resetează la implicit",
+      "moveUp": "Mută în sus",
+      "moveUpNamed": "Mută ${name} în sus",
+      "moveDown": "Mută în jos",
+      "moveDownNamed": "Mută ${name} în jos",
+      "dragToReorder": "Trage pentru a reordona",
+      "dragToReorderNamed": "Reordonează ${name}",
+      "newCollection": "Colecție nouă",
+      "importCollections": "Importă colecții",
+      "exportCollections": "Exportă colecții",
+      "edit": "Editează",
+      "delete": "Șterge",
+      "deleteTitle": "Ștergi „${title}”?",
+      "deleteMessage": "Colecția dispare din acest profil pe toate dispozitivele tale."
+    },
+    "playback": {
+      "title": "Redare",
+      "note": "Aceste setări aparțin acestui profil și se sincronizează pe celelalte dispozitive.",
+      "languagesHeader": "Limbi",
+      "audioLanguages": "Limbi audio",
+      "audioLanguagesHint": "Ce pistă audio se redă, în ordinea preferinței",
+      "audioLanguagesNone": "Pista implicită",
+      "audioLanguagesExplanation": "Un videoclip se redă în prima dintre aceste limbi pe care o are. Dacă nu alegi niciuna, se redă pista audio implicită.",
+      "subtitleLanguages": "Limbi subtitrări",
+      "subtitleLanguagesHint": "Ce subtitrări se activează, în ordinea preferinței",
+      "subtitleLanguagesNone": "Dezactivate",
+      "subtitleLanguagesExplanation": "Se activează subtitrările în prima dintre aceste limbi pe care o are videoclipul. Dacă nu alegi niciuna, subtitrările rămân dezactivate, cu excepția celor impuse de videoclip.",
+      "secondSubtitleLanguage": "Limba celei de-a doua subtitrări",
+      "secondSubtitleLanguageHint": "Afișată în partea de sus a imaginii, împreună cu prima",
+      "secondSubtitleLanguageExplanation": "Subtitrările în această limbă apar în partea de sus a imaginii, împreună cu prima subtitrare. Dacă nu alegi niciuna, a doua subtitrare nu apare decât dacă o alegi în player.",
+      "secondSubtitleLanguageNone": "Dezactivate",
+      "showSubtitles": "Afișează subtitrările",
+      "showSubtitlesHint": "Mereu: subtitrări și în limba vorbită, întâi SDH",
+      "showSubtitlesFollowAudio": "După audio",
+      "showSubtitlesAlways": "Mereu",
+      "chosenHeader": "Limbile tale",
+      "availableHeader": "Adaugă o limbă",
+      "searchLanguages": "Caută limbi",
+      "noLanguageMatches": "Nicio limbă potrivită.",
+      "playbackHeader": "Redare",
+      "watchedThreshold": "Considerat vizionat după",
+      "watchedThresholdHint": "De unde un videoclip contează ca vizionat și Continuă vizionarea trece la episodul următor",
+      "bingeWatching": "Redă episodul următor",
+      "bingeWatchingHint": "Când se termină un episod, pornește-l pe următorul, din aceeași sursă dacă e posibil",
+      "upNextCountdown": "Timp până la episodul următor",
+      "upNextCountdownHint": "Cât așteaptă mesajul pentru episodul următor înainte să-l pornească",
+      "upNextImmediately": "Imediat",
+      "seekShort": "Salt scurt",
+      "seekShortHint": "Tastele săgeți, telecomanda și butoanele de salt din player",
+      "seekLong": "Salt lung",
+      "seekLongHint": "Shift cu tastele săgeți și apăsările lungi",
+      "videoClick": "Clic pe videoclip",
+      "videoClickHint": "Dublu clic comută în continuare ecranul complet",
+      "videoClickPause": "Pauză și redare",
+      "videoClickControls": "Afișează sau ascunde comenzile",
+      "moveUp": "Mută în sus",
+      "moveUpNamed": "Mută ${name} în sus",
+      "moveDown": "Mută în jos",
+      "moveDownNamed": "Mută ${name} în jos",
+      "removeLanguage": "Elimină",
+      "removeLanguageNamed": "Elimină ${name}",
+      "dragToReorderNamed": "Reordonează ${name}",
+      "skipping": {
+        "header": "Omitere",
+        "footer": "Introducerile, rezumatele și genericul sunt găsite după numele capitolelor unui videoclip, așa că doar videoclipurile cu capitole denumite oferă omiterea lor. O omitere automată face mai întâi o numărătoare inversă pe buton, iar orice acțiune în player o oprește.",
+        "intros": "Introduceri",
+        "introsHint": "Melodii de deschidere și secvențe de titlu",
+        "recaps": "Rezumate",
+        "recapsHint": "„Anterior în…” la începutul unui episod",
+        "credits": "Generic",
+        "creditsHint": "Genericul de final și fragmentele din episodul următor; mesajul pentru episodul următor apare odată cu acestea",
+        "off": "Dezactivat",
+        "button": "Afișează butonul",
+        "auto": "Omite automat"
+      },
+      "streams": {
+        "header": "Stream-uri",
+        "footer": "Filtrele se aplică fiecărei liste de stream-uri, care arată câte stream-uri ascund și le poate afișa oricum.",
+        "autoPlay": "Redare automată",
+        "autoPlayHint": "Sare peste lista de stream-uri la Redă, Reia, un episod și episodul următor; cu o sortare, așteaptă răspunsul tuturor extensiilor",
+        "suggestions": "Sugerează un stream",
+        "suggestionsHint": "Învață ce stream-uri alegi pe acest profil și marchează unul în listă",
+        "autoPlayOff": "Dezactivată",
+        "autoPlayFirstMatch": "Primul stream care trece de filtre",
+        "autoPlayReuseLastLink": "Același stream ca data trecută, altfel primul care trece de filtre",
+        "qualities": "Calități",
+        "qualitiesHint": "Ce rezoluții arată listele de stream-uri",
+        "qualitiesAll": "Toate",
+        "qualitiesNone": "Niciuna",
+        "qualitiesAllBut": "Toate, mai puțin ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Necunoscută",
+        "ranges": "Gamă dinamică",
+        "rangesHint": "Care dintre SDR, HDR și Dolby Vision apar în listele de stream-uri",
+        "codecs": "Codecuri video",
+        "codecsHint": "Ce codecuri video arată listele de stream-uri",
+        "minSize": "Dimensiune minimă",
+        "minSizeHint": "Ascunde stream-urile fișierelor mai mici; unul fără dimensiune rămâne",
+        "maxSize": "Dimensiune maximă",
+        "maxSizeHint": "Ascunde stream-urile fișierelor mai mari; unul fără dimensiune rămâne",
+        "sizeAny": "Orice dimensiune",
+        "includePattern": "Doar stream-urile potrivite cu",
+        "includePatternHint": "O expresie regulată, comparată cu numele, descrierea și numele fișierului fiecărui stream, fără a ține cont de majuscule",
+        "includePatternNone": "Orice stream",
+        "includePlaceholder": "ex. 1080p|2160p",
+        "excludePattern": "Ascunde stream-urile potrivite cu",
+        "excludePatternHint": "Are prioritate față de expresia de mai sus",
+        "excludePatternNone": "Niciuna",
+        "excludePlaceholder": "ex. HDTV|XviD",
+        "invalidPattern": "Nu este o expresie regulată validă, așa că este ignorată",
+        "save": "Salvează",
+        "clear": "Șterge"
+      }
+    },
+    "device": {
+      "title": "Acest dispozitiv",
+      "note": "Aceste setări se aplică doar acestui dispozitiv și nu se sincronizează.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Decodare hardware",
+      "hardwareDecodingHint": "Decodează videoclipurile cu placa grafică. Dezactiveaz-o dacă imaginea prezintă defecte.",
+      "hdr": "HDR",
+      "hdrHint": "Redă videoclipurile HDR în HDR când ecranul le acceptă. Dacă e dezactivată, sunt convertite în SDR.",
+      "matchFrameRate": "Forțează schimbarea ratei de cadre",
+      "matchFrameRateHint": "Comută ecranul la rata de cadre a videoclipului chiar și când sistemul nu ar face-o. Ecranul devine negru pentru o clipă la fiecare comutare.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Passthrough audio",
+      "audioPassthroughHint": "Trimite sunetul surround (Dolby Digital, DTS, TrueHD) nedecodat către receiver",
+      "audioPassthroughHintApple": "Trimite Dolby Digital și Dolby Digital Plus, inclusiv Atmos, către decodorul Dolby al sistemului; DTS și TrueHD sunt redate ca PCM multicanal. Dezactivează dacă nu se aude sunetul.",
+      "audioPassthroughHintAppleSpatial": "Trimite Dolby Digital și Dolby Digital Plus, inclusiv Atmos, către decodorul Dolby al sistemului și redă TrueHD Atmos și DTS:X ca audio spațial; celelalte piste DTS și TrueHD sunt redate ca PCM multicanal. Dezactivează dacă nu se aude sunetul.",
+      "audioPassthroughNormalized": "Dezactivat cât timp normalizarea volumului este activată",
+      "gesturesHeader": "Gesturi",
+      "swipeGestures": "Glisare pentru luminozitate și volum",
+      "swipeGesturesHint": "Glisează în sus sau în jos pe jumătatea stângă a videoclipului pentru luminozitate, pe cea dreaptă pentru volum.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Cache de preîncărcare",
+      "cacheSizeHint": "Cât dintr-un stream se încarcă înaintea redării",
+      "discordHeader": "Discord",
+      "discordPresence": "Arată ce urmărești",
+      "discordPresenceHint": "Prietenii tăi de pe Discord văd titlul și episodul cât timp rulează un videoclip. Discord trebuie să fie pornit pe acest computer.",
+      "privacyHeader": "Confidențialitate",
+      "crashReports": "Trimite rapoarte de blocare",
+      "crashReportsHint": "Trimite ce nu a mers când aplicația se blochează sau o parte din ea eșuează, niciodată linkurile extensiilor sau conturile"
+    },
+    "subtitles": {
+      "title": "Subtitrări",
+      "note": "Aceste setări se aplică doar acestui dispozitiv și nu se sincronizează. Ele stilizează subtitrările de tip text simplu, precum SRT; subtitrările stilizate își păstrează aspectul propriu, dacă nu le aplici și lor acest stil.",
+      "previewText": "Așa arată subtitrările",
+      "textHeader": "Text",
+      "size": "Mărime",
+      "textColor": "Culoare",
+      "bold": "Aldin",
+      "outlineHeader": "Contur și fundal",
+      "outline": "Contur",
+      "outlineColor": "Culoare contur",
+      "background": "Fundal",
+      "backgroundHint": "O casetă în spatele textului și cât de opacă este",
+      "backgroundOff": "Dezactivat",
+      "positionHeader": "Poziție",
+      "position": "Înălțime",
+      "positionHint": "Cât de sus față de marginea de jos a imaginii apar subtitrările",
+      "positionBottom": "Jos",
+      "styledHeader": "Subtitrări stilizate",
+      "styledOverride": "Aplică la subtitrările stilizate",
+      "styledOverrideHint": "Subtitrările ASS și SSA preiau acest stil în locul celui propriu. Semnele și efectele pot arăta greșit.",
+      "outlines": {
+        "none": "Fără",
+        "thin": "Subțire",
+        "thick": "Gros"
+      },
+      "colors": {
+        "white": "Alb",
+        "yellow": "Galben",
+        "green": "Verde",
+        "cyan": "Cyan",
+        "gray": "Gri",
+        "black": "Negru"
+      }
+    },
+    "account": {
+      "title": "Cont",
+      "syncLabel": "Sincronizare",
+      "syncNow": "Sincronizează acum",
+      "lastSynced": "Ultima sincronizare: ${time}",
+      "serverLabel": "Server de sincronizare",
+      "identitiesHeader": "Metode de conectare",
+      "linkIdentity": "Adaugă o metodă de conectare",
+      "devicesHeader": "Dispozitive",
+      "thisDevice": "Acest dispozitiv",
+      "activeNow": "Activ acum",
+      "lastActive": "Activ ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} a fost deconectat.",
+      "identityRemoved": "Metoda de conectare ${provider} a fost eliminată.",
+      "cancel": "Anulează",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Conectare unică (SSO)"
+      },
+      "link": {
+        "start": "Asociază un dispozitiv nou",
+        "title": "Asociază un dispozitiv",
+        "instructions": "Pe dispozitivul nou, alege asocierea de pe alt dispozitiv. Apoi introdu codul afișat sau scanează-i codul QR.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Continuă",
+        "question": "Asociezi „${name}”?",
+        "consequence": "Va fi conectat la acest cont, cu profilurile, extensiile și biblioteca acestuia.",
+        "approve": "Asociază",
+        "reject": "Nu asocia",
+        "approved": "${name} a fost asociat. Configurarea se finalizează automat.",
+        "rejected": "${name} nu a fost asociat.",
+        "expired": "Codul a expirat. Reîncepe pe dispozitivul nou.",
+        "done": "Gata"
+      },
+      "signOut": {
+        "action": "Deconectează-te",
+        "title": "Te deconectezi?",
+        "message": "Profilurile, extensiile, biblioteca și descărcările sunt eliminate de pe acest dispozitiv. Toate, în afară de descărcări, rămân în cont: conectează-te din nou ca să le recuperezi.",
+        "confirm": "Deconectează-te"
+      },
+      "delete": {
+        "action": "Șterge contul",
+        "explanation": "Șterge contul și toate datele lui sincronizate de pe server.",
+        "title": "Ștergi contul?",
+        "message": "Contul, împreună cu profilurile, extensiile, biblioteca și istoricul lui, este șters definitiv de pe server, iar toate dispozitivele sunt deconectate. Acțiunea nu poate fi anulată.",
+        "confirm": "Șterge contul"
+      },
+      "revoke": {
+        "title": "Deconectezi ${name}?",
+        "message": "${name} va fi deconectat și eliminat din dispozitivele contului. Poate fi asociat din nou mai târziu.",
+        "messageThisDevice": "Acesta este dispozitivul pe care îl folosești. Este deconectat, iar profilurile, extensiile, biblioteca și descărcările lui sunt eliminate de pe el. Toate, în afară de descărcări, rămân în cont.",
+        "confirm": "Deconectează dispozitivul",
+        "confirmNamed": "Deconectează dispozitivul: ${name}"
+      },
+      "unsynced": {
+        "title": "Ștergi modificările nesincronizate?",
+        "message": {
+          "one": "${n} modificare făcută pe acest dispozitiv, cum ar fi progresul vizionării sau o editare în bibliotecă, nu a ajuns în cont. Dacă te deconectezi acum, va fi ștearsă definitiv. Cu Anulează, rămâne aici, iar dispozitivul rămâne conectat.",
+          "few": "${n} modificări făcute pe acest dispozitiv, cum ar fi progresul vizionării sau editări în bibliotecă, nu au ajuns în cont. Dacă te deconectezi acum, vor fi șterse definitiv. Cu Anulează, rămân aici, iar dispozitivul rămâne conectat.",
+          "other": "${n} de modificări făcute pe acest dispozitiv, cum ar fi progresul vizionării sau editări în bibliotecă, nu au ajuns în cont. Dacă te deconectezi acum, vor fi șterse definitiv. Cu Anulează, rămân aici, iar dispozitivul rămâne conectat."
+        },
+        "confirm": "Deconectează-te și șterge"
+      },
+      "unlink": {
+        "title": "Elimini metoda de conectare ${provider}?",
+        "message": "Nu te vei mai putea conecta la acest cont cu ${provider}.",
+        "confirm": "Elimină",
+        "action": "Elimină metoda de conectare ${name}"
+      }
+    },
+    "trackers": {
+      "title": "Trackere",
+      "note": "Serviciile conectate primesc ce vizionează acest profil: progresul vizionării și titlurile marcate ca vizionate. Conectarea sau deconectarea unui serviciu se aplică acestui profil pe toate dispozitivele tale; comutatoarele de mai jos se aplică doar acestui dispozitiv.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Conectat",
+      "connectedAs": "Conectat ca ${user}",
+      "notConnected": "Neconectat",
+      "unavailable": "Indisponibil în această versiune a aplicației",
+      "connect": "Conectează",
+      "connectNamed": "Conectează ${name}",
+      "disconnect": "Deconectează",
+      "disconnectNamed": "Deconectează ${name}",
+      "scrobble": "Trimite ce vizionezi",
+      "scrobbleHint": "Progresul vizionării și titlurile vizionate ajung la ${service}",
+      "filtersHeader": "Ce se trimite",
+      "movies": "Filme",
+      "series": "Seriale",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} modificare așteaptă trimiterea",
+        "few": "${n} modificări așteaptă trimiterea",
+        "other": "${n} de modificări așteaptă trimiterea"
+      },
+      "notSent": {
+        "one": "${n} modificare nu a putut fi trimisă (ultima: ${reason})",
+        "few": "${n} modificări nu au putut fi trimise (ultima: ${reason})",
+        "other": "${n} de modificări nu au putut fi trimise (ultima: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} a răspuns cu eroarea ${status}",
+        "refused": "${service} a refuzat-o",
+        "unreadable": "nu a putut fi citită"
+      },
+      "connectTitle": "Conectează ${service}",
+      "starting": "Se contactează ${service}…",
+      "waiting": "Se așteaptă să autorizezi Tortuga pe ${service}…",
+      "linkInstructions": "Conectează-te la ${service} în browser și autorizează Tortuga.",
+      "linkScan": "Sau scanează codul QR cu telefonul și conectează-te acolo.",
+      "openInBrowser": "Deschide în browser",
+      "expired": "Codul a expirat înainte de a fi folosit.",
+      "declined": "${service} nu a permis conexiunea.",
+      "unreachable": "${service} nu a putut fi accesat. Verifică conexiunea și încearcă din nou.",
+      "serverUnreachable": "Serverul tău Tortuga nu a putut fi accesat. Verifică conexiunea și încearcă din nou.",
+      "needsAccount": "Pentru a conecta ${service} ai nevoie de un cont Tortuga. Conectează-te mai întâi la contul tău.",
+      "busy": "${service} este ocupat. Încearcă din nou peste un minut.",
+      "refused": "${service} a refuzat conectarea.",
+      "failed": "Conectarea la ${service} nu a reușit.",
+      "retry": "Încearcă din nou",
+      "connectedNotice": "Conectat la ${service} ca ${user}.",
+      "connectedNoticeNoName": "Conectat la ${service}.",
+      "disconnectTitle": "Deconectezi ${service}?",
+      "disconnectMessage": "Pe toate dispozitivele tale, acest profil nu mai trimite către ${service} ce vizionează, iar modificările în așteptare sunt abandonate. Contul tău ${service} păstrează tot ce are deja.",
+      "disconnectedNotice": "Deconectat de la ${service}.",
+      "actionFailed": "Nu a funcționat. Încearcă din nou."
+    },
+    "downloads": {
+      "title": "Descărcări",
+      "note": "Aceste setări se aplică doar acestui dispozitiv și nu se sincronizează.",
+      "location": {
+        "title": "Locație",
+        "hint": "Unde se salvează descărcările noi. Descărcările deja salvate rămân unde sunt.",
+        "deviceStorage": "Stocare internă",
+        "external": "Stocare externă",
+        "change": "Schimbă dosarul"
+      },
+      "transferHeader": "Descărcare",
+      "wifiOnly": "Descarcă doar prin Wi-Fi",
+      "wifiOnlyHint": "Descărcările așteaptă cât timp rețeaua este contorizată, cum ar fi datele mobile",
+      "atOnce": "Descărcări simultane",
+      "atOnceHint": "Câte descărcări se transferă în același timp",
+      "autoRemoveWatched": "Șterge descărcările vizionate",
+      "autoRemoveWatchedHint": "O descărcare este ștearsă după ce e vizionată, niciodată în timpul redării",
+      "subtitleLanguages": "Subtitrări de salvat",
+      "subtitleLanguagesHint": "Subtitrările în aceste limbi se salvează cu fiecare descărcare",
+      "subtitleLanguagesProfile": "Limbile tale pentru subtitrări: ${languages}",
+      "subtitleLanguagesProfileNone": "Limbile tale pentru subtitrări: niciuna",
+      "subtitleLanguagesExplanation": "Subtitrările în aceste limbi se salvează cu fiecare descărcare, ca să apară și fără conexiune.",
+      "useProfileLanguages": "Folosește limbile mele pentru subtitrări",
+      "storageHeader": "Stocare",
+      "deleteAll": "Șterge toate descărcările",
+      "deleteAllTitle": "Ștergi toate descărcările?",
+      "deleteAllText": "Se șterg toate descărcările de pe acest dispozitiv, pentru toate profilurile.",
+      "deleteAllConfirm": "Șterge tot"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Extensii",
+        "addonsHint": "Extensiile instalate, în ordinea lor, cu linkurile lor",
+        "library": "Bibliotecă",
+        "libraryHint": "Titlurile pe care le-ai salvat",
+        "progress": "Progresul vizionării",
+        "progressHint": "Unde ai rămas și ce ai vizionat",
+        "settings": "Setările profilului",
+        "settingsHint": "Redare, stream-uri, rândurile din Acasă și celelalte setări care se sincronizează",
+        "streams": "Istoricul stream-urilor",
+        "streamsHint": "Ultimul stream redat pentru fiecare videoclip"
+      },
+      "profilesHeader": "Profiluri",
+      "privateNote": "Fișierul conține linkurile extensiilor tale și istoricul stream-urilor, care pot include chei API. Păstrează-l privat: oricine are fișierul le poate folosi.",
+      "exportNote": "PIN-urile, conturile de trackere, descărcările și setările acestui dispozitiv nu ajung niciodată în fișier.",
+      "exportAction": "Exportă într-un fișier",
+      "saved": "S-a salvat ${name}.",
+      "saveFailed": "Fișierul nu a putut fi salvat.",
+      "exportFailed": "Exportul a eșuat.",
+      "importHeader": "Import",
+      "importNote": "Deschide un fișier exportat din Tortuga. Datele mai noi au prioritate, element cu element, și nimic de pe acest dispozitiv nu este șters.",
+      "importAction": "Importă dintr-un fișier",
+      "reviewTitle": "Import",
+      "source": "Exportat pe ${date} din Tortuga ${version}",
+      "sourceUndated": "Exportat din Tortuga ${version}",
+      "dataHeader": "Date",
+      "counts": {
+        "addons": {
+          "one": "${n} extensie",
+          "few": "${n} extensii",
+          "other": "${n} de extensii"
+        },
+        "titles": {
+          "one": "${n} titlu",
+          "few": "${n} titluri",
+          "other": "${n} de titluri"
+        },
+        "progress": {
+          "one": "progres pentru ${n} titlu",
+          "few": "progres pentru ${n} titluri",
+          "other": "progres pentru ${n} de titluri"
+        },
+        "settings": {
+          "one": "${n} setare",
+          "few": "${n} setări",
+          "other": "${n} de setări"
+        },
+        "streams": {
+          "one": "${n} stream",
+          "few": "${n} stream-uri",
+          "other": "${n} de stream-uri"
+        },
+        "profiles": {
+          "one": "${n} profil",
+          "few": "${n} profiluri",
+          "other": "${n} de profiluri"
+        }
+      },
+      "into": "Importă în",
+      "intoSame": "În profilul ${name} din acest cont",
+      "newProfile": "Un profil nou",
+      "importConfirm": "Importă",
+      "imported": "Import finalizat: ${changes}.",
+      "nothingNew": "Nimic nou de importat: tot ce era în fișier exista deja aici.",
+      "notTortuga": "Acest fișier nu este un export Tortuga. Nu s-a importat nimic.",
+      "newer": "Acest fișier provine dintr-o versiune mai nouă de Tortuga. Actualizează Tortuga, apoi importă-l din nou.",
+      "damaged": "Acest fișier este deteriorat sau incomplet. Nu s-a importat nimic.",
+      "clockAhead": "Orele din acest fișier sunt cu mult înaintea ceasului acestui dispozitiv. Verifică data și ora pe ambele dispozitive, apoi importă-l din nou. Nu s-a importat nimic.",
+      "importFailed": "Importul a eșuat.",
+      "unreadable": "Fișierul nu a putut fi deschis. Nu s-a importat nimic."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "La zi",
+      "syncing": "Se sincronizează…",
+      "offline": "Offline. Modificările se sincronizează când revine conexiunea.",
+      "signedOut": "Deconectat",
+      "failed": {
+        "server": "Serverul de sincronizare a întâmpinat o problemă. Se reîncearcă în curând.",
+        "rateLimited": "Serverul de sincronizare a cerut o pauză. Se reîncearcă în curând.",
+        "quotaExceeded": "Spațiul de stocare al contului este plin, așa că modificările nu se sincronizează.",
+        "tooLarge": "Unele modificări sunt prea mari pentru a fi sincronizate.",
+        "addonsTooLarge": "Extensiile unui profil sunt prea mari pentru a fi sincronizate. Elimină extensiile pe care nu le folosește.",
+        "clockWrong": "Unele modificări nu pot fi sincronizate. Verifică data și ora pe dispozitivele tale.",
+        "unknown": "Sincronizarea a eșuat. Se reîncearcă în curând."
+      }
+    },
+    "error": {
+      "network": "Serverul de sincronizare nu a putut fi accesat. Verifică conexiunea și încearcă din nou.",
+      "server": "Serverul de sincronizare a întâmpinat o problemă. Încearcă din nou mai târziu.",
+      "rateLimited": "Prea multe încercări. Așteaptă puțin și încearcă din nou.",
+      "invalidServerUrl": "Aceasta nu este o adresă de server. Introdu una precum https://sync.example.com.",
+      "insecureServerUrl": "Folosește https pentru un server de pe internet. Protocolul http simplu funcționează doar pentru un server din propria ta rețea.",
+      "notTortugaServer": "Niciun server de sincronizare Tortuga nu a răspuns la această adresă.",
+      "incompatibleServer": "Acest server rulează o versiune mai veche a sincronizării Tortuga și nu poate fi folosit.",
+      "providerNotEnabled": "Acest server nu oferă această metodă de conectare.",
+      "signInRejected": "Conectarea nu a reușit. Încearcă din nou.",
+      "appleCodeRejected": "Apple nu a acceptat conectarea. Încearcă din nou.",
+      "providerUnavailable": "Serviciul de conectare nu a putut fi accesat. Încearcă din nou mai târziu.",
+      "signInCancelled": "Conectarea a fost anulată.",
+      "signInExpired": "Conectarea a durat prea mult. Reîncepe.",
+      "identityInUse": "Această metodă de conectare aparține deja altui cont Tortuga.",
+      "lastIdentity": "Aceasta este singura metodă de conectare a contului, așa că nu poate fi eliminată.",
+      "sessionEnded": "Acest dispozitiv a fost deconectat. Conectează-te din nou.",
+      "sessionUnreadable": "Datele de conectare ale acestui dispozitiv nu au putut fi citite din stocarea securizată a sistemului. Repornește Tortuga ca să încerci din nou.",
+      "notSignedIn": "Conectează-te mai întâi.",
+      "notFound": "Acest element nu mai există pe server.",
+      "linkCodeInvalid": "Codurile au 8 litere și cifre, de exemplu ABCD-EFGH.",
+      "linkNotFound": "Niciun dispozitiv nu așteaptă cu acest cod. Verifică codul sau reîncepe pe dispozitivul nou.",
+      "linkOtherServer": "Celălalt dispozitiv folosește alt server de sincronizare.",
+      "linkFailed": "Asocierea nu a putut fi finalizată. Reîncepe.",
+      "tooLarge": "Este prea mare pentru serverul de sincronizare.",
+      "quotaExceeded": "Spațiul de stocare al contului este plin.",
+      "unsynced": {
+        "one": "${n} modificare făcută pe acest dispozitiv nu s-a sincronizat încă în contul ei.",
+        "few": "${n} modificări făcute pe acest dispozitiv nu s-au sincronizat încă în contul lor.",
+        "other": "${n} de modificări făcute pe acest dispozitiv nu s-au sincronizat încă în contul lor."
+      },
+      "unexpected": "A apărut o eroare. Încearcă din nou."
+    },
+    "deletion": {
+      "done": "Contul și datele lui au fost șterse.",
+      "appleRevoked": "Contul și datele lui au fost șterse, iar Tortuga nu îți mai folosește ID-ul Apple.",
+      "appleManual": "Contul și datele lui au fost șterse. Pentru a finaliza, elimină Tortuga din Configurări → ID Apple → Conectare cu Apple.",
+      "githubManual": "Poți elimina Tortuga din contul tău GitHub la ${address}."
+    },
+    "switchAccount": {
+      "title": "Ștergi modificările nesincronizate?",
+      "message": {
+        "one": "Acesta este alt cont decât cel la care era conectat acest dispozitiv. ${n} modificare făcută aici în celălalt cont, cum ar fi progresul vizionării sau o editare în bibliotecă, nu a ajuns niciodată în el. Conectarea o șterge definitiv, împreună cu restul datelor acelui cont de pe acest dispozitiv, inclusiv descărcările.",
+        "few": "Acesta este alt cont decât cel la care era conectat acest dispozitiv. ${n} modificări făcute aici în celălalt cont, cum ar fi progresul vizionării sau editări în bibliotecă, nu au ajuns niciodată în el. Conectarea le șterge definitiv, împreună cu restul datelor acelui cont de pe acest dispozitiv, inclusiv descărcările.",
+        "other": "Acesta este alt cont decât cel la care era conectat acest dispozitiv. ${n} de modificări făcute aici în celălalt cont, cum ar fi progresul vizionării sau editări în bibliotecă, nu au ajuns niciodată în el. Conectarea le șterge definitiv, împreună cu restul datelor acelui cont de pe acest dispozitiv, inclusiv descărcările."
+      },
+      "confirm": "Șterge și conectează-te",
+      "cancel": "Anulează",
+      "kept": "Nu ești conectat. Modificările rămân pe acest dispozitiv până când te conectezi la contul în care au fost făcute."
+    },
+    "browser": {
+      "signedIn": "Te-ai conectat. Poți închide această filă și reveni la Tortuga.",
+      "failed": "Conectarea nu s-a finalizat. Revino la Tortuga și încearcă din nou."
+    },
+    "signIn": {
+      "title": "Conectează-te la Tortuga",
+      "intro": "Un cont Tortuga îți sincronizează profilurile, extensiile și biblioteca pe toate dispozitivele.",
+      "apple": "Conectare cu Apple",
+      "google": "Conectare cu Google",
+      "github": "Conectare cu GitHub",
+      "oidc": "Conectare cu ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Asociază de pe alt dispozitiv",
+      "linkDeviceHint": "Ești deja conectat pe un telefon sau computer? Asociază acest dispozitiv cu un cod.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Folosește serverul tău",
+      "useHostedServer": "Folosește serverul Tortuga",
+      "serverField": "Adresa serverului",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Continuă",
+      "checkingServer": "Se verifică serverul…",
+      "loadingOptions": "Se încarcă opțiunile de conectare…",
+      "noOptions": "Acest server nu oferă nicio metodă de conectare pe acest dispozitiv. Asociază-l de pe un dispozitiv conectat.",
+      "retry": "Încearcă din nou",
+      "starting": "Se pornește conectarea…",
+      "native": "Se conectează cu ${provider}…",
+      "browser": "Continuă în browser. Acest ecran trece mai departe după ce te conectezi acolo.",
+      "finishing": "Se finalizează conectarea…",
+      "cancel": "Anulează",
+      "deviceCode": {
+        "instructions": "Pe un telefon sau computer, accesează ${url} și introdu acest cod:",
+        "scan": "Sau scanează codul QR cu telefonul.",
+        "qrDescription": "Cod QR de scanat cu telefonul",
+        "expires": "Codul expiră peste ${time}.",
+        "waiting": "Se așteaptă conectarea ta…"
+      }
+    },
+    "link": {
+      "title": "Asociază acest dispozitiv",
+      "instructions": "Pe un dispozitiv conectat, deschide Setări, apoi Cont, apoi Asociază un dispozitiv nou. Scanează acolo acest cod QR sau introdu codul.",
+      "qrDescription": "Cod QR de scanat pe dispozitivul conectat",
+      "starting": "Se obține un cod…",
+      "expires": "Codul expiră peste ${time}.",
+      "waiting": "Se așteaptă aprobarea pe celălalt dispozitiv…",
+      "rejected": "Celălalt dispozitiv a refuzat asocierea.",
+      "expired": "Codul a expirat înainte de a fi folosit.",
+      "newCode": "Obține un cod nou"
+    },
+    "identityLink": {
+      "title": "Adaugă o metodă de conectare",
+      "intro": "Asociază încă o metodă de conectare, ca să nu pierzi accesul dacă pierzi un cont.",
+      "allLinked": "Toate metodele de conectare oferite pe acest dispozitiv sunt deja asociate.",
+      "linking": "Se asociază…"
+    }
+  },
+  "profiles": {
+    "title": "Cine se uită?",
+    "manageTitle": "Gestionează profilurile",
+    "manage": "Gestionează profilurile",
+    "done": "Gata",
+    "add": "Adaugă profil",
+    "empty": "Creează un profil pentru a începe.",
+    "loading": "Se încarcă profilurile…",
+    "current": "Profilul curent",
+    "switchProfile": "Schimbă profilul",
+    "pin": {
+      "title": "Introdu PIN-ul pentru ${name}",
+      "wrong": "PIN greșit. Încearcă din nou.",
+      "lockedOut": "Prea multe încercări. Încearcă din nou peste ${time}.",
+      "cancel": "Anulează",
+      "backspace": "Șterge ultima cifră",
+      "entered": "${count} din ${total} cifre introduse"
+    },
+    "editor": {
+      "newTitle": "Profil nou",
+      "editTitle": "Editează profilul",
+      "name": "Nume",
+      "nameRequired": "Introdu un nume.",
+      "nameTooLong": {
+        "one": "Numele poate avea cel mult ${n} caracter.",
+        "few": "Numele poate avea cel mult ${n} caractere.",
+        "other": "Numele poate avea cel mult ${n} de caractere."
+      },
+      "avatar": "Avatar",
+      "pinOff": "Fără PIN",
+      "pinOn": "Blocat cu PIN",
+      "setPin": "Setează un PIN",
+      "changePin": "Schimbă PIN-ul",
+      "removePin": "Elimină PIN-ul",
+      "pinEnter": "Introdu un PIN din 4 cifre",
+      "pinConfirm": "Introdu din nou PIN-ul",
+      "pinMismatch": "PIN-urile nu s-au potrivit. Introdu unul nou.",
+      "pinNote": "Un PIN îi ține pe ceilalți departe de acest profil pe dispozitivele tale. Este o încuietoare, nu o parolă.",
+      "save": "Salvează",
+      "create": "Creează profilul",
+      "cancel": "Anulează",
+      "delete": "Șterge profilul",
+      "deleteConfirm": "Ștergi ${name}? Extensiile, biblioteca și istoricul profilului sunt șterse de pe toate dispozitivele. Acțiunea nu poate fi anulată.",
+      "deleteAction": "Șterge",
+      "saveFailed": "Profilul nu a putut fi salvat. Încearcă din nou.",
+      "kids": {
+        "title": "Profil pentru copii",
+        "subtitle": "Arată doar titlurile sugerate pentru vârste până la nivelul pe care îl alegi. Cele mai multe vârste sugerate sunt estimări, nu clasificări oficiale.",
+        "needsParent": "Setează mai întâi un PIN pe un profil de adult: ieșirea dintr-un profil pentru copii îl cere.",
+        "newOnly": "Doar un profil nou poate fi un profil pentru copii.",
+        "capTitle": "Vârstă sugerată maximă",
+        "capLittle": "Cei mici",
+        "capLittleAges": "Sugerat 0+",
+        "capKids": "Copii",
+        "capKidsAges": "Cei mici, plus sugerat 6+",
+        "capTeen": "Adolescenți",
+        "capTeenAges": "Copii, plus sugerat 12+",
+        "allowUnrated": "Permite titlurile neclasificate",
+        "allowUnratedNote": "Titluri fără vârstă sugerată. Cât timp opțiunea e dezactivată, un părinte le permite pe rând.",
+        "homeRows": "Rândurile din Acasă",
+        "homeRowsNote": "Opțional. Titlurile din aceste rânduri trebuie totuși să se încadreze în vârsta sugerată maximă.",
+        "familyMovies": "Filme pentru familie",
+        "familySeries": "Seriale pentru familie",
+        "addonMissing": "Extensia lui nu este instalată pe acest profil.",
+        "allowed": "Titluri permise",
+        "allowedNone": "Niciunul încă. Un părinte permite un titlu din pagina lui.",
+        "blocked": "Titluri blocate",
+        "blockedNone": "Niciunul încă. Un părinte blochează un titlu din pagina lui.",
+        "remove": "Elimină ${title}",
+        "leaving": "Ieșirea din acest profil cere PIN-ul unui părinte.",
+        "off": "Linkurile, extensiile și majoritatea setărilor sunt dezactivate.",
+        "addons": "Videoclipurile vin din extensiile acestui profil. Tortuga nu le verifică."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafit",
+      "slate": "Ardezie",
+      "silver": "Argint",
+      "ivory": "Fildeș",
+      "sand": "Nisip",
+      "clay": "Lut",
+      "rose": "Roz",
+      "plum": "Prună",
+      "dusk": "Amurg",
+      "sea": "Mare",
+      "sage": "Salvie",
+      "moss": "Mușchi"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Indisponibil pe acest profil",
+      "suggested": "Sugerat ${age}+",
+      "byAddon": "Addonul său îl indică pentru cei mai mari",
+      "notRated": "Nicio vârstă sugerată",
+      "byParent": "Blocat de un părinte",
+      "unchecked": "Vârsta sugerată nu a putut fi verificată. Încearcă din nou mai târziu.",
+      "ask": "Întreabă un părinte"
+    },
+    "block": "Blochează pe acest profil",
+    "pin": {
+      "title": "Introdu PIN-ul unui părinte",
+      "allow": "Pentru a permite ${title} pe acest profil",
+      "allowThis": "Pentru a permite acest titlu pe acest profil",
+      "block": "Pentru a bloca ${title} pe acest profil",
+      "leave": "Pentru a ieși din acest profil",
+      "settings": "Pentru a deschide aceste setări"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Toate",
+      "movie": "Filme",
+      "series": "Seriale",
+      "channel": "Canale",
+      "tv": "Canale TV",
+      "other": "Altele"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Reîncearcă",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Vezi tot",
+      "downloading": "Se descarcă: ${count}, ${percent}%",
+      "downloadingUnsized": "Se descarcă: ${count}",
+      "empty": "Nimic de afișat deocamdată. Instalează extensii cu cataloage pentru a umple această pagină.",
+      "allHidden": "Toate rândurile din Acasă sunt ascunse. Le poți afișa din nou din Setări → Acasă."
+    },
+    "continueWatching": {
+      "title": "Continuă vizionarea",
+      "episode": "Episodul ${episode}",
+      "upNext": "Urmează",
+      "minutesLeft": "${minutes} min rămase",
+      "hoursLeft": "${hours} h rămase",
+      "hoursMinutesLeft": "${hours} h ${minutes} min rămase",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Listă de vizionare",
+      "recommended": "Recomandate",
+      "trending": "În tendințe",
+      "planToWatch": "De vizionat",
+      "planning": "Planificate",
+      "airing": "În difuzare",
+      "list": "Listă",
+      "unreachable": "${service} nu a putut fi accesat.",
+      "signedOut": "${service} te-a deconectat. Conectează-l din nou din Setări.",
+      "failed": "${service} nu a răspuns cum era de așteptat."
+    },
+    "discover": {
+      "type": "Tip",
+      "catalog": "Catalog",
+      "genre": "Gen",
+      "all": "Toate",
+      "empty": "Acest catalog nu are nimic de afișat.",
+      "noCatalogs": "Niciuna dintre extensiile instalate nu are un catalog de răsfoit.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Caută filme, seriale și altele",
+      "recent": "Căutări recente",
+      "clearRecent": "Șterge",
+      "removeRecentNamed": "Elimină ${name}",
+      "noResults": "Niciun rezultat pentru „${query}”",
+      "noCatalogs": "Niciuna dintre extensiile instalate nu poate căuta.",
+      "clearQuery": "Șterge căutarea",
+      "hint": "Găsește filme, seriale și altele în cataloagele extensiilor tale."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Acasă",
+      "discover": "Descoperă",
+      "search": "Căutare",
+      "library": "Bibliotecă",
+      "settings": "Setări"
+    },
+    "shortLabel": {
+      "board": "Acasă",
+      "library": "Bibliotecă",
+      "search": "Căutare",
+      "settings": "Setări"
+    },
+    "back": "Înapoi",
+    "retry": "Reîncearcă",
+    "close": "Închide",
+    "dismiss": "Ignoră",
+    "qrFailed": "Acest link nu poate fi afișat ca un cod QR.",
+    "openOnPhone": {
+      "title": "Deschide pe telefon",
+      "message": "Acest dispozitiv nu poate deschide acest link. Scanează codul cu camera telefonului pentru a-l deschide acolo.",
+      "qrDescription": "Codul QR al linkului"
+    },
+    "player": {
+      "close": "Închide playerul",
+      "fullscreen": "Ecran complet",
+      "exitFullscreen": "Ieși din ecran complet",
+      "rewind": "Derulează înapoi",
+      "fastForward": "Derulează înainte",
+      "pictureInPicture": "Imagine în imagine"
+    },
+    "menu": {
+      "playback": "Redare",
+      "nextSubtitles": "Pista de subtitrări următoare",
+      "nextAudio": "Pista audio următoare"
+    }
+  },
+  "watch": {
+    "title": "Vizionare împreună",
+    "intro": "Vizionează sincronizat cu prietenii, fiecare pe dispozitivul său. Toți redau același titlu din propriile extensii. Pentru a crea o cameră, alege Vizionare împreună în opțiunile playerului.",
+    "controlMode": {
+      "hostOnly": "Doar eu controlez",
+      "hostOnlyDetail": "Toată lumea te urmează când redai, pui pauză sau derulezi",
+      "anyone": "Toată lumea controlează",
+      "anyoneDetail": "Oricine din cameră poate reda, pune pauză sau derula"
+    },
+    "joinTitle": "Intră într-o cameră",
+    "joinHint": "Cod sau link de invitație",
+    "joinLabel": "Intră",
+    "joinInvalid": "Introdu un cod de cameră din 6 caractere sau un link de invitație",
+    "recentTitle": "Camere recente",
+    "recentUsed": "Folosită ${time}",
+    "removeRecentNamed": "Elimină ${name}",
+    "invite": {
+      "title": "Intri în camera ${code}? Este pe ${server}, nu pe serverul tău releu.",
+      "join": "Intră",
+      "leaveTitle": "Părăsești camera ca să intri în camera ${code}? Este pe ${server}, nu pe serverul tău releu.",
+      "leaveHostTitle": "Părăsești camera ca să intri în camera ${code}? Este pe ${server}, nu pe serverul tău releu. Camera aceasta continuă cu următorul participant ca gazdă."
+    },
+    "relay": {
+      "checking": "Se verifică releul…",
+      "unreachable": "Releul de la ${server} nu poate fi accesat.",
+      "retry": "Încearcă din nou",
+      "title": "Server releu",
+      "hint": "Releul care conectează camerele de vizionare împreună. Lasă câmpul gol ca să folosești releele publice Open Watch Party.",
+      "hosted": "Releele publice Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Introdu o adresă de releu care începe cu http:// sau https://",
+      "save": "Salvează",
+      "reset": "Folosește releele publice"
+    },
+    "busy": {
+      "creating": "Se creează camera…",
+      "joining": "Se intră în cameră…"
+    },
+    "dismiss": "Ignoră",
+    "room": {
+      "codeLabel": "Codul camerei",
+      "copyCode": "Copiază codul",
+      "codeCopied": "Cod copiat",
+      "share": "Distribuie invitația",
+      "shareText": "Vizionează cu mine în Tortuga: deschide ${link} sau introdu codul camerei ${code}.",
+      "scan": "Scanează cu telefonul pentru a intra",
+      "youHost": "Tu ești gazda",
+      "hostedBy": "Gazdă: ${name}",
+      "hostOnly": "Doar gazda controlează redarea",
+      "anyone": "Toată lumea controlează redarea",
+      "reconnecting": "Se reconectează…",
+      "hostReconnecting": "Se așteaptă ca ${name} să se reconecteze…",
+      "nowPlaying": "Se redă ${title}",
+      "nowPlayingEpisode": "Se redă ${title} · ${episode}",
+      "idleHost": "Pornește ceva: toată lumea din cameră îl va reda odată cu tine.",
+      "idleGuest": "Se așteaptă ca ${name} să pornească ceva.",
+      "participants": {
+        "one": "${n} participant",
+        "few": "${n} participanți",
+        "other": "${n} de participanți"
+      },
+      "you": "${name} (tu)",
+      "hostBadge": "Gazdă",
+      "makeHost": "Numește gazdă",
+      "makeHostNamed": "Numește gazdă: ${name}",
+      "joinPlayback": "Alătură-te redării",
+      "leave": "Părăsește camera",
+      "leaveTitle": "Părăsești camera?",
+      "leaveConfirm": "Părăsește",
+      "end": "Închide camera",
+      "endTitle": "Închizi camera pentru toată lumea?",
+      "endConfirm": "Închide camera",
+      "cancel": "Anulează",
+      "leaveHostTitle": "Părăsești camera? Ea continuă cu următorul participant ca gazdă.",
+      "kickNamed": "Elimină ${name}",
+      "kickTitle": "Elimini ${name} din cameră?",
+      "kickConfirm": "Elimină",
+      "lock": "Blochează camera",
+      "lockDetail": "Nimeni nou nu se poate alătura",
+      "controlTitle": "Cine controlează redarea"
+    },
+    "status": {
+      "ready": "Gata",
+      "loading": "Se pregătește",
+      "matching": "Se caută un fișier",
+      "buffering": "Se încarcă",
+      "sameLength": "Aceeași durată (${delta})",
+      "longer": "Cu ${delta} mai lung",
+      "shorter": "Cu ${delta} mai scurt",
+      "noStream": "Niciun stream găsit",
+      "searchFailed": "Căutarea în extensii a eșuat",
+      "notPlaying": "Nu este în player",
+      "away": "Deconectat",
+      "declined": "Nu redă",
+      "offset": "Decalaj ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Camera ${code}",
+      "startTitle": "Creează o cameră cu ce se redă acum",
+      "liveNoRoom": "Un stream live nu poate fi vizionat împreună",
+      "watching": {
+        "one": "${n} se uită",
+        "few": "${n} se uită împreună",
+        "other": "${n} se uită împreună"
+      },
+      "hostBadge": "GAZDĂ",
+      "waiting": "Se așteaptă ${names}…",
+      "waitingMore": {
+        "other": "Se așteaptă ${names} și încă ${n}…"
+      },
+      "syncing": "Se sincronizează…",
+      "matchingStart": "Se caută un fișier care se potrivește cu cel de la ${name}…",
+      "longer": "Fișierul tău este cu ${delta} mai lung decât cel de la ${name}",
+      "shorter": "Fișierul tău este cu ${delta} mai scurt decât cel de la ${name}",
+      "mismatchDetail": "Poate fi o altă versiune de montaj, așa că pozițiile voastre s-ar putea să nu coincidă.",
+      "playAnyway": "Redă oricum",
+      "chooseStream": "Alege alt stream",
+      "noStream": "Niciuna dintre extensiile tale nu are un stream pentru ${title}.",
+      "searchFailed": "Unele dintre extensiile tale nu au putut fi căutate pentru ${title}.",
+      "chooseAStream": "Alege un stream",
+      "pickFailed": "Stream-ul ales nu s-a deschis.",
+      "hostControls": "Doar ${name} controlează redarea în această cameră",
+      "hostControlsUnnamed": "Doar gazda controlează redarea în această cameră",
+      "pausedHere": "Pus pe pauză pe acest dispozitiv. Apasă Redă ca să ajungi din urmă camera.",
+      "dontPlay": "Nu reda",
+      "declined": "Nu redai ${title}.",
+      "offsetTitle": "Decalaj",
+      "offsetDetail": "Mută fișierul tău față de cel al camerei, pentru o versiune care începe mai devreme sau mai târziu.",
+      "offsetReset": "Resetează"
+    },
+    "toast": {
+      "joined": "${name} s-a alăturat",
+      "left": "${name} a plecat",
+      "paused": "${name} a pus pauză",
+      "resumed": "${name} a reluat redarea",
+      "seeked": "${name} a sărit la altă poziție",
+      "speed": "${name} a setat viteza la ${speed}",
+      "buffering": "${name} așteaptă încărcarea",
+      "hostChanged": "${name} este acum gazda",
+      "becameHost": "Acum tu ești gazda",
+      "media": "${name} a pornit ${title}",
+      "forbidden": "Doar gazda poate face asta"
+    },
+    "failure": {
+      "create": "Camera nu a putut fi creată. Încearcă din nou.",
+      "join": "Nu ai putut intra în cameră. Încearcă din nou.",
+      "share": "Videoclipul nu a putut fi partajat cu camera. Încearcă alt stream.",
+      "live": "Un stream live nu poate fi vizionat împreună. Camera așteaptă un videoclip.",
+      "roomNotFound": "Nu există nicio cameră cu acest cod.",
+      "roomFull": "Camera este plină.",
+      "rateLimited": "Prea multe încercări. Așteaptă un minut, apoi încearcă din nou.",
+      "connection": "Releul nu poate fi accesat. Verifică conexiunea.",
+      "sessionLost": "Conexiunea cu camera s-a pierdut.",
+      "ended": "Gazda a închis camera.",
+      "roomLocked": "Camera este blocată.",
+      "relayFull": "Releul este plin. Încearcă din nou mai târziu.",
+      "blocked": "Acest releu nu acceptă Tortuga.",
+      "kicked": "Gazda te-a eliminat din cameră.",
+      "expired": "Camera a expirat.",
+      "replaced": "Te-ai alăturat acestei camere pe alt dispozitiv."
+    }
+  },
+  "downloads": {
+    "title": "Descărcări",
+    "empty": "Nimic descărcat deocamdată. Descarcă filme și episoade din paginile lor ca să le vizionezi fără conexiune.",
+    "offline": "Ești offline. Descărcările continuă când revine conexiunea.",
+    "storage": "Folosit: ${used} · Liber: ${free}",
+    "storageUsed": "Folosit: ${used}",
+    "pauseAll": "Întrerupe toate",
+    "resumeAll": "Reia toate",
+    "actionFailed": "Descărcarea nu a putut fi modificată. Încearcă din nou.",
+    "actionsFailed": "Descărcările nu au putut fi modificate. Încearcă din nou.",
+    "episodes": {
+      "one": "${n} episod",
+      "few": "${n} episoade",
+      "other": "${n} de episoade"
+    },
+    "videos": {
+      "one": "${n} videoclip",
+      "few": "${n} videoclipuri",
+      "other": "${n} de videoclipuri"
+    },
+    "otherVideos": "Alte videoclipuri",
+    "summary": "${count} · ${size}",
+    "progress": "${done} din ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "În coadă",
+      "waitingForWifi": "Se așteaptă Wi-Fi",
+      "waitingForNetwork": "Se așteaptă o conexiune",
+      "resolving": "Se pregătește…",
+      "downloading": "Se descarcă",
+      "downloadingPercent": "Se descarcă · ${percent}%",
+      "paused": "În pauză",
+      "failed": "Eșuat",
+      "completed": "Descărcat",
+      "cancelled": "Anulat"
+    },
+    "action": {
+      "play": "Redă",
+      "pause": "Pauză",
+      "resume": "Reia",
+      "retry": "Reîncearcă",
+      "pickStream": "Alege un stream",
+      "cancel": "Anulează descărcarea",
+      "delete": "Șterge descărcarea",
+      "deleteGroup": "Șterge descărcările",
+      "openDetail": "Vezi detaliile"
+    },
+    "deleteConfirm": {
+      "title": "Ștergi ${count} din ${name}?",
+      "message": "Descărcarea din nou durează și necesită o conexiune.",
+      "confirm": "Șterge",
+      "cancel": "Anulează"
+    },
+    "keepSynced": {
+      "title": "Sincronizare automată",
+      "note": "Fiecare serial de aici își păstrează următoarele episoade nevizionate descărcate pe acest dispozitiv; după ce vizionezi unul, se descarcă altul.",
+      "empty": "Niciun serial nu are sincronizare automată. Din meniul de descărcare al unui serial, alege câte episoade nevizionate să păstrezi.",
+      "series": {
+        "one": "${n} serial",
+        "few": "${n} seriale",
+        "other": "${n} de seriale"
+      },
+      "manage": "Gestionează sincronizarea automată",
+      "pauseRule": "Întrerupe ${title}",
+      "resumeRule": "Reia ${title}",
+      "stopRule": "Oprește sincronizarea automată pentru ${title}",
+      "status": {
+        "downloading": {
+          "one": "Se descarcă ${n} episod",
+          "few": "Se descarcă ${n} episoade",
+          "other": "Se descarcă ${n} de episoade"
+        },
+        "failed": {
+          "one": "${n} episod eșuat",
+          "few": "${n} episoade eșuate",
+          "other": "${n} de episoade eșuate"
+        },
+        "downloaded": {
+          "one": "${n} episod descărcat",
+          "few": "${n} episoade descărcate",
+          "other": "${n} de episoade descărcate"
+        },
+        "downloadedNone": "Niciun episod descărcat"
+      },
+      "stop": {
+        "title": "Oprești sincronizarea automată pentru ${title}?",
+        "message": {
+          "one": "${n} episod din Descărcări a fost adăugat de sincronizarea automată. Îl ștergi și pe el?",
+          "few": "${n} episoade din Descărcări au fost adăugate de sincronizarea automată. Le ștergi și pe ele?",
+          "other": "${n} de episoade din Descărcări au fost adăugate de sincronizarea automată. Le ștergi și pe ele?"
+        },
+        "messageNone": "Nu se vor mai descărca episoade.",
+        "keep": "Păstrează descărcările",
+        "delete": "Șterge descărcările",
+        "confirm": "Oprește",
+        "cancel": "Anulează"
+      },
+      "notice": {
+        "one": "Sincronizarea automată a adăugat ${n} episod din ${title}",
+        "few": "Sincronizarea automată a adăugat ${n} episoade din ${title}",
+        "other": "Sincronizarea automată a adăugat ${n} de episoade din ${title}"
+      },
+      "noticeSeveral": {
+        "one": "Sincronizarea automată a adăugat ${n} episod",
+        "few": "Sincronizarea automată a adăugat ${n} episoade",
+        "other": "Sincronizarea automată a adăugat ${n} de episoade"
+      },
+      "actionFailed": "Sincronizarea automată nu a putut fi modificată. Încearcă din nou."
+    },
+    "failure": {
+      "noStream": "Nu s-a putut alege niciun stream pentru acest episod. Alege unul manual.",
+      "noStreamInstant": "Nu s-a putut alege niciun stream instant pentru acest episod. Alege unul manual.",
+      "network": "Conexiunea a eșuat.",
+      "http": "Serverul a răspuns cu HTTP ${status}.",
+      "streamGone": "Linkul a expirat, iar extensia lui nu mai oferă acest stream.",
+      "diskFull": "Dispozitivul a rămas fără spațiu. Descărcările s-au oprit.",
+      "notEnoughSpace": "Nu există suficient spațiu liber pentru această descărcare.",
+      "sizeMismatch": "Fișierul descărcat este incomplet.",
+      "unsupported": "Acest stream nu poate fi descărcat.",
+      "locationUnavailable": "Locația descărcărilor nu este disponibilă.",
+      "fileMissing": "Fișierul descărcat lipsește.",
+      "storage": "Spațiul de stocare al dispozitivului nu a răspuns."
+    },
+    "notification": {
+      "channel": "Descărcări",
+      "title": "Se descarcă ${title}",
+      "count": {
+        "one": "${n} descărcare",
+        "few": "${n} descărcări",
+        "other": "${n} de descărcări"
+      },
+      "progress": "${percent}%",
+      "preparing": "Se pregătește descărcarea…",
+      "waiting": "Se așteaptă Wi-Fi",
+      "paused": "În pauză",
+      "pause": "Pauză",
+      "resume": "Reia",
+      "cancel": "Anulează",
+      "failed": "Descărcare eșuată: ${title}",
+      "completed": "S-a descărcat ${title}"
+    }
+  },
+  "offline": {
+    "title": "Ești offline",
+    "text": "Conectează-te la internet ca să navighezi. Descărcările tale se redau fără conexiune.",
+    "textNoDownloads": "Conectează-te la internet ca să navighezi.",
+    "openDownloads": "Mergi la Descărcări",
+    "detail": "Se afișează detaliile salvate cu descărcările tale."
+  },
+  "playerApps": {
+    "chooser": "Întreabă de fiecare dată",
+    "tortuga": "Tortuga",
+    "playWith": "Redă cu…",
+    "banner": {
+      "opening": "Se deschide în ${player}…",
+      "notInstalled": "${player} nu este instalat pe acest dispozitiv.",
+      "didNotStart": "${player} nu a pornit.",
+      "playInTortuga": "Redă în Tortuga",
+      "cancel": "Anulează",
+      "dismiss": "Ignoră"
+    },
+    "detail": {
+      "playing": "Se redă în ${player} · ${position}",
+      "playingOf": "Se redă în ${player} · ${position} din ${duration}",
+      "paused": "În pauză în ${player} · ${position}",
+      "pausedOf": "În pauză în ${player} · ${position} din ${duration}",
+      "finished": "Deschis în ${player}. Ai terminat de vizionat ${title}?",
+      "markWatched": "Marchează ca vizionat",
+      "notYet": "Încă nu"
+    },
+    "settings": {
+      "player": "Player",
+      "deviceOnly": "Doar pe acest dispozitiv",
+      "note": "Videoclipurile de pe acest dispozitiv se redau în playerul ales aici. Redă cu… din meniul unui stream alege altul pentru un singur videoclip.",
+      "notFound": "${player} (negăsit)",
+      "followsProgress": "Reia de unde ai rămas și salvează progresul în timpul redării",
+      "savesOnReturn": "Reia de unde ai rămas și salvează punctul în care te-ai oprit",
+      "savesOnReturnFromStart": "Pornește de la început, apoi salvează punctul în care te-ai oprit sau întreabă dacă ai terminat",
+      "asksAfter": "Reia de unde ai rămas, apoi întreabă dacă ai terminat",
+      "asksAfterFromStart": "Doar deschide videoclipul, apoi întreabă dacă ai terminat",
+      "chooserDetail": "Dispozitivul întreabă ce aplicație redă fiecare videoclip",
+      "customHeader": "Playere personalizate",
+      "addCustom": "Adaugă un player personalizat",
+      "deleteNamed": "Șterge ${name}",
+      "form": {
+        "title": "Adaugă un player personalizat",
+        "name": "Nume",
+        "nameHint": "Playerul meu",
+        "program": "Program",
+        "programHint": "mpv sau calea completă a programului",
+        "arguments": "Argumente",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} este linkul videoclipului, {title} titlul său, {start} momentul de început în secunde, iar {subtitle} linkul primei subtitrări.",
+        "urlTemplate": "Șablon URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} este linkul videoclipului, codificat pentru URL, iar {url_raw} linkul neschimbat.",
+        "packageName": "Numele pachetului",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Adaugă",
+        "cancel": "Anulează",
+        "nameMissing": "Dă-i un nume playerului.",
+        "programMissing": "Introdu programul de rulat.",
+        "urlTemplateMissing": "Introdu șablonul URL.",
+        "packageNameMissing": "Introdu numele pachetului aplicației.",
+        "argumentsNeedUrl": "Argumentele trebuie să conțină {url}.",
+        "urlTemplateNeedsUrl": "Șablonul URL trebuie să conțină {url} sau {url_raw}.",
+        "packageNameInvalid": "Acesta nu este un nume de pachet. Introdu unul precum org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "Ghid TV",
+    "today": "Astăzi",
+    "tomorrow": "Mâine",
+    "yesterday": "Ieri",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Acum în difuzare",
+    "now": "Acum",
+    "noProgrammes": "Nicio informație despre program",
+    "noChannels": "Acest ghid nu are canale pentru această zi.",
+    "noGuide": "Nicio extensie instalată nu oferă un ghid TV.",
+    "failed": "Ghidul nu a putut fi încărcat: ${reason}",
+    "cast": "Cu ${names}",
+    "directors": "Regia: ${names}"
+  },
+  "calendar": {
+    "title": "Calendar",
+    "previousMonth": "Luna anterioară",
+    "nextMonth": "Luna următoare",
+    "today": "Azi",
+    "tomorrow": "Mâine",
+    "emptyLibrary": "Adaugă seriale în bibliotecă pentru a le vedea episoadele aici.",
+    "noAddon": "Niciuna dintre extensiile tale nu are un calendar pentru serialele din bibliotecă.",
+    "emptyMonth": "Niciun episod.",
+    "newEpisodes": {
+      "one": "${n} episod nou",
+      "few": "${n} episoade noi",
+      "other": "${n} de episoade noi"
+    },
+    "episodes": {
+      "one": "${n} episod",
+      "few": "${n} episoade",
+      "other": "${n} de episoade"
+    }
+  },
+  "watchlist": {
+    "lists": "Listele trackerelor",
+    "hint": "Fiecare listă e în contul tău la acel serviciu. Biblioteca ta nu se schimbă.",
+    "add": "Adaugă în ${list}",
+    "remove": "Elimină din ${list}",
+    "trakt": "Lista de vizionare Trakt",
+    "simkl": "Simkl: De vizionat",
+    "mdblist": "Lista de vizionare MDBList",
+    "myAnimeList": "MyAnimeList: De vizionat",
+    "aniList": "AniList: Planificate",
+    "saving": "Se salvează…",
+    "queued": "Netrimis încă, se va reîncerca",
+    "failed": "Nesalvat",
+    "addFailed": "${title} nu a putut fi adăugat în ${list}.",
+    "removeFailed": "${title} nu a putut fi eliminat din ${list}."
+  },
+  "collections": {
+    "needsAddon": "Necesită extensia ${name}",
+    "needsCatalog": "${addon} nu are catalogul ${catalog}",
+    "needsFilter": "Necesită un filtru pe care Tortuga nu îl poate seta",
+    "traktUnavailable": "Listele Trakt nu sunt disponibile în această versiune a aplicației",
+    "tooLarge": "„${title}” este prea mare pentru sincronizare",
+    "kind": {
+      "tmdbList": "Listă TMDB",
+      "tmdbCollection": "Colecție TMDB",
+      "tmdbCompany": "Companie TMDB",
+      "tmdbNetwork": "Rețea TMDB",
+      "tmdbDiscover": "Descoperă TMDB",
+      "tmdbPerson": "Persoană TMDB",
+      "tmdbDirector": "Regizor TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "Furnizor necunoscut „${name}”"
+    },
+    "summary": {
+      "adds": {
+        "one": "Adaugă ${n} colecție",
+        "few": "Adaugă ${n} colecții",
+        "other": "Adaugă ${n} de colecții"
+      },
+      "replaces": {
+        "one": "Înlocuiește ${n} colecție cu același id",
+        "few": "Înlocuiește ${n} colecții cu aceleași id-uri",
+        "other": "Înlocuiește ${n} de colecții cu aceleași id-uri"
+      },
+      "needsAddon": {
+        "one": "${n} sursă necesită extensia ${name}",
+        "few": "${n} surse necesită extensia ${name}",
+        "other": "${n} de surse necesită extensia ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} sursă necesită conectarea ${service}",
+        "few": "${n} surse necesită conectarea ${service}",
+        "other": "${n} de surse necesită conectarea ${service}"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} sursă omisă",
+        "few": "${kind}: ${n} surse omise",
+        "other": "${kind}: ${n} de surse omise"
+      },
+      "unsupportedHint": "Tortuga citește cataloagele extensiilor și listele trackerelor, nu aceste surse. Folosește în schimb catalogul unei extensii, de exemplu cele de la AIOMetadata sau MDBList.",
+      "folderDropped": "Dosarul „${folder}” din „${collection}” a fost omis: niciuna dintre sursele lui nu poate fi citită",
+      "collectionDropped": "Colecția „${title}” a fost omisă: niciunul dintre dosarele ei nu poate fi citit",
+      "tooLarge": "Colecția „${title}” nu a fost importată: este prea mare pentru sincronizare"
+    },
+    "refused": {
+      "notJson": "Acesta nu este un fișier de colecții: nu este JSON.",
+      "notList": "Acesta nu este un fișier de colecții: nu conține o listă de colecții.",
+      "empty": "Acest fișier nu conține colecții.",
+      "collectionInvalid": "Colecția ${position} din fișier nu poate fi citită.",
+      "collectionNoId": "Colecția ${position} din fișier nu are id.",
+      "collectionNoTitle": "Colecția ${id} nu are titlu.",
+      "duplicateCollection": "Două colecții din fișier au id-ul ${id}.",
+      "noFolders": "Colecția „${collection}” nu are o listă de dosare.",
+      "folderInvalid": "Dosarul ${position} din „${collection}” nu poate fi citit.",
+      "folderNoId": "Dosarul ${position} din „${collection}” nu are id.",
+      "folderNoTitle": "Dosarul ${id} din „${collection}” nu are titlu.",
+      "duplicateFolder": "Două dosare din „${collection}” au id-ul ${id}.",
+      "noSources": "Dosarul „${folder}” din „${collection}” nu are o listă de surse.",
+      "unknownShape": "Dosarul „${folder}” din „${collection}” are o formă de dală necunoscută: ${shape}.",
+      "sourceInvalid": "Sursa ${position} a dosarului „${folder}” din „${collection}” este incompletă."
+    },
+    "row": "Colecție",
+    "rowSource": {
+      "one": "Colecție · ${n} dosar",
+      "few": "Colecție · ${n} dosare",
+      "other": "Colecție · ${n} de dosare"
+    },
+    "folder": {
+      "all": "Toate",
+      "empty": "Nu sunt titluri aici",
+      "goToTrackers": "Mergi la Trackere",
+      "goToAddons": "Mergi la Extensii"
+    },
+    "importing": {
+      "title": "Importă colecții",
+      "note": "Un fișier de colecții din Nuvio sau AIOMetadata: introdu linkul lui sau deschide fișierul. O colecție cu același id ca una dintre ale tale o înlocuiește.",
+      "urlLabel": "Link",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Obține",
+      "openFile": "Deschide fișierul",
+      "confirm": "Importă",
+      "done": "Gata",
+      "rowNew": {
+        "one": "Nouă · ${n} dosar",
+        "few": "Nouă · ${n} dosare",
+        "other": "Nouă · ${n} de dosare"
+      },
+      "rowReplaces": {
+        "one": "O înlocuiește pe a ta · ${n} dosar",
+        "few": "O înlocuiește pe a ta · ${n} dosare",
+        "other": "O înlocuiește pe a ta · ${n} de dosare"
+      },
+      "imported": {
+        "one": "${n} colecție importată",
+        "few": "${n} colecții importate",
+        "other": "${n} de colecții importate"
+      },
+      "notWeb": "Introdu un link care începe cu http:// sau https://.",
+      "tooLarge": "Acest fișier depășește 4 MB.",
+      "httpError": "Linkul a răspuns cu eroarea ${status}.",
+      "timeout": "Linkul nu a răspuns la timp.",
+      "unreachable": "Linkul nu poate fi accesat. Verifică-l, precum și conexiunea.",
+      "unreadable": "Acest fișier nu poate fi citit ca text.",
+      "failed": "Colecțiile nu au putut fi salvate."
+    },
+    "editor": {
+      "newHeading": "Colecție nouă",
+      "editHeading": "Editează colecția",
+      "titleLabel": "Titlu",
+      "view": "Afișare",
+      "viewHint": "Cum își arată un dosar sursele",
+      "viewTabs": "File",
+      "viewRows": "Rânduri",
+      "viewFollow": "Ca în aplicație",
+      "allTab": "Fila Toate",
+      "allTabHint": "O primă filă cu titlurile tuturor surselor",
+      "foldersHeader": "Dosare",
+      "addFolder": "Adaugă un dosar",
+      "noFolders": "Încă nu sunt dosare",
+      "sources": {
+        "one": "${n} sursă",
+        "few": "${n} surse",
+        "other": "${n} de surse"
+      },
+      "save": "Salvează",
+      "newFolder": "Dosar nou",
+      "folderTitleLabel": "Titlu",
+      "shape": "Forma dalei",
+      "shapePoster": "Afiș",
+      "shapeLandscape": "Orizontal",
+      "shapeSquare": "Pătrat",
+      "coverLabel": "Linkul imaginii de copertă",
+      "coverHint": "https://…",
+      "hideTitle": "Ascunde titlul",
+      "hideTitleHint": "Dala arată doar coperta",
+      "sourcesHeader": "Surse",
+      "addSource": "Adaugă o sursă",
+      "noSources": "Încă nu sunt surse",
+      "deleteNamed": "Șterge ${name}",
+      "removeNamed": "Elimină ${name}",
+      "noTitle": "Dă un titlu colecției.",
+      "noFolder": "Adaugă un dosar în colecție.",
+      "folderNoTitle": "Dă un titlu dosarului ${position}.",
+      "folderNoSource": "Adaugă o sursă în „${folder}”.",
+      "saveFailed": "Colecția nu a putut fi salvată.",
+      "discardTitle": "Renunți la modificări?",
+      "discard": "Renunță",
+      "keepEditing": "Continuă editarea",
+      "picker": {
+        "addons": "Cataloage de extensii",
+        "trackers": "Trackere",
+        "noAddons": "Nicio extensie instalată nu are un catalog de adăugat.",
+        "noTrackers": "Conectează un tracker din Setări → Trackere ca să-i adaugi listele.",
+        "listsFailed": "Listele ${service} nu pot fi citite acum.",
+        "byLink": "O listă ${service} după link",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Adaugă",
+        "notAList": "Acesta nu este un link către o listă ${service}.",
+        "notFound": "${service} nu are nicio listă la acest link.",
+        "unreachable": "${service} nu poate fi accesat acum."
+      }
+    }
+  }
+}

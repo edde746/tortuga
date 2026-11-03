@@ -1,0 +1,2013 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "ตรวจหาอัปเดต…",
+    "launchFailed": "Tortuga เริ่มทำงานไม่ได้",
+    "startup": {
+      "database": "กำลังเปิดฐานข้อมูล…",
+      "migration": "กำลังอัปเดตฐานข้อมูล…",
+      "account": "กำลังโหลดบัญชีของคุณ…",
+      "profiles": "กำลังโหลดโปรไฟล์…"
+    },
+    "localNetworkUsage": "Tortuga ใช้เครือข่ายภายในของคุณเพื่อเข้าถึงส่วนเสริม สื่อ และเซิร์ฟเวอร์ซิงค์ที่คุณตั้งไว้ที่บ้าน"
+  },
+  "player": {
+    "nowPlaying": "กำลังเล่น",
+    "buffering": "กำลังบัฟเฟอร์…",
+    "position": "${position} / ${duration}",
+    "timeline": "ตำแหน่งการเล่น",
+    "play": "เล่น",
+    "pause": "หยุดชั่วคราว",
+    "resolving": "กำลังเตรียมสตรีม…",
+    "opening": "กำลังเปิด…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "สด",
+      "position": "สด · ดูแล้ว ${time}",
+      "behind": "สด · ช้ากว่า ${time}",
+      "goToLive": "ไปยังการถ่ายทอดสด"
+    },
+    "nextEpisode": "ตอนถัดไป",
+    "previousEpisode": "ตอนก่อนหน้า",
+    "lock": {
+      "button": "ล็อกหน้าจอ",
+      "tapToUnlock": "แตะเพื่อปลดล็อก",
+      "tapAgainToUnlock": "แตะอีกครั้งเพื่อปลดล็อก"
+    },
+    "format": {
+      "seconds": "${value} วินาที",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "ปกติ",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "ระดับเสียง",
+      "level": "${percent}%",
+      "muted": "ปิดเสียงอยู่",
+      "mute": "ปิดเสียง",
+      "unmute": "เปิดเสียง"
+    },
+    "menu": {
+      "audio": "เสียง",
+      "subtitles": "คำบรรยาย",
+      "speed": "ความเร็วในการเล่น",
+      "subtitleDelay": "หน่วงเวลาคำบรรยาย",
+      "audioDelay": "หน่วงเวลาเสียง",
+      "moreSubtitles": "คำบรรยายเพิ่มเติม",
+      "reset": "รีเซ็ต",
+      "subtitleDelayEarlier": "หน่วงเวลาคำบรรยาย: เร็วขึ้น",
+      "subtitleDelayLater": "หน่วงเวลาคำบรรยาย: ช้าลง",
+      "audioDelayEarlier": "หน่วงเวลาเสียง: เร็วขึ้น",
+      "audioDelayLater": "หน่วงเวลาเสียง: ช้าลง"
+    },
+    "track": {
+      "off": "ปิด",
+      "numbered": "แทร็ก ${number}",
+      "defaultTrack": "ค่าเริ่มต้น",
+      "forced": "บังคับ",
+      "sdh": "SDH",
+      "audioDescription": "เสียงบรรยายภาพ",
+      "external": "ภายนอก",
+      "second": "คำบรรยายที่สอง",
+      "showAsSecond": "แสดงเป็นคำบรรยายที่สอง",
+      "removeSecond": "นำคำบรรยายที่สองออก",
+      "otherLanguage": "อื่นๆ",
+      "mono": "โมโน",
+      "stereo": "สเตอริโอ",
+      "channels": {
+        "other": "${n} ช่องสัญญาณ"
+      }
+    },
+    "info": {
+      "title": "ข้อมูลการเล่น",
+      "tab": "ข้อมูล",
+      "resolution": "ความละเอียด",
+      "video": "วิดีโอ",
+      "dynamicRange": "ช่วงไดนามิก",
+      "audio": "เสียง",
+      "decoder": "ตัวถอดรหัส",
+      "cache": "แคช",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "ฮาร์ดแวร์ (${name})",
+      "softwareDecoder": "ซอฟต์แวร์",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision โปรไฟล์ ${profile}",
+      "stream": "สตรีม",
+      "addon": "ส่วนเสริม",
+      "pickedBy": "เลือกโดย",
+      "autoPlayFirstMatch": "เล่นอัตโนมัติ: สตรีมแรกที่ตรงเงื่อนไข",
+      "autoPlayLastLink": "เล่นอัตโนมัติ: สตรีมเดียวกับครั้งก่อน",
+      "source": "แหล่งที่มา",
+      "downloaded": "ดาวน์โหลดแล้ว",
+      "name": "ชื่อ",
+      "file": "ไฟล์",
+      "container": "คอนเทนเนอร์",
+      "fileSize": "ขนาด",
+      "bitrate": "บิตเรต",
+      "codec": "โคเดก",
+      "pixelFormat": "รูปแบบพิกเซล",
+      "bitDepth": "${bits} บิต",
+      "color": "สี",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} นิต",
+      "mastering": "จอมาสเตอริง",
+      "nitsRange": "${min}–${max} นิต",
+      "droppedFrames": "เฟรมที่หลุด",
+      "droppedFramesValue": "${output} (ตัวถอดรหัส ${decoder})",
+      "delayedFrames": "เฟรมที่ล่าช้า",
+      "output": "เอาต์พุต",
+      "hertz": "${value} Hz",
+      "channels": "ช่องสัญญาณ",
+      "sampleRate": "อัตราสุ่มตัวอย่าง",
+      "track": "แทร็ก",
+      "secondTrack": "แทร็กที่สอง",
+      "passthrough": "ส่งผ่านสัญญาณ (${format})",
+      "spatialAudio": "เสียงตามตำแหน่ง",
+      "rendering": "การเรนเดอร์",
+      "surround": "เซอร์ราวด์",
+      "subtitles": "คำบรรยาย",
+      "format": "รูปแบบ",
+      "embedded": "ฝังในไฟล์",
+      "delay": "หน่วงเวลา",
+      "network": "เครือข่าย",
+      "downloadSpeed": "ความเร็วดาวน์โหลด",
+      "buffering": "กำลังบัฟเฟอร์",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "ข้ามอินโทร",
+      "recap": "ข้ามสรุปตอนที่แล้ว",
+      "credits": "ข้ามเครดิต"
+    },
+    "prompt": {
+      "playNext": "เล่นตอนถัดไป: ${episode}",
+      "countdown": {
+        "other": "อัตโนมัติใน ${n} วินาที"
+      }
+    },
+    "options": {
+      "title": "ตัวเลือก",
+      "videoFit": "อัตราส่วนภาพ",
+      "fit": {
+        "contain": "พอดีจอ",
+        "cover": "เต็มจอ",
+        "fill": "ยืดภาพ"
+      },
+      "zoom": "ซูม",
+      "percent": "${percent}%",
+      "resetZoom": "รีเซ็ต",
+      "shaders": "เชดเดอร์",
+      "shader": {
+        "nvscalerDetail": "การปรับขนาดภาพของ NVIDIA เพื่อวิดีโอที่คมชัดขึ้น",
+        "neutral": "เป็นกลาง",
+        "denoise": "ลดสัญญาณรบกวน",
+        "denoiseSharpen": "ลดสัญญาณรบกวน + เพิ่มความคมชัด",
+        "fast": "เร็ว",
+        "highQuality": "คุณภาพสูง",
+        "modeDetail": "${quality} · โหมด ${mode}",
+        "customDetail": "เชดเดอร์ GLSL แบบกำหนดเอง",
+        "importShader": "นำเข้าเชดเดอร์",
+        "imported": "นำเข้าเชดเดอร์แล้ว",
+        "importFailed": "นำเข้าเชดเดอร์ไม่ได้",
+        "deleteLabel": "ลบ ${name}",
+        "deleteTitle": "ลบ ${name} ไหม",
+        "delete": "ลบ",
+        "cancel": "ยกเลิก"
+      },
+      "sleepTimer": "ตั้งเวลาหยุดเล่น",
+      "sleepEndOfVideo": "เมื่อจบวิดีโอนี้",
+      "sleepMinutes": {
+        "other": "${n} นาที"
+      },
+      "sleepLeft": "เหลือ ${time}",
+      "autoPlayNext": "เล่นตอนถัดไปอัตโนมัติ",
+      "audioOutput": "เอาต์พุตเสียง",
+      "systemOutput": "ค่าเริ่มต้นของระบบ",
+      "audioNormalization": "ปรับระดับเสียงให้เท่ากัน",
+      "audioChannels": "ช่องสัญญาณเสียง",
+      "channels": {
+        "original": "ต้นฉบับ",
+        "originalDetail": "เล่นทุกช่องสัญญาณในแทร็ก",
+        "surround51": "สูงสุด 5.1",
+        "surround51Detail": "ผสม 7.1 ให้เหลือ 5.1 สำหรับทีวีและเครื่องรับสัญญาณที่รองรับแค่ 5.1",
+        "stereo": "สเตอริโอ",
+        "stereoDetail": "ผสมให้เหลือสองช่องสัญญาณสำหรับลำโพงสเตอริโอหรือหูฟัง"
+      },
+      "on": "เปิด",
+      "off": "ปิด"
+    },
+    "stillWatching": {
+      "title": "ยังดูอยู่ไหม",
+      "countdown": {
+        "other": "หยุดชั่วคราวใน ${n} วินาที"
+      },
+      "keepWatching": "ดูต่อ",
+      "pause": "หยุดชั่วคราว"
+    },
+    "error": {
+      "title": "เล่นสตรีมนี้ไม่ได้",
+      "resolveTimeout": "สตรีมใช้เวลาเริ่มนานเกินไป",
+      "expired": "ลิงก์สตรีมหมดอายุแล้ว",
+      "notFound": "สตรีมนี้ไม่มีให้บริการแล้ว",
+      "http": "เซิร์ฟเวอร์ตอบกลับด้วย HTTP ${status}",
+      "cantOpen": "เปิดสตรีมไม่ได้",
+      "unsupportedFormat": "สตรีมนี้อยู่ในรูปแบบที่ตัวเล่นอ่านไม่ได้",
+      "cantDecode": "เล่นภาพหรือเสียงของสตรีมนี้ไม่ได้",
+      "engineFailed": "ตัวเล่นหยุดทำงานเนื่องจากเกิดข้อผิดพลาด",
+      "retry": "ลองอีกครั้ง",
+      "nextStream": "ลองสตรีมถัดไป",
+      "close": "ปิด",
+      "alternatives": {
+        "other": "มีสตรีมอื่นอีก ${n} รายการ"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "นี่ไม่ใช่ตอนที่เลือก",
+      "titleMovie": "นี่ไม่ใช่ภาพยนตร์ที่เลือก",
+      "titleVideo": "นี่ไม่ใช่วิดีโอที่เลือก",
+      "sent": "ส่วนเสริมส่งวิดีโอแจ้งข้อผิดพลาดมาแทนสตรีม",
+      "byUrl": "ลิงก์ของวิดีโอนี้เป็นวิดีโอแจ้งข้อผิดพลาดของส่วนเสริม",
+      "bySize": "ไฟล์มีขนาด ${served} แต่สตรีมระบุไว้ ${size}",
+      "byDuration": "วิดีโอนี้ยาว ${length} แต่ตอนที่คุณเล่นครั้งล่าสุดยาว ${known}",
+      "kept": "ความคืบหน้าของคุณยังอยู่",
+      "chooseStream": "เลือกสตรีมอื่น",
+      "watch": "ดูข้อความ"
+    },
+    "osd": {
+      "volume": "ระดับเสียง ${level}",
+      "brightness": "ความสว่าง ${level}",
+      "speed": "ความเร็ว ${speed}",
+      "subtitleDelay": "หน่วงเวลาคำบรรยาย ${delay}",
+      "audioDelay": "หน่วงเวลาเสียง ${delay}",
+      "audioTrack": "เสียง: ${track}",
+      "subtitleTrack": "คำบรรยาย: ${track}",
+      "subtitlesOff": "ปิดคำบรรยาย",
+      "chapter": "บท: ${title}",
+      "chapterNumbered": "บทที่ ${number}",
+      "zoom": "ซูม ${percent}",
+      "shader": "เชดเดอร์: ${name}",
+      "shadersOff": "ปิดเชดเดอร์"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": "."
+    }
+  },
+  "streams": {
+    "resolving": "กำลังเปิดสตรีม…",
+    "resolveFailed": {
+      "http": "เซิร์ฟเวอร์ของสตรีมตอบกลับด้วย HTTP ${status}",
+      "timeout": "เซิร์ฟเวอร์ของสตรีมตอบกลับช้าเกินไป",
+      "network": "เชื่อมต่อเซิร์ฟเวอร์ของสตรีมไม่ได้",
+      "unsupportedUrl": "เปิดลิงก์ของสตรีมนี้ไม่ได้",
+      "tooManyRedirects": "ลิงก์ของสตรีมนี้เปลี่ยนเส้นทางหลายครั้งเกินไป",
+      "unexpected": "แอปนี้เกิดข้อผิดพลาดขณะเปิดสตรีมนี้"
+    },
+    "badge": {
+      "instant": "พร้อมเล่น",
+      "notInstant": "ยังไม่พร้อม"
+    },
+    "lastUsed": "เล่นล่าสุด",
+    "external": "เปิดนอกแอป",
+    "unplayable": {
+      "other": "สตรีม ${n} รายการที่แอปนี้เล่นไม่ได้"
+    },
+    "empty": "ไม่พบสตรีม",
+    "all": "ทั้งหมด",
+    "refresh": "รีเฟรช",
+    "retryNamed": "ลอง ${name} อีกครั้ง",
+    "filters": {
+      "hidden": {
+        "other": "ตัวกรองของคุณซ่อนสตรีมไว้ ${n} รายการ"
+      },
+      "showing": {
+        "other": "กำลังแสดงสตรีม ${n} รายการที่ตัวกรองซ่อนไว้"
+      },
+      "show": "แสดง",
+      "hide": "ซ่อน",
+      "rowNote": "ถูกซ่อนโดยตัวกรองของคุณ"
+    },
+    "sort": {
+      "title": "เรียงลำดับ",
+      "addonOrder": "ลำดับส่วนเสริม",
+      "resolution": "ความละเอียด",
+      "source": "คุณภาพต้นทาง",
+      "sizeLargest": "ไฟล์ใหญ่ก่อน",
+      "sizeSmallest": "ไฟล์เล็กก่อน",
+      "cached": "พร้อมเล่นก่อน"
+    },
+    "autoPlay": {
+      "noMatch": "เล่นอัตโนมัติไม่พบสตรีมที่ผ่านตัวกรองของคุณ",
+      "failed": "สตรีมที่เล่นอัตโนมัติเลือกไว้ไม่เริ่มเล่น โปรดเลือกสตรีมอื่น"
+    },
+    "download": {
+      "notice": "เลือกสตรีมที่จะดาวน์โหลด",
+      "action": "ดาวน์โหลด",
+      "actionNamed": "ดาวน์โหลด ${name}",
+      "queued": "เพิ่มในคิวดาวน์โหลดแล้ว",
+      "failed": "เพิ่มการดาวน์โหลดไม่ได้"
+    },
+    "suggested": {
+      "label": "แนะนำ",
+      "reason": "คล้ายกับที่คุณเลือกล่าสุด: ${features}",
+      "audio": "เสียง${language}",
+      "subtitles": "คำบรรยาย${language}",
+      "smaller": "ไฟล์เล็กกว่า",
+      "larger": "ไฟล์ใหญ่กว่า"
+    }
+  },
+  "detail": {
+    "loadFailed": "โหลดรายละเอียดไม่ได้",
+    "notFound": "ไม่มีส่วนเสริมใดมีรายละเอียดของรายการนี้",
+    "noAddons": "ไม่มีส่วนเสริมที่ติดตั้งไว้ตัวใดมีรายละเอียดของรายการนี้",
+    "noAnimeAddon": "ไม่มีส่วนเสริมที่ติดตั้งไว้ตัวใดมีรายละเอียดของอนิเมะนี้ ติดตั้งส่วนเสริมสำหรับอนิเมะเพื่อเปิด",
+    "animeListsUnavailable": "โหลดรายชื่ออนิเมะไม่สำเร็จ จึงจับคู่อนิเมะเรื่องนี้กับชื่อเรื่องไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง",
+    "findingAnime": "กำลังค้นหาอนิเมะเรื่องนี้ในรายชื่ออนิเมะ…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} ชม. ${minutes} นาที",
+      "hours": "${hours} ชม.",
+      "minutes": "${minutes} นาที"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "นักวิจารณ์ Rotten Tomatoes",
+        "rottenTomatoesAudience": "ผู้ชม Rotten Tomatoes",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} เปอร์เซ็นต์"
+    },
+    "userRating": {
+      "rateLabel": "ให้คะแนนรายการนี้",
+      "label": "คะแนนของคุณ: ${score}",
+      "range": "${low}–${high}",
+      "title": "คะแนนของคุณ",
+      "hint": "คะแนนของคุณจะส่งไปยังแต่ละบริการด้านล่าง",
+      "clear": "ลบคะแนน",
+      "checking": "กำลังตรวจสอบ…",
+      "notRated": "ยังไม่ให้คะแนน",
+      "unreadable": "ตรวจสอบไม่ได้",
+      "saving": "กำลังบันทึก…",
+      "saved": "บันทึกแล้ว",
+      "removed": "ลบแล้ว",
+      "queued": "ยังไม่ได้ส่ง จะลองใหม่",
+      "failed": "ไม่ได้บันทึก"
+    },
+    "links": {
+      "genres": "แนว",
+      "cast": "นักแสดง",
+      "directors": "ผู้กำกับ",
+      "writers": "ผู้เขียนบท",
+      "website": "เว็บไซต์"
+    },
+    "facts": {
+      "title": "ข้อมูล",
+      "released": "วันที่ออกฉาย",
+      "runtime": "ความยาว",
+      "country": "ประเทศ",
+      "language": "ภาษา",
+      "awards": "รางวัล",
+      "source": "รายละเอียดจาก",
+      "failed": "โหลดไม่สำเร็จจาก"
+    },
+    "trailer": "ตัวอย่าง",
+    "trailerNumbered": "ตัวอย่าง ${number}",
+    "trailers": "ตัวอย่าง",
+    "share": "แชร์",
+    "season": "ซีซั่น ${number}",
+    "specials": "ตอนพิเศษ",
+    "episodeNumbered": "ตอนที่ ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "นำแสดงโดย ${names}",
+    "castAndCrew": "นักแสดงและทีมงาน",
+    "airs": "ออกอากาศ ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "ม.ค.",
+      "feb": "ก.พ.",
+      "mar": "มี.ค.",
+      "apr": "เม.ย.",
+      "may": "พ.ค.",
+      "jun": "มิ.ย.",
+      "jul": "ก.ค.",
+      "aug": "ส.ค.",
+      "sep": "ก.ย.",
+      "oct": "ต.ค.",
+      "nov": "พ.ย.",
+      "dec": "ธ.ค."
+    },
+    "play": "เล่น",
+    "playEpisode": "เล่น ${episode}",
+    "resume": "เล่นต่อ ${time}",
+    "resumeEpisode": "เล่นต่อ ${episode} · ${time}",
+    "addToLibrary": "เพิ่มลงในคลัง",
+    "removeFromLibrary": "นำออกจากคลัง",
+    "markWatched": "ทำเครื่องหมายว่าดูแล้ว",
+    "markUnwatched": "ทำเครื่องหมายว่ายังไม่ได้ดู",
+    "markAllWatched": "ทำเครื่องหมายทุกตอนว่าดูแล้ว",
+    "markAllUnwatched": "ทำเครื่องหมายทุกตอนว่ายังไม่ได้ดู",
+    "markSeasonWatched": "ทำเครื่องหมายซีซั่นนี้ว่าดูแล้ว",
+    "markSeasonUnwatched": "ทำเครื่องหมายซีซั่นนี้ว่ายังไม่ได้ดู",
+    "watched": "ดูแล้ว",
+    "overviewHidden": "ซ่อนคำอธิบายแล้ว",
+    "moreActions": "ตัวเลือกเพิ่มเติม",
+    "moreActionsNamed": "ตัวเลือกเพิ่มเติมสำหรับ ${name}",
+    "showMore": "แสดงเพิ่มเติม",
+    "showLess": "แสดงน้อยลง",
+    "findingStream": "กำลังค้นหาสตรีม…",
+    "chooseStream": "เลือกสตรีม",
+    "download": {
+      "download": "ดาวน์โหลด",
+      "queued": "อยู่ในคิว",
+      "waitingForWifi": "กำลังรอ Wi-Fi",
+      "downloading": "กำลังดาวน์โหลด ${percent}%",
+      "downloadingStarted": "กำลังดาวน์โหลด…",
+      "paused": "หยุดชั่วคราว",
+      "failed": "ดาวน์โหลดไม่สำเร็จ",
+      "partial": "ดาวน์โหลดแล้ว ${done} จาก ${total}",
+      "downloaded": "ดาวน์โหลดแล้ว",
+      "menuTitle": "ดาวน์โหลด",
+      "allSeasons": "ทุกซีซั่น",
+      "pick": {
+        "all": "ทุกตอน",
+        "unwatched": "ตอนที่ยังไม่ได้ดู",
+        "next5": "5 ตอนถัดไปที่ยังไม่ได้ดู",
+        "next10": "10 ตอนถัดไปที่ยังไม่ได้ดู"
+      },
+      "keepSynced": "ซิงค์อยู่เสมอ",
+      "keepSyncedCount": {
+        "other": "เก็บตอนที่ยังไม่ได้ดูไว้ ${n} ตอน"
+      },
+      "keepSyncedAll": "เก็บตอนที่ยังไม่ได้ดูไว้ทุกตอน",
+      "manage": "จัดการการดาวน์โหลด",
+      "pauseAll": "หยุดดาวน์โหลดชั่วคราว",
+      "resumeAll": "ดาวน์โหลดต่อ",
+      "deleteSeason": "ลบการดาวน์โหลดของซีซั่นนี้",
+      "deleteAll": "ลบการดาวน์โหลดทั้งหมด",
+      "queuedEpisodes": {
+        "other": "เพิ่ม ${n} ตอนในคิวดาวน์โหลดแล้ว"
+      },
+      "nothingQueued": "ทุกตอนดาวน์โหลดแล้วหรืออยู่ในคิวแล้ว",
+      "failedToQueue": "เพิ่มการดาวน์โหลดไม่ได้",
+      "episode": {
+        "download": "ดาวน์โหลดตอน",
+        "pause": "หยุดดาวน์โหลดชั่วคราว",
+        "resume": "ดาวน์โหลดต่อ",
+        "retry": "ลองดาวน์โหลดอีกครั้ง",
+        "pickStream": "เลือกสตรีม",
+        "cancel": "ยกเลิกการดาวน์โหลด",
+        "delete": "ลบการดาวน์โหลด",
+        "queued": "อยู่ในคิว",
+        "downloading": "${percent}%",
+        "paused": "หยุดชั่วคราว",
+        "failed": "ดาวน์โหลดไม่สำเร็จ",
+        "downloaded": "ดาวน์โหลดแล้ว"
+      }
+    },
+    "related": {
+      "title": "เรื่องที่คล้ายกัน",
+      "noneFound": "ไม่พบเรื่องที่คล้ายกัน"
+    }
+  },
+  "library": {
+    "title": "คลัง",
+    "continueWatching": "ดูต่อ",
+    "sort": {
+      "lastWatched": "ดูล่าสุด",
+      "added": "เพิ่มล่าสุด",
+      "name": "ชื่อ A–Z",
+      "nameReverse": "ชื่อ Z–A",
+      "timesWatched": "ดูบ่อยที่สุด",
+      "watched": "ดูแล้วขึ้นก่อน",
+      "notWatched": "ยังไม่ได้ดูขึ้นก่อน"
+    },
+    "sortBy": "เรียงตาม",
+    "sortByNamed": "เรียงตาม: ${name}",
+    "empty": "ยังไม่มีรายการ เพิ่มรายการลงในคลังได้จากหน้ารายละเอียด",
+    "emptyContinueWatching": "ยังไม่มีรายการให้ดูต่อ รายการจะแสดงที่นี่เมื่อคุณเริ่มดู",
+    "emptyType": "ไม่มีรายการประเภทนี้",
+    "watched": "ดูแล้ว"
+  },
+  "mediaMenu": {
+    "markWatched": "ทำเครื่องหมายว่าดูแล้ว",
+    "markUnwatched": "ทำเครื่องหมายว่ายังไม่ได้ดู",
+    "removeFromContinueWatching": "นำออกจากรายการดูต่อ",
+    "details": "ไปที่รายละเอียด",
+    "addToLibrary": "เพิ่มลงในคลัง",
+    "removeFromLibrary": "นำออกจากคลัง",
+    "playFromStart": "เล่นตั้งแต่ต้น",
+    "markSeasonWatched": "ทำเครื่องหมายซีซั่นนี้ว่าดูแล้ว",
+    "markSeasonUnwatched": "ทำเครื่องหมายซีซั่นนี้ว่ายังไม่ได้ดู",
+    "chooseStream": "เลือกสตรีม",
+    "download": "ดาวน์โหลด",
+    "pauseDownload": "หยุดดาวน์โหลดชั่วคราว",
+    "resumeDownload": "ดาวน์โหลดต่อ",
+    "retryDownload": "ลองดาวน์โหลดอีกครั้ง",
+    "cancelDownload": "ยกเลิกการดาวน์โหลด",
+    "deleteDownload": "ลบการดาวน์โหลด",
+    "pickStream": "เลือกสตรีม",
+    "trailer": "ตัวอย่าง",
+    "markFailed": "ทำเครื่องหมาย ${title} ไม่ได้ เพราะโหลดรายละเอียดไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง"
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "อ่านส่วนเสริมที่ติดตั้งไว้ไม่ได้ เปิด Tortuga ใหม่เพื่อลองอีกครั้ง",
+    "error": {
+      "invalidTransportUrl": "นี่ไม่ใช่ลิงก์ส่วนเสริม ลิงก์ส่วนเสริมจะลงท้ายด้วย /manifest.json",
+      "timeout": "ส่วนเสริมใช้เวลาตอบกลับนานเกินไป",
+      "network": "ติดต่อส่วนเสริมไม่ได้",
+      "http": "ส่วนเสริมแจ้งข้อผิดพลาด (HTTP ${status})",
+      "invalidResponse": "ส่วนเสริมส่งการตอบกลับที่แอปนี้อ่านไม่ได้",
+      "unexpectedResponse": "ส่วนเสริมตอบกลับในรูปแบบที่ต่างจากที่ร้องขอ",
+      "emptyContent": "ไม่พบข้อมูล",
+      "invalidManifest": "ไฟล์ manifest ของส่วนเสริมไม่ถูกต้อง",
+      "configurationRequired": "ต้องตั้งค่าส่วนเสริมนี้ก่อนจึงจะติดตั้งได้",
+      "alreadyInstalled": "ติดตั้งส่วนเสริมนี้แล้ว",
+      "notInstalled": "ยังไม่ได้ติดตั้งส่วนเสริมนี้",
+      "protectedAddon": "ส่วนเสริมนี้มีมาในตัว นำออกหรือปิดไม่ได้"
+    },
+    "title": "ส่วนเสริม",
+    "allTypes": "ทั้งหมด",
+    "empty": "ยังไม่ได้ติดตั้งส่วนเสริม",
+    "emptyFiltered": "ไม่มีส่วนเสริมที่ติดตั้งไว้สำหรับประเภทนี้",
+    "builtIn": "ในตัว",
+    "builtInExplanation": "ส่วนเสริมนี้มีมาในตัว นำออกหรือปิดไม่ได้",
+    "cancel": "ยกเลิก",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "เลื่อนขึ้น",
+    "moveUpNamed": "เลื่อน ${name} ขึ้น",
+    "moveDown": "เลื่อนลง",
+    "moveDownNamed": "เลื่อน ${name} ลง",
+    "dragToReorderNamed": "จัดลำดับ ${name}",
+    "enabledNamed": "ใช้ ${name}",
+    "close": "ปิด",
+    "version": "เวอร์ชัน ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "แคตตาล็อก",
+      "meta": "รายละเอียด",
+      "stream": "สตรีม",
+      "subtitles": "คำบรรยาย",
+      "addonCatalog": "แคตตาล็อกส่วนเสริม",
+      "player": "กิจกรรมการเล่น",
+      "library": "กิจกรรมคลัง"
+    },
+    "remove": {
+      "title": "นำ ${name} ออกใช่ไหม",
+      "message": "ส่วนเสริมจะถูกนำออกจากโปรไฟล์นี้ในทุกอุปกรณ์ พร้อมกับการตั้งค่าที่กำหนดไว้",
+      "confirm": "นำออก"
+    },
+    "details": {
+      "types": "ประเภท",
+      "resources": "ให้บริการ",
+      "catalogs": "แคตตาล็อก",
+      "contact": "ติดต่อ",
+      "configure": "ตั้งค่า",
+      "remove": "นำออก",
+      "enabled": "ใช้ส่วนเสริมนี้",
+      "enabledOff": "ปิด: Tortuga ไม่ขอสิ่งใดจากส่วนเสริมนี้และไม่แสดงแคตตาล็อกของมัน",
+      "shareTitle": "ลิงก์ส่วนเสริม",
+      "shareWarning": "ลิงก์นี้อาจมีคีย์ของบัญชีที่ใช้ตั้งค่าส่วนเสริมนี้ แชร์ให้เฉพาะคนที่คุณไว้ใจเท่านั้น",
+      "revealLink": "แสดงลิงก์",
+      "hideLink": "ซ่อนลิงก์",
+      "copyLink": "คัดลอกลิงก์",
+      "linkCopied": "คัดลอกลิงก์แล้ว"
+    },
+    "watchActivity": {
+      "title": "ส่งกิจกรรมการดู",
+      "explanation": "ส่วนเสริมนี้ได้รับกิจกรรมการดูของคุณ: สิ่งที่คุณเล่น หยุดชั่วคราว และหยุด สิ่งที่คุณเพิ่มลงในหรือนำออกจากคลัง และสิ่งที่คุณทำเครื่องหมายว่าดูแล้ว",
+      "agree": "ฉันยินยอมให้ส่วนเสริมนี้ได้รับกิจกรรมการดูของฉัน",
+      "notAllowed": "ไม่ได้รับกิจกรรมการดูจนกว่าคุณจะอนุญาต"
+    },
+    "install": {
+      "action": "ติดตั้งส่วนเสริม",
+      "title": "ติดตั้งส่วนเสริม",
+      "linkHint": "ลิงก์ส่วนเสริมที่ลงท้ายด้วย /manifest.json",
+      "submit": "ดำเนินการต่อ",
+      "confirm": "ติดตั้ง",
+      "update": "อัปเดต",
+      "configure": "ตั้งค่า",
+      "configureFirst": "ต้องตั้งค่าส่วนเสริมนี้ก่อนจึงจะติดตั้งได้ ตั้งค่าให้เรียบร้อย แล้วติดตั้งจากหน้าของส่วนเสริม",
+      "alreadyInstalled": "ติดตั้งส่วนเสริมนี้แล้ว",
+      "updateDetails": "ติดตั้งแล้ว การดำเนินการนี้จะอัปเดตรายละเอียดของส่วนเสริม",
+      "updateVersion": "ติดตั้งแล้ว การดำเนินการนี้จะอัปเดตเป็นเวอร์ชัน ${version}",
+      "adult": "ส่วนเสริมนี้ถูกระบุว่ามีเนื้อหาสำหรับผู้ใหญ่",
+      "installed": "ติดตั้ง ${name} แล้ว",
+      "updated": "อัปเดต ${name} แล้ว",
+      "done": "เสร็จสิ้น"
+    },
+    "browse": {
+      "title": "เรียกดู",
+      "installed": "ติดตั้งแล้ว",
+      "installedNote": "ติดตั้งแล้ว"
+    }
+  },
+  "settings": {
+    "title": "การตั้งค่า",
+    "automatic": "อัตโนมัติ",
+    "listSeparator": ", ",
+    "cancel": "ยกเลิก",
+    "close": "ปิด",
+    "increaseNamed": "เพิ่ม ${name}",
+    "decreaseNamed": "ลด ${name}",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "other": "${n} วินาที"
+      }
+    },
+    "time": {
+      "justNow": "เมื่อสักครู่",
+      "minutesAgo": {
+        "other": "${n} นาทีที่แล้ว"
+      },
+      "hoursAgo": {
+        "other": "${n} ชั่วโมงที่แล้ว"
+      },
+      "daysAgo": {
+        "other": "${n} วันที่แล้ว"
+      },
+      "monthsAgo": {
+        "other": "${n} เดือนที่แล้ว"
+      },
+      "yearsAgo": {
+        "other": "${n} ปีที่แล้ว"
+      }
+    },
+    "sections": {
+      "playback": "การเล่น",
+      "playbackSummary": "ภาษา เกณฑ์การดูแล้ว ตอนถัดไป และการข้าม",
+      "device": "อุปกรณ์นี้",
+      "deviceSummary": "การถอดรหัส HDR อัตราเฟรม เสียง แคช และรายงานข้อขัดข้อง",
+      "subtitles": "คำบรรยาย",
+      "subtitlesSummary": "ขนาด สี เส้นขอบ และตำแหน่งบนอุปกรณ์นี้",
+      "addons": "ส่วนเสริม",
+      "addonsSummary": {
+        "other": "ติดตั้งแล้ว ${n} รายการ"
+      },
+      "addonsSummaryLoading": "ส่วนเสริมที่ติดตั้ง",
+      "home": "หน้าหลัก",
+      "homeSummary": "แถวที่แสดงในหน้าหลักและลำดับของแถว",
+      "appearance": "รูปลักษณ์",
+      "appearanceSummary": "ภาษา โปสเตอร์ และเรื่องที่ดูแล้ว",
+      "trackers": "บริการติดตาม",
+      "trackersSummary": "การส่งข้อมูลการดู ประวัติการดู และรายการ",
+      "trackersConnected": "เชื่อมต่อกับ ${services} แล้ว",
+      "account": "บัญชี",
+      "about": "เกี่ยวกับ",
+      "downloads": "การดาวน์โหลด",
+      "downloadsSummary": "ตำแหน่งจัดเก็บ เฉพาะ Wi-Fi และพื้นที่จัดเก็บ",
+      "data": "ส่งออกและนำเข้า",
+      "dataSummary": "บันทึกข้อมูลโปรไฟล์ของคุณเป็นไฟล์ และนำกลับเข้ามา"
+    },
+    "profile": {
+      "locked": "ล็อกด้วย PIN",
+      "unlocked": "ไม่มี PIN",
+      "edit": "แก้ไขโปรไฟล์",
+      "manage": "สลับหรือจัดการโปรไฟล์"
+    },
+    "about": {
+      "version": "เวอร์ชัน ${version}",
+      "license": "Tortuga เป็นซอฟต์แวร์ภายใต้สัญญาอนุญาต GNU General Public License เวอร์ชัน 3 คุณสามารถเรียกใช้ ศึกษา แชร์ และแก้ไขซอฟต์แวร์นี้ได้ และผู้ที่ให้สำเนาแก่คุณต้องเสนอซอร์สโค้ดให้คุณด้วย",
+      "source": "ซอร์สโค้ด",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga ใช้ Trakt แต่ไม่ได้รับการสนับสนุนหรือการรับรองจาก Trakt",
+      "notices": "ซอฟต์แวร์ของบุคคลที่สาม",
+      "noticeLink": "หน้าโครงการ"
+    },
+    "appearance": {
+      "interfaceLanguage": "ภาษาของแอป",
+      "interfaceLanguageHint": "ภาษาของเมนูและข้อความในแอป",
+      "interfaceLanguageSystem": "ค่าเริ่มต้นของระบบ",
+      "blurUnwatched": "เบลอตอนที่ยังไม่ได้ดู",
+      "blurUnwatchedHint": "เบลอภาพและซ่อนคำอธิบายของตอนที่คุณยังไม่ได้เริ่มดู เพื่อไม่ให้เปิดเผยเนื้อหา",
+      "hideWatched": "ซ่อนเรื่องที่ดูแล้ว",
+      "hideWatchedHint": "ไม่แสดงภาพยนตร์และซีรีส์ที่คุณดูจบแล้วในแถวของหน้าหลักและในสำรวจ ซีรีส์จะกลับมาเมื่อมีตอนใหม่ออก",
+      "hidePosterCaptions": "ซ่อนชื่อใต้โปสเตอร์",
+      "hidePosterCaptionsHint": "แสดงเฉพาะภาพ ดูต่อยังคงแสดงตอนและเวลาที่เหลือ",
+      "posterTemplate": "เทมเพลต URL โปสเตอร์",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} และ {tvdb_id} แทน ID ของแต่ละเรื่อง ส่วน {type} แทน movie หรือ series",
+      "posterTemplateNone": "โปสเตอร์จากแอดออน",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "ไม่ใช่ที่อยู่ http หรือ https จึงถูกละเว้น"
+    },
+    "home": {
+      "note": "เลือกแถวที่จะแสดงในหน้าหลักและลำดับของแถว การตั้งค่านี้เป็นของโปรไฟล์นี้และจะซิงค์ไปยังอุปกรณ์อื่นของคุณ",
+      "continueWatchingHint": "เป็นแถวแรกเสมอ",
+      "rowsHeader": "แถว",
+      "empty": "ไม่มีส่วนเสริมที่ติดตั้งไว้ตัวใดมีแคตตาล็อกสำหรับหน้าหลัก",
+      "reset": "รีเซ็ตเป็นค่าเริ่มต้น",
+      "moveUp": "เลื่อนขึ้น",
+      "moveUpNamed": "เลื่อน ${name} ขึ้น",
+      "moveDown": "เลื่อนลง",
+      "moveDownNamed": "เลื่อน ${name} ลง",
+      "dragToReorder": "ลากเพื่อจัดลำดับ",
+      "dragToReorderNamed": "จัดลำดับ ${name}",
+      "newCollection": "คอลเลกชันใหม่",
+      "importCollections": "นำเข้าคอลเลกชัน",
+      "exportCollections": "ส่งออกคอลเลกชัน",
+      "edit": "แก้ไข",
+      "delete": "ลบ",
+      "deleteTitle": "ลบ “${title}” ไหม",
+      "deleteMessage": "คอลเลกชันจะถูกนำออกจากโปรไฟล์นี้ในทุกอุปกรณ์ของคุณ"
+    },
+    "playback": {
+      "title": "การเล่น",
+      "note": "การตั้งค่านี้เป็นของโปรไฟล์นี้และจะซิงค์ไปยังอุปกรณ์อื่นของคุณ",
+      "languagesHeader": "ภาษา",
+      "audioLanguages": "ภาษาเสียง",
+      "audioLanguagesHint": "แทร็กเสียงที่จะเล่น ตามลำดับที่ต้องการ",
+      "audioLanguagesNone": "ค่าเริ่มต้นของวิดีโอ",
+      "audioLanguagesExplanation": "วิดีโอจะเล่นด้วยภาษาแรกในรายการนี้ที่วิดีโอมี หากไม่ได้เลือกไว้ จะเล่นแทร็กเสียงเริ่มต้นของวิดีโอ",
+      "subtitleLanguages": "ภาษาคำบรรยาย",
+      "subtitleLanguagesHint": "คำบรรยายที่จะเปิด ตามลำดับที่ต้องการ",
+      "subtitleLanguagesNone": "ปิด",
+      "subtitleLanguagesExplanation": "คำบรรยายจะเปิดในภาษาแรกในรายการนี้ที่วิดีโอมี หากไม่ได้เลือกไว้ คำบรรยายจะปิดอยู่ เว้นแต่วิดีโอบังคับให้แสดง",
+      "secondSubtitleLanguage": "ภาษาคำบรรยายที่สอง",
+      "secondSubtitleLanguageHint": "แสดงที่ด้านบนของภาพพร้อมคำบรรยายแรก",
+      "secondSubtitleLanguageExplanation": "คำบรรยายในภาษานี้จะแสดงที่ด้านบนของภาพพร้อมกับคำบรรยายแรก หากไม่ได้เลือกไว้ จะไม่มีคำบรรยายที่สองเว้นแต่เลือกในเครื่องเล่น",
+      "secondSubtitleLanguageNone": "ปิด",
+      "showSubtitles": "แสดงคำบรรยาย",
+      "showSubtitlesHint": "เสมอ: คำบรรยายในภาษาที่พูดด้วย โดยเลือก SDH ก่อน",
+      "showSubtitlesFollowAudio": "ตามเสียง",
+      "showSubtitlesAlways": "เสมอ",
+      "chosenHeader": "ภาษาของคุณ",
+      "availableHeader": "เพิ่มภาษา",
+      "searchLanguages": "ค้นหาภาษา",
+      "noLanguageMatches": "ไม่พบภาษาที่ตรงกัน",
+      "playbackHeader": "การเล่น",
+      "watchedThreshold": "นับว่าดูแล้วเมื่อเล่นถึง",
+      "watchedThresholdHint": "เล่นวิดีโอถึงตรงไหนจึงนับว่าดูแล้ว และให้ดูต่อไปยังตอนถัดไป",
+      "bingeWatching": "เล่นตอนถัดไป",
+      "bingeWatchingHint": "เมื่อจบตอน ให้เริ่มตอนถัดไป โดยใช้แหล่งเดิมหากเป็นไปได้",
+      "upNextCountdown": "นับถอยหลังตอนถัดไป",
+      "upNextCountdownHint": "ระยะเวลาที่หน้าต่างแจ้งตอนถัดไปจะรอก่อนเริ่มเล่น",
+      "upNextImmediately": "เริ่มทันที",
+      "seekShort": "ข้ามระยะสั้น",
+      "seekShortHint": "ปุ่มลูกศร รีโมท และปุ่มข้ามของตัวเล่น",
+      "seekLong": "ข้ามระยะยาว",
+      "seekLongHint": "Shift ร่วมกับปุ่มลูกศร และการกดค้าง",
+      "videoClick": "การคลิกที่วิดีโอ",
+      "videoClickHint": "การดับเบิลคลิกยังคงเข้าและออกจากโหมดเต็มหน้าจอ",
+      "videoClickPause": "หยุดชั่วคราวและเล่น",
+      "videoClickControls": "แสดงหรือซ่อนตัวควบคุม",
+      "moveUp": "เลื่อนขึ้น",
+      "moveUpNamed": "เลื่อน ${name} ขึ้น",
+      "moveDown": "เลื่อนลง",
+      "moveDownNamed": "เลื่อน ${name} ลง",
+      "removeLanguage": "นำออก",
+      "removeLanguageNamed": "นำ ${name} ออก",
+      "dragToReorderNamed": "จัดลำดับ ${name}",
+      "skipping": {
+        "header": "การข้าม",
+        "footer": "อินโทร สรุปตอนที่แล้ว และเครดิตจะระบุจากชื่อบทของวิดีโอ จึงมีตัวเลือกให้ข้ามเฉพาะวิดีโอที่ตั้งชื่อบทไว้เท่านั้น การข้ามอัตโนมัติจะนับถอยหลังบนปุ่มก่อน และจะหยุดเมื่อคุณใช้งานตัวเล่น",
+        "intros": "อินโทร",
+        "introsHint": "เพลงเปิดและฉากไตเติ้ล",
+        "recaps": "สรุปตอนที่แล้ว",
+        "recapsHint": "“ตอนที่แล้ว…” ในช่วงต้นของตอน",
+        "credits": "เครดิต",
+        "creditsHint": "เครดิตท้ายเรื่องและตัวอย่างตอนถัดไป หน้าต่างแจ้งตอนถัดไปจะแสดงเมื่อเริ่มช่วงนี้",
+        "off": "ปิด",
+        "button": "แสดงปุ่ม",
+        "auto": "ข้ามอัตโนมัติ"
+      },
+      "streams": {
+        "header": "สตรีม",
+        "footer": "ตัวกรองมีผลกับรายการสตรีมทุกรายการ ซึ่งจะบอกจำนวนสตรีมที่ถูกซ่อนและยังเลือกแสดงได้",
+        "autoPlay": "เล่นอัตโนมัติ",
+        "autoPlayHint": "ข้ามรายการสตรีมเมื่อกดปุ่มเล่นหรือเล่นต่อ เมื่อเลือกตอน และเมื่อไปตอนถัดไป เมื่อเรียงลำดับ จะรอจนทุกส่วนเสริมตอบกลับ",
+        "suggestions": "แนะนำสตรีม",
+        "suggestionsHint": "เรียนรู้ว่าคุณเลือกสตรีมใดในโปรไฟล์นี้ และทำเครื่องหมายไว้หนึ่งรายการในรายการ",
+        "autoPlayOff": "ปิด",
+        "autoPlayFirstMatch": "สตรีมแรกที่ผ่านตัวกรอง",
+        "autoPlayReuseLastLink": "สตรีมเดียวกับครั้งก่อน หรือสตรีมแรกที่ผ่านตัวกรอง",
+        "qualities": "คุณภาพ",
+        "qualitiesHint": "ความละเอียดที่จะแสดงในรายการสตรีม",
+        "qualitiesAll": "ทั้งหมด",
+        "qualitiesNone": "ไม่มี",
+        "qualitiesAllBut": "ทั้งหมด ยกเว้น ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "ไม่ทราบ",
+        "ranges": "ช่วงไดนามิก",
+        "rangesHint": "SDR, HDR และ Dolby Vision ที่จะแสดงในรายการสตรีม",
+        "codecs": "โคเดกวิดีโอ",
+        "codecsHint": "โคเดกวิดีโอที่จะแสดงในรายการสตรีม",
+        "minSize": "ขนาดต่ำสุด",
+        "minSizeHint": "ซ่อนสตรีมของไฟล์ที่เล็กกว่านี้ สตรีมที่ไม่ระบุขนาดยังอยู่",
+        "maxSize": "ขนาดสูงสุด",
+        "maxSizeHint": "ซ่อนสตรีมของไฟล์ที่ใหญ่กว่านี้ สตรีมที่ไม่ระบุขนาดยังอยู่",
+        "sizeAny": "ขนาดใดก็ได้",
+        "includePattern": "เฉพาะสตรีมที่ตรงกับ",
+        "includePatternHint": "นิพจน์ปกติ (regular expression) ที่ใช้จับคู่กับชื่อ คำอธิบาย และชื่อไฟล์ของแต่ละสตรีม โดยไม่คำนึงถึงตัวพิมพ์เล็ก-ใหญ่",
+        "includePatternNone": "ทุกสตรีม",
+        "includePlaceholder": "เช่น 1080p|2160p",
+        "excludePattern": "ซ่อนสตรีมที่ตรงกับ",
+        "excludePatternHint": "มีผลเหนือรูปแบบด้านบน",
+        "excludePatternNone": "ไม่มี",
+        "excludePlaceholder": "เช่น HDTV|XviD",
+        "invalidPattern": "นิพจน์ปกติไม่ถูกต้อง จึงถูกละเว้น",
+        "save": "บันทึก",
+        "clear": "ล้าง"
+      }
+    },
+    "device": {
+      "title": "อุปกรณ์นี้",
+      "note": "การตั้งค่านี้ใช้กับอุปกรณ์นี้เท่านั้นและจะไม่ซิงค์",
+      "videoHeader": "วิดีโอ",
+      "hardwareDecoding": "ถอดรหัสด้วยฮาร์ดแวร์",
+      "hardwareDecodingHint": "ถอดรหัสวิดีโอด้วยฮาร์ดแวร์กราฟิก ปิดตัวเลือกนี้หากวิดีโอแสดงผลผิดปกติ",
+      "hdr": "HDR",
+      "hdrHint": "เล่นวิดีโอ HDR เป็น HDR เมื่อจอแสดงผลรองรับ หากปิดจะแปลงเป็น SDR",
+      "matchFrameRate": "บังคับเปลี่ยนอัตราเฟรม",
+      "matchFrameRateHint": "เปลี่ยนจอแสดงผลให้ใช้อัตราเฟรมของวิดีโอแม้ระบบจะไม่เปลี่ยนเอง หน้าจอจะดำไปชั่วครู่ทุกครั้งที่เปลี่ยน",
+      "audioHeader": "เสียง",
+      "audioPassthrough": "ส่งผ่านสัญญาณเสียง",
+      "audioPassthroughHint": "ส่งเสียงรอบทิศทาง (Dolby Digital, DTS, TrueHD) ไปยังเครื่องรับสัญญาณโดยไม่ถอดรหัส",
+      "audioPassthroughHintApple": "ส่ง Dolby Digital และ Dolby Digital Plus รวมถึง Atmos ไปยังตัวถอดรหัส Dolby ของระบบ ส่วน DTS และ TrueHD จะเล่นเป็น PCM หลายช่องสัญญาณ ปิดไว้หากไม่มีเสียง",
+      "audioPassthroughHintAppleSpatial": "ส่ง Dolby Digital และ Dolby Digital Plus รวมถึง Atmos ไปยังตัวถอดรหัส Dolby ของระบบ และเล่น TrueHD Atmos และ DTS:X เป็นเสียงตามตำแหน่ง ส่วนแทร็ก DTS และ TrueHD อื่นๆ จะเล่นเป็น PCM หลายช่องสัญญาณ ปิดไว้หากไม่มีเสียง",
+      "audioPassthroughNormalized": "ปิดอยู่ขณะที่เปิดการปรับระดับเสียงให้เท่ากัน",
+      "gesturesHeader": "ท่าทาง",
+      "swipeGestures": "ปัดเพื่อปรับความสว่างและระดับเสียง",
+      "swipeGesturesHint": "ปัดขึ้นหรือลงที่ครึ่งซ้ายของวิดีโอเพื่อปรับความสว่าง และที่ครึ่งขวาเพื่อปรับระดับเสียง",
+      "streamingHeader": "การสตรีม",
+      "cacheSize": "แคชล่วงหน้า",
+      "cacheSizeHint": "ปริมาณของสตรีมที่จะโหลดไว้ล่วงหน้าก่อนเล่น",
+      "discordHeader": "Discord",
+      "discordPresence": "แสดงสิ่งที่คุณกำลังดู",
+      "discordPresenceHint": "เพื่อนใน Discord จะเห็นชื่อเรื่องและตอนขณะที่วิดีโอเล่นอยู่ ต้องเปิด Discord ไว้ในคอมพิวเตอร์เครื่องนี้",
+      "privacyHeader": "ความเป็นส่วนตัว",
+      "crashReports": "ส่งรายงานข้อขัดข้อง",
+      "crashReportsHint": "ส่งข้อมูลว่าเกิดอะไรขึ้นเมื่อแอปหรือบางส่วนของแอปขัดข้อง โดยไม่ส่งลิงก์ส่วนเสริมหรือบัญชีของคุณ"
+    },
+    "subtitles": {
+      "title": "คำบรรยาย",
+      "note": "การตั้งค่านี้ใช้กับอุปกรณ์นี้เท่านั้นและจะไม่ซิงค์ ใช้จัดรูปแบบคำบรรยายแบบข้อความธรรมดา เช่น SRT ส่วนคำบรรยายที่มีรูปแบบในตัวจะคงรูปแบบเดิมไว้ เว้นแต่คุณจะใช้รูปแบบนี้กับคำบรรยายเหล่านั้นด้วย",
+      "previewText": "คำบรรยายจะมีลักษณะแบบนี้",
+      "textHeader": "ข้อความ",
+      "size": "ขนาด",
+      "textColor": "สี",
+      "bold": "ตัวหนา",
+      "outlineHeader": "เส้นขอบและพื้นหลัง",
+      "outline": "เส้นขอบ",
+      "outlineColor": "สีเส้นขอบ",
+      "background": "พื้นหลัง",
+      "backgroundHint": "กล่องด้านหลังข้อความ และระดับความทึบ",
+      "backgroundOff": "ปิด",
+      "positionHeader": "ตำแหน่ง",
+      "position": "ความสูง",
+      "positionHint": "ระยะห่างของคำบรรยายจากขอบล่างของภาพ",
+      "positionBottom": "ด้านล่าง",
+      "styledHeader": "คำบรรยายแบบมีรูปแบบ",
+      "styledOverride": "ใช้กับคำบรรยายแบบมีรูปแบบ",
+      "styledOverrideHint": "คำบรรยาย ASS และ SSA จะใช้รูปแบบนี้แทนรูปแบบของตัวเอง ป้ายข้อความและเอฟเฟกต์อาจแสดงผิดเพี้ยน",
+      "outlines": {
+        "none": "ไม่มี",
+        "thin": "บาง",
+        "thick": "หนา"
+      },
+      "colors": {
+        "white": "ขาว",
+        "yellow": "เหลือง",
+        "green": "เขียว",
+        "cyan": "ฟ้า",
+        "gray": "เทา",
+        "black": "ดำ"
+      }
+    },
+    "account": {
+      "title": "บัญชี",
+      "syncLabel": "ซิงค์",
+      "syncNow": "ซิงค์เลย",
+      "lastSynced": "ซิงค์ล่าสุด ${time}",
+      "serverLabel": "เซิร์ฟเวอร์ซิงค์",
+      "identitiesHeader": "วิธีลงชื่อเข้าใช้",
+      "linkIdentity": "เพิ่มวิธีลงชื่อเข้าใช้",
+      "devicesHeader": "อุปกรณ์",
+      "thisDevice": "อุปกรณ์นี้",
+      "activeNow": "ใช้งานอยู่ขณะนี้",
+      "lastActive": "ใช้งานล่าสุด ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} ออกจากระบบแล้ว",
+      "identityRemoved": "นำการลงชื่อเข้าใช้ด้วย ${provider} ออกแล้ว",
+      "cancel": "ยกเลิก",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "SSO"
+      },
+      "link": {
+        "start": "เชื่อมโยงอุปกรณ์ใหม่",
+        "title": "เชื่อมโยงอุปกรณ์",
+        "instructions": "บนอุปกรณ์ใหม่ ให้เลือกเชื่อมโยงจากอุปกรณ์อื่น แล้วป้อนรหัสที่แสดง หรือสแกนคิวอาร์โค้ด",
+        "codeHint": "ABCD-EFGH",
+        "submit": "ดำเนินการต่อ",
+        "question": "เชื่อมโยง “${name}” ใช่ไหม",
+        "consequence": "อุปกรณ์นี้จะลงชื่อเข้าใช้บัญชีนี้ พร้อมโปรไฟล์ ส่วนเสริม และคลังของบัญชี",
+        "approve": "เชื่อมโยง",
+        "reject": "ไม่เชื่อมโยง",
+        "approved": "เชื่อมโยง ${name} แล้ว อุปกรณ์จะตั้งค่าส่วนที่เหลือให้เสร็จเอง",
+        "rejected": "ไม่ได้เชื่อมโยง ${name}",
+        "expired": "รหัสหมดอายุแล้ว โปรดเริ่มใหม่บนอุปกรณ์ใหม่",
+        "done": "เสร็จสิ้น"
+      },
+      "signOut": {
+        "action": "ออกจากระบบ",
+        "title": "ออกจากระบบใช่ไหม",
+        "message": "โปรไฟล์ ส่วนเสริม คลัง และการดาวน์โหลดจะถูกนำออกจากอุปกรณ์นี้ ทุกอย่างยกเว้นการดาวน์โหลดยังคงอยู่ในบัญชี ลงชื่อเข้าใช้อีกครั้งเพื่อเรียกคืน",
+        "confirm": "ออกจากระบบ"
+      },
+      "delete": {
+        "action": "ลบบัญชี",
+        "explanation": "ลบบัญชีและข้อมูลที่ซิงค์ทั้งหมดออกจากเซิร์ฟเวอร์",
+        "title": "ลบบัญชีใช่ไหม",
+        "message": "บัญชีพร้อมโปรไฟล์ ส่วนเสริม คลัง และประวัติจะถูกลบออกจากเซิร์ฟเวอร์อย่างถาวร และทุกอุปกรณ์จะออกจากระบบ การดำเนินการนี้ไม่สามารถเลิกทำได้",
+        "confirm": "ลบบัญชี"
+      },
+      "revoke": {
+        "title": "นำ ${name} ออกจากระบบใช่ไหม",
+        "message": "${name} จะออกจากระบบและถูกนำออกจากอุปกรณ์ของบัญชี โดยสามารถเชื่อมโยงอีกครั้งได้ภายหลัง",
+        "messageThisDevice": "นี่คืออุปกรณ์ที่คุณกำลังใช้อยู่ อุปกรณ์นี้จะออกจากระบบ และโปรไฟล์ ส่วนเสริม คลัง และการดาวน์โหลดจะถูกนำออกจากอุปกรณ์ ทุกอย่างยกเว้นการดาวน์โหลดยังคงอยู่ในบัญชี",
+        "confirm": "นำอุปกรณ์ออกจากระบบ",
+        "confirmNamed": "นำอุปกรณ์ออกจากระบบ: ${name}"
+      },
+      "unsynced": {
+        "title": "ลบการเปลี่ยนแปลงที่ยังไม่ได้ซิงค์ใช่ไหม",
+        "message": {
+          "other": "การเปลี่ยนแปลง ${n} รายการที่ทำในอุปกรณ์นี้ เช่น ความคืบหน้าการดูหรือการแก้ไขคลัง ยังไปไม่ถึงบัญชี หากออกจากระบบตอนนี้ การเปลี่ยนแปลงจะถูกลบอย่างถาวร หากเลือก ยกเลิก การเปลี่ยนแปลงจะยังอยู่ที่นี่ และอุปกรณ์นี้จะยังลงชื่อเข้าใช้อยู่"
+        },
+        "confirm": "ออกจากระบบและลบ"
+      },
+      "unlink": {
+        "title": "นำการลงชื่อเข้าใช้ด้วย ${provider} ออกใช่ไหม",
+        "message": "คุณจะลงชื่อเข้าใช้บัญชีนี้ด้วย ${provider} ไม่ได้อีกต่อไป",
+        "confirm": "นำออก",
+        "action": "นำการลงชื่อเข้าใช้ด้วย ${name} ออก"
+      }
+    },
+    "trackers": {
+      "title": "บริการติดตาม",
+      "note": "บริการที่เชื่อมต่อจะได้รับข้อมูลสิ่งที่โปรไฟล์นี้ดู ได้แก่ ความคืบหน้าการดูและรายการที่ทำเครื่องหมายว่าดูแล้ว การเชื่อมต่อหรือยกเลิกการเชื่อมต่อบริการจะใช้กับโปรไฟล์นี้ในทุกอุปกรณ์ของคุณ ส่วนสวิตช์ด้านล่างใช้กับอุปกรณ์นี้เท่านั้น",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "เชื่อมต่อแล้ว",
+      "connectedAs": "เชื่อมต่อแล้วในชื่อ ${user}",
+      "notConnected": "ไม่ได้เชื่อมต่อ",
+      "unavailable": "ไม่มีในแอปเวอร์ชันนี้",
+      "connect": "เชื่อมต่อ",
+      "connectNamed": "เชื่อมต่อ ${name}",
+      "disconnect": "ยกเลิกการเชื่อมต่อ",
+      "disconnectNamed": "ยกเลิกการเชื่อมต่อ ${name}",
+      "scrobble": "ส่งสิ่งที่คุณดู",
+      "scrobbleHint": "ความคืบหน้าการดูและรายการที่ดูแล้วจะถูกส่งไปยัง ${service}",
+      "filtersHeader": "สิ่งที่จะส่ง",
+      "movies": "ภาพยนตร์",
+      "series": "ซีรีส์",
+      "anime": "อนิเมะ",
+      "queued": {
+        "other": "มีการเปลี่ยนแปลง ${n} รายการที่รอส่ง"
+      },
+      "notSent": {
+        "other": "มีการเปลี่ยนแปลง ${n} รายการที่ส่งไม่ได้ (ล่าสุด: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} ตอบกลับด้วยข้อผิดพลาด ${status}",
+        "refused": "${service} ปฏิเสธ",
+        "unreadable": "อ่านไม่ได้"
+      },
+      "connectTitle": "เชื่อมต่อ ${service}",
+      "starting": "กำลังติดต่อ ${service}…",
+      "waiting": "กำลังรอให้คุณอนุญาต Tortuga บน ${service}…",
+      "linkInstructions": "ลงชื่อเข้าใช้ ${service} ในเบราว์เซอร์และอนุญาต Tortuga",
+      "linkScan": "หรือสแกนคิวอาร์โค้ดด้วยโทรศัพท์แล้วลงชื่อเข้าใช้ที่นั่น",
+      "openInBrowser": "เปิดในเบราว์เซอร์",
+      "expired": "รหัสหมดอายุก่อนถูกใช้งาน",
+      "declined": "${service} ไม่อนุญาตการเชื่อมต่อ",
+      "unreachable": "ติดต่อ ${service} ไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง",
+      "serverUnreachable": "ติดต่อเซิร์ฟเวอร์ Tortuga ของคุณไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง",
+      "needsAccount": "การเชื่อมต่อ ${service} ต้องใช้บัญชี Tortuga โปรดลงชื่อเข้าใช้บัญชีของคุณก่อน",
+      "busy": "${service} ไม่ว่างในขณะนี้ โปรดลองอีกครั้งในอีกสักครู่",
+      "refused": "${service} ปฏิเสธการลงชื่อเข้าใช้",
+      "failed": "เชื่อมต่อ ${service} ไม่สำเร็จ",
+      "retry": "ลองอีกครั้ง",
+      "connectedNotice": "เชื่อมต่อกับ ${service} ในชื่อ ${user} แล้ว",
+      "connectedNoticeNoName": "เชื่อมต่อกับ ${service} แล้ว",
+      "disconnectTitle": "ยกเลิกการเชื่อมต่อ ${service} ใช่ไหม",
+      "disconnectMessage": "โปรไฟล์นี้จะหยุดส่งสิ่งที่ดูไปยัง ${service} ในทุกอุปกรณ์ของคุณ และการเปลี่ยนแปลงที่รอส่งจะถูกยกเลิก บัญชี ${service} ของคุณจะยังเก็บข้อมูลที่มีอยู่แล้วไว้ทั้งหมด",
+      "disconnectedNotice": "ยกเลิกการเชื่อมต่อจาก ${service} แล้ว",
+      "actionFailed": "ดำเนินการไม่สำเร็จ โปรดลองอีกครั้ง"
+    },
+    "downloads": {
+      "title": "การดาวน์โหลด",
+      "note": "การตั้งค่านี้ใช้กับอุปกรณ์นี้เท่านั้นและจะไม่ซิงค์",
+      "location": {
+        "title": "ตำแหน่งจัดเก็บ",
+        "hint": "ตำแหน่งที่จะบันทึกการดาวน์โหลดใหม่ ส่วนรายการที่ดาวน์โหลดไว้แล้วจะยังอยู่ที่เดิม",
+        "deviceStorage": "พื้นที่จัดเก็บภายใน",
+        "external": "พื้นที่จัดเก็บภายนอก",
+        "change": "เปลี่ยนโฟลเดอร์"
+      },
+      "transferHeader": "ตัวเลือกการดาวน์โหลด",
+      "wifiOnly": "ดาวน์โหลดผ่าน Wi-Fi เท่านั้น",
+      "wifiOnlyHint": "การดาวน์โหลดจะรอเมื่อใช้เครือข่ายแบบจำกัดปริมาณข้อมูล เช่น อินเทอร์เน็ตมือถือ",
+      "atOnce": "ดาวน์โหลดพร้อมกัน",
+      "atOnceHint": "จำนวนรายการที่ดาวน์โหลดพร้อมกันได้",
+      "autoRemoveWatched": "ลบการดาวน์โหลดที่ดูแล้ว",
+      "autoRemoveWatchedHint": "จะลบการดาวน์โหลดเมื่อดูแล้ว แต่จะไม่ลบขณะกำลังเล่น",
+      "subtitleLanguages": "คำบรรยายที่จะบันทึก",
+      "subtitleLanguagesHint": "คำบรรยายในภาษาเหล่านี้จะถูกบันทึกไปกับการดาวน์โหลดแต่ละรายการ",
+      "subtitleLanguagesProfile": "ภาษาคำบรรยายของคุณ: ${languages}",
+      "subtitleLanguagesProfileNone": "ภาษาคำบรรยายของคุณ: ไม่มี",
+      "subtitleLanguagesExplanation": "คำบรรยายในภาษาเหล่านี้จะถูกบันทึกไปกับการดาวน์โหลดแต่ละรายการ จึงแสดงได้โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต",
+      "useProfileLanguages": "ใช้ภาษาคำบรรยายของฉัน",
+      "storageHeader": "พื้นที่จัดเก็บ",
+      "deleteAll": "ลบการดาวน์โหลดทั้งหมด",
+      "deleteAllTitle": "ลบการดาวน์โหลดทั้งหมดใช่ไหม",
+      "deleteAllText": "การดำเนินการนี้จะลบการดาวน์โหลดทั้งหมดในอุปกรณ์นี้ของทุกโปรไฟล์",
+      "deleteAllConfirm": "ลบทั้งหมด"
+    },
+    "data": {
+      "exportHeader": "ส่งออก",
+      "categories": {
+        "addons": "ส่วนเสริม",
+        "addonsHint": "ส่วนเสริมที่ติดตั้งไว้ตามลำดับ พร้อมลิงก์",
+        "library": "คลัง",
+        "libraryHint": "รายการที่คุณบันทึกไว้",
+        "progress": "ความคืบหน้าการดู",
+        "progressHint": "จุดที่คุณดูค้างไว้ และสิ่งที่คุณดูแล้ว",
+        "settings": "การตั้งค่าโปรไฟล์",
+        "settingsHint": "การเล่น สตรีม แถวในหน้าหลัก และการตั้งค่าอื่นๆ ที่ซิงค์",
+        "streams": "ประวัติสตรีม",
+        "streamsHint": "สตรีมที่เล่นล่าสุดของแต่ละวิดีโอ"
+      },
+      "profilesHeader": "โปรไฟล์",
+      "privateNote": "ไฟล์นี้มีลิงก์ส่วนเสริมและประวัติสตรีมของคุณ ซึ่งอาจมีคีย์ API อยู่ด้วย โปรดเก็บไฟล์ไว้เป็นความลับ เพราะทุกคนที่มีไฟล์นี้จะใช้คีย์เหล่านั้นได้",
+      "exportNote": "PIN บัญชีบริการติดตาม การดาวน์โหลด และการตั้งค่าของอุปกรณ์นี้จะไม่อยู่ในไฟล์",
+      "exportAction": "ส่งออกเป็นไฟล์",
+      "saved": "บันทึก ${name} แล้ว",
+      "saveFailed": "บันทึกไฟล์ไม่ได้",
+      "exportFailed": "ส่งออกไม่สำเร็จ",
+      "importHeader": "นำเข้า",
+      "importNote": "เปิดไฟล์ที่ส่งออกจาก Tortuga แต่ละรายการจะใช้ข้อมูลที่ใหม่กว่า และจะไม่มีสิ่งใดในอุปกรณ์นี้ถูกลบ",
+      "importAction": "นำเข้าจากไฟล์",
+      "reviewTitle": "นำเข้า",
+      "source": "ส่งออกเมื่อ ${date} โดย Tortuga ${version}",
+      "sourceUndated": "ส่งออกโดย Tortuga ${version}",
+      "dataHeader": "ข้อมูล",
+      "counts": {
+        "addons": {
+          "other": "ส่วนเสริม ${n} รายการ"
+        },
+        "titles": {
+          "other": "${n} รายการ"
+        },
+        "progress": {
+          "other": "ความคืบหน้าของ ${n} รายการ"
+        },
+        "settings": {
+          "other": "การตั้งค่า ${n} รายการ"
+        },
+        "streams": {
+          "other": "สตรีม ${n} รายการ"
+        },
+        "profiles": {
+          "other": "${n} โปรไฟล์"
+        }
+      },
+      "into": "นำเข้าไปยัง",
+      "intoSame": "ไปยัง ${name} ในบัญชีนี้",
+      "newProfile": "โปรไฟล์ใหม่",
+      "importConfirm": "นำเข้า",
+      "imported": "นำเข้าเสร็จแล้ว: ${changes}",
+      "nothingNew": "ไม่มีข้อมูลใหม่ให้นำเข้า ทุกอย่างในไฟล์มีอยู่ที่นี่แล้ว",
+      "notTortuga": "ไฟล์นี้ไม่ใช่ไฟล์ที่ส่งออกจาก Tortuga ไม่มีข้อมูลใดถูกนำเข้า",
+      "newer": "ไฟล์นี้มาจาก Tortuga เวอร์ชันที่ใหม่กว่า โปรดอัปเดต Tortuga แล้วนำเข้าอีกครั้ง",
+      "damaged": "ไฟล์นี้เสียหายหรือไม่สมบูรณ์ ไม่มีข้อมูลใดถูกนำเข้า",
+      "clockAhead": "เวลาในไฟล์นี้เร็วกว่านาฬิกาของอุปกรณ์นี้มาก ตรวจสอบวันที่และเวลาบนอุปกรณ์ทั้งสองเครื่อง แล้วนำเข้าอีกครั้ง ไม่มีข้อมูลใดถูกนำเข้า",
+      "importFailed": "นำเข้าไม่สำเร็จ",
+      "unreadable": "เปิดไฟล์ไม่ได้ ไม่มีข้อมูลใดถูกนำเข้า"
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "ข้อมูลเป็นปัจจุบัน",
+      "syncing": "กำลังซิงค์…",
+      "offline": "ออฟไลน์อยู่ การเปลี่ยนแปลงจะซิงค์เมื่อกลับมาเชื่อมต่อได้",
+      "signedOut": "ออกจากระบบแล้ว",
+      "failed": {
+        "server": "เซิร์ฟเวอร์ซิงค์มีปัญหา จะลองอีกครั้งเร็วๆ นี้",
+        "rateLimited": "เซิร์ฟเวอร์ซิงค์ขอให้ลดความถี่ จะลองอีกครั้งเร็วๆ นี้",
+        "quotaExceeded": "พื้นที่จัดเก็บของบัญชีเต็ม จึงไม่สามารถซิงค์การเปลี่ยนแปลงได้",
+        "tooLarge": "การเปลี่ยนแปลงบางรายการมีขนาดใหญ่เกินกว่าจะซิงค์ได้",
+        "addonsTooLarge": "ส่วนเสริมของโปรไฟล์หนึ่งมีขนาดใหญ่เกินกว่าจะซิงค์ได้ นำส่วนเสริมที่ไม่ได้ใช้ออก",
+        "clockWrong": "ซิงค์การเปลี่ยนแปลงบางรายการไม่ได้ ตรวจสอบวันที่และเวลาบนอุปกรณ์ของคุณ",
+        "unknown": "ซิงค์ไม่สำเร็จ จะลองอีกครั้งเร็วๆ นี้"
+      }
+    },
+    "error": {
+      "network": "ติดต่อเซิร์ฟเวอร์ซิงค์ไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง",
+      "server": "เซิร์ฟเวอร์ซิงค์มีปัญหา โปรดลองอีกครั้งในภายหลัง",
+      "rateLimited": "ลองหลายครั้งเกินไป รอสักครู่แล้วลองอีกครั้ง",
+      "invalidServerUrl": "นี่ไม่ใช่ที่อยู่เซิร์ฟเวอร์ ป้อนที่อยู่ในรูปแบบ https://sync.example.com",
+      "insecureServerUrl": "ใช้ https สำหรับเซิร์ฟเวอร์บนอินเทอร์เน็ต http ธรรมดาใช้ได้เฉพาะกับเซิร์ฟเวอร์ในเครือข่ายของคุณเอง",
+      "notTortugaServer": "ไม่พบเซิร์ฟเวอร์ซิงค์ของ Tortuga ที่ที่อยู่นี้",
+      "incompatibleServer": "เซิร์ฟเวอร์นี้ใช้ระบบซิงค์ของ Tortuga เวอร์ชันเก่าและใช้งานไม่ได้",
+      "providerNotEnabled": "เซิร์ฟเวอร์นี้ไม่รองรับวิธีลงชื่อเข้าใช้นี้",
+      "signInRejected": "ลงชื่อเข้าใช้ไม่สำเร็จ โปรดลองอีกครั้ง",
+      "appleCodeRejected": "Apple ไม่ยอมรับการลงชื่อเข้าใช้ โปรดลองอีกครั้ง",
+      "providerUnavailable": "ติดต่อบริการลงชื่อเข้าใช้ไม่ได้ โปรดลองอีกครั้งในภายหลัง",
+      "signInCancelled": "ยกเลิกการลงชื่อเข้าใช้แล้ว",
+      "signInExpired": "การลงชื่อเข้าใช้ใช้เวลานานเกินไป โปรดเริ่มใหม่",
+      "identityInUse": "วิธีลงชื่อเข้าใช้นี้เป็นของบัญชี Tortuga อื่นอยู่แล้ว",
+      "lastIdentity": "นี่เป็นวิธีเดียวในการลงชื่อเข้าใช้บัญชีนี้ จึงนำออกไม่ได้",
+      "sessionEnded": "อุปกรณ์นี้ออกจากระบบแล้ว โปรดลงชื่อเข้าใช้อีกครั้ง",
+      "sessionUnreadable": "อ่านข้อมูลการลงชื่อเข้าใช้ของอุปกรณ์นี้จากที่เก็บข้อมูลที่ปลอดภัยของระบบไม่ได้ เปิด Tortuga ใหม่เพื่อลองอีกครั้ง",
+      "notSignedIn": "โปรดลงชื่อเข้าใช้ก่อน",
+      "notFound": "รายการนี้ไม่มีอยู่บนเซิร์ฟเวอร์แล้ว",
+      "linkCodeInvalid": "รหัสประกอบด้วยตัวอักษรและตัวเลข 8 ตัว เช่น ABCD-EFGH",
+      "linkNotFound": "ไม่มีอุปกรณ์ที่รอด้วยรหัสนี้ ตรวจสอบรหัส หรือเริ่มใหม่บนอุปกรณ์ใหม่",
+      "linkOtherServer": "อุปกรณ์อีกเครื่องใช้เซิร์ฟเวอร์ซิงค์อื่น",
+      "linkFailed": "เชื่อมโยงไม่สำเร็จ โปรดเริ่มใหม่",
+      "tooLarge": "ข้อมูลนี้มีขนาดใหญ่เกินไปสำหรับเซิร์ฟเวอร์ซิงค์",
+      "quotaExceeded": "พื้นที่จัดเก็บของบัญชีเต็มแล้ว",
+      "unsynced": {
+        "other": "การเปลี่ยนแปลง ${n} รายการที่ทำในอุปกรณ์นี้ยังไม่ได้ซิงค์ไปยังบัญชีของการเปลี่ยนแปลงนั้น"
+      },
+      "unexpected": "เกิดข้อผิดพลาด โปรดลองอีกครั้ง"
+    },
+    "deletion": {
+      "done": "ลบบัญชีและข้อมูลแล้ว",
+      "appleRevoked": "ลบบัญชีและข้อมูลแล้ว และ Tortuga จะไม่ใช้ Apple ID ของคุณอีกต่อไป",
+      "appleManual": "ลบบัญชีและข้อมูลแล้ว ขั้นตอนสุดท้าย ให้นำ Tortuga ออกที่ การตั้งค่า → Apple ID → ลงชื่อเข้าด้วย Apple",
+      "githubManual": "คุณนำ Tortuga ออกจากบัญชี GitHub ได้ที่ ${address}"
+    },
+    "switchAccount": {
+      "title": "ลบการเปลี่ยนแปลงที่ยังไม่ได้ซิงค์ใช่ไหม",
+      "message": {
+        "other": "บัญชีนี้ไม่ใช่บัญชีที่อุปกรณ์นี้เคยลงชื่อเข้าใช้อยู่ การเปลี่ยนแปลง ${n} รายการที่ทำที่นี่ในบัญชีก่อนหน้า เช่น ความคืบหน้าการดูหรือการแก้ไขคลัง ไม่เคยไปถึงบัญชีนั้น การลงชื่อเข้าใช้จะลบการเปลี่ยนแปลงเหล่านี้อย่างถาวร พร้อมกับข้อมูลอื่นของบัญชีก่อนหน้าในอุปกรณ์นี้ รวมถึงการดาวน์โหลด"
+      },
+      "confirm": "ลบและลงชื่อเข้าใช้",
+      "cancel": "ยกเลิก",
+      "kept": "ยังไม่ได้ลงชื่อเข้าใช้ การเปลี่ยนแปลงจะยังอยู่ในอุปกรณ์นี้จนกว่าคุณจะลงชื่อเข้าใช้บัญชีที่ใช้ทำการเปลี่ยนแปลงนั้น"
+    },
+    "browser": {
+      "signedIn": "ลงชื่อเข้าใช้แล้ว คุณปิดแท็บนี้และกลับไปที่ Tortuga ได้เลย",
+      "failed": "ลงชื่อเข้าใช้ไม่เสร็จสมบูรณ์ โปรดกลับไปที่ Tortuga แล้วลองอีกครั้ง"
+    },
+    "signIn": {
+      "title": "ลงชื่อเข้าใช้ Tortuga",
+      "intro": "บัญชี Tortuga จะซิงค์โปรไฟล์ ส่วนเสริม และคลังของคุณในทุกอุปกรณ์",
+      "apple": "ลงชื่อเข้าด้วย Apple",
+      "google": "ลงชื่อเข้าใช้ด้วย Google",
+      "github": "ลงชื่อเข้าใช้ด้วย GitHub",
+      "oidc": "ลงชื่อเข้าใช้ด้วย ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "เชื่อมโยงจากอุปกรณ์อื่น",
+      "linkDeviceHint": "ลงชื่อเข้าใช้บนโทรศัพท์หรือคอมพิวเตอร์อยู่แล้วใช่ไหม เชื่อมโยงอุปกรณ์นี้ด้วยรหัสแทนได้",
+      "server": "เซิร์ฟเวอร์: ${server}",
+      "useOwnServer": "ใช้เซิร์ฟเวอร์ของคุณเอง",
+      "useHostedServer": "ใช้เซิร์ฟเวอร์ของ Tortuga",
+      "serverField": "ที่อยู่เซิร์ฟเวอร์",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "ดำเนินการต่อ",
+      "checkingServer": "กำลังตรวจสอบเซิร์ฟเวอร์…",
+      "loadingOptions": "กำลังโหลดตัวเลือกการลงชื่อเข้าใช้…",
+      "noOptions": "เซิร์ฟเวอร์นี้ไม่มีวิธีลงชื่อเข้าใช้สำหรับอุปกรณ์นี้ ให้เชื่อมโยงจากอุปกรณ์ที่ลงชื่อเข้าใช้แล้วแทน",
+      "retry": "ลองอีกครั้ง",
+      "starting": "กำลังเริ่มลงชื่อเข้าใช้…",
+      "native": "กำลังลงชื่อเข้าใช้ด้วย ${provider}…",
+      "browser": "ดำเนินการต่อในเบราว์เซอร์ หน้าจอนี้จะไปต่อเมื่อคุณลงชื่อเข้าใช้ที่นั่นแล้ว",
+      "finishing": "กำลังลงชื่อเข้าใช้ให้เสร็จสิ้น…",
+      "cancel": "ยกเลิก",
+      "deviceCode": {
+        "instructions": "บนโทรศัพท์หรือคอมพิวเตอร์ ไปที่ ${url} แล้วป้อนรหัสนี้:",
+        "scan": "หรือสแกนคิวอาร์โค้ดด้วยโทรศัพท์",
+        "qrDescription": "คิวอาร์โค้ดสำหรับสแกนด้วยโทรศัพท์",
+        "expires": "รหัสจะหมดอายุใน ${time}",
+        "waiting": "กำลังรอให้คุณลงชื่อเข้าใช้…"
+      }
+    },
+    "link": {
+      "title": "เชื่อมโยงอุปกรณ์นี้",
+      "instructions": "บนอุปกรณ์ที่ลงชื่อเข้าใช้แล้ว ให้เปิด การตั้งค่า → บัญชี → เชื่อมโยงอุปกรณ์ใหม่ แล้วสแกนคิวอาร์โค้ดนี้หรือป้อนรหัส",
+      "qrDescription": "คิวอาร์โค้ดสำหรับสแกนบนอุปกรณ์ที่ลงชื่อเข้าใช้แล้ว",
+      "starting": "กำลังขอรหัส…",
+      "expires": "รหัสจะหมดอายุใน ${time}",
+      "waiting": "กำลังรอการอนุมัติบนอุปกรณ์อีกเครื่อง…",
+      "rejected": "อุปกรณ์อีกเครื่องปฏิเสธการเชื่อมโยง",
+      "expired": "รหัสหมดอายุก่อนถูกใช้งาน",
+      "newCode": "ขอรหัสใหม่"
+    },
+    "identityLink": {
+      "title": "เพิ่มวิธีลงชื่อเข้าใช้",
+      "intro": "เชื่อมโยงวิธีลงชื่อเข้าใช้อีกวิธี เพื่อไม่ให้ถูกล็อกออกหากเข้าบัญชีใดบัญชีหนึ่งไม่ได้",
+      "allLinked": "เชื่อมโยงวิธีลงชื่อเข้าใช้ทั้งหมดที่อุปกรณ์นี้รองรับแล้ว",
+      "linking": "กำลังเชื่อมโยง…"
+    }
+  },
+  "profiles": {
+    "title": "ใครกำลังดูอยู่",
+    "manageTitle": "จัดการโปรไฟล์",
+    "manage": "จัดการโปรไฟล์",
+    "done": "เสร็จสิ้น",
+    "add": "เพิ่มโปรไฟล์",
+    "empty": "สร้างโปรไฟล์เพื่อเริ่มต้นใช้งาน",
+    "loading": "กำลังโหลดโปรไฟล์…",
+    "current": "โปรไฟล์ปัจจุบัน",
+    "switchProfile": "สลับโปรไฟล์",
+    "pin": {
+      "title": "ป้อน PIN ของ ${name}",
+      "wrong": "PIN ไม่ถูกต้อง โปรดลองอีกครั้ง",
+      "lockedOut": "ลองหลายครั้งเกินไป ลองอีกครั้งใน ${time}",
+      "cancel": "ยกเลิก",
+      "backspace": "ลบตัวเลขตัวสุดท้าย",
+      "entered": "ป้อนแล้ว ${count} จาก ${total} หลัก"
+    },
+    "editor": {
+      "newTitle": "โปรไฟล์ใหม่",
+      "editTitle": "แก้ไขโปรไฟล์",
+      "name": "ชื่อ",
+      "nameRequired": "โปรดป้อนชื่อ",
+      "nameTooLong": {
+        "other": "ชื่อมีได้ไม่เกิน ${n} ตัวอักษร"
+      },
+      "avatar": "รูปโปรไฟล์",
+      "pinOff": "ไม่มี PIN",
+      "pinOn": "ล็อกด้วย PIN",
+      "setPin": "ตั้ง PIN",
+      "changePin": "เปลี่ยน PIN",
+      "removePin": "นำ PIN ออก",
+      "pinEnter": "ป้อน PIN 4 หลัก",
+      "pinConfirm": "ป้อน PIN อีกครั้ง",
+      "pinMismatch": "PIN ไม่ตรงกัน โปรดป้อน PIN ใหม่",
+      "pinNote": "PIN ช่วยกันไม่ให้ผู้อื่นเข้าโปรไฟล์นี้บนอุปกรณ์ของคุณ เป็นเพียงตัวล็อก ไม่ใช่รหัสผ่าน",
+      "save": "บันทึก",
+      "create": "สร้างโปรไฟล์",
+      "cancel": "ยกเลิก",
+      "delete": "ลบโปรไฟล์",
+      "deleteConfirm": "ลบ ${name} ใช่ไหม ส่วนเสริม คลัง และประวัติของโปรไฟล์นี้จะถูกลบในทุกอุปกรณ์ การดำเนินการนี้ไม่สามารถเลิกทำได้",
+      "deleteAction": "ลบ",
+      "saveFailed": "บันทึกโปรไฟล์ไม่ได้ โปรดลองอีกครั้ง",
+      "kids": {
+        "title": "โปรไฟล์เด็ก",
+        "subtitle": "แสดงเฉพาะเรื่องที่แนะนำสำหรับอายุไม่เกินระดับที่คุณเลือก อายุที่แนะนำส่วนใหญ่เป็นการประมาณ ไม่ใช่เรตอย่างเป็นทางการ",
+        "needsParent": "ตั้ง PIN ให้โปรไฟล์ผู้ใหญ่ก่อน: การออกจากโปรไฟล์เด็กต้องใช้ PIN นั้น",
+        "newOnly": "เฉพาะโปรไฟล์ใหม่เท่านั้นที่เป็นโปรไฟล์เด็กได้",
+        "capTitle": "อายุที่แนะนำสูงสุด",
+        "capLittle": "เด็กเล็ก",
+        "capLittleAges": "แนะนำ 0+",
+        "capKids": "เด็ก",
+        "capKidsAges": "เด็กเล็ก และแนะนำ 6+",
+        "capTeen": "วัยรุ่น",
+        "capTeenAges": "เด็ก และแนะนำ 12+",
+        "allowUnrated": "อนุญาตเรื่องที่ไม่มีเรต",
+        "allowUnratedNote": "เรื่องที่ไม่มีอายุที่แนะนำ ขณะที่ปิดอยู่ ผู้ปกครองจะอนุญาตทีละเรื่อง",
+        "homeRows": "แถวในหน้าหลัก",
+        "homeRowsNote": "ไม่บังคับ เรื่องในแถวเหล่านี้ยังต้องอยู่ในอายุที่แนะนำสูงสุด",
+        "familyMovies": "ภาพยนตร์ครอบครัว",
+        "familySeries": "ซีรีส์ครอบครัว",
+        "addonMissing": "ไม่ได้ติดตั้งส่วนเสริมของแคตตาล็อกนี้ในโปรไฟล์นี้",
+        "allowed": "เรื่องที่อนุญาต",
+        "allowedNone": "ยังไม่มี ผู้ปกครองอนุญาตเรื่องได้จากหน้าของเรื่องนั้น",
+        "blocked": "เรื่องที่บล็อก",
+        "blockedNone": "ยังไม่มี ผู้ปกครองบล็อกเรื่องได้จากหน้าของเรื่องนั้น",
+        "remove": "นำ ${title} ออก",
+        "leaving": "การออกจากโปรไฟล์นี้ต้องใช้ PIN ของผู้ปกครอง",
+        "off": "ลิงก์ ส่วนเสริม และการตั้งค่าส่วนใหญ่ถูกปิดอยู่",
+        "addons": "วิดีโอมาจากส่วนเสริมของโปรไฟล์นี้ Tortuga ไม่ได้ตรวจสอบวิดีโอเหล่านั้น"
+      }
+    },
+    "avatar": {
+      "graphite": "แกรไฟต์",
+      "slate": "หินชนวน",
+      "silver": "เงิน",
+      "ivory": "งาช้าง",
+      "sand": "ทราย",
+      "clay": "ดินเผา",
+      "rose": "กุหลาบ",
+      "plum": "พลัม",
+      "dusk": "สนธยา",
+      "sea": "ทะเล",
+      "sage": "เสจ",
+      "moss": "มอส"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "ไม่มีให้ดูในโปรไฟล์นี้",
+      "suggested": "แนะนำ ${age}+",
+      "byAddon": "ส่วนเสริมของเรื่องนี้ระบุว่าเหมาะกับผู้ชมที่โตกว่า",
+      "notRated": "ไม่มีอายุที่แนะนำ",
+      "byParent": "ถูกผู้ปกครองบล็อก",
+      "unchecked": "ตรวจสอบอายุที่แนะนำของเรื่องนี้ไม่ได้ โปรดลองอีกครั้งในภายหลัง",
+      "ask": "ขอผู้ปกครอง"
+    },
+    "block": "บล็อกในโปรไฟล์นี้",
+    "pin": {
+      "title": "ป้อน PIN ของผู้ปกครอง",
+      "allow": "เพื่ออนุญาต ${title} ในโปรไฟล์นี้",
+      "allowThis": "เพื่ออนุญาตเรื่องนี้ในโปรไฟล์นี้",
+      "block": "เพื่อบล็อก ${title} ในโปรไฟล์นี้",
+      "leave": "เพื่อออกจากโปรไฟล์นี้",
+      "settings": "เพื่อเปิดการตั้งค่าเหล่านี้"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "ทั้งหมด",
+      "movie": "ภาพยนตร์",
+      "series": "ซีรีส์",
+      "channel": "ช่อง",
+      "tv": "ช่องทีวี",
+      "other": "อื่นๆ"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "ลองอีกครั้ง",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "ดูทั้งหมด",
+      "downloading": "กำลังดาวน์โหลด ${count} รายการ, ${percent}%",
+      "downloadingUnsized": "กำลังดาวน์โหลด ${count} รายการ",
+      "empty": "ยังไม่มีอะไรให้แสดง ติดตั้งส่วนเสริมที่มีแคตตาล็อกเพื่อเติมเนื้อหาในหน้านี้",
+      "allHidden": "แถวทั้งหมดในหน้าหลักถูกซ่อนอยู่ เปิดแสดงอีกครั้งได้ที่ การตั้งค่า → หน้าหลัก"
+    },
+    "continueWatching": {
+      "title": "ดูต่อ",
+      "episode": "ตอนที่ ${episode}",
+      "upNext": "ถัดไป",
+      "minutesLeft": "เหลือ ${minutes} นาที",
+      "hoursLeft": "เหลือ ${hours} ชม.",
+      "hoursMinutesLeft": "เหลือ ${hours} ชม. ${minutes} นาที",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "รายการรอดู",
+      "recommended": "แนะนำ",
+      "trending": "กำลังมาแรง",
+      "planToWatch": "วางแผนจะดู",
+      "planning": "อยู่ในแผน",
+      "airing": "กำลังออกอากาศ",
+      "list": "รายการ",
+      "unreachable": "ติดต่อ ${service} ไม่ได้",
+      "signedOut": "${service} ได้นำคุณออกจากระบบ เชื่อมต่ออีกครั้งได้ในการตั้งค่า",
+      "failed": "${service} ตอบกลับไม่เป็นไปตามที่คาดไว้"
+    },
+    "discover": {
+      "type": "ประเภท",
+      "catalog": "แคตตาล็อก",
+      "genre": "แนว",
+      "all": "ทั้งหมด",
+      "empty": "แคตตาล็อกนี้ไม่มีรายการให้แสดง",
+      "noCatalogs": "ไม่มีส่วนเสริมที่ติดตั้งไว้ตัวใดมีแคตตาล็อกให้เรียกดู",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "ค้นหาภาพยนตร์ ซีรีส์ และอื่นๆ",
+      "recent": "การค้นหาล่าสุด",
+      "clearRecent": "ล้าง",
+      "removeRecentNamed": "นำ ${name} ออก",
+      "noResults": "ไม่พบผลลัพธ์สำหรับ “${query}”",
+      "noCatalogs": "ไม่มีส่วนเสริมที่ติดตั้งไว้ตัวใดรองรับการค้นหา",
+      "clearQuery": "ล้างการค้นหา",
+      "hint": "ค้นหาภาพยนตร์ ซีรีส์ และอื่นๆ ในแคตตาล็อกของส่วนเสริมของคุณ"
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "หน้าหลัก",
+      "discover": "สำรวจ",
+      "search": "ค้นหา",
+      "library": "คลัง",
+      "settings": "การตั้งค่า"
+    },
+    "shortLabel": {
+      "board": "หน้าหลัก",
+      "library": "คลัง",
+      "search": "ค้นหา",
+      "settings": "การตั้งค่า"
+    },
+    "back": "ย้อนกลับ",
+    "retry": "ลองอีกครั้ง",
+    "close": "ปิด",
+    "dismiss": "ปิด",
+    "qrFailed": "ไม่สามารถแสดงลิงก์นี้เป็นคิวอาร์โค้ดได้",
+    "openOnPhone": {
+      "title": "เปิดบนโทรศัพท์ของคุณ",
+      "message": "อุปกรณ์นี้เปิดลิงก์นี้ไม่ได้ สแกนโค้ดด้วยกล้องของโทรศัพท์เพื่อเปิดที่นั่น",
+      "qrDescription": "คิวอาร์โค้ดของลิงก์"
+    },
+    "player": {
+      "close": "ปิดตัวเล่น",
+      "fullscreen": "เต็มหน้าจอ",
+      "exitFullscreen": "ออกจากโหมดเต็มหน้าจอ",
+      "rewind": "กรอกลับ",
+      "fastForward": "กรอไปข้างหน้า",
+      "pictureInPicture": "ภาพซ้อนภาพ"
+    },
+    "menu": {
+      "playback": "การเล่น",
+      "nextSubtitles": "แทร็กคำบรรยายถัดไป",
+      "nextAudio": "แทร็กเสียงถัดไป"
+    }
+  },
+  "watch": {
+    "title": "ดูด้วยกัน",
+    "intro": "ดูพร้อมกันกับเพื่อนๆ โดยแต่ละคนดูบนอุปกรณ์ของตัวเอง ทุกคนจะเล่นรายการเดียวกันจากส่วนเสริมของตัวเอง หากต้องการสร้างห้อง ให้เลือก ดูด้วยกัน ในตัวเลือกของตัวเล่น",
+    "controlMode": {
+      "hostOnly": "เฉพาะฉันควบคุม",
+      "hostOnlyDetail": "เมื่อคุณเล่น หยุดชั่วคราว หรือข้าม ทุกคนจะทำตาม",
+      "anyone": "ทุกคนควบคุม",
+      "anyoneDetail": "ทุกคนในห้องเล่น หยุดชั่วคราว หรือข้ามได้"
+    },
+    "joinTitle": "เข้าร่วมห้อง",
+    "joinHint": "รหัสหรือลิงก์คำเชิญ",
+    "joinLabel": "เข้าร่วม",
+    "joinInvalid": "ป้อนรหัสห้อง 6 ตัวอักษร หรือลิงก์คำเชิญ",
+    "recentTitle": "ห้องล่าสุด",
+    "recentUsed": "ใช้ล่าสุด ${time}",
+    "removeRecentNamed": "นำ ${name} ออก",
+    "invite": {
+      "title": "เข้าร่วมห้อง ${code} ใช่ไหม ห้องนี้อยู่บน ${server} ไม่ใช่บนเซิร์ฟเวอร์รีเลย์ของคุณ",
+      "join": "เข้าร่วม",
+      "leaveTitle": "ออกจากห้องเพื่อเข้าร่วมห้อง ${code} ใช่ไหม ห้องนั้นอยู่บน ${server} ไม่ใช่บนเซิร์ฟเวอร์รีเลย์ของคุณ",
+      "leaveHostTitle": "ออกจากห้องเพื่อเข้าร่วมห้อง ${code} ใช่ไหม ห้องนั้นอยู่บน ${server} ไม่ใช่บนเซิร์ฟเวอร์รีเลย์ของคุณ ห้องนี้จะดำเนินต่อโดยมีผู้เข้าร่วมคนถัดไปเป็นโฮสต์"
+    },
+    "relay": {
+      "checking": "กำลังตรวจสอบรีเลย์…",
+      "unreachable": "ติดต่อรีเลย์ที่ ${server} ไม่ได้",
+      "retry": "ลองอีกครั้ง",
+      "title": "เซิร์ฟเวอร์รีเลย์",
+      "hint": "รีเลย์ที่เชื่อมต่อห้องดูด้วยกัน เว้นว่างไว้เพื่อใช้รีเลย์สาธารณะของ Open Watch Party",
+      "hosted": "รีเลย์สาธารณะของ Open Watch Party",
+      "placeholder": "https://relay.example.com",
+      "invalid": "ป้อนที่อยู่รีเลย์ที่ขึ้นต้นด้วย http:// หรือ https://",
+      "save": "บันทึก",
+      "reset": "ใช้รีเลย์สาธารณะ"
+    },
+    "busy": {
+      "creating": "กำลังสร้างห้อง…",
+      "joining": "กำลังเข้าร่วมห้อง…"
+    },
+    "dismiss": "ปิด",
+    "room": {
+      "codeLabel": "รหัสห้อง",
+      "copyCode": "คัดลอกรหัส",
+      "codeCopied": "คัดลอกรหัสแล้ว",
+      "share": "แชร์คำเชิญ",
+      "shareText": "มาดูด้วยกันบน Tortuga: เปิด ${link} หรือป้อนรหัสห้อง ${code}",
+      "scan": "สแกนด้วยโทรศัพท์เพื่อเข้าร่วม",
+      "youHost": "คุณเป็นโฮสต์",
+      "hostedBy": "โฮสต์โดย ${name}",
+      "hostOnly": "เฉพาะโฮสต์ที่ควบคุมการเล่นได้",
+      "anyone": "ทุกคนควบคุมการเล่นได้",
+      "reconnecting": "กำลังเชื่อมต่อใหม่…",
+      "hostReconnecting": "กำลังรอให้ ${name} เชื่อมต่อใหม่…",
+      "nowPlaying": "กำลังเล่น ${title}",
+      "nowPlayingEpisode": "กำลังเล่น ${title} · ${episode}",
+      "idleHost": "เลือกเล่นอะไรก็ได้ ทุกคนในห้องจะเล่นไปพร้อมกับคุณ",
+      "idleGuest": "กำลังรอให้ ${name} เริ่มเล่นอะไรสักเรื่อง",
+      "participants": {
+        "other": "ผู้เข้าร่วม ${n} คน"
+      },
+      "you": "${name} (คุณ)",
+      "hostBadge": "โฮสต์",
+      "makeHost": "ตั้งเป็นโฮสต์",
+      "makeHostNamed": "ตั้ง ${name} เป็นโฮสต์",
+      "joinPlayback": "เข้าร่วมการเล่น",
+      "leave": "ออกจากห้อง",
+      "leaveTitle": "ออกจากห้องใช่ไหม",
+      "leaveConfirm": "ออก",
+      "end": "ปิดห้อง",
+      "endTitle": "ปิดห้องสำหรับทุกคนใช่ไหม",
+      "endConfirm": "ปิดห้อง",
+      "cancel": "ยกเลิก",
+      "leaveHostTitle": "ออกจากห้องใช่ไหม ห้องจะดำเนินต่อโดยมีผู้เข้าร่วมคนถัดไปเป็นโฮสต์",
+      "kickNamed": "นำ ${name} ออก",
+      "kickTitle": "นำ ${name} ออกจากห้องใช่ไหม",
+      "kickConfirm": "นำออก",
+      "lock": "ล็อกห้อง",
+      "lockDetail": "ไม่มีใครเข้าร่วมเพิ่มได้",
+      "controlTitle": "ผู้ควบคุมการเล่น"
+    },
+    "status": {
+      "ready": "พร้อม",
+      "loading": "กำลังโหลด",
+      "matching": "กำลังหาไฟล์",
+      "buffering": "กำลังบัฟเฟอร์",
+      "sameLength": "ความยาวเท่ากัน (${delta})",
+      "longer": "ยาวกว่า ${delta}",
+      "shorter": "สั้นกว่า ${delta}",
+      "noStream": "ไม่พบสตรีม",
+      "searchFailed": "ค้นหาในส่วนเสริมไม่สำเร็จ",
+      "notPlaying": "ไม่ได้อยู่ในตัวเล่น",
+      "away": "ขาดการเชื่อมต่อ",
+      "declined": "ไม่ได้เล่น",
+      "offset": "เลื่อนเวลา ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} วินาที",
+      "minutes": "${minutes} นาที ${seconds} วินาที"
+    },
+    "player": {
+      "optionRoom": "ห้อง ${code}",
+      "startTitle": "สร้างห้องจากสิ่งที่กำลังเล่น",
+      "liveNoRoom": "ดูการถ่ายทอดสดด้วยกันไม่ได้",
+      "watching": {
+        "other": "กำลังดู ${n} คน"
+      },
+      "hostBadge": "โฮสต์",
+      "waiting": "กำลังรอ ${names}…",
+      "waitingMore": {
+        "other": "กำลังรอ ${names} และอีก ${n} คน…"
+      },
+      "syncing": "กำลังซิงค์…",
+      "matchingStart": "กำลังหาไฟล์ที่ตรงกับของ ${name}…",
+      "longer": "ไฟล์ของคุณยาวกว่าของ ${name} ${delta}",
+      "shorter": "ไฟล์ของคุณสั้นกว่าของ ${name} ${delta}",
+      "mismatchDetail": "อาจเป็นฉบับตัดต่ออื่น ตำแหน่งการเล่นของแต่ละคนจึงอาจไม่ตรงกัน",
+      "playAnyway": "เล่นเลย",
+      "chooseStream": "เลือกสตรีมอื่น",
+      "noStream": "ไม่มีส่วนเสริมของคุณตัวใดมีสตรีมสำหรับ ${title}",
+      "searchFailed": "ค้นหา ${title} ในส่วนเสริมบางตัวของคุณไม่ได้",
+      "chooseAStream": "เลือกสตรีม",
+      "pickFailed": "เปิดสตรีมนั้นไม่ได้",
+      "hostControls": "เฉพาะ ${name} ที่ควบคุมการเล่นในห้องนี้ได้",
+      "hostControlsUnnamed": "เฉพาะโฮสต์ที่ควบคุมการเล่นในห้องนี้ได้",
+      "pausedHere": "หยุดชั่วคราวบนอุปกรณ์นี้ กด เล่น เพื่อตามห้องให้ทัน",
+      "dontPlay": "ไม่เล่น",
+      "declined": "คุณไม่ได้เล่น ${title}",
+      "offsetTitle": "เลื่อนเวลา",
+      "offsetDetail": "เลื่อนไฟล์ของคุณเทียบกับไฟล์ของห้อง สำหรับฉบับตัดต่อที่เริ่มเร็วหรือช้ากว่า",
+      "offsetReset": "รีเซ็ต"
+    },
+    "toast": {
+      "joined": "${name} เข้าร่วมแล้ว",
+      "left": "${name} ออกไปแล้ว",
+      "paused": "${name} หยุดชั่วคราว",
+      "resumed": "${name} เล่นต่อ",
+      "seeked": "${name} ข้ามไปยังตำแหน่งอื่น",
+      "speed": "${name} ตั้งความเร็วเป็น ${speed}",
+      "buffering": "${name} กำลังบัฟเฟอร์",
+      "hostChanged": "ตอนนี้ ${name} เป็นโฮสต์แล้ว",
+      "becameHost": "ตอนนี้คุณเป็นโฮสต์แล้ว",
+      "media": "${name} เริ่มเล่น ${title}",
+      "forbidden": "เฉพาะโฮสต์ที่ทำแบบนั้นได้"
+    },
+    "failure": {
+      "create": "สร้างห้องไม่ได้ โปรดลองอีกครั้ง",
+      "join": "เข้าร่วมห้องไม่ได้ โปรดลองอีกครั้ง",
+      "share": "แชร์วิดีโอนี้กับห้องไม่ได้ ลองสตรีมอื่น",
+      "live": "ดูการถ่ายทอดสดด้วยกันไม่ได้ ห้องกำลังรอวิดีโอ",
+      "roomNotFound": "ไม่มีห้องที่ใช้รหัสนี้",
+      "roomFull": "ห้องนั้นเต็มแล้ว",
+      "rateLimited": "ลองหลายครั้งเกินไป รอสักครู่แล้วลองอีกครั้ง",
+      "connection": "ติดต่อรีเลย์ไม่ได้ ตรวจสอบการเชื่อมต่อ",
+      "sessionLost": "การเชื่อมต่อกับห้องขาดหาย",
+      "ended": "โฮสต์ปิดห้องแล้ว",
+      "roomLocked": "ห้องนั้นถูกล็อกอยู่",
+      "relayFull": "รีเลย์เต็ม โปรดลองอีกครั้งในภายหลัง",
+      "blocked": "รีเลย์นี้ไม่รองรับ Tortuga",
+      "kicked": "โฮสต์นำคุณออกจากห้องแล้ว",
+      "expired": "ห้องหมดอายุแล้ว",
+      "replaced": "คุณเข้าร่วมห้องนี้บนอุปกรณ์อื่นแล้ว"
+    }
+  },
+  "downloads": {
+    "title": "การดาวน์โหลด",
+    "empty": "ยังไม่มีรายการที่ดาวน์โหลด ดาวน์โหลดภาพยนตร์และตอนต่างๆ ได้จากหน้ารายละเอียด เพื่อดูได้โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต",
+    "offline": "คุณออฟไลน์อยู่ การดาวน์โหลดจะดำเนินต่อเมื่อกลับมาออนไลน์",
+    "storage": "ใช้ไป ${used} · ว่าง ${free}",
+    "storageUsed": "ใช้ไป ${used}",
+    "pauseAll": "หยุดทั้งหมดชั่วคราว",
+    "resumeAll": "ดาวน์โหลดต่อทั้งหมด",
+    "actionFailed": "เปลี่ยนการดาวน์โหลดไม่ได้ โปรดลองอีกครั้ง",
+    "actionsFailed": "เปลี่ยนการดาวน์โหลดไม่ได้ โปรดลองอีกครั้ง",
+    "episodes": {
+      "other": "${n} ตอน"
+    },
+    "videos": {
+      "other": "${n} วิดีโอ"
+    },
+    "otherVideos": "วิดีโออื่นๆ",
+    "summary": "${count} · ${size}",
+    "progress": "${done} จาก ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "อยู่ในคิว",
+      "waitingForWifi": "กำลังรอ Wi-Fi",
+      "waitingForNetwork": "กำลังรอการเชื่อมต่อ",
+      "resolving": "กำลังเตรียม…",
+      "downloading": "กำลังดาวน์โหลด",
+      "downloadingPercent": "กำลังดาวน์โหลด · ${percent}%",
+      "paused": "หยุดชั่วคราว",
+      "failed": "ไม่สำเร็จ",
+      "completed": "ดาวน์โหลดแล้ว",
+      "cancelled": "ยกเลิกแล้ว"
+    },
+    "action": {
+      "play": "เล่น",
+      "pause": "หยุดชั่วคราว",
+      "resume": "ดาวน์โหลดต่อ",
+      "retry": "ลองอีกครั้ง",
+      "pickStream": "เลือกสตรีม",
+      "cancel": "ยกเลิกการดาวน์โหลด",
+      "delete": "ลบการดาวน์โหลด",
+      "deleteGroup": "ลบการดาวน์โหลดเหล่านี้",
+      "openDetail": "ไปที่รายละเอียด"
+    },
+    "deleteConfirm": {
+      "title": "ลบ ${count} ของ ${name} ใช่ไหม",
+      "message": "การดาวน์โหลดอีกครั้งต้องใช้เวลาและการเชื่อมต่อ",
+      "confirm": "ลบ",
+      "cancel": "ยกเลิก"
+    },
+    "keepSynced": {
+      "title": "ซิงค์อยู่เสมอ",
+      "note": "ซีรีส์แต่ละเรื่องในนี้จะเก็บตอนถัดไปที่ยังไม่ได้ดูไว้ในอุปกรณ์นี้ และดาวน์โหลดตอนใหม่เพิ่มทุกครั้งที่คุณดูจบหนึ่งตอน",
+      "empty": "ยังไม่มีซีรีส์ที่ซิงค์อยู่เสมอ เลือกจำนวนตอนที่ยังไม่ได้ดูที่จะเก็บไว้ได้ในเมนูดาวน์โหลดของซีรีส์",
+      "series": {
+        "other": "ซีรีส์ ${n} เรื่อง"
+      },
+      "manage": "จัดการ “ซิงค์อยู่เสมอ”",
+      "pauseRule": "หยุดซิงค์ ${title} ชั่วคราว",
+      "resumeRule": "ซิงค์ ${title} ต่อ",
+      "stopRule": "หยุดซิงค์ ${title}",
+      "status": {
+        "downloading": {
+          "other": "กำลังดาวน์โหลด ${n} ตอน"
+        },
+        "failed": {
+          "other": "ไม่สำเร็จ ${n} ตอน"
+        },
+        "downloaded": {
+          "other": "ดาวน์โหลดแล้ว ${n} ตอน"
+        },
+        "downloadedNone": "ยังไม่มีตอนที่ดาวน์โหลด"
+      },
+      "stop": {
+        "title": "หยุดซิงค์ ${title} ใช่ไหม",
+        "message": {
+          "other": "${n} ตอนในหน้าการดาวน์โหลดมาจาก “ซิงค์อยู่เสมอ” ลบตอนเหล่านี้ด้วยไหม"
+        },
+        "messageNone": "จะไม่มีการดาวน์โหลดตอนเพิ่มอีก",
+        "keep": "เก็บการดาวน์โหลดไว้",
+        "delete": "ลบการดาวน์โหลด",
+        "confirm": "หยุด",
+        "cancel": "ยกเลิก"
+      },
+      "notice": {
+        "other": "“ซิงค์อยู่เสมอ” เพิ่ม ${title} ${n} ตอนแล้ว"
+      },
+      "noticeSeveral": {
+        "other": "“ซิงค์อยู่เสมอ” เพิ่ม ${n} ตอนแล้ว"
+      },
+      "actionFailed": "เปลี่ยน “ซิงค์อยู่เสมอ” ไม่ได้ โปรดลองอีกครั้ง"
+    },
+    "failure": {
+      "noStream": "เลือกสตรีมสำหรับตอนนี้โดยอัตโนมัติไม่ได้ โปรดเลือกเอง",
+      "noStreamInstant": "เลือกสตรีมที่พร้อมเล่นสำหรับตอนนี้โดยอัตโนมัติไม่ได้ โปรดเลือกเอง",
+      "network": "การเชื่อมต่อล้มเหลว",
+      "http": "เซิร์ฟเวอร์ตอบกลับด้วย HTTP ${status}",
+      "streamGone": "ลิงก์หมดอายุแล้ว และส่วนเสริมไม่มีสตรีมนี้ให้แล้ว",
+      "diskFull": "พื้นที่ในอุปกรณ์เต็ม การดาวน์โหลดจึงหยุดลง",
+      "notEnoughSpace": "พื้นที่ว่างไม่เพียงพอสำหรับการดาวน์โหลดนี้",
+      "sizeMismatch": "ไฟล์ที่ดาวน์โหลดไม่สมบูรณ์",
+      "unsupported": "ดาวน์โหลดสตรีมนี้ไม่ได้",
+      "locationUnavailable": "ตำแหน่งจัดเก็บการดาวน์โหลดใช้งานไม่ได้",
+      "fileMissing": "ไม่พบไฟล์ที่ดาวน์โหลดไว้",
+      "storage": "พื้นที่จัดเก็บของอุปกรณ์ไม่ตอบสนอง"
+    },
+    "notification": {
+      "channel": "การดาวน์โหลด",
+      "title": "กำลังดาวน์โหลด ${title}",
+      "count": {
+        "other": "ดาวน์โหลด ${n} รายการ"
+      },
+      "progress": "${percent}%",
+      "preparing": "กำลังเตรียมดาวน์โหลด…",
+      "waiting": "กำลังรอ Wi-Fi",
+      "paused": "หยุดชั่วคราว",
+      "pause": "หยุดชั่วคราว",
+      "resume": "ดาวน์โหลดต่อ",
+      "cancel": "ยกเลิก",
+      "failed": "ดาวน์โหลดไม่สำเร็จ: ${title}",
+      "completed": "ดาวน์โหลด ${title} แล้ว"
+    }
+  },
+  "offline": {
+    "title": "คุณออฟไลน์อยู่",
+    "text": "เชื่อมต่ออินเทอร์เน็ตเพื่อเรียกดู ส่วนรายการที่ดาวน์โหลดไว้เล่นได้โดยไม่ต้องเชื่อมต่อ",
+    "textNoDownloads": "เชื่อมต่ออินเทอร์เน็ตเพื่อเรียกดู",
+    "openDownloads": "ไปที่การดาวน์โหลด",
+    "detail": "กำลังแสดงรายละเอียดที่บันทึกไว้กับการดาวน์โหลดของคุณ"
+  },
+  "playerApps": {
+    "chooser": "ถามทุกครั้ง",
+    "tortuga": "Tortuga",
+    "playWith": "เล่นด้วย…",
+    "banner": {
+      "opening": "กำลังเปิดใน ${player}…",
+      "notInstalled": "ยังไม่ได้ติดตั้ง ${player} ในอุปกรณ์นี้",
+      "didNotStart": "${player} ไม่ได้เริ่มทำงาน",
+      "playInTortuga": "เล่นใน Tortuga",
+      "cancel": "ยกเลิก",
+      "dismiss": "ปิด"
+    },
+    "detail": {
+      "playing": "กำลังเล่นใน ${player} · ${position}",
+      "playingOf": "กำลังเล่นใน ${player} · ${position} จาก ${duration}",
+      "paused": "หยุดชั่วคราวใน ${player} · ${position}",
+      "pausedOf": "หยุดชั่วคราวใน ${player} · ${position} จาก ${duration}",
+      "finished": "เปิดใน ${player} แล้ว ดู ${title} จบแล้วหรือยัง",
+      "markWatched": "ทำเครื่องหมายว่าดูแล้ว",
+      "notYet": "ยังไม่จบ"
+    },
+    "settings": {
+      "player": "ตัวเล่น",
+      "deviceOnly": "อุปกรณ์นี้เท่านั้น",
+      "note": "วิดีโอบนอุปกรณ์นี้จะเล่นในตัวเล่นที่เลือกไว้ที่นี่ ใช้ “เล่นด้วย…” ในเมนูของสตรีมเพื่อเลือกตัวเล่นอื่นสำหรับวิดีโอเดียว",
+      "notFound": "${player} (ไม่พบ)",
+      "followsProgress": "เล่นต่อจากที่ดูค้างไว้ และบันทึกความคืบหน้าระหว่างเล่น",
+      "savesOnReturn": "เล่นต่อจากที่ดูค้างไว้ และบันทึกตำแหน่งที่หยุด",
+      "savesOnReturnFromStart": "เริ่มเล่นตั้งแต่ต้น แล้วบันทึกตำแหน่งที่หยุดหรือถามว่าดูจบแล้วหรือยัง",
+      "asksAfter": "เล่นต่อจากที่ดูค้างไว้ แล้วถามว่าดูจบแล้วหรือยัง",
+      "asksAfterFromStart": "เปิดวิดีโออย่างเดียว แล้วถามว่าดูจบแล้วหรือยัง",
+      "chooserDetail": "อุปกรณ์จะถามว่าจะใช้แอปใดเล่นวิดีโอแต่ละรายการ",
+      "customHeader": "ตัวเล่นที่กำหนดเอง",
+      "addCustom": "เพิ่มตัวเล่นที่กำหนดเอง",
+      "deleteNamed": "ลบ ${name}",
+      "form": {
+        "title": "เพิ่มตัวเล่นที่กำหนดเอง",
+        "name": "ชื่อ",
+        "nameHint": "ตัวเล่นของฉัน",
+        "program": "โปรแกรม",
+        "programHint": "mpv หรือพาธเต็มของโปรแกรม",
+        "arguments": "อาร์กิวเมนต์",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} คือลิงก์ของวิดีโอ {title} คือชื่อเรื่อง {start} คือจุดเริ่มเล่นเป็นวินาที และ {subtitle} คือลิงก์ของคำบรรยายแรก",
+        "urlTemplate": "เทมเพลต URL",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} คือลิงก์ของวิดีโอที่เข้ารหัสสำหรับ URL และ {url_raw} คือลิงก์ตามเดิม",
+        "packageName": "ชื่อแพ็กเกจ",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "เพิ่ม",
+        "cancel": "ยกเลิก",
+        "nameMissing": "โปรดตั้งชื่อตัวเล่น",
+        "programMissing": "โปรดป้อนโปรแกรมที่จะเรียกใช้",
+        "urlTemplateMissing": "โปรดป้อนเทมเพลต URL",
+        "packageNameMissing": "โปรดป้อนชื่อแพ็กเกจของแอป",
+        "argumentsNeedUrl": "อาร์กิวเมนต์ต้องมี {url}",
+        "urlTemplateNeedsUrl": "เทมเพลต URL ต้องมี {url} หรือ {url_raw}",
+        "packageNameInvalid": "นี่ไม่ใช่ชื่อแพ็กเกจ ป้อนชื่อในรูปแบบ org.videolan.vlc"
+      }
+    }
+  },
+  "guide": {
+    "title": "ผังรายการทีวี",
+    "today": "วันนี้",
+    "tomorrow": "พรุ่งนี้",
+    "yesterday": "เมื่อวาน",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "กำลังออกอากาศ",
+    "now": "ตอนนี้",
+    "noProgrammes": "ไม่มีข้อมูลรายการ",
+    "noChannels": "ผังรายการนี้ไม่มีช่องสำหรับวันดังกล่าว",
+    "noGuide": "ไม่มีส่วนเสริมที่ติดตั้งไว้ซึ่งมีผังรายการทีวี",
+    "failed": "โหลดผังรายการไม่ได้: ${reason}",
+    "cast": "นำแสดงโดย ${names}",
+    "directors": "กำกับโดย ${names}"
+  },
+  "calendar": {
+    "title": "ปฏิทิน",
+    "previousMonth": "เดือนก่อนหน้า",
+    "nextMonth": "เดือนถัดไป",
+    "today": "วันนี้",
+    "tomorrow": "พรุ่งนี้",
+    "emptyLibrary": "เพิ่มซีรีส์ลงในคลังเพื่อดูตอนต่างๆ ที่นี่",
+    "noAddon": "ไม่มีส่วนเสริมใดของคุณที่มีปฏิทินสำหรับซีรีส์ในคลังของคุณ",
+    "emptyMonth": "ไม่มีตอน",
+    "newEpisodes": {
+      "other": "${n} ตอนใหม่"
+    },
+    "episodes": {
+      "other": "${n} ตอน"
+    }
+  },
+  "watchlist": {
+    "lists": "รายการของบริการติดตาม",
+    "hint": "แต่ละรายการอยู่ในบัญชีของคุณที่บริการนั้น คลังของคุณไม่เปลี่ยน",
+    "add": "เพิ่มลงใน${list}",
+    "remove": "นำออกจาก${list}",
+    "trakt": "รายการรอดูของ Trakt",
+    "simkl": "วางแผนจะดูของ Simkl",
+    "mdblist": "รายการรอดูของ MDBList",
+    "myAnimeList": "วางแผนจะดูของ MyAnimeList",
+    "aniList": "อยู่ในแผนของ AniList",
+    "saving": "กำลังบันทึก…",
+    "queued": "ยังไม่ได้ส่ง จะลองใหม่",
+    "failed": "ไม่ได้บันทึก",
+    "addFailed": "เพิ่ม ${title} ลงใน${list}ไม่ได้",
+    "removeFailed": "นำ ${title} ออกจาก${list}ไม่ได้"
+  },
+  "collections": {
+    "needsAddon": "ต้องใช้ส่วนเสริม ${name}",
+    "needsCatalog": "${addon} ไม่มีแคตตาล็อก ${catalog}",
+    "needsFilter": "ต้องใช้ตัวกรองที่ Tortuga ตั้งค่าไม่ได้",
+    "traktUnavailable": "รายการ Trakt ไม่มีในแอปเวอร์ชันนี้",
+    "tooLarge": "“${title}” ใหญ่เกินกว่าจะซิงค์ได้",
+    "kind": {
+      "tmdbList": "รายการ TMDB",
+      "tmdbCollection": "คอลเลกชัน TMDB",
+      "tmdbCompany": "บริษัท TMDB",
+      "tmdbNetwork": "เครือข่าย TMDB",
+      "tmdbDiscover": "สำรวจ TMDB",
+      "tmdbPerson": "บุคคล TMDB",
+      "tmdbDirector": "ผู้กำกับ TMDB",
+      "letterboxd": "Letterboxd",
+      "unknown": "ผู้ให้บริการที่ไม่รู้จัก “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "other": "เพิ่มคอลเลกชัน ${n} รายการ"
+      },
+      "replaces": {
+        "other": "แทนที่คอลเลกชัน ${n} รายการที่มีรหัสเดียวกัน"
+      },
+      "needsAddon": {
+        "other": "แหล่งที่มา ${n} รายการต้องใช้ส่วนเสริม ${name}"
+      },
+      "needsTracker": {
+        "other": "แหล่งที่มา ${n} รายการต้องเชื่อมต่อ ${service}"
+      },
+      "unsupported": {
+        "other": "${kind}: ข้ามแหล่งที่มา ${n} รายการ"
+      },
+      "unsupportedHint": "Tortuga อ่านแคตตาล็อกของส่วนเสริมและรายการของตัวติดตาม ไม่ใช่แหล่งที่มาเหล่านี้ ให้ใช้แคตตาล็อกของส่วนเสริมแทน เช่น ของ AIOMetadata หรือ MDBList",
+      "folderDropped": "ข้ามโฟลเดอร์ “${folder}” ใน “${collection}”: อ่านแหล่งที่มาของโฟลเดอร์นี้ไม่ได้เลย",
+      "collectionDropped": "ข้ามคอลเลกชัน “${title}”: อ่านโฟลเดอร์ของคอลเลกชันนี้ไม่ได้เลย",
+      "tooLarge": "ไม่ได้นำเข้าคอลเลกชัน “${title}”: ใหญ่เกินกว่าจะซิงค์ได้"
+    },
+    "refused": {
+      "notJson": "นี่ไม่ใช่ไฟล์คอลเลกชัน: ไม่ใช่ JSON",
+      "notList": "นี่ไม่ใช่ไฟล์คอลเลกชัน: ไม่มีรายการคอลเลกชัน",
+      "empty": "ไฟล์นี้ไม่มีคอลเลกชัน",
+      "collectionInvalid": "อ่านคอลเลกชันที่ ${position} ในไฟล์ไม่ได้",
+      "collectionNoId": "คอลเลกชันที่ ${position} ในไฟล์ไม่มีรหัส",
+      "collectionNoTitle": "คอลเลกชัน ${id} ไม่มีชื่อ",
+      "duplicateCollection": "มีคอลเลกชันสองรายการในไฟล์ที่มีรหัส ${id}",
+      "noFolders": "คอลเลกชัน “${collection}” ไม่มีรายการโฟลเดอร์",
+      "folderInvalid": "อ่านโฟลเดอร์ที่ ${position} ของ “${collection}” ไม่ได้",
+      "folderNoId": "โฟลเดอร์ที่ ${position} ของ “${collection}” ไม่มีรหัส",
+      "folderNoTitle": "โฟลเดอร์ ${id} ของ “${collection}” ไม่มีชื่อ",
+      "duplicateFolder": "มีโฟลเดอร์สองรายการของ “${collection}” ที่มีรหัส ${id}",
+      "noSources": "โฟลเดอร์ “${folder}” ของ “${collection}” ไม่มีรายการแหล่งที่มา",
+      "unknownShape": "โฟลเดอร์ “${folder}” ของ “${collection}” มีรูปทรงไทล์ที่ไม่รู้จัก: ${shape}",
+      "sourceInvalid": "แหล่งที่มาที่ ${position} ของโฟลเดอร์ “${folder}” ใน “${collection}” ไม่ครบถ้วน"
+    },
+    "row": "คอลเลกชัน",
+    "rowSource": {
+      "other": "คอลเลกชัน · ${n} โฟลเดอร์"
+    },
+    "folder": {
+      "all": "ทั้งหมด",
+      "empty": "ไม่มีรายการที่นี่",
+      "goToTrackers": "ไปที่บริการติดตาม",
+      "goToAddons": "ไปที่ส่วนเสริม"
+    },
+    "importing": {
+      "title": "นำเข้าคอลเลกชัน",
+      "note": "ไฟล์คอลเลกชันจาก Nuvio หรือ AIOMetadata: ป้อนลิงก์ของไฟล์หรือเปิดไฟล์ คอลเลกชันที่มีรหัสเดียวกับคอลเลกชันของคุณจะแทนที่คอลเลกชันนั้น",
+      "urlLabel": "ลิงก์",
+      "urlHint": "https://…/collections.json",
+      "fetch": "ดึงข้อมูล",
+      "openFile": "เปิดไฟล์",
+      "confirm": "นำเข้า",
+      "done": "เสร็จสิ้น",
+      "rowNew": {
+        "other": "ใหม่ · ${n} โฟลเดอร์"
+      },
+      "rowReplaces": {
+        "other": "แทนที่ของคุณ · ${n} โฟลเดอร์"
+      },
+      "imported": {
+        "other": "นำเข้าคอลเลกชัน ${n} รายการแล้ว"
+      },
+      "notWeb": "ป้อนลิงก์ที่ขึ้นต้นด้วย http:// หรือ https://",
+      "tooLarge": "ไฟล์นี้ใหญ่กว่า 4 MB",
+      "httpError": "ลิงก์ตอบกลับด้วยข้อผิดพลาด ${status}",
+      "timeout": "ลิงก์ไม่ตอบกลับภายในเวลาที่กำหนด",
+      "unreachable": "เข้าถึงลิงก์ไม่ได้ ตรวจสอบลิงก์และการเชื่อมต่อของคุณ",
+      "unreadable": "อ่านไฟล์นี้เป็นข้อความไม่ได้",
+      "failed": "บันทึกคอลเลกชันไม่ได้"
+    },
+    "editor": {
+      "newHeading": "คอลเลกชันใหม่",
+      "editHeading": "แก้ไขคอลเลกชัน",
+      "titleLabel": "ชื่อ",
+      "view": "มุมมอง",
+      "viewHint": "วิธีที่โฟลเดอร์แสดงแหล่งที่มา",
+      "viewTabs": "แท็บ",
+      "viewRows": "แถว",
+      "viewFollow": "ตามแอป",
+      "allTab": "แท็บทั้งหมด",
+      "allTabHint": "แท็บแรกที่มีรายการจากทุกแหล่งที่มา",
+      "foldersHeader": "โฟลเดอร์",
+      "addFolder": "เพิ่มโฟลเดอร์",
+      "noFolders": "ยังไม่มีโฟลเดอร์",
+      "sources": {
+        "other": "${n} แหล่งที่มา"
+      },
+      "save": "บันทึก",
+      "newFolder": "โฟลเดอร์ใหม่",
+      "folderTitleLabel": "ชื่อ",
+      "shape": "รูปทรงของไทล์",
+      "shapePoster": "โปสเตอร์",
+      "shapeLandscape": "แนวนอน",
+      "shapeSquare": "สี่เหลี่ยมจัตุรัส",
+      "coverLabel": "ลิงก์รูปภาพหน้าปก",
+      "coverHint": "https://…",
+      "hideTitle": "ซ่อนชื่อ",
+      "hideTitleHint": "ไทล์แสดงเฉพาะหน้าปก",
+      "sourcesHeader": "แหล่งที่มา",
+      "addSource": "เพิ่มแหล่งที่มา",
+      "noSources": "ยังไม่มีแหล่งที่มา",
+      "deleteNamed": "ลบ ${name}",
+      "removeNamed": "นำ ${name} ออก",
+      "noTitle": "ตั้งชื่อให้คอลเลกชัน",
+      "noFolder": "เพิ่มโฟลเดอร์ลงในคอลเลกชัน",
+      "folderNoTitle": "ตั้งชื่อให้โฟลเดอร์ที่ ${position}",
+      "folderNoSource": "เพิ่มแหล่งที่มาลงใน “${folder}”",
+      "saveFailed": "บันทึกคอลเลกชันไม่ได้",
+      "discardTitle": "ทิ้งการเปลี่ยนแปลงไหม",
+      "discard": "ทิ้ง",
+      "keepEditing": "แก้ไขต่อ",
+      "picker": {
+        "addons": "แคตตาล็อกของส่วนเสริม",
+        "trackers": "บริการติดตาม",
+        "noAddons": "ไม่มีส่วนเสริมที่ติดตั้งไว้ซึ่งมีแคตตาล็อกให้เพิ่ม",
+        "noTrackers": "เชื่อมต่อบริการติดตามในการตั้งค่า → บริการติดตาม เพื่อเพิ่มรายการของบริการนั้น",
+        "listsFailed": "ตอนนี้อ่านรายการของ ${service} ไม่ได้",
+        "byLink": "รายการ ${service} จากลิงก์",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "เพิ่ม",
+        "notAList": "นี่ไม่ใช่ลิงก์ไปยังรายการ ${service}",
+        "notFound": "${service} ไม่มีรายการที่ลิงก์นี้",
+        "unreachable": "ตอนนี้เข้าถึง ${service} ไม่ได้"
+      }
+    }
+  }
+}

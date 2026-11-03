@@ -1,0 +1,281 @@
+/* Fraunces (soft, 500-800) for display, Figtree for text; both SIL OFL, licences in src/lib/fonts/. */
+@font-face {
+	font-family: "Fraunces";
+	src: url("./lib/fonts/fraunces.woff2") format("woff2");
+	font-weight: 500 800;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Figtree";
+	src: url("./lib/fonts/figtree.woff2") format("woff2");
+	font-weight: 300 900;
+	font-display: swap;
+}
+
+/*
+ * Near-black grounds with the icon's navy as a tint: ink is the darkest, char a neutral step up, navy the icon's own
+ * colour for one band and a few fills. Cream type, teal accents.
+ */
+:root {
+	--ink: #05090d;
+	--ink-fill: #161e24;
+	--ink-fill-2: #1e272d;
+	--char: #151c21;
+	--char-fill: #1e272d;
+	--char-fill-2: #273138;
+	--navy: #10202a;
+	--navy-raise: #18303d;
+	--navy-raise-2: #22404f;
+	--navy-raise-3: #2b4d5e;
+	--cream: #fff1d6;
+	--cream-soft: #fff6e5;
+	--teal: #23c4b0;
+	--muted: #c9c2b0;
+
+	--display: "Fraunces", "Iowan Old Style", Georgia, serif;
+	--text: "Figtree", "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
+	--gutter: clamp(20px, 5vw, 64px);
+	--max: 1180px;
+	--radius: 22px;
+
+	/* The eye-patch strap and patch from the icon, as a mask for ornaments. */
+	--patch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath d='M2 17.6 38 3.1' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/%3E%3Cellipse cx='20' cy='10.3' rx='7.6' ry='6' transform='rotate(-22 20 10.3)'/%3E%3C/svg%3E");
+	/* A gentle swell, the top edge of a section. */
+	--swell: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 24' preserveAspectRatio='none'%3E%3Cpath d='M0 14Q40 2 80 14T160 14V24H0Z'/%3E%3C/svg%3E");
+	/* Rows of the icon's play triangle, the shell pattern. */
+	--scutes: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='56'%3E%3Cg fill='%23FFF1D6' stroke='%23FFF1D6' stroke-width='4' stroke-linejoin='round' opacity='.055'%3E%3Cpath d='M8 6v16l14-8z'/%3E%3Cpath d='M32 34v16l14-8z'/%3E%3C/g%3E%3C/svg%3E");
+	/* The icon's rounded play triangle, as a mask for bullets, badges and backdrops. */
+	--tri: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 64'%3E%3Cpath d='M10 8v48l42-24z' stroke='%23000' stroke-width='12' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	background: var(--ink);
+}
+
+body {
+	margin: 0;
+	font-family: var(--text);
+	font-size: clamp(1rem, 0.95rem + 0.22vw, 1.125rem);
+	line-height: 1.6;
+	color: var(--cream);
+	background: var(--char);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Decorative backdrops may reach past the edges; clip them without making a scroll container. */
+main {
+	overflow-x: clip;
+}
+
+img,
+svg,
+picture {
+	display: block;
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	font-family: var(--display);
+	font-weight: 700;
+	line-height: 1.06;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5.25rem);
+	line-height: 1;
+}
+
+h2 {
+	font-size: clamp(2.1rem, 1.5rem + 2.5vw, 3.5rem);
+}
+
+h3 {
+	font-size: clamp(1.3rem, 1.2rem + 0.4vw, 1.5rem);
+	font-weight: 650;
+	letter-spacing: -0.01em;
+}
+
+p,
+ul,
+ol {
+	margin: 0;
+	text-wrap: pretty;
+}
+
+a {
+	color: inherit;
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus, var(--teal));
+	outline-offset: 3px;
+	border-radius: 6px;
+}
+
+code {
+	font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+	font-size: 0.9em;
+}
+
+/*
+ * Section bands, all dark with cream type, told apart by their ground: ink, char and navy.
+ * Contrast (WCAG): cream text 11.8:1 or more on every ground and fill, muted 7.4:1 or more, teal 6:1 or more (the one
+ * lighter hover fill, navy-raise-3, carries cream only, 8:1).
+ */
+.ink,
+.char,
+.navy {
+	--focus: var(--teal);
+	--accent: var(--teal);
+	background: var(--bg);
+	color: var(--cream);
+}
+.ink {
+	--bg: var(--ink);
+	--fill: var(--ink-fill);
+	--fill-hover: var(--ink-fill-2);
+}
+.char {
+	--bg: var(--char);
+	--fill: var(--char-fill);
+	--fill-hover: var(--char-fill-2);
+}
+.navy {
+	--bg: var(--navy);
+	--fill: var(--navy-raise);
+	--fill-hover: var(--navy-raise-2);
+}
+
+.wrap {
+	width: min(100% - 2 * var(--gutter), var(--max));
+	margin-inline: auto;
+}
+
+/* A section whose top edge is a swell in its own colour, rising over the section above. */
+.swell {
+	position: relative;
+}
+.swell::before {
+	content: "";
+	position: absolute;
+	inset: auto 0 calc(100% - 1px);
+	height: clamp(14px, 2vw, 24px);
+	background: var(--bg);
+	-webkit-mask: var(--swell) 0 100% / clamp(180px, 22vw, 320px) 100% repeat-x;
+	mask: var(--swell) 0 100% / clamp(180px, 22vw, 320px) 100% repeat-x;
+	pointer-events: none;
+}
+
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.65em;
+	margin-bottom: 1.1rem;
+	font: 800 0.8125rem/1.2 var(--text);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+.eyebrow::before {
+	content: "";
+	flex: none;
+	width: 2.5em;
+	height: 1.25em;
+	background: currentColor;
+	-webkit-mask: var(--patch) center / contain no-repeat;
+	mask: var(--patch) center / contain no-repeat;
+}
+
+.lede {
+	font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+	line-height: 1.5;
+	color: var(--muted);
+}
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55em;
+	min-height: 48px;
+	padding: 0.7em 1.35em;
+	border-radius: 999px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none;
+	background: var(--fill);
+	color: inherit;
+	transition: background-color 0.2s;
+}
+.button:hover {
+	background: var(--fill-hover);
+}
+.button.primary {
+	background: var(--cream);
+	color: var(--navy);
+}
+.button.primary:hover {
+	background: var(--cream-soft);
+}
+
+.tag {
+	display: inline-block;
+	padding: 0.3em 0.75em;
+	border-radius: 999px;
+	font-size: 0.8125rem;
+	font-weight: 800;
+	letter-spacing: 0.02em;
+	line-height: 1.2;
+	background: var(--teal);
+	color: var(--navy);
+}
+
+.skip {
+	position: absolute;
+	left: 12px;
+	top: -100px;
+	z-index: 10;
+	padding: 0.6em 1em;
+	border-radius: 12px;
+	background: var(--cream);
+	color: var(--navy);
+	font-weight: 700;
+}
+.skip:focus {
+	top: 12px;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}

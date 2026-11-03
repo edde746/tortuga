@@ -1,0 +1,58 @@
+-- The account's profiles. Synced. A profile's preferences are its `setting` rows.
+--
+-- Every synced table ends in the same sync columns:
+--   record_id       the natural key as the record's id on the server (data/sync/RecordKey.kt)
+--   hlc             hybrid logical clock of the last write (data/sync/Hlc.kt); text order is clock order
+--   server_version  server version the row was last pushed at or pulled from; NULL until the server has it
+--   dirty           a local write the server hasn't acknowledged
+--   deleted         tombstone: the row is gone for the user but kept so the delete syncs
+CREATE TABLE profile (
+    profile_id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    avatar TEXT,
+    -- The PIN's salted hash (data/profile/PinHash.kt), NULL when the profile has none.
+    pin_hash BLOB,
+    -- Epoch milliseconds; profiles list in creation order.
+    created_at INTEGER NOT NULL,
+    -- A kids profile (data/profile/ProfileRepository.kt: Profile.kids). home_catalogs: the Home rows it starts with,
+    -- optional, as a JSON array (HomeCatalog), `[]` for none; titles in them still have to pass the rating.
+    kids INTEGER AS kotlin.Boolean NOT NULL,
+    home_catalogs TEXT NOT NULL,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL
+);
+
+CREATE INDEX profile_dirty ON profile(dirty, hlc);
+
+selectAllLive:
+SELECT * FROM profile WHERE deleted = 0 ORDER BY created_at, profile_id;
+
+selectLive:
+SELECT * FROM profile WHERE profile_id = ? AND deleted = 0;
+
+select:
+SELECT * FROM profile WHERE profile_id = ?;
+
+upsert:
+INSERT OR REPLACE INTO profile VALUES ?;
+
+-- Paged by (hlc, record_id): a profile's deletion stamps all its records with one HLC (data/sync/SyncStore.kt).
+selectDirty:
+SELECT * FROM profile WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE profile SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE profile SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt): the account signed out, was deleted, or another account signed in.
+deleteAll:
+DELETE FROM profile;
+
+-- The server was restored from a backup: every row is pushed again as if the server never had it.
+forgetServerVersions:
+UPDATE profile SET server_version = NULL, dirty = 1;

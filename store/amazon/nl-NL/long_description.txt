@@ -1,0 +1,36 @@
+Tortuga is een videospeler die werkt met Stremio-add-ons. De add-ons die je installeert, leveren de catalogi en de streams, en Tortuga speelt ze af op je Fire TV. Tortuga biedt zelf geen content aan.
+
+Zo werkt het
+• Installeer een add-on via de link. Catalogi, zoekresultaten, detailpagina's en streams komen van je add-ons, en je verzoeken gaan rechtstreeks naar die add-ons.
+• Home toont Verder kijken en de catalogi van je add-ons. Ontdekken filtert op type en genre. Zoeken doorzoekt alle add-ons.
+• De streams van een film of aflevering zijn gegroepeerd per add-on. Kies er een en die wordt afgespeeld.
+
+De speler
+• Speelt af met mpv, met HDR10 en Dolby Vision als je Fire TV en tv die ondersteunen.
+• Audio-passthrough: Dolby Atmos en DTS naar je receiver.
+• Ingebedde ondertiteling en ondertiteling van add-ons, afgestemd op het bestand. Je keuzes voor audio en ondertiteling gaan mee naar de volgende aflevering.
+• Hoofdstukken op de tijdbalk. Sla intro's, samenvattingen en aftiteling over met een knop of automatisch.
+• Aftellen naar de volgende aflevering, vorige en volgende aflevering, afspeelsnelheid, en ondertitel- en audiovertraging.
+• Liever een andere speler? Stuur de video naar een andere spelerapp op je Fire TV.
+
+Jouw bibliotheek
+• Voortgang en markeringen als bekeken, met Verder kijken op Home om verder te gaan waar je was gebleven.
+• Tortuga onthoudt de stream die je koos en speelt de volgende aflevering af van dezelfde bron.
+• Downloads: sla films en afleveringen op, met hun ondertiteling, om offline te kijken. Tortuga kan bij een serie steeds de volgende niet-bekeken afleveringen klaarzetten.
+
+Samen kijken
+Start een kamer en deel de kamercode of een uitnodigingslink. Het afspelen blijft synchroon, en iedereen speelt de titel af via de eigen add-ons.
+
+Jouw account en profielen
+• Log in met Google, Apple of GitHub via een code op je telefoon, of koppel de tv vanaf een ingelogde telefoon met een QR-code of een korte code. Je profielen, add-ons, bibliotheek, voortgang en profielinstellingen worden gesynchroniseerd op al je apparaten.
+• Een profiel voor iedereen in het huishouden, elk met eigen add-ons, bibliotheek en instellingen. Een pincode is optioneel.
+• Koppel Trakt, Simkl, MDBList, MyAnimeList of AniList voor scrobbelen, kijkgeschiedenis, beoordelingen en lijsten.
+• Synchronisatie loopt via de Tortuga-server, of via een server die je zelf draait.
+
+De hele app werkt met de afstandsbediening van de Fire TV.
+
+Tortuga is open source onder de GPL-3.0 en beschikbaar in 21 talen. Geen advertenties, geen gebruiksanalyse.
+
+De speler in de screenshots toont korte fragmenten uit Spring (2019), Coffee Run (2020), Sprite Fright (2021) en Wing It! (2023) van Blender Studio, (CC) Blender Foundation | studio.blender.org, gelicentieerd onder CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga gebruikt Trakt, maar wordt niet door Trakt onderschreven of gecertificeerd.

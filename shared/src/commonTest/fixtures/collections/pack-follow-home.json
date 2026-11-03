@@ -1,0 +1,1054 @@
+[
+  {
+    "id": "pack-b-c1",
+    "title": "Discover",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "FOLLOW_HOME",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "pack-b-c1-f1",
+        "title": "Latest 1",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c1-f1-artartartartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "SQUARE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog1"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c1-f2",
+        "title": "Latest 2",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c1-f2-artartartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog2"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c1-f3",
+        "title": "Latest 3",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c1-f3-artartartartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "SQUARE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog3"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c1-f4",
+        "title": "Latest 4",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c1-f4-artartartartartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog4"
+          }
+        ],
+        "_coverMode": "image"
+      }
+    ]
+  },
+  {
+    "id": "pack-b-c2",
+    "title": "Services",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "FOLLOW_HOME",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "pack-b-c2-f1",
+        "title": "Service 1",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f1-artartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog5"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog5"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f2",
+        "title": "Service 2",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f2-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog6"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog6"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f3",
+        "title": "Service 3",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f3-artartartartartartartartartartartartartartartartartart.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog7"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog7"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f4",
+        "title": "Service 4",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f4-artartartartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog8"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog8"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f5",
+        "title": "Service 5",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f5-artartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog9"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog9"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f6",
+        "title": "Service 6",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f6-artartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog10"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog10"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f7",
+        "title": "Service 7",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f7-artartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "type": "movie",
+            "catalogId": "example.catalog11"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "type": "series",
+            "catalogId": "example.catalog11"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f8",
+        "title": "Service 8",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f8-artartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog12",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog12",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f9",
+        "title": "Service 9",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f9-artartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog13",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.streaming",
+            "catalogId": "example.catalog13",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f10",
+        "title": "Service 10",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f10-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog14",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog15",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c2-f11",
+        "title": "Service 11",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c2-f11-artartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog16",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      }
+    ]
+  },
+  {
+    "id": "pack-b-c3",
+    "title": "Genres",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "FOLLOW_HOME",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "pack-b-c3-f1",
+        "title": "Genre 1",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f1-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog17"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog18"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f2",
+        "title": "Genre 2",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f2-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog19"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog20"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f3",
+        "title": "Genre 3",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f3-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog21"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog22"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f4",
+        "title": "Genre 4",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f4-artartartartartartartartartartartartartartartartart.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog23"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog24"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f5",
+        "title": "Genre 5",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f5-artartartartartartartartartartartartartartartartartart.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog25"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog26"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f6",
+        "title": "Genre 6",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f6-artartartartartartartartartartartartartartartartart.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog27"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog28"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f7",
+        "title": "Genre 7",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f7-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog29"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog30"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog31"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f8",
+        "title": "Genre 8",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f8-artartartartartartartartartartartartartartartartartar.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog32"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "series",
+            "catalogId": "example.catalog33"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f9",
+        "title": "Genre 9",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f9-artartartartartartartartartartartartartartartartartart.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog34"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f10",
+        "title": "Genre 10",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f10-artartartartartartartartartartartartartartartartar.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "anime",
+            "catalogId": "example.catalog35"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "anime",
+            "catalogId": "example.catalog36"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "type": "anime",
+            "catalogId": "example.catalog37"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f11",
+        "title": "Genre 11",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f11-artartartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog38",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog39",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f12",
+        "title": "Genre 12",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f12-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog40",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog41",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f13",
+        "title": "Genre 13",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f13-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog42",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog43",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f14",
+        "title": "Genre 14",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f14-artartartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog44",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog45",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f15",
+        "title": "Genre 15",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f15-artartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog46",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f16",
+        "title": "Genre 16",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f16-artartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog47",
+            "type": "movie"
+          },
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog48",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c3-f17",
+        "title": "Genre 17",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c3-f17-artartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "POSTER",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog49",
+            "type": "series"
+          }
+        ],
+        "_coverMode": "image"
+      }
+    ]
+  },
+  {
+    "id": "pack-b-c4",
+    "title": "Decades",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "FOLLOW_HOME",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "pack-b-c4-f1",
+        "title": "Decade 1",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f1-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog50"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f2",
+        "title": "Decade 2",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f2-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog51"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f3",
+        "title": "Decade 3",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f3-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog52"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f4",
+        "title": "Decade 4",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f4-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog53"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f5",
+        "title": "Decade 5",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f5-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog54"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f6",
+        "title": "Decade 6",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f6-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog55"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c4-f7",
+        "title": "Decade 7",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c4-f7-artartartartartartartartartartartartartartartartarta.png",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog56",
+            "type": "movie"
+          }
+        ],
+        "_coverMode": "image"
+      }
+    ]
+  },
+  {
+    "id": "pack-b-c5",
+    "title": "Sets",
+    "backdropImageUrl": null,
+    "pinToTop": false,
+    "focusGlowEnabled": true,
+    "viewMode": "FOLLOW_HOME",
+    "showAllTab": false,
+    "folders": [
+      {
+        "id": "pack-b-c5-f1",
+        "title": "Set 1",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f1-artartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.saga.first",
+            "type": "SagaOne",
+            "catalogId": "example.catalog57"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f2",
+        "title": "Set 2",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f2-artartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.saga.second",
+            "type": "SagaTwo",
+            "catalogId": "example.catalog58"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f3",
+        "title": "Set 3",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f3-artartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.saga.third",
+            "type": "SagaThree",
+            "catalogId": "example.catalog59"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f4",
+        "title": "Set 4",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f4-artartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog60"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f5",
+        "title": "Set 5",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f5-artartartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "type": "movie",
+            "catalogId": "example.catalog61"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f6",
+        "title": "Set 6",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f6-artartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "SQUARE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog62",
+            "type": "all"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f7",
+        "title": "Set 7",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f7-artartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "SQUARE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog63",
+            "type": "movie"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f8",
+        "title": "Set 8",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f8-artartartartartartartartartartartartartartartartartartar.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog64",
+            "type": "all"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f9",
+        "title": "Set 9",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f9-artartartartartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog65",
+            "type": "movie"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f10",
+        "title": "Set 10",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f10-artartartartartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog66",
+            "type": "all"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f11",
+        "title": "Set 11",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f11-artartartartartartartartartartartartartartartartart.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog67",
+            "type": "movie"
+          }
+        ],
+        "_coverMode": "image"
+      },
+      {
+        "id": "pack-b-c5-f12",
+        "title": "Set 12",
+        "coverImageUrl": "https://example.com/pack-follow-home/covers/c5-f12-artartartartartartartartartartartartartartartarta.jpg",
+        "focusGifUrl": null,
+        "coverEmoji": null,
+        "tileShape": "LANDSCAPE",
+        "hideTitle": true,
+        "catalogSources": [
+          {
+            "addonId": "org.example.metadata",
+            "catalogId": "example.catalog68",
+            "type": "movie"
+          }
+        ],
+        "_coverMode": "image"
+      }
+    ]
+  }
+]

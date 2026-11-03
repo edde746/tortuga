@@ -1,0 +1,13 @@
+{
+  "streams": [
+    {
+      "url": "https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov",
+      "name": "Tortuga demo",
+      "description": "Tears of Steel (2012), 720p\n(CC) Blender Foundation | mango.blender.org, CC BY 3.0",
+      "behaviorHints": {
+        "videoSize": 372178639,
+        "filename": "tears_of_steel_720p.mov"
+      }
+    }
+  ]
+}

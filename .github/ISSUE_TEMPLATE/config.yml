@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support
+    url: https://usetortuga.app/support/
+    about: Questions about the apps or your account, and account deletion. Email support@usetortuga.app.
+  - name: Security vulnerability
+    url: https://github.com/edde746/tortuga/blob/main/SECURITY.md
+    about: Report it privately by email, as SECURITY.md describes.

@@ -1,0 +1,5 @@
+Spielt die Streams Ihrer Add-ons mit mpv ab, mit HDR10, Dolby Vision und Audio-Passthrough, sofern Ihre Geräte sie unterstützen
+„Weiterschauen“, Fortschritt und Gesehen-Markierungen sowie die nächste Folge aus derselben Quelle
+Intros, Rückblicke und Abspann überspringen; Ihre Audio- und Untertitelauswahl wird für die nächste Folge übernommen
+„Gemeinsam schauen“: synchron mit Freunden, alle über ihre eigenen Add-ons
+Profile, Add-ons, Bibliothek und Fortschritt werden auf allen Ihren Geräten synchronisiert

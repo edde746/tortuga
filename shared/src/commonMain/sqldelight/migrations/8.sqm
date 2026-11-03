@@ -1,0 +1,26 @@
+-- Version 8 → 9: the streams a profile picks by hand on this device and what came of each (data/db/StreamPick.sq), a
+-- new table, this device only.
+
+CREATE TABLE stream_pick (
+    pick_id TEXT NOT NULL PRIMARY KEY,
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    runtime_seconds INTEGER,
+    picked_at INTEGER NOT NULL,
+    device_class TEXT NOT NULL,
+    metered INTEGER NOT NULL,
+    hdr_display INTEGER NOT NULL,
+    dolby_vision_display INTEGER NOT NULL,
+    hardware_codecs TEXT NOT NULL,
+    source TEXT NOT NULL,
+    candidates_json TEXT NOT NULL,
+    chosen INTEGER NOT NULL,
+    first_row INTEGER NOT NULL,
+    outcome TEXT,
+    outcome_at INTEGER
+);
+
+CREATE INDEX stream_pick_profile ON stream_pick(profile_id, device_class, picked_at);
+
+CREATE INDEX stream_pick_video ON stream_pick(profile_id, meta_id, video_id, picked_at);

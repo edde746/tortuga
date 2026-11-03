@@ -1,0 +1,14 @@
+Funciona com addons do Stremio: instale um addon pelo link dele
+Início, Descobrir e Buscar em todos os addons
+Os streams de cada título agrupados por addon
+Reproduz com o mpv, com HDR10 e Dolby Vision quando seu computador e sua tela são compatíveis
+Legendas embutidas e de addons; suas escolhas de áudio e legenda passam para o próximo episódio
+Pule aberturas, resumos e créditos
+Continuar assistindo, progresso e títulos marcados como assistidos
+Downloads para assistir offline
+Assistir juntos em sincronia, cada pessoa pelos próprios addons
+Perfis com seus próprios addons, biblioteca e configurações, e PIN opcional
+Sincronização entre seus dispositivos ao entrar com a Apple, o Google ou o GitHub
+Trakt, Simkl, MDBList, MyAnimeList e AniList
+Atalhos de teclado, teclas de mídia e os controles de mídia do Windows
+21 idiomas

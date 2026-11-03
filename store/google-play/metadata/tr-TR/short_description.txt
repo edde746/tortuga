@@ -1,0 +1,1 @@
+Telefon, tablet ve TV'lerde Stremio eklentileriyle çalışan bir video oynatıcı.

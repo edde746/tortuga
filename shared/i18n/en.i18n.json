@@ -1,0 +1,2066 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Check for Updates…",
+    "launchFailed": "Tortuga couldn't start.",
+    "startup": {
+      "database": "Opening the database…",
+      "migration": "Updating the database…",
+      "account": "Loading your account…",
+      "profiles": "Loading profiles…"
+    },
+    "localNetworkUsage": "Tortuga uses your local network to reach addons, media and a sync server you run at home."
+  },
+  "player": {
+    "nowPlaying": "Now playing",
+    "buffering": "Buffering…",
+    "position": "${position} / ${duration}",
+    "timeline": "Playback position",
+    "play": "Play",
+    "pause": "Pause",
+    "resolving": "Preparing stream…",
+    "opening": "Opening…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "LIVE",
+      "position": "Live · watched ${time}",
+      "behind": "Live · ${time} behind",
+      "goToLive": "Go to live"
+    },
+    "nextEpisode": "Next episode",
+    "previousEpisode": "Previous episode",
+    "lock": {
+      "button": "Lock screen",
+      "tapToUnlock": "Tap to unlock",
+      "tapAgainToUnlock": "Tap again to unlock"
+    },
+    "format": {
+      "seconds": "${value} s",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Volume",
+      "level": "${percent}%",
+      "muted": "Muted",
+      "mute": "Mute",
+      "unmute": "Unmute"
+    },
+    "menu": {
+      "audio": "Audio",
+      "subtitles": "Subtitles",
+      "speed": "Playback speed",
+      "subtitleDelay": "Subtitle delay",
+      "audioDelay": "Audio delay",
+      "moreSubtitles": "More subtitles",
+      "reset": "Reset",
+      "subtitleDelayEarlier": "Subtitle delay: earlier",
+      "subtitleDelayLater": "Subtitle delay: later",
+      "audioDelayEarlier": "Audio delay: earlier",
+      "audioDelayLater": "Audio delay: later"
+    },
+    "track": {
+      "off": "Off",
+      "numbered": "Track ${number}",
+      "defaultTrack": "Default",
+      "forced": "Forced",
+      "sdh": "SDH",
+      "audioDescription": "Audio description",
+      "external": "External",
+      "second": "Second subtitle",
+      "showAsSecond": "Show as second subtitle",
+      "removeSecond": "Remove second subtitle",
+      "otherLanguage": "Other",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} channel",
+        "other": "${n} channels"
+      }
+    },
+    "info": {
+      "title": "Playback info",
+      "tab": "Info",
+      "resolution": "Resolution",
+      "video": "Video",
+      "dynamicRange": "Dynamic range",
+      "audio": "Audio",
+      "decoder": "Decoder",
+      "cache": "Cache",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Hardware (${name})",
+      "softwareDecoder": "Software",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision profile ${profile}",
+      "stream": "Stream",
+      "addon": "Addon",
+      "pickedBy": "Picked by",
+      "autoPlayFirstMatch": "Auto-play, first match",
+      "autoPlayLastLink": "Auto-play, same stream as last time",
+      "source": "Source",
+      "downloaded": "Downloaded",
+      "name": "Name",
+      "file": "File",
+      "container": "Container",
+      "fileSize": "Size",
+      "bitrate": "Bitrate",
+      "codec": "Codec",
+      "pixelFormat": "Pixel format",
+      "bitDepth": "${bits}-bit",
+      "color": "Color",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nits",
+      "mastering": "Mastering display",
+      "nitsRange": "${min}–${max} nits",
+      "droppedFrames": "Dropped frames",
+      "droppedFramesValue": "${output} (decoder ${decoder})",
+      "delayedFrames": "Delayed frames",
+      "output": "Output",
+      "hertz": "${value} Hz",
+      "channels": "Channels",
+      "sampleRate": "Sample rate",
+      "track": "Track",
+      "secondTrack": "Second track",
+      "passthrough": "Passthrough (${format})",
+      "spatialAudio": "Spatial Audio",
+      "rendering": "Rendering",
+      "surround": "Surround",
+      "subtitles": "Subtitles",
+      "format": "Format",
+      "embedded": "Embedded",
+      "delay": "Delay",
+      "network": "Network",
+      "downloadSpeed": "Download speed",
+      "buffering": "Buffering",
+      "percent": "${value}%",
+      "megabitsPerSecond": "${value} Mb/s",
+      "kilobitsPerSecond": "${value} kb/s",
+      "perSecond": "${size}/s"
+    },
+    "skip": {
+      "intro": "Skip intro",
+      "recap": "Skip recap",
+      "credits": "Skip credits"
+    },
+    "prompt": {
+      "playNext": "Play the next episode: ${episode}",
+      "countdown": {
+        "one": "Automatically in ${n} second",
+        "other": "Automatically in ${n} seconds"
+      }
+    },
+    "options": {
+      "title": "Options",
+      "videoFit": "Aspect ratio",
+      "fit": {
+        "contain": "Letterbox",
+        "cover": "Fill screen",
+        "fill": "Stretch"
+      },
+      "zoom": "Zoom",
+      "percent": "${percent}%",
+      "resetZoom": "Reset",
+      "shaders": "Shaders",
+      "shader": {
+        "nvscalerDetail": "NVIDIA image scaling for sharper video",
+        "neutral": "Neutral",
+        "denoise": "Denoise",
+        "denoiseSharpen": "Denoise + Sharpen",
+        "fast": "Fast",
+        "highQuality": "High quality",
+        "modeDetail": "${quality} · Mode ${mode}",
+        "customDetail": "Custom GLSL shader",
+        "importShader": "Import shader",
+        "imported": "Shader imported",
+        "importFailed": "Couldn't import the shader",
+        "deleteLabel": "Delete ${name}",
+        "deleteTitle": "Delete ${name}?",
+        "delete": "Delete",
+        "cancel": "Cancel"
+      },
+      "sleepTimer": "Sleep timer",
+      "sleepEndOfVideo": "End of current video",
+      "sleepMinutes": {
+        "one": "${n} minute",
+        "other": "${n} minutes"
+      },
+      "sleepLeft": "${time} left",
+      "autoPlayNext": "Auto-play next episode",
+      "audioOutput": "Audio output",
+      "systemOutput": "System default",
+      "audioNormalization": "Normalize loudness",
+      "audioChannels": "Audio channels",
+      "channels": {
+        "original": "Original",
+        "originalDetail": "Play every channel in the track",
+        "surround51": "Up to 5.1",
+        "surround51Detail": "Mix 7.1 down to 5.1 for TVs and receivers that only take 5.1",
+        "stereo": "Stereo",
+        "stereoDetail": "Mix down to two channels for stereo speakers or headphones"
+      },
+      "on": "On",
+      "off": "Off"
+    },
+    "stillWatching": {
+      "title": "Still watching?",
+      "countdown": {
+        "one": "Pausing in ${n} second",
+        "other": "Pausing in ${n} seconds"
+      },
+      "keepWatching": "Continue",
+      "pause": "Pause"
+    },
+    "error": {
+      "title": "Can't play this stream",
+      "resolveTimeout": "The stream took too long to start.",
+      "expired": "The stream link has expired.",
+      "notFound": "The stream is no longer available.",
+      "http": "The server responded with HTTP ${status}.",
+      "cantOpen": "The stream couldn't be opened.",
+      "unsupportedFormat": "The stream isn't in a format the player can read.",
+      "cantDecode": "The player couldn't play this stream's video or audio.",
+      "engineFailed": "The player stopped with an error.",
+      "retry": "Retry",
+      "nextStream": "Try next stream",
+      "close": "Close",
+      "alternatives": {
+        "one": "${n} more stream available",
+        "other": "${n} more streams available"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "This isn't the episode",
+      "titleMovie": "This isn't the movie",
+      "titleVideo": "This isn't the video",
+      "sent": "The addon sent an error video instead of the stream.",
+      "byUrl": "Its link is one of an addon's error videos.",
+      "bySize": "The file is ${served}, where the stream said ${size}.",
+      "byDuration": "It runs ${length}, where this video ran ${known} when you last played it.",
+      "kept": "Your progress is kept.",
+      "chooseStream": "Choose another stream",
+      "watch": "Watch the message"
+    },
+    "osd": {
+      "volume": "Volume ${level}",
+      "brightness": "Brightness ${level}",
+      "speed": "Speed ${speed}",
+      "subtitleDelay": "Subtitle delay ${delay}",
+      "audioDelay": "Audio delay ${delay}",
+      "audioTrack": "Audio: ${track}",
+      "subtitleTrack": "Subtitles: ${track}",
+      "subtitlesOff": "Subtitles off",
+      "chapter": "Chapter: ${title}",
+      "chapterNumbered": "Chapter ${number}",
+      "zoom": "Zoom ${percent}",
+      "shader": "Shaders: ${name}",
+      "shadersOff": "Shaders off"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": "."
+    }
+  },
+  "streams": {
+    "resolving": "Opening stream…",
+    "resolveFailed": {
+      "http": "The stream's server answered with HTTP ${status}",
+      "timeout": "The stream's server took too long to answer",
+      "network": "Couldn't connect to the stream's server",
+      "unsupportedUrl": "This stream's link can't be opened",
+      "tooManyRedirects": "This stream's link redirects too many times",
+      "unexpected": "This app ran into an error while opening this stream"
+    },
+    "badge": {
+      "instant": "Instant",
+      "notInstant": "Not instant"
+    },
+    "lastUsed": "Last played",
+    "external": "Opens outside the app",
+    "unplayable": {
+      "one": "${n} stream this app can't play",
+      "other": "${n} streams this app can't play"
+    },
+    "empty": "No streams found",
+    "all": "All",
+    "refresh": "Refresh",
+    "retryNamed": "Retry ${name}",
+    "filters": {
+      "hidden": {
+        "one": "${n} stream hidden by your filters",
+        "other": "${n} streams hidden by your filters"
+      },
+      "showing": {
+        "one": "Showing ${n} stream your filters hide",
+        "other": "Showing ${n} streams your filters hide"
+      },
+      "show": "Show",
+      "hide": "Hide",
+      "rowNote": "Hidden by your filters"
+    },
+    "sort": {
+      "title": "Sort",
+      "addonOrder": "Addon order",
+      "resolution": "Resolution",
+      "source": "Source quality",
+      "sizeLargest": "Largest size first",
+      "sizeSmallest": "Smallest size first",
+      "cached": "Instant first"
+    },
+    "autoPlay": {
+      "noMatch": "Auto-play found no stream that passes your filters.",
+      "failed": "The stream auto-play picked didn't start. Choose another one."
+    },
+    "download": {
+      "notice": "Choose the stream to download.",
+      "action": "Download",
+      "actionNamed": "Download ${name}",
+      "queued": "Added to Downloads",
+      "failed": "Couldn't add the download."
+    },
+    "suggested": {
+      "label": "Suggested",
+      "reason": "Like your recent picks: ${features}",
+      "audio": "${language} audio",
+      "subtitles": "${language} subtitles",
+      "smaller": "smaller files",
+      "larger": "larger files"
+    }
+  },
+  "detail": {
+    "loadFailed": "Couldn't load the details.",
+    "notFound": "No addon has details for this title.",
+    "noAddons": "None of the installed addons has details for this title.",
+    "noAnimeAddon": "None of the installed addons has details for this anime. Install an anime addon to open it.",
+    "animeListsUnavailable": "The anime lists didn't load, so this anime can't be matched to a title. Check your connection and try again.",
+    "findingAnime": "Looking this anime up in the anime lists…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} h ${minutes} min",
+      "hours": "${hours} h",
+      "minutes": "${minutes} min"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes critics",
+        "rottenTomatoesAudience": "Rotten Tomatoes audience",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} ${value} percent"
+    },
+    "userRating": {
+      "rateLabel": "Rate this title",
+      "label": "Your rating: ${score}",
+      "range": "${low}–${high}",
+      "title": "Your rating",
+      "hint": "Your score goes to each service below.",
+      "clear": "Remove rating",
+      "checking": "Checking…",
+      "notRated": "Not rated",
+      "unreadable": "Couldn't check",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "removed": "Removed",
+      "queued": "Not sent yet, will retry",
+      "failed": "Not saved"
+    },
+    "links": {
+      "genres": "Genres",
+      "cast": "Cast",
+      "directors": "Directors",
+      "writers": "Writers",
+      "website": "Website"
+    },
+    "facts": {
+      "title": "Information",
+      "released": "Released",
+      "runtime": "Runtime",
+      "country": "Country",
+      "language": "Language",
+      "awards": "Awards",
+      "source": "Details from",
+      "failed": "Couldn't load from"
+    },
+    "trailer": "Trailer",
+    "trailerNumbered": "Trailer ${number}",
+    "trailers": "Trailers",
+    "share": "Share",
+    "season": "Season ${number}",
+    "specials": "Specials",
+    "episodeNumbered": "Episode ${number}",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "With ${names}",
+    "castAndCrew": "Cast & crew",
+    "airs": "Airs ${date}",
+    "date": "${month} ${day}, ${year}",
+    "month": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
+    },
+    "play": "Play",
+    "playEpisode": "Play ${episode}",
+    "resume": "Resume ${time}",
+    "resumeEpisode": "Resume ${episode} · ${time}",
+    "addToLibrary": "Add to library",
+    "removeFromLibrary": "Remove from library",
+    "markWatched": "Mark as watched",
+    "markUnwatched": "Mark as unwatched",
+    "markAllWatched": "Mark all episodes as watched",
+    "markAllUnwatched": "Mark all episodes as unwatched",
+    "markSeasonWatched": "Mark season as watched",
+    "markSeasonUnwatched": "Mark season as unwatched",
+    "watched": "Watched",
+    "overviewHidden": "Description hidden",
+    "moreActions": "More actions",
+    "moreActionsNamed": "More actions for ${name}",
+    "showMore": "More",
+    "showLess": "Less",
+    "findingStream": "Finding a stream…",
+    "chooseStream": "Choose a stream",
+    "download": {
+      "download": "Download",
+      "queued": "Queued",
+      "waitingForWifi": "Waiting for Wi-Fi",
+      "downloading": "Downloading ${percent}%",
+      "downloadingStarted": "Downloading…",
+      "paused": "Paused",
+      "failed": "Download failed",
+      "partial": "${done} of ${total} downloaded",
+      "downloaded": "Downloaded",
+      "menuTitle": "Download",
+      "allSeasons": "All seasons",
+      "pick": {
+        "all": "All episodes",
+        "unwatched": "Unwatched episodes",
+        "next5": "Next 5 unwatched",
+        "next10": "Next 10 unwatched"
+      },
+      "keepSynced": "Keep synced",
+      "keepSyncedCount": {
+        "one": "Keep ${n} unwatched episode",
+        "other": "Keep ${n} unwatched episodes"
+      },
+      "keepSyncedAll": "Keep every unwatched episode",
+      "manage": "Manage downloads",
+      "pauseAll": "Pause downloads",
+      "resumeAll": "Resume downloads",
+      "deleteSeason": "Delete this season's downloads",
+      "deleteAll": "Delete all downloads",
+      "queuedEpisodes": {
+        "one": "${n} episode added to Downloads",
+        "other": "${n} episodes added to Downloads"
+      },
+      "nothingQueued": "Every episode is already downloaded or queued.",
+      "failedToQueue": "Couldn't add the downloads.",
+      "episode": {
+        "download": "Download episode",
+        "pause": "Pause download",
+        "resume": "Resume download",
+        "retry": "Retry download",
+        "pickStream": "Pick a stream",
+        "cancel": "Cancel download",
+        "delete": "Delete download",
+        "queued": "Queued",
+        "downloading": "${percent}%",
+        "paused": "Paused",
+        "failed": "Download failed",
+        "downloaded": "Downloaded"
+      }
+    },
+    "related": {
+      "title": "More like this",
+      "noneFound": "No similar titles found."
+    }
+  },
+  "library": {
+    "title": "Library",
+    "continueWatching": "Continue Watching",
+    "sort": {
+      "lastWatched": "Recently watched",
+      "added": "Recently added",
+      "name": "Title A–Z",
+      "nameReverse": "Title Z–A",
+      "timesWatched": "Most watched",
+      "watched": "Watched first",
+      "notWatched": "Unwatched first"
+    },
+    "sortBy": "Sort by",
+    "sortByNamed": "Sort by: ${name}",
+    "empty": "Nothing here yet. Add titles to the library from their details.",
+    "emptyContinueWatching": "Nothing to continue. Titles appear here once you start watching them.",
+    "emptyType": "Nothing of this type here.",
+    "watched": "Watched"
+  },
+  "mediaMenu": {
+    "markWatched": "Mark as watched",
+    "markUnwatched": "Mark as unwatched",
+    "removeFromContinueWatching": "Remove from Continue Watching",
+    "details": "Go to details",
+    "addToLibrary": "Add to library",
+    "removeFromLibrary": "Remove from library",
+    "playFromStart": "Play from the beginning",
+    "markSeasonWatched": "Mark season as watched",
+    "markSeasonUnwatched": "Mark season as unwatched",
+    "chooseStream": "Choose a stream",
+    "download": "Download",
+    "pauseDownload": "Pause download",
+    "resumeDownload": "Resume download",
+    "retryDownload": "Retry download",
+    "cancelDownload": "Cancel download",
+    "deleteDownload": "Delete download",
+    "pickStream": "Pick a stream",
+    "trailer": "Trailer",
+    "markFailed": "Couldn't mark ${title}: its details didn't load. Check the connection and try again."
+  },
+  "session": {
+    "episode": "S${season}E${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "The installed addons couldn't be read. Restart Tortuga to try again.",
+    "error": {
+      "invalidTransportUrl": "This isn't an addon link. Addon links end in /manifest.json.",
+      "timeout": "The addon took too long to respond.",
+      "network": "Couldn't reach the addon.",
+      "http": "The addon returned an error (HTTP ${status}).",
+      "invalidResponse": "The addon sent a response this app can't read.",
+      "unexpectedResponse": "The addon sent a different kind of response than requested.",
+      "emptyContent": "Nothing found.",
+      "invalidManifest": "The addon's manifest is invalid.",
+      "configurationRequired": "This addon has to be configured before it can be installed.",
+      "alreadyInstalled": "This addon is already installed.",
+      "notInstalled": "This addon isn't installed.",
+      "protectedAddon": "This addon is built in and can't be removed or turned off."
+    },
+    "title": "Addons",
+    "allTypes": "All",
+    "empty": "No addons installed.",
+    "emptyFiltered": "No installed addon has this type.",
+    "builtIn": "Built in",
+    "builtInExplanation": "This addon is built in and can't be removed or turned off.",
+    "cancel": "Cancel",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Move up",
+    "moveUpNamed": "Move ${name} up",
+    "moveDown": "Move down",
+    "moveDownNamed": "Move ${name} down",
+    "dragToReorderNamed": "Reorder ${name}",
+    "enabledNamed": "Use ${name}",
+    "close": "Close",
+    "version": "Version ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Catalogs",
+      "meta": "Details",
+      "stream": "Streams",
+      "subtitles": "Subtitles",
+      "addonCatalog": "Addon catalogs",
+      "player": "Playback activity",
+      "library": "Library activity"
+    },
+    "remove": {
+      "title": "Remove ${name}?",
+      "message": "It's removed from this profile on every device, along with the settings it was configured with.",
+      "confirm": "Remove"
+    },
+    "details": {
+      "types": "Types",
+      "resources": "Provides",
+      "catalogs": "Catalogs",
+      "contact": "Contact",
+      "configure": "Configure",
+      "remove": "Remove",
+      "enabled": "Use this addon",
+      "enabledOff": "Off: Tortuga asks it for nothing and doesn't show its catalogs.",
+      "shareTitle": "Addon link",
+      "shareWarning": "This link can contain the keys of the accounts this addon was configured with. Share it only with people you trust.",
+      "revealLink": "Show link",
+      "hideLink": "Hide link",
+      "copyLink": "Copy link",
+      "linkCopied": "Link copied."
+    },
+    "watchActivity": {
+      "title": "Send watch activity",
+      "explanation": "This addon receives your watch activity: what you play, pause and stop, what you add to or remove from your library, and what you mark as watched.",
+      "agree": "I agree that this addon receives my watch activity",
+      "notAllowed": "Gets no watch activity until you allow it"
+    },
+    "install": {
+      "action": "Install addon",
+      "title": "Install an addon",
+      "linkHint": "Addon link, ending in /manifest.json",
+      "submit": "Continue",
+      "confirm": "Install",
+      "update": "Update",
+      "configure": "Configure",
+      "configureFirst": "This addon has to be configured before it can be installed. Configure it, then install it from its page.",
+      "alreadyInstalled": "This addon is already installed.",
+      "updateDetails": "Installed. This updates its details.",
+      "updateVersion": "Installed. This updates it to version ${version}.",
+      "adult": "This addon is marked as adult content.",
+      "installed": "${name} is installed.",
+      "updated": "${name} is updated.",
+      "done": "Done"
+    },
+    "browse": {
+      "title": "Browse",
+      "installed": "Installed",
+      "installedNote": "Installed"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "automatic": "Automatic",
+    "listSeparator": ", ",
+    "cancel": "Cancel",
+    "close": "Close",
+    "increaseNamed": "Increase ${name}",
+    "decreaseNamed": "Decrease ${name}",
+    "value": {
+      "percent": "${value}%",
+      "seconds": {
+        "one": "${n} second",
+        "other": "${n} seconds"
+      }
+    },
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": {
+        "one": "${n} minute ago",
+        "other": "${n} minutes ago"
+      },
+      "hoursAgo": {
+        "one": "${n} hour ago",
+        "other": "${n} hours ago"
+      },
+      "daysAgo": {
+        "one": "${n} day ago",
+        "other": "${n} days ago"
+      },
+      "monthsAgo": {
+        "one": "${n} month ago",
+        "other": "${n} months ago"
+      },
+      "yearsAgo": {
+        "one": "${n} year ago",
+        "other": "${n} years ago"
+      }
+    },
+    "sections": {
+      "playback": "Playback",
+      "playbackSummary": "Languages, watched threshold, next episode and skipping",
+      "device": "This device",
+      "deviceSummary": "Decoding, HDR, frame rate, audio, cache and crash reports",
+      "subtitles": "Subtitles",
+      "subtitlesSummary": "Size, color, outline and position on this device",
+      "addons": "Addons",
+      "addonsSummary": {
+        "one": "${n} addon installed",
+        "other": "${n} addons installed"
+      },
+      "addonsSummaryLoading": "Installed addons",
+      "home": "Home",
+      "homeSummary": "Which rows Home shows, and their order",
+      "appearance": "Appearance",
+      "appearanceSummary": "Language, posters and watched titles",
+      "trackers": "Trackers",
+      "trackersSummary": "Scrobbling, watch history and lists",
+      "trackersConnected": "Connected to ${services}",
+      "account": "Account",
+      "about": "About",
+      "downloads": "Downloads",
+      "downloadsSummary": "Location, Wi-Fi only and storage",
+      "data": "Export and import",
+      "dataSummary": "Your profiles' data in a file, and back"
+    },
+    "profile": {
+      "locked": "Locked with a PIN",
+      "unlocked": "No PIN",
+      "edit": "Edit profile",
+      "manage": "Switch or manage profiles"
+    },
+    "about": {
+      "version": "Version ${version}",
+      "license": "Tortuga is licensed under the GNU General Public License, version 3. You may run, study, share and change it, and anyone who gives you a copy must offer you its source code.",
+      "source": "Source code",
+      "licenseLink": "GNU General Public License v3",
+      "traktCredit": "Tortuga uses Trakt but is not endorsed or certified by Trakt.",
+      "notices": "Third-party software",
+      "noticeLink": "Project page"
+    },
+    "appearance": {
+      "interfaceLanguage": "App language",
+      "interfaceLanguageHint": "The language of the app's menus and messages",
+      "interfaceLanguageSystem": "System default",
+      "blurUnwatched": "Blur unwatched episodes",
+      "blurUnwatchedHint": "Blur the pictures and hide the descriptions of episodes you haven't started, so they give nothing away",
+      "hideWatched": "Hide watched titles",
+      "hideWatchedHint": "Leave the movies and series you've finished out of Home's rows and Discover. A series comes back when a new episode is out",
+      "hidePosterCaptions": "Hide titles under posters",
+      "hidePosterCaptionsHint": "Show only the artwork. Continue Watching keeps its episode and time left",
+      "posterTemplate": "Poster URL template",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} and {tvdb_id} stand for each title's IDs, {type} for movie or series",
+      "posterTemplateNone": "Addon posters",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "Not an http or https address, so it's ignored"
+    },
+    "home": {
+      "note": "Choose the rows Home shows and their order. These belong to this profile and sync to your other devices.",
+      "continueWatchingHint": "Always the first row",
+      "rowsHeader": "Rows",
+      "empty": "No installed addon has a catalog for Home.",
+      "reset": "Reset to default",
+      "moveUp": "Move up",
+      "moveUpNamed": "Move ${name} up",
+      "moveDown": "Move down",
+      "moveDownNamed": "Move ${name} down",
+      "dragToReorder": "Drag to reorder",
+      "dragToReorderNamed": "Reorder ${name}",
+      "newCollection": "New collection",
+      "importCollections": "Import collections",
+      "exportCollections": "Export collections",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteTitle": "Delete “${title}”?",
+      "deleteMessage": "The collection goes from this profile on all your devices."
+    },
+    "playback": {
+      "title": "Playback",
+      "note": "These settings belong to this profile and sync to your other devices.",
+      "languagesHeader": "Languages",
+      "audioLanguages": "Audio languages",
+      "audioLanguagesHint": "Which audio track plays, in order of preference",
+      "audioLanguagesNone": "The video's default",
+      "audioLanguagesExplanation": "A video plays in the first of these languages it has. With none chosen, it plays its default audio track.",
+      "subtitleLanguages": "Subtitle languages",
+      "subtitleLanguagesHint": "Which subtitles turn on, in order of preference",
+      "subtitleLanguagesNone": "Off",
+      "subtitleLanguagesExplanation": "Subtitles in the first of these languages a video has turn on. With none chosen, subtitles stay off unless the video forces them.",
+      "secondSubtitleLanguage": "Second subtitle language",
+      "secondSubtitleLanguageHint": "Shown at the top of the picture with the first",
+      "secondSubtitleLanguageExplanation": "Subtitles in this language show at the top of the picture, with the first subtitles. With none chosen, no second subtitle shows unless one is picked in the player.",
+      "secondSubtitleLanguageNone": "Off",
+      "showSubtitles": "Show subtitles",
+      "showSubtitlesHint": "Always: subtitles in the spoken language too, SDH first",
+      "showSubtitlesFollowAudio": "Follow the audio",
+      "showSubtitlesAlways": "Always",
+      "chosenHeader": "Your languages",
+      "availableHeader": "Add a language",
+      "searchLanguages": "Search languages",
+      "noLanguageMatches": "No language matches.",
+      "playbackHeader": "Playback",
+      "watchedThreshold": "Counts as watched after",
+      "watchedThresholdHint": "How far into a video it counts as watched and Continue Watching moves to the next episode",
+      "bingeWatching": "Play the next episode",
+      "bingeWatchingHint": "When an episode ends, start the next one, from the same source where possible",
+      "upNextCountdown": "Next episode countdown",
+      "upNextCountdownHint": "How long the next episode prompt waits before starting it",
+      "upNextImmediately": "Start at once",
+      "seekShort": "Short skip",
+      "seekShortHint": "Arrow keys, the remote and the player's skip buttons",
+      "seekLong": "Long skip",
+      "seekLongHint": "Shift with the arrow keys, and long presses",
+      "videoClick": "Clicking the video",
+      "videoClickHint": "A double click still enters and leaves full screen",
+      "videoClickPause": "Pause and play",
+      "videoClickControls": "Show or hide the controls",
+      "moveUp": "Move up",
+      "moveUpNamed": "Move ${name} up",
+      "moveDown": "Move down",
+      "moveDownNamed": "Move ${name} down",
+      "removeLanguage": "Remove",
+      "removeLanguageNamed": "Remove ${name}",
+      "dragToReorderNamed": "Reorder ${name}",
+      "skipping": {
+        "header": "Skipping",
+        "footer": "Intros, recaps and credits are found by the names of a video's chapters, so only videos with named chapters offer to skip them. An automatic skip counts down on the button first, and anything you do on the player stops it.",
+        "intros": "Intros",
+        "introsHint": "Opening songs and title sequences",
+        "recaps": "Recaps",
+        "recapsHint": "\"Previously on…\" at the start of an episode",
+        "credits": "Credits",
+        "creditsHint": "End credits and next-episode previews; the next episode's prompt starts with them",
+        "off": "Off",
+        "button": "Show button",
+        "auto": "Skip automatically"
+      },
+      "streams": {
+        "header": "Streams",
+        "footer": "The filters apply to every stream list, which says how many streams they hide and can show them anyway.",
+        "autoPlay": "Play automatically",
+        "autoPlayHint": "Skips the stream list for Play, Resume, an episode and the next episode; with a sort, it waits until every addon has answered",
+        "suggestions": "Suggest a stream",
+        "suggestionsHint": "Learns which streams you pick on this profile and marks one in the list",
+        "autoPlayOff": "Off",
+        "autoPlayFirstMatch": "First stream that passes the filters",
+        "autoPlayReuseLastLink": "Same stream as last time, else the first that passes",
+        "qualities": "Qualities",
+        "qualitiesHint": "Which resolutions the stream lists show",
+        "qualitiesAll": "All",
+        "qualitiesNone": "None",
+        "qualitiesAllBut": "All but ${hidden}",
+        "qualitySd": "SD",
+        "qualityUnknown": "Unknown",
+        "ranges": "Dynamic range",
+        "rangesHint": "Which of SDR, HDR and Dolby Vision the stream lists show",
+        "codecs": "Video codecs",
+        "codecsHint": "Which video codecs the stream lists show",
+        "minSize": "Minimum size",
+        "minSizeHint": "Hides streams of smaller files; one that names no size stays",
+        "maxSize": "Maximum size",
+        "maxSizeHint": "Hides streams of larger files; one that names no size stays",
+        "sizeAny": "Any size",
+        "includePattern": "Only streams matching",
+        "includePatternHint": "A regular expression, matched against each stream's name, description and file name, ignoring case",
+        "includePatternNone": "Any stream",
+        "includePlaceholder": "e.g. 1080p|2160p",
+        "excludePattern": "Hide streams matching",
+        "excludePatternHint": "Wins over the pattern above",
+        "excludePatternNone": "None",
+        "excludePlaceholder": "e.g. HDTV|XviD",
+        "invalidPattern": "Not a valid regular expression, so it's ignored",
+        "save": "Save",
+        "clear": "Clear"
+      }
+    },
+    "device": {
+      "title": "This device",
+      "note": "These settings apply to this device only and don't sync.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Hardware decoding",
+      "hardwareDecodingHint": "Decode video with the graphics hardware. Turn it off if videos show glitches.",
+      "hdr": "HDR",
+      "hdrHint": "Play HDR video in HDR when the display supports it. Off converts it to SDR.",
+      "matchFrameRate": "Force frame rate switching",
+      "matchFrameRateHint": "Switch the display to the video's frame rate even where the system wouldn't. The screen goes black for a moment at each switch.",
+      "audioHeader": "Audio",
+      "audioPassthrough": "Audio passthrough",
+      "audioPassthroughHint": "Send surround sound (Dolby Digital, DTS, TrueHD) to the receiver undecoded",
+      "audioPassthroughHintApple": "Send Dolby Digital and Dolby Digital Plus, Atmos included, to the system's Dolby decoder; DTS and TrueHD play as multichannel PCM. Turn off if there's no sound.",
+      "audioPassthroughHintAppleSpatial": "Send Dolby Digital and Dolby Digital Plus, Atmos included, to the system's Dolby decoder, and play TrueHD Atmos and DTS:X as spatial audio; other DTS and TrueHD tracks play as multichannel PCM. Turn off if there's no sound.",
+      "audioPassthroughNormalized": "Off while loudness normalization is on",
+      "gesturesHeader": "Gestures",
+      "swipeGestures": "Swipe for brightness and volume",
+      "swipeGesturesHint": "Swipe up or down on the left half of the video for brightness, on the right half for volume.",
+      "streamingHeader": "Streaming",
+      "cacheSize": "Read-ahead cache",
+      "cacheSizeHint": "How much of a stream is loaded ahead of playback",
+      "discordHeader": "Discord",
+      "discordPresence": "Show what you're watching",
+      "discordPresenceHint": "Your Discord friends see the title and episode while a video plays. Discord must be running on this computer.",
+      "privacyHeader": "Privacy",
+      "crashReports": "Send crash reports",
+      "crashReportsHint": "Send what went wrong when the app crashes or part of it fails, never your addon links or accounts"
+    },
+    "subtitles": {
+      "title": "Subtitles",
+      "note": "These settings apply to this device only and don't sync. They style plain-text subtitles, such as SRT; styled subtitles keep their own look unless you apply the style to them too.",
+      "previewText": "This is how subtitles look",
+      "textHeader": "Text",
+      "size": "Size",
+      "textColor": "Color",
+      "bold": "Bold",
+      "outlineHeader": "Outline and background",
+      "outline": "Outline",
+      "outlineColor": "Outline color",
+      "background": "Background",
+      "backgroundHint": "A box behind the text, and how opaque it is",
+      "backgroundOff": "Off",
+      "positionHeader": "Position",
+      "position": "Height",
+      "positionHint": "How far above the bottom of the picture subtitles sit",
+      "positionBottom": "Bottom",
+      "styledHeader": "Styled subtitles",
+      "styledOverride": "Apply to styled subtitles",
+      "styledOverrideHint": "ASS and SSA subtitles take this style instead of their own. Signs and effects can look wrong.",
+      "outlines": {
+        "none": "None",
+        "thin": "Thin",
+        "thick": "Thick"
+      },
+      "colors": {
+        "white": "White",
+        "yellow": "Yellow",
+        "green": "Green",
+        "cyan": "Cyan",
+        "gray": "Gray",
+        "black": "Black"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "syncLabel": "Sync",
+      "syncNow": "Sync now",
+      "lastSynced": "Last synced ${time}",
+      "serverLabel": "Sync server",
+      "identitiesHeader": "Sign-ins",
+      "linkIdentity": "Add a sign-in",
+      "devicesHeader": "Devices",
+      "thisDevice": "This device",
+      "activeNow": "Active now",
+      "lastActive": "Active ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} is signed out.",
+      "identityRemoved": "The ${provider} sign-in is removed.",
+      "cancel": "Cancel",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Single sign-on"
+      },
+      "link": {
+        "start": "Link a new device",
+        "title": "Link a device",
+        "instructions": "On the new device, choose to link it from another device. Then enter the code it shows, or scan its QR code.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Continue",
+        "question": "Link “${name}”?",
+        "consequence": "It will be signed in to this account, with its profiles, addons and library.",
+        "approve": "Link",
+        "reject": "Don't link",
+        "approved": "${name} is linked. It finishes setting up on its own.",
+        "rejected": "${name} wasn't linked.",
+        "expired": "The code expired. Start again on the new device.",
+        "done": "Done"
+      },
+      "signOut": {
+        "action": "Sign out",
+        "title": "Sign out?",
+        "message": "Profiles, addons, library and downloads are removed from this device. All but the downloads stay in the account: sign in again to get them back.",
+        "confirm": "Sign out"
+      },
+      "delete": {
+        "action": "Delete account",
+        "explanation": "Deletes the account and all of its synced data from the server.",
+        "title": "Delete account?",
+        "message": "The account and its profiles, addons, library and history are deleted from the server for good, and every device is signed out. This can't be undone.",
+        "confirm": "Delete account"
+      },
+      "revoke": {
+        "title": "Sign out ${name}?",
+        "message": "${name} is signed out and leaves the account's devices. It can be linked again later.",
+        "messageThisDevice": "This is the device you're using. It's signed out, and its profiles, addons, library and downloads are removed from it. All but the downloads stay in the account.",
+        "confirm": "Sign out device",
+        "confirmNamed": "Sign out device: ${name}"
+      },
+      "unsynced": {
+        "title": "Delete changes that haven't synced?",
+        "message": {
+          "one": "${n} change made on this device, such as watch progress or a library edit, hasn't reached the account. Signing out now deletes it for good. Cancel keeps it here and leaves this device signed in.",
+          "other": "${n} changes made on this device, such as watch progress or library edits, haven't reached the account. Signing out now deletes them for good. Cancel keeps them here and leaves this device signed in."
+        },
+        "confirm": "Sign out and delete"
+      },
+      "unlink": {
+        "title": "Remove the ${provider} sign-in?",
+        "message": "You can no longer sign in to this account with ${provider}.",
+        "confirm": "Remove",
+        "action": "Remove ${name} sign-in"
+      }
+    },
+    "trackers": {
+      "title": "Trackers",
+      "note": "Connected services get what this profile watches: watch progress, and titles marked watched. Connecting or disconnecting a service applies to this profile on all your devices; the switches below apply to this device only.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Connected",
+      "connectedAs": "Connected as ${user}",
+      "notConnected": "Not connected",
+      "unavailable": "Not available in this version of the app",
+      "connect": "Connect",
+      "connectNamed": "Connect ${name}",
+      "disconnect": "Disconnect",
+      "disconnectNamed": "Disconnect ${name}",
+      "scrobble": "Send what you watch",
+      "scrobbleHint": "Watch progress and watched titles go to ${service}",
+      "filtersHeader": "What to send",
+      "movies": "Movies",
+      "series": "Series",
+      "anime": "Anime",
+      "queued": {
+        "one": "${n} change waiting to be sent",
+        "other": "${n} changes waiting to be sent"
+      },
+      "notSent": {
+        "one": "${n} change couldn’t be sent (last: ${reason})",
+        "other": "${n} changes couldn’t be sent (last: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} answered error ${status}",
+        "refused": "${service} refused it",
+        "unreadable": "it couldn’t be read"
+      },
+      "connectTitle": "Connect ${service}",
+      "starting": "Contacting ${service}…",
+      "waiting": "Waiting for you to allow Tortuga on ${service}…",
+      "linkInstructions": "Sign in to ${service} in your browser and allow Tortuga.",
+      "linkScan": "Or scan the QR code with your phone and sign in there.",
+      "openInBrowser": "Open in browser",
+      "expired": "The code expired before it was used.",
+      "declined": "${service} didn’t allow the connection.",
+      "unreachable": "Couldn’t reach ${service}. Check the connection and try again.",
+      "serverUnreachable": "Couldn’t reach your Tortuga server. Check the connection and try again.",
+      "needsAccount": "Connecting ${service} needs a Tortuga account. Sign in to your account first.",
+      "busy": "${service} is busy. Try again in a minute.",
+      "refused": "${service} refused the sign-in.",
+      "failed": "Connecting ${service} didn’t work.",
+      "retry": "Try again",
+      "connectedNotice": "Connected to ${service} as ${user}.",
+      "connectedNoticeNoName": "Connected to ${service}.",
+      "disconnectTitle": "Disconnect ${service}?",
+      "disconnectMessage": "This profile stops sending what it watches to ${service} on all your devices, and changes waiting to be sent are dropped. Your ${service} account keeps everything it already has.",
+      "disconnectedNotice": "Disconnected from ${service}.",
+      "actionFailed": "That didn’t work. Try again."
+    },
+    "downloads": {
+      "title": "Downloads",
+      "note": "These settings apply to this device only and don't sync.",
+      "location": {
+        "title": "Location",
+        "hint": "Where new downloads are saved. Downloads already saved stay where they are.",
+        "deviceStorage": "Internal storage",
+        "external": "External storage",
+        "change": "Change folder"
+      },
+      "transferHeader": "Downloading",
+      "wifiOnly": "Download on Wi-Fi only",
+      "wifiOnlyHint": "Downloads wait while the network is metered, such as mobile data",
+      "atOnce": "Downloads at once",
+      "atOnceHint": "How many downloads transfer at the same time",
+      "autoRemoveWatched": "Delete watched downloads",
+      "autoRemoveWatchedHint": "A download is deleted once it's watched, never while it plays",
+      "subtitleLanguages": "Subtitles to save",
+      "subtitleLanguagesHint": "Subtitles in these languages are saved with each download",
+      "subtitleLanguagesProfile": "Your subtitle languages: ${languages}",
+      "subtitleLanguagesProfileNone": "Your subtitle languages: none",
+      "subtitleLanguagesExplanation": "Subtitles in these languages are saved with each download, so they show without a connection.",
+      "useProfileLanguages": "Use my subtitle languages",
+      "storageHeader": "Storage",
+      "deleteAll": "Delete all downloads",
+      "deleteAllTitle": "Delete all downloads?",
+      "deleteAllText": "This deletes every download on this device, for every profile.",
+      "deleteAllConfirm": "Delete all"
+    },
+    "data": {
+      "exportHeader": "Export",
+      "categories": {
+        "addons": "Addons",
+        "addonsHint": "Installed addons in their order, with their links",
+        "library": "Library",
+        "libraryHint": "The titles you saved",
+        "progress": "Watch progress",
+        "progressHint": "Where you stopped, and what you watched",
+        "settings": "Profile settings",
+        "settingsHint": "Playback, streams, Home rows and the other settings that sync",
+        "streams": "Stream history",
+        "streamsHint": "The stream last played for each video"
+      },
+      "profilesHeader": "Profiles",
+      "privateNote": "The file holds your addon links and stream history, which can include API keys. Keep it private: anyone with the file can use them.",
+      "exportNote": "PINs, tracker accounts, downloads and this device's settings are never in the file.",
+      "exportAction": "Export to a file",
+      "saved": "Saved ${name}.",
+      "saveFailed": "The file couldn't be saved.",
+      "exportFailed": "The export failed.",
+      "importHeader": "Import",
+      "importNote": "Opens a file exported from Tortuga. Newer data wins item by item, and nothing on this device is deleted.",
+      "importAction": "Import from a file",
+      "reviewTitle": "Import",
+      "source": "Exported on ${date} by Tortuga ${version}",
+      "sourceUndated": "Exported by Tortuga ${version}",
+      "dataHeader": "Data",
+      "counts": {
+        "addons": {
+          "one": "${n} addon",
+          "other": "${n} addons"
+        },
+        "titles": {
+          "one": "${n} title",
+          "other": "${n} titles"
+        },
+        "progress": {
+          "one": "progress on ${n} title",
+          "other": "progress on ${n} titles"
+        },
+        "settings": {
+          "one": "${n} setting",
+          "other": "${n} settings"
+        },
+        "streams": {
+          "one": "${n} stream",
+          "other": "${n} streams"
+        },
+        "profiles": {
+          "one": "${n} profile",
+          "other": "${n} profiles"
+        }
+      },
+      "into": "Into",
+      "intoSame": "Into ${name} on this account",
+      "newProfile": "A new profile",
+      "importConfirm": "Import",
+      "imported": "Import finished: ${changes}.",
+      "nothingNew": "Nothing new to import: everything in the file was already here.",
+      "notTortuga": "This file isn't a Tortuga export. Nothing was imported.",
+      "newer": "This file is from a newer version of Tortuga. Update Tortuga, then import it again.",
+      "damaged": "This file is damaged or incomplete. Nothing was imported.",
+      "clockAhead": "This file's times are far ahead of this device's clock. Check the date and time on both devices, then import it again. Nothing was imported.",
+      "importFailed": "The import failed.",
+      "unreadable": "The file couldn't be opened. Nothing was imported."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Up to date",
+      "syncing": "Syncing…",
+      "offline": "Offline. Changes sync when the connection is back.",
+      "signedOut": "Signed out",
+      "failed": {
+        "server": "The sync server had a problem. Trying again soon.",
+        "rateLimited": "The sync server asked to slow down. Trying again soon.",
+        "quotaExceeded": "The account's storage is full, so changes aren't syncing.",
+        "tooLarge": "Some changes are too large to sync.",
+        "addonsTooLarge": "A profile's addons are too large to sync. Remove addons it doesn't use.",
+        "clockWrong": "Some changes can't sync. Check the date and time on your devices.",
+        "unknown": "Couldn't sync. Trying again soon."
+      }
+    },
+    "error": {
+      "network": "Couldn't reach the sync server. Check the connection and try again.",
+      "server": "The sync server had a problem. Try again later.",
+      "rateLimited": "Too many attempts. Wait a moment and try again.",
+      "invalidServerUrl": "This isn't a server address. Enter one like https://sync.example.com.",
+      "insecureServerUrl": "Use https for a server on the internet. Plain http only works for one on your own network.",
+      "notTortugaServer": "No Tortuga sync server answered at this address.",
+      "incompatibleServer": "This server runs an older version of Tortuga sync and can't be used.",
+      "providerNotEnabled": "This server doesn't offer this way of signing in.",
+      "signInRejected": "The sign-in didn't go through. Try again.",
+      "appleCodeRejected": "Apple didn't accept the sign-in. Try again.",
+      "providerUnavailable": "The sign-in service couldn't be reached. Try again later.",
+      "signInCancelled": "Sign-in was cancelled.",
+      "signInExpired": "The sign-in took too long. Start again.",
+      "identityInUse": "This sign-in already belongs to another Tortuga account.",
+      "lastIdentity": "This is the account's only way to sign in, so it can't be removed.",
+      "sessionEnded": "This device was signed out. Sign in again.",
+      "sessionUnreadable": "This device's sign-in couldn't be read from the system's secure storage. Restart Tortuga to try again.",
+      "notSignedIn": "Sign in first.",
+      "notFound": "This no longer exists on the server.",
+      "linkCodeInvalid": "Codes have 8 letters and digits, like ABCD-EFGH.",
+      "linkNotFound": "No device is waiting with this code. Check the code, or start again on the new device.",
+      "linkOtherServer": "The other device uses a different sync server.",
+      "linkFailed": "The link couldn't be completed. Start again.",
+      "tooLarge": "This is too large for the sync server.",
+      "quotaExceeded": "The account's storage is full.",
+      "unsynced": {
+        "one": "${n} change made on this device hasn't synced to its account yet.",
+        "other": "${n} changes made on this device haven't synced to their account yet."
+      },
+      "unexpected": "Something went wrong. Try again."
+    },
+    "deletion": {
+      "done": "The account and its data are deleted.",
+      "appleRevoked": "The account and its data are deleted, and Tortuga no longer uses your Apple ID.",
+      "appleManual": "The account and its data are deleted. To finish, remove Tortuga under Settings → Apple ID → Sign in with Apple.",
+      "githubManual": "You can remove Tortuga from your GitHub account at ${address}."
+    },
+    "switchAccount": {
+      "title": "Delete changes that haven't synced?",
+      "message": {
+        "one": "This is a different account from the one this device was signed in to. ${n} change made here under that account, such as watch progress or a library edit, never reached it. Signing in deletes it for good, with the rest of that account's data on this device, downloads included.",
+        "other": "This is a different account from the one this device was signed in to. ${n} changes made here under that account, such as watch progress or library edits, never reached it. Signing in deletes them for good, with the rest of that account's data on this device, downloads included."
+      },
+      "confirm": "Delete and sign in",
+      "cancel": "Cancel",
+      "kept": "Not signed in. The changes stay on this device until you sign in to the account they were made in."
+    },
+    "browser": {
+      "signedIn": "Signed in. You can close this tab and return to Tortuga.",
+      "failed": "Sign-in didn't finish. Return to Tortuga and try again."
+    },
+    "signIn": {
+      "title": "Sign in to Tortuga",
+      "intro": "A Tortuga account keeps your profiles, addons and library in sync on every device.",
+      "apple": "Sign in with Apple",
+      "google": "Sign in with Google",
+      "github": "Sign in with GitHub",
+      "oidc": "Sign in with ${name}",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Link from another device",
+      "linkDeviceHint": "Signed in on a phone or computer already? Link this device with a code instead.",
+      "server": "Server: ${server}",
+      "useOwnServer": "Use your own server",
+      "useHostedServer": "Use the Tortuga server",
+      "serverField": "Server address",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Continue",
+      "checkingServer": "Checking the server…",
+      "loadingOptions": "Loading sign-in options…",
+      "noOptions": "This server offers no way to sign in on this device. Link it from a signed-in device instead.",
+      "retry": "Try again",
+      "starting": "Starting sign-in…",
+      "native": "Signing in with ${provider}…",
+      "browser": "Continue in the browser. This screen moves on once you're signed in there.",
+      "finishing": "Finishing sign-in…",
+      "cancel": "Cancel",
+      "deviceCode": {
+        "instructions": "On a phone or computer, go to ${url} and enter this code:",
+        "scan": "Or scan the QR code with your phone.",
+        "qrDescription": "QR code to scan with your phone",
+        "expires": "The code expires in ${time}.",
+        "waiting": "Waiting for you to sign in…"
+      }
+    },
+    "link": {
+      "title": "Link this device",
+      "instructions": "On a device that's signed in, open Settings, then Account, then Link a new device. Scan this QR code there or enter the code.",
+      "qrDescription": "QR code to scan on the signed-in device",
+      "starting": "Getting a code…",
+      "expires": "The code expires in ${time}.",
+      "waiting": "Waiting for approval on the other device…",
+      "rejected": "The other device declined the link.",
+      "expired": "The code expired before it was used.",
+      "newCode": "Get a new code"
+    },
+    "identityLink": {
+      "title": "Add a sign-in method",
+      "intro": "Link another way to sign in, so losing one account doesn't lock you out.",
+      "allLinked": "Every sign-in method this device offers is already linked.",
+      "linking": "Linking…"
+    }
+  },
+  "profiles": {
+    "title": "Who's watching?",
+    "manageTitle": "Manage profiles",
+    "manage": "Manage profiles",
+    "done": "Done",
+    "add": "Add profile",
+    "empty": "Create a profile to get started.",
+    "loading": "Loading your profiles…",
+    "current": "Current profile",
+    "switchProfile": "Switch profile",
+    "pin": {
+      "title": "Enter the PIN for ${name}",
+      "wrong": "Wrong PIN. Try again.",
+      "lockedOut": "Too many attempts. Try again in ${time}.",
+      "cancel": "Cancel",
+      "backspace": "Delete the last digit",
+      "entered": "${count} of ${total} digits entered"
+    },
+    "editor": {
+      "newTitle": "New profile",
+      "editTitle": "Edit profile",
+      "name": "Name",
+      "nameRequired": "Enter a name.",
+      "nameTooLong": {
+        "one": "A name can have up to ${n} character.",
+        "other": "A name can have up to ${n} characters."
+      },
+      "avatar": "Avatar",
+      "pinOff": "No PIN",
+      "pinOn": "Locked with a PIN",
+      "setPin": "Set a PIN",
+      "changePin": "Change PIN",
+      "removePin": "Remove PIN",
+      "pinEnter": "Enter a 4-digit PIN",
+      "pinConfirm": "Enter the PIN again",
+      "pinMismatch": "The PINs didn't match. Enter a new one.",
+      "pinNote": "A PIN keeps others out of this profile on your devices. It's a lock, not a password.",
+      "save": "Save",
+      "create": "Create profile",
+      "cancel": "Cancel",
+      "delete": "Delete profile",
+      "deleteConfirm": "Delete ${name}? Its addons, library and history are deleted on every device. This can't be undone.",
+      "deleteAction": "Delete",
+      "saveFailed": "Couldn't save the profile. Try again.",
+      "kids": {
+        "title": "Kids profile",
+        "subtitle": "Shows only titles suggested for ages up to the level you pick. Most suggested ages are estimates, not official ratings.",
+        "needsParent": "Set a PIN on an adult profile first: leaving a kids profile asks for it.",
+        "newOnly": "Only a new profile can be a kids profile.",
+        "capTitle": "Highest suggested age",
+        "capLittle": "Little",
+        "capLittleAges": "Suggested 0+",
+        "capKids": "Kids",
+        "capKidsAges": "Little, plus suggested 6+",
+        "capTeen": "Teen",
+        "capTeenAges": "Kids, plus suggested 12+",
+        "allowUnrated": "Allow unrated titles",
+        "allowUnratedNote": "Titles with no suggested age. While this is off, a parent allows them one by one.",
+        "homeRows": "Home rows",
+        "homeRowsNote": "Optional. Titles in these rows still have to fit the highest suggested age.",
+        "familyMovies": "Family movies",
+        "familySeries": "Family series",
+        "addonMissing": "Its addon isn't installed on this profile.",
+        "allowed": "Allowed titles",
+        "allowedNone": "None yet. A parent allows a title from its page.",
+        "blocked": "Blocked titles",
+        "blockedNone": "None yet. A parent blocks a title from its page.",
+        "remove": "Remove ${title}",
+        "leaving": "Leaving this profile asks for a parent's PIN.",
+        "off": "Links, add-ons and most settings are off.",
+        "addons": "Videos come from this profile's addons. Tortuga doesn't check them."
+      }
+    },
+    "avatar": {
+      "graphite": "Graphite",
+      "slate": "Slate",
+      "silver": "Silver",
+      "ivory": "Ivory",
+      "sand": "Sand",
+      "clay": "Clay",
+      "rose": "Rose",
+      "plum": "Plum",
+      "dusk": "Dusk",
+      "sea": "Sea",
+      "sage": "Sage",
+      "moss": "Moss"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Not available on this profile",
+      "suggested": "Suggested ${age}+",
+      "byAddon": "Its addon rates it for older viewers",
+      "notRated": "No suggested age",
+      "byParent": "Blocked by a parent",
+      "unchecked": "Its suggested age couldn't be checked. Try again later.",
+      "ask": "Ask a parent"
+    },
+    "block": "Block on this profile",
+    "pin": {
+      "title": "Enter a parent's PIN",
+      "allow": "To allow ${title} on this profile",
+      "allowThis": "To allow this title on this profile",
+      "block": "To block ${title} on this profile",
+      "leave": "To leave this profile",
+      "settings": "To open these settings"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "All",
+      "movie": "Movies",
+      "series": "Series",
+      "channel": "Channels",
+      "tv": "TV channels",
+      "other": "Other"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Retry",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "See all",
+      "downloading": "Downloading ${count}, ${percent}%",
+      "downloadingUnsized": "Downloading ${count}",
+      "empty": "Nothing to show yet. Install addons with catalogs to fill this page.",
+      "allHidden": "Every row of Home is hidden. Settings → Home shows them again."
+    },
+    "continueWatching": {
+      "title": "Continue Watching",
+      "episode": "Episode ${episode}",
+      "upNext": "Up next",
+      "minutesLeft": "${minutes} min left",
+      "hoursLeft": "${hours} h left",
+      "hoursMinutesLeft": "${hours} h ${minutes} min left",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "Watchlist",
+      "recommended": "Recommended",
+      "trending": "Trending",
+      "planToWatch": "Plan to watch",
+      "planning": "Planning",
+      "airing": "Airing now",
+      "list": "List",
+      "unreachable": "Couldn’t reach ${service}.",
+      "signedOut": "${service} signed you out. Connect it again in Settings.",
+      "failed": "${service} didn’t answer as expected."
+    },
+    "discover": {
+      "type": "Type",
+      "catalog": "Catalog",
+      "genre": "Genre",
+      "all": "All",
+      "empty": "This catalog has nothing to show.",
+      "noCatalogs": "None of the installed addons has a catalog to browse.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Search movies, series and more",
+      "recent": "Recent searches",
+      "clearRecent": "Clear",
+      "removeRecentNamed": "Remove ${name}",
+      "noResults": "No results for “${query}”",
+      "noCatalogs": "None of the installed addons can search.",
+      "clearQuery": "Clear search",
+      "hint": "Find movies, series and more in the catalogs of your addons."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Home",
+      "discover": "Discover",
+      "search": "Search",
+      "library": "Library",
+      "settings": "Settings"
+    },
+    "shortLabel": {
+      "board": "Home",
+      "library": "Library",
+      "search": "Search",
+      "settings": "Settings"
+    },
+    "back": "Back",
+    "retry": "Retry",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "qrFailed": "This link can't be shown as a QR code.",
+    "openOnPhone": {
+      "title": "Open on your phone",
+      "message": "This device can't open this link. Scan the code with your phone's camera to open it there.",
+      "qrDescription": "QR code of the link"
+    },
+    "player": {
+      "close": "Close player",
+      "fullscreen": "Full screen",
+      "exitFullscreen": "Exit full screen",
+      "rewind": "Rewind",
+      "fastForward": "Fast forward",
+      "pictureInPicture": "Picture in picture"
+    },
+    "menu": {
+      "playback": "Playback",
+      "nextSubtitles": "Next subtitle track",
+      "nextAudio": "Next audio track"
+    }
+  },
+  "watch": {
+    "title": "Watch Together",
+    "intro": "Watch in sync with friends, each on their own device. Everyone plays the same title from their own addons. To start a room, choose Watch Together in the player's options.",
+    "controlMode": {
+      "hostOnly": "Only I control",
+      "hostOnlyDetail": "Everyone follows when you play, pause or seek",
+      "anyone": "Everyone controls",
+      "anyoneDetail": "Anyone in the room can play, pause or seek"
+    },
+    "joinTitle": "Join a room",
+    "joinHint": "Code or invite link",
+    "joinLabel": "Join",
+    "joinInvalid": "Enter a 6-character room code or an invite link",
+    "recentTitle": "Recent rooms",
+    "recentUsed": "Used ${time}",
+    "removeRecentNamed": "Remove ${name}",
+    "invite": {
+      "title": "Join room ${code}? It's on ${server}, not on your relay server.",
+      "join": "Join",
+      "leaveTitle": "Leave the room to join room ${code}? It's on ${server}, not on your relay server.",
+      "leaveHostTitle": "Leave the room to join room ${code}? It's on ${server}, not on your relay server. This room goes on with the next participant as host."
+    },
+    "relay": {
+      "checking": "Checking the relay…",
+      "unreachable": "Can't reach the relay at ${server}.",
+      "retry": "Try again",
+      "title": "Relay server",
+      "hint": "The relay that connects watch-together rooms. Leave it empty to use Open Watch Party's public relays.",
+      "hosted": "Open Watch Party's public relays",
+      "placeholder": "https://relay.example.com",
+      "invalid": "Enter a relay address that starts with http:// or https://",
+      "save": "Save",
+      "reset": "Use the public relays"
+    },
+    "busy": {
+      "creating": "Starting a room…",
+      "joining": "Joining the room…"
+    },
+    "dismiss": "Dismiss",
+    "room": {
+      "codeLabel": "Room code",
+      "copyCode": "Copy code",
+      "codeCopied": "Code copied",
+      "share": "Share invite",
+      "shareText": "Watch with me on Tortuga: open ${link} or enter the room code ${code}.",
+      "scan": "Scan with a phone to join",
+      "youHost": "You're the host",
+      "hostedBy": "Hosted by ${name}",
+      "hostOnly": "Only the host controls playback",
+      "anyone": "Everyone controls playback",
+      "reconnecting": "Reconnecting…",
+      "hostReconnecting": "Waiting for ${name} to reconnect…",
+      "nowPlaying": "Playing ${title}",
+      "nowPlayingEpisode": "Playing ${title} · ${episode}",
+      "idleHost": "Play something: everyone in the room plays it with you.",
+      "idleGuest": "Waiting for ${name} to play something.",
+      "participants": {
+        "one": "${n} participant",
+        "other": "${n} participants"
+      },
+      "you": "${name} (you)",
+      "hostBadge": "Host",
+      "makeHost": "Make host",
+      "makeHostNamed": "Make host: ${name}",
+      "joinPlayback": "Join playback",
+      "leave": "Leave room",
+      "leaveTitle": "Leave the room?",
+      "leaveConfirm": "Leave",
+      "end": "End room",
+      "endTitle": "End the room for everyone?",
+      "endConfirm": "End room",
+      "cancel": "Cancel",
+      "leaveHostTitle": "Leave the room? It goes on with the next participant as host.",
+      "kickNamed": "Remove ${name}",
+      "kickTitle": "Remove ${name} from the room?",
+      "kickConfirm": "Remove",
+      "lock": "Lock the room",
+      "lockDetail": "No one new can join",
+      "controlTitle": "Who controls playback"
+    },
+    "status": {
+      "ready": "Ready",
+      "loading": "Loading",
+      "matching": "Finding a file",
+      "buffering": "Buffering",
+      "sameLength": "Same length (${delta})",
+      "longer": "${delta} longer",
+      "shorter": "${delta} shorter",
+      "noStream": "No stream found",
+      "searchFailed": "Addon search failed",
+      "notPlaying": "Not in the player",
+      "away": "Disconnected",
+      "declined": "Not playing",
+      "offset": "Offset ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} s",
+      "minutes": "${minutes} min ${seconds} s"
+    },
+    "player": {
+      "optionRoom": "Room ${code}",
+      "startTitle": "Start a room with what's playing",
+      "liveNoRoom": "A live stream can't be watched together",
+      "watching": {
+        "one": "${n} watching",
+        "other": "${n} watching together"
+      },
+      "hostBadge": "HOST",
+      "waiting": "Waiting for ${names}…",
+      "waitingMore": {
+        "other": "Waiting for ${names} and ${n} more…"
+      },
+      "syncing": "Syncing…",
+      "matchingStart": "Finding a file that matches ${name}'s…",
+      "longer": "Your file is ${delta} longer than ${name}'s",
+      "shorter": "Your file is ${delta} shorter than ${name}'s",
+      "mismatchDetail": "It may be another cut, so your positions may not line up.",
+      "playAnyway": "Play anyway",
+      "chooseStream": "Choose another stream",
+      "noStream": "None of your addons has a stream for ${title}.",
+      "searchFailed": "Some of your addons couldn't be searched for ${title}.",
+      "chooseAStream": "Choose a stream",
+      "pickFailed": "That stream didn't open.",
+      "hostControls": "Only ${name} controls playback in this room",
+      "hostControlsUnnamed": "Only the host controls playback in this room",
+      "pausedHere": "Paused on this device. Press Play to catch up with the room.",
+      "dontPlay": "Don't play",
+      "declined": "You're not playing ${title}.",
+      "offsetTitle": "Offset",
+      "offsetDetail": "Moves your file against the room's, for a cut that starts earlier or later.",
+      "offsetReset": "Reset"
+    },
+    "toast": {
+      "joined": "${name} joined",
+      "left": "${name} left",
+      "paused": "${name} paused",
+      "resumed": "${name} resumed",
+      "seeked": "${name} jumped to another position",
+      "speed": "${name} set the speed to ${speed}",
+      "buffering": "${name} is buffering",
+      "hostChanged": "${name} is the host now",
+      "becameHost": "You're the host now",
+      "media": "${name} started ${title}",
+      "forbidden": "Only the host can do that"
+    },
+    "failure": {
+      "create": "Couldn't start a room. Try again.",
+      "join": "Couldn't join the room. Try again.",
+      "share": "Couldn't share this video with the room. Try another stream.",
+      "live": "A live stream can't be watched together. The room waits for a video.",
+      "roomNotFound": "There's no room with that code.",
+      "roomFull": "That room is full.",
+      "rateLimited": "Too many tries. Wait a minute, then try again.",
+      "connection": "Can't reach the relay. Check the connection.",
+      "sessionLost": "The connection to the room was lost.",
+      "ended": "The host ended the room.",
+      "roomLocked": "That room is locked.",
+      "relayFull": "The relay is full. Try again later.",
+      "blocked": "This relay doesn't accept Tortuga.",
+      "kicked": "The host removed you from the room.",
+      "expired": "The room expired.",
+      "replaced": "You joined this room on another device."
+    }
+  },
+  "downloads": {
+    "title": "Downloads",
+    "empty": "Nothing downloaded yet. Download movies and episodes from their pages to watch them without a connection.",
+    "offline": "You're offline. Downloads continue once you're back online.",
+    "storage": "${used} used · ${free} free",
+    "storageUsed": "${used} used",
+    "pauseAll": "Pause all",
+    "resumeAll": "Resume all",
+    "actionFailed": "Couldn't change the download. Try again.",
+    "actionsFailed": "Couldn't change the downloads. Try again.",
+    "episodes": {
+      "one": "${n} episode",
+      "other": "${n} episodes"
+    },
+    "videos": {
+      "one": "${n} video",
+      "other": "${n} videos"
+    },
+    "otherVideos": "Other videos",
+    "summary": "${count} · ${size}",
+    "progress": "${done} of ${total}",
+    "speed": "${speed}/s",
+    "status": {
+      "queued": "Queued",
+      "waitingForWifi": "Waiting for Wi-Fi",
+      "waitingForNetwork": "Waiting for a connection",
+      "resolving": "Preparing…",
+      "downloading": "Downloading",
+      "downloadingPercent": "Downloading · ${percent}%",
+      "paused": "Paused",
+      "failed": "Failed",
+      "completed": "Downloaded",
+      "cancelled": "Cancelled"
+    },
+    "action": {
+      "play": "Play",
+      "pause": "Pause",
+      "resume": "Resume",
+      "retry": "Retry",
+      "pickStream": "Pick a stream",
+      "cancel": "Cancel download",
+      "delete": "Delete download",
+      "deleteGroup": "Delete downloads",
+      "openDetail": "Go to details"
+    },
+    "deleteConfirm": {
+      "title": "Delete ${count} of ${name}?",
+      "message": "Downloading again takes time and a connection.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "keepSynced": {
+      "title": "Keep synced",
+      "note": "Each series here keeps its next unwatched episodes downloaded on this device, topped up after you watch one.",
+      "empty": "No series are kept synced. In a series' download menu, choose how many unwatched episodes to keep.",
+      "series": {
+        "one": "${n} series",
+        "other": "${n} series"
+      },
+      "manage": "Manage Keep synced",
+      "pauseRule": "Pause ${title}",
+      "resumeRule": "Resume ${title}",
+      "stopRule": "Stop keeping ${title} synced",
+      "status": {
+        "downloading": {
+          "one": "Downloading ${n} episode",
+          "other": "Downloading ${n} episodes"
+        },
+        "failed": {
+          "one": "${n} episode failed",
+          "other": "${n} episodes failed"
+        },
+        "downloaded": {
+          "one": "${n} episode downloaded",
+          "other": "${n} episodes downloaded"
+        },
+        "downloadedNone": "No episodes downloaded"
+      },
+      "stop": {
+        "title": "Stop keeping ${title} synced?",
+        "message": {
+          "one": "${n} episode in Downloads came from Keep synced. Delete it too?",
+          "other": "${n} episodes in Downloads came from Keep synced. Delete them too?"
+        },
+        "messageNone": "No more episodes will download.",
+        "keep": "Keep downloads",
+        "delete": "Delete downloads",
+        "confirm": "Stop",
+        "cancel": "Cancel"
+      },
+      "notice": {
+        "one": "Keep synced added ${n} episode of ${title}",
+        "other": "Keep synced added ${n} episodes of ${title}"
+      },
+      "noticeSeveral": {
+        "one": "Keep synced added ${n} episode",
+        "other": "Keep synced added ${n} episodes"
+      },
+      "actionFailed": "Couldn't change Keep synced. Try again."
+    },
+    "failure": {
+      "noStream": "No stream could be picked for this episode. Pick one by hand.",
+      "noStreamInstant": "No instant stream could be picked for this episode. Pick one by hand.",
+      "network": "The connection failed.",
+      "http": "The server answered with HTTP ${status}.",
+      "streamGone": "The link expired and its addon no longer offers this stream.",
+      "diskFull": "The device ran out of space. Downloads stopped.",
+      "notEnoughSpace": "There isn't enough free space for this download.",
+      "sizeMismatch": "The downloaded file is incomplete.",
+      "unsupported": "This stream can't be downloaded.",
+      "locationUnavailable": "The download location isn't available.",
+      "fileMissing": "The downloaded file is missing.",
+      "storage": "The device's storage didn't respond."
+    },
+    "notification": {
+      "channel": "Downloads",
+      "title": "Downloading ${title}",
+      "count": {
+        "one": "${n} download",
+        "other": "${n} downloads"
+      },
+      "progress": "${percent}%",
+      "preparing": "Preparing download…",
+      "waiting": "Waiting for Wi-Fi",
+      "paused": "Paused",
+      "pause": "Pause",
+      "resume": "Resume",
+      "cancel": "Cancel",
+      "failed": "Download failed: ${title}",
+      "completed": "Downloaded ${title}"
+    }
+  },
+  "offline": {
+    "title": "You're offline",
+    "text": "Connect to the internet to browse. Your downloads play without a connection.",
+    "textNoDownloads": "Connect to the internet to browse.",
+    "openDownloads": "Go to Downloads",
+    "detail": "Showing the details saved with your downloads."
+  },
+  "playerApps": {
+    "chooser": "Ask every time",
+    "tortuga": "Tortuga",
+    "playWith": "Play with…",
+    "banner": {
+      "opening": "Opening in ${player}…",
+      "notInstalled": "${player} isn't installed on this device.",
+      "didNotStart": "${player} didn't start.",
+      "playInTortuga": "Play in Tortuga",
+      "cancel": "Cancel",
+      "dismiss": "Dismiss"
+    },
+    "detail": {
+      "playing": "Playing in ${player} · ${position}",
+      "playingOf": "Playing in ${player} · ${position} of ${duration}",
+      "paused": "Paused in ${player} · ${position}",
+      "pausedOf": "Paused in ${player} · ${position} of ${duration}",
+      "finished": "Opened in ${player}. Finished watching ${title}?",
+      "markWatched": "Mark as watched",
+      "notYet": "Not yet"
+    },
+    "settings": {
+      "player": "Player",
+      "deviceOnly": "This device only",
+      "note": "Videos on this device play in the player chosen here. Play with… in a stream's menu picks another for one video.",
+      "notFound": "${player} (not found)",
+      "followsProgress": "Resumes where you left off and saves your progress as it plays",
+      "savesOnReturn": "Resumes where you left off and saves where you stopped",
+      "savesOnReturnFromStart": "Starts from the beginning, then saves where you stopped or asks whether you finished",
+      "asksAfter": "Resumes where you left off, then asks whether you finished",
+      "asksAfterFromStart": "Opens the video only, then asks whether you finished",
+      "chooserDetail": "Your device asks which app plays each video",
+      "customHeader": "Custom players",
+      "addCustom": "Add custom player",
+      "deleteNamed": "Delete ${name}",
+      "form": {
+        "title": "Add custom player",
+        "name": "Name",
+        "nameHint": "My player",
+        "program": "Program",
+        "programHint": "mpv, or the program's full path",
+        "arguments": "Arguments",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} is the video's link, {title} its title, {start} where it starts in seconds and {subtitle} the first subtitle's link.",
+        "urlTemplate": "URL template",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} is the video's link, encoded for a URL, and {url_raw} the link as it is.",
+        "packageName": "Package name",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Add",
+        "cancel": "Cancel",
+        "nameMissing": "Give the player a name.",
+        "programMissing": "Enter the program to run.",
+        "urlTemplateMissing": "Enter the URL template.",
+        "packageNameMissing": "Enter the app's package name.",
+        "argumentsNeedUrl": "The arguments need {url}.",
+        "urlTemplateNeedsUrl": "The URL template needs {url} or {url_raw}.",
+        "packageNameInvalid": "That isn't a package name, such as org.videolan.vlc."
+      }
+    }
+  },
+  "guide": {
+    "title": "TV Guide",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday",
+    "day": "${weekday} ${day}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "On now",
+    "now": "Now",
+    "noProgrammes": "No program information",
+    "noChannels": "This guide has no channels for this day.",
+    "noGuide": "No installed addon offers a TV guide.",
+    "failed": "Couldn't load the guide: ${reason}",
+    "cast": "With ${names}",
+    "directors": "Directed by ${names}"
+  },
+  "calendar": {
+    "title": "Calendar",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "emptyLibrary": "Add series to your library to see their episodes here.",
+    "noAddon": "None of your addons has a calendar for the series in your library.",
+    "emptyMonth": "No episodes.",
+    "newEpisodes": {
+      "one": "${n} new episode",
+      "other": "${n} new episodes"
+    },
+    "episodes": {
+      "one": "${n} episode",
+      "other": "${n} episodes"
+    }
+  },
+  "watchlist": {
+    "lists": "Tracker watchlists",
+    "hint": "Each list is on your account at that service. Your library doesn’t change.",
+    "add": "Add to ${list}",
+    "remove": "Remove from ${list}",
+    "trakt": "Trakt watchlist",
+    "simkl": "Simkl plan to watch",
+    "mdblist": "MDBList watchlist",
+    "myAnimeList": "MyAnimeList plan to watch",
+    "aniList": "AniList planning",
+    "saving": "Saving…",
+    "queued": "Not sent yet, will retry",
+    "failed": "Not saved",
+    "addFailed": "Couldn’t add ${title} to ${list}.",
+    "removeFailed": "Couldn’t remove ${title} from ${list}."
+  },
+  "collections": {
+    "needsAddon": "Needs the addon ${name}",
+    "needsCatalog": "${addon} has no catalog ${catalog}",
+    "needsFilter": "Needs a filter Tortuga can’t set",
+    "traktUnavailable": "Trakt lists aren’t available in this build",
+    "tooLarge": "“${title}” is too large to sync",
+    "kind": {
+      "tmdbList": "TMDB list",
+      "tmdbCollection": "TMDB collection",
+      "tmdbCompany": "TMDB company",
+      "tmdbNetwork": "TMDB network",
+      "tmdbDiscover": "TMDB discover",
+      "tmdbPerson": "TMDB person",
+      "tmdbDirector": "TMDB director",
+      "letterboxd": "Letterboxd",
+      "unknown": "Unknown provider “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "one": "Adds ${n} collection",
+        "other": "Adds ${n} collections"
+      },
+      "replaces": {
+        "one": "Replaces ${n} collection with the same id",
+        "other": "Replaces ${n} collections with the same ids"
+      },
+      "needsAddon": {
+        "one": "${n} source needs the addon ${name}",
+        "other": "${n} sources need the addon ${name}"
+      },
+      "needsTracker": {
+        "one": "${n} source needs ${service} connected",
+        "other": "${n} sources need ${service} connected"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} source left out",
+        "other": "${kind}: ${n} sources left out"
+      },
+      "unsupportedHint": "Tortuga reads addon catalogs and trackers’ lists, not these sources. Use an addon catalog instead, such as AIOMetadata’s or MDBList’s.",
+      "folderDropped": "Folder “${folder}” in “${collection}” left out: none of its sources can be read",
+      "collectionDropped": "Collection “${title}” left out: none of its folders can be read",
+      "tooLarge": "Collection “${title}” not imported: it is too large to sync"
+    },
+    "refused": {
+      "notJson": "This isn’t a collections file: it isn’t JSON.",
+      "notList": "This isn’t a collections file: it holds no list of collections.",
+      "empty": "This file holds no collections.",
+      "collectionInvalid": "Collection ${position} in the file can’t be read.",
+      "collectionNoId": "Collection ${position} in the file has no id.",
+      "collectionNoTitle": "Collection ${id} has no title.",
+      "duplicateCollection": "Two collections in the file have the id ${id}.",
+      "noFolders": "Collection “${collection}” has no list of folders.",
+      "folderInvalid": "Folder ${position} of “${collection}” can’t be read.",
+      "folderNoId": "Folder ${position} of “${collection}” has no id.",
+      "folderNoTitle": "Folder ${id} of “${collection}” has no title.",
+      "duplicateFolder": "Two folders of “${collection}” have the id ${id}.",
+      "noSources": "Folder “${folder}” of “${collection}” has no list of sources.",
+      "unknownShape": "Folder “${folder}” of “${collection}” has an unknown tile shape: ${shape}.",
+      "sourceInvalid": "Source ${position} of folder “${folder}” in “${collection}” is incomplete."
+    },
+    "row": "Collection",
+    "rowSource": {
+      "one": "Collection · ${n} folder",
+      "other": "Collection · ${n} folders"
+    },
+    "folder": {
+      "all": "All",
+      "empty": "No titles here",
+      "goToTrackers": "Go to Trackers",
+      "goToAddons": "Go to Addons"
+    },
+    "importing": {
+      "title": "Import collections",
+      "note": "A collections file from Nuvio or AIOMetadata: enter its link or open the file. A collection with the same id as one of yours replaces it.",
+      "urlLabel": "Link",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Get",
+      "openFile": "Open file",
+      "confirm": "Import",
+      "done": "Done",
+      "rowNew": {
+        "one": "New · ${n} folder",
+        "other": "New · ${n} folders"
+      },
+      "rowReplaces": {
+        "one": "Replaces yours · ${n} folder",
+        "other": "Replaces yours · ${n} folders"
+      },
+      "imported": {
+        "one": "Imported ${n} collection",
+        "other": "Imported ${n} collections"
+      },
+      "notWeb": "Enter a link that starts with http:// or https://.",
+      "tooLarge": "This file is larger than 4 MB.",
+      "httpError": "The link answered with error ${status}.",
+      "timeout": "The link didn’t answer in time.",
+      "unreachable": "The link can’t be reached. Check it and your connection.",
+      "unreadable": "This file can’t be read as text.",
+      "failed": "The collections couldn’t be saved."
+    },
+    "editor": {
+      "newHeading": "New collection",
+      "editHeading": "Edit collection",
+      "titleLabel": "Title",
+      "view": "View",
+      "viewHint": "How a folder shows its sources",
+      "viewTabs": "Tabs",
+      "viewRows": "Rows",
+      "viewFollow": "Follow the app",
+      "allTab": "All tab",
+      "allTabHint": "A first tab with every source’s titles",
+      "foldersHeader": "Folders",
+      "addFolder": "Add folder",
+      "noFolders": "No folders yet",
+      "sources": {
+        "one": "${n} source",
+        "other": "${n} sources"
+      },
+      "save": "Save",
+      "newFolder": "New folder",
+      "folderTitleLabel": "Title",
+      "shape": "Tile shape",
+      "shapePoster": "Poster",
+      "shapeLandscape": "Landscape",
+      "shapeSquare": "Square",
+      "coverLabel": "Cover image link",
+      "coverHint": "https://…",
+      "hideTitle": "Hide the title",
+      "hideTitleHint": "The tile shows its cover alone",
+      "sourcesHeader": "Sources",
+      "addSource": "Add source",
+      "noSources": "No sources yet",
+      "deleteNamed": "Delete ${name}",
+      "removeNamed": "Remove ${name}",
+      "noTitle": "Give the collection a title.",
+      "noFolder": "Add a folder to the collection.",
+      "folderNoTitle": "Give folder ${position} a title.",
+      "folderNoSource": "Add a source to “${folder}”.",
+      "saveFailed": "The collection couldn’t be saved.",
+      "discardTitle": "Discard changes?",
+      "discard": "Discard",
+      "keepEditing": "Keep editing",
+      "picker": {
+        "addons": "Addon catalogs",
+        "trackers": "Trackers",
+        "noAddons": "No installed addon has a catalog to add.",
+        "noTrackers": "Connect a tracker in Settings → Trackers to add its lists.",
+        "listsFailed": "${service}’s lists can’t be read now.",
+        "byLink": "A ${service} list by its link",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Add",
+        "notAList": "This isn’t a link to a ${service} list.",
+        "notFound": "${service} has no list at this link.",
+        "unreachable": "${service} can’t be reached now."
+      }
+    }
+  }
+}

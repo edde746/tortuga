@@ -1,0 +1,34 @@
+Tortuga, Stremio eklentileriyle çalışan bir video oynatıcıdır. Yüklediğiniz eklentiler katalogları ve akışları getirir, Tortuga da bunları oynatır. Tortuga kendine ait hiçbir içerik sunmaz.
+
+NASIL ÇALIŞIR
+• Bir eklentiyi bağlantısıyla yükleyin. Kataloglar, arama sonuçları, ayrıntı sayfaları ve akışlar eklentilerinizden gelir; istekleriniz de doğrudan onlara gider.
+• Ana Sayfa, İzlemeye Devam Et bölümünü ve eklentilerinizin kataloglarını gösterir. Keşfet, İçerik ve Tür filtreleri sunar. Ara ekranı tüm eklentilerde arama yapar.
+• Bir filmin veya bölümün akışları eklentiye göre gruplanır. Birini seçtiğinizde oynatılır.
+
+OYNATICI
+• mpv ile oynatma; iPhone veya iPad'iniz destekliyorsa HDR10 ve Dolby Vision ile.
+• Dosyayla eşleşen gömülü ve eklenti altyazıları. Ses ve altyazı seçimleriniz sonraki bölüme taşınır.
+• İlerleme çubuğunda kısımlar. Girişleri, özetleri ve jenerikleri bir düğmeyle ya da otomatik olarak atlayın.
+• Sonraki bölüm geri sayımı, önceki ve sonraki bölüme geçiş, oynatma hızı, altyazı ve ses gecikmesi.
+• Resim içinde resim.
+• Başka bir oynatıcı mı tercih edersiniz? Videoyu cihazınızdaki başka bir oynatıcı uygulamasına gönderin.
+
+KİTAPLIĞINIZ
+• İlerleme ve izlendi işaretleri; Ana Sayfa'daki İzlemeye Devam Et ile kaldığınız yere dönün.
+• Tortuga seçtiğiniz akışı hatırlar ve sonraki bölümü aynı kaynaktan oynatır.
+• İndirilenler: Filmleri ve bölümleri altyazılarıyla birlikte kaydedip çevrimdışı izleyin. Tortuga, bir dizinin izlenmemiş sonraki bölümlerini cihazda hep hazır tutabilir.
+
+BİRLİKTE İZLEME
+Bir oda oluşturun ve kodunu ya da bir davet bağlantısını paylaşın. Oynatma eşzamanlı kalır ve herkes içeriği kendi eklentileriyle oynatır.
+
+HESABINIZ VE PROFİLLERİNİZ
+• Apple, Google veya GitHub ile giriş yapın. Profilleriniz, eklentileriniz, kitaplığınız, ilerlemeniz ve profil ayarlarınız cihazlarınız arasında eşitlenir. Bir Apple TV'yi QR kodu veya kısa bir kodla bağlayın.
+• Evdeki herkes için ayrı bir profil; her birinin kendi eklentileri, kitaplığı ve ayarları vardır. PIN isteğe bağlıdır.
+• İzleme aktarımı, izleme geçmişi, puanlar ve listeler için Trakt, Simkl, MDBList, MyAnimeList veya AniList'i bağlayın.
+• Eşitleme, Tortuga'nın sunucusunda veya kendi çalıştırdığınız bir sunucuda çalışır.
+
+Tortuga, GPL-3.0 lisanslı açık kaynak bir uygulamadır ve 21 dili destekler. Reklam yoktur ve Tortuga kendine ait hiçbir analitik aracı çalıştırmaz.
+
+Ekran görüntülerindeki oynatıcı, Blender Studio'nun Spring (2019), Coffee Run (2020), Sprite Fright (2021) ve Wing It! (2023) filmlerinden kısa alıntılar gösterir. Bu filmler, (CC) Blender Foundation | studio.blender.org, CC BY 4.0 kapsamında lisanslanmıştır (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga, Trakt'ı kullanır ancak Trakt tarafından onaylanmış veya sertifikalandırılmış değildir.

@@ -1,0 +1,103 @@
+{
+    "recorded": "2026-09-29",
+    "recordedBy": ":dev:recordFixtures 0.1.0",
+    "fixtures": [
+        {
+            "file": "cinemeta/manifest.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json"
+        },
+        {
+            "file": "cinemeta/catalog-movie-top.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "catalog",
+            "type": "movie",
+            "id": "top",
+            "extra": []
+        },
+        {
+            "file": "cinemeta/catalog-movie-top-page2.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "catalog",
+            "type": "movie",
+            "id": "top",
+            "extra": [
+                {
+                    "name": "skip",
+                    "value": "49"
+                }
+            ]
+        },
+        {
+            "file": "cinemeta/search-movie-shawshank.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "catalog",
+            "type": "movie",
+            "id": "top",
+            "extra": [
+                {
+                    "name": "search",
+                    "value": "shawshank"
+                }
+            ]
+        },
+        {
+            "file": "cinemeta/search-series-chernobyl.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "catalog",
+            "type": "series",
+            "id": "top",
+            "extra": [
+                {
+                    "name": "search",
+                    "value": "chernobyl"
+                }
+            ]
+        },
+        {
+            "file": "cinemeta/meta-movie-tt0111161.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "meta",
+            "type": "movie",
+            "id": "tt0111161",
+            "extra": []
+        },
+        {
+            "file": "cinemeta/meta-series-tt7366338.json",
+            "addon": "Cinemeta",
+            "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+            "resource": "meta",
+            "type": "series",
+            "id": "tt7366338",
+            "extra": []
+        },
+        {
+            "file": "opensubtitles/manifest.json",
+            "addon": "OpenSubtitles v3",
+            "transportUrl": "https://opensubtitles-v3.strem.io/manifest.json"
+        },
+        {
+            "file": "opensubtitles/subtitles-movie-tt0111161.json",
+            "addon": "OpenSubtitles v3",
+            "transportUrl": "https://opensubtitles-v3.strem.io/manifest.json",
+            "resource": "subtitles",
+            "type": "movie",
+            "id": "tt0111161",
+            "extra": []
+        },
+        {
+            "file": "opensubtitles/subtitles-series-tt7366338-1-1.json",
+            "addon": "OpenSubtitles v3",
+            "transportUrl": "https://opensubtitles-v3.strem.io/manifest.json",
+            "resource": "subtitles",
+            "type": "series",
+            "id": "tt7366338:1:1",
+            "extra": []
+        }
+    ]
+}

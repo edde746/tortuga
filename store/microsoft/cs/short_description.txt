@@ -1,0 +1,1 @@
+Videopřehrávač, který funguje s doplňky Stremio. Doplňky, které si nainstalujete, přinášejí katalogy a streamy a Tortuga je přehrává. Tortuga sama neposkytuje žádný obsah.

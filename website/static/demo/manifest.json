@@ -1,0 +1,32 @@
+{
+  "id": "app.usetortuga.demo",
+  "version": "1.0.0",
+  "name": "Tortuga demo",
+  "description": "Public-domain films from the Internet Archive and Blender's open movies (CC BY) from download.blender.org, streamed straight from those sites, to try Tortuga with.",
+  "logo": "https://usetortuga.app/apple-touch-icon.png",
+  "types": [
+    "movie"
+  ],
+  "resources": [
+    "catalog",
+    "stream"
+  ],
+  "idPrefixes": [
+    "tt2285752",
+    "tt0063350",
+    "tt0032599",
+    "tt0807840",
+    "tt0038991"
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "tortuga-demo",
+      "name": "Tortuga demo"
+    }
+  ],
+  "behaviorHints": {
+    "configurable": false,
+    "configurationRequired": false
+  }
+}

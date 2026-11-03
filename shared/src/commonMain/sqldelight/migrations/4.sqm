@@ -1,0 +1,18 @@
+-- Version 4 → 5: Keep synced rules (data/db/Download.sq) can be paused and keep their series' name and poster for the
+-- rules screen, taken here from the series' latest download; a rule whose series has none gets them at its next run.
+
+ALTER TABLE download_sync_rule ADD COLUMN paused INTEGER NOT NULL DEFAULT 0;
+
+ALTER TABLE download_sync_rule ADD COLUMN title TEXT;
+
+ALTER TABLE download_sync_rule ADD COLUMN poster TEXT;
+
+UPDATE download_sync_rule SET
+    title = (
+        SELECT download.title FROM download WHERE download.meta_id = download_sync_rule.meta_id
+        ORDER BY download.added_at DESC, download.id DESC LIMIT 1
+    ),
+    poster = (
+        SELECT download.poster FROM download WHERE download.meta_id = download_sync_rule.meta_id
+        ORDER BY download.added_at DESC, download.id DESC LIMIT 1
+    );

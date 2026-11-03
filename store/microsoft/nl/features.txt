@@ -1,0 +1,14 @@
+Werkt met Stremio-add-ons: installeer een add-on via de link
+Home, Ontdekken en Zoeken in alle add-ons
+De streams van een titel, gegroepeerd per add-on
+Speelt af met mpv, met HDR10 en Dolby Vision als je computer en beeldscherm die ondersteunen
+Ingebedde ondertiteling en ondertiteling van add-ons; je keuzes voor audio en ondertiteling gaan mee naar de volgende aflevering
+Sla intro's, samenvattingen en aftiteling over
+Verder kijken, voortgang en markeringen als bekeken
+Downloads om offline te kijken
+Samen kijken: synchroon, iedereen via de eigen add-ons
+Profielen met eigen add-ons, bibliotheek en instellingen, en een optionele pincode
+Synchronisatie op al je apparaten door in te loggen met Apple, Google of GitHub
+Trakt, Simkl, MDBList, MyAnimeList en AniList
+Sneltoetsen, mediatoetsen en de mediabediening van Windows
+21 talen

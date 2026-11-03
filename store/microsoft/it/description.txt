@@ -1,0 +1,34 @@
+Tortuga è un player video compatibile con gli add-on Stremio. Gli add-on che installi forniscono i cataloghi e gli stream, e Tortuga li riproduce. Tortuga non offre alcun contenuto proprio.
+
+Come funziona
+• Installa un add-on tramite il suo link. Cataloghi, risultati di ricerca, pagine dei dettagli e stream arrivano dai tuoi add-on, e le tue richieste vanno direttamente a loro.
+• La Home mostra Continua a guardare e i cataloghi dei tuoi add-on. In Scopri puoi filtrare per tipo e genere. In Cerca puoi cercare in tutti gli add-on.
+• Gli stream di un film o di un episodio sono raggruppati per add-on. Scegline uno e parte la riproduzione.
+
+Il player
+• Riproduzione con mpv, in HDR10 e Dolby Vision se supportati dal computer e dallo schermo.
+• Sottotitoli integrati e degli add-on, abbinati al file. Le tue scelte di audio e sottotitoli passano all'episodio successivo.
+• Capitoli sulla barra di avanzamento. Salta intro, riepiloghi e titoli di coda con un pulsante o automaticamente.
+• Avvio dell'episodio successivo, passaggio all'episodio precedente o successivo, velocità di riproduzione, ritardo sottotitoli e ritardo audio.
+• Scorciatoie da tastiera, tasti multimediali e controlli multimediali di Windows.
+• Preferisci un altro player? Invia il video a un'altra app di riproduzione sul tuo computer.
+
+La tua libreria
+• Avanzamento e titoli segnati come visti, con Continua a guardare nella Home per riprendere da dove eri rimasto.
+• Tortuga ricorda lo stream che hai scelto e riproduce l'episodio successivo dalla stessa fonte.
+• Download: salva film ed episodi, con i loro sottotitoli, per guardarli offline. Tortuga può mantenere una serie aggiornata con i prossimi episodi non visti.
+
+Guarda insieme
+Crea una stanza e condividi il suo codice o un link di invito. La riproduzione resta sincronizzata e ognuno riproduce il titolo dai propri add-on.
+
+Il tuo account e i tuoi profili
+• Accedi con Apple, Google o GitHub. Profili, add-on, libreria, avanzamento e impostazioni del profilo si sincronizzano tra i tuoi dispositivi. Collega una TV con un codice QR o un codice breve.
+• Un profilo per ogni persona della famiglia, ciascuno con i propri add-on, la propria libreria e le proprie impostazioni. Il PIN è facoltativo.
+• Connetti Trakt, Simkl, MDBList, MyAnimeList o AniList per scrobbling, cronologia delle visioni, voti e liste.
+• La sincronizzazione avviene sul server di Tortuga o su uno gestito da te.
+
+Tortuga è open source con licenza GPL-3.0 ed è disponibile in 21 lingue. Niente pubblicità, niente strumenti di analisi.
+
+Il player negli screenshot mostra brevi estratti di Spring (2019), Coffee Run (2020), Sprite Fright (2021) e Wing It! (2023) di Blender Studio, (CC) Blender Foundation | studio.blender.org, con licenza CC BY 4.0.
+
+Tortuga usa Trakt, ma non è approvato né certificato da Trakt.

@@ -1,0 +1,315 @@
+-- Offline downloads on this device: one row per video
+-- (meta id + video id), owned by the profiles that asked for it (download_owner); a row left without owners goes with
+-- its files. Device-local, never synced. The stream JSON and the addon's transport URL can embed API keys, so
+-- neither is ever logged.
+CREATE TABLE download (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    -- The meta's type (`movie`, `series`, …); a movie's video id is its meta id.
+    type TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    -- What the screens and the file name show: the movie's or series' name, its year, the episode's own title,
+    -- season and number, and the addon's artwork URLs.
+    title TEXT NOT NULL,
+    year INTEGER,
+    episode_title TEXT,
+    season INTEGER,
+    episode INTEGER,
+    poster TEXT,
+    thumbnail TEXT,
+    -- DownloadStatus by name.
+    status TEXT NOT NULL,
+    -- DownloadFailureKind by name while FAILED, with the server's status for HTTP.
+    failure TEXT,
+    http_status INTEGER,
+    -- The stream it downloads from, as stream_history keeps it, and the addon that offered it; NULL for an episode
+    -- no stream was picked for (NO_STREAM).
+    stream_json TEXT,
+    addon_url TEXT,
+    addon_name TEXT,
+    -- A DownloadLocation id and the video's path under that location's directory; the path is set by the first
+    -- resolve (the extension comes from the file's name). The bytes arrive in `<path>.part` first.
+    location_id TEXT NOT NULL,
+    relative_path TEXT,
+    total_bytes INTEGER,
+    downloaded_bytes INTEGER NOT NULL,
+    -- The ETag, else Last-Modified, the bytes in the .part file came with: `If-Range` on a resume.
+    validator TEXT,
+    -- From the resolve: the file's OpenSubtitles hash and name.
+    video_hash TEXT,
+    filename TEXT,
+    -- Epoch milliseconds.
+    added_at INTEGER NOT NULL,
+    completed_at INTEGER,
+    -- Failed attempts (network, server errors) since the last success or user action.
+    attempts INTEGER NOT NULL,
+    -- Queued by Keep synced, not by hand.
+    keep_synced INTEGER AS kotlin.Boolean NOT NULL,
+    -- The platform's transport has the transfer: Apple's background session can finish it while the app is gone.
+    transferring INTEGER AS kotlin.Boolean NOT NULL,
+    -- The extras saved once the file completed; retried while false.
+    artwork_saved INTEGER AS kotlin.Boolean NOT NULL,
+    subtitles_saved INTEGER AS kotlin.Boolean NOT NULL,
+    UNIQUE (meta_id, video_id)
+);
+
+CREATE INDEX download_queue ON download(status, added_at);
+
+-- The profiles a download belongs to: a profile sees and deletes only its own.
+CREATE TABLE download_owner (
+    download_id INTEGER NOT NULL,
+    profile_id TEXT NOT NULL,
+    -- Epoch milliseconds; the first owner's subtitle languages are the ones saved.
+    added_at INTEGER NOT NULL,
+    PRIMARY KEY (download_id, profile_id)
+);
+
+CREATE INDEX download_owner_profile ON download_owner(profile_id);
+
+-- The meta saved with a meta's downloads (the item and its videos), so Detail and the Downloads screen work offline,
+-- and its artwork saved as files: a JSON object of the addon's image URL → path under the location's directory.
+CREATE TABLE download_meta (
+    meta_id TEXT NOT NULL PRIMARY KEY,
+    type TEXT NOT NULL,
+    meta_json TEXT NOT NULL,
+    location_id TEXT NOT NULL,
+    artwork_json TEXT NOT NULL,
+    -- Epoch milliseconds.
+    saved_at INTEGER NOT NULL
+);
+
+-- The addon subtitles saved with a download, in `<video base>_subs/`.
+CREATE TABLE download_subtitle (
+    download_id INTEGER NOT NULL,
+    -- Under the download's location, like download.relative_path.
+    relative_path TEXT NOT NULL,
+    title TEXT NOT NULL,
+    -- BCP 47 tag; NULL when unknown.
+    language TEXT,
+    PRIMARY KEY (download_id, relative_path)
+);
+
+-- Keep synced: a profile keeps a series at `episodes` unwatched episodes downloaded (NULL: all of
+-- them), topped up after a watch, at launch and on network changes, never deleting; a paused rule doesn't run. The
+-- series' name and poster URL are kept with it for the rules screen, written when the rule is set and at each run.
+CREATE TABLE download_sync_rule (
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    type TEXT NOT NULL,
+    episodes INTEGER,
+    -- Epoch milliseconds of the last run; NULL before the first.
+    last_run INTEGER,
+    paused INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0,
+    -- NULL for a rule older than these columns whose series had no download, until its next run.
+    title TEXT,
+    poster TEXT,
+    PRIMARY KEY (profile_id, meta_id)
+);
+
+-- Every download with its owners (comma-separated profile ids, empty for none) and its meta's saved artwork.
+selectDownloads:
+SELECT download.*,
+    coalesce((SELECT group_concat(profile_id) FROM download_owner WHERE download_id = download.id), '') AS owners,
+    download_meta.location_id AS artwork_location_id,
+    download_meta.artwork_json
+FROM download
+LEFT JOIN download_meta ON download_meta.meta_id = download.meta_id
+ORDER BY download.added_at DESC, download.id DESC;
+
+select:
+SELECT * FROM download WHERE id = ?;
+
+selectByVideo:
+SELECT * FROM download WHERE meta_id = ? AND video_id = ?;
+
+selectForMeta:
+SELECT * FROM download WHERE meta_id = ? ORDER BY added_at, id;
+
+-- The queue in its order: the oldest first.
+selectQueued:
+SELECT * FROM download WHERE status = 'QUEUED' ORDER BY added_at, id;
+
+selectByStatus:
+SELECT * FROM download WHERE status IN ?;
+
+selectTransferring:
+SELECT * FROM download WHERE transferring = 1;
+
+-- Completed downloads whose extras are still missing.
+selectMissingExtras:
+SELECT * FROM download WHERE status = 'COMPLETED' AND (artwork_saved = 0 OR subtitles_saved = 0) ORDER BY completed_at, id;
+
+selectLastWithStream:
+SELECT id FROM download WHERE meta_id = ? AND stream_json IS NOT NULL ORDER BY added_at DESC, id DESC LIMIT 1;
+
+insert:
+INSERT INTO download(
+    type, meta_id, video_id, title, year, episode_title, season, episode, poster, thumbnail, status, failure,
+    http_status, stream_json, addon_url, addon_name, location_id, relative_path, total_bytes, downloaded_bytes,
+    validator, video_hash, filename, added_at, completed_at, attempts, keep_synced, transferring,
+    artwork_saved, subtitles_saved
+) VALUES (
+    :type, :metaId, :videoId, :title, :year, :episodeTitle, :season, :episode, :poster, :thumbnail, :status,
+    :failure, :httpStatus, :streamJson, :addonUrl, :addonName, :locationId, NULL, NULL, 0, NULL, NULL, NULL,
+    :addedAt, NULL, 0, :keepSynced, 0, 0, 0
+);
+
+lastInsertId:
+SELECT last_insert_rowid();
+
+setStatus:
+UPDATE download SET status = :status, failure = :failure, http_status = :httpStatus WHERE id = :id;
+
+-- Queued again from a stream (a failed or cancelled download picked again).
+requeue:
+UPDATE download SET status = 'QUEUED', failure = NULL, http_status = NULL, stream_json = :streamJson,
+    addon_url = :addonUrl, addon_name = :addonName, attempts = 0
+WHERE id = :id;
+
+-- The file starts over: nothing of it is kept (its path is set again by the next resolve).
+resetFile:
+UPDATE download SET relative_path = NULL, total_bytes = NULL, downloaded_bytes = 0, validator = NULL, video_hash = NULL,
+    filename = NULL
+WHERE id = ?;
+
+setStream:
+UPDATE download SET stream_json = :streamJson, addon_url = :addonUrl, addon_name = :addonName WHERE id = :id;
+
+setPath:
+UPDATE download SET relative_path = :relativePath WHERE id = :id;
+
+setResolved:
+UPDATE download SET total_bytes = :totalBytes, video_hash = :videoHash, filename = :filename WHERE id = :id;
+
+setProgress:
+UPDATE download SET downloaded_bytes = :bytes WHERE id = :id;
+
+setValidator:
+UPDATE download SET validator = :validator WHERE id = :id;
+
+setTransferring:
+UPDATE download SET transferring = :transferring WHERE id = :id;
+
+setAttempts:
+UPDATE download SET attempts = :attempts WHERE id = :id;
+
+complete:
+UPDATE download SET status = 'COMPLETED', failure = NULL, http_status = NULL, downloaded_bytes = :bytes,
+    total_bytes = :bytes, validator = :validator, completed_at = :completedAt, attempts = 0, transferring = 0
+WHERE id = :id;
+
+setArtworkSaved:
+UPDATE download SET artwork_saved = :saved WHERE id = :id;
+
+setSubtitlesSaved:
+UPDATE download SET subtitles_saved = :saved WHERE id = :id;
+
+setKeepSynced:
+UPDATE download SET keep_synced = :keepSynced WHERE id = :id;
+
+-- The queue, rows a process left running included, back to its state at a launch.
+requeueInterrupted:
+UPDATE download SET status = 'QUEUED' WHERE status IN ('RESOLVING', 'DOWNLOADING') AND transferring = 0;
+
+delete:
+DELETE FROM download WHERE id = ?;
+
+selectOwners:
+SELECT profile_id FROM download_owner WHERE download_id = ? ORDER BY added_at, profile_id;
+
+insertOwner:
+INSERT OR IGNORE INTO download_owner(download_id, profile_id, added_at) VALUES (?, ?, ?);
+
+deleteOwner:
+DELETE FROM download_owner WHERE download_id = ? AND profile_id = ?;
+
+deleteOwners:
+DELETE FROM download_owner WHERE download_id = ?;
+
+-- A profile was deleted on this device or another (data/profile/ProfileRepository.kt).
+deleteOwnersForProfile:
+DELETE FROM download_owner WHERE profile_id = ?;
+
+-- The account's synced data is dropped (data/sync/SyncStore.kt): every download loses its owners, and so goes.
+deleteAllOwners:
+DELETE FROM download_owner;
+
+selectMeta:
+SELECT * FROM download_meta WHERE meta_id = ?;
+
+-- Whether a meta is saved, without reading its JSON.
+countMeta:
+SELECT count(*) FROM download_meta WHERE meta_id = ?;
+
+upsertMeta:
+INSERT OR REPLACE INTO download_meta VALUES ?;
+
+setArtwork:
+UPDATE download_meta SET artwork_json = :artworkJson WHERE meta_id = :metaId;
+
+deleteMeta:
+DELETE FROM download_meta WHERE meta_id = ?;
+
+selectSubtitles:
+SELECT * FROM download_subtitle WHERE download_id = ? ORDER BY rowid;
+
+insertSubtitle:
+INSERT OR REPLACE INTO download_subtitle VALUES ?;
+
+deleteSubtitles:
+DELETE FROM download_subtitle WHERE download_id = ?;
+
+-- A profile's rules, by the series' name, with the artwork saved with the series' downloads.
+selectRules:
+SELECT download_sync_rule.*,
+    download_meta.location_id AS artwork_location_id,
+    download_meta.artwork_json
+FROM download_sync_rule
+LEFT JOIN download_meta ON download_meta.meta_id = download_sync_rule.meta_id
+WHERE download_sync_rule.profile_id = ?
+ORDER BY coalesce(download_sync_rule.title, download_sync_rule.meta_id) COLLATE NOCASE, download_sync_rule.meta_id;
+
+selectAllRules:
+SELECT * FROM download_sync_rule ORDER BY profile_id, meta_id;
+
+selectRule:
+SELECT * FROM download_sync_rule WHERE profile_id = ? AND meta_id = ?;
+
+upsertRule:
+INSERT OR REPLACE INTO download_sync_rule VALUES ?;
+
+setRuleRun:
+UPDATE download_sync_rule SET last_run = :lastRun WHERE profile_id = :profileId AND meta_id = :metaId;
+
+setRulePaused:
+UPDATE download_sync_rule SET paused = :paused WHERE profile_id = :profileId AND meta_id = :metaId;
+
+-- The series' name and poster as a run fetched them, on every profile's rule for it.
+setRuleTitle:
+UPDATE download_sync_rule SET title = :title, poster = :poster WHERE meta_id = :metaId;
+
+deleteRule:
+DELETE FROM download_sync_rule WHERE profile_id = ? AND meta_id = ?;
+
+deleteRulesForProfile:
+DELETE FROM download_sync_rule WHERE profile_id = ?;
+
+deleteAllRules:
+DELETE FROM download_sync_rule;
+
+-- The watch state of every item a download or a Keep synced rule follows, per profile: the manager's "after a watch"
+-- (a watched mark, the watched threshold crossed) for auto-remove and Keep synced.
+selectWatchStates:
+SELECT library_item.profile_id, library_item.item_id, library_item.watched, library_item.times_watched,
+    library_item.flagged_watched
+FROM library_item
+WHERE library_item.deleted = 0 AND (
+    EXISTS (
+        SELECT 1 FROM download_owner JOIN download ON download.id = download_owner.download_id
+        WHERE download_owner.profile_id = library_item.profile_id AND download.meta_id = library_item.item_id
+    )
+    OR EXISTS (
+        SELECT 1 FROM download_sync_rule
+        WHERE download_sync_rule.profile_id = library_item.profile_id AND download_sync_rule.meta_id = library_item.item_id
+    )
+);

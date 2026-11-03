@@ -1,0 +1,13 @@
+{
+  "streams": [
+    {
+      "url": "https://archive.org/download/Night.Of.The.Living.Dead_1080p/NightOfTheLivingDead_1080p.mp4",
+      "name": "Tortuga demo",
+      "description": "Night of the Living Dead (1968), 480p\nPublic domain, from the Internet Archive",
+      "behaviorHints": {
+        "videoSize": 597585042,
+        "filename": "NightOfTheLivingDead_1080p.mp4"
+      }
+    }
+  ]
+}

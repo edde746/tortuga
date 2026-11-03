@@ -1,0 +1,1 @@
+Première version de Tortuga : parcourez les catalogues de vos add-ons, lisez leurs sources, téléchargez pour regarder hors ligne, regardez ensemble, et gardez vos profils, votre bibliothèque et votre progression synchronisés entre vos appareils.

@@ -1,0 +1,14 @@
+Funguje s doplňky Stremio: doplněk nainstalujete pomocí jeho odkazu
+Domů, Objevit a Hledat napříč všemi doplňky
+Streamy titulu seskupené podle doplňků
+Přehrává pomocí mpv, s HDR10 a Dolby Vision, pokud je váš počítač i displej podporují
+Interní titulky i titulky z doplňků; volba zvuku a titulků se přenese na další epizodu
+Přeskakování úvodů, rekapitulací a závěrečných titulků
+„Pokračovat ve sledování“, průběh sledování a označení zhlédnutých titulů
+Stahování ke sledování offline
+Společné sledování se synchronizovaným přehráváním, každý přes své vlastní doplňky
+Profily s vlastními doplňky, knihovnou a nastavením a volitelným PINem
+Synchronizace mezi zařízeními po přihlášení přes Apple, Google nebo GitHub
+Trakt, Simkl, MDBList, MyAnimeList a AniList
+Klávesové zkratky, multimediální klávesy a ovládání médií ve Windows
+21 jazyků

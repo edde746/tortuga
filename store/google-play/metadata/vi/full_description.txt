@@ -1,0 +1,37 @@
+Tortuga là trình phát video hoạt động với tiện ích Stremio. Các tiện ích bạn cài đặt cung cấp danh mục và nguồn phát, còn Tortuga phát chúng. Tortuga không tự cung cấp bất kỳ nội dung nào.
+
+Cách hoạt động
+• Cài đặt tiện ích bằng liên kết của tiện ích đó. Danh mục, kết quả tìm kiếm, trang nội dung và nguồn phát đều đến từ các tiện ích của bạn, và yêu cầu của bạn được gửi thẳng đến chúng.
+• Trang chủ hiển thị Tiếp tục xem và danh mục từ các tiện ích của bạn. Khám phá cho phép lọc theo loại và thể loại. Tìm kiếm bao quát mọi tiện ích.
+• Nguồn phát của một bộ phim hay một tập được nhóm theo tiện ích. Chọn một nguồn là video bắt đầu phát.
+
+Trình phát
+• Phát video bằng mpv, kèm HDR10 và Dolby Vision nếu thiết bị của bạn hỗ trợ.
+• Truyền thẳng âm thanh: Dolby Atmos và DTS đến bộ thu của bạn.
+• Phụ đề nhúng và phụ đề từ tiện ích, được khớp với tệp video. Lựa chọn âm thanh và phụ đề của bạn được giữ cho tập tiếp theo.
+• Chương trên thanh tua. Bỏ qua phần giới thiệu, phần tóm tắt và danh đề bằng một nút bấm hoặc tự động.
+• Đếm ngược tập tiếp theo, tập trước và tập tiếp theo, tốc độ phát, cùng độ trễ phụ đề và âm thanh.
+• Hình trong hình trên điện thoại và máy tính bảng.
+• Muốn dùng trình phát khác? Gửi video sang một ứng dụng trình phát khác trên thiết bị của bạn.
+
+Thư viện của bạn
+• Tiến độ xem và dấu đã xem, cùng Tiếp tục xem trên Trang chủ để bạn quay lại xem tiếp.
+• Tortuga ghi nhớ nguồn phát bạn đã chọn và phát tập tiếp theo từ cùng nguồn đó.
+• Tải xuống: lưu phim và các tập phim cùng phụ đề để xem ngoại tuyến. Tortuga có thể luôn giữ sẵn các tập chưa xem tiếp theo của một phim bộ.
+
+Xem cùng nhau
+Tạo phòng rồi chia sẻ mã phòng hoặc liên kết mời. Việc phát luôn được đồng bộ, và mỗi người phát nội dung qua tiện ích của riêng mình.
+
+Tài khoản và hồ sơ của bạn
+• Đăng nhập bằng Google, Apple hoặc GitHub. Hồ sơ, tiện ích, thư viện, tiến độ xem và cài đặt hồ sơ của bạn được đồng bộ trên các thiết bị. Liên kết TV bằng mã QR hoặc mã ngắn.
+• Mỗi người trong gia đình có một hồ sơ, với tiện ích, thư viện và cài đặt riêng. Mã PIN là tùy chọn.
+• Kết nối Trakt, Simkl, MDBList, MyAnimeList hoặc AniList: ghi nhận lượt xem, lịch sử xem, đánh giá và danh sách.
+• Tính năng đồng bộ chạy trên máy chủ Tortuga, hoặc trên máy chủ do bạn tự vận hành.
+
+Trên Android TV và Google TV, toàn bộ ứng dụng đều dùng được bằng điều khiển từ xa.
+
+Tortuga là phần mềm mã nguồn mở theo giấy phép GPL-3.0 và hỗ trợ 21 ngôn ngữ. Không quảng cáo, không công cụ phân tích.
+
+Trình phát trong ảnh chụp màn hình hiển thị các đoạn trích ngắn từ Spring (2019), Coffee Run (2020), Sprite Fright (2021) và Wing It! (2023) của Blender Studio, (CC) Blender Foundation | studio.blender.org, được cấp phép theo CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga sử dụng Trakt nhưng không được Trakt bảo trợ hay chứng nhận.

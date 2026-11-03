@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+The tvOS app's entitlements (project.yml): Sign in with Apple, as the iOS app's (Tortuga.entitlements), and the App
+Group group.com.edde746.tortuga, shared with the Top Shelf extension (../../TopShelf/TopShelf.entitlements), where the
+app writes the shelf's payload (TopShelfPublisher). A profile carries the group only once team G88U5B5783 has
+registered it and enabled it on the App IDs com.edde746.tortuga and com.edde746.tortuga.TopShelfExtension; simulator
+builds need no profile.
+-->
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.edde746.tortuga</string>
+	</array>
+</dict>
+</plist>

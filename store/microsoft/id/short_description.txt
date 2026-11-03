@@ -1,0 +1,1 @@
+Pemutar video yang bekerja dengan add-on Stremio. Add-on yang Anda pasang menyediakan katalog dan stream, lalu Tortuga memutarnya. Tortuga tidak menyediakan konten sendiri.

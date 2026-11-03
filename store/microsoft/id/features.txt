@@ -1,0 +1,14 @@
+Bekerja dengan add-on Stremio: pasang add-on melalui tautannya
+Beranda, Jelajahi, dan Cari di semua add-on
+Stream sebuah judul dikelompokkan per add-on
+Memutar video dengan mpv, termasuk HDR10 dan Dolby Vision bila komputer dan layar Anda mendukungnya
+Subtitel tertanam dan dari add-on; pilihan audio dan subtitel Anda terbawa ke episode berikutnya
+Lewati intro, rekap, dan kredit
+Lanjutkan Menonton, progres, dan tanda sudah ditonton
+Unduhan untuk ditonton secara offline
+Tonton Bersama secara sinkron, setiap orang melalui add-on mereka sendiri
+Profil dengan add-on, pustaka, dan pengaturannya sendiri, serta PIN opsional
+Sinkronisasi di semua perangkat Anda setelah masuk dengan Apple, Google, atau GitHub
+Trakt, Simkl, MDBList, MyAnimeList, dan AniList
+Pintasan keyboard, tombol media, dan kontrol media Windows
+21 bahasa

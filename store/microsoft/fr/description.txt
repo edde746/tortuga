@@ -1,0 +1,34 @@
+Tortuga est un lecteur vidéo compatible avec les add-ons Stremio. Les add-ons que vous installez apportent les catalogues et les sources, et Tortuga les lit. Tortuga ne fournit lui-même aucun contenu.
+
+Comment ça marche
+• Installez un add-on à partir de son lien. Les catalogues, les résultats de recherche, les fiches des titres et les sources viennent de vos add-ons, et vos requêtes leur sont envoyées directement.
+• L’Accueil affiche « Continuer à regarder » et les catalogues de vos add-ons. L’écran Découvrir filtre par type et par genre. L’écran Rechercher interroge tous les add-ons.
+• Les sources d’un film ou d’un épisode sont regroupées par add-on. Choisissez-en une et la lecture démarre.
+
+Le lecteur
+• Lecture avec mpv, en HDR10 et Dolby Vision si votre ordinateur et votre écran les prennent en charge.
+• Sous-titres intégrés et sous-titres des add-ons, correspondant au fichier. Vos choix de piste audio et de sous-titres sont repris à l’épisode suivant.
+• Chapitres sur la barre de progression. Passez les intros, les récapitulatifs et les génériques d’une pression sur un bouton ou automatiquement.
+• Compte à rebours de l’épisode suivant, passage à l’épisode précédent ou suivant, vitesse de lecture, décalage des sous-titres et décalage audio.
+• Raccourcis clavier, touches multimédias et commandes multimédias de Windows.
+• Vous préférez un autre lecteur ? Envoyez la vidéo vers une autre application de lecture sur votre ordinateur.
+
+Votre bibliothèque
+• Progression de lecture et titres marqués comme vus, avec « Continuer à regarder » sur l’Accueil pour reprendre là où vous en étiez.
+• Tortuga retient la source que vous avez choisie et lit l’épisode suivant depuis la même source.
+• Téléchargements : enregistrez des films et des épisodes, avec leurs sous-titres, pour les regarder hors ligne. Tortuga peut tenir une série à jour avec les prochains épisodes non vus.
+
+Regarder ensemble
+Créez un salon et partagez son code ou un lien d’invitation. La lecture reste synchronisée, et chacun lit le titre depuis ses propres add-ons.
+
+Votre compte et vos profils
+• Connectez-vous avec Apple, Google ou GitHub. Vos profils, vos add-ons, votre bibliothèque, votre progression et vos paramètres de profil sont synchronisés entre vos appareils. Associez un téléviseur avec un code QR ou un code court.
+• Un profil pour chaque membre du foyer, chacun avec ses propres add-ons, sa bibliothèque et ses paramètres. Le code PIN est facultatif.
+• Connectez Trakt, Simkl, MDBList, MyAnimeList ou AniList pour le suivi de lecture, l’historique de visionnage, les notes et les listes.
+• La synchronisation passe par le serveur de Tortuga, ou par un serveur que vous hébergez vous-même.
+
+Tortuga est open source, sous licence GPL-3.0, et disponible en 21 langues. Pas de publicité, pas d’outil d’analyse.
+
+Le lecteur des captures d’écran montre de courts extraits de Spring (2019), Coffee Run (2020), Sprite Fright (2021) et Wing It! (2023) de Blender Studio, (CC) Blender Foundation | studio.blender.org, sous licence CC BY 4.0.
+
+Tortuga utilise Trakt, mais n’est ni approuvé ni certifié par Trakt.

@@ -1,0 +1,5 @@
+-- Version 5 → 6: an installed addon's enable switch and the user's agreement to send it their watch activity
+-- (data/db/Addon.sq). Addons installed before are on, without the agreement.
+
+ALTER TABLE addon ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE addon ADD COLUMN watch_activity INTEGER NOT NULL DEFAULT 0;

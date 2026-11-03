@@ -1,0 +1,164 @@
+name: CI
+
+# Ubuntu builds and tests shared, Android, the server and the Linux desktop app; Windows runs
+# the JVM tests and the desktop UI tests (:ui-compose:jvmTest needs AWT's toolkit, which the Windows runner has and the
+# Ubuntu one, with no display, doesn't: Ubuntu only compiles them); macOS runs the Kotlin/Native tests and builds the
+# Apple apps. Device-level checks (emulators, simulators, the Android instrumented tests, the Windows/Linux test hosts)
+# run locally through the device test harnesses and the Gradle device tasks, not here.
+
+on:
+  push:
+    branches: [main]
+  # Untrusted code stays on the read-only pull_request event. Never use pull_request_target here.
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Shared, Android and Linux desktop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # 25 for the desktop modules' toolchain, 27 (listed last, so the default) runs Gradle, the shared modules and the
+      # server.
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            25
+            27
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+      # build-logic is an included build: the root `check` doesn't reach its tests (string generator validation).
+      # :server:test runs Postgres in Testcontainers, which needs the runner's Docker (ubuntu only).
+      - name: Build and test
+        run: >
+          ./gradlew --console=plain
+          :build-logic:test
+          :shared:jvmTest
+          :dev:jvmTest
+          :shared:verifyCommonMainTortugaDatabaseMigration
+          :dev:compileRecordKotlinJvm
+          :server:test
+          :ui-compose:compileTestKotlinJvm
+          :app-android:assembleDebug
+          :app-android:assembleRelease
+          :mpv-jvm:test
+          :app-desktop:test
+      - name: Server image
+        run: docker build -f server/Dockerfile .
+      # The failing tests' messages and output, which Gradle's console leaves out.
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports-linux
+          path: |
+            **/build/test-results/
+            **/build/reports/tests/
+          if-no-files-found: ignore
+
+  windows:
+    name: Windows desktop
+    runs-on: windows-latest
+    env:
+      # No Android SDK on this job; settings.gradle.kts then leaves the Android modules and targets out.
+      TORTUGA_ANDROID: "false"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            25
+            27
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+      - name: Build and test
+        run: ./gradlew --console=plain :shared:jvmTest :ui-compose:jvmTest :mpv-jvm:test :app-desktop:test
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports-windows
+          path: |
+            **/build/test-results/
+            **/build/reports/tests/
+          if-no-files-found: ignore
+
+  apple:
+    name: Apple (iOS, tvOS, macOS)
+    # The apps build against the iOS, tvOS and macOS 27 SDKs: Xcode 27.2, which macos-26 doesn't have.
+    runs-on: xcode-27
+    env:
+      TORTUGA_ANDROID: "false"
+      DEVELOPER_DIR: /Applications/Xcode_27.2.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "27"
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+      # shared's and dev's commonTest on the Apple simulators' runtimes.
+      - name: Kotlin/Native tests
+        run: ./gradlew --console=plain :shared:iosSimulatorArm64Test :shared:tvosSimulatorArm64Test :dev:iosSimulatorArm64Test
+      # The XcodeGen release project.yml names (minimumXcodeGenVersion), checked by its sha256.
+      - name: Generate the Xcode project
+        run: |
+          xcodegen=$(tools/install_xcodegen.sh "$RUNNER_TEMP")
+          cd apple && "$xcodegen" generate
+      - name: Build the three apps
+        working-directory: apple
+        run: |
+          set -euo pipefail
+          build() {
+            xcodebuild -project Tortuga.xcodeproj -scheme "$1" -configuration Debug -destination "$2" \
+              -derivedDataPath "$RUNNER_TEMP/dd" CODE_SIGNING_ALLOWED=NO build
+          }
+          build Tortuga-iOS "generic/platform=iOS Simulator"
+          build Tortuga-tvOS "generic/platform=tvOS Simulator"
+          build Tortuga-macOS "platform=macOS,arch=arm64"
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports-apple
+          path: |
+            **/build/test-results/
+            **/build/reports/tests/
+          if-no-files-found: ignore
+
+  # website/: the type check and the static build Cloudflare deploys (website/README.md, Deploy).
+  website:
+    name: Website
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: "1.4.2"
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Check
+        run: bun run check
+      - name: Build
+        run: bun run build

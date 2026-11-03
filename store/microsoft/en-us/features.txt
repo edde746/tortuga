@@ -1,0 +1,14 @@
+Works with Stremio addons: install an addon by its link
+Home, Discover and Search across every addon
+A title's streams grouped by addon
+Plays with mpv, with HDR10 and Dolby Vision where your PC and display support them
+Embedded and addon subtitles; your audio and subtitle choices carry to the next episode
+Skip intros, recaps and credits
+Continue Watching, progress and watched marks
+Downloads to watch offline
+Watch together in sync, each person through their own addons
+Profiles with their own addons, library and settings, and an optional PIN
+Sync across your devices with Apple, Google or GitHub sign-in
+Trakt, Simkl, MDBList, MyAnimeList and AniList
+Keyboard shortcuts, media keys and the Windows media controls
+21 languages

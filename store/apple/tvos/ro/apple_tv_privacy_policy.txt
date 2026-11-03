@@ -1,0 +1,11 @@
+Tortuga is a video player and provides no content. The addons you install, and the servers they point to, get your requests directly. Tortuga's own server is not in that path.
+
+With a Tortuga account, Tortuga's server keeps your sign-in identity, your devices, what you sync and your profiles' tracker sign-ins. It can read them, and stores what you sync and the tracker sign-ins encrypted at rest. There is no end-to-end encryption.
+
+Watch together sends what you play, and your profile's name, to the others in the room through Open Watch Party's public relays, or another relay you choose.
+
+No ads, and Tortuga runs no analytics of its own. Your data is not sold. Delete your account at any time in Settings, under Account.
+
+When the app crashes, or a fault stops one part of it while the rest keeps running, it sends a report to the developer's own crash-report server: what went wrong, the app's version, and the device's model and system. A report never holds your account, your addon links or your device's name. Turn crash reports off in Settings, under This device.
+
+The full policy is at usetortuga.app/privacy.

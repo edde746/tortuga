@@ -1,0 +1,135 @@
+{
+  "store_settings": {
+    "category": "Movies & TV",
+    "privacy_policy": "https://usetortuga.app/privacy/"
+  },
+  "target_audience": [
+    "13-17",
+    "18+"
+  ],
+  "content_rating": {
+    "violence": "None",
+    "cartoon_violence": "None",
+    "drugs": "None",
+    "nudity": "None",
+    "sex": "None",
+    "intolerance": "None",
+    "profanity": "None",
+    "academic": "None",
+    "account_creation_or_personal_info": true,
+    "account_creation_or_personal_info_why": "Sign-in creates a Tortuga account (the sign-in provider's ID for the user, a verified email when it shares one). Crash reports (sent when the app crashes or a fault stops one part of it), on by default and off in Settings > This device > Privacy, carry the error and the device's model and system, no account or device ID; the privacy policy describes both.",
+    "advertisements": false,
+    "gambling": false,
+    "location_detection": false,
+    "user_generated_content_or_communication": true,
+    "user_generated_content_or_communication_why": "Watch together shares a profile name and what plays with the others in a room. No chat."
+  },
+  "language_support": {
+    "ar": "Arabic",
+    "cs": "Czech",
+    "de": "German",
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "hi": "Hindi",
+    "id": "Indonesian",
+    "it": "Italian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "nl": "Dutch",
+    "pl": "Polish",
+    "pt-BR": "Portuguese",
+    "ro": "Romanian",
+    "ru": "Russian",
+    "sv": "Swedish",
+    "th": "Thai",
+    "tr": "Turkish",
+    "uk": "Ukrainian",
+    "vi": "Vietnamese"
+  },
+  "user_data_privacy": {
+    "_about": "Amazon's User Data Privacy Questionnaire, as google-play/forms.json data_safety: collected means it leaves the device for Tortuga's server or crash-report server. Nothing is transferred to a third party except at the user's request (addons they install, trackers they connect, watch-together rooms they open), and crash reports go only to the developer's own crash-report server.",
+    "user_info": {
+      "collected": true,
+      "transferred_to_third_parties": false,
+      "purposes": [
+        "App functionality",
+        "Account management"
+      ],
+      "what": "profile names; the sign-in provider's verified email, when it shares one; the provider's identifier for the user, the account ID, the username at a connected tracker"
+    },
+    "financial_info": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "device_or_other_ids": {
+      "collected": true,
+      "transferred_to_third_parties": false,
+      "purposes": [
+        "Account management"
+      ],
+      "what": "each signed-in device's session, with the device name and platform"
+    },
+    "health_and_fitness": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "location": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "web_browsing": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "photos_or_videos": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "audio_files": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "app_info_and_performance": {
+      "collected": true,
+      "transferred_to_third_parties": false,
+      "required": false,
+      "purposes": [
+        "App functionality",
+        "Analytics"
+      ],
+      "what": "crash reports: the error, its stack trace, the app's events before it, the app's version and the device's model, system, language, time zone, memory, storage, battery and screen, with every link cut to its origin and no account or device ID; on by default, off with Settings > This device > Privacy > Send crash reports. While Suggest a stream is on (off by default), what the screen and decoders handle and how playback went, with each stream picked by hand"
+    },
+    "app_activity": {
+      "collected": true,
+      "transferred_to_third_parties": false,
+      "purposes": [
+        "App functionality"
+      ],
+      "what": "library, watch progress, watched marks, the stream picked for each video; profiles (name, avatar, PIN hash), each profile's addons with their links, profile settings; while Suggest a stream is on (off by default), the streams picked by hand with the parsed descriptions of those around them (no links). Recent searches stay on the device"
+    },
+    "messages": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "files_and_docs": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "calendar": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    },
+    "contacts": {
+      "collected": false,
+      "transferred_to_third_parties": false
+    }
+  },
+  "data_deletion": {
+    "account_deletion": true,
+    "deletion_url": "https://usetortuga.app/support/#delete",
+    "only_data_deletion_from_the_account": true,
+    "how": "Without deleting the account: Settings > Account > Sign-ins removes a sign-in method, Settings > Account > Devices signs a device out and deletes its session, disconnecting a tracker deletes its sign-in from the server, and deleting a profile or removing a library item or addon removes it from every device, the server keeping only an encrypted deletion marker with the item's ID."
+  },
+  "testing_instructions": "Choose Sign in with Google and use the reviewer account: email demo@usetortuga.app, password {reviewer_password}. Open the address the TV shows on a phone or computer signed in to that account and enter the TV's code. Nothing plays until an addon with streams is installed. To see something play, open Settings, then Addons, choose Install addon, enter https://usetortuga.app/demo/manifest.json, then Continue and Install. On Home, the last row is Tortuga demo: open Tears of Steel, choose Play and pick the Tortuga demo stream (it plays from download.blender.org); Night of the Living Dead (1968) plays from the Internet Archive. Support: support@usetortuga.app."
+}

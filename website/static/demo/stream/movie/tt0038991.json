@@ -1,0 +1,13 @@
+{
+  "streams": [
+    {
+      "url": "https://archive.org/download/TheStranger720p/TheStranger720p.mp4",
+      "name": "Tortuga demo",
+      "description": "The Stranger (1946), 480p\nPublic domain, from the Internet Archive",
+      "behaviorHints": {
+        "videoSize": 582034159,
+        "filename": "TheStranger720p.mp4"
+      }
+    }
+  ]
+}

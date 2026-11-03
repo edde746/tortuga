@@ -1,0 +1,21 @@
+# Context of server/Dockerfile (the repository root): only what Gradle needs to configure the build and compile
+# :shared and :server.
+.git
+.idea
+.fleet
+.vscode
+**/.gradle
+**/.kotlin
+**/build
+**/.cxx
+**/local.properties
+**/*.xcframework
+**/.DS_Store
+apple
+android
+tools/media/out
+server/.env
+server/*.key
+**/tortuga-backup.key
+server/dev
+server/backup

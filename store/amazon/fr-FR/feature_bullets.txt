@@ -1,0 +1,5 @@
+Lit les sources de vos add-ons avec mpv, avec prise en charge du HDR10, du Dolby Vision et du passthrough audio si votre équipement le permet
+Continuer à regarder, progression et titres marqués comme vus, et l’épisode suivant depuis la même source
+Passez les intros, les récapitulatifs et les génériques ; vos choix de piste audio et de sous-titres sont repris à l’épisode suivant
+Regarder ensemble : lecture synchronisée avec vos amis, chacun via ses propres add-ons
+Profils, add-ons, bibliothèque et progression synchronisés entre vos appareils

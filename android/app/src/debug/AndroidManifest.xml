@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The test builds (debug, and harness through build.gradle.kts), installed as com.edde746.tortuga.dev beside the
+     release build:
+     - profileable by the shell (Android 10+), so the device test harness's traces can sample the harness build's
+       threads (simpleperf, heapprofd) the way they can a debuggable build, without debuggable's slower runtime;
+     - without the link filters (tortuga://watch, tortuga://link and tortuga://detail, stremio:), which stay the release
+       build's: a link opened on a device that carries both opens Tortuga, not a chooser between the two. The harnesses
+       hand links to MainActivity by name (am start -n). The title links' App Link filter (https://usetortuga.app/t/…)
+       stays: the site's assetlinks.json lists a debug certificate too, so a test build signed with it opens them. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+        <profileable
+            android:shell="true"
+            tools:targetApi="29" />
+        <activity android:name=".MainActivity">
+            <intent-filter tools:node="remove">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tortuga" />
+                <data android:host="watch" />
+                <data android:host="link" />
+                <data android:host="detail" />
+            </intent-filter>
+            <intent-filter tools:node="remove">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="stremio" />
+            </intent-filter>
+        </activity>
+        <!-- This app's Watch Next rows for the shell, to which the TV provider shows none of them (WatchNextQuery).
+             DUMP guards it: the shell holds it, an ordinary app can't. -->
+        <receiver
+            android:name=".WatchNextQuery"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+        <!-- Crashes the app for the crash-report harness (CrashTrigger). DUMP guards it as above. -->
+        <receiver
+            android:name=".CrashTrigger"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+    </application>
+</manifest>

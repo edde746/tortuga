@@ -1,0 +1,2066 @@
+{
+  "app": {
+    "name": "Tortuga",
+    "checkForUpdates": "Güncellemeleri Denetle…",
+    "launchFailed": "Tortuga başlatılamadı.",
+    "startup": {
+      "database": "Veritabanı açılıyor…",
+      "migration": "Veritabanı güncelleniyor…",
+      "account": "Hesabınız yükleniyor…",
+      "profiles": "Profiller yükleniyor…"
+    },
+    "localNetworkUsage": "Tortuga; eklentilere, medyaya ve evde çalıştırdığınız eşitleme sunucusuna ulaşmak için yerel ağınızı kullanır."
+  },
+  "player": {
+    "nowPlaying": "Şimdi oynatılıyor",
+    "buffering": "Arabelleğe alınıyor…",
+    "position": "${position} / ${duration}",
+    "timeline": "Oynatma konumu",
+    "play": "Oynat",
+    "pause": "Duraklat",
+    "resolving": "Akış hazırlanıyor…",
+    "opening": "Açılıyor…",
+    "remaining": "−${time}",
+    "live": {
+      "badge": "CANLI",
+      "position": "Canlı · ${time} izlendi",
+      "behind": "Canlı · ${time} geride",
+      "goToLive": "Canlıya git"
+    },
+    "nextEpisode": "Sonraki bölüm",
+    "previousEpisode": "Önceki bölüm",
+    "lock": {
+      "button": "Ekranı kilitle",
+      "tapToUnlock": "Kilidi açmak için dokunun",
+      "tapAgainToUnlock": "Kilidi açmak için tekrar dokunun"
+    },
+    "format": {
+      "seconds": "${value} sn",
+      "positive": "+${value}",
+      "negative": "−${value}"
+    },
+    "speed": {
+      "normal": "Normal",
+      "value": "${speed}×"
+    },
+    "volume": {
+      "title": "Ses düzeyi",
+      "level": "%${percent}",
+      "muted": "Sessiz",
+      "mute": "Sesi kapat",
+      "unmute": "Sesi aç"
+    },
+    "menu": {
+      "audio": "Ses",
+      "subtitles": "Altyazılar",
+      "speed": "Oynatma hızı",
+      "subtitleDelay": "Altyazı gecikmesi",
+      "audioDelay": "Ses gecikmesi",
+      "moreSubtitles": "Diğer altyazılar",
+      "reset": "Sıfırla",
+      "subtitleDelayEarlier": "Altyazı gecikmesi: daha erken",
+      "subtitleDelayLater": "Altyazı gecikmesi: daha geç",
+      "audioDelayEarlier": "Ses gecikmesi: daha erken",
+      "audioDelayLater": "Ses gecikmesi: daha geç"
+    },
+    "track": {
+      "off": "Kapalı",
+      "numbered": "Parça ${number}",
+      "defaultTrack": "Varsayılan",
+      "forced": "Zorunlu",
+      "sdh": "SDH",
+      "audioDescription": "Sesli betimleme",
+      "external": "Harici",
+      "second": "İkinci altyazı",
+      "showAsSecond": "İkinci altyazı olarak göster",
+      "removeSecond": "İkinci altyazıyı kaldır",
+      "otherLanguage": "Diğer",
+      "mono": "Mono",
+      "stereo": "Stereo",
+      "channels": {
+        "one": "${n} kanal",
+        "other": "${n} kanal"
+      }
+    },
+    "info": {
+      "title": "Oynatma bilgileri",
+      "tab": "Bilgi",
+      "resolution": "Çözünürlük",
+      "video": "Video",
+      "dynamicRange": "Dinamik aralık",
+      "audio": "Ses",
+      "decoder": "Kod çözücü",
+      "cache": "Önbellek",
+      "size": "${width}×${height}",
+      "fps": "${fps} fps",
+      "kilohertz": "${value} kHz",
+      "hardwareDecoder": "Donanım (${name})",
+      "softwareDecoder": "Yazılım",
+      "dolbyVision": "Dolby Vision",
+      "dolbyVisionProfile": "Dolby Vision profili ${profile}",
+      "stream": "Akış",
+      "addon": "Eklenti",
+      "pickedBy": "Seçim şekli",
+      "autoPlayFirstMatch": "Otomatik oynatma, ilk eşleşme",
+      "autoPlayLastLink": "Otomatik oynatma, geçen seferkiyle aynı akış",
+      "source": "Kaynak",
+      "downloaded": "İndirilen dosya",
+      "name": "Ad",
+      "file": "Dosya",
+      "container": "Kapsayıcı",
+      "fileSize": "Boyut",
+      "bitrate": "Bit hızı",
+      "codec": "Kodek",
+      "pixelFormat": "Piksel biçimi",
+      "bitDepth": "${bits} bit",
+      "color": "Renk",
+      "lightLevel": "MaxCLL / MaxFALL",
+      "lightLevelValue": "${maxCll} / ${maxFall} nit",
+      "mastering": "Mastering ekranı",
+      "nitsRange": "${min}–${max} nit",
+      "droppedFrames": "Atlanan kareler",
+      "droppedFramesValue": "${output} (kod çözücü ${decoder})",
+      "delayedFrames": "Geciken kareler",
+      "output": "Çıkış",
+      "hertz": "${value} Hz",
+      "channels": "Kanallar",
+      "sampleRate": "Örnekleme hızı",
+      "track": "Parça",
+      "secondTrack": "İkinci parça",
+      "passthrough": "Doğrudan aktarım (${format})",
+      "spatialAudio": "Uzamsal ses",
+      "rendering": "İşleme",
+      "surround": "Çevresel ses",
+      "subtitles": "Altyazılar",
+      "format": "Biçim",
+      "embedded": "Gömülü",
+      "delay": "Gecikme",
+      "network": "Ağ",
+      "downloadSpeed": "İndirme hızı",
+      "buffering": "Arabelleğe alınıyor",
+      "percent": "%${value}",
+      "megabitsPerSecond": "${value} Mb/sn",
+      "kilobitsPerSecond": "${value} kb/sn",
+      "perSecond": "${size}/sn"
+    },
+    "skip": {
+      "intro": "Girişi atla",
+      "recap": "Özeti atla",
+      "credits": "Jeneriği atla"
+    },
+    "prompt": {
+      "playNext": "Sonraki bölümü oynat: ${episode}",
+      "countdown": {
+        "one": "${n} saniye içinde otomatik olarak",
+        "other": "${n} saniye içinde otomatik olarak"
+      }
+    },
+    "options": {
+      "title": "Seçenekler",
+      "videoFit": "En boy oranı",
+      "fit": {
+        "contain": "Sığdır",
+        "cover": "Ekranı doldur",
+        "fill": "Uzat"
+      },
+      "zoom": "Yakınlaştırma",
+      "percent": "%${percent}",
+      "resetZoom": "Sıfırla",
+      "shaders": "Gölgelendiriciler",
+      "shader": {
+        "nvscalerDetail": "Daha keskin video için NVIDIA görüntü ölçekleme",
+        "neutral": "Nötr",
+        "denoise": "Parazit giderme",
+        "denoiseSharpen": "Parazit giderme + keskinleştirme",
+        "fast": "Hızlı",
+        "highQuality": "Yüksek kalite",
+        "modeDetail": "${quality} · Mod ${mode}",
+        "customDetail": "Özel GLSL gölgelendirici",
+        "importShader": "Gölgelendirici içe aktar",
+        "imported": "Gölgelendirici içe aktarıldı",
+        "importFailed": "Gölgelendirici içe aktarılamadı",
+        "deleteLabel": "${name} öğesini sil",
+        "deleteTitle": "${name} silinsin mi?",
+        "delete": "Sil",
+        "cancel": "İptal"
+      },
+      "sleepTimer": "Uyku zamanlayıcısı",
+      "sleepEndOfVideo": "Bu videonun sonu",
+      "sleepMinutes": {
+        "one": "${n} dakika",
+        "other": "${n} dakika"
+      },
+      "sleepLeft": "${time} kaldı",
+      "autoPlayNext": "Sonraki bölümü otomatik oynat",
+      "audioOutput": "Ses çıkışı",
+      "systemOutput": "Sistem varsayılanı",
+      "audioNormalization": "Ses düzeyini dengele",
+      "audioChannels": "Ses kanalları",
+      "channels": {
+        "original": "Orijinal",
+        "originalDetail": "Parçadaki tüm kanalları oynatır",
+        "surround51": "5.1'e kadar",
+        "surround51Detail": "Yalnızca 5.1 destekleyen TV ve alıcılar için 7.1'i 5.1'e indirger",
+        "stereo": "Stereo",
+        "stereoDetail": "Stereo hoparlör veya kulaklıklar için iki kanala indirger"
+      },
+      "on": "Açık",
+      "off": "Kapalı"
+    },
+    "stillWatching": {
+      "title": "Hâlâ izliyor musunuz?",
+      "countdown": {
+        "one": "${n} saniye içinde duraklatılacak",
+        "other": "${n} saniye içinde duraklatılacak"
+      },
+      "keepWatching": "Devam et",
+      "pause": "Duraklat"
+    },
+    "error": {
+      "title": "Bu akış oynatılamıyor",
+      "resolveTimeout": "Akışın başlaması çok uzun sürdü.",
+      "expired": "Akış bağlantısının süresi doldu.",
+      "notFound": "Bu akış artık kullanılamıyor.",
+      "http": "Sunucu HTTP ${status} ile yanıt verdi.",
+      "cantOpen": "Akış açılamadı.",
+      "unsupportedFormat": "Akış, oynatıcının okuyamadığı bir biçimde.",
+      "cantDecode": "Oynatıcı bu akışın görüntüsünü veya sesini oynatamadı.",
+      "engineFailed": "Oynatıcı bir hata nedeniyle durdu.",
+      "retry": "Tekrar dene",
+      "nextStream": "Sonraki akışı dene",
+      "close": "Kapat",
+      "alternatives": {
+        "one": "${n} akış daha var",
+        "other": "${n} akış daha var"
+      }
+    },
+    "errorVideo": {
+      "titleEpisode": "Bu bölüm değil",
+      "titleMovie": "Bu film değil",
+      "titleVideo": "Bu video değil",
+      "sent": "Eklenti, akış yerine bir hata videosu gönderdi.",
+      "byUrl": "Bağlantısı bir eklentinin hata videolarından biri.",
+      "bySize": "Dosya ${served}, oysa akış ${size} belirtiyordu.",
+      "byDuration": "Süresi ${length}, oysa bu video son oynattığınızda ${known} sürüyordu.",
+      "kept": "İlerlemeniz korunuyor.",
+      "chooseStream": "Başka bir akış seçin",
+      "watch": "Mesajı izle"
+    },
+    "osd": {
+      "volume": "Ses ${level}",
+      "brightness": "Parlaklık ${level}",
+      "speed": "Hız ${speed}",
+      "subtitleDelay": "Altyazı gecikmesi ${delay}",
+      "audioDelay": "Ses gecikmesi ${delay}",
+      "audioTrack": "Ses: ${track}",
+      "subtitleTrack": "Altyazı: ${track}",
+      "subtitlesOff": "Altyazı kapalı",
+      "chapter": "Kısım: ${title}",
+      "chapterNumbered": "Kısım ${number}",
+      "zoom": "Yakınlaştırma ${percent}",
+      "shader": "Gölgelendiriciler: ${name}",
+      "shadersOff": "Gölgelendiriciler kapalı"
+    }
+  },
+  "format": {
+    "size": {
+      "bytes": "${value} B",
+      "kilobytes": "${value} KB",
+      "megabytes": "${value} MB",
+      "gigabytes": "${value} GB",
+      "terabytes": "${value} TB",
+      "decimalSeparator": ","
+    }
+  },
+  "streams": {
+    "resolving": "Akış açılıyor…",
+    "resolveFailed": {
+      "http": "Akışın sunucusu HTTP ${status} ile yanıt verdi",
+      "timeout": "Akışın sunucusunun yanıt vermesi çok uzun sürdü",
+      "network": "Akışın sunucusuna bağlanılamadı",
+      "unsupportedUrl": "Bu akışın bağlantısı açılamıyor",
+      "tooManyRedirects": "Bu akışın bağlantısı çok fazla yönlendirme yapıyor",
+      "unexpected": "Bu uygulama, bu akışı açarken bir hatayla karşılaştı"
+    },
+    "badge": {
+      "instant": "Anında",
+      "notInstant": "Anında değil"
+    },
+    "lastUsed": "Son oynatılan",
+    "external": "Uygulama dışında açılır",
+    "unplayable": {
+      "one": "Bu uygulamanın oynatamadığı ${n} akış",
+      "other": "Bu uygulamanın oynatamadığı ${n} akış"
+    },
+    "empty": "Akış bulunamadı",
+    "all": "Tümü",
+    "refresh": "Yenile",
+    "retryNamed": "Tekrar dene: ${name}",
+    "filters": {
+      "hidden": {
+        "one": "Filtrelerinizin gizlediği ${n} akış",
+        "other": "Filtrelerinizin gizlediği ${n} akış"
+      },
+      "showing": {
+        "one": "Filtrelerinizin gizlediği ${n} akış gösteriliyor",
+        "other": "Filtrelerinizin gizlediği ${n} akış gösteriliyor"
+      },
+      "show": "Göster",
+      "hide": "Gizle",
+      "rowNote": "Filtreleriniz tarafından gizlendi"
+    },
+    "sort": {
+      "title": "Sırala",
+      "addonOrder": "Eklenti sırası",
+      "resolution": "Çözünürlük",
+      "source": "Kaynak kalitesi",
+      "sizeLargest": "Önce en büyük",
+      "sizeSmallest": "Önce en küçük",
+      "cached": "Önce anında olanlar"
+    },
+    "autoPlay": {
+      "noMatch": "Otomatik oynatma, filtrelerinize uyan bir akış bulamadı.",
+      "failed": "Otomatik oynatmanın seçtiği akış başlamadı. Başka bir akış seçin."
+    },
+    "download": {
+      "notice": "İndirilecek akışı seçin.",
+      "action": "İndir",
+      "actionNamed": "İndir: ${name}",
+      "queued": "İndirilenler'e eklendi",
+      "failed": "İndirme eklenemedi."
+    },
+    "suggested": {
+      "label": "Önerilen",
+      "reason": "Son seçimlerinize benzer: ${features}",
+      "audio": "ses: ${language}",
+      "subtitles": "altyazı: ${language}",
+      "smaller": "daha küçük dosyalar",
+      "larger": "daha büyük dosyalar"
+    }
+  },
+  "detail": {
+    "loadFailed": "Ayrıntılar yüklenemedi.",
+    "notFound": "Hiçbir eklenti bu içeriğin ayrıntılarını sağlamıyor.",
+    "noAddons": "Yüklü eklentilerin hiçbiri bu içeriğin ayrıntılarını sağlamıyor.",
+    "noAnimeAddon": "Yüklü eklentilerin hiçbiri bu animenin ayrıntılarını sağlamıyor. Açmak için bir anime eklentisi yükleyin.",
+    "animeListsUnavailable": "Anime listeleri yüklenemedi, bu yüzden bu anime bir yapımla eşleştirilemiyor. Bağlantınızı kontrol edip yeniden deneyin.",
+    "findingAnime": "Bu anime, anime listelerinde aranıyor…",
+    "sourceError": "${addon}: ${error}",
+    "infoJoin": "${first} · ${second}",
+    "listSeparator": ", ",
+    "runtime": {
+      "hoursMinutes": "${hours} sa ${minutes} dk",
+      "hours": "${hours} sa",
+      "minutes": "${minutes} dk"
+    },
+    "ratings": {
+      "source": {
+        "rottenTomatoesCritics": "Rotten Tomatoes eleştirmenleri",
+        "rottenTomatoesAudience": "Rotten Tomatoes izleyicileri",
+        "imdb": "IMDb",
+        "tmdb": "TMDB",
+        "metacritic": "Metacritic",
+        "letterboxd": "Letterboxd",
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "myAnimeList": "MyAnimeList",
+        "aniList": "AniList"
+      },
+      "label": "${source} ${value}",
+      "percentLabel": "${source} yüzde ${value}"
+    },
+    "userRating": {
+      "rateLabel": "Bu içeriğe puan verin",
+      "label": "Puanınız: ${score}",
+      "range": "${low}–${high}",
+      "title": "Puanınız",
+      "hint": "Puanınız aşağıdaki her hizmete gönderilir.",
+      "clear": "Puanı kaldır",
+      "checking": "Kontrol ediliyor…",
+      "notRated": "Puan verilmedi",
+      "unreadable": "Kontrol edilemedi",
+      "saving": "Kaydediliyor…",
+      "saved": "Kaydedildi",
+      "removed": "Kaldırıldı",
+      "queued": "Henüz gönderilmedi, yeniden denenecek",
+      "failed": "Kaydedilmedi"
+    },
+    "links": {
+      "genres": "Türler",
+      "cast": "Oyuncular",
+      "directors": "Yönetmenler",
+      "writers": "Senaristler",
+      "website": "Web sitesi"
+    },
+    "facts": {
+      "title": "Bilgiler",
+      "released": "Çıkış tarihi",
+      "runtime": "Süre",
+      "country": "Ülke",
+      "language": "Dil",
+      "awards": "Ödüller",
+      "source": "Ayrıntıların kaynağı",
+      "failed": "Yüklenemeyen kaynak"
+    },
+    "trailer": "Fragman",
+    "trailerNumbered": "Fragman ${number}",
+    "trailers": "Fragmanlar",
+    "share": "Paylaş",
+    "season": "${number}. Sezon",
+    "specials": "Özel bölümler",
+    "episodeNumbered": "${number}. Bölüm",
+    "numberedTitle": "${number}. ${title}",
+    "episodeRange": "${first}–${last}",
+    "withCast": "Oyuncular: ${names}",
+    "castAndCrew": "Oyuncular ve ekip",
+    "airs": "Yayınlanacak: ${date}",
+    "date": "${day} ${month} ${year}",
+    "month": {
+      "jan": "Oca",
+      "feb": "Şub",
+      "mar": "Mar",
+      "apr": "Nis",
+      "may": "May",
+      "jun": "Haz",
+      "jul": "Tem",
+      "aug": "Ağu",
+      "sep": "Eyl",
+      "oct": "Eki",
+      "nov": "Kas",
+      "dec": "Ara"
+    },
+    "play": "Oynat",
+    "playEpisode": "Oynat ${episode}",
+    "resume": "Devam et ${time}",
+    "resumeEpisode": "Devam et ${episode} · ${time}",
+    "addToLibrary": "Kitaplığa ekle",
+    "removeFromLibrary": "Kitaplıktan kaldır",
+    "markWatched": "İzlendi olarak işaretle",
+    "markUnwatched": "İzlenmedi olarak işaretle",
+    "markAllWatched": "Tüm bölümleri izlendi olarak işaretle",
+    "markAllUnwatched": "Tüm bölümleri izlenmedi olarak işaretle",
+    "markSeasonWatched": "Sezonu izlendi olarak işaretle",
+    "markSeasonUnwatched": "Sezonu izlenmedi olarak işaretle",
+    "watched": "İzlendi",
+    "overviewHidden": "Açıklama gizlendi",
+    "moreActions": "Diğer işlemler",
+    "moreActionsNamed": "Diğer işlemler: ${name}",
+    "showMore": "Daha fazla",
+    "showLess": "Daha az",
+    "findingStream": "Akış aranıyor…",
+    "chooseStream": "Akış seçin",
+    "download": {
+      "download": "İndir",
+      "queued": "Sırada",
+      "waitingForWifi": "Wi-Fi bekleniyor",
+      "downloading": "İndiriliyor %${percent}",
+      "downloadingStarted": "İndiriliyor…",
+      "paused": "Duraklatıldı",
+      "failed": "İndirme başarısız oldu",
+      "partial": "${done}/${total} indirildi",
+      "downloaded": "İndirildi",
+      "menuTitle": "İndir",
+      "allSeasons": "Tüm sezonlar",
+      "pick": {
+        "all": "Tüm bölümler",
+        "unwatched": "İzlenmemiş bölümler",
+        "next5": "Sonraki 5 izlenmemiş bölüm",
+        "next10": "Sonraki 10 izlenmemiş bölüm"
+      },
+      "keepSynced": "Eşitlenmiş tut",
+      "keepSyncedCount": {
+        "one": "İzlenmemiş ${n} bölümü cihazda tut",
+        "other": "İzlenmemiş ${n} bölümü cihazda tut"
+      },
+      "keepSyncedAll": "İzlenmemiş tüm bölümleri cihazda tut",
+      "manage": "İndirmeleri yönet",
+      "pauseAll": "İndirmeleri duraklat",
+      "resumeAll": "İndirmelere devam et",
+      "deleteSeason": "Bu sezonun indirmelerini sil",
+      "deleteAll": "Tüm indirmeleri sil",
+      "queuedEpisodes": {
+        "one": "${n} bölüm İndirilenler'e eklendi",
+        "other": "${n} bölüm İndirilenler'e eklendi"
+      },
+      "nothingQueued": "Tüm bölümler zaten indirilmiş veya sırada.",
+      "failedToQueue": "İndirmeler eklenemedi.",
+      "episode": {
+        "download": "Bölümü indir",
+        "pause": "İndirmeyi duraklat",
+        "resume": "İndirmeye devam et",
+        "retry": "İndirmeyi tekrar dene",
+        "pickStream": "Akış seçin",
+        "cancel": "İndirmeyi iptal et",
+        "delete": "İndirmeyi sil",
+        "queued": "Sırada",
+        "downloading": "%${percent}",
+        "paused": "Duraklatıldı",
+        "failed": "İndirme başarısız oldu",
+        "downloaded": "İndirildi"
+      }
+    },
+    "related": {
+      "title": "Benzer içerikler",
+      "noneFound": "Benzer içerik bulunamadı."
+    }
+  },
+  "library": {
+    "title": "Kitaplık",
+    "continueWatching": "İzlemeye Devam Et",
+    "sort": {
+      "lastWatched": "Son izlenenler",
+      "added": "Son eklenenler",
+      "name": "Ad (A–Z)",
+      "nameReverse": "Ad (Z–A)",
+      "timesWatched": "En çok izlenenler",
+      "watched": "Önce izlenenler",
+      "notWatched": "Önce izlenmeyenler"
+    },
+    "sortBy": "Sıralama ölçütü",
+    "sortByNamed": "Sıralama ölçütü: ${name}",
+    "empty": "Burada henüz bir şey yok. İçerikleri ayrıntı sayfalarından kitaplığa ekleyin.",
+    "emptyContinueWatching": "Devam edilecek bir şey yok. İzlemeye başladığınız içerikler burada görünür.",
+    "emptyType": "Burada bu türde bir şey yok.",
+    "watched": "İzlendi"
+  },
+  "mediaMenu": {
+    "markWatched": "İzlendi olarak işaretle",
+    "markUnwatched": "İzlenmedi olarak işaretle",
+    "removeFromContinueWatching": "İzlemeye Devam Et listesinden kaldır",
+    "details": "Ayrıntılara git",
+    "addToLibrary": "Kitaplığa ekle",
+    "removeFromLibrary": "Kitaplıktan kaldır",
+    "playFromStart": "Baştan oynat",
+    "markSeasonWatched": "Sezonu izlendi olarak işaretle",
+    "markSeasonUnwatched": "Sezonu izlenmedi olarak işaretle",
+    "chooseStream": "Akış seçin",
+    "download": "İndir",
+    "pauseDownload": "İndirmeyi duraklat",
+    "resumeDownload": "İndirmeye devam et",
+    "retryDownload": "İndirmeyi tekrar dene",
+    "cancelDownload": "İndirmeyi iptal et",
+    "deleteDownload": "İndirmeyi sil",
+    "pickStream": "Akış seçin",
+    "trailer": "Fragman",
+    "markFailed": "${title} işaretlenemedi: ayrıntılar yüklenemedi. Bağlantınızı kontrol edip tekrar deneyin."
+  },
+  "session": {
+    "episode": "S${season}:B${episode}",
+    "episodeTitle": "${episode} · ${title}",
+    "subtitleNumbered": "${title} ${number}"
+  },
+  "addons": {
+    "unreadable": "Yüklü eklentiler okunamadı. Yeniden denemek için Tortuga'yı yeniden başlatın.",
+    "error": {
+      "invalidTransportUrl": "Bu bir eklenti bağlantısı değil. Eklenti bağlantıları /manifest.json ile biter.",
+      "timeout": "Eklentinin yanıt vermesi çok uzun sürdü.",
+      "network": "Eklentiye ulaşılamadı.",
+      "http": "Eklenti bir hata döndürdü (HTTP ${status}).",
+      "invalidResponse": "Eklenti, bu uygulamanın okuyamadığı bir yanıt gönderdi.",
+      "unexpectedResponse": "Eklenti, istenenden farklı türde bir yanıt gönderdi.",
+      "emptyContent": "Hiçbir şey bulunamadı.",
+      "invalidManifest": "Eklentinin manifest dosyası geçersiz.",
+      "configurationRequired": "Bu eklentinin yüklenmeden önce yapılandırılması gerekiyor.",
+      "alreadyInstalled": "Bu eklenti zaten yüklü.",
+      "notInstalled": "Bu eklenti yüklü değil.",
+      "protectedAddon": "Bu eklenti yerleşiktir; kaldırılamaz ve kapatılamaz."
+    },
+    "title": "Eklentiler",
+    "allTypes": "Tümü",
+    "empty": "Yüklü eklenti yok.",
+    "emptyFiltered": "Bu türde yüklü eklenti yok.",
+    "builtIn": "Yerleşik",
+    "builtInExplanation": "Bu eklenti yerleşiktir; kaldırılamaz ve kapatılamaz.",
+    "cancel": "İptal",
+    "listSeparator": ", ",
+    "factsJoin": "${first}\u00a0· ${second}",
+    "moveUp": "Yukarı taşı",
+    "moveUpNamed": "Yukarı taşı: ${name}",
+    "moveDown": "Aşağı taşı",
+    "moveDownNamed": "Aşağı taşı: ${name}",
+    "dragToReorderNamed": "Yeniden sırala: ${name}",
+    "enabledNamed": "${name} kullan",
+    "close": "Kapat",
+    "version": "Sürüm ${version}",
+    "catalog": "${name} (${type})",
+    "resource": {
+      "catalog": "Kataloglar",
+      "meta": "Ayrıntılar",
+      "stream": "Akışlar",
+      "subtitles": "Altyazılar",
+      "addonCatalog": "Eklenti katalogları",
+      "player": "Oynatma etkinliği",
+      "library": "Kitaplık etkinliği"
+    },
+    "remove": {
+      "title": "${name} kaldırılsın mı?",
+      "message": "Yapılandırıldığı ayarlarla birlikte bu profilden tüm cihazlarda kaldırılır.",
+      "confirm": "Kaldır"
+    },
+    "details": {
+      "types": "İçerik türleri",
+      "resources": "Sağladıkları",
+      "catalogs": "Kataloglar",
+      "contact": "İletişim",
+      "configure": "Yapılandır",
+      "remove": "Kaldır",
+      "enabled": "Bu eklentiyi kullan",
+      "enabledOff": "Kapalı: Tortuga ondan hiçbir şey istemez ve kataloglarını göstermez.",
+      "shareTitle": "Eklenti bağlantısı",
+      "shareWarning": "Bu bağlantı, eklentinin yapılandırıldığı hesapların anahtarlarını içerebilir. Yalnızca güvendiğiniz kişilerle paylaşın.",
+      "revealLink": "Bağlantıyı göster",
+      "hideLink": "Bağlantıyı gizle",
+      "copyLink": "Bağlantıyı kopyala",
+      "linkCopied": "Bağlantı kopyalandı."
+    },
+    "watchActivity": {
+      "title": "İzleme etkinliğini gönder",
+      "explanation": "Bu eklenti izleme etkinliğini alır: neyi oynattığını, duraklattığını ve durdurduğunu, kitaplığına neyi eklediğini veya kaldırdığını ve neyi izlendi olarak işaretlediğini.",
+      "agree": "Bu eklentinin izleme etkinliğimi almasını kabul ediyorum",
+      "notAllowed": "Sen izin verene kadar izleme etkinliği almaz"
+    },
+    "install": {
+      "action": "Eklenti yükle",
+      "title": "Eklenti yükle",
+      "linkHint": "/manifest.json ile biten eklenti bağlantısı",
+      "submit": "Devam",
+      "confirm": "Yükle",
+      "update": "Güncelle",
+      "configure": "Yapılandır",
+      "configureFirst": "Bu eklentinin yüklenmeden önce yapılandırılması gerekiyor. Yapılandırın, ardından sayfasından yükleyin.",
+      "alreadyInstalled": "Bu eklenti zaten yüklü.",
+      "updateDetails": "Yüklü. Bu işlem eklentinin ayrıntılarını günceller.",
+      "updateVersion": "Yüklü. Bu işlem eklentiyi ${version} sürümüne günceller.",
+      "adult": "Bu eklenti yetişkin içerik olarak işaretlenmiş.",
+      "installed": "${name} yüklendi.",
+      "updated": "${name} güncellendi.",
+      "done": "Bitti"
+    },
+    "browse": {
+      "title": "Göz at",
+      "installed": "Yüklü",
+      "installedNote": "Yüklü"
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "automatic": "Otomatik",
+    "listSeparator": ", ",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "increaseNamed": "Artır: ${name}",
+    "decreaseNamed": "Azalt: ${name}",
+    "value": {
+      "percent": "%${value}",
+      "seconds": {
+        "one": "${n} saniye",
+        "other": "${n} saniye"
+      }
+    },
+    "time": {
+      "justNow": "az önce",
+      "minutesAgo": {
+        "one": "${n} dakika önce",
+        "other": "${n} dakika önce"
+      },
+      "hoursAgo": {
+        "one": "${n} saat önce",
+        "other": "${n} saat önce"
+      },
+      "daysAgo": {
+        "one": "${n} gün önce",
+        "other": "${n} gün önce"
+      },
+      "monthsAgo": {
+        "one": "${n} ay önce",
+        "other": "${n} ay önce"
+      },
+      "yearsAgo": {
+        "one": "${n} yıl önce",
+        "other": "${n} yıl önce"
+      }
+    },
+    "sections": {
+      "playback": "Oynatma",
+      "playbackSummary": "Diller, izlendi eşiği, sonraki bölüm ve atlama",
+      "device": "Bu cihaz",
+      "deviceSummary": "Kod çözme, HDR, kare hızı, ses, önbellek ve çökme raporları",
+      "subtitles": "Altyazılar",
+      "subtitlesSummary": "Bu cihazda boyut, renk, kontur ve konum",
+      "addons": "Eklentiler",
+      "addonsSummary": {
+        "one": "${n} eklenti yüklü",
+        "other": "${n} eklenti yüklü"
+      },
+      "addonsSummaryLoading": "Yüklü eklentiler",
+      "home": "Ana Sayfa",
+      "homeSummary": "Ana Sayfa'da gösterilen satırlar ve sıraları",
+      "appearance": "Görünüm",
+      "appearanceSummary": "Dil, afişler ve izlenen yapımlar",
+      "trackers": "Takip hizmetleri",
+      "trackersSummary": "İzleme aktarımı, izleme geçmişi ve listeler",
+      "trackersConnected": "Bağlı: ${services}",
+      "account": "Hesap",
+      "about": "Hakkında",
+      "downloads": "İndirmeler",
+      "downloadsSummary": "Konum, yalnızca Wi-Fi ve depolama",
+      "data": "Dışa ve içe aktarma",
+      "dataSummary": "Profil verilerinizi bir dosyaya aktarma ve geri yükleme"
+    },
+    "profile": {
+      "locked": "PIN ile kilitli",
+      "unlocked": "PIN yok",
+      "edit": "Profili düzenle",
+      "manage": "Profil değiştir veya yönet"
+    },
+    "about": {
+      "version": "Sürüm ${version}",
+      "license": "Tortuga, GNU Genel Kamu Lisansı sürüm 3 kapsamında lisanslanmıştır. Onu çalıştırabilir, inceleyebilir, paylaşabilir ve değiştirebilirsiniz; size bir kopyasını veren herkes kaynak kodunu da size sunmak zorundadır.",
+      "source": "Kaynak kodu",
+      "licenseLink": "GNU Genel Kamu Lisansı v3",
+      "traktCredit": "Tortuga, Trakt'ı kullanır ancak Trakt tarafından onaylanmış veya sertifikalandırılmış değildir.",
+      "notices": "Üçüncü taraf yazılımlar",
+      "noticeLink": "Proje sayfası"
+    },
+    "appearance": {
+      "interfaceLanguage": "Uygulama dili",
+      "interfaceLanguageHint": "Uygulamanın menülerinin ve mesajlarının dili",
+      "interfaceLanguageSystem": "Sistem varsayılanı",
+      "blurUnwatched": "İzlenmemiş bölümleri bulanıklaştır",
+      "blurUnwatchedHint": "Başlamadığınız bölümlerin görsellerini bulanıklaştırır ve açıklamalarını gizler, böylece hiçbir şey ele vermezler",
+      "hideWatched": "İzlenen yapımları gizle",
+      "hideWatchedHint": "Bitirdiğiniz filmleri ve dizileri Ana Sayfa satırlarından ve Keşfet'ten çıkarır. Yeni bölüm çıktığında dizi geri gelir",
+      "hidePosterCaptions": "Afişlerin altındaki adları gizle",
+      "hidePosterCaptionsHint": "Yalnızca görseli gösterir. İzlemeye Devam Et bölümü ve kalan süreyi göstermeyi sürdürür",
+      "posterTemplate": "Afiş URL şablonu",
+      "posterTemplateHint": "{imdb_id}, {tmdb_id} ve {tvdb_id} her yapımın kimlikleri, {type} ise movie veya series yerine geçer",
+      "posterTemplateNone": "Eklenti afişleri",
+      "posterTemplatePlaceholder": "https://example.com/{imdb_id}.jpg",
+      "posterTemplateInvalid": "http veya https adresi değil, bu yüzden yok sayılıyor"
+    },
+    "home": {
+      "note": "Ana Sayfa'da gösterilecek satırları ve sıralarını seçin. Bunlar bu profile aittir ve diğer cihazlarınızla eşitlenir.",
+      "continueWatchingHint": "Her zaman ilk satır",
+      "rowsHeader": "Satırlar",
+      "empty": "Yüklü eklentilerin hiçbirinde Ana Sayfa için katalog yok.",
+      "reset": "Varsayılana sıfırla",
+      "moveUp": "Yukarı taşı",
+      "moveUpNamed": "Yukarı taşı: ${name}",
+      "moveDown": "Aşağı taşı",
+      "moveDownNamed": "Aşağı taşı: ${name}",
+      "dragToReorder": "Sıralamak için sürükleyin",
+      "dragToReorderNamed": "Yeniden sırala: ${name}",
+      "newCollection": "Yeni koleksiyon",
+      "importCollections": "Koleksiyonları içe aktar",
+      "exportCollections": "Koleksiyonları dışa aktar",
+      "edit": "Düzenle",
+      "delete": "Sil",
+      "deleteTitle": "“${title}” silinsin mi?",
+      "deleteMessage": "Koleksiyon, tüm cihazlarınızda bu profilden kaldırılır."
+    },
+    "playback": {
+      "title": "Oynatma",
+      "note": "Bu ayarlar bu profile aittir ve diğer cihazlarınızla eşitlenir.",
+      "languagesHeader": "Diller",
+      "audioLanguages": "Ses dilleri",
+      "audioLanguagesHint": "Hangi ses parçasının oynatılacağı, tercih sırasına göre",
+      "audioLanguagesNone": "Videonun varsayılanı",
+      "audioLanguagesExplanation": "Video, bu dillerden sahip olduğu ilk dilde oynatılır. Hiçbiri seçilmezse varsayılan ses parçasıyla oynatılır.",
+      "subtitleLanguages": "Altyazı dilleri",
+      "subtitleLanguagesHint": "Hangi altyazıların açılacağı, tercih sırasına göre",
+      "subtitleLanguagesNone": "Kapalı",
+      "subtitleLanguagesExplanation": "Videoda bu dillerden ilk bulunan dildeki altyazılar açılır. Hiçbiri seçilmezse, video zorunlu kılmadıkça altyazılar kapalı kalır.",
+      "secondSubtitleLanguage": "İkinci altyazı dili",
+      "secondSubtitleLanguageHint": "Birinciyle birlikte görüntünün üstünde gösterilir",
+      "secondSubtitleLanguageExplanation": "Bu dildeki altyazılar, birinci altyazıyla birlikte görüntünün üst kısmında gösterilir. Hiçbiri seçilmezse, oynatıcıda seçilmedikçe ikinci altyazı gösterilmez.",
+      "secondSubtitleLanguageNone": "Kapalı",
+      "showSubtitles": "Altyazıları göster",
+      "showSubtitlesHint": "Her zaman: konuşulan dilde de altyazı, önce SDH",
+      "showSubtitlesFollowAudio": "Sese göre",
+      "showSubtitlesAlways": "Her zaman",
+      "chosenHeader": "Dilleriniz",
+      "availableHeader": "Dil ekle",
+      "searchLanguages": "Dil ara",
+      "noLanguageMatches": "Eşleşen dil yok.",
+      "playbackHeader": "Oynatma",
+      "watchedThreshold": "İzlendi sayılma eşiği",
+      "watchedThresholdHint": "Bir videonun hangi noktadan sonra izlendi sayılacağı ve İzlemeye Devam Et'in sonraki bölüme geçeceği",
+      "bingeWatching": "Sonraki bölümü oynat",
+      "bingeWatchingHint": "Bir bölüm bittiğinde sonrakini, mümkünse aynı kaynaktan başlatır",
+      "upNextCountdown": "Sonraki bölüm geri sayımı",
+      "upNextCountdownHint": "Sonraki bölüm isteminin bölümü başlatmadan önce ne kadar bekleyeceği",
+      "upNextImmediately": "Hemen başlat",
+      "seekShort": "Kısa atlama",
+      "seekShortHint": "Ok tuşları, kumanda ve oynatıcının atlama düğmeleri",
+      "seekLong": "Uzun atlama",
+      "seekLongHint": "Shift ile ok tuşları ve uzun basmalar",
+      "videoClick": "Videoya tıklama",
+      "videoClickHint": "Çift tıklama yine tam ekrana girip çıkar",
+      "videoClickPause": "Duraklat ve oynat",
+      "videoClickControls": "Kontrolleri göster veya gizle",
+      "moveUp": "Yukarı taşı",
+      "moveUpNamed": "Yukarı taşı: ${name}",
+      "moveDown": "Aşağı taşı",
+      "moveDownNamed": "Aşağı taşı: ${name}",
+      "removeLanguage": "Kaldır",
+      "removeLanguageNamed": "Kaldır: ${name}",
+      "dragToReorderNamed": "Yeniden sırala: ${name}",
+      "skipping": {
+        "header": "Atlama",
+        "footer": "Girişler, özetler ve jenerikler videonun kısım adlarından bulunur; bu yüzden yalnızca adlandırılmış kısımları olan videolarda atlama önerilir. Otomatik atlama önce düğme üzerinde geri sayar ve oynatıcıda yaptığınız herhangi bir işlem bunu durdurur.",
+        "intros": "Girişler",
+        "introsHint": "Açılış şarkıları ve açılış jenerikleri",
+        "recaps": "Özetler",
+        "recapsHint": "Bölümün başındaki “Önceki bölümlerde…”",
+        "credits": "Jenerikler",
+        "creditsHint": "Kapanış jeneriği ve sonraki bölüm fragmanları; sonraki bölüm istemi bunlarla başlar",
+        "off": "Kapalı",
+        "button": "Düğme göster",
+        "auto": "Otomatik atla"
+      },
+      "streams": {
+        "header": "Akışlar",
+        "footer": "Filtreler tüm akış listelerine uygulanır; her liste kaç akışı gizlediğini belirtir ve bunları yine de gösterebilir.",
+        "autoPlay": "Otomatik oynat",
+        "autoPlayHint": "Oynat, Devam et, bir bölüm ve sonraki bölüm için akış listesini atlar; sıralama varken tüm eklentilerin yanıt vermesini bekler",
+        "suggestions": "Akış öner",
+        "suggestionsHint": "Bu profilde hangi akışları seçtiğinizi öğrenir ve listede birini işaretler",
+        "autoPlayOff": "Kapalı",
+        "autoPlayFirstMatch": "Filtrelere uyan ilk akış",
+        "autoPlayReuseLastLink": "Geçen seferkiyle aynı akış, yoksa filtrelere uyan ilk akış",
+        "qualities": "Kaliteler",
+        "qualitiesHint": "Akış listelerinde gösterilecek çözünürlükler",
+        "qualitiesAll": "Tümü",
+        "qualitiesNone": "Hiçbiri",
+        "qualitiesAllBut": "${hidden} hariç tümü",
+        "qualitySd": "SD",
+        "qualityUnknown": "Bilinmiyor",
+        "ranges": "Dinamik aralık",
+        "rangesHint": "Akış listelerinde gösterilecek SDR, HDR ve Dolby Vision",
+        "codecs": "Video kodekleri",
+        "codecsHint": "Akış listelerinde gösterilecek video kodekleri",
+        "minSize": "En küçük boyut",
+        "minSizeHint": "Daha küçük dosyaların akışlarını gizler; boyut belirtmeyen akış kalır",
+        "maxSize": "En büyük boyut",
+        "maxSizeHint": "Daha büyük dosyaların akışlarını gizler; boyut belirtmeyen akış kalır",
+        "sizeAny": "Herhangi bir boyut",
+        "includePattern": "Yalnızca eşleşen akışlar",
+        "includePatternHint": "Her akışın adı, açıklaması ve dosya adıyla, büyük/küçük harf ayrımı yapılmadan eşleştirilen bir düzenli ifade",
+        "includePatternNone": "Tüm akışlar",
+        "includePlaceholder": "ör. 1080p|2160p",
+        "excludePattern": "Eşleşen akışları gizle",
+        "excludePatternHint": "Yukarıdaki kalıptan önceliklidir",
+        "excludePatternNone": "Hiçbiri",
+        "excludePlaceholder": "ör. HDTV|XviD",
+        "invalidPattern": "Geçerli bir düzenli ifade değil, bu yüzden yok sayılıyor",
+        "save": "Kaydet",
+        "clear": "Temizle"
+      }
+    },
+    "device": {
+      "title": "Bu cihaz",
+      "note": "Bu ayarlar yalnızca bu cihaz için geçerlidir ve eşitlenmez.",
+      "videoHeader": "Video",
+      "hardwareDecoding": "Donanımsal kod çözme",
+      "hardwareDecodingHint": "Videonun kodu grafik donanımıyla çözülür. Videolarda bozulma görürseniz kapatın.",
+      "hdr": "HDR",
+      "hdrHint": "Ekran destekliyorsa HDR videoları HDR olarak oynatır. Kapalıyken SDR'ye dönüştürülür.",
+      "matchFrameRate": "Kare hızı geçişini zorla",
+      "matchFrameRateHint": "Sistem yapmasa bile ekranı videonun kare hızına geçirir. Her geçişte ekran bir an kararır.",
+      "audioHeader": "Ses",
+      "audioPassthrough": "Doğrudan ses aktarımı",
+      "audioPassthroughHint": "Çevresel sesi (Dolby Digital, DTS, TrueHD) kodunu çözmeden alıcıya gönderir",
+      "audioPassthroughHintApple": "Dolby Digital ve Dolby Digital Plus'ı, Atmos dahil, sistemin Dolby kod çözücüsüne gönderir; DTS ve TrueHD çok kanallı PCM olarak çalınır. Ses yoksa kapatın.",
+      "audioPassthroughHintAppleSpatial": "Dolby Digital ve Dolby Digital Plus'ı, Atmos dahil, sistemin Dolby kod çözücüsüne gönderir, TrueHD Atmos ve DTS:X'i uzamsal ses olarak çalar; diğer DTS ve TrueHD parçaları çok kanallı PCM olarak çalınır. Ses yoksa kapatın.",
+      "audioPassthroughNormalized": "Ses düzeyi dengeleme açıkken kapalı",
+      "gesturesHeader": "Hareketler",
+      "swipeGestures": "Parlaklık ve ses için kaydırma",
+      "swipeGesturesHint": "Parlaklık için videonun sol yarısında, ses için sağ yarısında yukarı veya aşağı kaydırın.",
+      "streamingHeader": "Akış",
+      "cacheSize": "Ön okuma önbelleği",
+      "cacheSizeHint": "Akışın ne kadarının oynatmadan önce yükleneceği",
+      "discordHeader": "Discord",
+      "discordPresence": "İzlediklerinizi gösterin",
+      "discordPresenceHint": "Bir video oynatılırken Discord arkadaşlarınız başlığı ve bölümü görür. Discord'un bu bilgisayarda çalışıyor olması gerekir.",
+      "privacyHeader": "Gizlilik",
+      "crashReports": "Çökme raporları gönder",
+      "crashReportsHint": "Uygulama çöktüğünde veya bir bölümü hata verdiğinde neyin ters gittiğini gönderir; eklenti bağlantılarınızı veya hesaplarınızı asla göndermez"
+    },
+    "subtitles": {
+      "title": "Altyazılar",
+      "note": "Bu ayarlar yalnızca bu cihaz için geçerlidir ve eşitlenmez. SRT gibi düz metin altyazıların stilini belirler; stilli altyazılar, bu stili onlara da uygulamadığınız sürece kendi görünümlerini korur.",
+      "previewText": "Altyazılar böyle görünür",
+      "textHeader": "Metin",
+      "size": "Boyut",
+      "textColor": "Renk",
+      "bold": "Kalın",
+      "outlineHeader": "Kontur ve arka plan",
+      "outline": "Kontur",
+      "outlineColor": "Kontur rengi",
+      "background": "Arka plan",
+      "backgroundHint": "Metnin arkasındaki kutu ve opaklığı",
+      "backgroundOff": "Kapalı",
+      "positionHeader": "Konum",
+      "position": "Yükseklik",
+      "positionHint": "Altyazıların görüntünün altından ne kadar yukarıda duracağı",
+      "positionBottom": "En alt",
+      "styledHeader": "Stilli altyazılar",
+      "styledOverride": "Stilli altyazılara uygula",
+      "styledOverrideHint": "ASS ve SSA altyazılar kendi stilleri yerine bu stili kullanır. Tabelalar ve efektler hatalı görünebilir.",
+      "outlines": {
+        "none": "Yok",
+        "thin": "İnce",
+        "thick": "Kalın"
+      },
+      "colors": {
+        "white": "Beyaz",
+        "yellow": "Sarı",
+        "green": "Yeşil",
+        "cyan": "Camgöbeği",
+        "gray": "Gri",
+        "black": "Siyah"
+      }
+    },
+    "account": {
+      "title": "Hesap",
+      "syncLabel": "Eşitleme",
+      "syncNow": "Şimdi eşitle",
+      "lastSynced": "Son eşitleme: ${time}",
+      "serverLabel": "Eşitleme sunucusu",
+      "identitiesHeader": "Giriş yöntemleri",
+      "linkIdentity": "Giriş yöntemi ekle",
+      "devicesHeader": "Cihazlar",
+      "thisDevice": "Bu cihaz",
+      "activeNow": "Şu anda etkin",
+      "lastActive": "Son etkinlik: ${time}",
+      "deviceDetail": "${platform} · ${active}",
+      "deviceRemoved": "${name} cihazından çıkış yapıldı.",
+      "identityRemoved": "${provider} giriş yöntemi kaldırıldı.",
+      "cancel": "İptal",
+      "platform": {
+        "ios": "iPhone",
+        "ipados": "iPad",
+        "macos": "Mac",
+        "tvos": "Apple TV",
+        "android": "Android",
+        "androidTv": "Android TV",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "provider": {
+        "apple": "Apple",
+        "google": "Google",
+        "github": "GitHub",
+        "oidc": "Çoklu oturum açma"
+      },
+      "link": {
+        "start": "Yeni cihaz bağla",
+        "title": "Cihaz bağla",
+        "instructions": "Yeni cihazda, başka bir cihazdan bağlama seçeneğini seçin. Ardından cihazın gösterdiği kodu girin veya QR kodunu tarayın.",
+        "codeHint": "ABCD-EFGH",
+        "submit": "Devam",
+        "question": "“${name}” bağlansın mı?",
+        "consequence": "Cihaz; profilleri, eklentileri ve kitaplığıyla birlikte bu hesaba giriş yapacak.",
+        "approve": "Bağla",
+        "reject": "Bağlama",
+        "approved": "${name} bağlandı. Kurulumu kendiliğinden tamamlanacak.",
+        "rejected": "${name} bağlanmadı.",
+        "expired": "Kodun süresi doldu. Yeni cihazda yeniden başlayın.",
+        "done": "Bitti"
+      },
+      "signOut": {
+        "action": "Çıkış yap",
+        "title": "Çıkış yapılsın mı?",
+        "message": "Profiller, eklentiler, kitaplık ve indirilenler bu cihazdan kaldırılır. İndirilenler dışında hepsi hesapta kalır; geri almak için yeniden giriş yapın.",
+        "confirm": "Çıkış yap"
+      },
+      "delete": {
+        "action": "Hesabı sil",
+        "explanation": "Hesabı ve eşitlenen tüm verilerini sunucudan siler.",
+        "title": "Hesap silinsin mi?",
+        "message": "Hesap ve hesaba ait profiller, eklentiler, kitaplık ve geçmiş sunucudan kalıcı olarak silinir ve tüm cihazlarda çıkış yapılır. Bu işlem geri alınamaz.",
+        "confirm": "Hesabı sil"
+      },
+      "revoke": {
+        "title": "${name} cihazından çıkış yapılsın mı?",
+        "message": "${name} cihazından çıkış yapılır ve cihaz, hesabın cihazları arasından çıkarılır. Daha sonra yeniden bağlanabilir.",
+        "messageThisDevice": "Bu, şu anda kullandığınız cihaz. Bu cihazda çıkış yapılır; profilleri, eklentileri, kitaplığı ve indirilenleri cihazdan kaldırılır. İndirilenler dışında hepsi hesapta kalır.",
+        "confirm": "Cihazdan çıkış yap",
+        "confirmNamed": "Cihazdan çıkış yap: ${name}"
+      },
+      "unsynced": {
+        "title": "Eşitlenmemiş değişiklikler silinsin mi?",
+        "message": {
+          "one": "Bu cihazda yapılan, izleme ilerlemesi veya bir kitaplık düzenlemesi gibi ${n} değişiklik hesaba ulaşmadı. Şimdi çıkış yaparsanız kalıcı olarak silinir. İptal'i seçerseniz burada kalır ve bu cihazda oturumunuz açık kalır.",
+          "other": "Bu cihazda yapılan, izleme ilerlemesi veya kitaplık düzenlemeleri gibi ${n} değişiklik hesaba ulaşmadı. Şimdi çıkış yaparsanız kalıcı olarak silinir. İptal'i seçerseniz burada kalır ve bu cihazda oturumunuz açık kalır."
+        },
+        "confirm": "Çıkış yap ve sil"
+      },
+      "unlink": {
+        "title": "${provider} giriş yöntemi kaldırılsın mı?",
+        "message": "Artık bu hesaba ${provider} ile giriş yapamazsınız.",
+        "confirm": "Kaldır",
+        "action": "${name} giriş yöntemini kaldır"
+      }
+    },
+    "trackers": {
+      "title": "Takip hizmetleri",
+      "note": "Bağlı hizmetler, bu profilin izlediklerini alır: izleme ilerlemesi ve izlendi olarak işaretlenen içerikler. Bir hizmeti bağlamak veya bağlantısını kesmek bu profil için tüm cihazlarınızda geçerlidir; aşağıdaki düğmeler yalnızca bu cihaz için geçerlidir.",
+      "service": {
+        "trakt": "Trakt",
+        "simkl": "Simkl",
+        "mdblist": "MDBList",
+        "myanimelist": "MyAnimeList",
+        "anilist": "AniList"
+      },
+      "connected": "Bağlı",
+      "connectedAs": "${user} olarak bağlı",
+      "notConnected": "Bağlı değil",
+      "unavailable": "Uygulamanın bu sürümünde kullanılamıyor",
+      "connect": "Bağlan",
+      "connectNamed": "Bağlan: ${name}",
+      "disconnect": "Bağlantıyı kes",
+      "disconnectNamed": "Bağlantıyı kes: ${name}",
+      "scrobble": "İzlediklerini gönder",
+      "scrobbleHint": "İzleme ilerlemesi ve izlenen içerikler ${service} hizmetine gönderilir",
+      "filtersHeader": "Gönderilecekler",
+      "movies": "Filmler",
+      "series": "Diziler",
+      "anime": "Anime",
+      "queued": {
+        "one": "Gönderilmeyi bekleyen ${n} değişiklik",
+        "other": "Gönderilmeyi bekleyen ${n} değişiklik"
+      },
+      "notSent": {
+        "one": "${n} değişiklik gönderilemedi (sonuncusu: ${reason})",
+        "other": "${n} değişiklik gönderilemedi (sonuncusu: ${reason})"
+      },
+      "notSentReason": {
+        "answered": "${service} ${status} hatası döndürdü",
+        "refused": "${service} reddetti",
+        "unreadable": "okunamadı"
+      },
+      "connectTitle": "${service} hesabını bağla",
+      "starting": "${service} ile iletişim kuruluyor…",
+      "waiting": "${service} üzerinde Tortuga'ya izin vermeniz bekleniyor…",
+      "linkInstructions": "Tarayıcınızda ${service} hesabınıza giriş yapın ve Tortuga'ya izin verin.",
+      "linkScan": "Ya da QR kodunu telefonunuzla tarayıp orada giriş yapın.",
+      "openInBrowser": "Tarayıcıda aç",
+      "expired": "Kodun süresi, kod kullanılmadan doldu.",
+      "declined": "${service} bağlantıya izin vermedi.",
+      "unreachable": "${service} hizmetine ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+      "serverUnreachable": "Tortuga sunucunuza ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+      "needsAccount": "${service} hizmetini bağlamak için bir Tortuga hesabı gerekir. Önce hesabınıza giriş yapın.",
+      "busy": "${service} şu anda meşgul. Bir dakika sonra tekrar deneyin.",
+      "refused": "${service} girişi reddetti.",
+      "failed": "${service} bağlantısı kurulamadı.",
+      "retry": "Tekrar dene",
+      "connectedNotice": "${service} hizmetine ${user} olarak bağlanıldı.",
+      "connectedNoticeNoName": "${service} hizmetine bağlanıldı.",
+      "disconnectTitle": "${service} bağlantısı kesilsin mi?",
+      "disconnectMessage": "Bu profil, izlediklerini artık hiçbir cihazınızdan ${service} hizmetine göndermez ve gönderilmeyi bekleyen değişiklikler silinir. ${service} hesabınızdaki mevcut veriler korunur.",
+      "disconnectedNotice": "${service} bağlantısı kesildi.",
+      "actionFailed": "İşlem başarısız oldu. Tekrar deneyin."
+    },
+    "downloads": {
+      "title": "İndirmeler",
+      "note": "Bu ayarlar yalnızca bu cihaz için geçerlidir ve eşitlenmez.",
+      "location": {
+        "title": "Konum",
+        "hint": "Yeni indirmelerin kaydedileceği yer. Önceden kaydedilmiş indirmeler oldukları yerde kalır.",
+        "deviceStorage": "Dahili depolama",
+        "external": "Harici depolama",
+        "change": "Klasörü değiştir"
+      },
+      "transferHeader": "İndirme",
+      "wifiOnly": "Yalnızca Wi-Fi ile indir",
+      "wifiOnlyHint": "Mobil veri gibi sınırlı bir ağdayken indirmeler bekletilir",
+      "atOnce": "Eşzamanlı indirme",
+      "atOnceHint": "Aynı anda kaç indirmenin yapılacağı",
+      "autoRemoveWatched": "İzlenen indirmeleri sil",
+      "autoRemoveWatchedHint": "Bir indirme izlendikten sonra silinir, oynatılırken asla silinmez",
+      "subtitleLanguages": "Kaydedilecek altyazılar",
+      "subtitleLanguagesHint": "Bu dillerdeki altyazılar her indirmeyle birlikte kaydedilir",
+      "subtitleLanguagesProfile": "Altyazı dilleriniz: ${languages}",
+      "subtitleLanguagesProfileNone": "Altyazı dilleriniz: yok",
+      "subtitleLanguagesExplanation": "Bu dillerdeki altyazılar her indirmeyle birlikte kaydedilir; böylece bağlantı olmadan da gösterilir.",
+      "useProfileLanguages": "Altyazı dillerimi kullan",
+      "storageHeader": "Depolama",
+      "deleteAll": "Tüm indirmeleri sil",
+      "deleteAllTitle": "Tüm indirmeler silinsin mi?",
+      "deleteAllText": "Bu işlem, bu cihazdaki tüm profillere ait tüm indirmeleri siler.",
+      "deleteAllConfirm": "Tümünü sil"
+    },
+    "data": {
+      "exportHeader": "Dışa aktarma",
+      "categories": {
+        "addons": "Eklentiler",
+        "addonsHint": "Yüklü eklentiler, sıraları ve bağlantılarıyla",
+        "library": "Kitaplık",
+        "libraryHint": "Kaydettiğiniz içerikler",
+        "progress": "İzleme ilerlemesi",
+        "progressHint": "Nerede kaldığınız ve neleri izlediğiniz",
+        "settings": "Profil ayarları",
+        "settingsHint": "Oynatma, akışlar, Ana Sayfa satırları ve eşitlenen diğer ayarlar",
+        "streams": "Akış geçmişi",
+        "streamsHint": "Her video için en son oynatılan akış"
+      },
+      "profilesHeader": "Profiller",
+      "privateNote": "Dosya, eklenti bağlantılarınızı ve akış geçmişinizi içerir; bunlarda API anahtarları bulunabilir. Dosyayı gizli tutun: dosyaya sahip olan herkes bu anahtarları kullanabilir.",
+      "exportNote": "PIN'ler, takip hizmeti hesapları, indirmeler ve bu cihazın ayarları asla dosyaya eklenmez.",
+      "exportAction": "Dosyaya dışa aktar",
+      "saved": "${name} kaydedildi.",
+      "saveFailed": "Dosya kaydedilemedi.",
+      "exportFailed": "Dışa aktarma başarısız oldu.",
+      "importHeader": "İçe aktarma",
+      "importNote": "Tortuga'dan dışa aktarılmış bir dosyayı açar. Her öğede daha yeni olan veri geçerli olur ve bu cihazdaki hiçbir şey silinmez.",
+      "importAction": "Dosyadan içe aktar",
+      "reviewTitle": "İçe aktarma",
+      "source": "${date} tarihinde Tortuga ${version} ile dışa aktarıldı",
+      "sourceUndated": "Tortuga ${version} ile dışa aktarıldı",
+      "dataHeader": "Veriler",
+      "counts": {
+        "addons": {
+          "one": "${n} eklenti",
+          "other": "${n} eklenti"
+        },
+        "titles": {
+          "one": "${n} içerik",
+          "other": "${n} içerik"
+        },
+        "progress": {
+          "one": "${n} içeriğin ilerlemesi",
+          "other": "${n} içeriğin ilerlemesi"
+        },
+        "settings": {
+          "one": "${n} ayar",
+          "other": "${n} ayar"
+        },
+        "streams": {
+          "one": "${n} akış",
+          "other": "${n} akış"
+        },
+        "profiles": {
+          "one": "${n} profil",
+          "other": "${n} profil"
+        }
+      },
+      "into": "Hedef profil",
+      "intoSame": "Bu hesaptaki ${name} profiline",
+      "newProfile": "Yeni bir profil",
+      "importConfirm": "İçe aktar",
+      "imported": "İçe aktarma tamamlandı: ${changes}.",
+      "nothingNew": "İçe aktarılacak yeni bir şey yok: dosyadaki her şey zaten burada.",
+      "notTortuga": "Bu dosya bir Tortuga dışa aktarımı değil. Hiçbir şey içe aktarılmadı.",
+      "newer": "Bu dosya, Tortuga'nın daha yeni bir sürümünden. Tortuga'yı güncelleyin, ardından dosyayı tekrar içe aktarın.",
+      "damaged": "Bu dosya hasarlı veya eksik. Hiçbir şey içe aktarılmadı.",
+      "clockAhead": "Bu dosyadaki zamanlar, bu cihazın saatinin çok ilerisinde. İki cihazda da tarih ve saati kontrol edin, ardından dosyayı tekrar içe aktarın. Hiçbir şey içe aktarılmadı.",
+      "importFailed": "İçe aktarma başarısız oldu.",
+      "unreadable": "Dosya açılamadı. Hiçbir şey içe aktarılmadı."
+    }
+  },
+  "account": {
+    "status": {
+      "idle": "Güncel",
+      "syncing": "Eşitleniyor…",
+      "offline": "Çevrimdışı. Bağlantı geri geldiğinde değişiklikler eşitlenir.",
+      "signedOut": "Oturum kapalı",
+      "failed": {
+        "server": "Eşitleme sunucusunda bir sorun oluştu. Birazdan yeniden denenecek.",
+        "rateLimited": "Eşitleme sunucusu yavaşlamamızı istedi. Birazdan yeniden denenecek.",
+        "quotaExceeded": "Hesabın depolama alanı dolu, bu yüzden değişiklikler eşitlenmiyor.",
+        "tooLarge": "Bazı değişiklikler eşitlenemeyecek kadar büyük.",
+        "addonsTooLarge": "Bir profilin eklentileri eşitlenemeyecek kadar büyük. Kullanmadığı eklentileri kaldırın.",
+        "clockWrong": "Bazı değişiklikler eşitlenemiyor. Cihazlarınızdaki tarih ve saati kontrol edin.",
+        "unknown": "Eşitlenemedi. Birazdan yeniden denenecek."
+      }
+    },
+    "error": {
+      "network": "Eşitleme sunucusuna ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+      "server": "Eşitleme sunucusunda bir sorun oluştu. Daha sonra tekrar deneyin.",
+      "rateLimited": "Çok fazla deneme yapıldı. Biraz bekleyip tekrar deneyin.",
+      "invalidServerUrl": "Bu bir sunucu adresi değil. https://sync.example.com gibi bir adres girin.",
+      "insecureServerUrl": "İnternetteki bir sunucu için https kullanın. Düz http yalnızca kendi ağınızdaki bir sunucu için çalışır.",
+      "notTortugaServer": "Bu adreste yanıt veren bir Tortuga eşitleme sunucusu yok.",
+      "incompatibleServer": "Bu sunucu, Tortuga eşitlemenin eski bir sürümünü çalıştırıyor ve kullanılamaz.",
+      "providerNotEnabled": "Bu sunucu bu giriş yöntemini sunmuyor.",
+      "signInRejected": "Giriş tamamlanamadı. Tekrar deneyin.",
+      "appleCodeRejected": "Apple girişi kabul etmedi. Tekrar deneyin.",
+      "providerUnavailable": "Giriş hizmetine ulaşılamadı. Daha sonra tekrar deneyin.",
+      "signInCancelled": "Giriş iptal edildi.",
+      "signInExpired": "Giriş çok uzun sürdü. Yeniden başlayın.",
+      "identityInUse": "Bu giriş yöntemi zaten başka bir Tortuga hesabına ait.",
+      "lastIdentity": "Bu, hesaba giriş yapmanın tek yolu olduğundan kaldırılamaz.",
+      "sessionEnded": "Bu cihazda oturum kapatıldı. Yeniden giriş yapın.",
+      "sessionUnreadable": "Bu cihazın oturum bilgileri sistemin güvenli depolama alanından okunamadı. Yeniden denemek için Tortuga'yı yeniden başlatın.",
+      "notSignedIn": "Önce giriş yapın.",
+      "notFound": "Bu artık sunucuda yok.",
+      "linkCodeInvalid": "Kodlar, ABCD-EFGH gibi 8 harf ve rakamdan oluşur.",
+      "linkNotFound": "Bu kodla bekleyen bir cihaz yok. Kodu kontrol edin veya yeni cihazda yeniden başlayın.",
+      "linkOtherServer": "Diğer cihaz farklı bir eşitleme sunucusu kullanıyor.",
+      "linkFailed": "Bağlama tamamlanamadı. Yeniden başlayın.",
+      "tooLarge": "Bu, eşitleme sunucusu için çok büyük.",
+      "quotaExceeded": "Hesabın depolama alanı dolu.",
+      "unsynced": {
+        "one": "Bu cihazda yapılan ${n} değişiklik henüz hesabıyla eşitlenmedi.",
+        "other": "Bu cihazda yapılan ${n} değişiklik henüz hesabıyla eşitlenmedi."
+      },
+      "unexpected": "Bir sorun oluştu. Tekrar deneyin."
+    },
+    "deletion": {
+      "done": "Hesap ve verileri silindi.",
+      "appleRevoked": "Hesap ve verileri silindi; Tortuga artık Apple Kimliğinizi kullanmıyor.",
+      "appleManual": "Hesap ve verileri silindi. İşlemi tamamlamak için Ayarlar → Apple Kimliği → Apple ile Giriş Yap bölümünden Tortuga'yı kaldırın.",
+      "githubManual": "Tortuga'yı GitHub hesabınızdan ${address} adresinden kaldırabilirsiniz."
+    },
+    "switchAccount": {
+      "title": "Eşitlenmemiş değişiklikler silinsin mi?",
+      "message": {
+        "one": "Bu, cihazın daha önce giriş yaptığı hesaptan farklı bir hesap. Burada önceki hesapla yapılan, izleme ilerlemesi veya bir kitaplık düzenlemesi gibi ${n} değişiklik o hesaba hiç ulaşmadı. Giriş yapmak bu değişikliği, önceki hesabın bu cihazdaki diğer verileriyle birlikte, indirilenler dahil kalıcı olarak siler.",
+        "other": "Bu, cihazın daha önce giriş yaptığı hesaptan farklı bir hesap. Burada önceki hesapla yapılan, izleme ilerlemesi veya kitaplık düzenlemeleri gibi ${n} değişiklik o hesaba hiç ulaşmadı. Giriş yapmak bu değişiklikleri, önceki hesabın bu cihazdaki diğer verileriyle birlikte, indirilenler dahil kalıcı olarak siler."
+      },
+      "confirm": "Sil ve giriş yap",
+      "cancel": "İptal",
+      "kept": "Giriş yapılmadı. Değişiklikler, yapıldıkları hesaba giriş yapana kadar bu cihazda kalır."
+    },
+    "browser": {
+      "signedIn": "Giriş yapıldı. Bu sekmeyi kapatıp Tortuga'ya dönebilirsiniz.",
+      "failed": "Giriş tamamlanamadı. Tortuga'ya dönüp tekrar deneyin."
+    },
+    "signIn": {
+      "title": "Tortuga'ya giriş yap",
+      "intro": "Tortuga hesabı; profillerinizi, eklentilerinizi ve kitaplığınızı tüm cihazlarda eşitler.",
+      "apple": "Apple ile giriş yap",
+      "google": "Google ile giriş yap",
+      "github": "GitHub ile giriş yap",
+      "oidc": "${name} ile giriş yap",
+      "providerApple": "Apple",
+      "providerGoogle": "Google",
+      "providerGitHub": "GitHub",
+      "linkDevice": "Başka bir cihazdan bağla",
+      "linkDeviceHint": "Telefonda veya bilgisayarda zaten giriş yaptınız mı? Bunun yerine bu cihazı bir kodla bağlayın.",
+      "server": "Sunucu: ${server}",
+      "useOwnServer": "Kendi sunucunuzu kullanın",
+      "useHostedServer": "Tortuga sunucusunu kullanın",
+      "serverField": "Sunucu adresi",
+      "serverFieldHint": "https://sync.example.com",
+      "checkServer": "Devam",
+      "checkingServer": "Sunucu kontrol ediliyor…",
+      "loadingOptions": "Giriş seçenekleri yükleniyor…",
+      "noOptions": "Bu sunucu, bu cihazda giriş yapmak için bir yöntem sunmuyor. Bunun yerine giriş yapılmış bir cihazdan bağlayın.",
+      "retry": "Tekrar dene",
+      "starting": "Giriş başlatılıyor…",
+      "native": "${provider} ile giriş yapılıyor…",
+      "browser": "Tarayıcıda devam edin. Orada giriş yaptığınızda bu ekran kendiliğinden ilerler.",
+      "finishing": "Giriş tamamlanıyor…",
+      "cancel": "İptal",
+      "deviceCode": {
+        "instructions": "Telefonda veya bilgisayarda ${url} adresine gidin ve şu kodu girin:",
+        "scan": "Ya da QR kodunu telefonunuzla tarayın.",
+        "qrDescription": "Telefonunuzla taranacak QR kodu",
+        "expires": "Kodun süresi ${time} sonra doluyor.",
+        "waiting": "Giriş yapmanız bekleniyor…"
+      }
+    },
+    "link": {
+      "title": "Bu cihazı bağla",
+      "instructions": "Giriş yapılmış bir cihazda Ayarlar → Hesap → Yeni cihaz bağla bölümünü açın. Orada bu QR kodunu tarayın veya kodu girin.",
+      "qrDescription": "Giriş yapılmış cihazda taranacak QR kodu",
+      "starting": "Kod alınıyor…",
+      "expires": "Kodun süresi ${time} sonra doluyor.",
+      "waiting": "Diğer cihazda onay bekleniyor…",
+      "rejected": "Diğer cihaz bağlantıyı reddetti.",
+      "expired": "Kodun süresi, kod kullanılmadan doldu.",
+      "newCode": "Yeni kod al"
+    },
+    "identityLink": {
+      "title": "Giriş yöntemi ekle",
+      "intro": "Başka bir giriş yöntemi bağlayın; böylece bir hesabı kaybetseniz bile hesabınıza erişmeye devam edebilirsiniz.",
+      "allLinked": "Bu cihazın sunduğu tüm giriş yöntemleri zaten bağlı.",
+      "linking": "Bağlanıyor…"
+    }
+  },
+  "profiles": {
+    "title": "Kim izliyor?",
+    "manageTitle": "Profilleri yönet",
+    "manage": "Profilleri yönet",
+    "done": "Bitti",
+    "add": "Profil ekle",
+    "empty": "Başlamak için bir profil oluşturun.",
+    "loading": "Profilleriniz yükleniyor…",
+    "current": "Mevcut profil",
+    "switchProfile": "Profil değiştir",
+    "pin": {
+      "title": "${name} için PIN'i girin",
+      "wrong": "Yanlış PIN. Tekrar deneyin.",
+      "lockedOut": "Çok fazla deneme yapıldı. ${time} sonra tekrar deneyin.",
+      "cancel": "İptal",
+      "backspace": "Son rakamı sil",
+      "entered": "${count}/${total} rakam girildi"
+    },
+    "editor": {
+      "newTitle": "Yeni profil",
+      "editTitle": "Profili düzenle",
+      "name": "Ad",
+      "nameRequired": "Bir ad girin.",
+      "nameTooLong": {
+        "one": "Ad en fazla ${n} karakter olabilir.",
+        "other": "Ad en fazla ${n} karakter olabilir."
+      },
+      "avatar": "Avatar",
+      "pinOff": "PIN yok",
+      "pinOn": "PIN ile kilitli",
+      "setPin": "PIN belirle",
+      "changePin": "PIN'i değiştir",
+      "removePin": "PIN'i kaldır",
+      "pinEnter": "4 haneli bir PIN girin",
+      "pinConfirm": "PIN'i tekrar girin",
+      "pinMismatch": "PIN'ler eşleşmedi. Yeni bir PIN girin.",
+      "pinNote": "PIN, cihazlarınızda başkalarının bu profile girmesini engeller. Bir kilittir, parola değildir.",
+      "save": "Kaydet",
+      "create": "Profil oluştur",
+      "cancel": "İptal",
+      "delete": "Profili sil",
+      "deleteConfirm": "${name} silinsin mi? Profilin eklentileri, kitaplığı ve geçmişi tüm cihazlardan silinir. Bu işlem geri alınamaz.",
+      "deleteAction": "Sil",
+      "saveFailed": "Profil kaydedilemedi. Tekrar deneyin.",
+      "kids": {
+        "title": "Çocuk profili",
+        "subtitle": "Yalnızca seçtiğiniz düzeye kadar yaşlar için önerilen yapımları gösterir. Önerilen yaşların çoğu resmî derecelendirme değil, tahmindir.",
+        "needsParent": "Önce bir yetişkin profiline PIN belirleyin: çocuk profilinden çıkmak bu PIN'i ister.",
+        "newOnly": "Yalnızca yeni bir profil çocuk profili olabilir.",
+        "capTitle": "En yüksek önerilen yaş",
+        "capLittle": "Küçükler",
+        "capLittleAges": "Önerilen 0+",
+        "capKids": "Çocuklar",
+        "capKidsAges": "Küçükler ve önerilen 6+",
+        "capTeen": "Gençler",
+        "capTeenAges": "Çocuklar ve önerilen 12+",
+        "allowUnrated": "Derecelendirilmemiş yapımlara izin ver",
+        "allowUnratedNote": "Önerilen yaşı olmayan yapımlar. Bu kapalıyken bir ebeveyn bunlara tek tek izin verir.",
+        "homeRows": "Ana Sayfa satırları",
+        "homeRowsNote": "İsteğe bağlı. Bu satırlardaki yapımlar da en yüksek önerilen yaşa uymalıdır.",
+        "familyMovies": "Aile filmleri",
+        "familySeries": "Aile dizileri",
+        "addonMissing": "Eklentisi bu profilde yüklü değil.",
+        "allowed": "İzin verilen yapımlar",
+        "allowedNone": "Henüz yok. Bir ebeveyn, bir yapıma kendi sayfasından izin verir.",
+        "blocked": "Engellenen yapımlar",
+        "blockedNone": "Henüz yok. Bir ebeveyn, bir yapımı kendi sayfasından engeller.",
+        "remove": "Kaldır: ${title}",
+        "leaving": "Bu profilden çıkmak bir ebeveynin PIN'ini ister.",
+        "off": "Bağlantılar, eklentiler ve çoğu ayar kapalı.",
+        "addons": "Videolar bu profilin eklentilerinden gelir. Tortuga bunları denetlemez."
+      }
+    },
+    "avatar": {
+      "graphite": "Grafit",
+      "slate": "Arduvaz",
+      "silver": "Gümüş",
+      "ivory": "Fildişi",
+      "sand": "Kum",
+      "clay": "Kil",
+      "rose": "Gül",
+      "plum": "Erik",
+      "dusk": "Alacakaranlık",
+      "sea": "Deniz",
+      "sage": "Adaçayı",
+      "moss": "Yosun"
+    }
+  },
+  "kids": {
+    "blocked": {
+      "title": "Bu profilde kullanılamıyor",
+      "suggested": "Önerilen ${age}+",
+      "byAddon": "Eklentisi onu daha büyük izleyiciler için uygun görüyor",
+      "notRated": "Önerilen yaş yok",
+      "byParent": "Bir ebeveyn engelledi",
+      "unchecked": "Önerilen yaşı kontrol edilemedi. Daha sonra tekrar deneyin.",
+      "ask": "Bir ebeveyne sor"
+    },
+    "block": "Bu profilde engelle",
+    "pin": {
+      "title": "Bir ebeveynin PIN'ini girin",
+      "allow": "Bu profilde şuna izin vermek için: ${title}",
+      "allowThis": "Bu profilde bu içeriğe izin vermek için",
+      "block": "Bu profilde şunu engellemek için: ${title}",
+      "leave": "Bu profilden çıkmak için",
+      "settings": "Bu ayarları açmak için"
+    }
+  },
+  "browse": {
+    "type": {
+      "all": "Tümü",
+      "movie": "Filmler",
+      "series": "Diziler",
+      "channel": "Kanallar",
+      "tv": "TV kanalları",
+      "other": "Diğer"
+    },
+    "rowTitle": "${catalog} · ${type}",
+    "retry": "Tekrar dene",
+    "card": {
+      "rating": "★ ${rating}",
+      "yearAndRating": "${year} · ★ ${rating}"
+    },
+    "board": {
+      "seeAll": "Tümünü gör",
+      "downloading": "İndiriliyor: ${count}, %${percent}",
+      "downloadingUnsized": "İndiriliyor: ${count}",
+      "empty": "Henüz gösterilecek bir şey yok. Bu sayfayı doldurmak için katalog sunan eklentiler yükleyin.",
+      "allHidden": "Ana Sayfa'daki tüm satırlar gizli. Ayarlar → Ana Sayfa bölümünden yeniden gösterebilirsiniz."
+    },
+    "continueWatching": {
+      "title": "İzlemeye Devam Et",
+      "episode": "${episode}. Bölüm",
+      "upNext": "Sıradaki",
+      "minutesLeft": "${minutes} dk kaldı",
+      "hoursLeft": "${hours} sa kaldı",
+      "hoursMinutesLeft": "${hours} sa ${minutes} dk kaldı",
+      "detail": "${episode} · ${remaining}",
+      "shelfTitle": "${episode} · ${title}"
+    },
+    "tracker": {
+      "watchlist": "İzleme listesi",
+      "recommended": "Önerilenler",
+      "trending": "Gündemdekiler",
+      "planToWatch": "İzlenecekler",
+      "planning": "Planlananlar",
+      "airing": "Şu an yayında",
+      "list": "Liste",
+      "unreachable": "${service} hizmetine ulaşılamadı.",
+      "signedOut": "${service} oturumunuzu kapattı. Ayarlar'dan yeniden bağlayın.",
+      "failed": "${service} beklenen yanıtı vermedi."
+    },
+    "discover": {
+      "type": "İçerik",
+      "catalog": "Katalog",
+      "genre": "Tür",
+      "all": "Tümü",
+      "empty": "Bu katalogda gösterilecek bir şey yok.",
+      "noCatalogs": "Yüklü eklentilerin hiçbirinde göz atılacak bir katalog yok.",
+      "selection": "${picker}: ${selection}"
+    },
+    "search": {
+      "placeholder": "Film, dizi ve daha fazlasını arayın",
+      "recent": "Son aramalar",
+      "clearRecent": "Temizle",
+      "removeRecentNamed": "Kaldır: ${name}",
+      "noResults": "“${query}” için sonuç yok",
+      "noCatalogs": "Yüklü eklentilerin hiçbiri arama yapamıyor.",
+      "clearQuery": "Aramayı temizle",
+      "hint": "Eklentilerinizin kataloglarında film, dizi ve daha fazlasını bulun."
+    }
+  },
+  "nav": {
+    "destination": {
+      "board": "Ana Sayfa",
+      "discover": "Keşfet",
+      "search": "Ara",
+      "library": "Kitaplık",
+      "settings": "Ayarlar"
+    },
+    "shortLabel": {
+      "board": "Ana Sayfa",
+      "library": "Kitaplık",
+      "search": "Ara",
+      "settings": "Ayarlar"
+    },
+    "back": "Geri",
+    "retry": "Tekrar dene",
+    "close": "Kapat",
+    "dismiss": "Yoksay",
+    "qrFailed": "Bu bağlantı QR kodu olarak gösterilemiyor.",
+    "openOnPhone": {
+      "title": "Telefonunuzda açın",
+      "message": "Bu cihaz bu bağlantıyı açamıyor. Orada açmak için kodu telefonunuzun kamerasıyla tarayın.",
+      "qrDescription": "Bağlantının QR kodu"
+    },
+    "player": {
+      "close": "Oynatıcıyı kapat",
+      "fullscreen": "Tam ekran",
+      "exitFullscreen": "Tam ekrandan çık",
+      "rewind": "Geri sar",
+      "fastForward": "İleri sar",
+      "pictureInPicture": "Resim içinde resim"
+    },
+    "menu": {
+      "playback": "Oynatma",
+      "nextSubtitles": "Sonraki altyazı parçası",
+      "nextAudio": "Sonraki ses parçası"
+    }
+  },
+  "watch": {
+    "title": "Birlikte izleme",
+    "intro": "Arkadaşlarınızla, her biri kendi cihazında olmak üzere eşzamanlı izleyin. Herkes aynı içeriği kendi eklentilerinden oynatır. Oda oluşturmak için oynatıcı seçeneklerinde Birlikte izleme'yi seçin.",
+    "controlMode": {
+      "hostOnly": "Yalnızca ben kontrol ederim",
+      "hostOnlyDetail": "Oynattığınızda, duraklattığınızda veya ileri ya da geri sardığınızda herkes size uyar",
+      "anyone": "Herkes kontrol eder",
+      "anyoneDetail": "Odadaki herkes oynatabilir, duraklatabilir, ileri veya geri sarabilir"
+    },
+    "joinTitle": "Odaya katıl",
+    "joinHint": "Kod veya davet bağlantısı",
+    "joinLabel": "Katıl",
+    "joinInvalid": "6 karakterlik bir oda kodu veya davet bağlantısı girin",
+    "recentTitle": "Son odalar",
+    "recentUsed": "Son kullanım: ${time}",
+    "removeRecentNamed": "Kaldır: ${name}",
+    "invite": {
+      "title": "${code} odasına katılınsın mı? Bu oda sizin aktarma sunucunuzda değil, ${server} üzerinde.",
+      "join": "Katıl",
+      "leaveTitle": "${code} odasına katılmak için bu odadan çıkılsın mı? O oda sizin aktarma sunucunuzda değil, ${server} üzerinde.",
+      "leaveHostTitle": "${code} odasına katılmak için bu odadan çıkılsın mı? O oda sizin aktarma sunucunuzda değil, ${server} üzerinde. Bu oda, sıradaki katılımcının oda sahibi olmasıyla devam eder."
+    },
+    "relay": {
+      "checking": "Aktarma sunucusu kontrol ediliyor…",
+      "unreachable": "${server} adresindeki aktarma sunucusuna ulaşılamıyor.",
+      "retry": "Tekrar dene",
+      "title": "Aktarma sunucusu",
+      "hint": "Birlikte izleme odalarının bağlantısını sağlayan aktarma sunucusu. Open Watch Party'nin herkese açık aktarma sunucularını kullanmak için boş bırakın.",
+      "hosted": "Open Watch Party'nin herkese açık aktarma sunucuları",
+      "placeholder": "https://relay.example.com",
+      "invalid": "http:// veya https:// ile başlayan bir aktarma sunucusu adresi girin",
+      "save": "Kaydet",
+      "reset": "Herkese açık aktarma sunucularını kullanın"
+    },
+    "busy": {
+      "creating": "Oda oluşturuluyor…",
+      "joining": "Odaya katılınıyor…"
+    },
+    "dismiss": "Yoksay",
+    "room": {
+      "codeLabel": "Oda kodu",
+      "copyCode": "Kodu kopyala",
+      "codeCopied": "Kod kopyalandı",
+      "share": "Daveti paylaş",
+      "shareText": "Tortuga'da benimle izle: ${link} bağlantısını aç veya ${code} oda kodunu gir.",
+      "scan": "Katılmak için telefonla tarayın",
+      "youHost": "Oda sahibi sizsiniz",
+      "hostedBy": "Oda sahibi: ${name}",
+      "hostOnly": "Oynatmayı yalnızca oda sahibi kontrol eder",
+      "anyone": "Oynatmayı herkes kontrol eder",
+      "reconnecting": "Yeniden bağlanılıyor…",
+      "hostReconnecting": "${name} yeniden bağlanana kadar bekleniyor…",
+      "nowPlaying": "Oynatılıyor: ${title}",
+      "nowPlayingEpisode": "Oynatılıyor: ${title} · ${episode}",
+      "idleHost": "Bir şey oynatın; odadaki herkes sizinle birlikte izler.",
+      "idleGuest": "${name} bir şey oynatana kadar bekleniyor.",
+      "participants": {
+        "one": "${n} katılımcı",
+        "other": "${n} katılımcı"
+      },
+      "you": "${name} (siz)",
+      "hostBadge": "Oda sahibi",
+      "makeHost": "Oda sahibi yap",
+      "makeHostNamed": "Oda sahibi yap: ${name}",
+      "joinPlayback": "Oynatmaya katıl",
+      "leave": "Odadan çık",
+      "leaveTitle": "Odadan çıkılsın mı?",
+      "leaveConfirm": "Çık",
+      "end": "Odayı kapat",
+      "endTitle": "Oda herkes için kapatılsın mı?",
+      "endConfirm": "Odayı kapat",
+      "cancel": "İptal",
+      "leaveHostTitle": "Odadan çıkılsın mı? Oda, sıradaki katılımcının oda sahibi olmasıyla devam eder.",
+      "kickNamed": "Odadan çıkar: ${name}",
+      "kickTitle": "${name} odadan çıkarılsın mı?",
+      "kickConfirm": "Çıkar",
+      "lock": "Odayı kilitle",
+      "lockDetail": "Yeni kimse katılamaz",
+      "controlTitle": "Oynatmayı kim kontrol eder"
+    },
+    "status": {
+      "ready": "Hazır",
+      "loading": "Yükleniyor",
+      "matching": "Dosya aranıyor",
+      "buffering": "Arabelleğe alınıyor",
+      "sameLength": "Aynı süre (${delta})",
+      "longer": "${delta} daha uzun",
+      "shorter": "${delta} daha kısa",
+      "noStream": "Akış bulunamadı",
+      "searchFailed": "Eklenti araması başarısız oldu",
+      "notPlaying": "Oynatıcıda değil",
+      "away": "Bağlantı kesildi",
+      "declined": "Oynatmıyor",
+      "offset": "Kaydırma ${delta}"
+    },
+    "delta": {
+      "seconds": "${value} sn",
+      "minutes": "${minutes} dk ${seconds} sn"
+    },
+    "player": {
+      "optionRoom": "Oda ${code}",
+      "startTitle": "Oynatılan içerikle oda oluştur",
+      "liveNoRoom": "Canlı yayın birlikte izlenemez",
+      "watching": {
+        "one": "${n} kişi izliyor",
+        "other": "${n} kişi birlikte izliyor"
+      },
+      "hostBadge": "ODA SAHİBİ",
+      "waiting": "${names} bekleniyor…",
+      "waitingMore": {
+        "other": "${names} ve ${n} kişi daha bekleniyor…"
+      },
+      "syncing": "Eşitleniyor…",
+      "matchingStart": "${name} kullanıcısının dosyasıyla eşleşen dosya aranıyor…",
+      "longer": "Dosyanız, ${name} kullanıcısının dosyasından ${delta} daha uzun",
+      "shorter": "Dosyanız, ${name} kullanıcısının dosyasından ${delta} daha kısa",
+      "mismatchDetail": "Farklı bir kurgu olabilir; bu yüzden oynatma konumlarınız denk gelmeyebilir.",
+      "playAnyway": "Yine de oynat",
+      "chooseStream": "Başka bir akış seçin",
+      "noStream": "Eklentilerinizin hiçbirinde ${title} için akış yok.",
+      "searchFailed": "Eklentilerinizden bazılarında ${title} aranamadı.",
+      "chooseAStream": "Akış seçin",
+      "pickFailed": "Bu akış açılamadı.",
+      "hostControls": "Bu odada oynatmayı yalnızca ${name} kontrol ediyor",
+      "hostControlsUnnamed": "Bu odada oynatmayı yalnızca oda sahibi kontrol ediyor",
+      "pausedHere": "Bu cihazda duraklatıldı. Odaya yetişmek için Oynat'a basın.",
+      "dontPlay": "Oynatmayacağım",
+      "declined": "${title} oynatılmıyor.",
+      "offsetTitle": "Kaydırma",
+      "offsetDetail": "Dosyanızı odanınkine göre kaydırır; daha erken veya daha geç başlayan bir kurgu için.",
+      "offsetReset": "Sıfırla"
+    },
+    "toast": {
+      "joined": "${name} katıldı",
+      "left": "${name} ayrıldı",
+      "paused": "${name} duraklattı",
+      "resumed": "${name} devam ettirdi",
+      "seeked": "${name} başka bir konuma atladı",
+      "speed": "${name} hızı ${speed} olarak ayarladı",
+      "buffering": "${name} arabelleğe alıyor",
+      "hostChanged": "Oda sahibi artık ${name}",
+      "becameHost": "Artık oda sahibi sizsiniz",
+      "media": "${name} oynatmaya başladı: ${title}",
+      "forbidden": "Bunu yalnızca oda sahibi yapabilir"
+    },
+    "failure": {
+      "create": "Oda oluşturulamadı. Tekrar deneyin.",
+      "join": "Odaya katılınamadı. Tekrar deneyin.",
+      "share": "Bu video odayla paylaşılamadı. Başka bir akış deneyin.",
+      "live": "Canlı yayın birlikte izlenemez. Oda bir video bekliyor.",
+      "roomNotFound": "Bu kodla bir oda yok.",
+      "roomFull": "Bu oda dolu.",
+      "rateLimited": "Çok fazla deneme yapıldı. Bir dakika bekleyip tekrar deneyin.",
+      "connection": "Aktarma sunucusuna ulaşılamıyor. Bağlantınızı kontrol edin.",
+      "sessionLost": "Odayla bağlantı kesildi.",
+      "ended": "Oda sahibi odayı kapattı.",
+      "roomLocked": "Bu oda kilitli.",
+      "relayFull": "Aktarma sunucusu dolu. Daha sonra tekrar deneyin.",
+      "blocked": "Bu aktarma sunucusu Tortuga'yı kabul etmiyor.",
+      "kicked": "Oda sahibi sizi odadan çıkardı.",
+      "expired": "Odanın süresi doldu.",
+      "replaced": "Bu odaya başka bir cihazda katıldınız."
+    }
+  },
+  "downloads": {
+    "title": "İndirilenler",
+    "empty": "Henüz bir şey indirilmedi. Bağlantı olmadan izlemek için filmleri ve bölümleri kendi sayfalarından indirin.",
+    "offline": "Çevrimdışısınız. Bağlantı geri geldiğinde indirmeler devam eder.",
+    "storage": "${used} kullanılıyor · ${free} boş",
+    "storageUsed": "${used} kullanılıyor",
+    "pauseAll": "Tümünü duraklat",
+    "resumeAll": "Tümünü devam ettir",
+    "actionFailed": "İndirme değiştirilemedi. Tekrar deneyin.",
+    "actionsFailed": "İndirmeler değiştirilemedi. Tekrar deneyin.",
+    "episodes": {
+      "one": "${n} bölüm",
+      "other": "${n} bölüm"
+    },
+    "videos": {
+      "one": "${n} video",
+      "other": "${n} video"
+    },
+    "otherVideos": "Diğer videolar",
+    "summary": "${count} · ${size}",
+    "progress": "${done}/${total}",
+    "speed": "${speed}/sn",
+    "status": {
+      "queued": "Sırada",
+      "waitingForWifi": "Wi-Fi bekleniyor",
+      "waitingForNetwork": "Bağlantı bekleniyor",
+      "resolving": "Hazırlanıyor…",
+      "downloading": "İndiriliyor",
+      "downloadingPercent": "İndiriliyor · %${percent}",
+      "paused": "Duraklatıldı",
+      "failed": "Başarısız oldu",
+      "completed": "İndirildi",
+      "cancelled": "İptal edildi"
+    },
+    "action": {
+      "play": "Oynat",
+      "pause": "Duraklat",
+      "resume": "Devam ettir",
+      "retry": "Tekrar dene",
+      "pickStream": "Akış seçin",
+      "cancel": "İndirmeyi iptal et",
+      "delete": "İndirmeyi sil",
+      "deleteGroup": "İndirmeleri sil",
+      "openDetail": "Ayrıntılara git"
+    },
+    "deleteConfirm": {
+      "title": "${name} için ${count} silinsin mi?",
+      "message": "Yeniden indirmek zaman alır ve bağlantı gerektirir.",
+      "confirm": "Sil",
+      "cancel": "İptal"
+    },
+    "keepSynced": {
+      "title": "Eşitlenmiş tut",
+      "note": "Buradaki her dizinin izlenmemiş sonraki bölümleri bu cihazda indirilmiş olarak tutulur; birini izledikten sonra yenisi indirilir.",
+      "empty": "Eşitlenmiş tutulan dizi yok. Bir dizinin indirme menüsünde, izlenmemiş kaç bölümün tutulacağını seçin.",
+      "series": {
+        "one": "${n} dizi",
+        "other": "${n} dizi"
+      },
+      "manage": "“Eşitlenmiş tut” ayarlarını yönet",
+      "pauseRule": "${title} dizisini duraklat",
+      "resumeRule": "${title} dizisini devam ettir",
+      "stopRule": "${title} için eşitlemeyi durdur",
+      "status": {
+        "downloading": {
+          "one": "${n} bölüm indiriliyor",
+          "other": "${n} bölüm indiriliyor"
+        },
+        "failed": {
+          "one": "${n} bölüm başarısız oldu",
+          "other": "${n} bölüm başarısız oldu"
+        },
+        "downloaded": {
+          "one": "${n} bölüm indirildi",
+          "other": "${n} bölüm indirildi"
+        },
+        "downloadedNone": "İndirilen bölüm yok"
+      },
+      "stop": {
+        "title": "${title} için eşitleme durdurulsun mu?",
+        "message": {
+          "one": "İndirilenler'deki ${n} bölüm “Eşitlenmiş tut” ile eklendi. Bu da silinsin mi?",
+          "other": "İndirilenler'deki ${n} bölüm “Eşitlenmiş tut” ile eklendi. Bunlar da silinsin mi?"
+        },
+        "messageNone": "Başka bölüm indirilmeyecek.",
+        "keep": "İndirmeleri sakla",
+        "delete": "İndirmeleri sil",
+        "confirm": "Durdur",
+        "cancel": "İptal"
+      },
+      "notice": {
+        "one": "“Eşitlenmiş tut”, ${title} dizisinden ${n} bölüm ekledi",
+        "other": "“Eşitlenmiş tut”, ${title} dizisinden ${n} bölüm ekledi"
+      },
+      "noticeSeveral": {
+        "one": "“Eşitlenmiş tut” ${n} bölüm ekledi",
+        "other": "“Eşitlenmiş tut” ${n} bölüm ekledi"
+      },
+      "actionFailed": "“Eşitlenmiş tut” değiştirilemedi. Tekrar deneyin."
+    },
+    "failure": {
+      "noStream": "Bu bölüm için bir akış seçilemedi. Akışı elle seçin.",
+      "noStreamInstant": "Bu bölüm için anında kullanılabilir bir akış seçilemedi. Akışı elle seçin.",
+      "network": "Bağlantı başarısız oldu.",
+      "http": "Sunucu HTTP ${status} ile yanıt verdi.",
+      "streamGone": "Bağlantının süresi doldu ve eklentisi artık bu akışı sunmuyor.",
+      "diskFull": "Cihazda yer kalmadı. İndirmeler durduruldu.",
+      "notEnoughSpace": "Bu indirme için yeterli boş alan yok.",
+      "sizeMismatch": "İndirilen dosya eksik.",
+      "unsupported": "Bu akış indirilemez.",
+      "locationUnavailable": "İndirme konumu kullanılamıyor.",
+      "fileMissing": "İndirilen dosya bulunamıyor.",
+      "storage": "Cihazın depolama alanı yanıt vermedi."
+    },
+    "notification": {
+      "channel": "İndirmeler",
+      "title": "${title} indiriliyor",
+      "count": {
+        "one": "${n} indirme",
+        "other": "${n} indirme"
+      },
+      "progress": "%${percent}",
+      "preparing": "İndirme hazırlanıyor…",
+      "waiting": "Wi-Fi bekleniyor",
+      "paused": "Duraklatıldı",
+      "pause": "Duraklat",
+      "resume": "Devam ettir",
+      "cancel": "İptal",
+      "failed": "İndirme başarısız oldu: ${title}",
+      "completed": "${title} indirildi"
+    }
+  },
+  "offline": {
+    "title": "Çevrimdışısınız",
+    "text": "Göz atmak için internete bağlanın. İndirdikleriniz bağlantı olmadan da oynatılabilir.",
+    "textNoDownloads": "Göz atmak için internete bağlanın.",
+    "openDownloads": "İndirilenler'e git",
+    "detail": "İndirmelerinizle birlikte kaydedilen ayrıntılar gösteriliyor."
+  },
+  "playerApps": {
+    "chooser": "Her seferinde sor",
+    "tortuga": "Tortuga",
+    "playWith": "Şununla oynat…",
+    "banner": {
+      "opening": "${player} ile açılıyor…",
+      "notInstalled": "${player} bu cihazda yüklü değil.",
+      "didNotStart": "${player} başlatılamadı.",
+      "playInTortuga": "Tortuga'da oynat",
+      "cancel": "İptal",
+      "dismiss": "Yoksay"
+    },
+    "detail": {
+      "playing": "${player} uygulamasında oynatılıyor · ${position}",
+      "playingOf": "${player} uygulamasında oynatılıyor · ${position} / ${duration}",
+      "paused": "${player} uygulamasında duraklatıldı · ${position}",
+      "pausedOf": "${player} uygulamasında duraklatıldı · ${position} / ${duration}",
+      "finished": "${player} uygulamasında açıldı. ${title} izlemeyi bitirdiniz mi?",
+      "markWatched": "İzlendi olarak işaretle",
+      "notYet": "Henüz değil"
+    },
+    "settings": {
+      "player": "Oynatıcı",
+      "deviceOnly": "Yalnızca bu cihaz",
+      "note": "Bu cihazdaki videolar burada seçilen oynatıcıda oynatılır. Bir akışın menüsündeki “Şununla oynat…” ile tek bir video için başka bir oynatıcı seçebilirsiniz.",
+      "notFound": "${player} (bulunamadı)",
+      "followsProgress": "Kaldığınız yerden devam eder ve oynatırken ilerlemenizi kaydeder",
+      "savesOnReturn": "Kaldığınız yerden devam eder ve durduğunuz yeri kaydeder",
+      "savesOnReturnFromStart": "Baştan başlar, ardından durduğunuz yeri kaydeder veya bitirip bitirmediğinizi sorar",
+      "asksAfter": "Kaldığınız yerden devam eder, ardından bitirip bitirmediğinizi sorar",
+      "asksAfterFromStart": "Yalnızca videoyu açar, ardından bitirip bitirmediğinizi sorar",
+      "chooserDetail": "Cihazınız her videoyu hangi uygulamanın oynatacağını sorar",
+      "customHeader": "Özel oynatıcılar",
+      "addCustom": "Özel oynatıcı ekle",
+      "deleteNamed": "Sil: ${name}",
+      "form": {
+        "title": "Özel oynatıcı ekle",
+        "name": "Ad",
+        "nameHint": "Oynatıcım",
+        "program": "Program",
+        "programHint": "mpv veya programın tam yolu",
+        "arguments": "Argümanlar",
+        "argumentsHint": "--fs {url}",
+        "programPlaceholders": "{url} videonun bağlantısı, {title} başlığı, {start} saniye cinsinden başlangıç noktası, {subtitle} ise ilk altyazının bağlantısıdır.",
+        "urlTemplate": "URL şablonu",
+        "urlTemplateHint": "myplayer://play?url={url}",
+        "urlTemplatePlaceholders": "{url} videonun URL için kodlanmış bağlantısı, {url_raw} ise bağlantının olduğu gibi hâlidir.",
+        "packageName": "Paket adı",
+        "packageNameHint": "org.videolan.vlc",
+        "save": "Ekle",
+        "cancel": "İptal",
+        "nameMissing": "Oynatıcıya bir ad verin.",
+        "programMissing": "Çalıştırılacak programı girin.",
+        "urlTemplateMissing": "URL şablonunu girin.",
+        "packageNameMissing": "Uygulamanın paket adını girin.",
+        "argumentsNeedUrl": "Argümanlarda {url} bulunmalıdır.",
+        "urlTemplateNeedsUrl": "URL şablonunda {url} veya {url_raw} bulunmalıdır.",
+        "packageNameInvalid": "Bu, org.videolan.vlc gibi bir paket adı değil."
+      }
+    }
+  },
+  "guide": {
+    "title": "TV rehberi",
+    "today": "Bugün",
+    "tomorrow": "Yarın",
+    "yesterday": "Dün",
+    "day": "${day} ${weekday}",
+    "catalog": "${catalog} · ${addon}",
+    "timeRange": "${start} – ${end}",
+    "onNow": "Şimdi yayında",
+    "now": "Şimdi",
+    "noProgrammes": "Program bilgisi yok",
+    "noChannels": "Bu rehberde bu gün için kanal yok.",
+    "noGuide": "Yüklü eklentilerin hiçbiri TV rehberi sunmuyor.",
+    "failed": "Rehber yüklenemedi: ${reason}",
+    "cast": "Oyuncular: ${names}",
+    "directors": "Yönetmen: ${names}"
+  },
+  "calendar": {
+    "title": "Takvim",
+    "previousMonth": "Önceki ay",
+    "nextMonth": "Sonraki ay",
+    "today": "Bugün",
+    "tomorrow": "Yarın",
+    "emptyLibrary": "Bölümlerini burada görmek için kitaplığına dizi ekle.",
+    "noAddon": "Eklentilerinin hiçbirinde kitaplığındaki diziler için takvim yok.",
+    "emptyMonth": "Bölüm yok.",
+    "newEpisodes": {
+      "one": "${n} yeni bölüm",
+      "other": "${n} yeni bölüm"
+    },
+    "episodes": {
+      "one": "${n} bölüm",
+      "other": "${n} bölüm"
+    }
+  },
+  "watchlist": {
+    "lists": "Takip hizmeti listeleri",
+    "hint": "Her liste o hizmetteki hesabınızdadır. Kitaplığınız değişmez.",
+    "add": "Ekle: ${list}",
+    "remove": "Kaldır: ${list}",
+    "trakt": "Trakt izleme listesi",
+    "simkl": "Simkl izlenecekler",
+    "mdblist": "MDBList izleme listesi",
+    "myAnimeList": "MyAnimeList izlenecekler",
+    "aniList": "AniList planlananlar",
+    "saving": "Kaydediliyor…",
+    "queued": "Henüz gönderilmedi, yeniden denenecek",
+    "failed": "Kaydedilmedi",
+    "addFailed": "${title} eklenemedi: ${list}.",
+    "removeFailed": "${title} kaldırılamadı: ${list}."
+  },
+  "collections": {
+    "needsAddon": "${name} eklentisi gerekli",
+    "needsCatalog": "${addon} eklentisinde ${catalog} kataloğu yok",
+    "needsFilter": "Tortuga'nın ayarlayamadığı bir filtre gerekli",
+    "traktUnavailable": "Trakt listeleri uygulamanın bu sürümünde kullanılamıyor",
+    "tooLarge": "“${title}” eşitlenemeyecek kadar büyük",
+    "kind": {
+      "tmdbList": "TMDB listesi",
+      "tmdbCollection": "TMDB koleksiyonu",
+      "tmdbCompany": "TMDB şirketi",
+      "tmdbNetwork": "TMDB kanalı",
+      "tmdbDiscover": "TMDB keşfet",
+      "tmdbPerson": "TMDB kişisi",
+      "tmdbDirector": "TMDB yönetmeni",
+      "letterboxd": "Letterboxd",
+      "unknown": "Bilinmeyen sağlayıcı “${name}”"
+    },
+    "summary": {
+      "adds": {
+        "one": "${n} koleksiyon ekler",
+        "other": "${n} koleksiyon ekler"
+      },
+      "replaces": {
+        "one": "Aynı kimliğe sahip ${n} koleksiyonun yerini alır",
+        "other": "Aynı kimliklere sahip ${n} koleksiyonun yerini alır"
+      },
+      "needsAddon": {
+        "one": "${n} kaynak için ${name} eklentisi gerekli",
+        "other": "${n} kaynak için ${name} eklentisi gerekli"
+      },
+      "needsTracker": {
+        "one": "${n} kaynak için ${service} bağlantısı gerekli",
+        "other": "${n} kaynak için ${service} bağlantısı gerekli"
+      },
+      "unsupported": {
+        "one": "${kind}: ${n} kaynak dışarıda bırakıldı",
+        "other": "${kind}: ${n} kaynak dışarıda bırakıldı"
+      },
+      "unsupportedHint": "Tortuga bu kaynakları değil, eklenti kataloglarını ve takipçi listelerini okur. Bunun yerine AIOMetadata veya MDBList gibi bir eklenti kataloğu kullanın.",
+      "folderDropped": "“${collection}” içindeki “${folder}” klasörü dışarıda bırakıldı: kaynaklarının hiçbiri okunamıyor",
+      "collectionDropped": "“${title}” koleksiyonu dışarıda bırakıldı: klasörlerinin hiçbiri okunamıyor",
+      "tooLarge": "“${title}” koleksiyonu içe aktarılmadı: eşitlenemeyecek kadar büyük"
+    },
+    "refused": {
+      "notJson": "Bu bir koleksiyon dosyası değil: JSON değil.",
+      "notList": "Bu bir koleksiyon dosyası değil: koleksiyon listesi içermiyor.",
+      "empty": "Bu dosyada koleksiyon yok.",
+      "collectionInvalid": "Dosyadaki ${position}. koleksiyon okunamıyor.",
+      "collectionNoId": "Dosyadaki ${position}. koleksiyonun kimliği yok.",
+      "collectionNoTitle": "${id} koleksiyonunun başlığı yok.",
+      "duplicateCollection": "Dosyadaki iki koleksiyonun kimliği ${id}.",
+      "noFolders": "“${collection}” koleksiyonunda klasör listesi yok.",
+      "folderInvalid": "“${collection}” içindeki ${position}. klasör okunamıyor.",
+      "folderNoId": "“${collection}” içindeki ${position}. klasörün kimliği yok.",
+      "folderNoTitle": "“${collection}” içindeki ${id} klasörünün başlığı yok.",
+      "duplicateFolder": "“${collection}” içindeki iki klasörün kimliği ${id}.",
+      "noSources": "“${collection}” içindeki “${folder}” klasöründe kaynak listesi yok.",
+      "unknownShape": "“${collection}” içindeki “${folder}” klasörünün döşeme biçimi bilinmiyor: ${shape}.",
+      "sourceInvalid": "“${collection}” içindeki “${folder}” klasörünün ${position}. kaynağı eksik."
+    },
+    "row": "Koleksiyon",
+    "rowSource": {
+      "one": "Koleksiyon · ${n} klasör",
+      "other": "Koleksiyon · ${n} klasör"
+    },
+    "folder": {
+      "all": "Tümü",
+      "empty": "Burada hiç içerik yok",
+      "goToTrackers": "Takip hizmetlerine git",
+      "goToAddons": "Eklentilere git"
+    },
+    "importing": {
+      "title": "Koleksiyonları içe aktar",
+      "note": "Nuvio veya AIOMetadata'dan bir koleksiyon dosyası: bağlantısını girin ya da dosyayı açın. Sizinkilerden biriyle aynı kimliğe sahip bir koleksiyon onun yerini alır.",
+      "urlLabel": "Bağlantı",
+      "urlHint": "https://…/collections.json",
+      "fetch": "Getir",
+      "openFile": "Dosya aç",
+      "confirm": "İçe aktar",
+      "done": "Bitti",
+      "rowNew": {
+        "one": "Yeni · ${n} klasör",
+        "other": "Yeni · ${n} klasör"
+      },
+      "rowReplaces": {
+        "one": "Sizinkinin yerini alır · ${n} klasör",
+        "other": "Sizinkinin yerini alır · ${n} klasör"
+      },
+      "imported": {
+        "one": "${n} koleksiyon içe aktarıldı",
+        "other": "${n} koleksiyon içe aktarıldı"
+      },
+      "notWeb": "http:// veya https:// ile başlayan bir bağlantı girin.",
+      "tooLarge": "Bu dosya 4 MB'tan büyük.",
+      "httpError": "Bağlantı ${status} hatasıyla yanıt verdi.",
+      "timeout": "Bağlantı zamanında yanıt vermedi.",
+      "unreachable": "Bağlantıya ulaşılamıyor. Bağlantıyı ve internet bağlantınızı kontrol edin.",
+      "unreadable": "Bu dosya metin olarak okunamıyor.",
+      "failed": "Koleksiyonlar kaydedilemedi."
+    },
+    "editor": {
+      "newHeading": "Yeni koleksiyon",
+      "editHeading": "Koleksiyonu düzenle",
+      "titleLabel": "Başlık",
+      "view": "Görünüm",
+      "viewHint": "Bir klasörün kaynaklarını nasıl gösterdiği",
+      "viewTabs": "Sekmeler",
+      "viewRows": "Satırlar",
+      "viewFollow": "Uygulamaya göre",
+      "allTab": "Tümü sekmesi",
+      "allTabHint": "Tüm kaynakların içeriklerini gösteren ilk sekme",
+      "foldersHeader": "Klasörler",
+      "addFolder": "Klasör ekle",
+      "noFolders": "Henüz klasör yok",
+      "sources": {
+        "one": "${n} kaynak",
+        "other": "${n} kaynak"
+      },
+      "save": "Kaydet",
+      "newFolder": "Yeni klasör",
+      "folderTitleLabel": "Başlık",
+      "shape": "Kutucuk şekli",
+      "shapePoster": "Afiş",
+      "shapeLandscape": "Yatay",
+      "shapeSquare": "Kare",
+      "coverLabel": "Kapak görseli bağlantısı",
+      "coverHint": "https://…",
+      "hideTitle": "Başlığı gizle",
+      "hideTitleHint": "Kutucuk yalnızca kapağını gösterir",
+      "sourcesHeader": "Kaynaklar",
+      "addSource": "Kaynak ekle",
+      "noSources": "Henüz kaynak yok",
+      "deleteNamed": "${name} öğesini sil",
+      "removeNamed": "${name} öğesini kaldır",
+      "noTitle": "Koleksiyona bir başlık verin.",
+      "noFolder": "Koleksiyona bir klasör ekleyin.",
+      "folderNoTitle": "${position}. klasöre bir başlık verin.",
+      "folderNoSource": "“${folder}” klasörüne bir kaynak ekleyin.",
+      "saveFailed": "Koleksiyon kaydedilemedi.",
+      "discardTitle": "Değişiklikler silinsin mi?",
+      "discard": "Sil",
+      "keepEditing": "Düzenlemeye devam et",
+      "picker": {
+        "addons": "Eklenti katalogları",
+        "trackers": "Takip hizmetleri",
+        "noAddons": "Yüklü eklentilerin hiçbirinde eklenecek bir katalog yok.",
+        "noTrackers": "Listelerini eklemek için Ayarlar → Takip hizmetleri bölümünden bir hizmet bağlayın.",
+        "listsFailed": "${service} listeleri şu anda okunamıyor.",
+        "byLink": "Bağlantısıyla bir ${service} listesi",
+        "traktHint": "https://trakt.tv/users/…/lists/…",
+        "mdblistHint": "https://mdblist.com/lists/…/…",
+        "add": "Ekle",
+        "notAList": "Bu bir ${service} listesi bağlantısı değil.",
+        "notFound": "${service} hizmetinde bu bağlantıda bir liste yok.",
+        "unreachable": "${service} hizmetine şu anda ulaşılamıyor."
+      }
+    }
+  }
+}

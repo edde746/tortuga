@@ -1,0 +1,118 @@
+-- The streams a profile picked by hand, on any of its devices, with what the list showed around each pick and what
+-- came of it (data/streams/StreamPickRepository.kt): what stream suggestions learn from. Synced per profile, one
+-- record per pick; an outcome is a new write of its pick's record. A pruned pick is a tombstone without its candidates.
+-- The candidates are what their text says (resolution, codec, languages, size...), never a URL or an addon's address.
+-- Sync columns: see Profile.sq.
+CREATE TABLE stream_pick (
+    pick_id TEXT NOT NULL PRIMARY KEY,
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    -- The video's length as its meta gives it, in seconds; null when it gives none.
+    runtime_seconds INTEGER,
+    -- Epoch milliseconds.
+    picked_at INTEGER NOT NULL,
+    -- handheld, tv or desktop: the kind of device the pick was made on.
+    device_class TEXT NOT NULL,
+    -- The network cost per byte at the pick.
+    metered INTEGER AS kotlin.Boolean NOT NULL,
+    hdr_display INTEGER AS kotlin.Boolean NOT NULL,
+    dolby_vision_display INTEGER AS kotlin.Boolean NOT NULL,
+    -- The video codecs the device decodes in hardware, comma-separated (hevc,av1); empty when it can't tell.
+    hardware_codecs TEXT NOT NULL,
+    -- list (the Streams list) or player (the player's next stream).
+    source TEXT NOT NULL,
+    -- JSON array of the candidates in the order shown, the picked one among them; `[]` in a tombstone.
+    candidates_json TEXT NOT NULL,
+    chosen INTEGER NOT NULL,
+    -- The list row of the first candidate: where the candidates were shown (the list is cut to the rows around the pick).
+    first_row INTEGER NOT NULL,
+    -- good, bad, or backed_out (left within 30 s; bad once another stream is picked for the video); null until known.
+    outcome TEXT,
+    outcome_at INTEGER,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL
+);
+
+CREATE INDEX stream_pick_profile ON stream_pick(profile_id, device_class, picked_at);
+
+CREATE INDEX stream_pick_video ON stream_pick(profile_id, meta_id, video_id, picked_at);
+
+CREATE INDEX stream_pick_dirty ON stream_pick(dirty, hlc);
+
+insert:
+INSERT INTO stream_pick VALUES ?;
+
+upsert:
+INSERT OR REPLACE INTO stream_pick VALUES ?;
+
+select:
+SELECT * FROM stream_pick WHERE pick_id = ?;
+
+-- The profile's live picks on every kind of device, oldest first.
+selectLive:
+SELECT * FROM stream_pick WHERE profile_id = ? AND deleted = 0 ORDER BY picked_at, pick_id;
+
+-- Where the profile's picks are at: how many rows, the newest write's clock and the newest row (a pulled record is
+-- stored as a new row). A pick, an outcome, a prune and a pulled pick each change it (playback/suggest/StreamPicks.kt).
+changeMark:
+SELECT count(*) AS picks, coalesce(max(hlc), '') AS clock, coalesce(max(rowid), 0) AS newest FROM stream_pick WHERE profile_id = ?;
+
+setOutcome:
+UPDATE stream_pick SET outcome = :outcome, outcome_at = :at, hlc = :hlc, dirty = 1
+WHERE pick_id = :pickId AND deleted = 0 AND (outcome IS NULL OR outcome = 'backed_out');
+
+-- Another stream was picked for the video: a pick left within 30 s before it, since :since, went wrong.
+markBackedOutBad:
+UPDATE stream_pick SET outcome = 'bad', outcome_at = :at, hlc = :hlc, dirty = 1
+WHERE profile_id = :profileId AND meta_id = :metaId AND video_id = :videoId AND outcome = 'backed_out'
+    AND picked_at >= :since AND deleted = 0;
+
+-- The pick :pickId, left within 30 s, came before another pick of its video within :window: it went wrong. Picks of
+-- one millisecond go by the order this device stored them in.
+markBadIfPickedAgain:
+UPDATE stream_pick SET outcome = 'bad', hlc = :hlc, dirty = 1
+WHERE pick_id = :pickId AND outcome = 'backed_out' AND deleted = 0 AND EXISTS (
+    SELECT 1 FROM stream_pick AS later
+    WHERE later.profile_id = stream_pick.profile_id AND later.meta_id = stream_pick.meta_id
+        AND later.video_id = stream_pick.video_id AND later.deleted = 0
+        AND (later.picked_at > stream_pick.picked_at OR (later.picked_at = stream_pick.picked_at AND later.rowid > stream_pick.rowid))
+        AND later.picked_at <= stream_pick.picked_at + :window
+);
+
+-- The profile's live picks on one kind of device that a prune drops: those taken before :since and those past its
+-- newest :keep. By (picked_at, pick_id), so every device holding the same picks drops the same ones.
+selectPrunable:
+SELECT pick_id FROM stream_pick
+WHERE profile_id = :profileId AND device_class = :deviceClass AND deleted = 0 AND (
+    picked_at < :since OR pick_id NOT IN (
+        SELECT pick_id FROM stream_pick
+        WHERE profile_id = :profileId AND device_class = :deviceClass AND deleted = 0
+        ORDER BY picked_at DESC, pick_id DESC LIMIT :keep
+    )
+);
+
+tombstone:
+UPDATE stream_pick SET candidates_json = '[]', hlc = :hlc, dirty = 1, deleted = 1 WHERE pick_id = :pickId;
+
+tombstoneProfile:
+UPDATE stream_pick SET candidates_json = '[]', hlc = :hlc, dirty = 1, deleted = 1 WHERE profile_id = :profileId AND deleted = 0;
+
+selectDirty:
+SELECT * FROM stream_pick WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE stream_pick SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE stream_pick SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt; see Profile.sq).
+deleteAll:
+DELETE FROM stream_pick;
+
+forgetServerVersions:
+UPDATE stream_pick SET server_version = NULL, dirty = 1;

@@ -1,0 +1,5 @@
+Plays your addons' streams with mpv, with HDR10, Dolby Vision and audio passthrough where your setup supports them
+Continue Watching, progress and watched marks, and the next episode from the same source
+Skip intros, recaps and credits; your audio and subtitle choices carry to the next episode
+Watch together in sync with friends, each through their own addons
+Profiles, addons, library and progress sync across your devices

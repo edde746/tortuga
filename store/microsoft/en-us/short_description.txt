@@ -1,0 +1,1 @@
+A video player that works with Stremio addons. The addons you install bring the catalogs and the streams, and Tortuga plays them. Tortuga provides no content of its own.

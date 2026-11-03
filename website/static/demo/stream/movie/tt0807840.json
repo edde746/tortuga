@@ -1,0 +1,13 @@
+{
+  "streams": [
+    {
+      "url": "https://download.blender.org/ED/elephantsdream-1024-h264-st-aac.mov",
+      "name": "Tortuga demo",
+      "description": "Elephants Dream (2006), 576p\n(c) copyright 2006, Blender Foundation / Netherlands Media Art Institute / www.elephantsdream.org, CC BY 2.5",
+      "behaviorHints": {
+        "videoSize": 326632467,
+        "filename": "elephantsdream-1024-h264-st-aac.mov"
+      }
+    }
+  ]
+}

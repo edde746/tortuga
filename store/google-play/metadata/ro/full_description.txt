@@ -1,0 +1,37 @@
+Tortuga este un player video compatibil cu extensii Stremio. Extensiile pe care le instalezi aduc cataloagele și stream-urile, iar Tortuga le redă. Tortuga nu oferă conținut propriu.
+
+Cum funcționează
+• Instalează o extensie prin linkul ei. Cataloagele, rezultatele căutării, paginile de detalii și stream-urile vin de la extensiile tale, iar cererile tale ajung direct la ele.
+• Ecranul Acasă afișează Continuă vizionarea și cataloagele extensiilor tale. În Descoperă filtrezi după tip și gen, iar Căutare include toate extensiile.
+• Stream-urile unui film sau ale unui episod sunt grupate pe extensii. Alege unul și începe redarea.
+
+Playerul
+• Redare cu mpv, cu HDR10 și Dolby Vision acolo unde dispozitivul tău le acceptă.
+• Passthrough audio: Dolby Atmos și DTS către receiver.
+• Subtitrări încorporate și din extensii, potrivite cu fișierul. Alegerile tale de audio și subtitrări se păstrează la episodul următor.
+• Capitole pe bara de progres. Omite introducerile, rezumatele și genericul cu un buton sau automat.
+• Timp până la episodul următor cu numărătoare inversă, trecerea la episodul anterior sau următor, viteza de redare, întârzierea subtitrărilor și întârzierea audio.
+• Imagine în imagine pe telefoane și tablete.
+• Preferi alt player? Trimite videoclipul către altă aplicație player de pe dispozitivul tău.
+
+Biblioteca ta
+• Progresul și marcarea titlurilor ca vizionate, cu Continuă vizionarea în Acasă ca să reiei de unde ai rămas.
+• Tortuga ține minte stream-ul ales și redă episodul următor din aceeași sursă.
+• Descărcări: salvează filme și episoade, cu subtitrările lor, ca să le vizionezi offline. Tortuga poate ține un serial la zi cu următoarele episoade nevizionate.
+
+Vizionare împreună
+Creează o cameră și distribuie codul ei sau un link de invitație. Redarea rămâne sincronizată, iar fiecare persoană redă titlul prin propriile extensii.
+
+Contul și profilurile tale
+• Conectează-te cu Google, Apple sau GitHub. Profilurile, extensiile, biblioteca, progresul și setările profilurilor se sincronizează pe toate dispozitivele tale. Asociază un televizor cu un cod QR sau cu un cod scurt.
+• Câte un profil pentru fiecare persoană din casă, fiecare cu propriile extensii, bibliotecă și setări. PIN-ul este opțional.
+• Conectează Trakt, Simkl, MDBList, MyAnimeList sau AniList pentru scrobbling, istoricul vizionărilor, note și liste.
+• Sincronizarea rulează pe serverul Tortuga sau pe unul pe care îl rulezi chiar tu.
+
+Pe Android TV și Google TV, întreaga aplicație funcționează cu telecomanda.
+
+Tortuga este open source, sub licența GPL-3.0, și este disponibilă în 21 de limbi. Fără reclame, fără instrumente de analiză.
+
+Playerul din capturile de ecran arată scurte fragmente din Spring (2019), Coffee Run (2020), Sprite Fright (2021) și Wing It! (2023) de Blender Studio, (CC) Blender Foundation | studio.blender.org, sub licența CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga folosește Trakt, dar nu este aprobat sau certificat de Trakt.

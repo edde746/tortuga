@@ -1,0 +1,34 @@
+Tortuga is a video player that works with Stremio addons. The addons you install bring the catalogs and the streams, and Tortuga plays them. Tortuga provides no content of its own.
+
+How it works
+• Install an addon by its link. Catalogs, search results, title pages and streams come from your addons, and your requests go straight to them.
+• Home shows Continue Watching and your addons' catalogs. Discover filters by type and genre. Search covers every addon.
+• A movie's or an episode's streams come grouped by addon. Pick one and it plays.
+
+The player
+• Plays with mpv, with HDR10 and Dolby Vision where your PC and display support them.
+• Embedded and addon subtitles, matched to the file. Your audio and subtitle choices carry to the next episode.
+• Chapters on the scrub bar. Skip intros, recaps and credits with a button or automatically.
+• Up next, previous and next episode, playback speed, and subtitle and audio delay.
+• Keyboard shortcuts, media keys and the Windows media controls.
+• Rather use another player? Send the video to another player app on your PC.
+
+Your library
+• Progress and watched marks, with Continue Watching on Home to take you back in.
+• Tortuga remembers the stream you picked and plays the next episode from the same source.
+• Downloads: save movies and episodes, with their subtitles, to watch offline. Tortuga can keep a series topped up with the next unwatched episodes.
+
+Watch together
+Open a room and share its code or an invite link. Playback stays in sync, and each person plays the title through their own addons.
+
+Your account and profiles
+• Sign in with Apple, Google or GitHub. Your profiles, addons, library, progress and profile settings sync across your devices. Link a TV with a QR code or a short code.
+• A profile for each person in the household, each with its own addons, library and settings. A PIN is optional.
+• Connect Trakt, Simkl, MDBList, MyAnimeList or AniList for scrobbling, watched history, ratings and lists.
+• Sync runs on Tortuga's server, or on one you run yourself.
+
+Tortuga is open source under the GPL-3.0 and speaks 21 languages. No ads, no analytics.
+
+The player in the screenshots shows short excerpts of Spring (2019), Coffee Run (2020), Sprite Fright (2021) and Wing It! (2023) by Blender Studio, (CC) Blender Foundation | studio.blender.org, licensed under CC BY 4.0.
+
+Tortuga uses Trakt but is not endorsed or certified by Trakt.

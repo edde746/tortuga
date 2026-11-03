@@ -1,0 +1,62 @@
+[
+  {
+    "transportUrl": "https://styled-streams.example/stremio/configured-instance/stream-settings-stream-settings-stream-settings-stream-settings-stream-settings-stream-settings-stream-settings-stream-settings-stream-settings-end/manifest.json",
+    "manifest": "addon-lists/heavy/styled-streams.json"
+  },
+  {
+    "transportUrl": "https://streams.example/manifest.json",
+    "manifest": "addon-lists/heavy/example-streams.json"
+  },
+  {
+    "transportUrl": "https://v3-cinemeta.strem.io/manifest.json",
+    "manifest": "live/cinemeta/manifest.json"
+  },
+  {
+    "transportUrl": "https://aiometadata.example/stremio/catalogs-1/manifest.json",
+    "manifest": "addon-lists/heavy/aiometadata-1.json"
+  },
+  {
+    "transportUrl": "https://aiometadata.example/stremio/catalogs-2/manifest.json",
+    "manifest": "addon-lists/heavy/aiometadata-2.json"
+  },
+  {
+    "transportUrl": "https://aiometadata.example/stremio/catalogs-3/manifest.json",
+    "manifest": "addon-lists/heavy/aiometadata-3.json"
+  },
+  {
+    "transportUrl": "https://aiometadata.example/stremio/catalogs-4/manifest.json",
+    "manifest": "addon-lists/heavy/aiometadata-4.json"
+  },
+  {
+    "transportUrl": "https://opensubtitles-v3.strem.io/manifest.json",
+    "manifest": "live/opensubtitles/manifest.json"
+  },
+  {
+    "transportUrl": "https://anime-kitsu.strem.fun/manifest.json",
+    "manifest": "addon-lists/heavy/anime-kitsu.json"
+  },
+  {
+    "transportUrl": "https://94c8cb9f702d-tmdb-addon.baby-beamup.club/manifest.json",
+    "manifest": "addon-lists/heavy/tmdb.json"
+  },
+  {
+    "transportUrl": "https://2ecbbd610840-trakt.baby-beamup.club/manifest.json",
+    "manifest": "addon-lists/heavy/trakt.json"
+  },
+  {
+    "transportUrl": "https://61ab9c85a149-tmdb-collections.baby-beamup.club/manifest.json",
+    "manifest": "addon-lists/heavy/tmdb-collections.json"
+  },
+  {
+    "transportUrl": "https://api.101catalogs.xyz/manifest.json",
+    "manifest": "addon-lists/heavy/101catalogs.json"
+  },
+  {
+    "transportUrl": "https://watch-atlas.pages.dev/manifest.json",
+    "manifest": "addon-lists/heavy/watch-atlas.json"
+  },
+  {
+    "transportUrl": "https://scplus.duckdns.org/manifest.json",
+    "manifest": "addon-lists/heavy/streaming-catalogs-plus.json"
+  }
+]

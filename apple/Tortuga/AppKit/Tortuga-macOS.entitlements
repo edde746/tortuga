@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+The Developer ID build's entitlements: .github/workflows/build.yml signs the macOS app with them (hardened runtime),
+under team G88U5B5783.
+
+- application-identifier, team-identifier, keychain-access-groups: KeychainSecretStore keeps the account's secrets in
+  the data protection keychain, which on macOS needs the app's access group. These are restricted entitlements, so the
+  app must carry a Developer ID provisioning profile for com.edde746.tortuga that grants them
+  (Contents/embedded.provisionprofile, from the MACOS_PROVISIONING_PROFILE_BASE64 secret); without one macOS refuses
+  to launch the app.
+- associated-domains: a title's link (https://usetortuga.app/t/…, which Detail's Share sends) opens the app as a
+  Universal Link, the site's /.well-known/apple-app-site-association naming this App ID. Also restricted: the
+  Developer ID profile must grant it (the App ID's Associated Domains capability), or macOS refuses to launch the app.
+- allow-jit, allow-unsigned-executable-memory: the exceptions for the embedded MPVKit (LuaJIT).
+- No App Sandbox.
+-->
+<plist version="1.0">
+<dict>
+	<key>com.apple.application-identifier</key>
+	<string>G88U5B5783.com.edde746.tortuga</string>
+	<key>com.apple.developer.team-identifier</key>
+	<string>G88U5B5783</string>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>G88U5B5783.com.edde746.tortuga</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:usetortuga.app</string>
+	</array>
+	<key>com.apple.security.cs.allow-jit</key>
+	<true/>
+	<key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+	<true/>
+</dict>
+</plist>

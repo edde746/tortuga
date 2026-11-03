@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+The iOS app's entitlements (project.yml). Sign in with Apple (AppleSignInPlatform): the App ID com.edde746.tortuga has
+the capability as a primary App ID, so the development and distribution profiles Xcode makes for team G88U5B5783 carry
+it. Associated Domains: a title's link (https://usetortuga.app/t/…, which Detail's Share sends) opens the app as a
+Universal Link, the site's /.well-known/apple-app-site-association naming this App ID; the App ID needs the
+Associated Domains capability, which the profiles then carry. The tvOS app adds the Top Shelf's App Group
+(Tortuga-tvOS.entitlements) and has no Universal Links (no browser); the macOS app signs with its own files
+(../AppKit/Tortuga-macOS.entitlements, and the UI tests' for a development-signed run).
+-->
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:usetortuga.app</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,37 @@
+Tortuga es un reproductor de video que funciona con complementos de Stremio. Los complementos que instalas traen los catálogos y las transmisiones, y Tortuga las reproduce. Tortuga no ofrece contenido propio.
+
+Cómo funciona
+• Instala un complemento con su enlace. Los catálogos, los resultados de búsqueda, las páginas de los títulos y las transmisiones vienen de tus complementos, y tus solicitudes van directamente a ellos.
+• Inicio muestra Seguir viendo y los catálogos de tus complementos. En Descubrir puedes filtrar por tipo y género. En Buscar puedes buscar en todos los complementos.
+• Las transmisiones de una película o de un episodio aparecen agrupadas por complemento. Elige una y se reproduce.
+
+El reproductor
+• Reproduce con mpv, con HDR10 y Dolby Vision si tu dispositivo los admite.
+• Passthrough de audio: Dolby Atmos y DTS a tu receptor.
+• Subtítulos integrados y de los complementos, que coinciden con el archivo. Tus elecciones de audio y subtítulos se mantienen en el siguiente episodio.
+• Capítulos en la barra de progreso. Salta intros, resúmenes y créditos con un botón o automáticamente.
+• Temporizador del siguiente episodio, episodio anterior y siguiente, velocidad de reproducción, y retraso de subtítulos y de audio.
+• Imagen en imagen en teléfonos y tablets.
+• ¿Prefieres usar otro reproductor? Envía el video a otro reproductor instalado en tu dispositivo.
+
+Tu biblioteca
+• Progreso y marcas de visto, con Seguir viendo en Inicio para retomar lo que estabas viendo.
+• Tortuga recuerda la transmisión que elegiste y reproduce el siguiente episodio de la misma fuente.
+• Descargas: guarda películas y episodios, con sus subtítulos, para verlos sin conexión. Tortuga puede mantener una serie al día con los siguientes episodios no vistos.
+
+Ver juntos
+Abre una sala y comparte su código o un enlace de invitación. La reproducción se mantiene sincronizada y cada persona reproduce el título con sus propios complementos.
+
+Tu cuenta y tus perfiles
+• Inicia sesión con Google, Apple o GitHub. Tus perfiles, complementos, biblioteca, progreso y ajustes del perfil se sincronizan entre tus dispositivos. Vincula un televisor con un código QR o un código corto.
+• Un perfil para cada persona de la casa, cada uno con sus propios complementos, biblioteca y ajustes. El PIN es opcional.
+• Conecta Trakt, Simkl, MDBList, MyAnimeList o AniList para el registro de reproducciones, el historial de lo que viste, las valoraciones y las listas.
+• La sincronización funciona en el servidor de Tortuga o en uno que administres tú mismo.
+
+En Android TV y Google TV, toda la app funciona con el control remoto.
+
+Tortuga es de código abierto bajo la licencia GPL-3.0 y está disponible en 21 idiomas. Sin anuncios ni estadísticas de uso.
+
+El reproductor de las capturas de pantalla muestra fragmentos breves de Spring (2019), Coffee Run (2020), Sprite Fright (2021) y Wing It! (2023) de Blender Studio, (CC) Blender Foundation | studio.blender.org, con licencia CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga usa Trakt, pero no está respaldado ni certificado por Trakt.

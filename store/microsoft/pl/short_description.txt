@@ -1,0 +1,1 @@
+Odtwarzacz wideo, który działa z dodatkami Stremio. Zainstalowane przez ciebie dodatki dostarczają katalogi i źródła, a Tortuga je odtwarza. Tortuga nie udostępnia żadnych własnych treści.

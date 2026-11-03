@@ -1,0 +1,1 @@
+Trình phát video hoạt động với tiện ích Stremio. Điện thoại, máy tính bảng, TV.

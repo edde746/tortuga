@@ -1,0 +1,1 @@
+Un reproductor de video que funciona con complementos de Stremio. Los complementos que instalas traen los catálogos y las transmisiones, y Tortuga las reproduce. Tortuga no ofrece contenido propio.

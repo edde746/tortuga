@@ -1,0 +1,11 @@
+<!-- The smoke client prints its own steps; libraries only report problems. -->
+<configuration>
+    <appender name="text" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level %logger{24} %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+    <root level="WARN">
+        <appender-ref ref="text"/>
+    </root>
+</configuration>

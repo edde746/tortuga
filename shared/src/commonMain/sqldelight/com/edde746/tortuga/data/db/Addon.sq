@@ -1,0 +1,62 @@
+-- Installed addons per profile, in the user's order. The manifest is opaque JSON that the
+-- addon registry owns. Positions run 0..n-1 without gaps. `enabled` off: the addon stays in the list but is
+-- asked for nothing; `watch_activity`: the user agreed that it receives their watch activity (its player and
+-- library events).
+CREATE TABLE addon (
+    profile_id TEXT NOT NULL,
+    transport_url TEXT NOT NULL,
+    manifest_json TEXT NOT NULL,
+    position INTEGER NOT NULL,
+    enabled INTEGER AS kotlin.Boolean NOT NULL DEFAULT 1,
+    watch_activity INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0,
+    PRIMARY KEY (profile_id, transport_url)
+);
+
+CREATE INDEX addon_order ON addon(profile_id, position);
+
+-- A profile's addon list syncs as one record, so its order can't split between devices. This table
+-- holds that record's sync columns (see Profile.sq); `addon` holds its content.
+CREATE TABLE addon_list (
+    profile_id TEXT NOT NULL PRIMARY KEY,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL
+);
+
+CREATE INDEX addon_list_dirty ON addon_list(dirty, hlc);
+
+selectAddons:
+SELECT * FROM addon WHERE profile_id = ? ORDER BY position;
+
+insertAddon:
+INSERT INTO addon VALUES ?;
+
+deleteAddons:
+DELETE FROM addon WHERE profile_id = ?;
+
+selectList:
+SELECT * FROM addon_list WHERE profile_id = ?;
+
+upsertList:
+INSERT OR REPLACE INTO addon_list VALUES ?;
+
+selectDirty:
+SELECT * FROM addon_list WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE addon_list SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE addon_list SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt; see Profile.sq).
+deleteAllAddons:
+DELETE FROM addon;
+
+deleteAllLists:
+DELETE FROM addon_list;
+
+forgetServerVersions:
+UPDATE addon_list SET server_version = NULL, dirty = 1;

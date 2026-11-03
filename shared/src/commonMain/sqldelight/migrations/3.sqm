@@ -1,0 +1,3 @@
+-- Version 3 → 4: ratings in the tracker write queue (data/db/Tracker.sq), queued as watched marks are.
+
+ALTER TABLE tracker_write_queue ADD COLUMN rating INTEGER;

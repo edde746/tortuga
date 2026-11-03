@@ -1,0 +1,4 @@
+-- Version 11 → 12: a tracker write can put a title on a watchlist or take it off (data/db/Tracker.sq). Rows queued
+-- before are watched writes and ratings.
+
+ALTER TABLE tracker_write_queue ADD COLUMN watchlist INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0;

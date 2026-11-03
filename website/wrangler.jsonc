@@ -1,0 +1,15 @@
+// Cloudflare Workers Builds installs and runs `bun run build` in website/ (settings in README.md, Deploy), then
+// `npx wrangler deploy`, which uploads build/ as static assets. The dashboard's Worker must be named `tortuga`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tortuga",
+  "compatibility_date": "2026-10-02",
+  "assets": {
+    "directory": "./build",
+    // Unknown paths get build/404.html with a 404 status; `/privacy` redirects to `/privacy/` (privacy/index.html).
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  // A Custom Domain needs the usetortuga.app zone in the same Cloudflare account.
+  "routes": [{ "pattern": "usetortuga.app", "custom_domain": true }]
+}

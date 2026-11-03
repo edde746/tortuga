@@ -1,0 +1,5 @@
+Odtwarza źródła z twoich dodatków za pomocą mpv, z HDR10, Dolby Vision i przekazywaniem dźwięku, jeśli twój sprzęt je obsługuje
+„Kontynuuj oglądanie”, postęp i oznaczenia obejrzanych tytułów oraz następny odcinek z tego samego źródła
+Pomijanie czołówek, podsumowań i napisów końcowych; wybór dźwięku i napisów zostaje zachowany w następnym odcinku
+Wspólne oglądanie ze znajomymi z synchronizacją odtwarzania, każdy przez własne dodatki
+Profile, dodatki, biblioteka i postęp synchronizują się między twoimi urządzeniami

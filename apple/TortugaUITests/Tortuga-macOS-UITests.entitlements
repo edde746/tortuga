@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+The macOS UI tests' runner, which Xcode signs with these merged into its own sandbox entitlements (network client
+only):
+- it may listen too, on 127.0.0.1, for the sync tests' relay to the dev stack's server (ServerRelay,
+  TortugaUITests/Shared/AccountTestSupport.swift);
+- it may make folders and Unix sockets under /private/tmp/tortuga-discord, for the fake Discord the app connects to
+  (FakeDiscord, TortugaUITests/macOS/DiscordPresenceTests.swift). The sandbox lets a runner make a socket only in its
+  container otherwise, which the app, another program, can't reach into without the user's consent.
+The iOS and tvOS simulators' runners aren't sandboxed.
+-->
+<plist version="1.0">
+<dict>
+	<key>com.apple.security.network.server</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.sbpl</key>
+	<array>
+		<string>(allow file-read* file-write* (subpath "/private/tmp/tortuga-discord"))</string>
+		<string>(allow network-bind (subpath "/private/tmp/tortuga-discord"))</string>
+	</array>
+</dict>
+</plist>

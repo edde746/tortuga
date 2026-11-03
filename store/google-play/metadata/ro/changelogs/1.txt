@@ -1,0 +1,1 @@
+Prima versiune a aplicației Tortuga: răsfoiește cataloagele extensiilor tale, redă stream-urile lor, descarcă pentru vizionare offline, vizionează împreună și păstrează-ți profilurile, biblioteca și progresul sincronizate pe toate dispozitivele tale.

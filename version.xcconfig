@@ -1,0 +1,15 @@
+// The app's version on every platform, bumped here before a release:
+//   app-android     versionName and versionCode
+//   app-desktop     the packaged app's version (About, the MSIX manifest); the MSIX takes 1.0.0 or later only
+//                   (build-msix.ps1: the Store rejects a version starting with 0)
+//   store/          the release's notes and date, written with the bump: Play's changelogs/<CURRENT_PROJECT_VERSION>.txt
+//                   and the first <release> of the Flatpak metainfo, which build-flatpak.py requires
+//   dev             the fixture recorder's User-Agent version (dev/build.gradle.kts); the live tracker checks' too
+//   apple           MARKETING_VERSION and CURRENT_PROJECT_VERSION (project.yml includes this file)
+//   build.yml       the release tag must equal MARKETING_VERSION; the Sparkle appcast's sparkle:version is
+//                   CURRENT_PROJECT_VERSION
+// MARKETING_VERSION is major.minor.patch. CURRENT_PROJECT_VERSION is a positive integer that grows with every release
+// (Android versionCode, CFBundleVersion, which Sparkle compares).
+// Plain `KEY = value` lines only: Gradle (settings.gradle.kts) and the workflow read this file too.
+MARKETING_VERSION = 1.0.0
+CURRENT_PROJECT_VERSION = 1

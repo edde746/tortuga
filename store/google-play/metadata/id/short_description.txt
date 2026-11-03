@@ -1,0 +1,1 @@
+Pemutar video yang bekerja dengan add-on Stremio, di ponsel, tablet, dan TV.

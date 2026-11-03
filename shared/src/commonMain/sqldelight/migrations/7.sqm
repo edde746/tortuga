@@ -1,0 +1,6 @@
+-- Version 7 → 8: a tracker write given up on stays in its queue as a failed row, with why and when
+-- (data/db/Tracker.sq). Rows queued before are waiting writes.
+
+ALTER TABLE tracker_write_queue ADD COLUMN failure TEXT;
+ALTER TABLE tracker_write_queue ADD COLUMN failure_status INTEGER;
+ALTER TABLE tracker_write_queue ADD COLUMN failed_at INTEGER;

@@ -1,0 +1,32 @@
+Tortuga là trình phát video hoạt động với tiện ích Stremio. Các tiện ích bạn cài đặt cung cấp danh mục và nguồn phát, còn Tortuga phát chúng trên TV của bạn. Tortuga không tự cung cấp bất kỳ nội dung nào.
+
+CÁCH HOẠT ĐỘNG
+• Cài đặt tiện ích bằng liên kết của tiện ích đó. Danh mục, kết quả tìm kiếm, trang nội dung và nguồn phát đều đến từ các tiện ích của bạn, và yêu cầu của bạn được gửi thẳng đến chúng.
+• Trang chủ hiển thị Tiếp tục xem và danh mục từ các tiện ích của bạn. Khám phá cho phép lọc theo loại và thể loại. Tìm kiếm bao quát mọi tiện ích.
+• Nguồn phát của một bộ phim hay một tập được nhóm theo tiện ích. Chọn một nguồn là video bắt đầu phát.
+
+TRÌNH PHÁT
+• Phát video bằng mpv, kèm HDR10 và Dolby Vision nếu Apple TV và TV của bạn hỗ trợ.
+• Phụ đề nhúng và phụ đề từ tiện ích, được khớp với tệp video. Lựa chọn âm thanh và phụ đề của bạn được giữ cho tập tiếp theo.
+• Chương trên thanh tua. Bỏ qua phần giới thiệu, phần tóm tắt và danh đề bằng một nút bấm hoặc tự động.
+• Đếm ngược tập tiếp theo, tập trước và tập tiếp theo, tốc độ phát, cùng độ trễ phụ đề và âm thanh.
+• Muốn dùng trình phát khác? Gửi video sang một ứng dụng trình phát khác trên Apple TV của bạn.
+
+THƯ VIỆN CỦA BẠN
+• Tiến độ xem và dấu đã xem, cùng Tiếp tục xem trên Trang chủ để bạn quay lại xem tiếp.
+• Tortuga ghi nhớ nguồn phát bạn đã chọn và phát tập tiếp theo từ cùng nguồn đó.
+
+XEM CÙNG NHAU
+Tạo phòng rồi chia sẻ mã phòng hoặc liên kết mời. Việc phát luôn được đồng bộ, và mỗi người phát nội dung qua tiện ích của riêng mình.
+
+TÀI KHOẢN VÀ HỒ SƠ CỦA BẠN
+• Đăng nhập bằng Apple, Google hoặc GitHub trên TV, hoặc liên kết TV từ iPhone hay iPad đã đăng nhập bằng mã QR hoặc mã ngắn. Hồ sơ, tiện ích, thư viện, tiến độ xem và cài đặt hồ sơ của bạn được đồng bộ trên các thiết bị.
+• Mỗi người trong gia đình có một hồ sơ, với tiện ích, thư viện và cài đặt riêng. Mã PIN là tùy chọn.
+• Kết nối Trakt, Simkl, MDBList, MyAnimeList hoặc AniList: ghi nhận lượt xem, lịch sử xem, đánh giá và danh sách.
+• Tính năng đồng bộ chạy trên máy chủ Tortuga, hoặc trên máy chủ do bạn tự vận hành.
+
+Tortuga là phần mềm mã nguồn mở theo giấy phép GPL-3.0 và hỗ trợ 21 ngôn ngữ. Không có quảng cáo, và Tortuga không chạy công cụ phân tích nào của riêng mình.
+
+Trình phát trong ảnh chụp màn hình hiển thị các đoạn trích ngắn từ Spring (2019), Coffee Run (2020), Sprite Fright (2021) và Wing It! (2023) của Blender Studio, (CC) Blender Foundation | studio.blender.org, được cấp phép theo CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga sử dụng Trakt nhưng không được Trakt bảo trợ hay chứng nhận.

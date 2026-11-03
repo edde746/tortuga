@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usetortuga.app/sitemap.xml

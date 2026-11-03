@@ -1,0 +1,37 @@
+Tortuga ist ein mit Stremio-Add-ons kompatibler Videoplayer. Die Add-ons, die Sie installieren, liefern die Kataloge und die Streams, und Tortuga spielt sie ab. Tortuga stellt selbst keine Inhalte bereit.
+
+So funktioniert es
+• Installieren Sie ein Add-on über seinen Link. Kataloge, Suchergebnisse, Detailseiten und Streams kommen von Ihren Add-ons, und Ihre Anfragen gehen direkt an sie.
+• Die Startseite zeigt „Weiterschauen“ und die Kataloge Ihrer Add-ons. „Entdecken“ filtert nach Typ und Genre. Die Suche umfasst alle Add-ons.
+• Die Streams eines Films oder einer Folge sind nach Add-on gruppiert. Wählen Sie einen aus, und er wird abgespielt.
+
+Der Player
+• Wiedergabe mit mpv, mit HDR10 und Dolby Vision, sofern Ihr Gerät sie unterstützt.
+• Audio-Passthrough: Dolby Atmos und DTS an Ihren Receiver.
+• Eingebettete und Add-on-Untertitel, passend zur Datei. Ihre Audio- und Untertitelauswahl wird für die nächste Folge übernommen.
+• Kapitel auf der Fortschrittsleiste. Intros, Rückblicke und Abspann per Schaltfläche oder automatisch überspringen.
+• Countdown zur nächsten Folge, vorherige und nächste Folge, Geschwindigkeit sowie Untertitel- und Audioversatz.
+• Bild-in-Bild auf Smartphones und Tablets.
+• Lieber einen anderen Player nutzen? Senden Sie das Video an eine andere Player-App auf Ihrem Gerät.
+
+Ihre Bibliothek
+• Fortschritt und Gesehen-Markierungen, dazu „Weiterschauen“ auf der Startseite für den Wiedereinstieg.
+• Tortuga merkt sich den gewählten Stream und spielt die nächste Folge aus derselben Quelle ab.
+• Downloads: Speichern Sie Filme und Folgen samt Untertiteln, um sie offline zu schauen. Tortuga kann bei einer Serie die nächsten ungesehenen Folgen stets bereithalten.
+
+Gemeinsam schauen
+Erstellen Sie einen Raum und teilen Sie seinen Code oder einen Einladungslink. Die Wiedergabe bleibt synchron, und alle spielen den Titel über ihre eigenen Add-ons ab.
+
+Ihr Konto und Ihre Profile
+• Melden Sie sich mit Google, Apple oder GitHub an. Profile, Add-ons, Bibliothek, Fortschritt und Profileinstellungen werden auf allen Ihren Geräten synchronisiert. Verknüpfen Sie einen Fernseher per QR-Code oder mit einem kurzen Code.
+• Ein Profil für jede Person im Haushalt, jedes mit eigenen Add-ons, eigener Bibliothek und eigenen Einstellungen. Eine PIN ist optional.
+• Verbinden Sie Trakt, Simkl, MDBList, MyAnimeList oder AniList für Scrobbling, Verlauf, Bewertungen und Listen.
+• Die Synchronisierung läuft über den Tortuga-Server oder über einen Server, den Sie selbst betreiben.
+
+Auf Android TV und Google TV lässt sich die gesamte App mit der Fernbedienung steuern.
+
+Tortuga ist Open Source unter der GPL-3.0 und in 21 Sprachen verfügbar. Keine Werbung, keine Nutzungsanalyse.
+
+Der Player auf den Screenshots zeigt kurze Ausschnitte aus Spring (2019), Coffee Run (2020), Sprite Fright (2021) und Wing It! (2023) von Blender Studio, (CC) Blender Foundation | studio.blender.org, lizenziert unter CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga verwendet Trakt, wird aber von Trakt weder befürwortet noch zertifiziert.

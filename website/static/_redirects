@@ -1,0 +1,2 @@
+# A title's link (/t/<type>/<id>) is one page, which reads the title from its address.
+/t/* /t/ 200

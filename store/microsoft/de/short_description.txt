@@ -1,0 +1,1 @@
+Ein mit Stremio-Add-ons kompatibler Videoplayer. Die Add-ons, die Sie installieren, liefern die Kataloge und die Streams, und Tortuga spielt sie ab. Tortuga stellt selbst keine Inhalte bereit.

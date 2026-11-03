@@ -1,0 +1,1 @@
+Pierwsze wydanie aplikacji Tortuga: przeglądaj katalogi swoich dodatków, odtwarzaj ich źródła, pobieraj do oglądania offline, oglądaj wspólnie i synchronizuj profile, bibliotekę oraz postęp między swoimi urządzeniami.

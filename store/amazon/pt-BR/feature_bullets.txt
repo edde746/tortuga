@@ -1,0 +1,5 @@
+Reproduz os streams dos seus addons com o mpv, com HDR10, Dolby Vision e passthrough de áudio quando seu equipamento é compatível
+Continuar assistindo, progresso e títulos marcados como assistidos, e o próximo episódio da mesma fonte
+Pule aberturas, resumos e créditos; suas escolhas de áudio e legenda passam para o próximo episódio
+Assistir juntos em sincronia com amigos, cada um pelos próprios addons
+Perfis, addons, biblioteca e progresso sincronizados entre seus dispositivos

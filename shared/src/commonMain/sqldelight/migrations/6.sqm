@@ -1,0 +1,39 @@
+-- Version 6 → 7: kids profiles (data/db/Profile.sq): profile gains kids and home_catalogs before its sync columns,
+-- so the table is rebuilt with every row, each an adult profile with no Home rows preset. Its index goes first, by
+-- name, as SQLDelight's checker needs.
+
+CREATE TABLE profile_new (
+    profile_id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    avatar TEXT,
+    pin_hash BLOB,
+    created_at INTEGER NOT NULL,
+    kids INTEGER NOT NULL,
+    home_catalogs TEXT NOT NULL,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER NOT NULL,
+    deleted INTEGER NOT NULL
+);
+
+INSERT INTO profile_new (
+    profile_id, name, avatar, pin_hash, created_at, kids, home_catalogs, record_id, hlc, server_version, dirty, deleted
+)
+SELECT profile_id, name, avatar, pin_hash, created_at, 0, '[]', record_id, hlc, server_version, dirty, deleted
+FROM profile;
+
+DROP INDEX profile_dirty;
+
+DROP TABLE profile;
+
+ALTER TABLE profile_new RENAME TO profile;
+
+CREATE INDEX profile_dirty ON profile(dirty, hlc);
+
+-- Kids profiles' age ratings (data/db/TitleRating.sq): a new table, this device only.
+CREATE TABLE title_rating (
+    title_key TEXT NOT NULL PRIMARY KEY,
+    certification TEXT NOT NULL,
+    fetched_at INTEGER NOT NULL
+);

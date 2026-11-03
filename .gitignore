@@ -1,0 +1,50 @@
+# Gradle / Kotlin
+.gradle/
+.kotlin/
+build/
+local.properties
+*.hprof
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.fleet/
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+apple/*.xcodeproj/project.xcworkspace/xcuserdata/
+apple/build/
+
+# Android
+captures/
+*.apk
+*.aab
+# The release upload keystore and its key.properties (android/app/build.gradle.kts; the release workflow writes them)
+android/app/key.properties
+*.jks
+
+# macOS
+.DS_Store
+
+# Test media, which tools/media/serve.py serves (tools/media/make-*.sh: the sample, the playback matrix with its live
+# channels' source and error videos; the marketing clips), and the Android performance harness's replay recordings
+# (perf-replay/)
+tools/media/out/
+
+# Xcode project generated from apple/project.yml by XcodeGen
+apple/*.xcodeproj/
+
+# Android CMake/NDK build state
+.cxx/
+
+# Sync server secrets for docker compose (server/.env.example is the template), the server's data key, and the
+# backups' private age key wherever it lands (server/README.md, Backups, keeps it outside the checkout)
+server/.env
+server/*.key
+tortuga-backup.key
+
+# Python bytecode from the test scripts
+__pycache__/

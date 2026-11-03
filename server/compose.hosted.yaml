@@ -1,0 +1,65 @@
+# The hosted instance (api.usetortuga.app) on top of compose.yaml: a small host shared with
+# other services behind Caddy, so memory is capped and Postgres kept small, logs are rotated, and every secret (the
+# database password, the Sign in with Apple key, the GitHub and AniList client secrets) is a mounted file, never an
+# environment value: server/.env sets none of them.
+#
+#   docker compose -f compose.yaml -f compose.hosted.yaml up -d --no-build
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: 10m
+    max-file: "3"
+
+services:
+  postgres:
+    command: ["postgres", "-c", "shared_buffers=32MB", "-c", "max_connections=20"]
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
+    mem_limit: 192m
+    logging: *logging
+    secrets:
+      - postgres-password
+
+  server:
+    environment:
+      TORTUGA_DATABASE_POOL_SIZE: 5
+      # The JVM's whole footprint fits the limit with headroom (server/README.md, Memory): the heap at 45 % (174 MiB),
+      # which Serial GC on JDK 27 fills to its cap under load, direct buffers at most 32 MB, the code cache at most
+      # 64 MB; beside the full heap the rest (metaspace, threads, the JIT's and glibc's memory, socket buffers) took up to
+      # 162 MiB in the load runs (16 Oct), the container's peak 336 MiB. The JIT's freed native memory goes back to the
+      # system every 30 s (glibc keeps it otherwise).
+      JAVA_OPTS: -XX:MaxRAMPercentage=45 -XX:MaxDirectMemorySize=32m -XX:ReservedCodeCacheSize=64m -XX:+UseSerialGC -XX:+ExitOnOutOfMemoryError -XX:TrimNativeHeapInterval=30000
+      TORTUGA_DATABASE_PASSWORD_FILE: /run/secrets/postgres-password
+      TORTUGA_APPLE_PRIVATE_KEY_FILE: /run/secrets/apple-signin-key
+      TORTUGA_GITHUB_CLIENT_SECRET_FILE: /run/secrets/github-client-secret
+      TORTUGA_ANILIST_CLIENT_SECRET_FILE: /run/secrets/anilist-client-secret
+      # Pushes stop while the VPS's disk, shared with the host's other services, has under 2 GiB free: Postgres's WAL
+      # may grow by up to its max_wal_size (1 GB, Postgres's default, unchanged above) before a checkpoint, and the
+      # other GiB holds the host's logs and the next deploy's image (each deploy builds it there).
+      TORTUGA_DATABASE_MIN_FREE_MB: 2048
+    mem_limit: 384m
+    # One file descriptor per connection, notice streams included. The JVM raises its soft limit to this hard one, which
+    # is otherwise whatever the Docker daemon's own unit grants (524288 on the host today).
+    ulimits:
+      nofile: 524288
+    logging: *logging
+    secrets:
+      - tortuga-data-key
+      - postgres-password
+      - apple-signin-key
+      - github-client-secret
+      - anilist-client-secret
+
+secrets:
+  # The database password, readable by the server's user (uid 10001) and by Postgres's (group 70 in its image).
+  postgres-password:
+    file: ${TORTUGA_POSTGRES_PASSWORD_PATH:-./postgres-password}
+  # Tortuga's Sign in with Apple key (.p8), readable by the server's user (uid 10001).
+  apple-signin-key:
+    file: ${TORTUGA_APPLE_KEY_PATH:-./apple-signin.p8}
+  # Tortuga's GitHub OAuth App's client secret, readable by the server's user (uid 10001).
+  github-client-secret:
+    file: ${TORTUGA_GITHUB_SECRET_PATH:-./github-client-secret}
+  # The AniList client's secret (the tracker sign-in relay, server/README.md), readable by the server's user (uid 10001).
+  anilist-client-secret:
+    file: ${TORTUGA_ANILIST_SECRET_PATH:-./anilist-client-secret}

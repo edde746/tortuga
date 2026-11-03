@@ -1,0 +1,1 @@
+Un lecteur vidéo compatible avec les add-ons Stremio. Les add-ons que vous installez apportent les catalogues et les sources, et Tortuga les lit. Tortuga ne fournit lui-même aucun contenu.

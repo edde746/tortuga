@@ -1,0 +1,71 @@
+-- Version 9 → 10: stream picks sync per profile (data/db/StreamPick.sq). stream_pick gains the sync columns, so the
+-- table is rebuilt with every row: each becomes a change of this device that the next sync pushes, stamped with this
+-- device's clock at its pick, or at its outcome when that came later. Its indexes go first, by name, as SQLDelight's
+-- checker needs.
+
+-- The picks' timestamps carry this device's node id: a clock that never ran is created as the app creates it
+-- (data/Db.kt), at zero.
+INSERT OR IGNORE INTO hlc_state (id, node_id, last_hlc)
+SELECT 1, node, '000000000000-0000-' || node FROM (SELECT lower(hex(randomblob(8))) AS node);
+
+CREATE TABLE stream_pick_new (
+    pick_id TEXT NOT NULL PRIMARY KEY,
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    runtime_seconds INTEGER,
+    picked_at INTEGER NOT NULL,
+    device_class TEXT NOT NULL,
+    metered INTEGER NOT NULL,
+    hdr_display INTEGER NOT NULL,
+    dolby_vision_display INTEGER NOT NULL,
+    hardware_codecs TEXT NOT NULL,
+    source TEXT NOT NULL,
+    candidates_json TEXT NOT NULL,
+    chosen INTEGER NOT NULL,
+    first_row INTEGER NOT NULL,
+    outcome TEXT,
+    outcome_at INTEGER,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER NOT NULL,
+    deleted INTEGER NOT NULL
+);
+
+-- The record id is RecordKey.StreamPick's (data/sync/RecordKey.kt): `pick/<profile id>/<pick id>`, each part with
+-- `%` and `/` escaped. The HLC is Hlc's text: 12 hex digits of wall time, 4 of counter, the node id.
+INSERT INTO stream_pick_new (
+    pick_id, profile_id, meta_id, video_id, runtime_seconds, picked_at, device_class, metered, hdr_display,
+    dolby_vision_display, hardware_codecs, source, candidates_json, chosen, first_row, outcome, outcome_at,
+    record_id, hlc, server_version, dirty, deleted
+)
+SELECT pick_id, profile_id, meta_id, video_id, runtime_seconds, picked_at, device_class, metered, hdr_display,
+    dolby_vision_display, hardware_codecs, source, candidates_json, chosen, first_row, outcome, outcome_at,
+    'pick/' || replace(replace(profile_id, '%', '%25'), '/', '%2F') || '/' || replace(replace(pick_id, '%', '%25'), '/', '%2F'),
+    printf('%012x-0000-', max(picked_at, coalesce(outcome_at, 0))) || (SELECT node_id FROM hlc_state WHERE id = 1),
+    NULL, 1, 0
+FROM stream_pick;
+
+-- The clock goes on after the newest of those timestamps, should the wall clock have moved back since.
+UPDATE hlc_state SET last_hlc = (SELECT max(hlc) FROM stream_pick_new)
+WHERE id = 1 AND (SELECT max(hlc) FROM stream_pick_new) > last_hlc;
+
+DROP INDEX stream_pick_profile;
+
+DROP INDEX stream_pick_video;
+
+DROP TABLE stream_pick;
+
+ALTER TABLE stream_pick_new RENAME TO stream_pick;
+
+CREATE INDEX stream_pick_profile ON stream_pick(profile_id, device_class, picked_at);
+
+CREATE INDEX stream_pick_video ON stream_pick(profile_id, meta_id, video_id, picked_at);
+
+CREATE INDEX stream_pick_dirty ON stream_pick(dirty, hlc);
+
+-- Builds before this one skipped the pick records other devices pushed, as a kind they didn't know, and pulled on past
+-- them: every account's pull starts again from the beginning, once, and takes them. The records this device already
+-- has change nothing. The row stays: it names the account the synced data belongs to.
+UPDATE sync_state SET pull_cursor = 0;

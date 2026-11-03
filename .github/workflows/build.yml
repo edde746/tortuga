@@ -1,0 +1,838 @@
+name: Build
+run-name: ${{ inputs.release_tag != '' && format('Release {0}', inputs.release_tag) || format('Build {0}', github.sha) }}
+
+# The release build: run by hand from main, it builds every platform into Actions artifacts and, given a release tag
+# equal to version.xcconfig's MARKETING_VERSION, drafts a GitHub release with them. A draft needs all five platforms.
+#
+#   Android    APKs per ABI (arm64-v8a, armeabi-v7a, x86_64) for the release, and the AAB for Google Play as an
+#              artifact only; both signed with the upload keystore. The AAB is a store build, the APKs are sideloaded
+#              ones (-Ptortuga.flavor, settings.gradle.kts: what the stream list may show).
+#   iOS, tvOS  unsigned IPAs, for the release.
+#   macOS      the Developer ID-signed, notarized DMG and its Sparkle signature; the release carries the DMG and
+#              appcast.xml (the feed the app reads, apple/Tortuga/Shared/Info.plist's SUFeedURL).
+#   Windows    a portable zip (x64) of the sideloaded build, for the release, and the MSIX bundle (x64) for Partner
+#              Center as an artifact only, unsigned because the Store signs it (a store build; it needs
+#              MARKETING_VERSION 1.0.0 or later, build-msix.ps1).
+#   Linux      Flatpak bundles (x64, arm64) with JetBrains Runtime, for the release. Sideloaded builds.
+# The release also carries SHA256SUMS, every attached file's sha256, for people who download them by hand.
+#
+# Two runs of one commit build from the same inputs: the JDKs are exact builds (Temurin, and JetBrains Runtime with
+# its sha512), XcodeGen is the release tools/install_xcodegen.sh checks, and the Linux job's Ubuntu libraries and
+# Flatpak runtime are pinned by sha256 and commit (their steps below). Moving one is a change here; the JDKs move to
+# each new JDK release within a month of it (the desktop app's waits for a JetBrains Runtime of that release).
+#
+# Secrets:
+#   ANDROID_KEYSTORE_BASE64, ANDROID_STORE_PASSWORD, ANDROID_KEY_PASSWORD, ANDROID_KEY_ALIAS
+#   MACOS_CERTIFICATE_BASE64 (Developer ID Application .p12), MACOS_CERTIFICATE_PASSWORD, KEYCHAIN_PASSWORD,
+#   MACOS_PROVISIONING_PROFILE_BASE64 (Developer ID profile for com.edde746.tortuga with the keychain access group and
+#     Associated Domains),
+#   APP_STORE_CONNECT_KEY_ID, APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_BASE64 (an App Store Connect team API
+#     key, its .p8 in base64: notarytool notarizes with it)
+#   SPARKLE_PRIVATE_KEY (base64 EdDSA seed of Tortuga's own update key; its public key is Info.plist's SUPublicEDKey)
+#   TORTUGA_GOOGLE_DESKTOP_CLIENT_SECRET, TORTUGA_GOOGLE_TV_CLIENT_SECRET (Google's installed-app client secrets)
+#   TORTUGA_SENTRY_DSN (the DSN of the Tortuga project on bugs.plezy.app, where crash reports go)
+#   BUGS_ADMIN_TOKEN (bugs.plezy.app's admin token, the only token edde746/bugs has: the Android job uploads the native
+#   libraries' symbols with it, the Apple jobs their dSYMs, so the reports' native frames, Kotlin's on Apple too,
+#   symbolicate; the server takes no R8 mapping, so the Android job keeps those as an artifact)
+# Without them a build still runs: the APKs and the AAB are debug-signed, the macOS app keeps Xcode's ad-hoc signature
+# and is not notarized, the DMG has no Sparkle signature, desktop and TVs offer no Google sign-in, no build sends crash
+# reports and no symbols are uploaded. A release tag requires the signing ones.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Tag for a draft release (MARKETING_VERSION); omit to build Actions artifacts only
+        default: ''
+        type: string
+      build_android:
+        description: Build Android
+        default: true
+        type: boolean
+      build_ios:
+        description: Build iOS and tvOS
+        default: true
+        type: boolean
+      build_macos:
+        description: Build macOS
+        default: true
+        type: boolean
+      build_windows:
+        description: Build Windows
+        default: true
+        type: boolean
+      build_linux:
+        description: Build Linux
+        default: true
+        type: boolean
+
+permissions: {}
+
+# Google's installed-app secrets for the desktop and TV sign-in clients, read by
+# shared/build.gradle.kts's generateSignInConfig; the client IDs default there. The apps ship them, as installed apps
+# do; the secrets only stay out of the repository's text. The crash reports' DSN likewise (generateCrashReportConfig):
+# only these builds send crash reports, so development, CI and harness builds, which never have it, send none. The
+# symbol uploads (tools/upload_symbols.sh) go to the Tortuga project on bugs.plezy.app, which runs edde746/bugs; bugs
+# has one organization and ignores the slug sentry-cli sends.
+env:
+  TORTUGA_GOOGLE_DESKTOP_CLIENT_SECRET: ${{ secrets.TORTUGA_GOOGLE_DESKTOP_CLIENT_SECRET }}
+  TORTUGA_GOOGLE_TV_CLIENT_SECRET: ${{ secrets.TORTUGA_GOOGLE_TV_CLIENT_SECRET }}
+  TORTUGA_SENTRY_DSN: ${{ secrets.TORTUGA_SENTRY_DSN }}
+  SENTRY_URL: https://bugs.plezy.app
+  SENTRY_ORG: plezy
+  SENTRY_PROJECT: tortuga
+
+jobs:
+  validate-trusted-ref:
+    name: Validate trusted build ref
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the protected main branch
+        run: |
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "Release builds may only run from refs/heads/main." >&2
+            exit 1
+          fi
+
+  build-android:
+    name: Build Android
+    needs: validate-trusted-ref
+    if: ${{ inputs.build_android }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+    env:
+      HAS_SIGNING: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      HAS_SYMBOL_UPLOAD: ${{ secrets.BUGS_ADMIN_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # 27 runs Gradle and builds Android; the desktop modules' 25 is configured too (settings include them).
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            25.0.4+101.0.LTS
+            27.0.0+35
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      - name: Require signing for a release
+        if: ${{ inputs.release_tag != '' && env.HAS_SIGNING != 'true' }}
+        run: |
+          echo "Release $RELEASE_TAG needs the ANDROID_* signing secrets." >&2
+          exit 1
+
+      # android/app/build.gradle.kts signs release builds with the keystore key.properties names.
+      - name: Configure Android signing
+        if: ${{ env.HAS_SIGNING == 'true' }}
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          cat > android/app/key.properties << EOF
+          storePassword=$ANDROID_STORE_PASSWORD
+          keyPassword=$ANDROID_KEY_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          storeFile=upload-keystore.jks
+          EOF
+
+      # Two builds: AGP refuses to build the bundle while the per-ABI APK splits are on. The bundle is for the stores
+      # (Google Play, Amazon), the APKs are installed by hand. Each runs R8 once; bugs.plezy.app takes no mapping, so
+      # each mapping file is kept as r8-mappings/<uuid>.txt, by the UUID its app carries and its reports name
+      # (assets/sentry-debug-meta.properties, android/app/build.gradle.kts).
+      - name: Build the Play bundle
+        run: |
+          ./gradlew --console=plain -Ptortuga.flavor=store :app-android:bundleRelease
+          uuid=$(unzip -p android/app/build/outputs/bundle/release/app-android-release.aab \
+            base/assets/sentry-debug-meta.properties | sed -n 's/^io\.sentry\.ProguardUuids=//p')
+          [[ -n $uuid ]] || { echo "The bundle names no R8 mapping UUID." >&2; exit 1; }
+          mkdir -p r8-mappings
+          cp android/app/build/outputs/mapping/release/mapping.txt "r8-mappings/$uuid.txt"
+
+      - name: Build APKs
+        run: |
+          ./gradlew --console=plain -Ptortuga.flavor=sideloaded -Ptortuga.abiSplits=true :app-android:assembleRelease
+          uuid=$(unzip -p android/app/build/outputs/apk/release/app-android-arm64-v8a-release.apk \
+            assets/sentry-debug-meta.properties | sed -n 's/^io\.sentry\.ProguardUuids=//p')
+          [[ -n $uuid ]] || { echo "The APKs name no R8 mapping UUID." >&2; exit 1; }
+          cp android/app/build/outputs/mapping/release/mapping.txt "r8-mappings/$uuid.txt"
+
+      # The native libraries both builds packed (every ABI, as merged before AGP strips them), so the reports' native
+      # frames, libmpv's among them, symbolicate.
+      - name: Upload native symbols
+        if: ${{ env.HAS_SYMBOL_UPLOAD == 'true' }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.BUGS_ADMIN_TOKEN }}
+        run: tools/upload_symbols.sh elf android/app/build/intermediates/merged_native_libs/release
+
+      - name: Clean up keystore
+        if: always()
+        run: rm -f android/app/upload-keystore.jks android/app/key.properties
+
+      - name: Package APKs and the bundle
+        run: |
+          for abi in arm64-v8a armeabi-v7a x86_64; do
+            tar -czf "tortuga-android-$abi.tar.gz" -C android/app/build/outputs/apk/release \
+              "app-android-$abi-release.apk" --transform "s/app-android-$abi-release.apk/tortuga.apk/"
+          done
+          cp android/app/build/outputs/bundle/release/app-android-release.aab tortuga-android.aab
+
+      - name: Attest Android artifacts
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            tortuga-android-arm64-v8a.tar.gz
+            tortuga-android-armeabi-v7a.tar.gz
+            tortuga-android-x86_64.tar.gz
+            tortuga-android.aab
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: android-apk
+          path: |
+            tortuga-android-arm64-v8a.tar.gz
+            tortuga-android-armeabi-v7a.tar.gz
+            tortuga-android-x86_64.tar.gz
+
+      # For the Play Console only; not attached to the release.
+      - name: Upload Play bundle
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: android-aab
+          path: tortuga-android.aab
+
+      # Not attached to the release: a report's debug_meta names the UUID of the mapping that retraces it.
+      - name: Upload R8 mappings
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: android-r8-mappings
+          path: r8-mappings/
+
+  build-ios:
+    name: Build ${{ matrix.name }}
+    needs: validate-trusted-ref
+    if: ${{ inputs.build_ios }}
+    # The apps build against the iOS, tvOS and macOS 27 SDKs: Xcode 27.2, which macos-26 doesn't have.
+    runs-on: xcode-27
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: iOS
+            scheme: Tortuga-iOS
+            platform: iOS
+            products: Release-iphoneos
+            ipa: tortuga-ios.ipa
+          - name: tvOS
+            scheme: Tortuga-tvOS
+            platform: tvOS
+            products: Release-appletvos
+            ipa: tortuga-tvos.ipa
+    env:
+      # No Android SDK here; settings.gradle.kts then leaves the Android modules and targets out.
+      TORTUGA_ANDROID: "false"
+      DEVELOPER_DIR: /Applications/Xcode_27.2.app/Contents/Developer
+      SCHEME: ${{ matrix.scheme }}
+      PLATFORM: ${{ matrix.platform }}
+      PRODUCTS: ${{ matrix.products }}
+      IPA: ${{ matrix.ipa }}
+      HAS_SYMBOL_UPLOAD: ${{ secrets.BUGS_ADMIN_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 27.0.0+35
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      - name: Generate the Xcode project
+        run: |
+          xcodegen=$(tools/install_xcodegen.sh "$RUNNER_TEMP")
+          cd apple && "$xcodegen" generate
+
+      # The Kotlin script phase builds TortugaKit's release framework for the device.
+      - name: Build ${{ matrix.name }} (no codesign)
+        run: |
+          xcodebuild -project apple/Tortuga.xcodeproj -scheme "$SCHEME" -configuration Release \
+            -destination "generic/platform=$PLATFORM" -derivedDataPath apple/build/dd \
+            -clonedSourcePackagesDirPath apple/build/spm CODE_SIGNING_ALLOWED=NO build
+
+      # The app's dSYMs (TortugaKit is static, so Kotlin's code is in the app's) and its frameworks'.
+      - name: Upload dSYMs
+        if: ${{ env.HAS_SYMBOL_UPLOAD == 'true' }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.BUGS_ADMIN_TOKEN }}
+        run: tools/upload_symbols.sh dsym "apple/build/dd/Build/Products/$PRODUCTS"
+
+      - name: Create IPA
+        run: |
+          mkdir -p Payload
+          cp -R "apple/build/dd/Build/Products/$PRODUCTS/Tortuga.app" Payload/
+          zip -qry "$IPA" Payload
+
+      - name: Attest IPA
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: ${{ matrix.ipa }}
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ matrix.platform }}-ipa
+          path: ${{ matrix.ipa }}
+
+  build-macos:
+    name: Build macOS
+    needs: validate-trusted-ref
+    if: ${{ inputs.build_macos }}
+    runs-on: xcode-27
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+    env:
+      TORTUGA_ANDROID: "false"
+      DEVELOPER_DIR: /Applications/Xcode_27.2.app/Contents/Developer
+      APP_PATH: apple/build/dd/Build/Products/Release/Tortuga.app
+      HAS_SIGNING: ${{ secrets.MACOS_CERTIFICATE_BASE64 != '' }}
+      HAS_NOTARIZATION: ${{ secrets.APP_STORE_CONNECT_KEY_BASE64 != '' }}
+      HAS_SPARKLE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY != '' }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      HAS_SYMBOL_UPLOAD: ${{ secrets.BUGS_ADMIN_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 27.0.0+35
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      - name: Require signing, notarization and Sparkle for a release
+        if: ${{ inputs.release_tag != '' && (env.HAS_SIGNING != 'true' || env.HAS_NOTARIZATION != 'true' || env.HAS_SPARKLE_KEY != 'true') }}
+        run: |
+          echo "Release $RELEASE_TAG needs the MACOS_*, APP_STORE_CONNECT_* and SPARKLE_PRIVATE_KEY secrets." >&2
+          exit 1
+
+      - name: Generate the Xcode project
+        run: |
+          xcodegen=$(tools/install_xcodegen.sh "$RUNNER_TEMP")
+          cd apple && "$xcodegen" generate
+
+      # Arm64 only, as the Kotlin/Native targets. Signed ad hoc by the project; the steps below re-sign.
+      - name: Build macOS
+        run: |
+          xcodebuild -project apple/Tortuga.xcodeproj -scheme Tortuga-macOS -configuration Release \
+            -destination "platform=macOS,arch=arm64" -derivedDataPath apple/build/dd \
+            -clonedSourcePackagesDirPath apple/build/spm build
+
+      # The app's dSYMs, as in build-ios; signing below doesn't change their UUIDs.
+      - name: Upload dSYMs
+        if: ${{ env.HAS_SYMBOL_UPLOAD == 'true' }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.BUGS_ADMIN_TOKEN }}
+        run: tools/upload_symbols.sh dsym apple/build/dd/Build/Products/Release
+
+      - name: Import Code Signing Certificate
+        if: ${{ env.HAS_SIGNING == 'true' }}
+        env:
+          MACOS_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_BASE64 }}
+          MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+          MACOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.MACOS_PROVISIONING_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          KEYCHAIN_PATH=$RUNNER_TEMP/build.keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
+          echo "$MACOS_CERTIFICATE_BASE64" | base64 --decode -o "$CERTIFICATE_PATH"
+          security import "$CERTIFICATE_PATH" -k "$KEYCHAIN_PATH" -P "$MACOS_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          rm "$CERTIFICATE_PATH"
+
+          # Add keychain to search list
+          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
+
+          # The Developer ID profile grants the keychain access group (apple/Tortuga/AppKit/Tortuga-macOS.entitlements).
+          if [[ -z "$MACOS_PROVISIONING_PROFILE_BASE64" ]]; then
+            echo "MACOS_PROVISIONING_PROFILE_BASE64 is required with the certificate." >&2
+            exit 1
+          fi
+          echo "$MACOS_PROVISIONING_PROFILE_BASE64" | base64 --decode -o "$RUNNER_TEMP/tortuga.provisionprofile"
+
+      - name: Sign Application
+        if: ${{ env.HAS_SIGNING == 'true' }}
+        run: |
+          IDENTITY=$(security find-identity -v -p codesigning | grep "Developer ID Application" | head -1 | grep -o '".*"' | tr -d '"')
+          echo "Signing with identity: $IDENTITY"
+
+          cp "$RUNNER_TEMP/tortuga.provisionprofile" "$APP_PATH/Contents/embedded.provisionprofile"
+
+          # Inside out, since a bundle's signature seals what it holds: Sparkle's helpers as Sparkle's documentation
+          # re-signs them (the Downloader keeps its own entitlements), then each framework and dylib the app embeds,
+          # then the app. Every codesign failure fails the step.
+          SPARKLE="$APP_PATH/Contents/Frameworks/Sparkle.framework/Versions/B"
+          for item in "$SPARKLE/XPCServices/Installer.xpc" "$SPARKLE/Autoupdate" "$SPARKLE/Updater.app"; do
+            echo "Signing: $item"
+            codesign --force --sign "$IDENTITY" --timestamp --options runtime "$item"
+          done
+          echo "Signing: $SPARKLE/XPCServices/Downloader.xpc"
+          codesign --force --sign "$IDENTITY" --timestamp --options runtime --preserve-metadata=entitlements \
+            "$SPARKLE/XPCServices/Downloader.xpc"
+          find "$APP_PATH/Contents/Frameworks" -mindepth 1 -maxdepth 1 \( -name "*.framework" -o -name "*.dylib" \) -print0 \
+            | while IFS= read -r -d '' item; do
+              echo "Signing: $item"
+              codesign --force --sign "$IDENTITY" --timestamp --options runtime "$item"
+            done
+
+          # Sign the app bundle itself
+          echo "Signing app bundle: $APP_PATH"
+          codesign --force --sign "$IDENTITY" --timestamp --options runtime \
+            --entitlements apple/Tortuga/AppKit/Tortuga-macOS.entitlements "$APP_PATH"
+
+      - name: Verify Signature
+        if: ${{ env.HAS_SIGNING == 'true' }}
+        run: |
+          echo "Verifying signature..."
+          codesign -dvvv "$APP_PATH"
+          echo "Verifying signed entitlements..."
+          codesign -d --entitlements :- "$APP_PATH" > "$RUNNER_TEMP/macos-entitlements.plist"
+          /usr/libexec/PlistBuddy -c "Print" "$RUNNER_TEMP/macos-entitlements.plist"
+          /usr/libexec/PlistBuddy -c "Print :keychain-access-groups:0" "$RUNNER_TEMP/macos-entitlements.plist"
+          # macOS refuses to launch an app whose restricted entitlements its profile doesn't grant: the profile must
+          # come from an App ID with Associated Domains (Universal Links to usetortuga.app).
+          security cms -D -i "$APP_PATH/Contents/embedded.provisionprofile" > "$RUNNER_TEMP/macos-profile.plist"
+          /usr/libexec/PlistBuddy -c "Print :Entitlements:com.apple.developer.associated-domains" "$RUNNER_TEMP/macos-profile.plist"
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+
+      - name: Notarize Application
+        if: ${{ env.HAS_SIGNING == 'true' && env.HAS_NOTARIZATION == 'true' }}
+        env:
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_KEY_BASE64 }}
+        run: |
+          # notarytool reads the API key from a file.
+          KEY_PATH=$RUNNER_TEMP/AuthKey_$APP_STORE_CONNECT_KEY_ID.p8
+          echo "$APP_STORE_CONNECT_KEY_BASE64" | base64 --decode -o "$KEY_PATH"
+
+          # Create a temporary ZIP for notarization submission
+          echo "Creating ZIP for notarization..."
+          ditto -c -k --keepParent "$APP_PATH" notarization.zip
+
+          # Submit for notarization. notarytool exits 0 however the notary service decides, Invalid included, so the
+          # submission's status decides the step, and anything but Accepted prints Apple's log of the submission.
+          echo "Submitting to Apple's notary service..."
+          AUTH=(--key "$KEY_PATH" --key-id "$APP_STORE_CONNECT_KEY_ID" --issuer "$APP_STORE_CONNECT_ISSUER_ID")
+          xcrun notarytool submit notarization.zip "${AUTH[@]}" --wait --output-format json \
+            > "$RUNNER_TEMP/notarization.json"
+          cat "$RUNNER_TEMP/notarization.json"
+          SUBMISSION_ID=$(plutil -extract id raw "$RUNNER_TEMP/notarization.json")
+          STATUS=$(plutil -extract status raw "$RUNNER_TEMP/notarization.json")
+          if [[ "$STATUS" != "Accepted" ]]; then
+            echo "Notarization of submission $SUBMISSION_ID ended $STATUS; the notary service's log:" >&2
+            xcrun notarytool log "$SUBMISSION_ID" "${AUTH[@]}"
+            exit 1
+          fi
+          rm "$KEY_PATH"
+
+          # Staple the notarization ticket to the app
+          echo "Stapling notarization ticket..."
+          xcrun stapler staple "$APP_PATH"
+
+          # Verify stapling
+          echo "Verifying notarization..."
+          xcrun stapler validate "$APP_PATH"
+          rm notarization.zip
+
+      - name: Create DMG
+        run: |
+          mkdir -p dmg-staging
+          cp -R "$APP_PATH" dmg-staging/
+          ln -s /Applications dmg-staging/Applications
+          hdiutil create -format ULMO -srcfolder dmg-staging -volname "Tortuga" tortuga-macos.dmg
+
+      # sign_update comes with the Sparkle package the app links (apple/project.yml).
+      - name: Sign DMG for Sparkle (EdDSA)
+        if: ${{ env.HAS_SPARKLE_KEY == 'true' }}
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+        run: |
+          SIGNATURE=$(printf '%s' "$SPARKLE_PRIVATE_KEY" \
+            | apple/build/spm/artifacts/sparkle/Sparkle/bin/sign_update --ed-key-file - -p tortuga-macos.dmg)
+          echo "$SIGNATURE" > macos-ed-signature.txt
+          stat -f%z tortuga-macos.dmg > macos-dmg-size.txt
+
+      - name: Attest macOS DMG
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: tortuga-macos.dmg
+
+      - name: Upload macOS DMG
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: macos-dmg
+          path: |
+            tortuga-macos.dmg
+            macos-ed-signature.txt
+            macos-dmg-size.txt
+
+  build-windows:
+    name: Build Windows
+    needs: validate-trusted-ref
+    if: ${{ inputs.build_windows }}
+    runs-on: windows-latest
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+    env:
+      TORTUGA_ANDROID: "false"
+      # The Microsoft Store's build (settings.gradle.kts). An environment variable, as TORTUGA_ANDROID: PowerShell can
+      # split a -Ptortuga.* argument at the dot.
+      TORTUGA_FLAVOR: store
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # 25 is the app's runtime (the desktop modules' toolchain); 27, listed last, runs Gradle and the shared modules.
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            25.0.4+101.0.LTS
+            27.0.0+35
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      # The portable zip first: a Store package refused (MARKETING_VERSION below 1.0.0, build-msix.ps1) still leaves
+      # its artifact. The release's Windows download: the sideloaded build (the default flavor), unzipped and run as
+      # Tortuga\Tortuga.exe. It carries the workflow's sign-in secrets, which local builds don't have (Google sign-in).
+      # Both images carry the licence texts of the Windows app (the repository's licenses/, licenses/apps.json) in
+      # app\resources\licenses and libmpv's (its artifact's licenses\) in app\resources\mpv\licenses (one Gradle
+      # configuration, which fails on an artifact without them); build-msix.ps1 refuses the Store's image without one.
+      - name: Build the portable app image
+        env:
+          TORTUGA_FLAVOR: sideloaded
+        run: ./gradlew --console=plain :app-desktop:createDistributable
+
+      - name: Package the portable app
+        run: Compress-Archive -Path desktop\app\build\compose\binaries\main\app\Tortuga -DestinationPath tortuga-windows-x64.zip
+
+      - name: Upload portable app
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: windows-zip
+          path: tortuga-windows-x64.zip
+
+      - name: Build the app image
+        run: ./gradlew --console=plain :app-desktop:createDistributable
+
+      # Unsigned on purpose: the Store re-signs the bundle during certification. See build-msix.ps1.
+      - name: Build Store package (MSIX)
+        run: .\desktop\app\packaging\windows\build-msix.ps1 -X64AppDir desktop\app\build\compose\binaries\main\app\Tortuga
+
+      - name: Attest Windows packages
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            tortuga-windows-x64.zip
+            tortuga-windows.msixbundle
+
+      # Not attached to the GitHub release in create-release: a Store-identity package cannot be installed without the
+      # Store's signature, so it is only a Partner Center upload.
+      - name: Upload Store package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: windows-msix
+          path: tortuga-windows.msixbundle
+
+  build-linux:
+    name: Build Linux (${{ matrix.arch }})
+    needs: validate-trusted-ref
+    if: ${{ inputs.build_linux }}
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      id-token: write
+      attestations: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    env:
+      TORTUGA_ANDROID: "false"
+      TORTUGA_FLAVOR: sideloaded
+      ARCH: ${{ matrix.arch }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            25.0.4+101.0.LTS
+            27.0.0+35
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      # The app's runtime is JetBrains Runtime 25 (desktop/app/build.gradle.kts): this build, checked by its sha512.
+      # Gradle finds it through installations.paths and may provision no other (auto-download off), so the foojay
+      # resolver's newest JBR never replaces it.
+      - name: Install JetBrains Runtime
+        run: |
+          case "$ARCH" in
+            x64) jbr=jbrsdk-25.0.4.1-linux-x64-b635.75
+              sha512=eb9806ffc8226a53ece596730de2a1d5923bee85cd0eeb0e30fa3f21a2c561b0dfe8c29d1c17d6675ba91649e9aa010d85f4fb428bfc96a035d104a23e4e2f50 ;;
+            arm64) jbr=jbrsdk-25.0.4.1-linux-aarch64-b635.75
+              sha512=f34ec0721110c2ee539854dd4f7ecb4c5f6700daa0f97bc996f18e0b44e359c75fd946799fbdda7c454978a1780f6f5f7348de51c18d44f5d2c482c60a3220a4 ;;
+          esac
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/$jbr.tar.gz" "https://cache-redirector.jetbrains.com/intellij-jbr/$jbr.tar.gz"
+          echo "$sha512  $RUNNER_TEMP/$jbr.tar.gz" | sha512sum -c -
+          tar -xzf "$RUNNER_TEMP/$jbr.tar.gz" -C "$RUNNER_TEMP"
+          echo "JBR_HOME=$RUNNER_TEMP/$jbr" >> "$GITHUB_ENV"
+
+      - name: Build the app image
+        run: >
+          ./gradlew --console=plain -Porg.gradle.java.installations.paths="$JBR_HOME"
+          -Porg.gradle.java.installations.auto-download=false :app-desktop:createDistributable
+
+      # mpv-build's libmpv is built on Ubuntu 24.04 (this runner) and links these under sonames the Flatpak runtime
+      # lacks; build-flatpak.py puts them in /app/lib and refuses a package whose copyright file (its licence) differs
+      # from the app's copy in licenses/linux. Exact builds from Launchpad, which keeps every published one, checked by
+      # sha256: new versions (an Ubuntu update or a new mpv-build) are new lines here, and new copyright files there.
+      - name: Fetch libmpv's Ubuntu libraries
+        run: |
+          mkdir -p ubuntu-debs ubuntu-libs
+          cd ubuntu-debs
+          case "$ARCH" in x64) deb_arch=amd64 ;; arm64) deb_arch=arm64 ;; esac
+          grep "_$deb_arch\.deb\$" > SHA256SUMS << EOF
+          b030bc0bea32fe27dfb70a31e14491b6ab767379811877e6497af28338eab5d8  liblua5.2-0_5.2.4-3build2_amd64.deb
+          eb65d35b3cee83aeecaa4ccdbfbde2452d5bb394237f4668f1bb6cc154e61ff0  libmujs3_1.3.3-3build2_amd64.deb
+          a3bfce18d53aa9d635d899f1f555e84bbbf2c859d80cef3b4eb1c36b2c772026  libdisplay-info1_0.1.1-2build1_amd64.deb
+          36ee08b00b1ee5018b2fce02881b7d2d73c9b4e32990bde3388400d86c48126a  libbz2-1.0_1.0.8-5.1ubuntu0.1_amd64.deb
+          0b813a3869bb39f65e9cdbf8c59bfd48ec2a872df7776b176d7641a27d0abb76  liblua5.2-0_5.2.4-3build2_arm64.deb
+          e76fbf1797e6bccf7aa57a99118bb73de02e606f1d865a2237d092203c1b67fe  libmujs3_1.3.3-3build2_arm64.deb
+          cb9622f90d68ef13e851e8f95dd4a6bd54ae5d746f7911ffd0110b6ac0781680  libdisplay-info1_0.1.1-2build1_arm64.deb
+          1a92811105f89bf948a629de99715ef23941ef93c901e0942883029069db3f94  libbz2-1.0_1.0.8-5.1ubuntu0.1_arm64.deb
+          EOF
+          while read -r _ deb; do
+            curl -fsSL --retry 3 -o "$deb" "https://launchpad.net/ubuntu/+archive/primary/+files/$deb"
+          done < SHA256SUMS
+          sha256sum -c SHA256SUMS
+          for deb in *.deb; do dpkg-deb -x "$deb" ../ubuntu-libs; done
+
+      # The SDK and Platform the bundle is built against, moved to these commits of Flathub's 26.08 branch. The bundle
+      # itself names the branch, so an installed Tortuga runs on whatever 26.08 its user has. unzip: flatpak-builder
+      # unpacks the manifest's Noto Sans release with it, and only recommends it.
+      - name: Install Flatpak packaging dependencies
+        run: |
+          case "$ARCH" in
+            x64) flatpak_arch=x86_64
+              platform=e7f7b0fb20662fe92e4eac65d58a57019cefae45a39559c4b50440a88acc0491
+              sdk=3311c13c67b602315c39cf5310de129dd3460d04b6c8cf5be1b2cbc42c51abd7 ;;
+            arm64) flatpak_arch=aarch64
+              platform=b1638b75d1c66cc77ca956cc56ee3cc3520f917c167fac9ddd603294beefc086
+              sdk=c49710941b05177c7a69cfef43a97547b9bed24a7ad1f52cd4ba26cdd9bc1665 ;;
+          esac
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y --no-install-recommends flatpak flatpak-builder unzip
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install --user --noninteractive -y flathub org.freedesktop.Platform//26.08 org.freedesktop.Sdk//26.08
+          flatpak update --user --noninteractive -y --commit="$platform" "org.freedesktop.Platform/$flatpak_arch/26.08"
+          flatpak update --user --noninteractive -y --commit="$sdk" "org.freedesktop.Sdk/$flatpak_arch/26.08"
+          check() {
+            installed=$(flatpak info --user --show-commit "org.freedesktop.$1/$flatpak_arch/26.08")
+            [[ "$installed" == "$2" ]] || { echo "org.freedesktop.$1 is at $installed, not $2" >&2; exit 1; }
+          }
+          check Platform "$platform"
+          check Sdk "$sdk"
+
+      - name: Build Flatpak bundle
+        run: |
+          python3 desktop/app/packaging/linux/build-flatpak.py --app desktop/app/build/compose/binaries/main/app/Tortuga \
+            --libs ubuntu-libs --arch "$ARCH" --output "$GITHUB_WORKSPACE"
+
+      - name: Verify installed Flatpak runtime dependencies
+        run: |
+          flatpak install --user --noninteractive -y "tortuga-linux-$ARCH.flatpak"
+          dbus-run-session -- python3 desktop/app/packaging/linux/check-flatpak.py --arch "$ARCH"
+
+      - name: Attest Linux ${{ matrix.arch }} Flatpak
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: tortuga-linux-${{ matrix.arch }}.flatpak
+
+      - name: Upload Linux ${{ matrix.arch }} Flatpak
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: linux-${{ matrix.arch }}
+          path: tortuga-linux-${{ matrix.arch }}.flatpak
+
+  create-release:
+    name: Create draft release
+    needs: [validate-trusted-ref, build-android, build-ios, build-macos, build-windows, build-linux]
+    if: ${{ always() && needs.validate-trusted-ref.result == 'success' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && inputs.build_android && inputs.build_ios && inputs.build_macos && inputs.build_windows && inputs.build_linux && inputs.release_tag != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            version.xcconfig
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Read version from version.xcconfig
+        id: version
+        run: |
+          echo "version=$(sed -n 's/^MARKETING_VERSION *= *\([^ ]*\) *$/\1/p' version.xcconfig)" >> "$GITHUB_OUTPUT"
+          echo "build_number=$(sed -n 's/^CURRENT_PROJECT_VERSION *= *\([^ ]*\) *$/\1/p' version.xcconfig)" >> "$GITHUB_OUTPUT"
+
+      - name: Validate release tag
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release tag must use semantic versioning: $RELEASE_TAG" >&2
+            exit 1
+          fi
+          if [[ "$RELEASE_TAG" != "$VERSION" ]]; then
+            echo "Release tag $RELEASE_TAG does not match MARKETING_VERSION $VERSION in version.xcconfig." >&2
+            exit 1
+          fi
+
+      - name: Download Android artifacts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: android-apk
+          path: artifacts/android-apk
+
+      - name: Download iOS artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: iOS-ipa
+          path: artifacts/ios-ipa
+
+      - name: Download tvOS artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: tvOS-ipa
+          path: artifacts/tvos-ipa
+
+      - name: Download macOS artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: macos-dmg
+          path: artifacts/macos-dmg
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: windows-zip
+          path: artifacts/windows-zip
+
+      - name: Download Linux x64 artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: linux-x64
+          path: artifacts/linux-x64
+
+      - name: Download Linux arm64 artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: linux-arm64
+          path: artifacts/linux-arm64
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      # The feed the macOS app reads (SUFeedURL: the latest release's appcast.xml). sparkle:version is compared with
+      # the installed app's CFBundleVersion (CURRENT_PROJECT_VERSION).
+      - name: Generate appcast.xml
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          BUILD_NUMBER: ${{ steps.version.outputs.build_number }}
+        run: |
+          SIGNATURE=$(cat artifacts/macos-dmg/macos-ed-signature.txt)
+          LENGTH=$(cat artifacts/macos-dmg/macos-dmg-size.txt)
+          cat > appcast.xml << EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+            <channel>
+              <title>Tortuga Updates</title>
+              <item>
+                <title>Version ${VERSION}</title>
+                <sparkle:version>${BUILD_NUMBER}</sparkle:version>
+                <sparkle:shortVersionString>${VERSION}</sparkle:shortVersionString>
+                <sparkle:releaseNotesLink>https://gh-html.edde746.dev/edde746/tortuga/${VERSION}</sparkle:releaseNotesLink>
+                <enclosure url="https://github.com/edde746/tortuga/releases/download/${VERSION}/tortuga-macos.dmg"
+                           length="${LENGTH}" type="application/octet-stream"
+                           sparkle:edSignature="${SIGNATURE}"
+                           sparkle:os="macos" />
+              </item>
+            </channel>
+          </rss>
+          EOF
+          echo "Generated appcast.xml:"
+          cat appcast.xml
+
+      # The sha256 of every file the release attaches, in `sha256sum -c` form.
+      - name: Write SHA256SUMS
+        run: |
+          files=(artifacts/android-apk/*.tar.gz artifacts/ios-ipa/*.ipa artifacts/tvos-ipa/*.ipa \
+            artifacts/macos-dmg/*.dmg artifacts/windows-zip/*.zip artifacts/linux-x64/*.flatpak \
+            artifacts/linux-arm64/*.flatpak appcast.xml)
+          for f in "${files[@]}"; do (cd "$(dirname "$f")" && sha256sum "$(basename "$f")"); done > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Create Release
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          files: |
+            artifacts/android-apk/tortuga-android-arm64-v8a.tar.gz
+            artifacts/android-apk/tortuga-android-armeabi-v7a.tar.gz
+            artifacts/android-apk/tortuga-android-x86_64.tar.gz
+            artifacts/ios-ipa/tortuga-ios.ipa
+            artifacts/tvos-ipa/tortuga-tvos.ipa
+            artifacts/macos-dmg/tortuga-macos.dmg
+            artifacts/windows-zip/tortuga-windows-x64.zip
+            artifacts/linux-x64/tortuga-linux-x64.flatpak
+            artifacts/linux-arm64/tortuga-linux-arm64.flatpak
+            appcast.xml
+            SHA256SUMS
+          draft: true
+          prerelease: false
+          name: ${{ inputs.release_tag }}
+          tag_name: ${{ inputs.release_tag }}
+          target_commitish: ${{ github.sha }}
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

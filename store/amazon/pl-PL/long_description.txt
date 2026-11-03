@@ -1,0 +1,36 @@
+Tortuga to odtwarzacz wideo, który działa z dodatkami Stremio. Zainstalowane przez ciebie dodatki dostarczają katalogi i źródła, a Tortuga odtwarza je na twoim Fire TV. Tortuga nie udostępnia żadnych własnych treści.
+
+Jak to działa
+• Dodatek zainstalujesz za pomocą jego linku. Katalogi, wyniki wyszukiwania, strony szczegółów i źródła pochodzą z twoich dodatków, a twoje zapytania trafiają bezpośrednio do nich.
+• Strona główna pokazuje „Kontynuuj oglądanie” i katalogi twoich dodatków. W sekcji „Odkrywaj” filtrujesz według typu i gatunku. Sekcja „Szukaj” przeszukuje wszystkie dodatki.
+• Źródła filmu lub odcinka są pogrupowane według dodatków. Wybierz jedno, a zacznie się odtwarzanie.
+
+Odtwarzacz
+• Odtwarza za pomocą mpv, z HDR10 i Dolby Vision, jeśli twój Fire TV i telewizor je obsługują.
+• Przekazywanie dźwięku: Dolby Atmos i DTS do twojego amplitunera.
+• Wbudowane napisy i napisy z dodatków, dopasowane do pliku. Wybór dźwięku i napisów zostaje zachowany w następnym odcinku.
+• Rozdziały na pasku postępu. Czołówki, podsumowania i napisy końcowe pominiesz przyciskiem lub automatycznie.
+• Odliczanie do następnego odcinka, poprzedni i następny odcinek, szybkość odtwarzania oraz opóźnienie napisów i dźwięku.
+• Wolisz inny odtwarzacz? Wyślij wideo do innego odtwarzacza na swoim Fire TV.
+
+Twoja biblioteka
+• Postęp oglądania i oznaczenia obejrzanych tytułów, a „Kontynuuj oglądanie” na stronie głównej pozwala wrócić do oglądania.
+• Tortuga pamięta wybrane źródło i odtwarza z niego następny odcinek.
+• Pobrane: zapisuj filmy i odcinki wraz z napisami, aby oglądać je offline. Tortuga może na bieżąco pobierać kolejne nieobejrzane odcinki serialu.
+
+Wspólne oglądanie
+Utwórz pokój i udostępnij jego kod lub link z zaproszeniem. Odtwarzanie pozostaje zsynchronizowane, a każdy odtwarza tytuł przez własne dodatki.
+
+Twoje konto i profile
+• Zaloguj się przez Google, Apple lub GitHub, wpisując kod na telefonie, albo połącz telewizor z zalogowanego telefonu za pomocą kodu QR lub krótkiego kodu. Twoje profile, dodatki, biblioteka, postęp oglądania i ustawienia profili synchronizują się między twoimi urządzeniami.
+• Profil dla każdego domownika, każdy z własnymi dodatkami, biblioteką i ustawieniami. Kod PIN jest opcjonalny.
+• Połącz Trakt, Simkl, MDBList, MyAnimeList lub AniList, aby korzystać ze scrobblingu, historii oglądania, ocen i list.
+• Synchronizacja działa na serwerze Tortuga albo na twoim własnym serwerze.
+
+Całą aplikację obsłużysz pilotem Fire TV.
+
+Tortuga to oprogramowanie open source na licencji GPL-3.0, dostępne w 21 językach. Bez reklam i bez analityki.
+
+Odtwarzacz na zrzutach ekranu pokazuje krótkie fragmenty filmów Spring (2019), Coffee Run (2020), Sprite Fright (2021) i Wing It! (2023) autorstwa Blender Studio, (CC) Blender Foundation | studio.blender.org, na licencji CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+
+Tortuga korzysta z Trakt, ale nie ma poparcia ani certyfikacji Trakt.

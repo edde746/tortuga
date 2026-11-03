@@ -1,0 +1,13 @@
+{
+  "streams": [
+    {
+      "url": "https://archive.org/download/his-girl-friday-1940_202109/His%20Girl%20Friday%20%281940%29.ia.mp4",
+      "name": "Tortuga demo",
+      "description": "His Girl Friday (1940), 480p\nPublic domain, from the Internet Archive",
+      "behaviorHints": {
+        "videoSize": 530717847,
+        "filename": "His Girl Friday (1940).ia.mp4"
+      }
+    }
+  ]
+}

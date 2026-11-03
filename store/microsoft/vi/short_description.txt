@@ -1,0 +1,1 @@
+Trình phát video hoạt động với tiện ích Stremio. Các tiện ích bạn cài đặt cung cấp danh mục và nguồn phát, còn Tortuga phát chúng. Tortuga không tự cung cấp bất kỳ nội dung nào.

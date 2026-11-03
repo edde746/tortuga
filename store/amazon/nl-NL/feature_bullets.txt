@@ -1,0 +1,5 @@
+Speelt de streams van je add-ons af met mpv, met HDR10, Dolby Vision en audio-passthrough als je apparatuur die ondersteunt
+Verder kijken, voortgang en markeringen als bekeken, en de volgende aflevering van dezelfde bron
+Sla intro's, samenvattingen en aftiteling over; je keuzes voor audio en ondertiteling gaan mee naar de volgende aflevering
+Samen kijken: synchroon met vrienden, ieder via de eigen add-ons
+Profielen, add-ons, bibliotheek en voortgang gesynchroniseerd op al je apparaten

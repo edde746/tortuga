@@ -1,0 +1,52 @@
+<!--
+  Logs go to stdout: JSON lines by default (TORTUGA_LOG_FORMAT=json), or plain text (TORTUGA_LOG_FORMAT=text).
+  Log lines carry account ids and request ids, never email addresses, tokens or request bodies.
+  A JSON line's message is in `formattedMessage`, its arguments filled in; the raw pattern (`message`) is left out.
+  Only the selected format's appender is defined: logback warns about an appender nothing references, and a warning
+  prints its whole status at startup. Any other format leaves the root's reference unresolved, which logback reports.
+-->
+<configuration>
+    <variable name="logFormat" value="${TORTUGA_LOG_FORMAT:-json}"/>
+
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>logFormat</key>
+        <value>json</value>
+    </condition>
+    <if>
+        <then>
+            <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder class="ch.qos.logback.classic.encoder.JsonEncoder">
+                    <withSequenceNumber>false</withSequenceNumber>
+                    <withNanoseconds>false</withNanoseconds>
+                    <withContext>false</withContext>
+                    <withMessage>false</withMessage>
+                    <withFormattedMessage>true</withFormattedMessage>
+                    <withArguments>false</withArguments>
+                </encoder>
+            </appender>
+        </then>
+    </if>
+
+    <condition class="ch.qos.logback.core.boolex.PropertyEqualityCondition">
+        <key>logFormat</key>
+        <value>text</value>
+    </condition>
+    <if>
+        <then>
+            <appender name="text" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSX,UTC} %-5level %logger{24} [%X{requestId:-}] %X{accountId:-} %kvp %msg%n%ex</pattern>
+                </encoder>
+            </appender>
+        </then>
+    </if>
+
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="org.flywaydb" level="INFO"/>
+    <logger name="io.ktor.server.plugins.calllogging" level="INFO"/>
+    <logger name="io.netty" level="WARN"/>
+
+    <root level="${TORTUGA_LOG_LEVEL:-INFO}">
+        <appender-ref ref="${logFormat}"/>
+    </root>
+</configuration>

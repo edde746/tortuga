@@ -1,0 +1,58 @@
+-- The account's pull cursor: the server version up to which changes have been pulled. Keyed by
+-- account so signing in to another account never reuses a cursor; its one row also names the account the local
+-- synced data belongs to. Device-local.
+CREATE TABLE sync_state (
+    account_id TEXT NOT NULL PRIMARY KEY,
+    pull_cursor INTEGER NOT NULL,
+    -- Epoch milliseconds of the last cursor move.
+    updated_at INTEGER NOT NULL
+);
+
+selectCursor:
+SELECT pull_cursor FROM sync_state WHERE account_id = ?;
+
+upsert:
+INSERT OR REPLACE INTO sync_state VALUES ?;
+
+selectAccount:
+SELECT account_id FROM sync_state LIMIT 1;
+
+deleteAll:
+DELETE FROM sync_state;
+
+-- The HLC of the newest local change of the synced tables that awaits a push, '' when none does
+-- (data/sync/SyncStore.kt).
+newestDirty:
+SELECT coalesce(max(hlc), '') FROM (
+    SELECT max(hlc) AS hlc FROM profile WHERE dirty = 1
+    UNION ALL SELECT max(hlc) FROM addon_list WHERE dirty = 1
+    UNION ALL SELECT max(hlc) FROM library_item WHERE dirty = 1
+    UNION ALL SELECT max(hlc) FROM stream_history WHERE dirty = 1
+    UNION ALL SELECT max(hlc) FROM setting WHERE dirty = 1
+    UNION ALL SELECT max(hlc) FROM stream_pick WHERE dirty = 1
+);
+
+-- How many local changes of the synced tables await a push (data/sync/SyncStore.kt).
+countDirty:
+SELECT count(*) FROM (
+    SELECT 1 FROM profile WHERE dirty = 1
+    UNION ALL SELECT 1 FROM addon_list WHERE dirty = 1
+    UNION ALL SELECT 1 FROM library_item WHERE dirty = 1
+    UNION ALL SELECT 1 FROM stream_history WHERE dirty = 1
+    UNION ALL SELECT 1 FROM setting WHERE dirty = 1
+    UNION ALL SELECT 1 FROM stream_pick WHERE dirty = 1
+);
+
+-- This device's hybrid logical clock (data/sync/HybridClock.kt): its node id and the last timestamp it issued or
+-- received, so the clock stays monotonic across restarts even when the wall clock moves back. One row.
+CREATE TABLE hlc_state (
+    id INTEGER NOT NULL PRIMARY KEY CHECK (id = 1),
+    node_id TEXT NOT NULL,
+    last_hlc TEXT NOT NULL
+);
+
+selectClock:
+SELECT node_id, last_hlc FROM hlc_state WHERE id = 1;
+
+saveClock:
+INSERT OR REPLACE INTO hlc_state VALUES (1, ?, ?);

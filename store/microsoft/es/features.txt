@@ -1,0 +1,14 @@
+Funciona con complementos de Stremio: instala un complemento con su enlace
+Inicio, Descubrir y Buscar en todos los complementos
+Las transmisiones de cada título agrupadas por complemento
+Reproduce con mpv, con HDR10 y Dolby Vision si tu computadora y tu pantalla los admiten
+Subtítulos integrados y de los complementos; tus elecciones de audio y subtítulos se mantienen en el siguiente episodio
+Salta intros, resúmenes y créditos
+Seguir viendo, progreso y marcas de visto
+Descargas para ver sin conexión
+Ver juntos en sincronía, cada persona con sus propios complementos
+Perfiles con sus propios complementos, biblioteca y ajustes, y PIN opcional
+Sincronización entre tus dispositivos al iniciar sesión con Apple, Google o GitHub
+Trakt, Simkl, MDBList, MyAnimeList y AniList
+Atajos de teclado, teclas multimedia y los controles multimedia de Windows
+21 idiomas

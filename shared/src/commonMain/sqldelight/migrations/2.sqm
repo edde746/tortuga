@@ -1,0 +1,59 @@
+-- Version 2 → 3: download loses priority, always 0 (the queue runs oldest first). SQLite 3.18 (Android API 26) has no
+-- DROP COLUMN, so the table is rebuilt with every row and id; nothing references it (download_owner and
+-- download_subtitle keep their rows). The queue's index goes first, by name, as SQLDelight's checker needs.
+
+CREATE TABLE download_new (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    type TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    year INTEGER,
+    episode_title TEXT,
+    season INTEGER,
+    episode INTEGER,
+    poster TEXT,
+    thumbnail TEXT,
+    status TEXT NOT NULL,
+    failure TEXT,
+    http_status INTEGER,
+    stream_json TEXT,
+    addon_url TEXT,
+    addon_name TEXT,
+    location_id TEXT NOT NULL,
+    relative_path TEXT,
+    total_bytes INTEGER,
+    downloaded_bytes INTEGER NOT NULL,
+    validator TEXT,
+    video_hash TEXT,
+    filename TEXT,
+    added_at INTEGER NOT NULL,
+    completed_at INTEGER,
+    attempts INTEGER NOT NULL,
+    keep_synced INTEGER NOT NULL,
+    transferring INTEGER NOT NULL,
+    artwork_saved INTEGER NOT NULL,
+    subtitles_saved INTEGER NOT NULL,
+    UNIQUE (meta_id, video_id)
+);
+
+INSERT INTO download_new (
+    id, type, meta_id, video_id, title, year, episode_title, season, episode, poster, thumbnail, status, failure,
+    http_status, stream_json, addon_url, addon_name, location_id, relative_path, total_bytes, downloaded_bytes,
+    validator, video_hash, filename, added_at, completed_at, attempts, keep_synced, transferring, artwork_saved,
+    subtitles_saved
+)
+SELECT
+    id, type, meta_id, video_id, title, year, episode_title, season, episode, poster, thumbnail, status, failure,
+    http_status, stream_json, addon_url, addon_name, location_id, relative_path, total_bytes, downloaded_bytes,
+    validator, video_hash, filename, added_at, completed_at, attempts, keep_synced, transferring, artwork_saved,
+    subtitles_saved
+FROM download;
+
+DROP INDEX download_queue;
+
+DROP TABLE download;
+
+ALTER TABLE download_new RENAME TO download;
+
+CREATE INDEX download_queue ON download(status, added_at);

@@ -1,0 +1,28 @@
+{
+  "metas": [
+    {"id": "tt0000001", "type": "movie", "name": "Kept as is"},
+    {"type": "movie", "name": "No id"},
+    {"id": "tt0000003", "type": 42, "name": "Type is a number"},
+    "not an object",
+    {
+      "id": "tt0000005",
+      "type": "movie",
+      "name": "Lenient fields",
+      "poster": "not a url",
+      "background": "",
+      "released": "yesterday",
+      "posterShape": "hexagon",
+      "releaseInfo": 2001,
+      "runtime": 95.5,
+      "links": [
+        {"name": "7.1", "category": "imdb", "url": "https://imdb.com/title/tt0000005"},
+        {"name": "Broken", "category": "Genres", "url": "no scheme"}
+      ]
+    },
+    null,
+    {"id": "tt0000007", "type": "series", "name": null, "posterShape": "landscape", "released": 1000000000000}
+  ],
+  "cacheMaxAge": "3600",
+  "staleRevalidate": 600,
+  "staleError": -5
+}

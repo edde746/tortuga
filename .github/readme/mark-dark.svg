@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="596" height="596" viewBox="214 214 596 596"><defs><mask id="m" maskUnits="userSpaceOnUse" x="-512" y="-512" width="2048" height="2048">
+      <path d="M384 282 L384 742 L782 512 Z" fill="#fff" stroke="#fff" stroke-width="76" stroke-linejoin="round"/>
+      <line x1="300" y1="596" x2="760" y2="408" stroke="#000" stroke-width="28"/>
+      <ellipse cx="585" cy="480" rx="80" ry="63" transform="rotate(-22 585 480)" fill="#000"/>
+    </mask></defs>
+    <g transform="translate(-41 0)"><rect fill="#FFF1D6" x="200" y="100" width="760" height="824" mask="url(#m)"/></g></svg>

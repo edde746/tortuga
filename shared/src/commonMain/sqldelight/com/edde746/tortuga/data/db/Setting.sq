@@ -1,0 +1,44 @@
+-- Per-profile settings: one synced record per key, the value as JSON. A missing or tombstoned row
+-- means the setting's default (data/settings/ProfileSetting.kt). Keys this build doesn't know are kept as they are,
+-- so a newer app's settings survive a round trip through an older one. Sync columns: see Profile.sq.
+CREATE TABLE setting (
+    profile_id TEXT NOT NULL,
+    setting_key TEXT NOT NULL,
+    value_json TEXT NOT NULL,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL,
+    PRIMARY KEY (profile_id, setting_key)
+);
+
+CREATE INDEX setting_dirty ON setting(dirty, hlc);
+
+selectLiveForProfile:
+SELECT * FROM setting WHERE profile_id = ? AND deleted = 0;
+
+select:
+SELECT * FROM setting WHERE profile_id = ? AND setting_key = ?;
+
+upsert:
+INSERT OR REPLACE INTO setting VALUES ?;
+
+tombstoneProfile:
+UPDATE setting SET deleted = 1, dirty = 1, hlc = :hlc WHERE profile_id = :profileId AND deleted = 0;
+
+selectDirty:
+SELECT * FROM setting WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE setting SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE setting SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt; see Profile.sq).
+deleteAll:
+DELETE FROM setting;
+
+forgetServerVersions:
+UPDATE setting SET server_version = NULL, dirty = 1;

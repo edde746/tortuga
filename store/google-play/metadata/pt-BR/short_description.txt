@@ -1,0 +1,1 @@
+Player de vídeo que funciona com addons do Stremio, em celulares, tablets e TVs.

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Tortuga
+Comment=Watch streams from Stremio addons
+Exec=tortuga %u
+Icon=com.edde746.tortuga
+Terminal=false
+Categories=AudioVideo;Video;Player;
+MimeType=x-scheme-handler/stremio;
+Keywords=stremio;addons;streaming;video;player;
+StartupWMClass=com-edde746-tortuga-desktop-MainKt

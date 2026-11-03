@@ -1,0 +1,5 @@
+Reproduce las transmisiones de tus complementos con mpv, con HDR10, Dolby Vision y passthrough de audio si tu equipo los admite
+Seguir viendo, progreso y marcas de visto, y el siguiente episodio de la misma fuente
+Salta intros, resúmenes y créditos; tus elecciones de audio y subtítulos se mantienen en el siguiente episodio
+Ver juntos en sincronía con tus amigos, cada uno con sus propios complementos
+Perfiles, complementos, biblioteca y progreso sincronizados entre tus dispositivos

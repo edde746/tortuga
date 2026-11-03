@@ -1,0 +1,5 @@
+Riproduce gli stream dei tuoi add-on con mpv, supportando HDR10, Dolby Vision e passthrough audio se la tua configurazione lo consente
+Continua a guardare, avanzamento e titoli segnati come visti, e l'episodio successivo dalla stessa fonte
+Salta intro, riepiloghi e titoli di coda; le tue scelte di audio e sottotitoli passano all'episodio successivo
+Guarda insieme agli amici in sincronia, ognuno tramite i propri add-on
+Profili, add-on, libreria e avanzamento sincronizzati tra i tuoi dispositivi

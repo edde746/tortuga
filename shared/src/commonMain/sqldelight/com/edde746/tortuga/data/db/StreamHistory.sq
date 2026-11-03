@@ -1,0 +1,61 @@
+-- The last stream played per (meta, video) and profile, so resume and binge reuse the same source. The stream is
+-- opaque JSON; it and the addon's transport URL can embed API keys, so neither is ever
+-- logged. Sync columns: see Profile.sq.
+CREATE TABLE stream_history (
+    profile_id TEXT NOT NULL,
+    meta_id TEXT NOT NULL,
+    video_id TEXT NOT NULL,
+    stream_json TEXT NOT NULL,
+    -- The addon that returned the stream.
+    transport_url TEXT NOT NULL,
+    -- Epoch milliseconds.
+    updated_at INTEGER NOT NULL,
+    record_id TEXT NOT NULL UNIQUE,
+    hlc TEXT NOT NULL,
+    server_version INTEGER,
+    dirty INTEGER AS kotlin.Boolean NOT NULL,
+    deleted INTEGER AS kotlin.Boolean NOT NULL,
+    PRIMARY KEY (profile_id, meta_id, video_id)
+);
+
+CREATE INDEX stream_history_meta ON stream_history(profile_id, meta_id, updated_at);
+
+CREATE INDEX stream_history_dirty ON stream_history(dirty, hlc);
+
+selectLive:
+SELECT * FROM stream_history WHERE profile_id = ? AND meta_id = ? AND video_id = ? AND deleted = 0;
+
+select:
+SELECT * FROM stream_history WHERE profile_id = ? AND meta_id = ? AND video_id = ?;
+
+-- Every live entry of a profile, for an export (data/transfer/DataTransfer.kt).
+selectAllLive:
+SELECT * FROM stream_history WHERE profile_id = ? AND deleted = 0 ORDER BY meta_id, video_id;
+
+selectLatestForMeta:
+SELECT * FROM stream_history
+WHERE profile_id = ? AND meta_id = ? AND deleted = 0
+ORDER BY updated_at DESC
+LIMIT 1;
+
+upsert:
+INSERT OR REPLACE INTO stream_history VALUES ?;
+
+tombstoneProfile:
+UPDATE stream_history SET deleted = 1, dirty = 1, hlc = :hlc WHERE profile_id = :profileId AND deleted = 0;
+
+selectDirty:
+SELECT * FROM stream_history WHERE dirty = 1 AND (hlc > :afterHlc OR (hlc = :afterHlc AND record_id > :afterId))
+ORDER BY hlc, record_id LIMIT :limit;
+
+markPushed {
+    UPDATE stream_history SET server_version = :serverVersion WHERE record_id = :recordId;
+    UPDATE stream_history SET dirty = 0 WHERE record_id = :recordId AND hlc = :hlc;
+}
+
+-- Sync maintenance (data/sync/SyncStore.kt; see Profile.sq).
+deleteAll:
+DELETE FROM stream_history;
+
+forgetServerVersions:
+UPDATE stream_history SET server_version = NULL, dirty = 1;
