@@ -18,8 +18,8 @@ private let log = Logger(subsystem: "com.edde746.tortuga", category: "player")
 /// the window is up the player shows the whole picture
 /// (`PlayerStore`'s layout in picture in picture), letterboxed to the window. As on iOS, the window's controls follow
 /// the shared `NowPlaying` (playing or paused) and act through its `MediaCommand`s. The window's close button pauses the
-/// playback, its return button doesn't; either way the video goes back to the player. The playback ending closes the
-/// window and keeps the layers (`stop`).
+/// playback, its return button doesn't; either way the video goes back to the player. The playback ending takes the
+/// layers into the player's window for mpv's teardown, then closes the window (`stop`).
 @MainActor
 @Observable
 final class PictureInPicture: NSObject {
@@ -70,8 +70,8 @@ final class PictureInPicture: NSObject {
         }
     }
 
-    /// The playback ended: the window closes at once and keeps the layers, which the playback's teardown takes; PiP no
-    /// longer starts.
+    /// The playback ended: the window closes at once, the surface having taken the layers out of it for the playback's
+    /// teardown (`VideoSurface.endPlayback`); PiP no longer starts.
     func stop() {
         stopped = true
         possible = false

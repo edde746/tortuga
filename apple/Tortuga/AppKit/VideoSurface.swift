@@ -147,27 +147,30 @@ final class VideoSurface: NSView {
         updateSampleBufferLayer()
     }
 
-    /// The playback ended (before mpv goes): picture in picture closes, and the video's layers (the display layer and
-    /// vo_avfoundation's subtitle layer) are hidden at once. They stay in the window, hidden, until mpv has let go of
-    /// them and the hidden frame is on screen (`removeEndedLayers`, from the engine): on macOS 27 a display layer that
-    /// leaves the window while its video receiver is torn down can stop the whole display, and the window server's
-    /// watchdog panics the Mac. The closing player takes this view out of the window, so they wait under the window's
-    /// content view; vo_avfoundation's teardown takes its timebase and observers off them on the main thread, which
-    /// nothing here waits for.
+    /// The playback ended (before mpv goes): the video's layers (the display layer and vo_avfoundation's subtitle layer),
+    /// in the player or lent to picture in picture, are hidden at once, and picture in picture closes. They stay in the
+    /// window, hidden, until mpv has let go of them and the hidden frame is on screen (`removeEndedLayers`, from the
+    /// engine): on macOS 27 a display layer that leaves the window while its video receiver is torn down can stop the
+    /// whole display, and the window server's watchdog panics the Mac. The closing player takes this view out of the
+    /// window and the closing PiP window takes its own, so they wait under the player window's content view, moved
+    /// there before picture in picture closes; vo_avfoundation's teardown takes its timebase and observers off them on
+    /// the main thread, which nothing here waits for.
     func endPlayback() {
-        let videoLayers = sampleBufferLayer.superlayer?.sublayers ?? []
-        withoutAnimation { videoLayers.forEach { $0.isHidden = true } }
-        pictureInPicture.stop()
+        guard !ended else { return }
         ended = true
         layerLent = false
-        guard sampleBufferLayer.superlayer === layer, let windowLayer = window?.contentView?.layer else { return }
-        let holder = CALayer()
-        holder.isHidden = true
-        withoutAnimation {
-            videoLayers.forEach { holder.addSublayer($0) }
-            windowLayer.addSublayer(holder)
+        let videoLayers = sampleBufferLayer.superlayer?.sublayers ?? []
+        withoutAnimation { videoLayers.forEach { $0.isHidden = true } }
+        if let windowLayer = window?.contentView?.layer {
+            let holder = CALayer()
+            holder.isHidden = true
+            withoutAnimation {
+                videoLayers.forEach { holder.addSublayer($0) }
+                windowLayer.addSublayer(holder)
+            }
+            endedLayers = holder
         }
-        endedLayers = holder
+        pictureInPicture.stop()
     }
 
     /// mpv has let go of the video's layers, and their hidden frame is on screen: they leave the window.

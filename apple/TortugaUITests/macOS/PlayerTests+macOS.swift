@@ -759,7 +759,9 @@ extension PlayerTests {
 
     /// Picture in picture by the button beside back: the button reads as selected (VoiceOver: "selected") while PiP
     /// runs, and not once the same button has ended it; then PiP with the app hidden, the PiP window's pause and play
-    /// acting on the player, and Escape closing the player in PiP, the window going with it.
+    /// acting on the player, and Escape closing the player in PiP, the window going with it and the video's display
+    /// layer leaving the app's window hidden and only once mpv is gone (`app.videoTeardown`, as for a player closed
+    /// outside PiP).
     func testPictureInPicture() throws {
         try launchDev(addon: true, open: ["streams:movie:tt0111161:tt0111161"])
         ready(require("streams.row.0", timeout: 60, "the Streams screen lists the remux")).click()
@@ -828,6 +830,10 @@ extension PlayerTests {
             fail("the app quit after the player closed in picture in picture (state \(app.state.rawValue))")
         }
         if pictureInPictureWindow().exists { fail("the picture in picture window stays after the player closed") }
+        let teardown = require("app.videoTeardown", timeout: 5, "the app has the video teardown probe")
+        if !waitUntil(5, { teardown.label == "hidden mpv=gone" }) {
+            fail("closed in picture in picture, the display layer left the window as '\(teardown.label)'; expected 'hidden mpv=gone'")
+        }
         screenShot("player closed in picture in picture")
     }
 
