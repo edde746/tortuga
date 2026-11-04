@@ -190,7 +190,14 @@ class ProfileEditorStore internal constructor(
 
     private val scope = CoroutineScope(parentScope.coroutineContext + SupervisorJob(parentScope.coroutineContext[Job]))
 
+    /** The profile as it is now (another device's change included). */
     private var original: Profile? = null
+
+    /** The profile as the form loaded it: [save] writes only the fields edited since. */
+    private var loadedProfile: Profile? = null
+
+    /** The profile [save] created, once it did: a save that failed after it goes on with it, not with another one. */
+    private var created: Profile? = null
     private var name = ""
     private var avatar: ProfileAvatar = ProfileAvatars.all.first()
 
@@ -256,6 +263,7 @@ class ProfileEditorStore internal constructor(
                         }
                         !loaded -> {
                             original = profile
+                            loadedProfile = profile
                             name = profile.name
                             avatar = ProfileAvatars.forProfile(profile.avatar, profile.id)
                             kids = profile.kids
@@ -402,21 +410,24 @@ class ProfileEditorStore internal constructor(
         publish()
         scope.launch {
             try {
-                if (profileId == null) {
-                    val created = createProfile(trimmed, avatar.id, kids, if (kids) homeCatalogs else emptyList())
-                    (pinChange as? PinChange.Set)?.let { profiles.setPin(created.id, it.pin) }
-                    if (kids) saveKidsSettings(created.id)
+                val id = profileId ?: created?.id
+                if (id == null) {
+                    val profile = createProfile(trimmed, avatar.id, kids, if (kids) homeCatalogs else emptyList())
+                    created = profile
+                    (pinChange as? PinChange.Set)?.let { profiles.setPin(profile.id, it.pin) }
+                    if (kids) saveKidsSettings(profile.id)
                 } else {
-                    val before = original
-                    if (before?.name != trimmed) profiles.rename(profileId, trimmed)
-                    if (avatarPicked && before?.avatar != avatar.id) profiles.setAvatar(profileId, avatar.id)
+                    // Against the form's starting point, so another device's change to a field left alone stays.
+                    val before = loadedProfile ?: created
+                    if (before?.name != trimmed) profiles.rename(id, trimmed)
+                    if (avatarPicked && before?.avatar != avatar.id) profiles.setAvatar(id, avatar.id)
                     when (val change = pinChange) {
                         PinChange.Keep -> Unit
-                        PinChange.Remove -> profiles.setPin(profileId, null)
-                        is PinChange.Set -> profiles.setPin(profileId, change.pin)
+                        PinChange.Remove -> profiles.setPin(id, null)
+                        is PinChange.Set -> profiles.setPin(id, change.pin)
                     }
-                    if (before?.kids != kids || before?.homeCatalogs != homeCatalogs) profiles.setKids(profileId, kids, homeCatalogs)
-                    if (kids) saveKidsSettings(profileId)
+                    if (before?.kids != kids || before?.homeCatalogs != homeCatalogs) profiles.setKids(id, kids, homeCatalogs)
+                    if (kids) saveKidsSettings(id)
                 }
                 done = true
                 host.closeEditor()

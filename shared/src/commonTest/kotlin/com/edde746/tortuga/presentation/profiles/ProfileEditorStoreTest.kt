@@ -205,6 +205,26 @@ class ProfileEditorStoreTest {
     }
 
     @Test
+    fun aChangeFromAnotherDeviceToAFieldLeftAloneSurvivesTheSave() = runTest {
+        ready { app ->
+            val profile = app.data.profiles.create("Kids", "sea")
+            val store = editor(app, profile.id, RecordingHost())
+            store.state.await { it.loaded }
+            // Another device renames the profile while this editor is open; here only the PIN changes.
+            app.data.profiles.rename(profile.id, "Children")
+            runCurrent()
+            store.startPinSetup()
+            store.type("2468")
+            store.type("2468")
+            store.save()
+            runCurrent()
+            val saved = assertNotNull(app.data.profiles.profile(profile.id))
+            assertEquals("Children", saved.name)
+            assertTrue(saved.hasPin)
+        }
+    }
+
+    @Test
     fun aProfileDeletedElsewhereClosesItsEditor() = runTest {
         ready { app ->
             val profile = app.data.profiles.create("Guest", null)
