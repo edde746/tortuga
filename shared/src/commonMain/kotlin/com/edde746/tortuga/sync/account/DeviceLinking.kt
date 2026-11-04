@@ -9,6 +9,7 @@ import com.edde746.tortuga.sync.api.LinkStartResponse
 import com.edde746.tortuga.sync.api.LinkStatus
 import com.edde746.tortuga.sync.api.formatLinkCode
 import com.edde746.tortuga.sync.api.normalizeLinkCode
+import io.ktor.http.URLDecodeException
 import io.ktor.http.decodeURLQueryComponent
 import io.ktor.http.encodeURLParameter
 import kotlin.coroutines.cancellation.CancellationException
@@ -29,15 +30,22 @@ data class DeviceLinkQr(val serverUrl: ServerUrl, val code: String) {
         private const val SCHEME = "tortuga"
         private const val HOST = "link"
 
-        /** Parses [encode]'s form; null for any other text, or one whose server isn't a server URL ([ServerUrl.parse]). */
+        /**
+         * Parses [encode]'s form; null for any other text, one with a malformed percent escape, or one whose server
+         * isn't a server URL ([ServerUrl.parse]).
+         */
         fun parse(text: String): DeviceLinkQr? {
             val trimmed = text.trim()
             val prefix = "$SCHEME://$HOST?"
             if (!trimmed.startsWith(prefix, ignoreCase = true)) return null
-            val parameters = trimmed.substring(prefix.length).split('&').mapNotNull { part ->
-                val name = part.substringBefore('=', "")
-                if (name.isEmpty()) null else name to part.substringAfter('=').decodeURLQueryComponent()
-            }.toMap()
+            val parameters = try {
+                trimmed.substring(prefix.length).split('&').mapNotNull { part ->
+                    val name = part.substringBefore('=', "")
+                    if (name.isEmpty()) null else name to part.substringAfter('=').decodeURLQueryComponent()
+                }.toMap()
+            } catch (_: URLDecodeException) {
+                return null
+            }
             val server = try {
                 ServerUrl.parse(parameters["server"] ?: return null)
             } catch (_: AccountException) {

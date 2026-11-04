@@ -152,5 +152,7 @@ class SyncApiTest {
         assertNull(DeviceLinkQr.parse("https://api.usetortuga.app/link?code=ABCDEFGH"))
         assertNull(DeviceLinkQr.parse("tortuga://link?server=https%3A%2F%2Fapi.usetortuga.app&code=ABCDEFG0"))
         assertNull(DeviceLinkQr.parse("tortuga://link?server=ftp%3A%2F%2Fsync.example.com&code=ABCDEFGH"), "a server that isn't one")
+        assertNull(DeviceLinkQr.parse("tortuga://link?server=%ZZ&code=ABCDEFGH"), "a malformed escape")
+        assertNull(DeviceLinkQr.parse("tortuga://link?server=https%3A%2F%2Fapi.usetortuga.app&code=ABCD%E"), "a cut-off escape")
     }
 }
