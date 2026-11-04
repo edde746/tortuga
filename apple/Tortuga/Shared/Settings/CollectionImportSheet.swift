@@ -68,7 +68,8 @@ struct CollectionImportSheet: View {
         // Any file, so one saved under another type is still offered; the store tells what it holds.
         .fileImporter(isPresented: $opening, allowedContentTypes: [.json, .data]) { result in
             switch result {
-            case .success(let url): Task { await open(url) }
+            case .success(let url):
+                Task { if let text = await importedText(url) { store.open(text: text) } else { store.openFailed() } }
             case .failure: store.openFailed()
             }
         }
@@ -183,17 +184,4 @@ struct CollectionImportSheet: View {
         guard !url.isEmpty, !(observer.state.step is CollectionImportStepLoading) else { return }
         store.fetch(url: url)
     }
-
-    #if !os(tvOS)
-    /// Reads the picked file off the main thread and hands its text to the store; a file that can't be read, or not
-    /// as UTF-8, is refused (`openFailed`).
-    private func open(_ url: URL) async {
-        let text = await Task.detached(priority: .userInitiated) {
-            let scoped = url.startAccessingSecurityScopedResource()
-            defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-            return (try? Data(contentsOf: url)).flatMap { String(data: $0, encoding: .utf8) }
-        }.value
-        if let text { store.open(text: text) } else { store.openFailed() }
-    }
-    #endif
 }

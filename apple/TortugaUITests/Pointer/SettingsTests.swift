@@ -723,6 +723,32 @@ final class SettingsTests: TortugaUITestCase {
         #endif
     }
 
+    #if os(iOS)
+    /// A file over the 32 MiB Import reads (a video picked by mistake) is refused as one that couldn't be opened, before
+    /// it is read: not read whole and handed on, which said it isn't an export. The file goes into On My iPhone once the
+    /// open sheet has shown it (a fresh simulator has no such folder before), then the sheet opens again to list it.
+    func testImportRefusesAFileOver32MiB() throws {
+        try launchDev()
+        activate(navItem("nav.settings", "the sidebar lists Settings"))
+        openDataSection()
+        activate(showOnScreen("settings.data.import", "the section has Import"))
+        showLocalFiles("the open sheet")
+        let file = try localFileStorage().appending(path: "too-big.json")
+        FileManager.default.createFile(atPath: file.path(percentEncoded: false), contents: nil)
+        addTeardownBlock { try? FileManager.default.removeItem(at: file) }
+        let handle = try FileHandle(forWritingTo: file)
+        try handle.truncate(atOffset: 33 << 20)
+        try handle.close()
+        ready(app.buttons.matching(NSPredicate(format: "label == 'Cancel'")).firstMatch).tap()
+        activate(showOnScreen("settings.data.import", "Cancel returns to the section's Import"))
+        let sheet = showLocalFiles("the open sheet, again")
+        ready(fileInSheet("too-big", "the open sheet lists the 33 MiB file")).tap()
+        if !waitUntil(10, { !sheet.exists }) { fail("picking a file leaves the open sheet up") }
+        requireDataNotice("The file couldn't be opened.", "a file over 32 MiB is refused as unreadable")
+        shot("file over 32 MiB refused")
+    }
+    #endif
+
     /// Opens the menu of the row `row` by its ⋯ (`<row>.more`); `what` names the row in the failure when it has none.
     private func openMenu(_ row: String, _ what: String) {
         activate(require("\(row).more", "\(what): \(row) shows ⋯"))

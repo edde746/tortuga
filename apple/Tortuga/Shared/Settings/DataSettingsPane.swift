@@ -37,7 +37,8 @@ struct DataSettingsRoute: View {
             // Any file, so one saved under another type is still offered; the store tells what it holds.
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json, .data]) { result in
                 switch result {
-                case .success(let url): Task { await open(url) }
+                case .success(let url):
+                    Task { if let text = await importedText(url) { store.open(text: text) } else { store.openFailed() } }
                 case .failure: store.openFailed()
                 }
             }
@@ -45,17 +46,23 @@ struct DataSettingsRoute: View {
                 DataImportSheet(review: review, store: store)
             }
     }
+}
 
-    /// Reads the picked file off the main thread and hands its text to the store; a file that can't be read, or not
-    /// as UTF-8, is refused (`openFailed`).
-    private func open(_ url: URL) async {
-        let text = await Task.detached(priority: .userInitiated) {
-            let scoped = url.startAccessingSecurityScopedResource()
-            defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-            return (try? Data(contentsOf: url)).flatMap { String(data: $0, encoding: .utf8) }
-        }.value
-        if let text { model.store.open(text: text) } else { model.store.openFailed() }
-    }
+/// The largest file Import reads (Data's, Home's collections'); a bigger one is refused as unreadable before it fills
+/// memory, as a video picked by mistake and read whole would.
+private let maxImportBytes = 32 << 20
+
+/// The text of a file picked in the open dialog to import, read off the main thread; nil when it can't be read, is
+/// over `maxImportBytes` (read no further than a byte past them) or isn't UTF-8.
+func importedText(_ url: URL) async -> String? {
+    await Task.detached(priority: .userInitiated) {
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        guard let file = try? FileHandle(forReadingFrom: url) else { return nil }
+        defer { try? file.close() }
+        guard let data = try? file.read(upToCount: maxImportBytes + 1) ?? Data(), data.count <= maxImportBytes else { return nil }
+        return String(data: data, encoding: .utf8)
+    }.value
 }
 
 /// An export as the save dialog writes it: the store's text as UTF-8 (Data's export, Home's collections).
