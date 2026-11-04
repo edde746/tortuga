@@ -237,7 +237,9 @@ class TrackersSettingsStore internal constructor(
     /** Whether anime goes to [service]. */
     fun setAnime(service: TrackerService, on: Boolean) = filter(service, TrackerContentType.ANIME, on)
 
+    /** Ends the store: a connect flow still open closes as [cancelConnect] closes it, its sign-in browser with it. */
     fun release() {
+        closeConnect()
         scope.cancel()
     }
 

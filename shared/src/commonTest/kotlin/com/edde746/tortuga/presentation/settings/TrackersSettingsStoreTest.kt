@@ -55,15 +55,18 @@ class TrackersSettingsStoreTest {
         }
     }
 
-    /** A phone's sign-in browser: it comes back to the receiver with the state and a proof as soon as it opens. */
-    private class PhoneBrowser : SignInPlatform by TestSignInPlatform(canOpenBrowser = true, canReceiveRedirect = true) {
+    /**
+     * A phone's sign-in browser: it comes back to the receiver with the state and a proof as soon as it opens, unless
+     * the user never finishes there ([comesBack] false).
+     */
+    private class PhoneBrowser(private val comesBack: Boolean = true) : SignInPlatform by TestSignInPlatform(canOpenBrowser = true, canReceiveRedirect = true) {
         val opened = mutableListOf<String>()
         var closed = 0
         private val back = CompletableDeferred<Map<String, String>>()
 
         override fun openBrowser(url: String) {
             opened += url
-            back.complete(mapOf(SyncPaths.RETURN_STATE to "own", SyncPaths.RETURN_PROOF to "ttp_proof"))
+            if (comesBack) back.complete(mapOf(SyncPaths.RETURN_STATE to "own", SyncPaths.RETURN_PROOF to "ttp_proof"))
         }
 
         override fun closeBrowser() {
@@ -233,6 +236,24 @@ class TrackersSettingsStoreTest {
         assertEquals(listOf("ttp_proof"), relay.collected)
         assertNull(s.state.connect)
         assertEquals("Connected as \u2068kai\u2069", s.row().status)
+        assertEquals(1, phone.closed)
+    }
+
+    @Test
+    fun releasingTheStoreMidSignInClosesItsSignInBrowser() = runTest {
+        val relay = FakeRelay()
+        val phone = PhoneBrowser(comesBack = false)
+        val s = setup(TrackerFixture(this, listOf(MYANIMELIST), relay), phone)
+        s.f.providers.getValue(MYANIMELIST).relaySignIn = FakeRelaySignIn
+        s.store.connect(MYANIMELIST)
+        s.f.settle()
+        s.store.openInBrowser()
+        s.f.settle()
+        assertEquals(listOf("https://relay.example/v1/trackers/oauth/mal/own"), phone.opened)
+        assertEquals(0, phone.closed, "the user is signing in there")
+
+        // The app's session closes meanwhile.
+        s.store.release()
         assertEquals(1, phone.closed)
     }
 
