@@ -277,11 +277,12 @@ class StreamSuggestionEvaluationTest {
      * - new kind: [PERSON_PICKS] picks on one device only, suggestions on the other (both ways).
      * Today, with the picks staying on the device they were made on, a new device suggests nothing: the list's order
      * (`profileSort`). Writes `build/reports/stream-suggestions/pooling.json`: each case's regret and hit@1 per method,
-     * mean and CI over [SEEDS], and the per-seed regrets for paired differences.
+     * mean and CI over [SEEDS], and the per-seed regrets for paired differences; asserts what the product claims.
      */
     @Test
     fun picksPooledAcrossAProfilesDevices() {
         val report = StringBuilder("{\"methods\":{" + POOLING.joinToString(",") { (name, options) -> "\"$name\":\"${options.pooling} ${options.offsetRidge}\"" } + "},")
+        var heldOutResults: Map<String, Map<String, List<DoubleArray>>> = emptyMap()
         for (split in listOf("tune", "heldOut")) {
             val heldOut = split == "heldOut"
             val pool = if (heldOut) heldOutTitles else tuneTitles
@@ -336,9 +337,23 @@ class StreamSuggestionEvaluationTest {
                         "\"seeds\":[${seeds.joinToString(",") { "%.5f".format(it[0]) }}]}"
                 } + "}"
             } + "},")
+            if (heldOut) heldOutResults = perSeed
         }
         report.setLength(report.length - 1)
         File("build/reports/stream-suggestions").apply { mkdirs() }.resolve("pooling.json").writeText(report.append("}").toString())
+
+        // On held-out people the product's pooling suggests better than the profile's sort on every device, and on a new
+        // kind of device, learning from the profile's other kind, better than that kind's own picks (none: the sort).
+        val product = POOLING.single { it.second == ScorerOptions() }.first
+        fun mean(case: String, method: String, measure: Int) = heldOutResults.getValue(case).getValue(method).map { it[measure] }.average()
+        for ((case, baselines) in mapOf("both" to listOf("profileSort"), "newDevice" to listOf("profileSort"), "newKind" to listOf("profileSort", "classOnly"))) {
+            for (baseline in baselines) {
+                val (ours, theirs) = mean(case, product, 0) to mean(case, baseline, 0)
+                assertTrue(ours < theirs, "$case: $product's regret $ours against $baseline's $theirs")
+                val (ourHits, theirHits) = mean(case, product, 1) to mean(case, baseline, 1)
+                assertTrue(ourHits > theirHits, "$case: $product's hit@1 $ourHits against $baseline's $theirHits")
+            }
+        }
     }
 
     /** [a] and [b] merged at random, each in its order: picks made on two devices over the same time. */
