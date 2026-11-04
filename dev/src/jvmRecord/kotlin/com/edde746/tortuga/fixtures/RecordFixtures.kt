@@ -52,7 +52,6 @@ fun main(args: Array<String>) = runBlocking<Unit> {
     // Sent as `User-Agent: Tortuga/<version>` (TortugaHttpClient) and written into index.json; the Gradle task sets it.
     val version = checkNotNull(System.getProperty("tortuga.version")) { "tortuga.version is not set: run ./gradlew :dev:recordFixtures" }
     val out = File(args.firstOrNull() ?: DEFAULT_OUT)
-    out.mkdirs()
     val cinemeta = DefaultAddons.CINEMETA_URL
     val subtitles = DefaultAddons.OPENSUBTITLES_URL
     fun catalog(type: String, vararg extra: ExtraValue) = ResourcePath(Resources.CATALOG, type, "top", extra.toList())
@@ -72,6 +71,8 @@ fun main(args: Array<String>) = runBlocking<Unit> {
         ),
     )
 
+    // Every file is kept here until the whole corpus is recorded and checked: a failure writes nothing.
+    val files = LinkedHashMap<String, String>()
     val index = mutableListOf<JsonElement>()
     TortugaHttpClient.create(version).use { http ->
         var i = 0
@@ -82,7 +83,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
             val raw = response.bodyAsText()
             check(response.status.isSuccess()) { "${r.file}: HTTP ${response.status.value}" }
             val scrubbed = FixtureScrubber.scrub(FixtureScrubber.withoutReleaseNames(raw), r.transportUrl)
-            File(out, r.file).apply { parentFile.mkdirs() }.writeText(scrubbed.text)
+            files[r.file] = scrubbed.text
             index += buildJsonObject {
                 put("file", r.file)
                 put("addon", r.addon)
@@ -99,7 +100,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
 
             // The second page of the movie Board catalog: `skip` as CatalogPaging computes it from the first page.
             if (r.file == "cinemeta/catalog-movie-top.json") {
-                val manifest = Manifest.decode(File(out, "cinemeta/manifest.json").readText())
+                val manifest = Manifest.decode(files.getValue("cinemeta/manifest.json"))
                 val top = manifest.catalogs.first { it.id == "top" && it.type == "movie" }
                 val size = (AddonResponse.decode(raw).content as ResourceContent.Metas).items.size
                 val next = CatalogPaging.nextPage(top, ResourceRequest(checkNotNull(TransportUrl.checked(cinemeta)), r.path!!), listOf(size))!!
@@ -112,9 +113,10 @@ fun main(args: Array<String>) = runBlocking<Unit> {
         put("recordedBy", ":dev:recordFixtures $version")
         put("fixtures", JsonArray(index))
     }
-    File(out, "index.json").writeText(Json(from = AddonJson) { prettyPrint = true }.encodeToString(JsonObject.serializer(), indexJson) + "\n")
-    val leaks = out.walkTopDown().filter { it.isFile }.flatMap { file -> Redactor.findKeys(file.readText()).map { file to it } }.toList()
-    check(leaks.isEmpty()) { leaks.joinToString("\n") { (file, key) -> "key-shaped text left in ${file.path}: ${Redactor.redact(key)}" } }
+    files["index.json"] = Json(from = AddonJson) { prettyPrint = true }.encodeToString(JsonObject.serializer(), indexJson) + "\n"
+    val leaks = files.flatMap { (file, text) -> Redactor.findKeys(text).map { file to it } }
+    check(leaks.isEmpty()) { leaks.joinToString("\n") { (file, key) -> "key-shaped text left in $file: ${Redactor.redact(key)}" } }
+    for ((file, text) in files) File(out, file).apply { parentFile.mkdirs() }.writeText(text)
     println("wrote ${recordings.size} fixtures and index.json to ${out.path}")
 }
 
