@@ -253,4 +253,21 @@ class ClickTest {
         advance(300.milliseconds)
         assertFalse(state.controlsVisible)
     }
+
+    @Test
+    fun onTouchATapOnEachSideIsTwoTapsNotADoubleTap() = playerTest(
+        profile = InputProfile.TOUCH,
+        config = PlayerConfig.defaults(InputProfile.TOUCH, doubleClickIntervalMillis = 300),
+    ) {
+        playing(position = 100.0)
+        advance(5.seconds)
+        assertFalse(state.controlsVisible)
+        input(InputEvent.Click(x = 0.1f))
+        advance(100.milliseconds)
+        input(InputEvent.Click(x = 0.9f))
+        assertTrue(state.controlsVisible, "the first tap acts at once")
+        advance(300.milliseconds)
+        assertFalse(state.controlsVisible, "the second on its own")
+        assertTrue(engine.seeks.isEmpty())
+    }
 }
