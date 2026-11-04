@@ -96,20 +96,26 @@ class SyncStore internal constructor(private val db: Db) {
     /**
      * Up to [limit] local changes after [after] (all when `null`), oldest first: by HLC, then by record id, since a
      * profile's deletion stamps all its records with one HLC. Page with the last record returned; a record written
-     * again after being read comes back in a later call.
+     * again after being read comes back in a later call. Each table gives its first [limit] rows; only those of the
+     * page are encoded.
      */
     suspend fun dirtyRecords(after: DirtyRecord?, limit: Int): List<DirtyRecord> = db.read {
         val hlc = (after?.hlc ?: Hlc.ZERO).toString()
         val id = after?.recordId.orEmpty()
         val max = limit.toLong()
         buildList {
-            profileQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty()) }
-            addonQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty(this@read)) }
-            libraryItemQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty()) }
-            streamHistoryQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty()) }
-            settingQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty()) }
-            streamPickQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(it.toDirty()) }
-        }.sortedWith(DIRTY_ORDER).take(limit)
+            profileQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty() }) }
+            addonQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty(this@read) }) }
+            libraryItemQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty() }) }
+            streamHistoryQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty() }) }
+            settingQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty() }) }
+            streamPickQueries.selectDirty(hlc, id, max).executeAsList().forEach { add(Dirty(it.hlc, it.record_id) { it.toDirty() }) }
+        }.sortedWith(DIRTY_ORDER).take(limit).map { it.encode() }
+    }
+
+    /** A dirty row by its place in [dirtyRecords]'s order, [encode]d only once it makes the page. */
+    private class Dirty(hlc: String, val recordId: String, val encode: () -> DirtyRecord) {
+        val hlc: Hlc = Hlc.parse(hlc)
     }
 
     /** How many local changes await a push: what [dropSyncedData] would delete that the server doesn't have. */
@@ -377,7 +383,7 @@ class SyncStore internal constructor(private val db: Db) {
          * The `selectDirty` queries' order, `(hlc, record_id)`: an HLC's text sorts as the HLC does, and SQLite compares
          * text by its UTF-8 bytes, which is code point order ([compareCodePoints]), not [String.compareTo]'s UTF-16.
          */
-        val DIRTY_ORDER = Comparator<DirtyRecord> { a, b ->
+        val DIRTY_ORDER = Comparator<Dirty> { a, b ->
             a.hlc.compareTo(b.hlc).takeIf { it != 0 } ?: compareCodePoints(a.recordId, b.recordId)
         }
 
