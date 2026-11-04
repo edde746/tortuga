@@ -20,6 +20,7 @@ Routes:
   GET  /_events          the event items kept so far, each its parsed JSON, in order, each id once
   GET  /_log             every envelope received: its item types, the size of each and why bugs would drop it, in order
   POST /_reset           forgets everything received
+The /_ routes take no key: they are for a trusted network only.
 Answers every envelope it takes with 200 {"id": <the envelope's event id>}, as bugs does.
 
 The tests judge what came with probe_crash and leaks, which they import from here (a test that runs on another host
@@ -206,14 +207,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 EVENTS.clear()
                 ENVELOPES.clear()
             return self.reply(200, {})
-        body = self.rfile.read(int(self.headers.get("Content-Length") or 0))
         parts = path.strip("/").split("/")
         if len(parts) != 3 or parts[0] != "api" or parts[2] not in ("envelope", "store"):
             return self.reply(404, {"detail": "not found"})
         if self.sentry_key(query) != KEY or parts[1] != PROJECT:
             return self.reply(401, "unauthorized")
-        if len(body) > MAX_REQUEST:
+        # The length is checked before anything is read, so no request is held in memory beyond the limit.
+        declared = self.headers.get("Content-Length") or "0"
+        if not (declared.isascii() and declared.isdigit()):
+            return self.reply(400, "Invalid Content-Length")
+        if int(declared) > MAX_REQUEST:
             return self.reply(413, "Request too large")
+        body = self.rfile.read(int(declared))
         if body[:2] == b"\x1f\x8b":
             try:
                 with gzip.GzipFile(fileobj=io.BytesIO(body)) as unpacked:
