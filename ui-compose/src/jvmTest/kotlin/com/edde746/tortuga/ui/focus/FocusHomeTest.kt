@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,7 @@ import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.pressKey
 import androidx.compose.ui.test.requestFocus
 import androidx.compose.ui.test.v2.runComposeUiTest
+import com.edde746.tortuga.ui.components.LocalOverlayHost
 import com.edde746.tortuga.ui.components.LocalOverlayOpeners
 import com.edde746.tortuga.ui.components.ModalOverlay
 import com.edde746.tortuga.ui.components.OverlayHostBox
@@ -165,6 +167,36 @@ class FocusHomeTest {
         waitForIdle()
         onNodeWithText("B").assertIsFocused()
         assertEquals(0, fallbackFocused, "the screen took focus to its fallback while the shelf handed it on")
+    }
+
+    /**
+     * A hand-off that never ends (one a surface left registered) holds the screen back only for a while: the focused row
+     * leaving still sends focus to the screen's fallback.
+     */
+    @Test
+    fun aHandOffThatNeverEndsDelaysTheScreenOnlyForAWhile() = runComposeUiTest {
+        setContent {
+            TortugaTheme {
+                OverlayHostBox {
+                    val app = LocalOverlayHost.current?.appFocus
+                    SideEffect { app?.handOffs?.add(Unit) }
+                    val screen = remember { ScreenFocus { true } }
+                    Box(screen.modifier) {
+                        CompositionLocalProvider(LocalScreenFocus provides screen) {
+                            val memory = rememberFocusMemory()
+                            Column {
+                                for (row in rows) key(row) { TortugaButton(row, {}, Modifier.rememberFocus(memory, row)) }
+                            }
+                            RestoreFocus(memory, ready = true, fallback = rows.firstOrNull())
+                        }
+                    }
+                }
+            }
+        }
+        onNodeWithText("Three").requestFocus()
+        rows = listOf("One", "Two")
+        waitForIdle()
+        onNodeWithText("One").assertIsFocused()
     }
 
     /**

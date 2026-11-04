@@ -36,15 +36,15 @@ import kotlinx.coroutines.launch
  * element that has focus in it is disabled or leaves (Previous at the first episode, a row removed, a button swapped
  * for another), Compose drops focus from the whole window, and the platform leaves it nowhere (desktop) or hands it to
  * the window's first element (Android: the player itself, where the D-pad moves nothing, or the navigation). A frame
- * later, and once no surface is handing focus on itself ([AppFocus.handOffs]: a shelf's card to its neighbour), unless
- * focus has come back to one of the surface's elements meanwhile, [home] takes it: [home] moves focus to where the
- * surface keeps it (the player's play/pause, a screen's remembered element or its first) and says whether it could. A
- * control an overlay gave focus back to goes to the control nearest its place instead ([OverlayHost.follow]). While
- * [home] can't (what replaced the element isn't composed yet) the surface holds focus itself, and [home] is asked again
- * each frame for up to [FOCUS_RETRY_FRAMES] frames, then at each D-pad key the surface gets meanwhile: the key takes
- * focus to [home], or where [home] still can't moves it on as it would from the surface. Focus moved on purpose (to a
- * sheet, the navigation, the next screen) is left alone, and so is the touch screen (Android's touch mode focuses
- * nothing). Of surfaces inside one another the innermost takes the drop.
+ * later, and once no surface is handing focus on itself ([AppFocus.handOffs]: a shelf's card to its neighbour; for up
+ * to [FOCUS_RETRY_FRAMES] frames), unless focus has come back to one of the surface's elements meanwhile, [home] takes
+ * it: [home] moves focus to where the surface keeps it (the player's play/pause, a screen's remembered element or its
+ * first) and says whether it could. A control an overlay gave focus back to goes to the control nearest its place
+ * instead ([OverlayHost.follow]). While [home] can't (what replaced the element isn't composed yet) the surface holds
+ * focus itself, and [home] is asked again each frame for up to [FOCUS_RETRY_FRAMES] frames, then at each D-pad key the
+ * surface gets meanwhile: the key takes focus to [home], or where [home] still can't moves it on as it would from the
+ * surface. Focus moved on purpose (to a sheet, the navigation, the next screen) is left alone, and so is the touch
+ * screen (Android's touch mode focuses nothing). Of surfaces inside one another the innermost takes the drop.
  *
  * Place it before the surface's focus target, the `focusable` the surface is (the player, which holds focus itself
  * while its controls are down); a surface that is a group of elements takes [focusHomeGroup] instead. It needs the app's
@@ -107,8 +107,9 @@ private class FocusHomeNode(var home: () -> Boolean) :
         app.dropTaken = true
         coroutineScope.launch {
             app.dropTaken = false
-            // After the surfaces' own handovers (a shelf's card to its neighbour), however many frames they take.
-            do withFrameNanos { } while (app.handOffs.isNotEmpty())
+            // After the surfaces' own handovers (a shelf's card to its neighbour), for up to FOCUS_RETRY_FRAMES frames.
+            var frames = 0
+            do withFrameNanos { } while (app.handOffs.isNotEmpty() && ++frames < FOCUS_RETRY_FRAMES)
             // Where the platform put focus meanwhile (Android: the window's first element) was no one's choice.
             if (onElement || host.follow() || home() || !hold()) return@launch
             repeat(FOCUS_RETRY_FRAMES - 1) {
@@ -177,7 +178,8 @@ internal class AppFocus {
 
     /**
      * The surfaces handing focus on themselves (a shelf whose focused card left, to the card taking its place): a
-     * [focusHome] whose focus dropped waits until there are none, then takes the drop only if they left it nowhere.
+     * [focusHome] whose focus dropped waits until there are none (for up to [FOCUS_RETRY_FRAMES] frames), then takes
+     * the drop only if they left it nowhere.
      */
     val handOffs = HashSet<Any>()
 

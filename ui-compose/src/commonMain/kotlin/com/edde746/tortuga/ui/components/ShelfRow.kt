@@ -22,9 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -96,19 +99,22 @@ fun <T> ShelfRow(
     // The surfaces around the row wait while it hands focus on (FocusHome), rather than take the drop meanwhile.
     val appFocus = LocalOverlayHost.current?.appFocus
     val entry = if (LocalWindowLayout.current.formFactor == FormFactor.TV) items.firstOrNull()?.let(key) else null
-    // Before the change is applied, while the row still holds focus: the focused card's place in the items it left.
-    if (items !== focus.items) {
-        val gone = focus.key
-        if (focus.inRow && gone != null && items.isNotEmpty() && items.none { key(it) == gone }) {
-            val at = focus.items.indexOfFirst { key(it) == gone }
-            if (at >= 0) {
-                focus.handOff = key(items[at.coerceAtMost(items.lastIndex)])
-                focus.handOffs++
-                appFocus?.handOffs?.add(focus)
-            }
-        }
+    // Before the change is applied, while the row still holds focus: the card taking the place of the focused card the
+    // items left. Kept once the change is applied, so a composition Compose drops leaves no hand-off behind.
+    val gone = focus.key
+    val handOff = if (items !== focus.items && focus.inRow && gone != null && items.isNotEmpty() && items.none { key(it) == gone }) {
+        focus.items.indexOfFirst { key(it) == gone }.takeIf { it >= 0 }?.let { at -> key(items[at.coerceAtMost(items.lastIndex)]) }
+    } else {
+        null
+    }
+    SideEffect {
+        if (items === focus.items) return@SideEffect
         focus.items = items
         focus.keep(items.mapTo(HashSet()) { key(it) })
+        if (handOff != null) {
+            focus.handOff = HandOff(handOff)
+            appFocus?.handOffs?.add(focus)
+        }
     }
     Column(modifier.fillMaxWidth()) {
         Row(
@@ -141,12 +147,12 @@ fun <T> ShelfRow(
             if (end != null) item(key = END_KEY) { end() }
         }
     }
-    focus.handOff?.let { target ->
-        LaunchedEffect(focus.handOffs) {
+    focus.handOff?.let { pending ->
+        LaunchedEffect(pending) {
             // The card composes in its new place with the row's next measure.
             for (frame in 0 until HAND_OFF_FRAMES) {
                 withFrameNanos { }
-                if (focus.requester(target).requestFocus()) break
+                if (focus.requester(pending.target).requestFocus()) break
             }
             focus.handOff = null
             appFocus?.handOffs?.remove(focus)
@@ -178,9 +184,8 @@ private class ShelfFocus<T> {
         return (last != null && requester(last).requestFocus()) || (first != null && requester(first).requestFocus())
     }
 
-    /** The card to give focus to, the focused one having left the row, and how many times that happened. */
-    var handOff: Any? = null
-    var handOffs = 0
+    /** The card to give focus to, the focused one having left the row. */
+    var handOff by mutableStateOf<HandOff?>(null)
 
     private val requesters = HashMap<Any, FocusRequester>()
 
@@ -191,6 +196,9 @@ private class ShelfFocus<T> {
         requesters.keys.retainAll(keys)
     }
 }
+
+/** One hand-off of [ShelfRow]'s focus, to the card keyed [target]: each one runs anew, to the same card too. */
+private class HandOff(val target: Any)
 
 /** How many frames [ShelfRow] waits for the card taking a focused card's place to take focus: about half a second. */
 private const val HAND_OFF_FRAMES = 30
