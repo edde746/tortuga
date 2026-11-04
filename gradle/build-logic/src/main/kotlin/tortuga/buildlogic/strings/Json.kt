@@ -21,10 +21,14 @@ internal object Json {
     fun parse(text: String): JsonValue = JsonParser(text).document()
 }
 
+/** Far deeper than any string source: its groups nest a few levels. */
+private const val MAX_DEPTH = 64
+
 private class JsonParser(private val s: String) {
     private var i = 0
     private var line = 1
     private var lineStart = 0
+    private var depth = 0
 
     fun document(): JsonValue {
         if (s.startsWith('\uFEFF')) i = 1
@@ -38,14 +42,21 @@ private class JsonParser(private val s: String) {
     private fun value(): JsonValue {
         val start = line
         return when (val c = peek()) {
-            '{' -> obj()
+            '{' -> nested { obj() }
             '"' -> JsonString(string(), start)
-            '[' -> { array(); JsonOther("an array", start) }
+            '[' -> { nested { array() }; JsonOther("an array", start) }
             't' -> { word("true"); JsonOther("true", start) }
             'f' -> { word("false"); JsonOther("false", start) }
             'n' -> { word("null"); JsonOther("null", start) }
             else -> if (c == '-' || c in '0'..'9') { number(); JsonOther("a number", start) } else fail("expected a value, found ${describe(c)}")
         }
+    }
+
+    /** [parse] one level deeper, failing past [MAX_DEPTH] levels: the parser and the catalog recurse per level. */
+    private inline fun <T> nested(parse: () -> T): T {
+        if (depth == MAX_DEPTH) fail("nested deeper than $MAX_DEPTH levels")
+        depth++
+        return parse().also { depth-- }
     }
 
     private fun obj(): JsonObject {

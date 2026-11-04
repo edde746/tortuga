@@ -37,6 +37,7 @@ class ValidationTest {
         assertEquals(listOf("shared/i18n/en.i18n.json:1:9: invalid JSON: unterminated string"), enErrors("""{"a": "x"""))
         assertEquals(listOf("shared/i18n/en.i18n.json: invalid JSON: not UTF-8"), errors(StringsSource("shared/i18n/en.i18n.json", "en.i18n.json", byteArrayOf('"'.code.toByte(), 0xC3.toByte(), '"'.code.toByte()))))
         assertEquals(listOf("shared/i18n/en.i18n.json:1: the top level must be an object, found an array"), enErrors("[]"))
+        assertEquals(listOf("shared/i18n/en.i18n.json:1:65: invalid JSON: nested deeper than 64 levels"), enErrors("[".repeat(100_000)))
     }
 
     @Test
