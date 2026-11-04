@@ -1,5 +1,8 @@
 import Foundation
+import OSLog
 import TortugaKit
+
+private let log = Logger(subsystem: "com.edde746.tortuga", category: "player-apps")
 
 /// A player app's process (`MacPlayerApps`). Its input and output go nowhere: a player may print the URL. The process
 /// keeps this object until it exits, so it is reaped and `exited` runs, once, on a background queue, with whether the
@@ -33,8 +36,9 @@ final class PlayerProcess: @unchecked Sendable {
 }
 
 /// Follows one mpv, or IINA's, through its JSON IPC (`MpvIpcSession`): connects to the Unix socket mpv creates once it
-/// runs, writes the session's commands and passes every line it reads to the session, and the events on. The session's
-/// `Ended` follows once the socket closed and the process exited (saying whether it failed), and the socket's private
+/// runs, writes the session's commands and passes every line it reads to the session, and the events on. A line longer
+/// than `maxLineBytes` means the stream can't be followed: the reading ends there. The session's `Ended` follows once
+/// the socket closed (or the reading ended) and the process exited (saying whether it failed), and the socket's private
 /// folder goes. One thread reads, so the session has one reader.
 final class MpvIpcFollower: @unchecked Sendable {
     private let session = MpvIpcSession()
@@ -46,6 +50,8 @@ final class MpvIpcFollower: @unchecked Sendable {
     private var pending = 2
     /// Whether the process failed (`processExited`).
     private var failed = false
+    /// The most a line of mpv's (one JSON event or reply) may hold before its newline.
+    private static let maxLineBytes = 4 * 1024 * 1024
 
     init(socketPath: String, directory: URL, events: any PlayerAppEvents) {
         self.socketPath = socketPath
@@ -101,6 +107,10 @@ final class MpvIpcFollower: @unchecked Sendable {
                 for event in session.onLine(line: line) { events.onEvent(event: event) }
             }
             buffer.removeFirst(start)
+            guard buffer.count <= Self.maxLineBytes else {
+                log.error("mpv IPC: a line past \(Self.maxLineBytes, privacy: .public) bytes without its end: no longer following")
+                return
+            }
         }
     }
 
@@ -144,7 +154,8 @@ final class MpvIpcFollower: @unchecked Sendable {
 
 /// Follows one VLC through its HTTP interface (`VlcHttpSession`): asks for `status.json` once a second, one request
 /// at a time, and passes each answer to the session and its events on; once the process exited, the session's
-/// `Ended`, saying whether it failed. The session is only touched on this follower's queue.
+/// `Ended`, saying whether it failed. An answer longer than `maxStatusBytes` is dropped unread past it. The session is
+/// only touched on this follower's queue.
 final class VlcHttpFollower: @unchecked Sendable {
     private let queue = DispatchQueue(label: "com.edde746.tortuga.player-apps.vlc")
     private let session = VlcHttpSession()
@@ -153,6 +164,8 @@ final class VlcHttpFollower: @unchecked Sendable {
     private let client: URLSession
     private var timer: (any DispatchSourceTimer)?
     private var asking = false
+    /// The most VLC's `status.json` may hold.
+    private static let maxStatusBytes = 4 * 1024 * 1024
     private var ended = false
 
     init(port: Int, password: String, events: any PlayerAppEvents) {
@@ -190,13 +203,30 @@ final class VlcHttpFollower: @unchecked Sendable {
     private func ask() {
         guard !ended, !asking else { return }
         asking = true
-        client.dataTask(with: request) { [self] data, response, _ in
+        Task { [self] in
+            // Before VLC's interface listens, and after it stopped, the request fails: nothing to read.
+            let json = try? await status()
             queue.async { [self] in
                 asking = false
-                // Before VLC's interface listens, and after it stopped, the request fails: nothing to read.
-                guard !ended, let data, (response as? HTTPURLResponse)?.statusCode == 200 else { return }
-                for event in session.onStatus(json: String(decoding: data, as: UTF8.self)) { events.onEvent(event: event) }
+                guard !ended, let json else { return }
+                for event in session.onStatus(json: json) { events.onEvent(event: event) }
             }
-        }.resume()
+        }
+    }
+
+    /// VLC's answer, read as it arrives; nil for one other than 200, or past `maxStatusBytes`, where the read stops.
+    private func status() async throws -> String? {
+        let (bytes, response) = try await client.bytes(for: request)
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
+        var data = Data()
+        for try await byte in bytes {
+            guard data.count < Self.maxStatusBytes else {
+                bytes.task.cancel()
+                log.error("VLC: a status past \(Self.maxStatusBytes, privacy: .public) bytes, dropped")
+                return nil
+            }
+            data.append(byte)
+        }
+        return String(decoding: data, as: UTF8.self)
     }
 }
