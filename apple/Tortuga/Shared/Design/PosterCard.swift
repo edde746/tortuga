@@ -71,12 +71,15 @@ struct PosterCard: View {
         // system hides the view a context menu is on from the moment the menu lifts it until about a second after the
         // menu has gone, whatever part of it the preview takes, and with the menu on the card the caption vanished for
         // all that time (3 Nov, iPhone: Continue Watching's "S1E1 · 48 min left"). A press anywhere on the card still
-        // opens it: on the artwork's button, or on the room under it, which a content shape of its own makes take the
-        // press (one around the button too gave the button the whole card's frame to accessibility).
+        // opens the menu, and a tap the title: on the artwork's button, or on the room under it, which a content shape
+        // of its own makes take them (one around the button too gave the button the whole card's frame to
+        // accessibility), hidden there as the caption is: to accessibility the card is its button.
         .overlay(alignment: .top) {
             VStack(spacing: 0) {
                 button(width: width, height: height, entries: entries)
                 Color.clear.contentShape(Rectangle())
+                    .onTapGesture(perform: action)
+                    .accessibilityHidden(true)
             }
             .contentShape(.contextMenuPreview, ArtworkShape(height: height))
             .itemMenu(entries: entries, probe: "\(accessibilityId).menu")

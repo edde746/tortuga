@@ -13,6 +13,8 @@ import UIKit
 ///   left out stays where it is (a card's caption, an episode's title and date), read in every frame sampled from the
 ///   press until a second and a half after the menu closes, but where the menu covers it (`requireTextStays`), and a
 ///   long press on a card's caption opens its menu too;
+/// - a tap on a card's caption, under its artwork, opens its title as a tap on the artwork does (a Home row's poster,
+///   a Discover poster);
 /// - Detail's round + (a glass button) takes no taps while an item menu is open, so the glass can't take the taps of
 ///   the menu's entries, and takes taps again once the menu closes: the episode's ⋯ menu closed by a tap beside it
 ///   and by a pick, its long-press menu by a tap beside it;
@@ -99,6 +101,23 @@ extension BrowseTests {
         requireLift(of: "detail.episode.0", menu: "detail.menu.item.", part: ("thumbnail", 16.0 / 9.0), text: .inside, "an episode's row")
         scrollTo(element("detail.season.0"), up: true, "the series shows its first season's chip")
         requireLift(of: "detail.season.0", menu: "detail.menu.item.", "a season's chip")
+    }
+
+    func testATapOnACardsCaptionOpensItsTitle() throws {
+        try launchDev(addon: true)
+        for (id, screen) in [("board.row.0.item.0", "nav.board"), ("discover.item.0", "nav.discover")] {
+            // On the caption's title and on its second line (the year): 14 and 34 pt under the artwork, the card's
+            // button, its caption 6 pt under it.
+            for below in [14.0, 34.0] {
+                ready(phoneTab(screen)).tap()
+                let card = ready(require(id, timeout: 90, "\(screen) shows \(id)"))
+                print("caption tap, \(id) at \(card.frame), \(Int(below)) pt under it")
+                card.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 1)).withOffset(CGVector(dx: 0, dy: below)).tap()
+                requireDetail("a tap \(Int(below)) pt under \(id)'s artwork, on its caption, opens its Detail screen")
+                shot("detail from \(id)'s caption, \(Int(below)) pt under its artwork")
+                goBack()
+            }
+        }
     }
 
     func testAGlassButtonTakesTapsAgainOnceAnItemMenuCloses() throws {
