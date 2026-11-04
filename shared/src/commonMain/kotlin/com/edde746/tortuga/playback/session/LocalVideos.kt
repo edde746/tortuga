@@ -3,7 +3,9 @@ package com.edde746.tortuga.playback.session
 import com.edde746.tortuga.downloads.DownloadManager
 import com.edde746.tortuga.downloads.LocalVideo
 import com.edde746.tortuga.model.MetaItem
+import com.edde746.tortuga.playback.ErrorVideoSign
 import com.edde746.tortuga.playback.resolve.ResolvedStream
+import io.ktor.http.parseUrl
 
 /**
  * One profile's completed downloads as playback uses them ([DownloadManager]): the next episode plays from its download
@@ -38,7 +40,12 @@ internal fun localPlayRequest(meta: MetaItem, videoId: String, local: LocalVideo
 
 /**
  * The file as the session opens it and reports it ([OpenedFile.resolved]): its path, no headers, and the size, hash and
- * name watch together matches files by.
+ * name watch together matches files by. A file saved before downloads refused error videos may be one: what its
+ * stream's link and `videoSize` tell against the file's size ([ErrorVideoSign.ofResolve]) is its sign, and the
+ * session's check of its length ([ErrorVideoSign.ofDuration]) catches the rest.
  */
-internal fun LocalVideo.resolved(): ResolvedStream =
-    ResolvedStream(url = path, headers = emptyMap(), size = size, videoHash = videoHash, filename = filename)
+internal fun LocalVideo.resolved(): ResolvedStream {
+    val source = stream.request()
+    val errorVideo = source?.let { parseUrl(it.url) }?.let { ErrorVideoSign.ofResolve(it, size, source.videoSize, ByteArray(0)) }
+    return ResolvedStream(url = path, headers = emptyMap(), size = size, videoHash = videoHash, filename = filename, errorVideo = errorVideo)
+}

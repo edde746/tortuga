@@ -1,10 +1,12 @@
 package com.edde746.tortuga.playback.session
 
+import com.edde746.tortuga.data.library.librarySnapshot
 import com.edde746.tortuga.downloads.LocalSubtitle
 import com.edde746.tortuga.downloads.LocalVideo
 import com.edde746.tortuga.model.AddonJson
 import com.edde746.tortuga.model.Stream
 import com.edde746.tortuga.model.StreamSource
+import com.edde746.tortuga.playback.ErrorVideoSign
 import com.edde746.tortuga.playback.resolve.ResolvedStream
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -113,6 +115,24 @@ class LocalPlaybackTest {
         assertTrue(h.session.engineState.value.eof)
         assertEquals(1, h.engine.loads.size)
         assertEquals(null, h.session.info.value.failure)
+    }
+
+    /** A download saved before downloads refused error videos: what its stream tells shows it as one. */
+    @Test
+    fun aDownloadedErrorVideoShowsAsOne() = runTest {
+        val h = SessionHarness(this, localVideos = FakeLocalVideos())
+        val sized = urlStream("https://host.example/movie.mkv").let { it.copy(behaviorHints = it.behaviorHints.copy(videoSize = 2_000_000_000L)) }
+        h.start(localPlayRequest(MOVIE, MOVIE.id, local(7, choice(sized), "/data/Movie.mkv")))
+        assertEquals(emptyList(), h.engine.loads, "the clip never loads")
+        assertEquals(ErrorVideoSign.Size(2_000_000L, 2_000_000_000L), h.session.info.value.errorVideo)
+
+        // Its length tells it where the library knows the video's.
+        h.data.library.upsertFromMeta(h.profileId, MOVIE.librarySnapshot())
+        h.data.library.recordProgress(h.profileId, MOVIE.id, MOVIE.id, 0, 7_200_000)
+        h.start(localPlayRequest(MOVIE, MOVIE.id, local(8, choice(urlStream("https://host.example/movie.mkv")), "/data/Clip.mkv")))
+        h.engine.open(duration = 60.0)
+        h.settle()
+        assertEquals(ErrorVideoSign.Duration(60.0, 7200.0), h.session.info.value.errorVideo)
     }
 
     @Test
