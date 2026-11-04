@@ -65,7 +65,8 @@ internal class WatchedBitField private constructor(private val bits: BitField8, 
 
         /**
          * `WatchedBitField::construct_and_resize`: reads [serialized] against [videoIds], shifting the bits to where
-         * the anchor video is now.
+         * the anchor video is now. Unlike stremio-core, the shift reads every stored bit, not only as many as
+         * [videoIds] has: with videos gone before the anchor, the marks up to the anchor move down and stay.
          *
          * @throws IllegalArgumentException when [serialized] isn't a watched field.
          */
@@ -74,12 +75,11 @@ internal class WatchedBitField private constructor(private val bits: BitField8, 
             val anchorIndex = videoIds.indexOf(field.anchor)
             if (anchorIndex < 0) return empty(videoIds)
             val offset = field.anchorLength - anchorIndex - 1
-            val bits = BitField8.withValues(field.bits.values, videoIds.size)
-            if (offset == 0) return WatchedBitField(bits, videoIds)
+            if (offset == 0) return WatchedBitField(BitField8.withValues(field.bits.values, videoIds.size), videoIds)
             val resized = BitField8(videoIds.size)
             for (i in videoIds.indices) {
                 val previous = i + offset
-                if (previous >= 0 && previous < bits.length) resized[i] = bits[previous]
+                if (previous >= 0 && previous < field.bits.length) resized[i] = field.bits[previous]
             }
             return WatchedBitField(resized, videoIds)
         }
@@ -97,13 +97,17 @@ internal class WatchedField(val anchor: String, val anchorLength: Int, val bits:
     fun serialize(): String = "$anchor:$anchorLength:${bits.encode()}"
 
     companion object {
-        /** @throws IllegalArgumentException when [text] isn't a watched field. */
+        /**
+         * @throws IllegalArgumentException when [text] isn't a watched field, its anchor length past its bits included
+         * (1 over none is the field of no videos, `undefined:1:…`).
+         */
         fun parse(text: String): WatchedField {
             val components = text.split(':')
             require(components.size >= 3) { "not enough components" }
             val anchorLength = components[components.size - 2].toIntOrNull()?.takeIf { it >= 0 }
                 ?: throw IllegalArgumentException("bad anchor length")
             val bits = BitField8.decode(components.last(), length = null)
+            require(anchorLength <= maxOf(bits.length, 1)) { "anchor length past the bits" }
             return WatchedField(components.subList(0, components.size - 2).joinToString(":"), anchorLength, bits)
         }
     }

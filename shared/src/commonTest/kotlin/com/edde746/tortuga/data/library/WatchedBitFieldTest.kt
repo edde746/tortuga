@@ -74,6 +74,24 @@ class WatchedBitFieldTest {
         assertTrue(field.serialize().startsWith("tt0:1:16:16:"), field.serialize())
     }
 
+    @Test
+    fun marksUpToTheAnchorStayWhenVideosBeforeItAreGone() {
+        val videos = (1..16).map { "tt0:1:$it" }
+        val field = WatchedBitField.empty(videos)
+        videos.takeLast(4).forEach { field.set(it, true) }
+        val fewer = videos.drop(2)
+        val parsed = WatchedBitField.parse(field.serialize(), fewer)
+        assertEquals(fewer.takeLast(4), fewer.filter(parsed::isWatched))
+    }
+
+    @Test
+    fun anAnchorLengthPastTheBitsIsNoWatchedField() {
+        val oneByte = BitField8(8).also { it[0] = true }.encode()
+        assertEquals(8, WatchedField.parse("tt0:1:1:8:$oneByte").anchorLength)
+        assertFailsWith<IllegalArgumentException> { WatchedField.parse("tt0:1:1:${Int.MAX_VALUE}:$oneByte") }
+        assertFailsWith<IllegalArgumentException> { WatchedField.parse("tt0:1:1:9:$oneByte") }
+    }
+
     // stremio-core bitfield8.rs
 
     @Test
