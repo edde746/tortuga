@@ -6,8 +6,11 @@ import com.edde746.tortuga.data.movie
 import com.edde746.tortuga.sync.FailingSecretStore
 import com.edde746.tortuga.sync.FakeSyncServer
 import com.edde746.tortuga.sync.TestDevice
+import com.edde746.tortuga.sync.api.DeviceInfo
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
@@ -213,6 +216,41 @@ class SyncAccountTest {
             assertEquals(1, server.refreshes)
             // The rotated tokens are what the secret store keeps.
             assertNotEquals(before, phone.secrets.entries.getValue("account.session").decodeToString())
+        }
+    }
+
+    @Test
+    fun aCallRefusedForTheTokenARefreshJustReplacedRunsAgainWithTheNewOne() = runTest {
+        device("Phone").use { phone ->
+            phone.signUp()
+            server.expireAccessTokens()
+            var overlapping: Deferred<List<DeviceInfo>>? = null
+            server.afterNextRefresh = {
+                // A call that left with the old token reaches the server after it rotated, before the refresh's answer.
+                overlapping = async { phone.account.devices() }
+                delay(1_000)
+            }
+            assertEquals(1, phone.account.devices().size)
+            assertEquals(1, assertNotNull(overlapping).await().size)
+            assertIs<AccountState.SignedIn>(phone.account.state.value)
+        }
+    }
+
+    @Test
+    fun aSignOutDuringARefreshLeavesNoSessionBehind() = runTest {
+        device("Phone").use { phone ->
+            phone.signUp()
+            server.expireAccessTokens()
+            var signOut: Deferred<Unit>? = null
+            server.afterNextRefresh = {
+                signOut = async { phone.account.signOut() }
+                delay(1_000)
+            }
+            runCatching { phone.account.devices() }
+            assertNotNull(signOut).await()
+            assertEquals(AccountState.SignedOut(null), phone.account.state.value)
+            assertTrue(phone.secrets.entries.isEmpty())
+            assertTrue(server.sessions.isEmpty(), "the server's session ended with the refreshed token")
         }
     }
 

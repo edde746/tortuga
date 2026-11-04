@@ -33,7 +33,10 @@ interface ServerSession {
  * - Refreshes are single-flight: concurrent callers wait for one refresh and use its tokens. Refresh tokens rotate,
  *   so two refreshes with the same token would race.
  * - [AccountError.SessionEnded] (unauthorized, or an invalid refresh token) forgets the session and reports it through
- *   [onEnded], also when the secret store can't delete it; the user signs in again.
+ *   [onEnded], also when the secret store can't delete it; the user signs in again. A refusal of an access token a
+ *   concurrent refresh replaced meanwhile ends nothing: the call runs once more with the new token.
+ * - Loading, setting, clearing, refreshing and ending the session take turns ([refreshLock]), so a refresh still
+ *   running when the session is cleared or replaced lands before it, never over it.
  * - The secret store's failures are [AccountException]s ([SessionVault]); a refresh whose tokens it can't keep fails,
  *   and the session keeps the stored tokens, whose refresh token the server accepts once more within ten minutes.
  * - A refresh that got no answer keeps the old tokens: the server accepts the previous refresh token once more within
@@ -52,16 +55,20 @@ internal class SessionManager(
 
     override val signedIn: Boolean get() = current.value != null
 
-    suspend fun load(): StoredSession? = vault.load().also { current.value = it }
+    suspend fun load(): StoredSession? = refreshLock.withLock { vault.load().also { current.value = it } }
 
     suspend fun set(session: StoredSession) {
-        vault.store(session)
-        current.value = session
+        refreshLock.withLock {
+            vault.store(session)
+            current.value = session
+        }
     }
 
     suspend fun clear() {
-        vault.clear()
-        current.value = null
+        refreshLock.withLock {
+            vault.clear()
+            current.value = null
+        }
     }
 
     override suspend fun <T> authorized(call: suspend (serverUrl: String, accessToken: String) -> T): T {
@@ -70,6 +77,7 @@ internal class SessionManager(
             session = refresh(session)
         }
         var refreshed = false
+        var replayed = false
         while (true) {
             try {
                 return call(session.serverUrl, session.tokens.accessToken)
@@ -78,8 +86,11 @@ internal class SessionManager(
                 refreshed = true
                 session = refresh(session)
             } catch (e: AccountException) {
-                if (e.error == AccountError.SessionEnded) end(session)
-                throw e
+                if (e.error != AccountError.SessionEnded) throw e
+                val newer = refreshLock.withLock { endUnlessReplaced(session) }
+                if (newer == null || replayed || newer.accountId != session.accountId || newer.serverUrl != session.serverUrl) throw e
+                replayed = true
+                session = newer
             }
         }
     }
@@ -91,7 +102,7 @@ internal class SessionManager(
         val tokens = try {
             api.refresh(latest.serverUrl, latest.tokens.refreshToken)
         } catch (e: AccountException) {
-            if (e.error == AccountError.SessionEnded) end(latest)
+            if (e.error == AccountError.SessionEnded) endUnlessReplaced(latest)
             throw e
         }
         val next = latest.copy(tokens = tokens.received(clock()))
@@ -103,14 +114,13 @@ internal class SessionManager(
 
     /**
      * The server ended [session]: it is forgotten here and reported through [onEnded] even when the secret store can't
-     * delete it (logged by [SessionVault]); the next start loads it again, and its first call ends it again.
+     * delete it (logged by [SessionVault]); the next start loads it again, and its first call ends it again. Unless
+     * the session's access token was replaced meanwhile (a refresh, a sign-in) or it is gone: then returns the session
+     * there is now, if any. Callers hold [refreshLock].
      */
-    private suspend fun end(session: StoredSession) {
-        if (current.value?.tokens?.refreshToken != session.tokens.refreshToken &&
-            current.value?.tokens?.accessToken != session.tokens.accessToken
-        ) {
-            return
-        }
+    private suspend fun endUnlessReplaced(session: StoredSession): StoredSession? {
+        val now = current.value
+        if (now?.tokens?.accessToken != session.tokens.accessToken) return now
         Log.i(TAG) { "The server ended this device's session" }
         current.value = null
         try {
@@ -119,6 +129,7 @@ internal class SessionManager(
             Log.w(TAG) { "The ended session stays in the secret store until the next start ends it again" }
         }
         onEnded(session)
+        return null
     }
 
     private companion object {

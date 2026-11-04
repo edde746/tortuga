@@ -152,6 +152,9 @@ internal class FakeSyncServer {
     /** Runs once when the next pull arrives, before it is answered. */
     var beforeNextPull: (suspend () -> Unit)? = null
 
+    /** Runs once after the next refresh rotates the tokens, before it is answered: what reaches the server meanwhile. */
+    var afterNextRefresh: (suspend () -> Unit)? = null
+
     /** The open notice streams and the session each belongs to. */
     private val streams = ArrayList<Pair<Session, ByteChannel>>()
 
@@ -307,7 +310,12 @@ internal class FakeSyncServer {
                 session.refreshToken = next("refresh")
                 session.accessToken = next("access")
                 session.accessExpired = false
-                ok(SessionTokens.serializer(), session.tokens())
+                val tokens = session.tokens()
+                afterNextRefresh?.let { hook ->
+                    afterNextRefresh = null
+                    hook()
+                }
+                ok(SessionTokens.serializer(), tokens)
             }
             method == HttpMethod.Post && path == SyncPaths.AUTH_SIGN_OUT -> {
                 sessions.remove(session(request))
