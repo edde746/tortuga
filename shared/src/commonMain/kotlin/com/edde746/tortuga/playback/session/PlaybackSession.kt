@@ -331,11 +331,12 @@ class PlaybackSession internal constructor(
     /**
      * Shows [title] (and [subtitle], [artworkUrl]) while a stream is still to be found for it ([resolving]): a
      * watch-together guest's player while it looks for a file matching the host's. The video playing, if any, is
-     * saved and left first; [start] plays the file once there is one.
+     * saved, paused and left first: the engine holds it until [start] plays the file once there is one.
      */
     fun prepare(title: String, subtitle: String?, artworkUrl: String?, resolving: Boolean) {
         if (closed) return
         leaveVideo()
+        engine.setPaused(true)
         attempt?.cancel()
         request = null
         recording = null

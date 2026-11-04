@@ -293,6 +293,20 @@ class PlaybackSessionTest {
         assertEquals(stream, entry.stream)
     }
 
+    @Test
+    fun preparingForAnotherTitlePausesTheVideoItLeaves() = runTest {
+        val h = SessionHarness(this)
+        h.redirectLinks()
+        h.open(PlayRequest(MOVIE, MOVIE.id, choice(urlStream("https://addon.example/movie"))), duration = 3000.0)
+        h.playTo(30.0)
+        assertFalse(h.engine.state.paused)
+        h.session.prepare("Chernobyl", "S1 E1", artworkUrl = null, resolving = true)
+        h.settle()
+        assertTrue(h.engine.state.paused, "the left video is no longer heard under the search for the room's file")
+        assertTrue(h.session.info.value.resolving)
+        assertEquals("Chernobyl", h.session.info.value.title)
+    }
+
     /** Starts [request] and opens its file, [duration] seconds long, where it starts. */
     private fun SessionHarness.open(request: PlayRequest, duration: Double = 100.0) {
         start(request)
