@@ -436,7 +436,7 @@ def main():
     ap.add_argument("--out", type=Path, required=True, help="directory the media server serves as matrix/")
     ap.add_argument("--work", type=Path, required=True, help="scratch directory (downloads, build state)")
     ap.add_argument("--force", action="store_true", help="rebuild every file")
-    ap.add_argument("--only", nargs="*", help="build and verify only these ids (matrix.json keeps the others)")
+    ap.add_argument("--only", nargs="+", help="build and verify only these ids (matrix.json keeps the others)")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     args.work.mkdir(parents=True, exist_ok=True)
