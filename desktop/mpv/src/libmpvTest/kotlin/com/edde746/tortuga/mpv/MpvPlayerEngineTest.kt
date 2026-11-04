@@ -281,6 +281,32 @@ class MpvPlayerEngineTest {
         }
     }
 
+    /**
+     * What fails on the engine's thread as it hands out mpv's events (here the listener, as the file loads) is logged
+     * and the thread goes on: else the playback, and every later call, would stop with it.
+     */
+    @Test
+    fun aListenerFailingOnAnEventLeavesTheEngineRunning() {
+        val file = silentAc3()
+        try {
+            val thrown = CountDownLatch(1)
+            engine.setListener(object : PlayerEngineListener {
+                override fun onState(state: EngineState) {
+                    if (state.loaded && thrown.count > 0) {
+                        thrown.countDown()
+                        error("the listener failed")
+                    }
+                }
+            })
+            engine.startWithoutWindow()
+            engine.load(LoadRequest(url = file.toString(), options = PlaybackOptions.of(DeviceSettings.DEFAULT, HardwareDecoder.LINUX)))
+            assertTrue(thrown.await(20, TimeUnit.SECONDS), "never loaded: ${engine.currentState}")
+            assertEquals(file.toString(), engine.properties(listOf("path"))["path"], "the engine's thread stopped")
+        } finally {
+            Files.deleteIfExists(file)
+        }
+    }
+
     /** Two loads in turn on an engine with [host], each failing. */
     private fun assertEveryLoadFails(host: WindowlessHost) {
         val failing = MpvPlayerEngine(WINDOWLESS, host)

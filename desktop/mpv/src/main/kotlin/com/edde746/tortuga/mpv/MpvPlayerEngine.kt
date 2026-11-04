@@ -510,13 +510,15 @@ class MpvPlayerEngine internal constructor(
         while (!stopped) {
             val c = core
             if (c == null) {
-                runCommand(commands.take())
+                guarded("command", commands.take())
                 continue
             }
-            while (!stopped) runCommand(commands.poll() ?: break)
+            while (!stopped) guarded("command", commands.poll() ?: break)
             if (stopped || core == null) continue
-            handleEvent(c.waitEvent(waitTimeoutSeconds()))
-            if (statsWanted && System.nanoTime() >= nextStatsNanos) readStats()
+            guarded("event") {
+                handleEvent(c.waitEvent(waitTimeoutSeconds()))
+                if (statsWanted && System.nanoTime() >= nextStatsNanos) readStats()
+            }
         }
     }
 
@@ -536,11 +538,12 @@ class MpvPlayerEngine internal constructor(
         update { stats(reading) }
     }
 
-    private fun runCommand(block: () -> Unit) {
+    /** One turn of the mpv thread: what fails in it (a listener, a reply it can't read) is logged, and the thread goes on. */
+    private inline fun guarded(what: String, block: () -> Unit) {
         try {
             block()
         } catch (t: Throwable) {
-            log.log(System.Logger.Level.ERROR, "mpv command failed", t)
+            log.log(System.Logger.Level.ERROR, "mpv $what failed", t)
         }
     }
 
