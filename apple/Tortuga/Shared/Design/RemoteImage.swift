@@ -68,7 +68,7 @@ struct RemoteImage<Placeholder: View>: View {
         var anchor = UnitPoint(x: alignment.horizontal == .leading ? 0 : alignment.horizontal == .trailing ? 1 : 0.5,
                                y: alignment.vertical == .top ? 0 : alignment.vertical == .bottom ? 1 : 0.5)
         if layoutDirection == .rightToLeft { anchor.x = 1 - anchor.x }
-        return ImageRequest(url: url, processors: [ArtworkResize(pixels: pixels, fill: contentMode == .fill, anchor: anchor)])
+        return ArtworkResize(pixels: pixels, fill: contentMode == .fill, anchor: anchor).request(url)
     }
 }
 
@@ -115,6 +115,18 @@ struct ArtworkResize: ImageProcessing, Hashable {
 
     var identifier: String {
         "tortuga/artwork?\(Int(pixels.width))x\(Int(pixels.height)),\(fill ? "fill" : "fit"),\(anchor.x),\(anchor.y)"
+    }
+
+    /// `url`'s image decoded by ImageIO no larger than twice `pixels` (filling them or fitted in them, as this makes
+    /// it), then made by this. An addon's image may be any size, and decoded whole one 30000 pixels square takes
+    /// 3.6 GB, which ends the app; decoded near the size it is drawn at it costs that little whatever its own. Twice
+    /// that, so what shows is resampled by the Lanczos here, not by ImageIO's thumbnailing, which never enlarges.
+    func request(_ url: URL) -> ImageRequest {
+        var request = ImageRequest(url: url, processors: [self])
+        request.thumbnail = ImageRequest.ThumbnailOptions(
+            size: CGSize(width: pixels.width * 2, height: pixels.height * 2), unit: .pixels, contentMode: fill ? .aspectFill : .aspectFit
+        )
+        return request
     }
 
     func process(_ image: PlatformImage) -> PlatformImage? {

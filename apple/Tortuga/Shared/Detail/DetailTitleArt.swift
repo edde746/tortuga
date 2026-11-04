@@ -34,7 +34,7 @@ struct DetailTitleArt: View {
         let height = DetailMetrics.titleHeight(formFactor, centred: centred)
         Group {
             if let logo = header.logo.flatMap(URL.init(string:)) {
-                LazyImage(request: ImageRequest(url: logo, processors: [trimmedToArt])) { state in
+                LazyImage(request: logoRequest(logo)) { state in
                     if let image = state.image, let container = state.imageContainer {
                         let size = logoSize(pixels: pixelSize(of: container.image), maxHeight: artHeight)
                         image.resizable()
@@ -87,6 +87,17 @@ struct DetailTitleArt: View {
         case .regular: .system(size: regularTitleSize, weight: .bold)
         case .tv: .title2.weight(.bold)
         }
+    }
+
+    /// The logo decoded by ImageIO no larger than twice the widest it is drawn on its long side, then cut to its art: an
+    /// addon's logo may be any size, and the whole of one 30000 pixels square takes 3.6 GB, then as much again to find
+    /// its art. The widest is `DetailMetrics.infoMaxWidth`, or `maxWidth` where that is wider (Apple TV's, which is
+    /// fixed); not `maxWidth` itself elsewhere, which follows the window: each new width would load the logo again, the
+    /// name showing meanwhile.
+    private func logoRequest(_ logo: URL) -> ImageRequest {
+        var request = ImageRequest(url: logo, processors: [trimmedToArt])
+        request.thumbnail = ImageRequest.ThumbnailOptions(maxPixelSize: Float(2 * max(maxWidth, DetailMetrics.infoMaxWidth) * displayScale))
+        return request
     }
 
     /// The logo's size: its own shape fitted in `maxWidth` × `maxHeight`, at most twice its pixels on this screen.

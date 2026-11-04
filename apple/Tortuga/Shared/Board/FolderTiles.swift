@@ -128,7 +128,7 @@ private struct FolderCover: View {
     private var request: ImageRequest? {
         guard let url = URL(string: url), frame.width > 0, frame.height > 0 else { return nil }
         let pixels = CGSize(width: (frame.width * displayScale).rounded(), height: (frame.height * displayScale).rounded())
-        return ImageRequest(url: url, processors: [ArtworkResize(pixels: pixels, fill: false)])
+        return ArtworkResize(pixels: pixels, fill: false).request(url)
     }
 
     /// How far (as a fraction) a cover's aspect may be from its tile's and still be cropped to fill it.
@@ -137,14 +137,15 @@ private struct FolderCover: View {
 
 /// The bars behind a cover drawn whole: the cover itself made `CoverFillImage` (16 pixels on its long side, dimmed),
 /// scaled up to fill the tile with smooth interpolation, which blurs it. Pixels, not a blur effect, so it looks as the
-/// Compose tiles' does; a cover with transparency leaves it empty, its blurred shape would ring the cover's edges.
+/// Compose tiles' does; a cover with transparency leaves it empty, its blurred shape would ring the cover's edges. The
+/// cover is decoded no larger than `CoverFillImage.probe` on its long side, never whole.
 private struct CoverFill: View {
     let url: String
 
     var body: some View {
         Color.clear
             .overlay {
-                LazyImage(request: ImageRequest(url: URL(string: url), processors: [CoverFillImage()])) { state in
+                LazyImage(request: request) { state in
                     if let image = state.image {
                         image.resizable().interpolation(.medium).aspectRatio(contentMode: .fill)
                     }
@@ -152,14 +153,24 @@ private struct CoverFill: View {
             }
             .clipped()
     }
+
+    private var request: ImageRequest {
+        var request = ImageRequest(url: URL(string: url), processors: [CoverFillImage()])
+        request.thumbnail = ImageRequest.ThumbnailOptions(maxPixelSize: Float(CoverFillImage.probe))
+        return request
+    }
 }
 
 /// A cover made into its own blurred fill (its own memory cache entry, a few hundred bytes): decoded to `pixels` on its
 /// long side and its colours at `light`; a cover with any pixel less than opaque (a logo on alpha, an edge's
-/// antialiasing included) gives one clear pixel instead, so nothing is drawn behind it.
+/// antialiasing included) gives one clear pixel instead, so nothing is drawn behind it. It takes the cover as its
+/// request decodes it, no larger than `probe` on its long side (`CoverFill`): a transparent background or rounded
+/// corners still show at that size, and the image read is never the cover whole (4000 × 6000 pixels were 96 MB).
 private struct CoverFillImage: ImageProcessing, Hashable {
     /// The long side, in pixels: small enough that scaling it up blurs it.
     static let pixels = 16
+    /// The long side, in pixels, of the cover as decoded for its fill and read for transparency.
+    static let probe = 128
     /// How much of the cover's light is left: dimmed, so the cover in front of it stands out.
     static let light: CGFloat = 0.7
     /// The least alpha a pixel counts as opaque at (of 255).
