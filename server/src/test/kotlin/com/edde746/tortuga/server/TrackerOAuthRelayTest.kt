@@ -6,6 +6,7 @@ import com.edde746.tortuga.server.support.TestClock
 import com.edde746.tortuga.server.support.assertError
 import com.edde746.tortuga.server.support.captureLogs
 import com.edde746.tortuga.server.support.ok
+import com.edde746.tortuga.server.support.serverTest
 import com.edde746.tortuga.server.support.testDataKey
 import com.edde746.tortuga.sync.api.ApiErrorCode
 import com.edde746.tortuga.sync.api.SyncPaths
@@ -303,6 +304,26 @@ class TrackerOAuthRelayTest {
         assertEquals(ContentType.Text.Html, expired.contentType()?.withoutParameters())
         assertTrue("Link expired" in expired.bodyAsText())
         poll(start.session).assertError(HttpStatusCode.Gone, ApiErrorCode.NOT_FOUND)
+    }
+
+    @Test
+    fun abandonedSignInsAreDroppedOnTheJanitorsRoundWithoutAnotherRequest() = serverTest(configure = { config, _ ->
+        config.copy(
+            trackerOAuth = TrackerOAuthConfig(
+                publicUrl = PUBLIC_URL,
+                myAnimeList = OAuthClientConfig("mal-client", null, "https://mal.test/v1/oauth2/authorize", "https://mal.test/v1/oauth2/token"),
+                aniList = null,
+            ),
+        )
+    }) {
+        val relay = services.trackerOAuth
+        relay.start(OAuthRelayStartRequest(OAuthRelayApi.MYANIMELIST, DEVICE), "198.51.100.7")
+        services.janitor.sweep()
+        assertEquals(1, relay.inProgress)
+        // Nobody comes back to it: past its 10 minutes the next round drops it, with nothing else reaching the relay.
+        clock.advance(Duration.ofMinutes(10))
+        services.janitor.sweep()
+        assertEquals(0, relay.inProgress)
     }
 
     @Test

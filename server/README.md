@@ -246,7 +246,8 @@ So a sign-in link someone else started never hands the tokens of whoever opens i
 names the device they go to: from their own browser's link, the browser goes back to its own device's loopback or app
 return, where the starter can't collect.
 
-Sessions live in memory for 10 minutes (a restart cancels sign-ins in progress). The browser states, the poll secret,
+Sessions live in memory for 10 minutes (a restart cancels sign-ins in progress); the janitor's round each minute drops
+an expired one with the tokens it held, so none stays past 11 minutes. The browser states, the poll secret,
 the proof and the confirmation are separate random values, the callback is single use, the result is handed out once,
 and tokens, codes and secrets are never stored or logged. Starts and polls are rate limited per client address like
 the rest of the API, and the browser's pages like the other sign-in return pages (`signInReturn`). A client address

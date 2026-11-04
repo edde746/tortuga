@@ -14,11 +14,13 @@ import org.slf4j.LoggerFactory
 
 /**
  * Deletes expired nonces, used-token markers, device links, Apple and GitHub handoffs and idle sessions every
- * [interval]; an expired session's notice stream ends with it.
+ * [interval], and drops the tracker sign-in relay's expired sign-ins ([TrackerOAuthRelay.purgeExpired]); an expired
+ * session's notice stream ends with it.
  */
 class Janitor(
     private val db: Database,
     private val events: SyncEvents,
+    private val trackerOAuth: TrackerOAuthRelay,
     private val clock: Clock,
     private val interval: Duration,
 ) {
@@ -36,6 +38,7 @@ class Janitor(
     }
 
     suspend fun sweep() {
+        trackerOAuth.purgeExpired()
         val now = clock.instant()
         db.transaction {
             update("DELETE FROM auth_nonces WHERE expires_at <= ?", now)

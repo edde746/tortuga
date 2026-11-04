@@ -63,6 +63,9 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
     /** The services this server can sign in to. */
     val services: Set<String> get() = clients.keys
 
+    /** Sign-ins in progress. */
+    internal val inProgress: Int get() = synchronized(this) { byPollDigest.size }
+
     /** Sessions by each of their browser states. */
     private val byState = HashMap<String, Session>()
     private val byPollDigest = HashMap<String, Session>()
@@ -333,7 +336,12 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
         return null
     }
 
-    private fun purgeExpired() {
+    /**
+     * Drops every expired sign-in with what it holds: tokens no device collected, its waiting polls (they answer gone).
+     * The janitor runs it every round, so an abandoned sign-in outlives its [TrackerOAuthConfig.sessionTtl] by one
+     * round at most, however quiet the relay.
+     */
+    fun purgeExpired() = synchronized(this) {
         val now = clock.instant()
         byPollDigest.values.filter { expired(it, now) }.forEach(::remove)
     }
@@ -345,6 +353,10 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
         byPollDigest.remove(session.pollDigest)
         session.states.forEach { if (byState[it] === session) byState.remove(it) }
         byAddress.computeIfPresent(session.address) { _, count -> (count - 1).takeIf { it > 0 } }
+        session.held = null
+        session.result = null
+        session.codeVerifier = null
+        session.done.complete(Unit)
     }
 
     /** The app's own browser: its [state], and the app's return on its device ([OAuthRelayStartRequest.redirectUri]). */

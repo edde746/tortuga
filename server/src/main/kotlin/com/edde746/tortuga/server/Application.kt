@@ -113,8 +113,8 @@ class Services(val config: ServerConfig, val db: Database, http: HttpClient, val
     )
     val handoffs = AppleHandoffs(db, cipher, clock)
     val githubHandoffs: GitHubHandoffs? = github?.let { GitHubHandoffs(db, it, cipher, clock) }
-    val janitor = Janitor(db, events, clock, config.janitorInterval)
     val trackerOAuth = TrackerOAuthRelay(config.trackerOAuth, http, clock)
+    val janitor = Janitor(db, events, trackerOAuth, clock, config.janitorInterval)
     val bytes = ByteBudget(config.requestBytes)
 
     val info = ServerInfo(
