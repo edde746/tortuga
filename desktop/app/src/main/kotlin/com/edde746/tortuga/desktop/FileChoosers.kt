@@ -6,6 +6,7 @@ import com.edde746.tortuga.log.Log
 import com.edde746.tortuga.ui.app.SaveResult
 import java.awt.EventQueue
 import java.awt.Window
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import javax.swing.JFileChooser
@@ -14,6 +15,12 @@ import javax.swing.filechooser.FileNameExtensionFilter
 import kotlin.concurrent.thread
 
 private const val TAG = "Files"
+
+/**
+ * The largest file the open dialog reads; a bigger one is refused as unreadable before it fills the heap (a video
+ * picked by mistake, read whole).
+ */
+internal const val MAX_OPENED_BYTES = 32 * 1024 * 1024
 
 /*
  * The desktop's file dialogs: a modal JFileChooser over the window, built in the system's look as the JDK names it:
@@ -73,7 +80,8 @@ internal fun saveTextFile(parent: Window, fileName: String, text: String, done: 
  * The open dialog (`TortugaPlatform.openFile`: Settings → Export and import, Settings → Home's Import collections, the
  * player's shader import) over [parent], every file listed (one saved under another type is still offered). The chosen
  * file is read on a thread of its own and decoded strictly as UTF-8, then its name and text go to [opened], or [failed]
- * runs when it can't be read, isn't UTF-8 or the portal failed, on the AWT event thread; nothing when the user cancels.
+ * runs when it can't be read, is over [MAX_OPENED_BYTES], isn't UTF-8 or the portal failed, on the AWT event thread;
+ * nothing when the user cancels.
  */
 internal fun openTextFile(parent: Window, opened: (name: String, text: String) -> Unit, failed: () -> Unit) {
     if (inFlatpak) {
@@ -103,18 +111,37 @@ private fun write(file: File, text: String, done: (SaveResult) -> Unit) {
     }
 }
 
-/** Reads [file] on a thread of its own, strictly as UTF-8: its name and text to [opened], else [failed], on the AWT event thread. */
+/** Reads [file] on a thread of its own ([readText]): its name and text to [opened], else [failed], on the AWT event thread. */
 private fun read(file: File, opened: (name: String, text: String) -> Unit, failed: () -> Unit) {
     thread(name = "Files.open", isDaemon = true) {
-        // A CharacterCodingException (not UTF-8) is an IOException.
-        val text = try {
-            file.readBytes().decodeToString(throwOnInvalidSequence = true)
-        } catch (e: IOException) {
-            Log.w(TAG) { "The file couldn't be read: ${e.javaClass.simpleName}" }
-            null
-        }
+        val text = readText(file)
         EventQueue.invokeLater { if (text != null) opened(file.name, text) else failed() }
     }
+}
+
+/**
+ * [file]'s text, strictly UTF-8, or null when it can't be read, is over [MAX_OPENED_BYTES] or isn't UTF-8 (a
+ * CharacterCodingException is an IOException). Running out of memory is a file that couldn't be read too, not the
+ * reader's end with no answer.
+ */
+internal fun readText(file: File): String? = try {
+    val bytes = ByteArrayOutputStream()
+    file.inputStream().use {
+        val buffer = ByteArray(64 * 1024)
+        while (true) {
+            val n = it.read(buffer)
+            if (n < 0) break
+            if (bytes.size() + n > MAX_OPENED_BYTES) throw IOException("over $MAX_OPENED_BYTES bytes")
+            bytes.write(buffer, 0, n)
+        }
+    }
+    bytes.toByteArray().decodeToString(throwOnInvalidSequence = true)
+} catch (e: IOException) {
+    Log.w(TAG) { "The file couldn't be read: ${e.javaClass.simpleName}" }
+    null
+} catch (e: OutOfMemoryError) {
+    Log.w(TAG) { "The file couldn't be read: ${e.javaClass.simpleName}" }
+    null
 }
 
 /**
