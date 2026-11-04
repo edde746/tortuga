@@ -732,22 +732,26 @@ private fun ScrubBar(
                     val down = awaitFirstDown()
                     down.consume()
                     onCommand(PlayerCommand.ScrubTo(fraction(down.position.x)))
-                    while (true) {
-                        val event = awaitPointerEvent()
-                        val change = event.changes.firstOrNull { it.id == down.id }
-                        if (change == null) {
-                            onCommand(PlayerCommand.CancelScrub)
-                            break
+                    var ended = false
+                    try {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull { it.id == down.id }
+                            if (change == null) break
+                            if (!change.pressed) {
+                                change.consume()
+                                ended = true
+                                onCommand(PlayerCommand.CommitScrub)
+                                break
+                            }
+                            if (change.positionChanged()) {
+                                change.consume()
+                                onCommand(PlayerCommand.ScrubTo(fraction(change.position.x)))
+                            }
                         }
-                        if (!change.pressed) {
-                            change.consume()
-                            onCommand(PlayerCommand.CommitScrub)
-                            break
-                        }
-                        if (change.positionChanged()) {
-                            change.consume()
-                            onCommand(PlayerCommand.ScrubTo(fraction(change.position.x)))
-                        }
+                    } finally {
+                        // Not released on the bar: the pointer went, or the bar did mid-drag (picture in picture).
+                        if (!ended) onCommand(PlayerCommand.CancelScrub)
                     }
                 }
             }
