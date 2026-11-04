@@ -133,29 +133,47 @@ internal class DownloadFiles(private val fileSystem: FileSystem) {
         false
     }
 
-    fun delete(path: Path) {
-        try {
-            fileSystem.delete(path, mustExist = false)
-        } catch (e: IOException) {
-            Log.w(TAG) { "can't delete a file (${e::class.simpleName})" }
-        }
+    /** Deletes [path]; false when it is still there (no permission, a volume gone read-only, a non-empty directory). */
+    fun delete(path: Path): Boolean = try {
+        fileSystem.delete(path, mustExist = false)
+        true
+    } catch (e: IOException) {
+        Log.w(TAG) { "can't delete a file (${e::class.simpleName})" }
+        false
     }
 
-    /** Deletes [path] and, for a directory, everything under it. */
-    fun deleteRecursively(path: Path) {
+    /** Deletes [path] and, for a directory, everything under it; false when any of it is still there. */
+    fun deleteRecursively(path: Path): Boolean {
         val metadata = try {
-            fileSystem.metadataOrNull(path)
-        } catch (_: IOException) {
-            null
-        } ?: return
-        if (metadata.isDirectory) list(path).forEach(::deleteRecursively)
-        delete(path)
+            fileSystem.metadataOrNull(path) ?: return true
+        } catch (e: IOException) {
+            Log.w(TAG) { "can't read a file's metadata (${e::class.simpleName})" }
+            return false
+        }
+        // Every child is tried, whatever an earlier one did.
+        val children = if (metadata.isDirectory) list(path).map(::deleteRecursively).all { it } else true
+        return children && delete(path)
     }
 
-    /** The part file of the video at [video], with what a platform transport keeps next to it. */
-    fun deletePart(video: Path) {
-        delete(Path("$video${DownloadNames.PART}"))
-        DownloadNames.PART_SIDECARS.forEach { delete(Path("$video$it")) }
+    /** The part file of the video at [video], with what a platform transport keeps next to it; false as [delete]. */
+    fun deletePart(video: Path): Boolean =
+        (listOf(DownloadNames.PART) + DownloadNames.PART_SIDECARS).map { delete(Path("$video$it")) }.all { it }
+
+    /** The first [count] bytes of [path] (all of a shorter file); null when it can't be read. */
+    fun head(path: Path, count: Int): ByteArray? = try {
+        fileSystem.source(path).buffered().use { source ->
+            val bytes = ByteArray(count)
+            var read = 0
+            while (read < count) {
+                val n = source.readAtMostTo(bytes, read, count)
+                if (n < 0) break
+                read += n
+            }
+            bytes.copyOf(read)
+        }
+    } catch (e: IOException) {
+        Log.w(TAG) { "can't read a file (${e::class.simpleName})" }
+        null
     }
 
     /** A new file at [path] (replacing one there), to write; throws on I/O failure. */

@@ -201,6 +201,28 @@ class DownloadManagerTest {
     }
 
     @Test
+    fun aDownloadWhoseFileCantBeDeletedStaysUntilItIs() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+        val video = Path(assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).path)
+        // Something in the way of the deletion: the file's name is a folder with something in it.
+        SystemFileSystem.delete(video)
+        SystemFileSystem.createDirectories(Path(video, "held"))
+
+        manager.delete(h.profileId, id)
+        h.settle()
+        assertNotNull(h.data.downloads.download(id), "kept, so its files can still be deleted")
+
+        SystemFileSystem.delete(Path(video, "held"))
+        manager.enqueue(h.profileId, SHOW, "tt0903747:1:1", cdnChoice("1.mkv"))
+        h.settle()
+        assertNull(h.data.downloads.download(id), "deleted with its files by the next purge")
+        assertFalse(SystemFileSystem.exists(video))
+    }
+
+    @Test
     fun aDownloadWithoutRoomForItsSizeFailsBeforeTransferring() = downloadsTest(fake = true) { h ->
         h.serveCdn(bytes)
         h.platform.free = DownloadWorker.SPACE_MARGIN

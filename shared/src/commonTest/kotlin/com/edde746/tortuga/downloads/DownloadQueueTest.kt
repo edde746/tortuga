@@ -195,6 +195,25 @@ class DownloadQueueTest {
         assertEquals(DownloadStatus.DOWNLOADING, h.download(id)?.status)
     }
 
+    /** A part a failed deletion left behind (a cancel's, a restart's) is another file's: a fresh start never resumes it. */
+    @Test
+    fun aPartLeftWhereAFileStartsAfreshIsNotResumed() = downloadsTest(fake = true) { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+        val request = h.fakeTransport.started.single()
+        manager.cancel(id)
+        h.settle()
+        writePart(request, 1000)
+
+        manager.retry(id)
+        h.settle()
+
+        assertEquals(0L, h.fakeTransport.started.last().offset)
+        assertFalse(SystemFileSystem.exists(Path(request.partPath)))
+    }
+
     @Test
     fun networkFailuresAreRetriedThreeTimesThirtySecondsApart() = downloadsTest(fake = true) { h ->
         h.serveCdn(bytes)

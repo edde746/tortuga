@@ -815,10 +815,11 @@ class DownloadManager internal constructor(
 
     /**
      * Deletes [id]'s files (video, part, subtitles; its meta's artwork with its meta's last download) and its row. A
-     * download with files whose location isn't there (a card taken out, a picked folder's drive gone) keeps its row,
-     * without owners and so on no screen, until a later purge finds the location again (the next change to the
-     * downloads, the next launch): its files are never left on the volume with nothing that knows them. The purge ends
-     * either way: one that throws leaves the row, which the next change to the downloads purges again.
+     * download with files whose location isn't there (a card taken out, a picked folder's drive gone), or whose files
+     * can't all be deleted (no permission, a volume gone read-only, a file another process holds), keeps its row,
+     * without owners and so on no screen, until a later purge deletes them (the next change to the downloads, the next
+     * launch): its files are never left on the volume with nothing that knows them. The purge ends either way: one that
+     * throws leaves the row, which the next change to the downloads purges again.
      */
     private suspend fun deleteFiles(id: Long) {
         try {
@@ -830,12 +831,19 @@ class DownloadManager internal constructor(
                     Log.i(TAG) { "download $id: its location isn't there, so its files are deleted once it is" }
                     return
                 }
-                withContext(env.io) {
+                val deleted = withContext(env.io) {
                     val video = child(directory, path)
-                    env.files.delete(video)
-                    env.files.deletePart(video)
-                    env.files.deleteRecursively(child(directory, DownloadNames.subtitlesDirectory(path)))
+                    val files = listOf(
+                        env.files.delete(video),
+                        env.files.deletePart(video),
+                        env.files.deleteRecursively(child(directory, DownloadNames.subtitlesDirectory(path))),
+                    ).all { it }
                     env.files.deleteEmptyParents(video.parent, Path(directory))
+                    files
+                }
+                if (!deleted) {
+                    Log.w(TAG) { "download $id: some of its files can't be deleted, so it stays until they are" }
+                    return
                 }
             }
             val meta = repo.delete(id)

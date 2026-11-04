@@ -99,8 +99,9 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
                 val size = stream.size
                 if (row.totalBytes != null && size != null && size != row.totalBytes) {
                     Log.i(TAG) { "download $id: the file changed size; starting over" }
-                    row = restart(row) ?: return Outcome.Gone
+                    row = restart(row) { return it }
                 }
+                val fresh = row.relativePath == null
                 path = row.relativePath ?: DownloadNames.videoPath(row, DownloadNames.extension(stream.filename, row.hintedFilename()))
                     .also { env.repo.setPath(id, it) }
                 val video = child(directory, path)
@@ -108,9 +109,10 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
                     return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
                 }
                 val part = Path("$video${DownloadNames.PART}")
+                if (fresh && !env.io { deletePart(video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
                 var offset = env.io { size(part) } ?: 0L
                 if (size != null && offset > size) {
-                    env.io { deletePart(video) }
+                    if (!env.io { deletePart(video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
                     offset = 0
                 }
                 if (size != null) {
@@ -156,7 +158,7 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
                     result.status == RANGE_NOT_SATISFIABLE -> {
                         forget(id)
                         if (++restarts > MAX_RESTARTS) return Outcome.Failed(DownloadFailureKind.HTTP, result.status)
-                        row = restart(row) ?: return Outcome.Gone
+                        row = restart(row) { return it }
                     }
                     result.status >= 500 || result.status == TOO_MANY_REQUESTS ->
                         row = retry(row, ++retries, DownloadFailure(DownloadFailureKind.HTTP, result.status)) { return it }
@@ -166,7 +168,7 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
                     Log.i(TAG) { "download $id: the server's file changed; starting over" }
                     forget(id)
                     if (++restarts > MAX_RESTARTS) return Outcome.Failed(DownloadFailureKind.NETWORK)
-                    row = restart(row) ?: return Outcome.Gone
+                    row = restart(row) { return it }
                 }
                 is TransferResult.Network -> {
                     Log.i(TAG) { "download $id: transfer failed (${result.kind})" }
@@ -209,12 +211,17 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
         return env.repo.download(row.id) ?: fail(Outcome.Gone)
     }
 
-    /** Nothing of the file is kept: the part goes, and the next attempt starts from zero. */
-    private suspend fun restart(row: DownloadRow): DownloadRow? {
+    /**
+     * Nothing of the file is kept: the part goes, and the next attempt starts from zero. A part that can't be deleted
+     * fails it as the location unavailable.
+     */
+    private suspend inline fun restart(row: DownloadRow, fail: (Outcome) -> Nothing): DownloadRow {
         val directory = env.locationPath(row.locationId)
-        if (directory != null && row.relativePath != null) env.io { deletePart(child(directory, row.relativePath)) }
+        if (directory != null && row.relativePath != null && !env.io { deletePart(child(directory, row.relativePath)) }) {
+            fail(Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE))
+        }
         env.repo.resetFile(row.id)
-        return env.repo.download(row.id)
+        return env.repo.download(row.id) ?: fail(Outcome.Gone)
     }
 
     /** The stream's final URL, size and hash, right before an attempt. */
