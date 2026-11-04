@@ -140,6 +140,10 @@ final class NowPlayingCenter: @preconcurrency MediaControlsHost {
         #endif
     }
 
+    /// The most the artwork's download may hold: the URL is an addon's, and its answer may be anything (a video, an
+    /// endless body), which would otherwise be read whole into memory.
+    private nonisolated static let maxArtworkBytes = 8 * 1024 * 1024
+
     /// Loads the artwork once per URL and publishes again when it arrives.
     private func loadArtwork(_ url: String?) {
         guard artwork?.url != url else { return }
@@ -152,8 +156,7 @@ final class NowPlayingCenter: @preconcurrency MediaControlsHost {
         artwork = (url, nil)
         artworkTask = Task { [weak self] in
             do {
-                let (data, _) = try await URLSession.shared.data(from: location)
-                guard let image = Self.artwork(from: data) else { return }
+                guard let data = try await Self.download(location), let image = Self.artwork(from: data) else { return }
                 guard let self, !Task.isCancelled, artwork?.url == url else { return }
                 artwork = (url, image)
                 publish()
@@ -161,6 +164,29 @@ final class NowPlayingCenter: @preconcurrency MediaControlsHost {
                 log.debug("now playing artwork: \(error.localizedDescription, privacy: .public)")
             }
         }
+    }
+
+    /// The body at `location`, read as it arrives; nil for an answer other than 2xx, or one that says or turns out to
+    /// be over `maxArtworkBytes`, whose download stops there.
+    private nonisolated static func download(_ location: URL) async throws -> Data? {
+        let (bytes, response) = try await URLSession.shared.bytes(from: location)
+        let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+        guard (200..<300).contains(status), response.expectedContentLength <= maxArtworkBytes else {
+            bytes.task.cancel()
+            log.debug("now playing artwork: HTTP \(status, privacy: .public), \(response.expectedContentLength, privacy: .public) bytes, not loaded")
+            return nil
+        }
+        var data = Data()
+        if response.expectedContentLength > 0 { data.reserveCapacity(Int(response.expectedContentLength)) }
+        for try await byte in bytes {
+            guard data.count < maxArtworkBytes else {
+                bytes.task.cancel()
+                log.debug("now playing artwork: over \(maxArtworkBytes, privacy: .public) bytes, not loaded")
+                return nil
+            }
+            data.append(byte)
+        }
+        return data
     }
 
     private nonisolated static func artwork(from data: Data) -> MPMediaItemArtwork? {
