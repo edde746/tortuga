@@ -238,7 +238,7 @@ internal class KidsGate(
         val key = keyOf(id, preview)
         val live = preview?.isLive ?: (type == LIVE_TYPE)
         policy.settled(key, live)?.let { return it }
-        val cacheKey = cacheKey(type, id)
+        val cacheKey = cacheKey(type, id, preview)
         val entry = known[cacheKey]
         val due = entry == null || entry.rating == TitleRating.Failed && timeSource.markNow() - entry.at >= RETRY_FAILED
         if (due && cacheKey !in asking) ask(cacheKey, type, id, preview)
@@ -251,7 +251,7 @@ internal class KidsGate(
         val key = keyOf(id, preview)
         val live = preview?.isLive ?: (type == LIVE_TYPE)
         policy.settled(key, live)?.let { return it }
-        val cacheKey = cacheKey(type, id)
+        val cacheKey = cacheKey(type, id, preview)
         val entry = known[cacheKey]
         val rating = if (entry != null && (entry.rating != TitleRating.Failed || timeSource.markNow() - entry.at < RETRY_FAILED)) {
             entry.rating
@@ -293,8 +293,8 @@ internal class KidsGate(
     }
 
     /**
-     * Looks up the rating of the title [id] of [type] (kept under [cacheKey]) once at a time; the answer is kept and
-     * moves [changes], and a failed one moves it again once [RETRY_FAILED] has passed ([retryFailed]).
+     * Looks up the rating of the title [id] of [type] with [preview] (kept under [cacheKey]) once at a time; the answer
+     * is kept and moves [changes], and a failed one moves it again once [RETRY_FAILED] has passed ([retryFailed]).
      */
     private fun ask(cacheKey: String, type: String, id: String, preview: MetaItemPreview?): Deferred<TitleRating> {
         asking[cacheKey]?.let { return it }
@@ -354,6 +354,7 @@ internal class KidsGate(
 
         private fun keyOf(id: String, preview: MetaItemPreview?): String = if (ImdbId.parse(id) != null) id else preview?.imdbId ?: id
 
-        private fun cacheKey(type: String, id: String) = "$type/$id"
+        /** A rating as it was looked up: by the title's type and id, and the IMDb id its [preview] adds ([AgeRatings.rating]). */
+        private fun cacheKey(type: String, id: String, preview: MetaItemPreview?) = "$type/$id/${preview?.imdbId.orEmpty()}"
     }
 }

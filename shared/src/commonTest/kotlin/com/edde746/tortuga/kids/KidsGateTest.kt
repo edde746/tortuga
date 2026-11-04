@@ -5,6 +5,7 @@ package com.edde746.tortuga.kids
 import com.edde746.tortuga.data.LocalData
 import com.edde746.tortuga.data.profile.Profile
 import com.edde746.tortuga.data.settings.ProfileSetting
+import com.edde746.tortuga.model.MetaItemPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestScope
@@ -78,6 +79,21 @@ class KidsGateTest {
 
         // Suggested 6+: the default cap would show it; the parent's (unreadable) one may not.
         assertEquals(KidsVerdict.Blocked(KidsBlockReason.Unchecked), gate.verdict("movie", GHOSTBUSTERS.id, null))
+    }
+
+    /** A rating looked up without the IMDb id a title's catalog item adds is looked up again once it comes with it. */
+    @Test
+    fun aTitleSeenWithoutItsImdbIdIsLookedUpAgainWithIt() = runTest {
+        val w = kidsWorld()
+        w.graph.data.settings.set(w.kids.id, ProfileSetting.KidsAllowUnrated, true)
+        w.ages.ages[AgeIdTable.IMDB to 9_000_001L] = 18
+        val gate = gate(w)
+
+        // Continue Watching knows it by its addon's TMDB id only, which the database hasn't.
+        assertEquals(KidsVerdict.Allowed, gate.verdict("movie", "tmdb:555", null))
+        val preview = MetaItemPreview("tmdb:555", "movie", "A film", imdbId = "tt9000001")
+        assertEquals(KidsVerdict.Blocked(KidsBlockReason.Suggested(18)), gate.verdict("movie", "tmdb:555", preview))
+        assertEquals(2, w.ages.reads)
     }
 
     /**
