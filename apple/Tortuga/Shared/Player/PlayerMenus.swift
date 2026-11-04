@@ -120,7 +120,13 @@ struct PlayerMenuContent {
         /// What a long press on the row does (a held Select on Apple TV; the system menus' Second subtitle submenu on
         /// iOS and the Mac, whose entries take none); nil for a row whose long press is a click (not a subtitle's).
         var hold: Hold?
-        let perform: () -> Void
+        /// What a pick sends to `store` (`perform`): the entry's identity beside what it shows (`NativeMenu.target`).
+        let command: any PlayerCommand
+        let store: PlayerStore
+
+        func perform() {
+            store.dispatch(command: command)
+        }
     }
 
     /// A subtitle row's long-press action, named for VoiceOver; no name where it does nothing.
@@ -151,17 +157,20 @@ struct PlayerMenuContent {
             delay = state.subtitleDelay
         case .moreSubtitles:
             entries = state.moreSubtitles.map { language in
-                Entry(label: language.label, detail: nil, value: language.count, selected: false) {
-                    store.dispatch(command: PlayerCommandOpenSubtitleLanguage(key: language.key))
-                }
+                Entry(
+                    label: language.label,
+                    detail: nil,
+                    value: language.count,
+                    selected: false,
+                    command: PlayerCommandOpenSubtitleLanguage(key: language.key),
+                    store: store
+                )
             }
         case .subtitleLanguage:
             entries = Self.choices(state.subtitleLanguage?.subtitles ?? [], store: store)
         case .speed:
             entries = state.speeds.map { option in
-                Entry(label: option.label, detail: nil, selected: option.selected) {
-                    store.dispatch(command: PlayerCommandSetSpeed(speed: option.speed))
-                }
+                Entry(label: option.label, detail: nil, selected: option.selected, command: PlayerCommandSetSpeed(speed: option.speed), store: store)
             }
         // An option's page; the options themselves, the delays and the room panel list apart (`PlayerOptionsButton`,
         // the delay popovers, the TV panel's Options tab).
@@ -174,9 +183,7 @@ struct PlayerMenuContent {
     /// Choices as entries: an option's (its page), a language's subtitles to add.
     static func choices(_ choices: [OptionChoice], store: PlayerStore) -> [Entry] {
         choices.map { choice in
-            Entry(label: choice.label, detail: choice.detail, selected: choice.selected) {
-                store.dispatch(command: choice.command)
-            }
+            Entry(label: choice.label, detail: choice.detail, selected: choice.selected, command: choice.command, store: store)
         }
     }
 
@@ -197,9 +204,15 @@ struct PlayerMenuContent {
                 }
                 hold = Hold(name: name) { store.dispatch(command: PlayerCommandToggleSecondSubtitle(id: track.id)) }
             }
-            return Entry(label: track.label, detail: track.detail, selected: track.selected, second: track.second, hold: hold) {
-                store.dispatch(command: PlayerCommandSelectTrack(kind: kind, id: track.id))
-            }
+            return Entry(
+                label: track.label,
+                detail: track.detail,
+                selected: track.selected,
+                second: track.second,
+                hold: hold,
+                command: PlayerCommandSelectTrack(kind: kind, id: track.id),
+                store: store
+            )
         }
     }
 }
@@ -388,23 +401,6 @@ struct PlayerOptionsButton: View {
         .playerMenuStyle(menu: .options, label: T.shared.player.options.title, value: nil, id: "player.more")
     }
     #endif
-
-    /// Reads the picked file off the main thread and sends its name and text (`PlayerCommandImportShader`); a file
-    /// that can't be read, is over `maxBytes` or isn't UTF-8 fails the import (`PlayerCommandShaderImportFailed`).
-    private func importShader(_ url: URL) async {
-        let maxBytes = Self.maxBytes
-        let text = await Task.detached(priority: .userInitiated) { () -> String? in
-            let scoped = url.startAccessingSecurityScopedResource()
-            defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-            guard let file = try? FileHandle(forReadingFrom: url) else { return nil }
-            defer { try? file.close() }
-            guard let data = try? file.read(upToCount: maxBytes + 1) ?? Data(), data.count <= maxBytes else { return nil }
-            return String(data: data, encoding: .utf8)
-        }.value
-        if let text {
-            store.dispatch(command: PlayerCommandImportShader(fileName: url.lastPathComponent, source: text))
-        } else {
-            store.dispatch(command: PlayerCommandShaderImportFailed.shared)
 }
 
 /// What the Shaders submenu's own entries open once the menu has gone: Import shader the open dialog, an imported
@@ -451,6 +447,23 @@ struct ShaderPromptsPresenter: ViewModifier {
                 Button(T.shared.player.options.shader.cancel, role: .cancel) {}
             }
     }
+
+    /// Reads the picked file off the main thread and sends its name and text (`PlayerCommandImportShader`); a file
+    /// that can't be read, is over `maxBytes` or isn't UTF-8 fails the import (`PlayerCommandShaderImportFailed`).
+    private func importShader(_ url: URL) async {
+        let maxBytes = Self.maxBytes
+        let text = await Task.detached(priority: .userInitiated) { () -> String? in
+            let scoped = url.startAccessingSecurityScopedResource()
+            defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+            guard let file = try? FileHandle(forReadingFrom: url) else { return nil }
+            defer { try? file.close() }
+            guard let data = try? file.read(upToCount: maxBytes + 1) ?? Data(), data.count <= maxBytes else { return nil }
+            return String(data: data, encoding: .utf8)
+        }.value
+        if let text {
+            store.dispatch(command: PlayerCommandImportShader(fileName: url.lastPathComponent, source: text))
+        } else {
+            store.dispatch(command: PlayerCommandShaderImportFailed.shared)
         }
     }
 }
@@ -476,14 +489,21 @@ private struct NativeMenu {
     /// One of the submenu's entries is checked at a time.
     var singleSelection = false
     var action: (() -> Void)?
+    /// The command the entry's pick sends, where it sends one: entries that show the same can act apart (More
+    /// subtitles' subtitles of the next episode, labelled as the last one's), so it is part of `signature`.
+    var target: (any PlayerCommand)?
     var afterClose: (() -> Void)?
 
-    /// What the menu shows, to tell when it changed: iOS builds its menu again only then, and on the Mac each build
-    /// closes an open submenu (`PlayerOptionsButton`'s `==`).
-    var signature: [String] {
-        let entry = "\(identifier)|\(title)|\(subtitle ?? "")|\(systemImage ?? "")|\(checked?.description ?? "-")"
-        guard let children else { return [entry] }
-        return [entry, "["] + children.flatMap(\.signature) + ["]"]
+    /// What the menu shows and what its entries act on, to tell when it changed: iOS builds its menu again only then,
+    /// and on the Mac each build closes an open submenu (`PlayerOptionsButton`'s `==`). Kotlin's commands compare as
+    /// their `equals`, a data class's by its values.
+    var signature: [AnyHashable] {
+        let entry: [AnyHashable] = [
+            "\(identifier)|\(title)|\(subtitle ?? "")|\(systemImage ?? "")|\(checked?.description ?? "-")",
+            AnyHashable(target.map { $0 as AnyObject as! NSObject }),
+        ]
+        guard let children else { return entry }
+        return entry + ["["] + children.flatMap(\.signature) + ["]"]
     }
 
     /// A track or speed menu (`PlayerMenuContent`): its entries, the current one checked, then the subtitle menu's
@@ -528,7 +548,8 @@ private struct NativeMenu {
                 subtitle: entry.detail,
                 checked: checked,
                 identifier: "player.menu.second.item.\(index)",
-                action: checked ? nil : entry.hold?.perform
+                action: checked ? nil : entry.hold?.perform,
+                target: entry.command
             )
         }
         return NativeMenu(
@@ -582,7 +603,8 @@ private struct NativeMenu {
                     systemImage: option.id.systemImage,
                     checked: on.boolValue,
                     identifier: option.id.identifier,
-                    action: { store.dispatch(command: toggle) }
+                    action: { store.dispatch(command: toggle) },
+                    target: toggle
                 )
             }
             let picks = choices(PlayerMenuContent.choices(option.choices, store: store))
@@ -619,6 +641,7 @@ private struct NativeMenu {
                 title: T.shared.player.options.shader.deleteLabel(name: choice.label),
                 systemImage: "trash",
                 identifier: "player.shaders.delete.\(index)",
+                target: choice.delete,
                 afterClose: { prompts?.deleting = choice }
             )
         }
@@ -677,7 +700,8 @@ private struct NativeMenu {
                 imageLabel: entry.second ? T.shared.player.track.second : nil,
                 checked: entry.selected,
                 identifier: "player.menu.item.\(index)",
-                action: entry.perform
+                action: entry.perform,
+                target: entry.command
             )
         }
     }
@@ -943,7 +967,7 @@ private struct NativeMenuButton: UIViewRepresentable {
     final class MenuButton: UIButton {
         var onOpen: (() -> Void)?
         var onClose: (() -> Void)?
-        var signature: [String] = []
+        var signature: [AnyHashable] = []
         /// The symbol the button's configuration shows.
         var systemImage: String?
         /// The point size of the symbol the configuration shows.
