@@ -15,7 +15,10 @@ import io.ktor.server.response.respondText
  * by an app, so their text is English here rather than in the apps' string catalog.
  */
 suspend fun ApplicationCall.respondStaticPage(status: HttpStatusCode, title: String, body: String, form: PageForm? = null) {
-    response.header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'")
+    // No site may frame a page (default-src doesn't cover framing): a page's one button can't be clicked through
+    // another's. X-Frame-Options for browsers without frame-ancestors.
+    response.header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'")
+    response.header("X-Frame-Options", "DENY")
     response.header("Referrer-Policy", "no-referrer")
     response.header("Cache-Control", "no-store")
     response.header("X-Content-Type-Options", "nosniff")

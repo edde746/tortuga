@@ -86,6 +86,15 @@ class ReviewSignInTest {
     }
 
     @Test
+    fun noSiteCanFrameThePage() = reviewTest {
+        // A page's form framed under another site's could take a click meant for that site (clickjacking).
+        for (page in listOf(browserGet(), review(PASSWORD, "ABCD-EFGH"))) {
+            assertContains(assertNotNull(page.headers["Content-Security-Policy"]), "frame-ancestors 'none'")
+            assertEquals("DENY", page.headers["X-Frame-Options"])
+        }
+    }
+
+    @Test
     fun aWrongPasswordIsRefusedAndApprovesNothing() = reviewTest {
         val secret = LinkSecret()
         val started = startLink(secret, tv)
