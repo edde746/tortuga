@@ -25,9 +25,13 @@ val mpvAndroid = mpvLock.getValue("artifacts")["android"]
     ?: throw GradleException("mpv-build.lock.json has no android group; run tools/set_native_revision.sh")
 @Suppress("UNCHECKED_CAST")
 val mpvAar = mpvAndroid.getValue("aar") as Map<String, String>
-check(providers.fileContents(layout.rootDirectory.file("gradle/verification-metadata.xml")).asText.get()
-    .contains("<sha256 value=\"${mpvAar.getValue("checksum")}\"")) {
-    "gradle/verification-metadata.xml doesn't check mpv-android against mpv-build.lock.json's sha256; run tools/set_native_revision.sh"
+val mpvAarKey = Regex.escape(mpvAar.getValue("key"))
+val mpvAarVerified = Regex(
+    """<component group="edde746" name="mpv-android" version="$mpvAarKey">\s*<artifact name="mpv-android-$mpvAarKey\.aar">""" +
+        """\s*<sha256 value="${Regex.escape(mpvAar.getValue("checksum"))}"""",
+)
+check(mpvAarVerified.containsMatchIn(providers.fileContents(layout.rootDirectory.file("gradle/verification-metadata.xml")).asText.get())) {
+    "gradle/verification-metadata.xml doesn't check mpv-android against mpv-build.lock.json's key and sha256; run tools/set_native_revision.sh"
 }
 
 dependencyResolutionManagement {
