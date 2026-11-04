@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Seguimiento",
-      "note": "Los servicios conectados reciben lo que este perfil ve: el progreso de reproducción y los títulos marcados como vistos. Conectar o desconectar un servicio se aplica a este perfil en todos tus dispositivos; los interruptores de abajo solo se aplican a este dispositivo.",
+      "note": "Los servicios conectados reciben lo que este perfil ve: el progreso de reproducción y los títulos marcados como vistos. Conectar o desconectar un servicio, y los interruptores de abajo, se aplican a este perfil en todos tus dispositivos.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

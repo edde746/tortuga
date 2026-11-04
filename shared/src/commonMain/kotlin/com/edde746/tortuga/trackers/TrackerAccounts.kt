@@ -1,5 +1,9 @@
 package com.edde746.tortuga.trackers
 
+import com.edde746.tortuga.data.settings.ProfileSetting
+import com.edde746.tortuga.data.settings.SettingsRepository
+import com.edde746.tortuga.data.settings.TrackerSwitch
+import com.edde746.tortuga.data.settings.TrackerSwitches
 import com.edde746.tortuga.data.tracker.TrackerAccount
 import com.edde746.tortuga.data.tracker.TrackerAccountRepository
 import com.edde746.tortuga.log.Log
@@ -23,6 +27,7 @@ import com.edde746.tortuga.trackers.relay.OAuthRelayApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.selects.select
@@ -46,14 +51,14 @@ sealed interface SignInPrompt {
 
 /**
  * A profile's tracker accounts (connections belong to the Tortuga account, per profile, and serve every device of
- * it): sign-in, the connection list with its enabled and content-filter toggles, and the tokens behind each
- * connection.
+ * it): sign-in, the connection list, each service's switches (sending at all, content filters: the profile's synced
+ * settings, [TrackerSwitches]), and the tokens behind each connection.
  *
  * The account server ([server], through [api]'s tracker connection routes) holds each connection's tokens and alone
- * refreshes them. This device keeps the account's connection list ([TrackerAccountRepository], with this device's
- * own switches), which [syncConnections] brings up to date, and each connection's current access token
- * ([TrackerTokenStore]) until it expires. A sign-in hands the service's tokens to the server; no refresh token stays
- * here. Without an account session nothing can be connected ([canConnect]).
+ * refreshes them. This device keeps the account's connection list ([TrackerAccountRepository]), which
+ * [syncConnections] brings up to date, and each connection's current access token ([TrackerTokenStore]) until it
+ * expires. A sign-in hands the service's tokens to the server; no refresh token stays here. Without an account
+ * session nothing can be connected ([canConnect]).
  *
  * Each connection is a binding named by [TrackerAccount.connectedAt] (when the server stored the sign-in). Its
  * [TrackerCredentials] ask the server one request at a time, keep the token before handing it out, and drop the
@@ -62,6 +67,7 @@ sealed interface SignInPrompt {
  */
 class TrackerAccounts internal constructor(
     private val repository: TrackerAccountRepository,
+    private val settings: SettingsRepository,
     private val tokens: TrackerTokenStore,
     private val server: ServerSession,
     private val api: SyncApi,
@@ -241,7 +247,8 @@ class TrackerAccounts internal constructor(
 
     /**
      * Disconnects [service] from the profile on every device: the account server forgets the connection and revokes
-     * its token at the service (best effort), then this device drops the connection, its queued writes and its token.
+     * its token at the service (best effort), then this device drops the connection, its queued writes and its token,
+     * and the profile's switches for the service go back to on, so a later connection starts with every one on.
      *
      * @throws TrackerException.AccountServer when the server couldn't be reached; nothing changed then. Also when this
      *   device's secret store couldn't delete the token: the connection is gone then, and the cleanup of unused tokens
@@ -256,6 +263,7 @@ class TrackerAccounts internal constructor(
             bindings.remove(profileId to service)
         }
         Log.i(TAG) { "${service.id} disconnected" }
+        settings.edit(profileId) { for (switch in TrackerSwitch.entries) remove(ProfileSetting.Tracker(service, switch).key) }
         relist()
     }
 
@@ -302,21 +310,27 @@ class TrackerAccounts internal constructor(
         if (version != listedVersion) syncConnections()
     }
 
-    /** Whether the profile's writes go to [service] at all. */
-    suspend fun setEnabled(profileId: String, service: TrackerService, enabled: Boolean) =
-        repository.setEnabled(profileId, service, enabled)
+    /** Every service's switches for the profile, again whenever one changes (here, or on another device by sync). */
+    fun observeSwitches(profileId: String): Flow<Map<TrackerService, TrackerSwitches>> =
+        settings.observe(profileId).map { it.trackers }.distinctUntilChanged()
 
-    /** Whether the profile's writes about [type] go to [service]. */
+    /** Whether the profile's writes go to [service] at all, on every device of the profile. */
+    suspend fun setEnabled(profileId: String, service: TrackerService, enabled: Boolean) =
+        settings.set(profileId, ProfileSetting.Tracker(service, TrackerSwitch.SENDING), enabled)
+
+    /** Whether the profile's writes about [type] go to [service], on every device of the profile. */
     suspend fun setContentFilter(profileId: String, service: TrackerService, type: TrackerContentType, on: Boolean) =
-        repository.setContentFilter(profileId, service, type, on)
+        settings.set(profileId, ProfileSetting.Tracker(service, TrackerSwitch.of(type)), on)
 
     /**
-     * The profile's connections as trackers, each bound to its sign-in: the same [Tracker] instance as long as the
-     * binding lasts, a new one after a reconnect. Connections to services this build has no provider for are left
-     * out.
+     * The profile's connections as trackers, each bound to its sign-in, with the service's switches: the same
+     * [Tracker] instance as long as the binding lasts, a new one after a reconnect. Connections to services this build
+     * has no provider for are left out.
      */
-    internal fun bound(profileId: String): Flow<List<BoundTracker>> = observe(profileId).map { accounts ->
-        accounts.mapNotNull { account -> binding(profileId, account)?.let { BoundTracker(account, it.tracker, it.watchlist) } }
+    internal fun bound(profileId: String): Flow<List<BoundTracker>> = combine(observe(profileId), observeSwitches(profileId)) { accounts, switches ->
+        accounts.mapNotNull { account ->
+            binding(profileId, account)?.let { BoundTracker(account, switches.getValue(account.service), it.tracker, it.watchlist) }
+        }
     }
 
     /**
@@ -481,18 +495,19 @@ class TrackerAccounts internal constructor(
 }
 
 /**
- * A connection and the tracker bound to its sign-in, with its watchlist where the service has one (the five services
- * this build knows all do).
+ * A connection, the profile's switches for its service, and the tracker bound to its sign-in, with its watchlist where
+ * the service has one (the five services this build knows all do).
  */
-internal class BoundTracker(val account: TrackerAccount, val tracker: Tracker, val watchlist: BoundWatchlist? = null) {
+internal class BoundTracker(
+    val account: TrackerAccount,
+    val switches: TrackerSwitches,
+    val tracker: Tracker,
+    val watchlist: BoundWatchlist? = null,
+) {
     val service: TrackerService get() = account.service
 
-    /** Writes about [type] go to this account: it is enabled and its content filter lets them through. */
-    fun takes(type: TrackerContentType): Boolean = account.enabled && when (type) {
-        TrackerContentType.MOVIE -> account.syncMovies
-        TrackerContentType.SERIES -> account.syncSeries
-        TrackerContentType.ANIME -> account.syncAnime
-    }
+    /** Writes about [type] go to this account: sending is on and its content filter lets them through. */
+    fun takes(type: TrackerContentType): Boolean = switches.takes(type)
 }
 
 /** One sign-in's [TrackerWatchlist] and what is known of it. */

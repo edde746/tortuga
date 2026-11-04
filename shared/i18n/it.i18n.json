@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Tracker",
-      "note": "I servizi connessi ricevono ciò che questo profilo guarda: l'avanzamento della visione e i titoli segnati come visti. Connettere o disconnettere un servizio vale per questo profilo su tutti i tuoi dispositivi; gli interruttori qui sotto valgono solo per questo dispositivo.",
+      "note": "I servizi connessi ricevono ciò che questo profilo guarda: l'avanzamento della visione e i titoli segnati come visti. Connettere o disconnettere un servizio e gli interruttori qui sotto valgono per questo profilo su tutti i tuoi dispositivi.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

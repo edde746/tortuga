@@ -265,7 +265,7 @@ class TrackerCoordinator internal constructor(
 
     /** Opens the playback of [videoId]; its start is reported once it plays ([playing] now, else its first resume). */
     private suspend fun start(meta: MetaItem, videoId: String, at: PlaybackPosition, playing: Boolean) {
-        if (meta.preview.isLive || bound.none { it.account.enabled }) return
+        if (meta.preview.isLive || bound.none { it.switches.sending }) return
         val kind = when {
             videoIsTitle(meta.id, videoId) -> TrackerMediaKind.MOVIE
             meta.video(videoId)?.seriesInfo != null -> TrackerMediaKind.EPISODE
@@ -378,7 +378,7 @@ class TrackerCoordinator internal constructor(
     // Manual marks
 
     private suspend fun applyMark(mark: WatchedMark) {
-        if (bound.none { it.account.enabled }) return
+        if (bound.none { it.switches.sending }) return
         when (mark) {
             is WatchedMark.Title -> {
                 if (mark.type == "movie") {
@@ -951,7 +951,7 @@ class TrackerCoordinator internal constructor(
         val batches = LinkedHashMap<Pair<Tracker, Boolean>, MutableList<Replay>>()
         for (row in queue.pending(profileId)) {
             val b = bound.firstOrNull { it.service == row.service } ?: continue
-            if (!b.account.enabled) continue
+            if (!b.switches.sending) continue
             when (val content = row.content) {
                 is QueuedTrackerContent.Rate -> {
                     // A rating: one row, one request.

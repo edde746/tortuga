@@ -6,9 +6,9 @@ import com.edde746.tortuga.trackers.TrackerService
 /**
  * The Trackers section of Settings: the tracker services this build can connect, each with its
  * connection on this profile (connections belong to the Tortuga account and apply on every device of it),
- * connecting and disconnecting, and a connected account's switches (this device's).
+ * connecting and disconnecting, and a connected account's switches (the profile's, on every device of it too).
  *
- * @param note what a connection is and where it applies: Connect and Disconnect on every device, the switches here.
+ * @param note what a connection is and where it applies: Connect, Disconnect and the switches on every device.
  * @param services one row per service this build has a registration for, in [TrackerService] order, plus any
  *   connection whose service this build can no longer connect ([TrackerServiceRow.available] false), so it can still
  *   be disconnected. Services without a registration are left out.
@@ -56,8 +56,8 @@ data class TrackerServiceRow(
 )
 
 /**
- * A connected account's switches: whether anything goes to the service ([scrobble]: live playback reports and watched
- * marks), and which content types do (per profile, movie / series / anime).
+ * A connected account's switches, the profile's on every device: whether anything goes to the service ([scrobble]:
+ * live playback reports and watched marks), and which content types do (movie / series / anime).
  *
  * @param filtersHeader the heading above [movies], [series] and [anime].
  * @param queued "2 changes waiting to be sent": watched marks and ratings that failed and wait for a retry; null when

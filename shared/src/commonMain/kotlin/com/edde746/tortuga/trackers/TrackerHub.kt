@@ -52,9 +52,10 @@ class TrackerHub internal constructor(
 ) {
     private val coordinators = mutableMapOf<String, TrackerCoordinator>()
 
-    /** Sign-in, connections and their toggles; connecting replays the profile's queued writes. */
+    /** Sign-in, connections and their switches; connecting replays the profile's queued writes. */
     val accounts: TrackerAccounts = TrackerAccounts(
         repository = accountRepository,
+        settings = settings,
         tokens = tokens,
         server = server,
         api = api,

@@ -988,7 +988,7 @@
     },
     "trackers": {
       "title": "Dịch vụ theo dõi",
-      "note": "Các dịch vụ đã kết nối sẽ nhận nội dung mà hồ sơ này xem: tiến độ xem và các nội dung được đánh dấu đã xem. Việc kết nối hoặc ngắt kết nối một dịch vụ áp dụng cho hồ sơ này trên tất cả thiết bị của bạn; các công tắc bên dưới chỉ áp dụng cho thiết bị này.",
+      "note": "Các dịch vụ đã kết nối sẽ nhận nội dung mà hồ sơ này xem: tiến độ xem và các nội dung được đánh dấu đã xem. Việc kết nối hoặc ngắt kết nối một dịch vụ, cùng các công tắc bên dưới, áp dụng cho hồ sơ này trên tất cả thiết bị của bạn.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

@@ -1,10 +1,12 @@
 package com.edde746.tortuga.trackers
 
+import com.edde746.tortuga.data.settings.TrackerSwitches
 import com.edde746.tortuga.sync.account.AccountError
 import com.edde746.tortuga.trackers.TrackerService.ANILIST
 import com.edde746.tortuga.trackers.TrackerService.SIMKL
 import com.edde746.tortuga.trackers.TrackerService.TRAKT
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
@@ -174,10 +176,14 @@ class TrackerAccountsTest {
         val f = fixture()
         f.connect(TRAKT)
         f.queueWrite(TRAKT)
+        f.hub.accounts.setEnabled(f.profileId, TRAKT, false)
+        f.hub.accounts.setContentFilter(f.profileId, TRAKT, TrackerContentType.ANIME, on = false)
+        val off = TrackerSwitches.DEFAULT.copy(sending = false, anime = false)
 
         f.server.down = true
         assertFailsWith<TrackerException.AccountServer> { f.hub.accounts.disconnect(f.profileId, TRAKT) }
         assertEquals(listOf(TRAKT), f.hub.accounts.accounts(f.profileId).map { it.service }, "nothing changed while unreachable")
+        assertEquals(off, f.hub.accounts.observeSwitches(f.profileId).first().getValue(TRAKT))
 
         f.server.down = false
         f.hub.accounts.disconnect(f.profileId, TRAKT)
@@ -186,6 +192,7 @@ class TrackerAccountsTest {
         assertEquals(emptyList(), f.queued())
         assertNull(f.stored(TRAKT))
         assertTrue(f.secrets.entries.isEmpty(), "no token left in the secret store")
+        assertEquals(TrackerSwitches.DEFAULT, f.hub.accounts.observeSwitches(f.profileId).first().getValue(TRAKT), "a later connection starts with every switch on")
     }
 
     @Test
@@ -243,7 +250,7 @@ class TrackerAccountsTest {
     }
 
     @Test
-    fun aListingKeepsTheSwitchesAndANewSignInElsewhereStartsANewBinding() = runTest {
+    fun aListingLeavesTheSwitchesAndANewSignInElsewhereStartsANewBinding() = runTest {
         val phone = fixture()
         val tv = fixture(server = phone.server)
         phone.connect(TRAKT)
@@ -261,7 +268,7 @@ class TrackerAccountsTest {
         val after = tv.hub.accounts.accounts(tv.profileId).single()
         assertEquals("sam", after.username)
         assertTrue(after.connectedAt > before.connectedAt)
-        assertFalse(after.enabled, "this device's switch kept")
+        assertFalse(tv.hub.accounts.observeSwitches(tv.profileId).first().getValue(TRAKT).sending, "the profile's switch stays")
         assertEquals(emptyList(), tv.queued(), "writes queued for the previous sign-in dropped")
         assertEquals("b0", tv.hub.accounts.credentials(tv.profileId, TRAKT)!!.accessToken())
     }

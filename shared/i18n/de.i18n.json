@@ -1006,7 +1006,7 @@
     },
     "trackers": {
       "title": "Tracker",
-      "note": "Verbundene Dienste erfahren, was dieses Profil ansieht: Wiedergabefortschritt und als gesehen markierte Titel. Das Verbinden oder Trennen eines Dienstes gilt für dieses Profil auf allen Ihren Geräten; die Schalter darunter gelten nur für dieses Gerät.",
+      "note": "Verbundene Dienste erfahren, was dieses Profil ansieht: Wiedergabefortschritt und als gesehen markierte Titel. Das Verbinden oder Trennen eines Dienstes und die Schalter darunter gelten für dieses Profil auf allen Ihren Geräten.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

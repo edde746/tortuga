@@ -3,7 +3,6 @@ package com.edde746.tortuga.data.tracker
 import com.edde746.tortuga.data.Db
 import com.edde746.tortuga.data.db.SelectConnections
 import com.edde746.tortuga.data.db.Tracker_account
-import com.edde746.tortuga.trackers.TrackerContentType
 import com.edde746.tortuga.trackers.TrackerService
 import com.edde746.tortuga.trackers.connections.TrackerConnection
 import kotlinx.coroutines.flow.Flow
@@ -17,12 +16,6 @@ data class TrackerAccount(
     val service: TrackerService,
     val username: String?,
     val scopes: List<String>,
-    /** Writes go to this service at all. */
-    val enabled: Boolean,
-    /** Content-type filters: whether the profile's writes about movies, series and anime go to this service. */
-    val syncMovies: Boolean,
-    val syncSeries: Boolean,
-    val syncAnime: Boolean,
     /**
      * When the account server stored this sign-in, epoch milliseconds by its clock. It names the binding: a reconnect
      * moves it, so work begun under one sign-in can tell that the account it was for is gone.
@@ -31,8 +24,9 @@ data class TrackerAccount(
 )
 
 /**
- * A profile's connected trackers, one per service: this device's copy of the account's connections, with this
- * device's own switches (sending at all, content filters).
+ * A profile's connected trackers, one per service: this device's copy of the account's connections. Their switches
+ * (sending at all, content filters) are the profile's synced settings
+ * ([com.edde746.tortuga.data.settings.TrackerSwitches]).
  */
 class TrackerAccountRepository internal constructor(private val db: Db) {
     fun observeAccounts(profileId: String): Flow<List<TrackerAccount>> =
@@ -55,10 +49,10 @@ class TrackerAccountRepository internal constructor(private val db: Db) {
         db.read { trackerQueries.selectAccount(profileId, service.id).executeAsOneOrNull()?.toModel() }
 
     /**
-     * Records the account server's [connectedAt] sign-in as the profile's [service] connection. A new one starts
-     * enabled for every content type. Reconnecting the same service (a new sign-in, maybe to another account) updates
-     * the username and scopes, keeps the toggles, and starts a new binding: writes queued under the previous sign-in
-     * are dropped, since a queued row carries no account identity and would otherwise replay through the new one.
+     * Records the account server's [connectedAt] sign-in as the profile's [service] connection. Reconnecting the same
+     * service (a new sign-in, maybe to another account) updates the username and scopes and starts a new binding:
+     * writes queued under the previous sign-in are dropped, since a queued row carries no account identity and would
+     * otherwise replay through the new one.
      */
     suspend fun connect(profileId: String, service: TrackerService, username: String?, scopes: List<String>, connectedAt: Long): TrackerAccount =
         db.write {
@@ -96,21 +90,6 @@ class TrackerAccountRepository internal constructor(private val db: Db) {
         }
     }
 
-    suspend fun setEnabled(profileId: String, service: TrackerService, enabled: Boolean) {
-        update(profileId, service) { it.copy(enabled = enabled) }
-    }
-
-    /** Whether writes about [type] go to [service]; the other types' filters stay as stored. */
-    suspend fun setContentFilter(profileId: String, service: TrackerService, type: TrackerContentType, on: Boolean) {
-        update(profileId, service) {
-            when (type) {
-                TrackerContentType.MOVIE -> it.copy(sync_movies = on)
-                TrackerContentType.SERIES -> it.copy(sync_series = on)
-                TrackerContentType.ANIME -> it.copy(sync_anime = on)
-            }
-        }
-    }
-
     /**
      * Forgets the connection and every write queued for it: a queued row carries no account identity, so it would
      * otherwise replay through whichever account connects to the service next.
@@ -125,13 +104,6 @@ class TrackerAccountRepository internal constructor(private val db: Db) {
         q.trackerQueries.deleteQueuedForService(profileId, service.id)
         stored != null
     }
-
-    private suspend fun update(profileId: String, service: TrackerService, change: (Tracker_account) -> Tracker_account) {
-        db.write {
-            val stored = q.trackerQueries.selectAccount(profileId, service.id).executeAsOneOrNull() ?: return@write
-            q.trackerQueries.upsertAccount(change(stored))
-        }
-    }
 }
 
 private fun newRow(profileId: String, service: String, username: String?, scopesJson: String, connectedAt: Long) = Tracker_account(
@@ -139,10 +111,6 @@ private fun newRow(profileId: String, service: String, username: String?, scopes
     service = service,
     username = username,
     scopes_json = scopesJson,
-    enabled = true,
-    sync_movies = true,
-    sync_series = true,
-    sync_anime = true,
     connected_at = connectedAt,
 )
 
@@ -158,10 +126,6 @@ private fun Tracker_account.toModel() = TrackerService.fromId(service)?.let { kn
         service = known,
         username = username,
         scopes = Json.decodeFromString(scopesSerializer, scopes_json),
-        enabled = enabled,
-        syncMovies = sync_movies,
-        syncSeries = sync_series,
-        syncAnime = sync_anime,
         connectedAt = connected_at,
     )
 }

@@ -988,7 +988,7 @@
     },
     "trackers": {
       "title": "Pelacak",
-      "note": "Layanan yang terhubung menerima apa yang ditonton profil ini: progres tontonan dan judul yang ditandai sudah ditonton. Menghubungkan atau memutuskan layanan berlaku untuk profil ini di semua perangkat Anda; sakelar di bawah hanya berlaku untuk perangkat ini.",
+      "note": "Layanan yang terhubung menerima apa yang ditonton profil ini: progres tontonan dan judul yang ditandai sudah ditonton. Menghubungkan atau memutuskan layanan, serta sakelar di bawah, berlaku untuk profil ini di semua perangkat Anda.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

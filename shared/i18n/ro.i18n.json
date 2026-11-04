@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Trackere",
-      "note": "Serviciile conectate primesc ce vizionează acest profil: progresul vizionării și titlurile marcate ca vizionate. Conectarea sau deconectarea unui serviciu se aplică acestui profil pe toate dispozitivele tale; comutatoarele de mai jos se aplică doar acestui dispozitiv.",
+      "note": "Serviciile conectate primesc ce vizionează acest profil: progresul vizionării și titlurile marcate ca vizionate. Conectarea sau deconectarea unui serviciu și comutatoarele de mai jos se aplică acestui profil pe toate dispozitivele tale.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

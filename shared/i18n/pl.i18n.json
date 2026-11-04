@@ -1042,7 +1042,7 @@
     },
     "trackers": {
       "title": "Śledzenie",
-      "note": "Połączone serwisy otrzymują informacje o tym, co ogląda ten profil: postęp oglądania i tytuły oznaczone jako obejrzane. Połączenie lub rozłączenie serwisu dotyczy tego profilu na wszystkich twoich urządzeniach; przełączniki poniżej dotyczą tylko tego urządzenia.",
+      "note": "Połączone serwisy otrzymują informacje o tym, co ogląda ten profil: postęp oglądania i tytuły oznaczone jako obejrzane. Połączenie lub rozłączenie serwisu oraz przełączniki poniżej dotyczą tego profilu na wszystkich twoich urządzeniach.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

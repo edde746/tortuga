@@ -2,6 +2,9 @@
 
 package com.edde746.tortuga.presentation.settings
 
+import com.edde746.tortuga.data.settings.ProfileSetting
+import com.edde746.tortuga.data.settings.TrackerSwitch
+import com.edde746.tortuga.data.settings.TrackerSwitches
 import com.edde746.tortuga.data.tracker.TrackerWriteQueue
 import com.edde746.tortuga.sync.account.signin.RedirectReceiver
 import com.edde746.tortuga.sync.account.signin.SignInPlatform
@@ -308,17 +311,24 @@ class TrackersSettingsStoreTest {
     fun anAccountsSwitchesAndQueuedWritesFollowWhatIsStored() = runTest {
         val s = setup(TrackerFixture(this, listOf(TRAKT)))
         s.f.connect(TRAKT)
-        // Switches flipped faster than the rows follow the stored connection (D-pad, keyboard) each keep theirs.
+        // Switches flipped faster than the rows follow the stored settings (D-pad, keyboard) each keep theirs.
         s.store.setMovies(TRAKT, false)
         s.store.setAnime(TRAKT, false)
         s.store.setScrobbling(TRAKT, false)
         s.store.setAnime(TRAKT, true)
         s.f.settle()
-        val stored = assertNotNull(s.f.data.trackerAccounts.account(s.f.profileId, TRAKT))
-        assertEquals(listOf(false, false, true, true), listOf(stored.enabled, stored.syncMovies, stored.syncSeries, stored.syncAnime))
+        assertEquals(TrackerSwitches(sending = false, movies = false, series = true, anime = true), s.f.data.settings.settings(s.f.profileId).trackers.getValue(TRAKT))
         var account = assertNotNull(s.row().account)
         assertEquals(listOf(false, false, true, true), listOf(account.scrobble, account.movies, account.series, account.anime).map { it.checked })
         assertNull(account.queued)
+
+        // Another device of the profile turned series off: sync stores it, and the row follows.
+        s.f.data.settings.set(s.f.profileId, ProfileSetting.Tracker(TRAKT, TrackerSwitch.SERIES), false)
+        s.f.settle()
+        account = assertNotNull(s.row().account)
+        assertEquals(listOf(false, false, false, true), listOf(account.scrobble, account.movies, account.series, account.anime).map { it.checked })
+
+        val stored = assertNotNull(s.f.data.trackerAccounts.account(s.f.profileId, TRAKT))
 
         for (key in listOf("trakt|movie|imdb=tt1", "trakt|movie|imdb=tt2")) {
             s.f.data.trackerWriteQueue.enqueue(s.f.profileId, TRAKT, stored.connectedAt, key, movieMark(), null, 1)

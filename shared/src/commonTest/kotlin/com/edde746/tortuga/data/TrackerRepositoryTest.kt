@@ -4,7 +4,6 @@ import com.edde746.tortuga.data.tracker.QueuedTrackerContent
 import com.edde746.tortuga.data.tracker.TrackerQueueCounts
 import com.edde746.tortuga.data.tracker.TrackerWriteFailure
 import com.edde746.tortuga.data.tracker.TrackerWriteQueue
-import com.edde746.tortuga.trackers.TrackerContentType
 import com.edde746.tortuga.trackers.TrackerService
 import com.edde746.tortuga.trackers.movieMark
 import kotlinx.coroutines.flow.first
@@ -59,16 +58,12 @@ class TrackerRepositoryTest {
     }
 
     @Test
-    fun reconnectKeepsTheTogglesAndDisconnectDropsQueuedWrites() = runTest {
+    fun reconnectUpdatesTheSignInAndDisconnectDropsQueuedWrites() = runTest {
         data.trackerAccounts.connect(p, trakt, "alex", listOf("public"), 1)
-        data.trackerAccounts.setContentFilter(p, trakt, TrackerContentType.SERIES, on = false)
-        data.trackerAccounts.setEnabled(p, trakt, false)
         data.trackerAccounts.connect(p, trakt, "alex2", listOf("public", "scrobble"), 2)
         val account = data.trackerAccounts.account(p, trakt)!!
         assertEquals("alex2", account.username)
         assertEquals(listOf("public", "scrobble"), account.scopes)
-        assertFalse(account.enabled)
-        assertFalse(account.syncSeries)
 
         enqueue(trakt, "movie:tt1", true)
         failed(trakt, "movie:tt2")

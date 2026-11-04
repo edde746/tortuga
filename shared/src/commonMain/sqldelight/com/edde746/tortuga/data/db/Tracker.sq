@@ -1,6 +1,6 @@
 -- One row per connected tracker service and profile: this device's copy of the account's connections, listed by
--- the account server, with this device's own switches. Tokens never live here: the account
--- server holds them, and the current access token is in the SecretStore.
+-- the account server. Their switches are the profile's synced settings (data/settings/TrackerSwitches.kt). Tokens
+-- never live here: the account server holds them, and the current access token is in the SecretStore.
 CREATE TABLE tracker_account (
     profile_id TEXT NOT NULL,
     -- trakt, simkl, mdblist, mal or anilist.
@@ -8,12 +8,6 @@ CREATE TABLE tracker_account (
     username TEXT,
     -- JSON array of the granted OAuth scopes.
     scopes_json TEXT NOT NULL,
-    -- Writes go to the service at all.
-    enabled INTEGER AS kotlin.Boolean NOT NULL,
-    -- Per content type filters: whether the profile's writes about movies, series and anime go to this service.
-    sync_movies INTEGER AS kotlin.Boolean NOT NULL,
-    sync_series INTEGER AS kotlin.Boolean NOT NULL,
-    sync_anime INTEGER AS kotlin.Boolean NOT NULL,
     -- When the account server stored the sign-in, epoch milliseconds.
     connected_at INTEGER NOT NULL,
     PRIMARY KEY (profile_id, service)

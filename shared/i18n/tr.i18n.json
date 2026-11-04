@@ -1006,7 +1006,7 @@
     },
     "trackers": {
       "title": "Takip hizmetleri",
-      "note": "Bağlı hizmetler, bu profilin izlediklerini alır: izleme ilerlemesi ve izlendi olarak işaretlenen içerikler. Bir hizmeti bağlamak veya bağlantısını kesmek bu profil için tüm cihazlarınızda geçerlidir; aşağıdaki düğmeler yalnızca bu cihaz için geçerlidir.",
+      "note": "Bağlı hizmetler, bu profilin izlediklerini alır: izleme ilerlemesi ve izlendi olarak işaretlenen içerikler. Bir hizmeti bağlamak veya bağlantısını kesmek ve aşağıdaki düğmeler, bu profil için tüm cihazlarınızda geçerlidir.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

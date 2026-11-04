@@ -1,5 +1,6 @@
 package com.edde746.tortuga.presentation.settings
 
+import com.edde746.tortuga.data.settings.TrackerSwitches
 import com.edde746.tortuga.data.tracker.TrackerAccount
 import com.edde746.tortuga.data.tracker.TrackerQueueCounts
 import com.edde746.tortuga.data.tracker.TrackerWriteFailure
@@ -28,6 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -35,9 +37,9 @@ import kotlin.coroutines.cancellation.CancellationException
  * The Trackers section's store for [profileId]: the services [accounts] can connect and the profile's
  * connections, which belong to the Tortuga account and apply on every device of it, following them live
  * (a connection another device or screen changed, one the account server dropped); connecting by device code or
- * relay link, with the code's countdown; disconnecting after a confirmation; a connected account's switches on this
- * device (sending at all, and movies / series / anime); and each account's queued writes, and those given up on. Without
- * an account session Connect only says that one is needed.
+ * relay link, with the code's countdown; disconnecting after a confirmation; a connected account's switches (sending
+ * at all, and movies / series / anime), the profile's on every device, following them live too; and each account's
+ * queued writes, and those given up on. Without an account session Connect only says that one is needed.
  *
  * "Open in browser" ([TrackerConnectStep.Code.canOpenInBrowser]) is offered where the user can sign in in a browser on
  * this device: not on a [tv], whose user signs in on a phone through the QR code (most Android TVs have no browser,
@@ -67,6 +69,7 @@ class TrackersSettingsStore internal constructor(
     private val scope = CoroutineScope(parentScope.coroutineContext + SupervisorJob(parentScope.coroutineContext[Job]))
 
     private var connections: List<TrackerAccount> = emptyList()
+    private var switches: Map<TrackerService, TrackerSwitches> = emptyMap()
     private var counts: Map<TrackerService, TrackerQueueCounts> = emptyMap()
 
     private var connect: Connect? = null
@@ -102,10 +105,12 @@ class TrackersSettingsStore internal constructor(
 
     init {
         scope.launch {
-            accounts.observe(profileId).collect {
-                connections = it
+            // A connection's row shows with its switches as stored, never with defaults in their place first.
+            combine(accounts.observe(profileId), accounts.observeSwitches(profileId), ::Pair).collect { (stored, on) ->
+                connections = stored
+                switches = on
                 // Connected, by this flow or elsewhere (another screen, sync): the flow has nothing left to do.
-                connect?.let { flow -> it.firstOrNull { account -> account.service == flow.service }?.let(::finishConnect) }
+                connect?.let { flow -> stored.firstOrNull { account -> account.service == flow.service }?.let(::finishConnect) }
                 publish()
             }
         }
@@ -247,7 +252,7 @@ class TrackersSettingsStore internal constructor(
     private fun filter(service: TrackerService, type: TrackerContentType, on: Boolean) =
         change(service) { accounts.setContentFilter(profileId, service, type, on) }
 
-    /** Stores a switch; the rows follow the stored connection. */
+    /** Stores a switch; the rows follow the stored settings. */
     private fun change(service: TrackerService, write: suspend () -> Unit) {
         if (connections.none { it.service == service }) return
         scope.launch {
@@ -363,12 +368,13 @@ class TrackersSettingsStore internal constructor(
                 val writes = counts[service]
                 val queued = writes?.queued ?: 0
                 val failed = writes?.failed ?: 0
+                val on = switches.getValue(service)
                 TrackerAccountUiState(
-                    scrobble = SettingToggleRow("${service.name}.scrobble", text.scrobble, text.scrobbleHint(serviceName(service)), it.enabled),
+                    scrobble = SettingToggleRow("${service.name}.scrobble", text.scrobble, text.scrobbleHint(serviceName(service)), on.sending),
                     filtersHeader = text.filtersHeader,
-                    movies = SettingToggleRow("${service.name}.movies", text.movies, null, it.syncMovies),
-                    series = SettingToggleRow("${service.name}.series", text.series, null, it.syncSeries),
-                    anime = SettingToggleRow("${service.name}.anime", text.anime, null, it.syncAnime),
+                    movies = SettingToggleRow("${service.name}.movies", text.movies, null, on.movies),
+                    series = SettingToggleRow("${service.name}.series", text.series, null, on.series),
+                    anime = SettingToggleRow("${service.name}.anime", text.anime, null, on.anime),
                     queuedCount = queued,
                     queued = if (queued > 0) text.queued(queued) else null,
                     failedCount = failed,

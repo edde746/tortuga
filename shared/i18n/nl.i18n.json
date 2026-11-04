@@ -1006,7 +1006,7 @@
     },
     "trackers": {
       "title": "Trackers",
-      "note": "Gekoppelde diensten krijgen te zien wat dit profiel kijkt: de kijkvoortgang en titels die als bekeken zijn gemarkeerd. Een dienst koppelen of ontkoppelen geldt voor dit profiel op al je apparaten; de schakelaars hieronder gelden alleen voor dit apparaat.",
+      "note": "Gekoppelde diensten krijgen te zien wat dit profiel kijkt: de kijkvoortgang en titels die als bekeken zijn gemarkeerd. Een dienst koppelen of ontkoppelen en de schakelaars hieronder gelden voor dit profiel op al je apparaten.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

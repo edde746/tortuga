@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Services de suivi",
-      "note": "Les services connectés reçoivent ce que ce profil regarde : la progression de lecture et les titres marqués comme vus. Connecter ou déconnecter un service s’applique à ce profil sur tous vos appareils ; les options ci-dessous s’appliquent uniquement à cet appareil.",
+      "note": "Les services connectés reçoivent ce que ce profil regarde : la progression de lecture et les titres marqués comme vus. Connecter ou déconnecter un service, ainsi que les options ci-dessous, s’appliquent à ce profil sur tous vos appareils.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

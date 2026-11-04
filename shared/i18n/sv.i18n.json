@@ -1006,7 +1006,7 @@
     },
     "trackers": {
       "title": "Spårning",
-      "note": "Anslutna tjänster får veta vad den här profilen ser: tittarförlopp och titlar som markerats som sedda. Att ansluta eller koppla från en tjänst gäller den här profilen på alla dina enheter; reglagen nedan gäller bara den här enheten.",
+      "note": "Anslutna tjänster får veta vad den här profilen ser: tittarförlopp och titlar som markerats som sedda. Att ansluta eller koppla från en tjänst, liksom reglagen nedan, gäller den här profilen på alla dina enheter.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

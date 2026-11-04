@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Rastreadores",
-      "note": "Os serviços conectados recebem o que este perfil assiste: o progresso da reprodução e os títulos marcados como assistidos. Conectar ou desconectar um serviço vale para este perfil em todos os seus dispositivos; as opções abaixo valem apenas para este dispositivo.",
+      "note": "Os serviços conectados recebem o que este perfil assiste: o progresso da reprodução e os títulos marcados como assistidos. Conectar ou desconectar um serviço e as opções abaixo valem para este perfil em todos os seus dispositivos.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

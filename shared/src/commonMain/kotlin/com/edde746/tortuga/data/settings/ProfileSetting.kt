@@ -7,6 +7,7 @@ import com.edde746.tortuga.input.VideoClickAction
 import com.edde746.tortuga.kids.AgeStep
 import com.edde746.tortuga.kids.KidsTitle
 import com.edde746.tortuga.log.Log
+import com.edde746.tortuga.trackers.TrackerService
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.nullable
@@ -196,6 +197,13 @@ sealed class ProfileSetting<T>(val key: String, val default: T, internal val ser
         override fun normalize(value: String) = value.trim()
     }
 
+    /**
+     * One of the profile's switches for a tracker service ([TrackerSwitches]), under `trackers.<service id>.<switch>`
+     * (`trackers.trakt.sending`); on while unset.
+     */
+    data class Tracker(val service: TrackerService, val switch: TrackerSwitch) :
+        ProfileSetting<Boolean>("trackers.${service.id}.${switch.key}", true, Boolean.serializer())
+
     // ---- Kids profile: the rating cap, unrated titles, and the titles a parent allowed or blocked ----
 
     /** The highest age step a kids profile shows ([AgeStep]); [AgeStep.ADULT] is stored as [AgeStep.TEEN]. */
@@ -253,6 +261,8 @@ data class ProfileSettings(
     val streamSort: List<StreamSortKey>,
     val homeRows: HomeLayout,
     val posterTemplate: String,
+    /** Every tracker service's switches, whether connected or not. */
+    val trackers: Map<TrackerService, TrackerSwitches>,
     val kidsCap: AgeStep,
     val kidsAllowUnrated: Boolean,
     val kidsAllowed: List<KidsTitle>,
@@ -306,6 +316,14 @@ data class ProfileSettings(
                 streamSort = ProfileSetting.StreamSortKeys.value(),
                 homeRows = ProfileSetting.HomeRows.value(),
                 posterTemplate = ProfileSetting.PosterTemplate.value(),
+                trackers = TrackerService.entries.associateWith { service ->
+                    TrackerSwitches(
+                        sending = ProfileSetting.Tracker(service, TrackerSwitch.SENDING).value(),
+                        movies = ProfileSetting.Tracker(service, TrackerSwitch.MOVIES).value(),
+                        series = ProfileSetting.Tracker(service, TrackerSwitch.SERIES).value(),
+                        anime = ProfileSetting.Tracker(service, TrackerSwitch.ANIME).value(),
+                    )
+                },
                 kidsCap = ProfileSetting.KidsCap.value(),
                 kidsAllowUnrated = ProfileSetting.KidsAllowUnrated.value(),
                 kidsAllowed = ProfileSetting.KidsAllowed.value(),
@@ -376,7 +394,9 @@ private val settingsByKey: Map<String, ProfileSetting<*>> by lazy {
         ProfileSetting.StreamMaxSizeMb, ProfileSetting.StreamIncludePattern,
         ProfileSetting.StreamExcludePattern, ProfileSetting.StreamSortKeys, ProfileSetting.HomeRows, ProfileSetting.PosterTemplate,
         ProfileSetting.KidsCap, ProfileSetting.KidsAllowUnrated, ProfileSetting.KidsAllowed, ProfileSetting.KidsBlocked,
-    ).associateBy { it.key }
+    ).associateBy { it.key } + TrackerService.entries.flatMap { service ->
+        TrackerSwitch.entries.map { ProfileSetting.Tracker(service, it) }
+    }.associateBy { it.key }
 }
 
 /**

@@ -4,6 +4,9 @@ package com.edde746.tortuga.sync.engine
 
 import com.edde746.tortuga.data.library.MetaSnapshot
 import com.edde746.tortuga.data.addon.AddonDescriptor
+import com.edde746.tortuga.data.settings.ProfileSetting
+import com.edde746.tortuga.data.settings.TrackerSwitch
+import com.edde746.tortuga.data.settings.TrackerSwitches
 import com.edde746.tortuga.data.streams.DeviceClass
 import com.edde746.tortuga.data.streams.PickContext
 import com.edde746.tortuga.data.streams.PickOutcome
@@ -27,6 +30,7 @@ import com.edde746.tortuga.sync.api.ApiErrorCode
 import com.edde746.tortuga.sync.api.RecordChange
 import com.edde746.tortuga.sync.api.SyncPaths
 import com.edde746.tortuga.sync.api.SyncProtocol
+import com.edde746.tortuga.trackers.TrackerService
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.test.TestScope
@@ -179,6 +183,39 @@ class SyncEngineTest {
                 // The server keeps the tombstones under the records' ids.
                 val tombstones = server.account().records.values.filter { it.deleted }.map { it.recordId }
                 assertTrue(tombstones.containsAll(listOf("library/${profile.id}/tt0903747", "profile/${kids.id}")), "$tombstones")
+            }
+        }
+    }
+
+    @Test
+    fun aTrackerSwitchTurnedOffOnOneDeviceIsOffOnTheOtherAndEachSwitchKeepsItsOwnChange() = runTest {
+        val (phone, tv) = pair()
+        phone.use {
+            tv.use {
+                val profile = phone.data.profiles.create("Wednesday", null)
+                phone.sync()
+                tv.sync()
+
+                // Each device turns off another of Trakt's switches before it hears of the other's.
+                phone.data.settings.set(profile.id, ProfileSetting.Tracker(TrackerService.TRAKT, TrackerSwitch.SENDING), false)
+                testScheduler.advanceTimeBy(1_000)
+                tv.data.settings.set(profile.id, ProfileSetting.Tracker(TrackerService.TRAKT, TrackerSwitch.ANIME), false)
+                phone.sync()
+                tv.sync()
+                phone.sync()
+                val off = TrackerSwitches.DEFAULT.copy(sending = false, anime = false)
+                for (device in listOf(phone, tv)) {
+                    val switches = device.data.settings.settings(profile.id).trackers
+                    assertEquals(off, switches.getValue(TrackerService.TRAKT), device.name)
+                    assertEquals(TrackerSwitches.DEFAULT, switches.getValue(TrackerService.SIMKL), device.name)
+                }
+
+                // Turned back on on the TV: on on the phone too, the anime filter still off.
+                testScheduler.advanceTimeBy(1_000)
+                tv.data.settings.set(profile.id, ProfileSetting.Tracker(TrackerService.TRAKT, TrackerSwitch.SENDING), true)
+                tv.sync()
+                phone.sync()
+                assertEquals(TrackerSwitches.DEFAULT.copy(anime = false), phone.data.settings.settings(profile.id).trackers.getValue(TrackerService.TRAKT))
             }
         }
     }

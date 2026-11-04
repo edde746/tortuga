@@ -1,0 +1,51 @@
+-- Version 12 → 13: a tracker connection's switches (sending at all, movies, series, anime) are the profile's synced
+-- settings, one per service and switch (data/settings/TrackerSwitches.kt), instead of columns of this device's
+-- tracker_account. A switch that is off here becomes its setting, a change of this device that the next sync pushes;
+-- one that is on, the default, writes nothing, so a device left at the defaults overwrites no other device's switch.
+-- A setting this device already has for the key (another device's, kept by the build before this one) stays. Each is
+-- stamped at the connection's sign-in, the earliest the switch can have changed: a switch set since on a device with
+-- this version is later and wins. SQLite 3.18 (Android API 26) has no DROP COLUMN, so tracker_account is rebuilt with
+-- every row.
+
+-- The settings' timestamps carry this device's node id: a clock that never ran is created as the app creates it
+-- (data/Db.kt), at zero.
+INSERT OR IGNORE INTO hlc_state (id, node_id, last_hlc)
+SELECT 1, node, '000000000000-0000-' || node FROM (SELECT lower(hex(randomblob(8))) AS node);
+
+-- The key is ProfileSetting.Tracker's, `trackers.<service id>.<switch>`; the record id RecordKey.Setting's
+-- (data/sync/RecordKey.kt): `setting/<profile id>/<key>`, each part with `%` and `/` escaped. The HLC is Hlc's text: 12
+-- hex digits of wall time, 4 of counter, the node id.
+INSERT OR IGNORE INTO setting (profile_id, setting_key, value_json, record_id, hlc, server_version, dirty, deleted)
+SELECT profile_id, setting_key, 'false',
+    'setting/' || replace(replace(profile_id, '%', '%25'), '/', '%2F') || '/' || replace(replace(setting_key, '%', '%25'), '/', '%2F'),
+    printf('%012x-0000-', connected_at) || (SELECT node_id FROM hlc_state WHERE id = 1),
+    NULL, 1, 0
+FROM (
+    SELECT profile_id, 'trackers.' || service || '.sending' AS setting_key, connected_at FROM tracker_account WHERE enabled = 0
+    UNION ALL
+    SELECT profile_id, 'trackers.' || service || '.movies', connected_at FROM tracker_account WHERE sync_movies = 0
+    UNION ALL
+    SELECT profile_id, 'trackers.' || service || '.series', connected_at FROM tracker_account WHERE sync_series = 0
+    UNION ALL
+    SELECT profile_id, 'trackers.' || service || '.anime', connected_at FROM tracker_account WHERE sync_anime = 0
+);
+
+-- The clock goes on after the newest of those timestamps, should the wall clock be behind the sign-in's.
+UPDATE hlc_state SET last_hlc = (SELECT max(hlc) FROM setting)
+WHERE id = 1 AND (SELECT max(hlc) FROM setting) > last_hlc;
+
+CREATE TABLE tracker_account_new (
+    profile_id TEXT NOT NULL,
+    service TEXT NOT NULL,
+    username TEXT,
+    scopes_json TEXT NOT NULL,
+    connected_at INTEGER NOT NULL,
+    PRIMARY KEY (profile_id, service)
+);
+
+INSERT INTO tracker_account_new (profile_id, service, username, scopes_json, connected_at)
+SELECT profile_id, service, username, scopes_json, connected_at FROM tracker_account;
+
+DROP TABLE tracker_account;
+
+ALTER TABLE tracker_account_new RENAME TO tracker_account;

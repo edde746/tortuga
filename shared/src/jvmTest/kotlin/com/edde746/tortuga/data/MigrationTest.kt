@@ -194,6 +194,58 @@ class MigrationTest {
     }
 
     @Test
+    fun onlyTheTrackerSwitchesThatAreOffBecomeSettingsToPushInTheUpgradeFromVersion12() {
+        withCopy(snapshots.getValue(12)) { driver ->
+            for (sql in listOf(
+                "INSERT INTO hlc_state(id, node_id, last_hlc) VALUES (1, '0123456789abcdef', '018b00000000-0005-0123456789abcdef')",
+                """
+                INSERT INTO tracker_account(profile_id, service, username, scopes_json, enabled, sync_movies, sync_series,
+                    sync_anime, connected_at)
+                VALUES ('p/1', 'trakt', 'alex', '[]', 0, 1, 1, 0, 1790000000000),
+                    ('p/1', 'simkl', NULL, '[]', 1, 1, 1, 1, 1790000100000),
+                    ('p2', 'anilist', 'sam', '["scrobble"]', 1, 1, 0, 1, 1790000200000)
+                """,
+                // Another device's setting of the key, kept by the build before: it stays as it is.
+                """
+                INSERT INTO setting(profile_id, setting_key, value_json, record_id, hlc, server_version, dirty, deleted)
+                VALUES ('p2', 'trackers.anilist.series', 'true', 'setting/p2/trackers.anilist.series',
+                    '018c00000000-0000-fedcba9876543210', 7, 0, 0)
+                """,
+            )) {
+                driver.execute(null, sql.trimIndent(), 0)
+            }
+
+            TortugaDatabase.Schema.migrate(driver, 12, TortugaDatabase.Schema.version)
+
+            val settings = query(driver, "SELECT profile_id, setting_key, value_json, record_id, hlc, server_version, dirty, deleted FROM setting ORDER BY profile_id, setting_key") {
+                listOf<Any?>(it.getString(0), it.getString(1), it.getString(2), it.getString(3), it.getString(4), it.getLong(5), it.getLong(6), it.getLong(7))
+            }
+            val signIn = Hlc(1_790_000_000_000, 0, "0123456789abcdef").toString()
+            assertEquals(
+                listOf(
+                    listOf<Any?>("p/1", "trackers.trakt.anime", "false", RecordKey.Setting("p/1", "trackers.trakt.anime").recordId(), signIn, null, 1L, 0L),
+                    listOf<Any?>("p/1", "trackers.trakt.sending", "false", RecordKey.Setting("p/1", "trackers.trakt.sending").recordId(), signIn, null, 1L, 0L),
+                    listOf<Any?>("p2", "trackers.anilist.series", "true", "setting/p2/trackers.anilist.series", "018c00000000-0000-fedcba9876543210", 7L, 0L, 0L),
+                ),
+                settings,
+                "the switches that were off, stamped at their sign-in and waiting to be pushed; none for a switch that was on",
+            )
+            assertEquals(listOf(signIn), query(driver, "SELECT last_hlc FROM hlc_state") { it.getString(0) }, "the clock goes on after them")
+            assertEquals(
+                listOf(
+                    listOf<Any?>("p/1", "simkl", null, "[]", 1_790_000_100_000L),
+                    listOf<Any?>("p/1", "trakt", "alex", "[]", 1_790_000_000_000L),
+                    listOf<Any?>("p2", "anilist", "sam", "[\"scrobble\"]", 1_790_000_200_000L),
+                ),
+                query(driver, "SELECT * FROM tracker_account ORDER BY profile_id, service") {
+                    listOf<Any?>(it.getString(0), it.getString(1), it.getString(2), it.getString(3), it.getLong(4))
+                },
+                "the connections stay, without their switches",
+            )
+        }
+    }
+
+    @Test
     fun schemaDescriptionSeesEveryTable() {
         val tables = freshSchema().keys.filter { it.startsWith("table ") }.map { it.removePrefix("table ") }.toSet()
         assertTrue(

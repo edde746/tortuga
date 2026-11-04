@@ -1,5 +1,6 @@
 package com.edde746.tortuga.trackers
 
+import com.edde746.tortuga.data.sync.RemoteRecord
 import com.edde746.tortuga.model.MetaItem
 import com.edde746.tortuga.model.MetaItemPreview
 import com.edde746.tortuga.model.SeriesInfo
@@ -10,6 +11,8 @@ import com.edde746.tortuga.trackers.TrackerService.MYANIMELIST
 import com.edde746.tortuga.trackers.TrackerService.SIMKL
 import com.edde746.tortuga.trackers.TrackerService.TRAKT
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -222,6 +225,40 @@ class TrackerCoordinatorTest {
         f.observer.onPlayingChanged(false, at(5))
         f.drain()
         assertEquals(listOf("scrobble START 0"), f.calls(TRAKT))
+    }
+
+    @Test
+    fun aSwitchTurnedOffOnAnotherDeviceOfTheProfileStopsTheWritesHere() = runTest {
+        val tv = fixture()
+        val phone = TrackerFixture(this, server = tv.server)
+        try {
+            tv.connect(TRAKT)
+            tv.connect(SIMKL)
+            phone.hub.accounts.syncConnections()
+            phone.hub.accounts.setEnabled(phone.profileId, TRAKT, false)
+            phone.hub.accounts.setContentFilter(phone.profileId, SIMKL, TrackerContentType.MOVIE, on = false)
+            phone.settle()
+            // The phone's changes reach the TV as sync carries them: the records the phone pushes, pulled.
+            val pushed = phone.data.sync.dirtyRecords(null, 100)
+            assertEquals(2, pushed.size, "one record per switch")
+            assertEquals(emptyList(), tv.data.sync.applyRemote(pushed.mapIndexed { i, it -> RemoteRecord(it.recordId, i + 1L, Json.parseToJsonElement(it.payload).jsonObject) }))
+            tv.settle()
+
+            tv.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
+            tv.drain()
+            tv.coordinator.marks.onMarked(WatchedMark.Title("tt0111161", "movie", movieMeta(), watched = true))
+            tv.drain()
+            assertEquals(emptyList(), tv.calls(TRAKT), "sending is off on the profile")
+            assertEquals(emptyList(), tv.calls(SIMKL), "movies are off on the profile")
+            val show = seriesMeta("tt0903747", 2)
+            tv.observer.onVideoStopped(at(10))
+            tv.observer.onVideoStarted(show, "tt0903747:1:1", at(0), playing = true)
+            tv.drain()
+            assertEquals(listOf("scrobble START 0"), tv.calls(SIMKL), "its series still go")
+            assertEquals(emptyList(), tv.calls(TRAKT))
+        } finally {
+            phone.close()
+        }
     }
 
     @Test

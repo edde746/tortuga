@@ -89,6 +89,7 @@ class TrackerEndToEndTest {
         val engine = SyncEngine(account, data, scope)
         val trackers = TrackerAccounts(
             repository = data.trackerAccounts,
+            settings = data.settings,
             tokens = TrackerTokenStore(secrets),
             server = account.sessions,
             api = account.api,

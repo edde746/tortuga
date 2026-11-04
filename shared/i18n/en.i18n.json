@@ -1006,7 +1006,7 @@
     },
     "trackers": {
       "title": "Trackers",
-      "note": "Connected services get what this profile watches: watch progress, and titles marked watched. Connecting or disconnecting a service applies to this profile on all your devices; the switches below apply to this device only.",
+      "note": "Connected services get what this profile watches: watch progress, and titles marked watched. Connecting or disconnecting a service, and the switches below, apply to this profile on all your devices.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",

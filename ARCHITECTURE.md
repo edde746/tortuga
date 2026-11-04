@@ -158,7 +158,8 @@ platform's driver: Android's, the native SQLite driver on Apple, and JDBC SQLite
   stream; turning it off keeps the picks. Picks stay out of exports.
 - Tables that stay on the device: `device_setting` (decoding, display, audio output), the `download*` tables,
   `sync_state`, `hlc_state` and `tracker_write_queue`. `tracker_account` is this device's copy of the account's
-  tracker connections.
+  tracker connections; their switches (sending at all, movies, series, anime) are the profile's settings, one record
+  per service and switch (`ProfileSetting.Tracker`), so they apply on every device of the profile.
 - Tokens never go into SQLite. `SecretStore` holds the account session and the trackers' access tokens: the Keychain
   on Apple, a Keystore-sealed store on Android, Windows Credential Manager and libsecret on the desktop.
 

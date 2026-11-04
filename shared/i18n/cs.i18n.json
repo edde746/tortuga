@@ -1024,7 +1024,7 @@
     },
     "trackers": {
       "title": "Sledovací služby",
-      "note": "Připojené služby dostávají, co tento profil sleduje: průběh sledování a tituly označené jako zhlédnuté. Připojení nebo odpojení služby platí pro tento profil na všech vašich zařízeních; přepínače níže platí jen pro toto zařízení.",
+      "note": "Připojené služby dostávají, co tento profil sleduje: průběh sledování a tituly označené jako zhlédnuté. Připojení nebo odpojení služby i přepínače níže platí pro tento profil na všech vašich zařízeních.",
       "service": {
         "trakt": "Trakt",
         "simkl": "Simkl",
