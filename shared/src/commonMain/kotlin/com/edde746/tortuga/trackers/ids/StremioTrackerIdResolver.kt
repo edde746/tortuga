@@ -1,6 +1,8 @@
 package com.edde746.tortuga.trackers.ids
 
+import com.edde746.tortuga.model.ImdbId
 import com.edde746.tortuga.model.StremioId
+import com.edde746.tortuga.model.videoIsTitle
 import com.edde746.tortuga.trackers.AnimeIds
 import com.edde746.tortuga.trackers.ExternalIds
 import com.edde746.tortuga.trackers.ResolvedIds
@@ -19,7 +21,8 @@ import com.edde746.tortuga.trackers.TrackerItem
  *   themselves. With anime ids wanted, Fribb adds the other lists' ids and the title's IMDb/TMDB/TVDB ids, and
  *   Anime-Lists (or, where it has no entry, Fribb's season and offset) places the episode on TVDB's seasons.
  * - **The meta** fills what is still missing, before giving up: `imdb_id`, IMDb and TMDB links, and the per-video IMDb
- *   episode that anime addons add. Without anime ids wanted, this is the only way a `kitsu:` episode reaches Trakt.
+ *   episode that anime addons add. Without anime ids wanted, this is the only way a `kitsu:` episode reaches Trakt,
+ *   and for an addon's own ids the only way anything does.
  *
  * Datasets are only touched when [resolve] is asked for anime ids, so a profile without an anime tracker never
  * downloads them. A dataset that can't be had (offline, no copy yet) is logged by [AnimeMappings] and the item
@@ -29,14 +32,26 @@ class StremioTrackerIdResolver internal constructor(private val mappings: AnimeM
     constructor(mappings: AnimeMappings) : this(mappings.source)
 
     override suspend fun resolve(item: TrackerItem, animeIds: Boolean): ResolvedIds? {
-        val id = StremioId.ofVideo(item.stremioId, item.videoId, item.meta) ?: return null
         val meta = item.meta?.let { MetaIds.of(it, item.videoId) }
         val movie = item.type == MOVIE
+        val id = StremioId.ofVideo(item.stremioId, item.videoId, item.meta) ?: meta?.let { videoOf(item, it, movie) } ?: return null
         val resolved = when (id) {
             is StremioId.Catalog -> catalog(id, movie, meta, animeIds)
             is StremioId.Anime -> anime(id, movie, meta, animeIds)
         }
         return resolved.takeUnless { it.ids.isEmpty && it.anime == null }
+    }
+
+    /**
+     * The video [item] plays by the ids its [meta] adds, where its own ids don't say (an addon's own namespace): the
+     * title's IMDb id, else its TMDB id, for the title itself; for an episode, the addon's IMDb episode, else the
+     * video's season and episode on that id. Null when the meta names neither, or not the episode's place.
+     */
+    private fun videoOf(item: TrackerItem, meta: MetaIds, movie: Boolean): StremioId? {
+        val title = meta.imdb?.let(ImdbId::parse)?.let { StremioId.Imdb(it) } ?: meta.tmdb(movie)?.let { StremioId.Tmdb(it) }
+        if (videoIsTitle(item.metaId, item.videoId)) return title
+        meta.video?.let { video -> ImdbId.parse(video.id)?.let { return StremioId.Imdb(it, video.season, video.episode) } }
+        return StremioId.ofVideo(title ?: return null, item.videoId, item.meta)
     }
 
     private suspend fun catalog(id: StremioId.Catalog, movie: Boolean, meta: MetaIds?, animeIds: Boolean): ResolvedIds {

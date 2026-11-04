@@ -198,6 +198,37 @@ class StremioTrackerIdResolverTest {
         assertNull(resolve("yt_id:UC123", metaId = "yt_id:UC123", animeIds = false))
     }
 
+    @Test
+    fun anAddonsOwnIdsResolveByTheIdsItsMetaAdds() = runTest {
+        val film = meta("myaddon:shawshank", type = "movie", imdbId = "tt0111161")
+        assertEquals(
+            ResolvedIds(ExternalIds(imdb = "tt0111161")),
+            resolve("myaddon:shawshank", "movie", meta = film, metaId = "myaddon:shawshank", animeIds = false),
+        )
+        val tmdbFilm = meta("myaddon:278", type = "movie", links = listOf(Link("TMDB", "other", "https://www.themoviedb.org/movie/278")))
+        assertEquals(ResolvedIds(ExternalIds(tmdb = 278)), resolve("myaddon:278", "movie", meta = tmdbFilm, metaId = "myaddon:278", animeIds = false))
+        // An episode: by its season and episode on the title's id, or by the addon's IMDb episode.
+        val show = meta(
+            "myaddon:got",
+            imdbId = "tt0944947",
+            videos = listOf(
+                Video("myaddon:got-1-3", seriesInfo = SeriesInfo(1, 3)),
+                Video("myaddon:got-x", imdb = ImdbEpisode("tt0944947", 2, 4)),
+                Video("myaddon:got-y"),
+            ),
+        )
+        assertEquals(
+            ResolvedIds(ExternalIds(imdb = "tt0944947"), season = 1, episode = 3),
+            resolve("myaddon:got-1-3", meta = show, metaId = "myaddon:got", animeIds = false),
+        )
+        assertEquals(
+            ResolvedIds(ExternalIds(imdb = "tt0944947"), season = 2, episode = 4),
+            resolve("myaddon:got-x", meta = show, metaId = "myaddon:got", animeIds = false),
+        )
+        assertNull(resolve("myaddon:got-y", meta = show, metaId = "myaddon:got", animeIds = false), "an episode nothing places")
+        assertNull(resolve("myaddon:other", "movie", meta = meta("myaddon:other", type = "movie"), metaId = "myaddon:other", animeIds = false))
+    }
+
     /** The Kitsu addon's meta, as `https://anime-kitsu.strem.fun/meta/series/kitsu:12268.json` sends it (trimmed). */
     private fun kitsuMeta(): MetaItem {
         val meta = AddonJson.decodeFromString(
