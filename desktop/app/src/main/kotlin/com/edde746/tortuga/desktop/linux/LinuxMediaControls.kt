@@ -39,7 +39,8 @@ import kotlin.math.roundToLong
  * The object `/org/mpris/MediaPlayer2` has the root interface (Identity, Raise; no Quit, no track list) and the Player
  * interface: PlaybackStatus, Metadata (track id, length, title, the episode line as artist, artwork URL), Position
  * (extrapolated from the last [NowPlaying] at its rate while playing, as the spec asks), Rate, CanGoNext,
- * CanGoPrevious, CanSeek; the methods Play, Pause, PlayPause, Stop, Next, Previous, Seek and SetPosition. Changes go
+ * CanGoPrevious, CanSeek, all read-only (a write of Rate or Volume fails, as nothing here sets them); the methods
+ * Play, Pause, PlayPause, Stop, Next, Previous, Seek and SetPosition. Changes go
  * out as PropertiesChanged, and a jump in position (a seek) as Seeked. The name is released when the playback ends
  * ([hide]), so no player lingers on the bus. A second instance on the same bus takes
  * `org.mpris.MediaPlayer2.com.edde746.tortuga.instance<pid>`, as the spec suggests.
@@ -268,11 +269,9 @@ internal class LinuxMediaControls(
             else -> throw UnknownInterface("no interface $_interfaceName")
         }
 
-        // Rate and Volume are writable in the spec; setting them has no effect here (CanControl covers the buttons).
-        override fun <A : Any?> Set(_interfaceName: String, _propertyName: String, _value: A) {
-            if (_interfaceName == PLAYER && (_propertyName == "Rate" || _propertyName == "Volume")) return
+        // Every property is read-only, Rate and Volume too (the spec's are writable): the session sets neither.
+        override fun <A : Any?> Set(_interfaceName: String, _propertyName: String, _value: A): Unit =
             throw PropertyReadOnly("$_propertyName is read-only")
-        }
     }
 
     private companion object {
@@ -313,9 +312,9 @@ internal interface MprisRoot : DBusInterface {
 @Suppress("FunctionName")
 @DBusInterfaceName("org.mpris.MediaPlayer2.Player")
 @DBusProperty(name = "PlaybackStatus", type = String::class, access = Access.READ)
-@DBusProperty(name = "Rate", type = Double::class, access = Access.READ_WRITE)
+@DBusProperty(name = "Rate", type = Double::class, access = Access.READ)
 @DBusProperty(name = "Metadata", type = MetadataMap::class, access = Access.READ)
-@DBusProperty(name = "Volume", type = Double::class, access = Access.READ_WRITE)
+@DBusProperty(name = "Volume", type = Double::class, access = Access.READ)
 @DBusProperty(name = "Position", type = Long::class, access = Access.READ)
 @DBusProperty(name = "MinimumRate", type = Double::class, access = Access.READ)
 @DBusProperty(name = "MaximumRate", type = Double::class, access = Access.READ)
