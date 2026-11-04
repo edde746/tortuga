@@ -7,6 +7,9 @@ import io.sentry.SentryEvent
 import io.sentry.SentryOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 /**
@@ -24,9 +27,19 @@ object SentryReports {
      */
     fun follow(reports: CrashReports, scope: CoroutineScope, start: (configure: (SentryOptions) -> Unit) -> Unit): Job =
         scope.launch {
-            launch { reports.failures.collect { Sentry.captureException(it) } }
+            // The DSN Sentry runs with: set once [start] returned for it, null once Sentry closed.
+            val running = MutableStateFlow<String?>(null)
+            launch {
+                reports.failures.collect { failure ->
+                    // One that comes as reports turn on waits for Sentry to start (before, Sentry drops it); one that
+                    // comes as they turn off goes unsent.
+                    if (running.value != reports.active.value) combine(running, reports.active) { ran, on -> ran == on }.first { it }
+                    if (running.value != null) Sentry.captureException(failure)
+                }
+            }
             reports.active.collect { dsn ->
                 if (dsn == null) Sentry.close() else start { options -> configure(options, dsn, reports) }
+                running.value = dsn
             }
         }
 

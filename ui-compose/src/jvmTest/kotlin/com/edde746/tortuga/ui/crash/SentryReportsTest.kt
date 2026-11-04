@@ -7,6 +7,7 @@ import com.edde746.tortuga.app.SystemInputs
 import com.edde746.tortuga.crash.CrashReports
 import com.edde746.tortuga.crash.crashReports
 import com.edde746.tortuga.data.DatabaseFactory
+import com.edde746.tortuga.data.settings.DeviceSetting
 import com.edde746.tortuga.secrets.SecretStore
 import com.edde746.tortuga.sync.api.DeviceDescriptor
 import com.edde746.tortuga.sync.api.DevicePlatform
@@ -24,15 +25,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.yield
 import java.io.ByteArrayOutputStream
 import java.nio.file.Files
 import java.util.Collections
+import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -160,6 +165,53 @@ class SentryReportsTest {
                 }
             }
         } finally {
+            cache.toFile().deleteRecursively()
+        }
+    }
+
+    /**
+     * A failure that comes as reports turn on, heard before Sentry has started (which drops what comes before), is sent
+     * once it has.
+     */
+    @Test
+    fun aFailureAsReportsTurnOnIsSentOnceSentryHasStarted(): Unit = runBlocking {
+        val cache = Files.createTempDirectory("tortuga-test-cache")
+        val device = DeviceDescriptor("Test", DevicePlatform.WINDOWS)
+        val follower = Executors.newSingleThreadExecutor()
+        val following = follower.asCoroutineDispatcher()
+        try {
+            AppBootstrap.product(DatabaseFactory.inMemory(), MemorySecrets(), BuildFlavor.SIDELOADED, "1.2.3", device, cache.toString(), Startup()).use { boot ->
+                val settings = boot.graph.data.deviceSettings
+                settings.set(DeviceSetting.CrashReports, false)
+                val reports = boot.crashReports("http://public@127.0.0.1:9/1", CrashReports.PRODUCTION)
+                val started = CompletableDeferred<Unit>()
+                val follow = SentryReports.follow(reports, CoroutineScope(following)) { configure ->
+                    Sentry.init { options ->
+                        configure(options)
+                        options.flushTimeoutMillis = 200
+                        options.setTransportFactory { o, _ -> RecordingTransport(o.serializer, sent) }
+                    }
+                    started.complete(Unit)
+                }
+                // The follow's first pass, then its failures' collector: both wait, reports off.
+                repeat(2) { withContext(following) {} }
+
+                // While the follow's thread is busy, a store's coroutine fails and then reports turn on: the follow hears
+                // of the failure first.
+                val busy = CountDownLatch(1)
+                follower.execute { busy.await() }
+                boot.graph.scope.launch { throw IllegalStateException("stream failed") }.join()
+                settings.set(DeviceSetting.CrashReports, true)
+                withTimeout(10_000) { reports.active.first { it != null } }
+                busy.countDown()
+
+                withTimeout(10_000) { started.await() }
+                withTimeout(5_000) { while (sent.none { "\"type\":\"event\"" in it }) delay(10) }
+                follow.cancel()
+                assertTrue(sent.single { "\"type\":\"event\"" in it }.contains("stream failed"))
+            }
+        } finally {
+            follower.shutdown()
             cache.toFile().deleteRecursively()
         }
     }
