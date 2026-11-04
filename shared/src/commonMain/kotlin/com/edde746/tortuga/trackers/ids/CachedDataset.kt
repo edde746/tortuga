@@ -62,8 +62,9 @@ import kotlin.time.Duration.Companion.seconds
  *   [REFRESH_INTERVAL] later. A copy on disk that is unreadable, empty or larger than [maxBytes] is deleted, so the
  *   next call downloads it again.
  * - With [snapshot], the index is also kept as `<fileName>.packed`, written once a copy has opened (after the lookups
- *   waiting for that load have the index, before its daily check) and deleted before another copy replaces it; a load
- *   reads it instead of opening the copy, and opens the copy (writing it again) when it is missing or unreadable.
+ *   waiting for that load have the index, before its daily check; under the lock a check holds, and only while that
+ *   copy is still the one in place) and deleted before another copy replaces it; a load reads it instead of opening
+ *   the copy, and opens the copy (writing it again) when it is missing or unreadable.
  * - The release tag, the time of the last check and of the last unusable download are in `<fileName>.state` next to
  *   the copy.
  */
@@ -173,7 +174,10 @@ internal class CachedDataset<T : Any>(
         // Neither the snapshot nor the daily check holds up the lookups waiting for this load.
         if (loaded != null) {
             scope.launch(ioDispatcher) {
-                if (snapshot != null && !fileSystem.exists(snapshotFile)) saveSnapshot(loaded)
+                // Under [disk], so no check puts another copy in place meanwhile; one that did since wrote its own.
+                if (snapshot != null) {
+                    disk.withLock { if (lock.withLock { index === loaded } && !fileSystem.exists(snapshotFile)) saveSnapshot(loaded) }
+                }
                 refreshIfDue()
             }
         }
@@ -264,7 +268,10 @@ internal class CachedDataset<T : Any>(
         }
     }
 
-    /** Writes [index], the copy's, as the snapshot; when that fails there is none, and the next load opens the copy. */
+    /**
+     * Writes [index], the copy's, as the snapshot (under [disk]); when that fails there is none, and the next load
+     * opens the copy.
+     */
     private suspend fun saveSnapshot(index: T) {
         val snapshot = snapshot ?: return
         try {
