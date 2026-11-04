@@ -167,8 +167,9 @@ class LibraryRepository internal constructor(private val db: Db) {
 
     /**
      * Marks the item watched or unwatched (Stremio's `MetaItemMarkAsWatched`): watched counts one more watch, clears
-     * the resume position and creates the item if needed; unwatched resets the count. Per-video marks are left alone
-     * ([markAllWatched] sets them too). Returns whether it marked: false for unwatched without an item.
+     * the resume position and creates the item if needed; unwatched resets the count and the current video's watched
+     * flag, so playing it again counts as a watch. Per-video marks are left alone ([markAllWatched] sets them too).
+     * Returns whether it marked: false for unwatched without an item.
      */
     suspend fun markWatched(profileId: String, meta: MetaSnapshot, watched: Boolean): Boolean = db.write {
         val row = liveRow(profileId, meta.id) ?: if (watched) newRow(profileId, meta) else return@write false
@@ -180,6 +181,7 @@ class LibraryRepository internal constructor(private val db: Db) {
      * Marks one video of [meta] watched or unwatched ([WatchedBitField]; stremio-core `MarkVideoAsWatched`), creating
      * the item (not in the library) to mark one watched. Marking watched moves `lastWatched` up to the video's
      * release date if that is later; an item that rests on a video now watched moves on ([LibraryItemState.settled]).
+     * Unmarking the video the item rests on clears its watched flag too, so playing it again counts as a watch.
      * Returns whether the video's mark changed: never over a stored field that can't be read ([marksToChange]).
      */
     suspend fun markVideoWatched(profileId: String, meta: MetaItem, videoId: String, watched: Boolean): Boolean = db.write {
@@ -190,6 +192,7 @@ class LibraryRepository internal constructor(private val db: Db) {
         marks.set(videoId, watched)
         var next = row.copy(watched = marks.serialize())
         if (watched) next = next.copy(last_watched = laterOf(next.last_watched, video.released))
+        if (!watched && row.video_id == videoId) next = next.copy(flagged_watched = 0)
         save(next, meta)
         changed
     }
@@ -197,7 +200,8 @@ class LibraryRepository internal constructor(private val db: Db) {
     /**
      * Marks the videos of [season] (0 for specials) watched or unwatched (stremio-core `MarkSeasonAsWatched`). Unlike
      * Stremio, marking watched leaves videos released after now unmarked, so an episode doesn't arrive already
-     * watched. An item that rests on a video now watched moves on past the watched videos ([LibraryItemState.settled]).
+     * watched. An item that rests on a video now watched moves on past the watched videos ([LibraryItemState.settled]);
+     * one resting on a video now unwatched loses its watched flag ([markVideoWatched]).
      * Returns the videos whose mark changed, in the season's order: none over a stored field that can't be read
      * ([marksToChange]).
      */
@@ -210,6 +214,7 @@ class LibraryRepository internal constructor(private val db: Db) {
         videos.forEach { marks.set(it.id, watched) }
         var next = row.copy(watched = marks.serialize())
         if (watched) next = next.copy(last_watched = laterOf(next.last_watched, videos.last().released))
+        if (!watched && videos.any { it.id == row.video_id }) next = next.copy(flagged_watched = 0)
         save(next, meta)
         changed
     }
@@ -387,9 +392,9 @@ class LibraryRepository internal constructor(private val db: Db) {
     }
 }
 
-/** stremio-core `LibraryItem::mark_as_watched`, at [now]. */
+/** stremio-core `LibraryItem::mark_as_watched`, at [now]; unwatched also clears the current video's watched flag. */
 private fun Library_item.markedWatched(watched: Boolean, now: Long) =
-    if (watched) copy(times_watched = times_watched + 1, last_watched = now, time_offset = 0) else copy(times_watched = 0)
+    if (watched) copy(times_watched = times_watched + 1, last_watched = now, time_offset = 0) else copy(times_watched = 0, flagged_watched = 0)
 
 /** stremio-core `advance_to_video`, without adding the time watched to the overall again (see recordProgress). */
 private fun Library_item.advancedTo(videoId: String) =

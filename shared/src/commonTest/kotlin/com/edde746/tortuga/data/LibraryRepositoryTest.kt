@@ -153,6 +153,19 @@ class LibraryRepositoryTest {
     }
 
     @Test
+    fun aMovieMarkedUnwatchedCountsAsWatchedWhenPlayedAgain() = runTest {
+        val item = data.library.upsertFromMeta(p, movie())
+        data.library.recordProgress(p, item.id, item.id, 90_000, 100_000, watched = true)
+        data.library.markWatched(p, movie(), watched = false)
+
+        data.library.recordProgress(p, item.id, item.id, 10_000, 100_000)
+        val again = data.library.recordProgress(p, item.id, item.id, 90_000, 100_000, watched = true)!!
+        assertTrue(again.crossedWatchedThreshold)
+        assertTrue(again.item.isWatched)
+        assertEquals(1, again.item.state.timesWatched)
+    }
+
+    @Test
     fun continueWatchingIsNewestFirstAndSkipsItemsOutsideIt() = runTest {
         val items = listOf(movie("tt1"), movie("tt2"), series("tt3"), MetaSnapshot("ch1", "tv", "News", null, "landscape"))
         for (meta in items) {

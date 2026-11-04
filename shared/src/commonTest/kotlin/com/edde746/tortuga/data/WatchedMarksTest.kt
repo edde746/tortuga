@@ -81,6 +81,25 @@ class WatchedMarksTest {
     }
 
     @Test
+    fun anEpisodeUnmarkedWhereThePointerRestsCountsAsWatchedWhenPlayedAgain() = runTest {
+        data.library.upsertFromMeta(p, MetaSnapshot("tt9", "series", "Show", null, "poster"))
+        for (unmark in listOf<suspend () -> Unit>(
+            { data.library.markVideoWatched(p, show, "tt9:2:2", watched = false) },
+            { data.library.markSeasonWatched(p, show, 2, watched = false) },
+        )) {
+            // S2E3 isn't out: the pointer stays on S2E2 once it counts as watched.
+            data.library.recordProgress(p, "tt9", "tt9:2:2", 90_000, 100_000, show, watched = true)
+            assertEquals("tt9:2:2", data.library.item(p, "tt9")!!.state.videoId)
+            unmark()
+            assertFalse("tt9:2:2" in watched())
+
+            val again = data.library.recordProgress(p, "tt9", "tt9:2:2", 95_000, 100_000, show, watched = true)!!
+            assertTrue(again.crossedWatchedThreshold)
+            assertTrue("tt9:2:2" in watched())
+        }
+    }
+
+    @Test
     fun markingASeasonSkipsUnreleasedEpisodesAndMovesThePointerPastIt() = runTest {
         data.library.addToLibrary(p, MetaSnapshot("tt9", "series", "Show", null, "poster"))
         data.library.recordProgress(p, "tt9", "tt9:1:1", 60_000, 2_400_000, show)
