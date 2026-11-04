@@ -148,6 +148,8 @@ def parse_envelope(body):
         if length is None:
             payload, _, rest = rest.partition(b"\n")
         else:
+            if not isinstance(length, int) or isinstance(length, bool) or length < 0:
+                raise ValueError(f"an item length of {json.dumps(length)[:80]}, not a byte count")
             if length > len(rest):
                 raise ValueError("an item shorter than its length")
             payload, rest = rest[:length], rest[length:]
