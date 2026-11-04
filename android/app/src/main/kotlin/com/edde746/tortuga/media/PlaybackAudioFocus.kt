@@ -20,7 +20,7 @@ import com.edde746.tortuga.presentation.player.MediaCommand
  *   pause asks for focus again (a guest's Play after a loss, which the room's playback catches up): Android 12+ keeps
  *   a player that lost focus to another app muted until it asks.
  * - A permanent loss pauses and lets go. A transient loss (a call, navigation prompt) pauses and resumes on the gain if
- *   the playback was playing; the user pausing meanwhile cancels that.
+ *   the playback was playing; the viewer's Pause meanwhile ([userPaused]) cancels that and lets focus go.
  * - A loss that allows ducking is ducked by the system (API 26+): a film's dialogue stays audible under a navigation
  *   prompt, so nothing pauses for it ([AudioFocusRequest.willPauseWhenDucked] false, as Media3's ExoPlayer does for
  *   `CONTENT_TYPE_MOVIE`).
@@ -83,6 +83,16 @@ internal class PlaybackAudioFocus(
             unregisterNoisy()
             if (!resumeOnGain) abandon()
         }
+    }
+
+    /**
+     * The viewer asked to pause (the session's Pause, a media button, the notification's action), whether or not the
+     * playback still plays: a transient loss waiting to resume on the gain no longer does, and focus goes once paused.
+     */
+    fun userPaused() {
+        if (!resumeOnGain) return
+        resumeOnGain = false
+        if (!playing) abandon()
     }
 
     /** The playback ended. */

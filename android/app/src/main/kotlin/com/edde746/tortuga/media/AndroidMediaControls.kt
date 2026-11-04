@@ -137,9 +137,13 @@ internal class AndroidMediaControls(context: Context, private val seekStepSecond
         Log.i(TAG, "Media session released")
     }
 
-    /** A command from outside the session (picture-in-picture and the notification's actions): the same way in. */
+    /**
+     * A command from outside the session (picture-in-picture and the notification's actions): the same way in. The
+     * viewer's Pause also cancels the resume a transient loss of audio focus waits for ([PlaybackAudioFocus.userPaused]).
+     */
     fun perform(command: MediaCommand) {
         Log.i(TAG, "Media command: $command")
+        if (command == MediaCommand.Pause) focus.userPaused()
         commands?.perform(command)
     }
 
