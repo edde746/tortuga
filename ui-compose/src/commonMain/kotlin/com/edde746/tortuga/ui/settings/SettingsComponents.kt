@@ -52,6 +52,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -61,6 +62,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.edde746.tortuga.presentation.settings.SettingChoiceRow
@@ -265,13 +267,15 @@ internal fun SettingStepperItem(row: SettingStepperRow, onStep: (up: Boolean) ->
 
 /**
  * The stepper's value: focusable (the primary fill while focused), and the D-pad's (or arrow keys') left and right step
- * it. Screen readers hear the row's [title] with the value, [label].
+ * it, toward the − and + beside it (in a right-to-left layout, + on the left, Left steps up). Screen readers hear the
+ * row's [title] with the value, [label].
  */
 @Composable
 private fun StepperValue(title: String, label: String, onStep: (up: Boolean) -> Unit, probe: String) {
     val interactions = remember { MutableInteractionSource() }
     val focusedRaw by interactions.collectIsFocusedAsState()
     val focused = focusedRaw && isFocusVisible()
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     Box(
         Modifier
             .widthIn(min = 88.dp)
@@ -285,8 +289,10 @@ private fun StepperValue(title: String, label: String, onStep: (up: Boolean) -> 
             .onPreviewKeyEvent { event ->
                 if (event.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
                 val up = when (event.key) {
-                    Key.DirectionLeft, Key.Minus, Key.NumPadSubtract -> false
-                    Key.DirectionRight, Key.Plus, Key.Equals, Key.NumPadAdd -> true
+                    Key.Minus, Key.NumPadSubtract -> false
+                    Key.Plus, Key.Equals, Key.NumPadAdd -> true
+                    Key.DirectionLeft -> rtl
+                    Key.DirectionRight -> !rtl
                     else -> return@onPreviewKeyEvent false
                 }
                 onStep(up)
