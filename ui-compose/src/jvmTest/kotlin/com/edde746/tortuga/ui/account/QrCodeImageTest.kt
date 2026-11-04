@@ -2,10 +2,13 @@ package com.edde746.tortuga.ui.account
 
 import androidx.compose.ui.graphics.toAwtImage
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.compose.ui.unit.dp
+import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.sync.account.DeviceLinkQr
 import com.edde746.tortuga.sync.account.ServerUrl
 import com.edde746.tortuga.ui.theme.TortugaTheme
@@ -27,5 +30,14 @@ class QrCodeImageTest {
         val pixels = image.getRGB(0, 0, image.width, image.height, null, 0, image.width)
         val bitmap = BinaryBitmap(HybridBinarizer(RGBLuminanceSource(image.width, image.height, pixels)))
         assertEquals(payload, QRCodeReader().decode(bitmap).text)
+    }
+
+    /** A link longer than a QR code holds (a large addon configuration's) shows the line saying so in its place. */
+    @Test
+    fun aLinkTooLongForAQrCodeShowsTheLineSayingSo() = runComposeUiTest {
+        val payload = "https://addon.example/" + "configuration".repeat(200) + "/configure"
+        setContent { TortugaTheme { QrCodeImage(payload, "QR code", 280.dp) } }
+        onNodeWithText(T.nav.qrFailed).assertIsDisplayed()
+        onNodeWithContentDescription("QR code").assertDoesNotExist()
     }
 }

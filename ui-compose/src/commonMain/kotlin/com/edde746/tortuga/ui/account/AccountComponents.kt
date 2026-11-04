@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -62,6 +63,7 @@ import com.edde746.tortuga.ui.probe.layoutProbe
 import com.edde746.tortuga.ui.theme.LocalTortugaDimens
 import com.edde746.tortuga.ui.theme.TortugaColors
 import com.google.zxing.EncodeHintType
+import com.google.zxing.WriterException
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.google.zxing.qrcode.encoder.Encoder
 
@@ -153,11 +155,23 @@ fun CodeText(code: String, modifier: Modifier = Modifier) {
 
 /**
  * [payload] as a QR code (ZXing's: UTF-8, error correction level M, as Apple's), dark modules on a light square
- * whatever the theme (phone cameras read that reliably), with a four-module quiet zone, [size] wide.
+ * whatever the theme (phone cameras read that reliably), with a four-module quiet zone, [size] wide. A payload no QR
+ * code can hold (past about 2.3 KB: a large addon configuration's link) shows an error line in its place, [size] wide,
+ * read out as itself rather than as [contentDescription].
  */
 @Composable
 fun QrCodeImage(payload: String, contentDescription: String, size: Dp, modifier: Modifier = Modifier) {
-    val modules = remember(payload) { Encoder.encode(payload, ErrorCorrectionLevel.M, mapOf(EncodeHintType.CHARACTER_SET to "UTF-8")).matrix }
+    val modules = remember(payload) {
+        try {
+            Encoder.encode(payload, ErrorCorrectionLevel.M, mapOf(EncodeHintType.CHARACTER_SET to "UTF-8")).matrix
+        } catch (_: WriterException) {
+            null
+        }
+    }
+    if (modules == null) {
+        ErrorLine(T.nav.qrFailed, modifier.width(size))
+        return
+    }
     val scheme = MaterialTheme.colorScheme
     val light = if (scheme.surface.luminance() > scheme.onSurface.luminance()) scheme.surface else scheme.onSurface
     val dark = if (light == scheme.surface) scheme.onSurface else scheme.surface
