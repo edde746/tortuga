@@ -368,11 +368,16 @@ private class TimeAxis(start: Float) {
     /** Moves by [minutes] at once, within the day's 0 to [latest]; returns how far it moved. */
     fun dragBy(minutes: Float, latest: Float): Float {
         move?.cancel()
-        val next = (shown + minutes).coerceIn(0f, latest.coerceAtLeast(shown))
+        val next = (shown + minutes).coerceIn(0f, latest)
         val moved = next - shown
         shown = next
         target = next
         return moved
+    }
+
+    /** Back within the day's 0 to [latest] at once, where the time shown or its move went past it (the window grew). */
+    fun keepWithin(latest: Float) {
+        if (shown > latest || target > latest) dragBy(0f, latest)
     }
 }
 
@@ -405,6 +410,7 @@ private fun Grid(
         val current by rememberUpdatedState(state)
         val bound by rememberUpdatedState(latest)
         LaunchedEffect(axis) { toNow.collect { axis.animateTo(scope, minutes(current, current.openingMillis).coerceIn(0f, bound)) } }
+        LaunchedEffect(axis, latest) { axis.keepWithin(latest) }
         val time = { axis.shown }
         // The programmes composed: the time shown and at least as much again either side, so the arrow keys find the
         // next one before the time moves to it; in steps of the time shown, so a drag composes the rows again only as
