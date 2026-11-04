@@ -20,4 +20,14 @@ class StremioCoreIdsGoldenTest {
             assertEquals(case.expected, planned, case.name)
         }
     }
+
+    @Test
+    fun aCatalogWhoseLimitIsNegativeIsntAsked() {
+        val manifest = Manifest.decode(
+            """{"id":"bad","version":"1.0.0","name":"bad","types":["series"],"resources":["catalog"],"idPrefixes":["tt"],"catalogs":[""" +
+                """{"id":"last-videos","type":"series","extra":[{"name":"lastVideosIds","isRequired":true,"optionsLimit":-1}]}]}""",
+        )
+        val addon = Descriptor(manifest, "https://bad.example/manifest.json".transportUrl())
+        assertEquals(emptyList(), AggrRequest.CatalogsFiltered("lastVideosIds", listOf("tt1" to "series")).plan(listOf(addon)))
+    }
 }

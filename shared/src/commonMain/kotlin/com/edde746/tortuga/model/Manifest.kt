@@ -142,7 +142,10 @@ data class ManifestCatalog(
     }
 }
 
-/** An extra property of a catalog. `skip` is always normalized to [SKIP] (stremio-core `ExtraPropValid`). */
+/**
+ * An extra property of a catalog. `skip` is always normalized to [SKIP] (stremio-core `ExtraPropValid`). A negative
+ * [optionsLimit] doesn't decode (stremio-core's is unsigned), so the catalog's full `extra` is malformed.
+ */
 @Serializable
 data class ExtraProp(
     val name: String,
@@ -151,6 +154,10 @@ data class ExtraProp(
     /** Most values the property takes at once. */
     val optionsLimit: Int = 1,
 ) {
+    init {
+        require(optionsLimit >= 0) { "'optionsLimit' must be a non-negative integer" }
+    }
+
     companion object {
         val SKIP = ExtraProp(Extras.SKIP)
     }
