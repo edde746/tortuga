@@ -36,6 +36,7 @@ class ParentPinScreenTest {
         entered = 1,
         length = 4,
         error = T.profiles.pin.wrong,
+        acceptsInput = true,
     )
 
     /**

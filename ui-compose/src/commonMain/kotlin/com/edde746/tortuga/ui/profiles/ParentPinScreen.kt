@@ -44,7 +44,7 @@ fun ParentPinScreen(
         length = state.length,
         enteredText = state.enteredText,
         message = state.error,
-        acceptsInput = true,
+        acceptsInput = state.acceptsInput,
         onDigit = onDigit,
         onBackspace = onBackspace,
         onCancel = onCancel,

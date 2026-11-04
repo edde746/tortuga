@@ -189,7 +189,7 @@ struct ParentPinRoute: View {
                 length: Int(state.length),
                 enteredText: state.enteredText,
                 message: state.error,
-                acceptsInput: true,
+                acceptsInput: state.acceptsInput,
                 onDigit: { store.digit(digit: Int32($0)) },
                 onBackspace: store.backspace,
                 onCancel: store.cancel

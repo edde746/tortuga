@@ -1,5 +1,6 @@
 package com.edde746.tortuga.presentation.profiles
 
+import com.edde746.tortuga.data.profile.Profile
 import com.edde746.tortuga.data.profile.ProfileRepository
 import com.edde746.tortuga.presentation.account.nextTickMillis
 import com.edde746.tortuga.presentation.account.remainingText
@@ -38,8 +39,17 @@ sealed interface ParentCheck {
  * @param entered digits in so far (the pad shows that many dots of [length]).
  * @param error "Wrong PIN. Try again." after a wrong PIN, or "Too many attempts. Try again in 0:30.", counting down
  *   while entry is locked out (digits are ignored then).
+ * @param acceptsInput false while a PIN is checked or entry is locked out: the pad's keys show dimmed, and the store
+ *   ignores them.
  */
-data class ParentPinUiState(val title: String, val subtitle: String, val entered: Int, val length: Int, val error: String?) {
+data class ParentPinUiState(
+    val title: String,
+    val subtitle: String,
+    val entered: Int,
+    val length: Int,
+    val error: String?,
+    val acceptsInput: Boolean,
+) {
     /** The pad's dots, spoken ([pinEnteredText]). */
     val enteredText: String
         get() = pinEnteredText(entered, length)
@@ -47,8 +57,10 @@ data class ParentPinUiState(val title: String, val subtitle: String, val entered
 
 /**
  * A parent's PIN, asked on a kids profile before what it guards ([ParentCheck]): the PIN of any profile on the account
- * that isn't a kids profile unlocks it. Wrong PINs count in this device's parent PIN throttle ([PinThrottle.PARENT]),
- * which a relaunch doesn't reset; a wrong PIN counts even if the pad is closed before the check answers.
+ * that isn't a kids profile unlocks it. A wrong PIN counts in this device's parent PIN throttle ([PinThrottle.PARENT])
+ * and against each parent profile's own entry, since it was tried against each of them; the pad stays shut while any
+ * of them is locked out, there or on the profile picker, so switching pads doesn't give more guesses. A relaunch
+ * doesn't reset it; a wrong PIN counts even if the pad is closed before the check answers.
  *
  * Call everything on the main thread; [release] ends it.
  *
@@ -78,7 +90,7 @@ class ParentPinStore internal constructor(
     val state: StateFlow<ParentPinUiState> = mutableState.asStateFlow()
 
     init {
-        scope.launch { throttle.lockedUntil(PinThrottle.PARENT)?.let(::startLockout) }
+        scope.launch { throttle.lockedUntil(throttleKeys(parents()))?.let(::startLockout) }
     }
 
     /** A digit (0–9) on the pad or the keyboard; the fourth checks the PIN. */
@@ -106,7 +118,13 @@ class ParentPinStore internal constructor(
         scope.cancel()
     }
 
-    private fun acceptsInput(): Boolean = !done && !checking && lockoutJob?.isActive != true
+    private fun acceptsInput(): Boolean = !done && !checking && lockedUntil == null
+
+    /** The profiles whose PIN unlocks the pad. */
+    private suspend fun parents() = profiles.profiles().filter { !it.kids && it.hasPin }
+
+    /** Where a wrong PIN on this pad counts: the pad's own entry and each of [parents]' entries. */
+    private fun throttleKeys(parents: List<Profile>) = listOf(PinThrottle.PARENT) + parents.map { it.id }
 
     /** Checks the PIN against every profile that isn't a kids profile; a lockout read meanwhile refuses it unchecked. */
     private fun verify() {
@@ -114,20 +132,23 @@ class ParentPinStore internal constructor(
         checking = true
         publish()
         parentScope.launch {
-            val locked = throttle.lockedUntil(PinThrottle.PARENT)
+            val parents = parents()
+            val keys = throttleKeys(parents)
+            val locked = throttle.lockedUntil(keys)
             if (locked != null) {
                 checking = false
                 digits = ""
                 startLockout(locked)
                 return@launch
             }
-            val parents = profiles.profiles().filter { !it.kids && it.hasPin }
-            val right = parents.any { profiles.verifyPin(it.id, pin) }
-            val lockout = if (right) {
+            val match = parents.firstOrNull { profiles.verifyPin(it.id, pin) }
+            val right = match != null
+            val lockout = if (match != null) {
                 throttle.succeeded(PinThrottle.PARENT)
+                throttle.succeeded(match.id)
                 null
             } else {
-                throttle.failed(PinThrottle.PARENT)
+                throttle.failed(keys)
             }
             checking = false
             digits = ""
@@ -183,6 +204,7 @@ class ParentPinStore internal constructor(
                 wrong -> T.profiles.pin.wrong
                 else -> null
             },
+            acceptsInput = acceptsInput(),
         )
     }
 }
