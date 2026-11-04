@@ -1,6 +1,7 @@
 package com.edde746.tortuga.server.service
 
 import com.edde746.tortuga.sync.api.SyncProtocol
+import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicBoolean
@@ -24,17 +25,20 @@ import kotlinx.coroutines.launch
  * - A session that ends (revoked, signed out, evicted, expired: [endSession]) or a deleted account ([endAccount]) loses
  *   its stream at once. One stream per session: a new one ends the session's older one, a reconnect over a connection
  *   whose end the server hasn't seen.
+ * - A stream lasts no longer than the access token it opened with ([Stream.endsAt]): the janitor's round ends it once
+ *   that has expired ([endExpired]), and the app opens another with its current token.
  * - At most [maxStreams] at once, counting those still authenticating: a place is taken first ([tryAdmit]), and given
  *   back by [leave] if no stream opens, or by its stream's [close].
  * - One job ([start]) asks every stream for a keepalive each [keepalive].
  */
 class SyncEvents(val maxStreams: Int, private val keepalive: Duration = SyncProtocol.EVENTS_KEEPALIVE_MILLIS.milliseconds) {
     /**
-     * One open stream of [sessionId] on [accountId], read by its writer only ([awaitWork], [take]). While its connection
-     * still holds the last write ([hold]), notices and keepalives only mark what is due and wake no one: a client that
-     * stops reading costs a stream nothing per notice. Its connection wakes it once it has sent what it held ([resume]).
+     * One open stream of [sessionId] on [accountId], read by its writer only ([awaitWork], [take]), until [endsAt], when
+     * the access token it opened with expires. While its connection still holds the last write ([hold]), notices and
+     * keepalives only mark what is due and wake no one: a client that stops reading costs a stream nothing per notice.
+     * Its connection wakes it once it has sent what it held ([resume]).
      */
-    class Stream(val accountId: UUID, val sessionId: UUID) {
+    class Stream(val accountId: UUID, val sessionId: UUID, val endsAt: Instant) {
         /** The highest version not yet sent, or [NONE]: an account that never pushed is at 0, a version like any other. */
         private val version = AtomicLong(NONE)
 
@@ -146,6 +150,11 @@ class SyncEvents(val maxStreams: Int, private val keepalive: Duration = SyncProt
 
     fun endAccount(accountId: UUID) {
         byAccount[accountId]?.forEach { it.end() }
+    }
+
+    /** Ends every stream whose access token has expired by [now]. */
+    fun endExpired(now: Instant) {
+        for (streams in byAccount.values) streams.forEach { if (!it.endsAt.isAfter(now)) it.end() }
     }
 
     /** The keepalive job, for as long as [scope] lives. */

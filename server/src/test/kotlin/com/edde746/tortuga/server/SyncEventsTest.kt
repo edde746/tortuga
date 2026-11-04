@@ -33,6 +33,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.readLine
+import java.time.Duration
 import java.util.concurrent.CountDownLatch
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -112,6 +113,25 @@ class SyncEventsTest {
         onNetty { netty ->
             netty.events(tv) { fromTv ->
                 assertEquals(HttpStatusCode.OK, delete(SyncPaths.ACCOUNT, phone).status)
+                assertNull(withTimeout(5.seconds) { fromTv.next() })
+            }
+        }
+    }
+
+    @Test
+    fun aStreamEndsOnceTheAccessTokenItOpenedWithExpires() = serverTest {
+        val phone = signIn("alice", deviceName = "Phone").session.accessToken
+        val tv = signIn("alice", deviceName = "TV").session.accessToken
+        onNetty { netty ->
+            netty.events(tv) { fromTv ->
+                // Within the token's hour the janitor's round leaves it be.
+                clock.advance(Duration.ofMinutes(59))
+                services.janitor.sweep()
+                push(phone, "a", 0)
+                assertEquals(Event(SyncPaths.EVENT_CHANGED, "1"), withTimeout(5.seconds) { fromTv.next() })
+                // Past it the next round ends the stream, though the session lives on: the app opens another.
+                clock.advance(Duration.ofMinutes(1))
+                services.janitor.sweep()
                 assertNull(withTimeout(5.seconds) { fromTv.next() })
             }
         }

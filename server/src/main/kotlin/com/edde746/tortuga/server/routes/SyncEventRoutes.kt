@@ -53,7 +53,7 @@ fun Route.syncEventRoutes(services: Services) {
         if (!events.tryAdmit()) throw ServerBusy("Every notice stream is taken", STREAMS_TAKEN_RETRY_AFTER_SECONDS)
         val stream = try {
             val session = services.sessions.authenticate(call.bearer())
-            SyncEvents.Stream(session.accountId, session.sessionId)
+            SyncEvents.Stream(session.accountId, session.sessionId, session.accessExpiresAt)
         } catch (e: Throwable) {
             events.leave()
             throw e

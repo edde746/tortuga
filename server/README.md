@@ -321,10 +321,12 @@ changed the account. The answer is `200 text/event-stream` with `Cache-Control: 
 
 One stream per session: a session that opens another ends its older one. The server closes a session's stream when the
 session ends (signed out, revoked from another device, ended for a new session past the account's 50, expired) or its
-account is deleted; it resets a stream whose client stops reading for 10 s (the engine's write timeout), and a restart
-drops them all. The app opens it again after a backoff, and pulls. Refusals are JSON whatever `Accept` says: 401 as
-everywhere, 503 `server_busy` with `Retry-After: 5` when the server is busy or starting, and with `Retry-After: 60`
-when `TORTUGA_MAX_EVENT_STREAMS` are open; meanwhile the app keeps to its periodic pulls.
+account is deleted, and ends it within a minute after the access token it opened with expires (the janitor's round),
+so a token lasts no longer on a stream than on any other call; it resets a stream whose client stops reading for 10 s
+(the engine's write timeout), and a restart drops them all. The app opens it again after a backoff, and pulls.
+Refusals are JSON whatever `Accept` says: 401 as everywhere, 503 `server_busy` with `Retry-After: 5` when the server is
+busy or starting, and with `Retry-After: 60` when `TORTUGA_MAX_EVENT_STREAMS` are open; meanwhile the app keeps to its
+periodic pulls.
 
 A reverse proxy in front must pass the stream on as it comes. Caddy's `reverse_proxy` does with nothing to set.
 nginx buffers responses unless told otherwise: the server's `X-Accel-Buffering: no` turns that off for the stream, or

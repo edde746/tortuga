@@ -22,8 +22,8 @@ import kotlin.time.Duration.Companion.minutes
 import kotlin.time.toJavaDuration
 import org.slf4j.LoggerFactory
 
-/** An authenticated request's session. */
-data class Session(val accountId: UUID, val sessionId: UUID)
+/** An authenticated request's session, and when the access token it came with expires. */
+data class Session(val accountId: UUID, val sessionId: UUID, val accessExpiresAt: Instant)
 
 /**
  * Per-device sessions: an access token (short-lived) and a rotating refresh token, both stored as SHA-256 only.
@@ -87,7 +87,7 @@ class Sessions(
         if (!row.accessExpiresAt.isAfter(now)) {
             throw ApiException(HttpStatusCode.Unauthorized, ApiErrorCode.TOKEN_EXPIRED, "Access token expired")
         }
-        val session = Session(row.accountId, row.id)
+        val session = Session(row.accountId, row.id, row.accessExpiresAt)
         bearer.session = session
         val result = block(session)
         if (row.lastSeenAt.isBefore(now - SEEN_GRANULARITY.toJavaDuration())) {
