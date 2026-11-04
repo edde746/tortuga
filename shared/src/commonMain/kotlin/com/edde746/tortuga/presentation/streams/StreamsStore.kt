@@ -240,11 +240,12 @@ class StreamsStore internal constructor(
 
     /**
      * The row [id]'s [choice] as played, with the other playable streams as alternatives (the ones after it first),
-     * its pick recorded ([picks]).
+     * its pick recorded ([picks]). A row the list no longer shows (a tap that crossed a rebuild) plays with every
+     * playable stream shown as its alternatives.
      */
     private fun playRequest(id: String, choice: StreamChoice): PlayRequest {
         val index = playableOrder.indexOf(id)
-        val others = (playableOrder.drop(index + 1) + playableOrder.take(index)).mapNotNull(choices::get)
+        val others = (playableOrder.drop(index + 1) + playableOrder.take(index.coerceAtLeast(0))).mapNotNull(choices::get)
         val shown = playableOrder.mapNotNull(entries::get)
         val pickId = picks?.takeIf { index >= 0 && shown.size == playableOrder.size }?.listPick(
             meta,

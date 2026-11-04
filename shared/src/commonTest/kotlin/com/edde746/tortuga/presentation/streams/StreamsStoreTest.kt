@@ -356,6 +356,20 @@ class StreamsStoreTest {
         assertEquals(1, f.host.links.size, "stremio: links stay in the app")
     }
 
+    @Test
+    fun aTapOnARowTheListNoLongerShowsPlaysIt() = runTest {
+        val f = Fixture(this, sideloaded, listOf(slow, hosted))
+        advanceTimeBy(6.seconds)
+        runCurrent()
+        val slowRow = f.store.state.value.groups[0].streams[0].id
+        // The list rebuilds between the row's render and its tap: only hosted's group shows now.
+        f.store.selectAddon(f.store.state.value.addons.single { it.name == "hosted" }.id)
+        f.store.pick(slowRow)
+        val request = f.host.played.single()
+        assertEquals("https://slow.example.com/1.mkv", request.stream.request()?.url)
+        assertEquals(listOf("https://hosted.example.com/play/1", "https://hosted.example.com/play/2"), request.alternatives.map { it.request()?.url })
+    }
+
     /**
      * While the profile's suggestions are on, a pick that plays is recorded with the playable streams the list shows, in
      * its order; external rows aren't. While they are off nothing is.
