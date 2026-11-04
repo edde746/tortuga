@@ -2,8 +2,9 @@
 //   app-android     versionName and versionCode (a per-ABI APK's: CURRENT_PROJECT_VERSION * 10 + its ABI's digit)
 //   app-desktop     the packaged app's version (About, the MSIX manifest); the MSIX takes 1.0.0 or later only
 //                   (build-msix.ps1: the Store rejects a version starting with 0)
-//   store/          the release's notes and date, written with the bump: Play's changelogs/<CURRENT_PROJECT_VERSION>.txt
-//                   and the first <release> of the Flatpak metainfo, which build-flatpak.py requires
+//   store/          the release's notes and date, written with the bump: Play's changelogs/<CURRENT_PROJECT_VERSION>.txt,
+//                   after the first version the other stores' update notes (store/check.py's FIRST_VERSION), and the
+//                   first <release> of the Flatpak metainfo, which build-flatpak.py requires
 //   dev             the fixture recorder's User-Agent version (dev/build.gradle.kts); the live tracker checks' too
 //   apple           MARKETING_VERSION and CURRENT_PROJECT_VERSION (project.yml includes this file)
 //   build.yml       the release tag must equal MARKETING_VERSION; the Sparkle appcast's sparkle:version is

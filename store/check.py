@@ -10,14 +10,17 @@
 Layout, so an upload is mechanical:
   apple/ios, apple/tvos     fastlane deliver metadata folders (platform ios, appletvos), one folder per locale. Name,
                             subtitle and privacy URL (each locale's), copyright and categories belong to the one app
-                            record, so both folders must agree. No release_notes.txt: App Store Connect takes no What's
-                            New for an app's first version.
+                            record, so both folders must agree. release_notes.txt (What's New) only past FIRST_VERSION:
+                            App Store Connect takes no What's New for an app's first version.
   apple/age_rating.json     App Store Connect's age rating declaration (deliver's app_rating_config_path)
   apple/app_privacy_details.json  the App Privacy label (fastlane upload_app_privacy_details_to_app_store)
   google-play/metadata      fastlane supply's metadata_path, one folder per locale (changelogs/<versionCode>.txt)
   amazon/<locale>, microsoft/<locale>  one file per Developer Console / Partner Center field. Partner Center's listing
                             CSV keeps IDs from its own export, so its import is filled from these files after a first
-                            export. Microsoft takes no What's New on a first submission.
+                            export. Their update notes (Amazon's release_notes.txt, Microsoft's whats_new.txt) only past
+                            FIRST_VERSION: a first submission takes none.
+  update notes              each version after FIRST_VERSION has its notes in every locale of every store (Apple's,
+                            Amazon's and Microsoft's files above, Play's changelog), written with the version bump
   <store>/forms.json        that store's questionnaires (Play's Data safety, IARC, target audience, ...) and the review
                             notes of Play (app_access), Amazon (testing_instructions) and Microsoft
                             (notes_for_certification), in English: the reviewers read English
@@ -94,6 +97,16 @@ PLAY = {
     "full_description.txt": (4000, "chars"),
 }
 PLAY_CHANGELOG = (500, "chars")
+# An update's notes (written with the version bump, version.xcconfig), in every locale of every store after the first
+# version, which no store takes them for: Apple release_notes.txt (What's New, 4000: .../platform-version-information),
+# Play changelogs/<versionCode>.txt (PLAY_CHANGELOG, every version), Amazon release_notes.txt (the console's Release notes,
+# the App Submission API's recentChanges: no limit in the console's documentation, upload-app-file.html, nor in the
+# API's ListingResource, checked 4 Nov 2026), Microsoft whats_new.txt (What's new in this version, 1500:
+# .../add-and-edit-store-listing-info).
+FIRST_VERSION = "1.0.0"
+APPLE_WHATS_NEW = (4000, "chars")
+AMAZON_RELEASE_NOTES = (None, "chars")
+MICROSOFT_WHATS_NEW = (1500, "chars")
 PLAY_APP_ACCESS = 500  # characters of the instructions, as Play Console's sign-in details take them
 AMAZON_TESTING = 4000  # characters of the testing instructions
 # Amazon's User Data Privacy Questionnaire: each data type it asks about (collected, transferred to third parties and
@@ -297,7 +310,15 @@ def has_phrase(r: Report, label: str, text: str | None, lang: str) -> None:
         r.line(bool(said), label, f"says {said.group(0)!r}" if said else f"does not say {WORDING[lang][1]!r}")
 
 
-def apple(r: Report) -> None:
+def whats_new(r: Report, path: Path, spec: tuple[int | None, str], lang: str, first: bool) -> None:
+    """An update's notes: absent in the first version, a field within the store's limit in every later one."""
+    if not first:
+        read_field(r, path, *spec, lang)
+    elif path.exists():
+        r.line(False, str(path.relative_to(ROOT)), f"the first version ({FIRST_VERSION}) takes no update notes")
+
+
+def apple(r: Report, first: bool) -> None:
     folders = {}
     for platform in ("ios", "tvos"):
         base = STORE / "apple" / platform
@@ -319,8 +340,7 @@ def apple(r: Report) -> None:
                 bad = [t for t in terms if t != t.strip() or len(t) < MIN_TERM.get(lang, 3) or TRADEMARKS.search(t)
                        or any(w.lower() in t.lower() for w in NAMES[APPLE].split())]
                 r.line(not bad, f"{label} keywords", f"{len(terms)} terms" + (f", bad: {bad}" if bad else ""))
-            if (base / code / "release_notes.txt").exists():
-                r.line(False, label, "release_notes.txt: the first version takes no What's New")
+            whats_new(r, base / code / "release_notes.txt", APPLE_WHATS_NEW, lang, first)
         for demo in ("demo_user.txt", "demo_password.txt"):
             if (base / "review_information" / demo).exists():
                 r.line(False, f"apple/{platform}/review_information/{demo}", "the demo account goes to deliver at upload")
@@ -356,7 +376,7 @@ def play(r: Report, build: str) -> None:
         review_notes(r, f"{label} instructions", access["instructions"], PLAY_APP_ACCESS, fields=True)
 
 
-def amazon(r: Report) -> None:
+def amazon(r: Report, first: bool) -> None:
     locale_folders(r, "amazon", STORE / "amazon", AMAZON_STORE, ("images",))
     for lang, code in locales(AMAZON_STORE):
         base, label = STORE / "amazon" / code, f"amazon/{code}"
@@ -372,6 +392,7 @@ def amazon(r: Report) -> None:
         if bullets is not None:
             count = len(bullets.splitlines())
             r.line(3 <= count <= 5, f"{label} feature bullets", f"{count} lines (3 to 5)")
+        whats_new(r, base / "release_notes.txt", AMAZON_RELEASE_NOTES, lang, first)
     forms = json_file(r, STORE / "amazon" / "forms.json")
     if forms:
         review_notes(r, "amazon/forms.json testing_instructions", forms["testing_instructions"], AMAZON_TESTING)
@@ -395,7 +416,7 @@ def amazon(r: Report) -> None:
                repr(partial))
 
 
-def microsoft(r: Report) -> None:
+def microsoft(r: Report, first: bool) -> None:
     locale_folders(r, "microsoft", STORE / "microsoft", MICROSOFT_STORE, ("images",))
     for lang, code in locales(MICROSOFT_STORE):
         base, label = STORE / "microsoft" / code, f"microsoft/{code}"
@@ -414,8 +435,7 @@ def microsoft(r: Report) -> None:
             lines = features.splitlines()
             long = [line for line in lines if len(line) > 200]
             r.line(len(lines) <= 20 and not long, f"{label} features", f"{len(lines)}/20 lines, longest {max(map(len, lines))}/200")
-        if (base / "whats_new.txt").exists():
-            r.line(False, label, "whats_new.txt: a first submission leaves What's new blank")
+        whats_new(r, base / "whats_new.txt", MICROSOFT_WHATS_NEW, lang, first)
     forms = json_file(r, STORE / "microsoft" / "forms.json")
     if forms:
         review_notes(r, "microsoft/forms.json notes_for_certification", forms["notes_for_certification"])
@@ -544,12 +564,13 @@ def main() -> int:
     parser.add_argument("--urls", action="store_true", help="also fetch every URL the listings give")
     args = parser.parse_args()
     version = dict(re.findall(r"^(\w+) = (\S+)$", (ROOT / "version.xcconfig").read_text(), re.M))
+    first = version["MARKETING_VERSION"] == FIRST_VERSION
     r = Report()
     languages(r)
-    apple(r)
+    apple(r, first)
     play(r, version["CURRENT_PROJECT_VERSION"])
-    amazon(r)
-    microsoft(r)
+    amazon(r, first)
+    microsoft(r, first)
     demo(r)
     if args.urls:
         fetch_urls(r)
