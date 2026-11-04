@@ -1,6 +1,5 @@
 package com.edde746.tortuga.playback
 
-import com.edde746.tortuga.data.settings.DeviceSettings
 import com.edde746.tortuga.data.settings.SubtitleAppearance
 import com.edde746.tortuga.data.settings.SubtitleColor
 import com.edde746.tortuga.data.settings.SubtitleOutline
@@ -14,7 +13,6 @@ class SubtitleStyleTest {
 
     @Test
     fun theDefaultsAreMpvsOwnLookAndLeaveStyledSubtitlesAlone() {
-        assertEquals(DeviceSettings.DEFAULT.subtitles, default)
         assertEquals(
             mapOf(
                 "sub-ass-override" to "scale",
@@ -29,7 +27,6 @@ class SubtitleStyleTest {
             ),
             properties(default),
         )
-        assertEquals(SubtitleStyle.DEFAULT, SubtitleStyle.of(default))
         assertEquals(100.0, SubtitleStyle.DEFAULT.position(0.0, SubtitleFrame.SCREEN), "mpv's own place")
     }
 

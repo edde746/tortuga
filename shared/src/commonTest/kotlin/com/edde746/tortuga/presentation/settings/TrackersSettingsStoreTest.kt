@@ -359,5 +359,13 @@ class TrackersSettingsStoreTest {
         assertTrue(simkl.connected)
         s.store.connect(SIMKL)
         assertNull(s.state.connect, "it can't connect again")
+
+        s.store.disconnect(SIMKL)
+        s.store.confirmDialog()
+        s.f.settle()
+        assertEquals(listOf(TRAKT), s.state.services.map { it.service }, "the Simkl row is gone")
+        assertEquals("Disconnected from Simkl.", s.state.notice)
+        assertEquals(listOf("s0"), s.f.server.revoked)
+        assertTrue(s.f.server.connections.isEmpty())
     }
 }
