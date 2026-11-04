@@ -101,7 +101,11 @@ class Accounts(
                 // The proof is spent and may hold a token just issued (GitHub's reset, Apple's refresh token), which a
                 // shed request would lose: this waits for a connection however busy the pool is.
                 return db.transaction(Duration.INFINITE) {
-                    val existing = findIdentity(proof)
+                    // The account row is locked before the identity is written, as deletion takes it: an account
+                    // deleted meanwhile took the identity with it, so the sign-in makes a new one and keeps its token.
+                    val existing = findIdentity(proof)?.takeIf { owner ->
+                        queryOne("SELECT 1 FROM accounts WHERE id = ? FOR UPDATE", owner.accountId) { true } != null
+                    }
                     val accountId = existing?.accountId ?: createAccount(proof)
                     if (existing != null) refreshIdentity(existing, proof)
                     val tokens = sessions.create(this, accountId, device)
@@ -144,6 +148,8 @@ class Accounts(
         return try {
             // As in signIn: the proof is spent, and a shed request would lose the token it holds.
             db.transaction(Duration.INFINITE) {
+                // Locked first, as deletion takes it: a link waits for a deletion and then finds no account.
+                lockAccount(session.accountId)
                 val owner = findIdentity(proof)
                 when (owner?.accountId) {
                     null -> insertIdentity(session.accountId, proof)
@@ -185,16 +191,22 @@ class Accounts(
 
     /**
      * Deletes the account and everything under it (the foreign keys cascade to identities, sessions, records, tracker
-     * connections and the device links it approved), after revoking Sign in with Apple where this server can and
-     * deleting its GitHub grants (best effort); then revokes its tracker connections at their services (best effort).
+     * connections and the device links it approved), then revokes Sign in with Apple where this server can, deletes
+     * its GitHub grants and revokes its tracker connections at their services (best effort). What it revokes is read
+     * under the account row's lock with the deletion: a sign-in, link or tracker connection stored meanwhile waits for
+     * the lock and then finds no account, so nothing is deleted without being revoked.
      */
     suspend fun delete(bearer: Bearer): AccountDeletionResponse {
-        val (accountId, identities) = sessions.transaction(bearer) { session ->
+        val (accountId, identities, trackerConnections) = sessions.transaction(bearer) { session ->
             lockAccount(session.accountId)
-            session.accountId to query(
+            afterCommit { events.endAccount(session.accountId) }
+            val identities = query(
                 "SELECT $REVOCABLE_COLUMNS FROM identities WHERE account_id = ?",
                 session.accountId,
             ) { it.revocable(session.accountId) }
+            val trackerConnections = trackers.readAll(this, session.accountId)
+            update("DELETE FROM accounts WHERE id = ?", session.accountId)
+            Triple(session.accountId, identities, trackerConnections)
         }
         val appleIdentities = identities.filter { it.provider == IdentityProvider.APPLE }
         val appleRevocation = when {
@@ -215,13 +227,6 @@ class Accounts(
             githubIdentities.isEmpty() -> GitHubRevocation.NONE
             deleteGitHubGrants(githubIdentities, accountId) -> GitHubRevocation.REVOKED
             else -> GitHubRevocation.FAILED
-        }
-        // The account row stays locked from reading the tracker connections to deleting them with it, so a connection
-        // stored meanwhile waits and then finds no account: none is deleted without being revoked.
-        val trackerConnections = db.transaction {
-            lockAccount(accountId)
-            afterCommit { events.endAccount(accountId) }
-            trackers.readAll(this, accountId).also { update("DELETE FROM accounts WHERE id = ?", accountId) }
         }
         trackers.revoke(accountId, trackerConnections)
         log.atInfo().addKeyValue("accountId", accountId).addKeyValue("appleRevocation", appleRevocation)

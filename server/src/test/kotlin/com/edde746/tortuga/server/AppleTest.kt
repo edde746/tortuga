@@ -27,6 +27,7 @@ import io.ktor.http.Url
 import io.ktor.http.parameters
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class AppleTest {
@@ -88,6 +89,25 @@ class AppleTest {
         val deletion = delete(SyncPaths.ACCOUNT, signedIn.session.accessToken).ok<AccountDeletionResponse>()
         assertEquals(AppleRevocation.FAILED, deletion.appleRevocation)
         assertEquals(0, TestPostgres.count("accounts"))
+    }
+
+    @Test
+    fun aSignInWhileTheAccountIsDeletedKeepsItsTokenOrItIsRevoked() = serverTest(configure = { c, e -> withAppleKey(c, e) }) {
+        val signedIn = signIn("apple.user", issuer = apple, authorizationCode = appleEndpoints.issueCode("apple.user"))
+        // While the server waits for Apple to revoke, the same Apple ID signs in on another device, which exchanges a
+        // new code for a new refresh token.
+        var during: SignInResponse? = null
+        appleEndpoints.whileRevoking = {
+            appleEndpoints.whileRevoking = null
+            during = signIn("apple.user", issuer = apple, deviceName = "iPad", authorizationCode = appleEndpoints.issueCode("apple.user"))
+        }
+        assertEquals(AppleRevocation.REVOKED, delete(SyncPaths.ACCOUNT, signedIn.session.accessToken).ok<AccountDeletionResponse>().appleRevocation)
+        // Each refresh token Apple issued is revoked, or kept by an account that can still revoke it: the deleted one
+        // is gone with what it held, and the sign-in after it made a new one.
+        assertEquals(2, appleEndpoints.exchanges.size)
+        assertEquals(1, appleEndpoints.revocations.size)
+        assertTrue(assertNotNull(during).accountCreated)
+        assertEquals(1, TestPostgres.count("identities"))
     }
 
     @Test

@@ -129,6 +129,9 @@ class FakeAppleEndpoints(private val issuer: FakeIssuer, private val clock: Cloc
     /** Apple answers revoke with this status. */
     @Volatile var revokeStatus: HttpStatusCode = HttpStatusCode.OK
 
+    /** Runs while Apple takes a revoke, before it answers: what happens elsewhere while the server waits for Apple. */
+    @Volatile var whileRevoking: (suspend () -> Unit)? = null
+
     /** Apple's tokens come padded with spaces to this many bytes; null: unpadded. */
     @Volatile var tokenAnswerBytes: Int? = null
 
@@ -154,6 +157,7 @@ class FakeAppleEndpoints(private val issuer: FakeIssuer, private val clock: Cloc
         route.post("/auth/revoke") {
             val form = call.receiveParameters().entries().associate { it.key to it.value.single() }
             revocations += form
+            whileRevoking?.invoke()
             val status = if (validSecret(form["client_secret"], form["client_id"])) revokeStatus else HttpStatusCode.BadRequest
             call.respondText("", status = status)
         }
