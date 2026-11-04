@@ -40,6 +40,24 @@ class ServerConfigTest {
     }
 
     @Test
+    fun aSecretFileLongerThanAnySecretFailsNamingIt() {
+        val file = Files.createTempFile("tortuga-secret", ".txt")
+        try {
+            // A path that names something else (a disk image, a log): the server reads no further than any secret goes.
+            Files.write(file, ByteArray(16 * 1024 + 1) { 'a'.code.toByte() })
+            val error = assertFailsWith<IllegalArgumentException> {
+                configFromEnvironment("TORTUGA_DATABASE_PASSWORD_FILE" to file.toString())
+            }
+            assertEquals("TORTUGA_DATABASE_PASSWORD_FILE: $file holds more than 16384 bytes, more than any secret: check the path", error.message)
+
+            Files.write(file, ByteArray(16 * 1024) { 'a'.code.toByte() })
+            assertEquals(16 * 1024, configFromEnvironment("TORTUGA_DATABASE_PASSWORD_FILE" to file.toString()).database.password.length)
+        } finally {
+            Files.delete(file)
+        }
+    }
+
+    @Test
     fun aSettingTheServerCantUseFailsNamingIt() {
         val missing = Files.createTempDirectory("tortuga-config").resolve("missing")
         try {

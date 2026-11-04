@@ -5,7 +5,6 @@ import com.edde746.tortuga.server.crypto.DataKey
 import com.edde746.tortuga.server.http.ByteBudget
 import com.edde746.tortuga.sync.api.SyncPaths
 import com.edde746.tortuga.trackers.devTrackerUrl
-import java.io.File
 import java.io.IOException
 import java.net.URI
 import java.nio.file.Files
@@ -168,6 +167,9 @@ data class ServerConfig(
 }
 
 private val SHA256_HEX = Regex("[0-9a-f]{64}")
+
+/** The longest `_FILE` secret read: a Sign in with Apple `.p8` is about 250 bytes, a password or client secret less. */
+private const val MAX_SECRET_FILE_BYTES = 16 * 1024
 
 /** Fails, naming the variable, unless [pem] is a Sign in with Apple key as AppleClient reads it. */
 private fun checkAppleKey(pem: String) {
@@ -378,16 +380,23 @@ private class EnvReader(private val env: Map<String, String>) {
 
     fun required(name: String): String = secret(name) ?: throw IllegalArgumentException("$name is not set")
 
-    /** [name], or the contents of the file named by `${name}_FILE`; one of the two, never both. */
+    /**
+     * [name], or the contents of the file named by `${name}_FILE`; one of the two, never both. The file is read up to
+     * [MAX_SECRET_FILE_BYTES], as [DataKey.load] reads its key, so a wrong path (a device, a large file) fails at once.
+     */
     fun secret(name: String): String? {
         val value = string(name)
         val file = string("${name}_FILE") ?: return value
         require(value == null) { "$name and ${name}_FILE are both set: keep one" }
-        return try {
-            File(file).readText()
+        val bytes = try {
+            Files.newInputStream(Path.of(file)).use { it.readNBytes(MAX_SECRET_FILE_BYTES + 1) }
         } catch (e: IOException) {
             throw IllegalArgumentException("${name}_FILE: can't read $file ($e)")
-        }.trim().takeIf(String::isNotEmpty)
+        }
+        require(bytes.size <= MAX_SECRET_FILE_BYTES) {
+            "${name}_FILE: $file holds more than $MAX_SECRET_FILE_BYTES bytes, more than any secret: check the path"
+        }
+        return bytes.decodeToString().trim().takeIf(String::isNotEmpty)
     }
 
     fun list(name: String): List<String> = string(name)?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() }.orEmpty()
