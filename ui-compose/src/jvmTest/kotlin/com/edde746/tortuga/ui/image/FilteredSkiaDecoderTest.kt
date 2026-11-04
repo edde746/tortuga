@@ -80,4 +80,20 @@ class FilteredSkiaDecoderTest {
         }
         assertTrue(read <= MAX_ENCODED_BYTES + 64 * 1024, "read $read bytes")
     }
+
+    /** A small file whose header declares 30000 × 30000 fails before its pixels are decoded into gigabytes. */
+    @Test
+    fun anImageDeclaringTooManyPixelsFails() {
+        val png = Image.makeRaster(ImageInfo.makeN32Premul(1, 1), ByteArray(4) { -1 }, 4).encodeToData(EncodedImageFormat.PNG)!!.bytes
+        // IHDR's width and height (bytes 16-23), and its CRC over the chunk's type and data (bytes 12-28).
+        val declared = java.nio.ByteBuffer.wrap(png).putInt(16, 30_000).putInt(20, 30_000)
+        val crc = java.util.zip.CRC32().apply { update(png, 12, 17) }.value
+        declared.putInt(29, crc.toInt())
+        val options = Options(PlatformContext.INSTANCE, size = Size(40, 40), scale = Scale.FIT)
+
+        val failure = assertFailsWith<IllegalStateException> {
+            runBlocking { FilteredSkiaDecoder(ImageSource(Buffer().write(png), FileSystem.SYSTEM), options).decode() }
+        }
+        assertEquals("an image of 30000 × 30000 pixels", failure.message)
+    }
 }
