@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -57,6 +58,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.edde746.tortuga.ui.focus.focusGrowth
@@ -318,10 +320,17 @@ fun TortugaButton(
         hitTarget = true,
     ) {
         if (progress != null && progress > 0f) {
-            // The watched part: the button's content colour over its fill, faintly.
+            // The watched part, from the button's leading edge (right to left in Arabic): the button's content colour
+            // over its fill, faintly.
             val tone = LocalContentColor.current.copy(alpha = 0.16f)
             val watched = progress.coerceIn(0f, 1f)
-            Box(Modifier.matchParentSize().drawBehind { drawRect(tone, size = Size(size.width * watched, size.height)) })
+            Box(
+                Modifier.matchParentSize().drawBehind {
+                    val width = size.width * watched
+                    val left = if (layoutDirection == LayoutDirection.Rtl) size.width - width else 0f
+                    drawRect(tone, topLeft = Offset(left, 0f), size = Size(width, size.height))
+                },
+            )
         }
         Row(
             Modifier.padding(start = if (icon != null || logo != null) 16.dp else ButtonLabelInset, end = if (trailingIcon != null) 14.dp else ButtonLabelInset, top = 8.dp, bottom = 8.dp),

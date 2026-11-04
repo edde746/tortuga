@@ -41,6 +41,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.edde746.tortuga.model.FormFactor
 import com.edde746.tortuga.model.PosterShape
@@ -176,8 +177,8 @@ fun PosterCard(
 /**
  * How much of an item is watched, over its artwork (a poster, a thumbnail; place it with `matchParentSize()`): a
  * rounded bar 4 dp high (TV 6) inset 8 dp from the left, right and bottom edges (TV 10), white on a 30 % white
- * track, over a scrim darkening the lowest 30 % of the artwork from 60 % black at the bottom edge to none, so the bar
- * reads on light artwork too.
+ * track, filled from its leading edge (right to left in Arabic), over a scrim darkening the lowest 30 % of the artwork
+ * from 60 % black at the bottom edge to none, so the bar reads on light artwork too.
  */
 @Composable
 fun ArtworkProgress(progress: Float, modifier: Modifier = Modifier) {
@@ -200,7 +201,9 @@ fun ArtworkProgress(progress: Float, modifier: Modifier = Modifier) {
             drawRoundRect(TortugaColors.ArtworkProgressTrack, origin, track, radius)
             // A started item shows at least a round dot.
             if (watched > 0f) {
-                drawRoundRect(TortugaColors.ArtworkProgressFill, origin, Size(minOf(maxOf(track.width * watched, bar), track.width), bar), radius)
+                val fill = minOf(maxOf(track.width * watched, bar), track.width)
+                val start = if (layoutDirection == LayoutDirection.Rtl) origin.x + track.width - fill else origin.x
+                drawRoundRect(TortugaColors.ArtworkProgressFill, Offset(start, origin.y), Size(fill, bar), radius)
             }
         },
     )
