@@ -13,7 +13,9 @@ name: tortuga
 
 services:
   postgres:
-    image: postgres:18-alpine
+    # Pinned by digest, the image backup/Dockerfile pins too: move both together to the digest `docker pull
+    # postgres:18-alpine` reports (a new digest recreates this container, a restart of a few seconds).
+    image: postgres:18-alpine@sha256:10a5c69a83035ab5239f5620d708520e8b28f5aa1f2b20143e6024532edadfb5
     environment:
       POSTGRES_DB: tortuga
       POSTGRES_USER: tortuga
