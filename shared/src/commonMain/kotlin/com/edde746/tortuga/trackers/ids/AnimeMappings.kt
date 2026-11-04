@@ -74,6 +74,8 @@ class AnimeMappings internal constructor(
         open = { path -> read(gunzip(fileSystem.source(path).buffered().use { it.readByteArray() })) },
         isEmpty = { it.fribb.isEmpty || it.animeLists.isEmpty },
         summary = { "${it.fribb.summary}; ${it.animeLists.summary}" },
+        // The packed list is about 0.65 MB.
+        maxBytes = 8L * 1024 * 1024,
         // Decoding the packed list takes about 0.4 s on a TV stick; the indexes' arrays load in a fifth of that.
         snapshot = PackedForm(write = ::writeSnapshot, read = ::readSnapshot),
     )

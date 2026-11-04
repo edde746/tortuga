@@ -78,6 +78,8 @@ internal class AgeRatingDataset(
         open = { path -> AgeIndex.read(gunzip(fileSystem.source(path).buffered().use { it.readByteArray() })) },
         isEmpty = AgeIndex::isEmpty,
         summary = AgeIndex::summary,
+        // The packed list is about 2 MB.
+        maxBytes = 16L * 1024 * 1024,
     )
 
     override suspend fun <R : Any> read(block: (AgeLookup) -> R): R? = dataset.get()?.let(block)

@@ -222,6 +222,7 @@ class CachedDatasetReleaseTest {
             },
             isEmpty = { it.text.isEmpty() },
             summary = { it.text },
+            maxBytes = 1024,
         )
     }
 

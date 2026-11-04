@@ -216,6 +216,35 @@ class CachedDatasetTest {
         assertTrue(exists(FILE))
     }
 
+    @Test
+    fun aFileLargerThanTheDatasetTakesIsDroppedAsItDownloadsAndCountsAsTheCheck() = runTest {
+        github.publish("v2", "x".repeat(MAX_BYTES + 1))
+        val data = dataset()
+        assertNull(data.get())
+        assertFalse(exists(FILE))
+        assertFalse(exists("$FILE.part"))
+        assertEquals(emptyList(), opened)
+        // Not downloaded again before a day has passed.
+        assertNull(data.get())
+        assertEquals(3, github.requests.size)
+
+        github.publish("v3", "x".repeat(MAX_BYTES))
+        clock.advance(CachedDataset.REFRESH_INTERVAL)
+        assertEquals(MAX_BYTES, data.get()?.length, "a file of the largest size it takes")
+    }
+
+    @Test
+    fun aCopyOnDiskLargerThanTheDatasetTakesIsDeletedAndDownloadedAgain() = runTest {
+        // As a build without the bound downloaded it.
+        write(FILE, "x".repeat(MAX_BYTES + 1))
+        write("$FILE.state", """{"version":"v0","lastCheckMillis":${clock.now().toEpochMilliseconds()}}""")
+        val data = dataset()
+        assertNull(data.get())
+        assertEquals(emptyList(), opened, "never read")
+        assertFalse(exists(FILE))
+        assertEquals("rows v1", data.get())
+    }
+
     private suspend fun TestScope.unusableFirstDownloadWaitsADay(body: String) {
         github.publish("v0", body)
         val data = dataset()
@@ -258,6 +287,7 @@ class CachedDatasetTest {
             open = { path -> read(path.name).also { require(it != "corrupt") { "unreadable" }; opened += it } },
             isEmpty = String::isEmpty,
             summary = { it },
+            maxBytes = MAX_BYTES.toLong(),
         )
     }
 
@@ -273,6 +303,7 @@ class CachedDatasetTest {
     private companion object {
         const val LATEST = "releases/latest"
         const val FILE = "data.txt"
+        const val MAX_BYTES = 64
     }
 
     /**

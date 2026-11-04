@@ -57,9 +57,10 @@ import kotlin.time.Duration.Companion.seconds
  *   the file are both fetched from that tag, so a release published in between can't pair one release's checksum
  *   with another's file. A file that doesn't match its listed checksum is therefore corrupt.
  * - Downloads stream to a temporary file, which is checked against the release's checksum and opened before it
- *   replaces the copy. A download that fails its checksum, is unreadable or opens empty is deleted and counts as the
- *   check: the copy in use stays, and with no copy, lookups download again only [REFRESH_INTERVAL] later. A copy on
- *   disk that is unreadable or empty is deleted, so the next call downloads it again.
+ *   replaces the copy. A download that fails its checksum, runs past [maxBytes], is unreadable or opens empty is
+ *   deleted and counts as the check: the copy in use stays, and with no copy, lookups download again only
+ *   [REFRESH_INTERVAL] later. A copy on disk that is unreadable, empty or larger than [maxBytes] is deleted, so the
+ *   next call downloads it again.
  * - With [snapshot], the index is also kept as `<fileName>.packed`, written once a copy has opened (after the lookups
  *   waiting for that load have the index, before its daily check) and deleted before another copy replaces it; a load
  *   reads it instead of opening the copy, and opens the copy (writing it again) when it is missing or unreadable.
@@ -82,6 +83,8 @@ internal class CachedDataset<T : Any>(
     private val open: (Path) -> T,
     private val isEmpty: (T) -> Boolean,
     private val summary: (T) -> String,
+    /** The largest file this dataset takes, a few times its release's: a download or copy past it is unusable. */
+    private val maxBytes: Long,
     private val snapshot: PackedForm<T>? = null,
 ) {
     private val lock = Mutex()
@@ -240,6 +243,8 @@ internal class CachedDataset<T : Any>(
     }
 
     private suspend fun openChecked(path: Path): T = withContext(parseDispatcher) {
+        val size = fileSystem.metadataOrNull(path)?.size ?: 0
+        check(size <= maxBytes) { "the file has $size bytes, more than $maxBytes" }
         open(path).also { check(!isEmpty(it)) { "the file is empty" } }
     }
 
@@ -314,17 +319,19 @@ internal class CachedDataset<T : Any>(
         return Download.Fresh(version = tag)
     }
 
-    /** GETs [url] into [target]: [Download.Fresh] once it is complete there. */
+    /** GETs [url] into [target]: [Download.Fresh] once it is complete there, [Download.Unusable] past [maxBytes]. */
     private suspend fun fetch(url: String, accept: String, target: Path): Download =
         http.prepareGet(url) {
             header(HttpHeaders.Accept, accept)
             timeout { requestTimeoutMillis = REQUEST_TIMEOUT.inWholeMilliseconds }
         }.execute { response ->
-            if (response.status == HttpStatusCode.OK) {
-                save(response, target)
-                Download.Fresh(version = null)
-            } else {
-                Download.Failed("HTTP ${response.status.value}", answered = true)
+            when {
+                response.status != HttpStatusCode.OK -> Download.Failed("HTTP ${response.status.value}", answered = true)
+                save(response, target) -> Download.Fresh(version = null)
+                else -> {
+                    Log.w(TAG) { "$label: $url is larger than $maxBytes bytes, dropping it" }
+                    Download.Unusable
+                }
             }
         }
 
@@ -363,10 +370,22 @@ internal class CachedDataset<T : Any>(
             }
         }
 
-    private suspend fun save(response: HttpResponse, target: Path) = response.readBody { channel ->
-        fileSystem.sink(target).buffered().use { sink ->
-            while (!channel.exhausted()) sink.transferFrom(channel.readBuffer(CHUNK_BYTES))
+    /** Streams [response] into [target]; false, with [target] deleted, once it runs past [maxBytes]. */
+    private suspend fun save(response: HttpResponse, target: Path): Boolean {
+        val fits = response.readBody { channel ->
+            fileSystem.sink(target).buffered().use { sink ->
+                var saved = 0L
+                while (!channel.exhausted()) {
+                    val chunk = channel.readBuffer(CHUNK_BYTES)
+                    saved += chunk.size
+                    if (saved > maxBytes) return@use false
+                    sink.transferFrom(chunk)
+                }
+                true
+            }
         }
+        if (!fits) fileSystem.delete(target, mustExist = false)
+        return fits
     }
 
     private fun sha256Of(path: Path): String = cryptoProvider.get(SHA256).hasher().createHashFunction().use { hash ->

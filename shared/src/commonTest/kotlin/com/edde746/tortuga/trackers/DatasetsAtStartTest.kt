@@ -205,6 +205,7 @@ class DatasetsAtStartTest {
             open = { it.name },
             isEmpty = String::isEmpty,
             summary = { it },
+            maxBytes = 1024,
         )
         return DatasetAtStart(updateDiskCopy = { data.updateDiskCopy() }, needed = MutableStateFlow(false), load = { data.get() })
     }
