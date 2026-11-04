@@ -90,14 +90,14 @@ private final class TopmostPresenter<Cover: View> {
     }
 
     /// Dismisses the cover, then runs `gone`; at once when it isn't presented (the system dismissed it, or it still
-    /// waits to come).
+    /// waits to come). The cover is let go of as its dismissal starts: one asked for while it goes is a new one, which
+    /// waits for the dismissal to end (`present`), not this one's page redrawn as it leaves, never to come back.
     func dismiss(then gone: @escaping () -> Void) {
         stopWaiting()
-        guard let controller, controller.presentingViewController != nil else {
-            controller = nil
-            return gone()
-        }
-        controller.dismiss(animated: true, completion: gone)
+        let dismissed = controller
+        controller = nil
+        guard let dismissed, dismissed.presentingViewController != nil else { return gone() }
+        dismissed.dismiss(animated: true, completion: gone)
     }
 }
 
