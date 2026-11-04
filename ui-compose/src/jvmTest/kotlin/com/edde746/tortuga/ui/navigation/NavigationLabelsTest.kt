@@ -28,10 +28,10 @@ import com.edde746.tortuga.presentation.navigation.TopLevelDestination
 import com.edde746.tortuga.strings.InterfaceLocale
 import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.ui.adaptive.AdaptiveLayout
+import com.edde746.tortuga.ui.interfaceLanguages
 import com.edde746.tortuga.ui.theme.TortugaTheme
 import kotlin.math.ceil
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /** The top-level destinations' names in the navigation, worded in every language. */
@@ -46,7 +46,7 @@ class NavigationLabelsTest {
     fun everyDestinationsNameShowsWholeInEveryLanguage() {
         val wrong = mutableListOf<String>()
         try {
-            for (language in languages) {
+            for (language in interfaceLanguages) {
                 T.locale = language
                 for ((place, size, formFactor, font) in places) runComposeUiTest {
                     navigation(size, formFactor, font)
@@ -65,7 +65,6 @@ class NavigationLabelsTest {
             T.locale = "en"
         }
         assertTrue(wrong.isEmpty(), wrong.joinToString("\n"))
-        assertEquals(21, languages.size, "a language is missing from the list")
     }
 
     /**
@@ -111,11 +110,6 @@ class NavigationLabelsTest {
             Triple(layout.layoutInput.text.text, needed, (layout.layoutInput.constraints.maxWidth / density.density).toInt())
         }
     }
-
-    /** The interface's languages (shared/i18n/). */
-    private val languages = listOf(
-        "ar", "cs", "de", "en", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt-BR", "ro", "ru", "sv", "th", "tr", "uk", "vi",
-    )
 
     private data class Place(val name: String, val size: DpSize, val formFactor: FormFactor, val font: FontFamily)
 

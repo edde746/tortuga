@@ -34,10 +34,10 @@ import com.edde746.tortuga.presentation.settings.SettingToggleRow
 import com.edde746.tortuga.strings.InterfaceLocale
 import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.ui.adaptive.AdaptiveLayout
+import com.edde746.tortuga.ui.interfaceLanguages
 import com.edde746.tortuga.ui.theme.TortugaTheme
 import kotlin.math.abs
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /** Settings' rows with a control at their end (a stepper, a switch, a menu's value), worded in every language. */
@@ -52,7 +52,7 @@ class SettingRowTextTest {
     fun onANarrowPhoneEveryRowShowsItsTextWholeAndItsControlInReach() {
         val wrong = mutableListOf<String>()
         try {
-            for (language in languages) {
+            for (language in interfaceLanguages) {
                 T.locale = language
                 val rows = rows()
                 for (fontScale in listOf(1f, 1.3f)) runComposeUiTest {
@@ -93,7 +93,6 @@ class SettingRowTextTest {
             T.locale = "en"
         }
         assertTrue(wrong.isEmpty(), wrong.distinct().joinToString("\n"))
-        assertEquals(21, languages.size, "a language is missing from the list")
     }
 
     /**
@@ -103,7 +102,7 @@ class SettingRowTextTest {
     @Test
     fun withRoomEveryStepperStaysBesideItsText() {
         val wrong = mutableListOf<String>()
-        val cases = languages.map { Triple(it, TV, FormFactor.TV) } + Triple("en", PIXEL_7, FormFactor.HANDHELD)
+        val cases = interfaceLanguages.map { Triple(it, TV, FormFactor.TV) } + Triple("en", PIXEL_7, FormFactor.HANDHELD)
         try {
             for ((language, size, formFactor) in cases) {
                 T.locale = language
@@ -260,11 +259,6 @@ class SettingRowTextTest {
 
     private fun choice(id: String, title: String, hint: String?, value: String) =
         SettingChoiceRow(id, title, hint, listOf(SettingChoiceOption("value", value, selected = true)))
-
-    /** The interface's languages (shared/i18n/). */
-    private val languages = listOf(
-        "ar", "cs", "de", "en", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt-BR", "ro", "ru", "sv", "th", "tr", "uk", "vi",
-    )
 
     private companion object {
         /** The narrowest common phone (a Galaxy A's 360 dp), at a height the test's window holds. */

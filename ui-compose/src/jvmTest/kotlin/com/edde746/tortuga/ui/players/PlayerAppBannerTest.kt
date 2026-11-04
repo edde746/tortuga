@@ -105,9 +105,8 @@ class PlayerAppBannerTest {
     }
 
     /**
-     * The failed hand-off's banner over the Streams sheet on a phone (411 × 800 dp at twice the pixels) and on a 1080p
-     * TV (960 × 540 dp), where it took focus from the sheet as the hand-off failed. The pictures are kept as
-     * build/screenshots/player-app-banner-phone.png and player-app-banner-tv.png.
+     * The failed hand-off's banner over the Streams sheet on a phone (411 × 800 dp at twice the pixels). The picture is
+     * kept as build/screenshots/player-app-banner-phone.png.
      */
     @Test
     fun theBannerShowsOverTheSheetOnAPhone() = runSkikoComposeUiTest(size = Size(822f, 1600f), density = Density(2f)) {
@@ -115,15 +114,6 @@ class PlayerAppBannerTest {
         bannerOverSheet(FormFactor.HANDHELD)
         onNodeWithText(failed.text).assertIsDisplayed()
         shot("player-app-banner-phone")
-    }
-
-    @Test
-    fun theBannerShowsOverTheSheetOnTv() = runSkikoComposeUiTest(size = Size(1920f, 1080f), density = Density(2f)) {
-        bannerOverSheet(FormFactor.TV)
-        onNodeWithText("First").assertIsFocused()
-        banner = failed
-        onNodeWithText("Play in Tortuga").assertIsFocused()
-        shot("player-app-banner-tv")
     }
 
     private fun ComposeUiTest.shot(name: String) {

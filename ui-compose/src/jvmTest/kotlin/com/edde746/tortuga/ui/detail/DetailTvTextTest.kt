@@ -38,10 +38,10 @@ import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.ui.adaptive.AdaptiveLayout
 import com.edde746.tortuga.ui.components.OverlayHostBox
 import com.edde746.tortuga.ui.focus.arrowKeyFocus
+import com.edde746.tortuga.ui.interfaceLanguages
 import com.edde746.tortuga.ui.navigation.NavigationScaffold
 import com.edde746.tortuga.ui.theme.TortugaTheme
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
@@ -136,7 +136,7 @@ class DetailTvTextTest {
         )
         val wrong = mutableListOf<String>()
         try {
-            for (language in languages) {
+            for (language in interfaceLanguages) {
                 T.locale = language
                 val texts = boys.copy(
                     chooseStreamText = T.detail.chooseStream,
@@ -167,7 +167,6 @@ class DetailTvTextTest {
             T.locale = "en"
         }
         assertTrue(wrong.isEmpty(), wrong.joinToString("\n"))
-        assertEquals(21, languages.size, "a language is missing from the list")
     }
 
     /**
@@ -203,11 +202,6 @@ class DetailTvTextTest {
         }
         assertTrue(wrong.isEmpty(), wrong.joinToString("\n"))
     }
-
-    /** The interface's languages (shared/i18n/). */
-    private val languages = listOf(
-        "ar", "cs", "de", "en", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt-BR", "ro", "ru", "sv", "th", "tr", "uk", "vi",
-    )
 
     /** The bounds of each node reading [text] that shows on screen. */
     private fun ComposeUiTest.shownBounds(text: String): List<DpRect> {
