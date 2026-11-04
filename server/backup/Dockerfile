@@ -1,6 +1,7 @@
 # Scheduled, client-side encrypted Postgres backups to S3-compatible storage. The base image's
 # pg_dump/pg_restore match the server's Postgres major version; age encrypts, rclone talks S3, supercronic schedules.
-FROM postgres:18-alpine
+# Pinned by digest, as the server's base images are; bump it deliberately.
+FROM postgres:18-alpine@sha256:10a5c69a83035ab5239f5620d708520e8b28f5aa1f2b20143e6024532edadfb5
 
 ARG TARGETARCH
 ARG SUPERCRONIC_VERSION=v0.2.49

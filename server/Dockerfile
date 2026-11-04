@@ -8,7 +8,8 @@
 # small to run Gradle replaces the `dist` stage with a distribution built elsewhere (`:server:installDist`), and the
 # build stage is then skipped: `docker build --build-context dist=<installDist dir> ...`.
 
-FROM eclipse-temurin:27-jdk-resolute AS build
+# Base images pinned by digest, so two builds of one commit run on the same bytes; bump the digests deliberately.
+FROM eclipse-temurin:27-jdk-resolute@sha256:11fb95031e5720b9f6efc684658fde4f3d5a2318cced98602c882df0b328d22c AS build
 WORKDIR /src
 COPY . .
 # Hosts without an Android SDK build with tortuga.android=false (settings.gradle.kts); Kotlin compiles in-process so
@@ -25,7 +26,7 @@ RUN --mount=type=cache,target=/root/.gradle,id=tortuga-gradle,sharing=locked \
 FROM scratch AS dist
 COPY --from=build /src/server/build/install/tortuga-server /
 
-FROM eclipse-temurin:27-jre-resolute
+FROM eclipse-temurin:27-jre-resolute@sha256:7520762e9fac9c34ae0ef3a898ff0e9fc652b019860ab859728b17df41f2b497
 # curl for the health check below: Temurin's images carry none since JDK 27.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl \
