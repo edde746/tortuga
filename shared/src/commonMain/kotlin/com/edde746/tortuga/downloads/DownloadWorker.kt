@@ -44,13 +44,17 @@ internal sealed interface Outcome {
  * Runs one download until it completes or fails (DownloadManager's transfer rules):
  * resolves the stream right before each attempt (or reuses the download's last resolve while it is [REUSE_WINDOW]
  * old and the download's stream unchanged: an addon's service may mint a new URL per resolve, and Apple's resume data
- * only resumes the URL it came from), checks the free space, transfers into the `.part` file resuming what is there,
- * recovers an expired link (re-resolving the original stream, else finding the same stream in its addon's answer
- * again; once more each time the `.part` grew since the last recovery, so a link that delivers nothing ends it),
- * restarts from zero only when the file isn't the same, retries network and server failures [MAX_RETRIES] times
- * [RETRY_DELAY] apart, verifies the size and moves the file into place. A failed write ends it as a full volume when the
- * location has less than [SPACE_MARGIN] free (the queue stops), else as the location unavailable: the transport's error
- * can't tell, its text being the OS's, in the user's language.
+ * only resumes the URL it came from), refuses an error video ([ResolvedStream.errorVideo]) and a playlist (HLS, DASH:
+ * its link's extension, else the transferred file's first bytes, [isDocument]), checks the free space, transfers into
+ * the `.part` file resuming what is there (none when the file starts afresh: a part a failed deletion left there is
+ * another file's), recovers an expired link (re-resolving the original stream, else finding the same stream in its
+ * addon's answer again; once more each time the `.part` grew since the last recovery, so a link that delivers nothing
+ * ends it), restarts from zero only when the file isn't the same, retries network and server failures [MAX_RETRIES]
+ * times [RETRY_DELAY] apart (counted again from zero after an attempt that left more of the file than it started
+ * with), verifies the size and moves the file into place. A part that can't be deleted, and a failed write when the
+ * location has [SPACE_MARGIN] free or more, end it as the location unavailable; a failed write with less free ends it
+ * as a full volume (the queue stops): the transport's error can't tell, its text being the OS's, in the user's
+ * language.
  */
 internal class DownloadWorker(private val env: DownloadEnv, private val transfers: Transfers, private val timeSource: TimeSource) {
     /** Each download's last resolve, in memory only (its URL and headers carry keys), by download id. Main thread. */
@@ -77,9 +81,12 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
             val result: TransferResult
             val expected: Long?
             val path: String
+            // What of the file was there as the attempt started: one that ends with more re-arms the retries.
+            val startedWith: Long
             if (reattached != null) {
                 path = row.relativePath ?: return Outcome.Requeue
                 expected = row.totalBytes
+                startedWith = row.downloadedBytes
                 env.repo.setStatus(id, DownloadStatus.DOWNLOADING)
                 result = transfers.await(id.toString(), reattached, stopping)
                 reattached = null
@@ -115,6 +122,7 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
                     if (!env.io { deletePart(video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
                     offset = 0
                 }
+                startedWith = maxOf(offset, row.downloadedBytes)
                 if (size != null) {
                     val free = env.io { env.platform.freeBytes(directory) }
                     if (free != null && free < size - offset + SPACE_MARGIN) return Outcome.Failed(DownloadFailureKind.NOT_ENOUGH_SPACE)
@@ -145,7 +153,14 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
             transfers.clear(id)
             val video = child(directory, path)
             val partBytes = if (result is TransferResult.Completed) 0L else env.io { size(Path("$video${DownloadNames.PART}")) } ?: 0L
-            if (result !is TransferResult.Completed) env.repo.setProgress(id, maxOf(partBytes, reported))
+            if (result !is TransferResult.Completed) {
+                val progress = maxOf(partBytes, reported)
+                env.repo.setProgress(id, progress)
+                if (progress > startedWith && retries > 0) {
+                    retries = 0
+                    env.repo.setAttempts(id, 0)
+                }
+            }
             when (result) {
                 is TransferResult.Completed -> return complete(id, video, expected, result)
                 is TransferResult.Http -> when {

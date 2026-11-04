@@ -256,6 +256,29 @@ class DownloadQueueTest {
         assertEquals(DownloadStatus.QUEUED, h.download(id)?.status, "its next failure is retried, not the last")
     }
 
+    /** Retries count failures in a row: an attempt that left more of the file than it started with re-arms them. */
+    @Test
+    fun aTransferThatKeepsGrowingBetweenDropsIsRetriedUntilItCompletes() = downloadsTest(fake = true) { h ->
+        h.serveCdn(bytes)
+        // Each attempt delivers 20 000 bytes more, then the connection drops.
+        h.fakeTransport.onStart = { request, listener ->
+            writePart(request, request.offset + 20_000)
+            listener.onResult(request.id, TransferResult.Network("IOException"))
+        }
+        val manager = h.install()
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+
+        repeat(2 * DownloadWorker.MAX_RETRIES) { h.advance(DownloadWorker.RETRY_DELAY) }
+
+        assertEquals(2 * DownloadWorker.MAX_RETRIES + 1, h.fakeTransport.started.size)
+        assertEquals(DownloadStatus.QUEUED, h.download(id)?.status, "still retried")
+        h.fakeTransport.onStart = { _, _ -> }
+        h.advance(DownloadWorker.RETRY_DELAY)
+        h.complete(h.fakeTransport.started.last())
+        assertEquals(DownloadStatus.COMPLETED, h.download(id)?.status)
+    }
+
     @Test
     fun threeFailuresInARowStopTheQueueUntilTheUserActs() = downloadsTest(fake = true) { h ->
         h.serveCdn(bytes)
