@@ -14,6 +14,8 @@ import XCTest
 /// - a rating Trakt refuses (the fake answering 422) when it is given and at each of its five retries, one each time
 ///   the app comes back to the front: Settings → Trackers then says under Trakt's switches that a change couldn't be
 ///   sent and what Trakt answered (`testARatingTraktKeepsRefusingShowsInTrackers`);
+/// - in Arabic the rating's stars run from the right, and a tap or a drag counts them from there
+///   (`testRatingStarsFollowTouchRightToLeft`);
 /// - the test addon's series left at 12 s of its first episode: the episode's long-press menu offers Play from the
 ///   beginning and Mark as watched and, auto-play off, no Choose a stream; with auto-play on (First match, set in
 ///   Settings, the session launched again on the series), it offers Choose a stream too, which opens the episode's
@@ -150,6 +152,34 @@ extension DetailTests {
         requireNoRatingItem("without trackers")
         requireNoRateAction("without trackers")
         shot("rate, no trackers")
+    }
+
+    /// In Arabic the stars run from the right, and a tap or a drag counts them from there: on The Shawshank Redemption,
+    /// unrated, a tap on the leftmost star's right half (the fifth star's leading half) gives 9, saved on all three
+    /// trackers, four and a half stars lit from the right; a drag from the rightmost star to the second star's left
+    /// half (its trailing half) gives 4 (shot as "rate in arabic").
+    func testRatingStarsFollowTouchRightToLeft() throws {
+        try seedFakeRatings()
+        try launchDev(trackersConnected: true, open: [Self.rateTitle], languages: ["ar"])
+        require("detail.play", timeout: 60, "The Shawshank Redemption's details show Play")
+        openRatingPicker("the unrated title in Arabic", timeout: 60)
+
+        giveScore(9, rightToLeft: true)
+        requireStars(9, rightToLeft: true, "in Arabic, 9 given by a tap")
+        requireFakeRatings(Self.rateImdb, ["trakt": [9], "simkl": [9], "mdblist": [9]], "in Arabic, 9 given by a tap")
+        shot("rate in arabic")
+
+        let stars = ready(require("detail.userRating.stars", "the picker shows the stars"))
+        let frame = stars.frame
+        let star = (frame.width - 2 * Self.starsPadding - 4 * Self.starsGap) / 5
+        func at(_ x: CGFloat) -> XCUICoordinate {
+            stars.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: x, dy: frame.height / 2))
+        }
+        // From the rightmost star's middle to the second star's left quarter.
+        let second = frame.width - Self.starsPadding - star - Self.starsGap - star * 0.75
+        at(frame.width - Self.starsPadding - star / 2).press(forDuration: 0.2, thenDragTo: at(second))
+        requireStars(4, rightToLeft: true, "in Arabic, 4 given by a drag")
+        requireFakeRatings(Self.rateImdb, ["trakt": [4], "simkl": [4], "mdblist": [4]], "in Arabic, 4 given by a drag")
     }
 
     func testARatingTraktKeepsRefusingShowsInTrackers() throws {

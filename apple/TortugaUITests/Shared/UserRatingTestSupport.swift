@@ -137,11 +137,11 @@ extension TortugaUITestCase {
     }
 
     /// Fails with `what` unless the stars give `score` (nil: none) as their value, and light exactly its half stars,
-    /// read off the screen: a half star is lit where over a tenth of its pixels are near white (each channel at least
-    /// 230, the text colour); the unlit fill, white at 20 %, stays far under that. The Mac's XCUITest reads no value of
-    /// the stars (nor of the trackers' lines: macOS 27), so there the lit stars alone are checked, once the
-    /// caller has seen the score arrive elsewhere.
-    func requireStars(_ score: Int?, _ what: String) {
+    /// read off the screen (`rightToLeft`: the stars run from the right, each lit from its right): a half star is lit
+    /// where over a tenth of its pixels are near white (each channel at least 230, the text colour); the unlit fill,
+    /// white at 20 %, stays far under that. The Mac's XCUITest reads no value of the stars (nor of the trackers' lines:
+    /// macOS 27), so there the lit stars alone are checked, once the caller has seen the score arrive elsewhere.
+    func requireStars(_ score: Int?, rightToLeft: Bool = TortugaUITestCase.rightToLeft, _ what: String) {
         let stars = require("detail.userRating.stars", what)
         #if !os(macOS)
         let value = score.map(String.init) ?? "Not rated"
@@ -157,7 +157,7 @@ extension TortugaUITestCase {
             let frame = stars.frame
             let star = (frame.width - 2 * Self.starsPadding - 4 * Self.starsGap) / 5
             read = (1...10).filter { point in
-                let half = halfStar(point, in: frame, star: star).insetBy(dx: 1, dy: 0)
+                let half = halfStar(point, in: frame, star: star, rightToLeft: rightToLeft).insetBy(dx: 1, dy: 0)
                 return pixels.share(in: half) { min($0, $1, $2) >= 230 } > 0.1
             }
             return read == expected
@@ -168,21 +168,22 @@ extension TortugaUITestCase {
         }
     }
 
-    /// Point `point`'s half star in the stars' `frame`, each star `star` wide: a star's left half its odd point, its
-    /// right half the even one.
-    private func halfStar(_ point: Int, in frame: CGRect, star: CGFloat) -> CGRect {
+    /// Point `point`'s half star in the stars' `frame`, each star `star` wide, counted from the left (`rightToLeft`: from
+    /// the right): a star's leading half its odd point, its trailing half the even one.
+    private func halfStar(_ point: Int, in frame: CGRect, star: CGFloat, rightToLeft: Bool) -> CGRect {
         let index = CGFloat((point - 1) / 2)
-        let x = frame.minX + Self.starsPadding + index * (star + Self.starsGap) + (point.isMultiple(of: 2) ? star / 2 : 0)
+        let leading = Self.starsPadding + index * (star + Self.starsGap) + (point.isMultiple(of: 2) ? star / 2 : 0)
+        let x = rightToLeft ? frame.maxX - leading - star / 2 : frame.minX + leading
         return CGRect(x: x, y: frame.minY, width: star / 2, height: frame.height)
     }
 
     #if !os(tvOS)
-    /// Taps (the Mac: clicks) point `point`'s half star, at its middle.
-    func giveScore(_ point: Int) {
+    /// Taps (the Mac: clicks) point `point`'s half star, at its middle (`rightToLeft`: the stars run from the right).
+    func giveScore(_ point: Int, rightToLeft: Bool = TortugaUITestCase.rightToLeft) {
         let stars = ready(require("detail.userRating.stars", "the picker shows the stars"))
         let frame = stars.frame
         let star = (frame.width - 2 * Self.starsPadding - 4 * Self.starsGap) / 5
-        let half = halfStar(point, in: frame, star: star)
+        let half = halfStar(point, in: frame, star: star, rightToLeft: rightToLeft)
         let target = stars.coordinate(withNormalizedOffset: .zero)
             .withOffset(CGVector(dx: half.midX - frame.minX, dy: frame.height / 2))
         #if os(macOS)

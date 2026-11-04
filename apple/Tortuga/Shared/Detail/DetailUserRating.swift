@@ -212,16 +212,17 @@ enum DetailRatingFocus: Hashable {
     case stars, clear
 }
 
-/// The score 1–10 as five stars, each half one point (4½ stars: 9; the 4th star's right half 8): the given half stars
-/// in the text colour, the rest a dim solid fill (never an outline), with the score large beside them, a dash without
-/// one (`score` nil: unrated, or the trackers differing). The stars are `RatingMetrics.starMax` wide where the room
-/// allows, smaller where it doesn't. A tap or a click on a half star gives its score; a drag along them lights the
-/// stars under the finger or pointer and gives the score on release (the gap after a star counts as its right half).
+/// The score 1–10 as five stars, each half one point (4½ stars: 9; the 4th star's trailing half 8): the given half
+/// stars in the text colour, the rest a dim solid fill (never an outline), with the score large beside them, a dash
+/// without one (`score` nil: unrated, or the trackers differing). The stars are `RatingMetrics.starMax` wide where the
+/// room allows, smaller where it doesn't. A tap or a click on a half star gives its score; a drag along them lights the
+/// stars under the finger or pointer and gives the score on release (the gap after a star counts as its trailing
+/// half).
 /// On Apple TV the stars are one focus stop, its focus a solid fill behind them: Left and Right move the score a
 /// point, Select gives it; the Mac's keyboard (with keyboard navigation on) the same, Return or Space giving it. In a
-/// right-to-left language the stars run from the right, and Left raises the score. One element for VoiceOver
-/// (`detail.userRating.stars`), "Your rating" valued "8" or "Not rated", adjustable: a swipe up or down gives the score
-/// a point higher or lower.
+/// right-to-left language the stars run from the right, each lit from its right, a tap or a drag counts them from the
+/// right, and Left raises the score. One element for VoiceOver (`detail.userRating.stars`), "Your rating" valued "8" or
+/// "Not rated", adjustable: a swipe up or down gives the score a point higher or lower.
 struct DetailRatingStars: View {
     let score: Int?
     let onRate: (Int?) -> Void
@@ -233,9 +234,7 @@ struct DetailRatingStars: View {
     /// gives it. It goes as the trackers' score changes.
     @State private var pending: Int?
     @State private var width: CGFloat = 0
-    #if !os(iOS)
     @Environment(\.layoutDirection) private var layoutDirection
-    #endif
     #if os(macOS)
     @FocusState private var keyboardFocused: Bool
     #endif
@@ -308,10 +307,11 @@ struct DetailRatingStars: View {
     }
 
     #if !os(tvOS)
-    /// The point (1–10) at `x` along the row: a star's left half its odd point, its right half and the gap after it the
-    /// even one.
+    /// The point (1–10) at `x` across the row, counted from its leading edge (the right right to left; `x` is from its
+    /// left either way): a star's leading half its odd point, its trailing half and the gap after it the even one.
     private func point(at x: CGFloat) -> Int {
-        let along = x - RatingMetrics.rowPadding
+        let row = 5 * star + 4 * RatingMetrics.starGap + 2 * RatingMetrics.rowPadding
+        let along = (layoutDirection == .rightToLeft ? row - x : x) - RatingMetrics.rowPadding
         let pitch = star + RatingMetrics.starGap
         let index = min(max(Int((along / pitch).rounded(.down)), 0), 4)
         return 2 * index + (along - CGFloat(index) * pitch < star / 2 ? 1 : 2)
