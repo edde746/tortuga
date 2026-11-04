@@ -11,6 +11,7 @@ import com.edde746.tortuga.playback.subtitles.SubtitleRequest
 import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.plugins.timeout
 import io.ktor.client.request.prepareGet
+import io.ktor.http.contentLength
 import io.ktor.http.isSuccess
 import io.ktor.utils.io.exhausted
 import io.ktor.utils.io.readBuffer
@@ -25,7 +26,10 @@ import kotlin.time.Duration.Companion.seconds
  * the subtitle languages to save (`DownloadSubtitleLanguages`, else the first owner's subtitle and second subtitle
  * languages, `ProfileSettings.savedSubtitleLanguages`), looked up by the file's hash,
  * size and name as playback looks them up, in `<video base>_subs/`. The meta itself is saved when the download is
- * queued. Each part that fails stays marked missing and is tried again later; it never fails the download.
+ * queued. Each part that fails stays marked missing and is tried again later; it never fails the download. Subtitles
+ * stay missing too while an addon couldn't answer the lookup (`FoundSubtitles.complete`).
+ * An extra is at most [MAX_ARTWORK_BYTES] or [MAX_SUBTITLE_BYTES]: a larger answer is no image or subtitle and is
+ * dropped (the part deleted), whatever its `Content-Length` says.
  */
 internal class DownloadExtras(private val env: DownloadEnv) {
     /**
@@ -60,7 +64,7 @@ internal class DownloadExtras(private val env: DownloadEnv) {
             val known = saved.artwork[url]
             if (known != null && env.io { exists(child(directory, known)) }) continue
             val path = DownloadNames.artworkPath(url)
-            if (fetch(url, directory, path)) added[url] = path else complete = false
+            if (fetch(url, directory, path, MAX_ARTWORK_BYTES)) added[url] = path else complete = false
         }
         env.repo.addArtwork(row.metaId, added)
         metas[row.metaId] = saved.copy(artwork = saved.artwork + added)
@@ -94,7 +98,7 @@ internal class DownloadExtras(private val env: DownloadEnv) {
         found.added.forEachIndexed { index, subtitle ->
             val path = "$folder/${index + 1}.${subtitle.language ?: "und"}.${subtitleExtension(subtitle.url)}"
             if (path in existing) return@forEachIndexed
-            if (fetch(subtitle.url, directory, path)) {
+            if (fetch(subtitle.url, directory, path, MAX_SUBTITLE_BYTES)) {
                 env.repo.addSubtitle(row.id, SavedSubtitle(path, subtitle.title ?: subtitle.language.orEmpty(), subtitle.language))
             } else {
                 complete = false
@@ -104,10 +108,10 @@ internal class DownloadExtras(private val env: DownloadEnv) {
     }
 
     /**
-     * GETs [url] into [path] under [directory] (through a `.part` file, moved into place only when it holds something);
-     * false when that fails, so the part stays missing and is asked for again.
+     * GETs [url] into [path] under [directory] (through a `.part` file, moved into place only when it holds something,
+     * at most [maxBytes]); false when that fails, so the part stays missing and is asked for again.
      */
-    private suspend fun fetch(url: String, directory: String, path: String): Boolean {
+    private suspend fun fetch(url: String, directory: String, path: String, maxBytes: Long): Boolean {
         if (!env.io { env.createDirectories(directory, path.substringBeforeLast('/')) }) return false
         val target = child(directory, path)
         val part = Path("$target${DownloadNames.PART}")
@@ -120,14 +124,18 @@ internal class DownloadExtras(private val env: DownloadEnv) {
                     Log.d(TAG) { "an extra answered HTTP ${response.status.value}" }
                     return@execute false
                 }
+                if ((response.contentLength() ?: 0L) > maxBytes) {
+                    Log.w(TAG) { "an extra announced ${response.contentLength()} bytes, past its $maxBytes" }
+                    return@execute false
+                }
                 response.readBody { channel ->
                     withContext(env.io) {
                         var bytes = 0L
                         env.files.sink(part).use { sink ->
-                            while (!channel.exhausted()) bytes += sink.transferFrom(channel.readBuffer(CHUNK_BYTES))
+                            while (!channel.exhausted() && bytes <= maxBytes) bytes += sink.transferFrom(channel.readBuffer(CHUNK_BYTES))
                         }
-                        if (bytes > 0) return@withContext env.files.move(part, target)
-                        Log.d(TAG) { "an extra answered an empty body" }
+                        if (bytes in 1..maxBytes) return@withContext env.files.move(part, target)
+                        if (bytes > maxBytes) Log.w(TAG) { "an extra ran past its $maxBytes bytes" } else Log.d(TAG) { "an extra answered an empty body" }
                         env.files.delete(part)
                         false
                     }
@@ -145,6 +153,12 @@ internal class DownloadExtras(private val env: DownloadEnv) {
     private companion object {
         const val TAG = "downloads"
         const val CHUNK_BYTES = 64L * 1024
+
+        /** Far past a poster's, a background's or a logo's size, even a 4K PNG's. */
+        const val MAX_ARTWORK_BYTES = 32L * 1024 * 1024
+
+        /** Far past a subtitle file's size, even an ASS file's with its styles. */
+        const val MAX_SUBTITLE_BYTES = 16L * 1024 * 1024
         val FETCH_TIMEOUT = 60.seconds
         val SUBTITLE_EXTENSIONS = setOf("srt", "vtt", "ass", "ssa", "sub", "ttml", "smi")
 

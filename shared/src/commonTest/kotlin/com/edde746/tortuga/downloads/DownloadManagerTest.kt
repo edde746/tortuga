@@ -12,6 +12,7 @@ import com.edde746.tortuga.playback.resolve.headers
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.utils.io.ByteReadChannel
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
 import kotlin.test.Test
@@ -438,6 +439,7 @@ class DownloadManagerTest {
         val subtitle = assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).subtitles.single()
         assertEquals(file, read(Path(subtitle.path)).decodeToString())
     }
+
     @Test
     fun subtitlesAnAddonCouldntLookUpAreAskedForAgain() = downloadsTest { h ->
         h.serveCdn(bytes)
@@ -465,6 +467,21 @@ class DownloadManagerTest {
         assertEquals("en", assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).subtitles.single().language)
     }
 
+    @Test
+    fun artworkPastItsSizeIsNotKept() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        // No Content-Length: only the bytes tell.
+        h.routes["img.example"] = { respond(ByteReadChannel(ByteArray(33 * 1024 * 1024)), HttpStatusCode.OK) }
+        val manager = h.install()
+
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+
+        assertEquals(DownloadStatus.COMPLETED, h.download(id)?.status)
+        assertEquals("https://img.example/poster.jpg", manager.savedMeta("movie", FILM.id)?.preview?.poster)
+        assertFalse(assertNotNull(h.data.downloads.download(id)).artworkSaved)
+        assertEquals(emptyList(), SystemFileSystem.list(h.file(DownloadNames.ARTWORK)))
+    }
 }
 
 /** A transfer's request (whole, or from an offset on), not one of the resolve's ranged reads. */
