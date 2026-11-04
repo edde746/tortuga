@@ -24,11 +24,17 @@ LICENSES = Path(__file__).resolve().parents[1] / "licenses"
 
 
 def texts(app: str) -> dict:
-    """Each text's path under licenses/ → its file in the repository."""
+    """Each text's path under licenses/ → its file in the repository; exits naming a group that isn't a folder of
+    licenses/ or holds no file (renamed or mistyped, its texts would otherwise be left out unnoticed)."""
     found = {}
     for group in json.loads((LICENSES / "apps.json").read_text())[app]:
         root = LICENSES / group
-        for file in sorted(path for path in root.rglob("*") if path.is_file()):
+        if not root.is_dir():
+            sys.exit(f"licenses/apps.json gives {app} licenses/{group}, which isn't a folder")
+        files = sorted(path for path in root.rglob("*") if path.is_file())
+        if not files:
+            sys.exit(f"licenses/{group}, which licenses/apps.json gives {app}, holds no licence texts")
+        for file in files:
             path = file.relative_to(root).as_posix()
             if path in found:
                 sys.exit(f"licenses/{group}/{path}: also in {found[path]}")
