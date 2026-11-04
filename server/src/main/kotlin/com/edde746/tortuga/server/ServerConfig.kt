@@ -6,6 +6,7 @@ import com.edde746.tortuga.server.http.ByteBudget
 import com.edde746.tortuga.sync.api.SyncPaths
 import com.edde746.tortuga.trackers.devTrackerUrl
 import java.io.IOException
+import java.net.InetAddress
 import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
@@ -95,7 +96,7 @@ data class ServerConfig(
             val appleKey = listOf("TORTUGA_APPLE_TEAM_ID", "TORTUGA_APPLE_KEY_ID", "TORTUGA_APPLE_PRIVATE_KEY")
                 .map { secret(it) }
             val googleClientIds = list("TORTUGA_GOOGLE_CLIENT_IDS")
-            val oidcIssuer = string("TORTUGA_OIDC_ISSUER")
+            val oidcIssuer = upstreamUrl("TORTUGA_OIDC_ISSUER")
             ServerConfig(
                 host = string("TORTUGA_HOST") ?: "0.0.0.0",
                 port = int("TORTUGA_PORT", 8080),
@@ -121,7 +122,7 @@ data class ServerConfig(
                         )
                     },
                     webReturn = boolean("TORTUGA_APPLE_WEB_RETURN", false),
-                    webRedirectUri = string("TORTUGA_PUBLIC_URL")?.trimEnd('/')?.plus(SyncPaths.APPLE_RETURN),
+                    webRedirectUri = upstreamUrl("TORTUGA_PUBLIC_URL")?.trimEnd('/')?.plus(SyncPaths.APPLE_RETURN),
                 ).also {
                     require(it.signingKey == null || it.servicesId == null || it.webRedirectUri != null) {
                         "Exchanging web-flow codes (TORTUGA_APPLE_SERVICES_ID with a signing key) needs TORTUGA_PUBLIC_URL"
@@ -138,7 +139,7 @@ data class ServerConfig(
                             require(ids.isNotEmpty()) { "TORTUGA_OIDC_ISSUER needs TORTUGA_OIDC_CLIENT_IDS" }
                         },
                         displayName = string("TORTUGA_OIDC_NAME"),
-                        jwksUri = string("TORTUGA_OIDC_JWKS_URL"),
+                        jwksUri = upstreamUrl("TORTUGA_OIDC_JWKS_URL"),
                     )
                 },
                 github = github(),
@@ -187,7 +188,7 @@ private fun checkAppleKey(pem: String) {
  * (authorization pages); both or neither.
  */
 private fun EnvReader.trackerOAuth(): TrackerOAuthConfig {
-    val publicUrl = string("TORTUGA_PUBLIC_URL")?.trimEnd('/')
+    val publicUrl = upstreamUrl("TORTUGA_PUBLIC_URL")?.trimEnd('/')
     val malId = string("TORTUGA_MAL_CLIENT_ID")
     val aniListId = string("TORTUGA_ANILIST_CLIENT_ID")
     val aniListSecret = secret("TORTUGA_ANILIST_CLIENT_SECRET")
@@ -227,6 +228,33 @@ private fun EnvReader.fakeTrackersUrl(name: String): String? = string(name)?.als
     }
 }
 
+/**
+ * [name]'s URL, if set: https, or http only to this machine or a private network (a development stack's provider, a
+ * container next to the server), so no one between the server and a public provider can stand in for it (a forged key
+ * set signs in as anyone) or read what the server sends it (GitHub's client secret).
+ */
+private fun EnvReader.upstreamUrl(name: String): String? = string(name)?.also {
+    val url = runCatching { URI(it) }.getOrNull()
+    val host = url?.host
+    require(url != null && !host.isNullOrEmpty() && (url.scheme == "https" || url.scheme == "http" && isLocalHost(host))) {
+        "$name must be an https URL (http only to this machine or a private network), not $it"
+    }
+}
+
+/**
+ * A name without a dot (`localhost`, a compose service such as `dex`), or a loopback, private or link-local address
+ * literal; never looked up.
+ */
+private fun isLocalHost(host: String): Boolean {
+    if ('.' !in host && ':' !in host) return true
+    val literal = host.removeSurrounding("[", "]")
+    if (!IP_LITERAL.matches(literal)) return false
+    val address = InetAddress.getByName(literal)
+    return address.isLoopbackAddress || address.isSiteLocalAddress || address.isLinkLocalAddress
+}
+
+private val IP_LITERAL = Regex("[0-9.]+|[0-9A-Fa-f:.]*:[0-9A-Fa-f:.]*")
+
 /** Sign in with GitHub: on when both the client ID and the secret are set. */
 private fun EnvReader.github(): GitHubConfig? {
     val clientId = string("TORTUGA_GITHUB_CLIENT_ID")
@@ -235,13 +263,13 @@ private fun EnvReader.github(): GitHubConfig? {
         "Set both TORTUGA_GITHUB_CLIENT_ID and TORTUGA_GITHUB_CLIENT_SECRET, or neither"
     }
     if (clientId == null || clientSecret == null) return null
-    val url = (string("TORTUGA_GITHUB_URL") ?: ServerConfig.DEFAULT_GITHUB_URL).trimEnd('/')
+    val url = (upstreamUrl("TORTUGA_GITHUB_URL") ?: ServerConfig.DEFAULT_GITHUB_URL).trimEnd('/')
     return GitHubConfig(
         clientId = clientId,
         clientSecret = clientSecret,
         url = url,
-        apiUrl = (string("TORTUGA_GITHUB_API_URL") ?: ServerConfig.DEFAULT_GITHUB_API_URL).trimEnd('/'),
-        tokenUrl = string("TORTUGA_GITHUB_TOKEN_URL") ?: "$url/login/oauth/access_token",
+        apiUrl = (upstreamUrl("TORTUGA_GITHUB_API_URL") ?: ServerConfig.DEFAULT_GITHUB_API_URL).trimEnd('/'),
+        tokenUrl = upstreamUrl("TORTUGA_GITHUB_TOKEN_URL") ?: "$url/login/oauth/access_token",
     )
 }
 

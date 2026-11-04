@@ -98,9 +98,12 @@ as `POSTGRES_PASSWORD` or `POSTGRES_PASSWORD_FILE`, which it hands to Postgres, 
 `_FILE` path needs the file mounted there, as a compose secret in an override file (`compose.hosted.yaml` mounts every
 secret of the hosted instance so).
 A setting the server can't use stops it at start with one line, `Not starting: ...`, that names it: a missing or
-invalid value, a `_FILE` it can't read, a `TORTUGA_DATABASE_DISK_PATH` that isn't a directory, a
-`TORTUGA_APPLE_PRIVATE_KEY` that isn't a Sign in with Apple key, a database that doesn't let it in within a minute, a
-data key that isn't the database's.
+invalid value, a `_FILE` it can't read or that holds more than 16 KiB (more than any secret), a
+`TORTUGA_DATABASE_DISK_PATH` that isn't a directory, a `TORTUGA_APPLE_PRIVATE_KEY` that isn't a Sign in with Apple key,
+a provider's or the public address (`TORTUGA_OIDC_ISSUER`, `TORTUGA_OIDC_JWKS_URL`, `TORTUGA_GITHUB_URL`, `_API_URL`,
+`_TOKEN_URL`, `TORTUGA_PUBLIC_URL`) that isn't https, where http is taken only to this machine or a private network (a
+name without a dot, such as a compose service's, or a loopback, private or link-local address), a database that
+doesn't let it in within a minute, a data key that isn't the database's.
 
 | Variable | Default | |
 |---|---|---|

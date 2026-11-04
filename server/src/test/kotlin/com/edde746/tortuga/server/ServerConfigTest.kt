@@ -95,6 +95,33 @@ class ServerConfigTest {
     }
 
     @Test
+    fun aProviderOrPublicUrlIsHttpsUnlessItIsLocal() {
+        // GitHub and an OpenID Connect provider on, so each of their addresses is read.
+        val enabled = mapOf(
+            "TORTUGA_GITHUB_CLIENT_ID" to "Ov23liFixture",
+            "TORTUGA_GITHUB_CLIENT_SECRET" to "secret",
+            "TORTUGA_OIDC_ISSUER" to "https://idp.example.com",
+            "TORTUGA_OIDC_CLIENT_IDS" to "tortuga",
+        )
+        fun config(name: String, value: String) = configFromEnvironment(*(enabled + (name to value)).toList().toTypedArray())
+        val names = listOf(
+            "TORTUGA_OIDC_ISSUER", "TORTUGA_OIDC_JWKS_URL", "TORTUGA_GITHUB_URL", "TORTUGA_GITHUB_API_URL",
+            "TORTUGA_GITHUB_TOKEN_URL", "TORTUGA_PUBLIC_URL",
+        )
+        for (name in names) {
+            // Plain http to a host on the internet: anyone on the path could answer for the provider.
+            for (value in listOf("http://idp.example.com/realms/home", "http://203.0.113.9", "ftp://idp.example.com", "idp.example.com")) {
+                val error = assertFailsWith<IllegalArgumentException>("$name=$value") { config(name, value) }
+                assertEquals("$name must be an https URL (http only to this machine or a private network), not $value", error.message)
+            }
+            // This machine, a container beside the server, a private network: a development stack or a home server.
+            for (value in listOf("https://idp.example.com", "http://127.0.0.1:5556/dex", "http://dex:5556/dex", "http://localhost:8080", "http://192.168.1.20", "http://[::1]:5556")) {
+                config(name, value)
+            }
+        }
+    }
+
+    @Test
     fun aDevelopmentStackSignsTrackersInAtTheFakeTrackerServer() {
         val relay = arrayOf(
             "TORTUGA_PUBLIC_URL" to "http://127.0.0.1:18180",
