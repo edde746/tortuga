@@ -781,10 +781,10 @@ final class PlayerTests: TortugaUITestCase {
         requireAutomaticIntroSkip()
     }
 
-    /// The scripts clip's subtitle line in nine scripts (Japanese, Chinese, Korean, Arabic, Hebrew, Thai, Devanagari,
-    /// Cyrillic, Greek), paused: each drawn, none as boxes (a script libass finds no font for). The track is forced and
-    /// in the audio's language, so it shows with no pick.
-    func testEveryScriptDrawsInSubtitles() throws {
+    /// The scripts clip plays with its forced subtitle line in nine scripts (Japanese, Chinese, Korean, Arabic, Hebrew,
+    /// Thai, Devanagari, Cyrillic, Greek) and pauses for a shot of them, checked by eye: a script libass finds no font
+    /// for draws boxes. The track is forced and in the audio's language, so it shows with no pick.
+    func testTheScriptsClipPlaysForItsShot() throws {
         try launchDev(addon: true, open: ["streams:movie:tortuga-scripts:tortuga-scripts"])
         requireFocus("streams.row.0", timeout: 60, "the scripts clip has focus once the Streams screen lists it")
         press(.select)

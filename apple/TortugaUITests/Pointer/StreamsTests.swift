@@ -25,8 +25,7 @@ import XCTest
 /// - an addon whose every stream is malformed: its group shows the error and Retry, not an empty list
 ///   (`testAnAnswerOfMalformedStreamsShowsItsErrorAndRetry`);
 /// - the sort button before Refresh, over the test addon's sorted movie: its menu's keys sort the list, which then has
-///   no addon heading and starts at its top, the button filled (`testSortButtonSortsTheListFromItsTop`); and shots of
-///   Settings → Playback → Streams with the stream filters' rows (`testStreamSettingsShots`);
+///   no addon heading and starts at its top, the button filled (`testSortButtonSortsTheListFromItsTop`);
 /// - stream suggestions over a phone user's mocked picks (`--dev-picks phone`, which seeds them on every kind of device
 ///   and turns the profile's "Suggest a stream" on): the test addon's sorted movie marks one stream "Suggested" above
 ///   its name with "Like your recent picks: …" under it, the list in the addon's order, and so does its movie of real
@@ -344,14 +343,6 @@ final class StreamsTests: TortugaUITestCase {
         try launchDev(addon: true, open: ["streams:movie:tortuga-sorted:tortuga-sorted"], arguments: picks + ["--dev-suggestions", "false"])
         require("streams.row.6", timeout: 60, "the sorted movie's Streams screen lists its seven streams")
         if rows.contains(where: { allText(of: $0).contains("Suggested") }) { fail("a row is marked Suggested with the setting off") }
-    }
-
-    /// Shots of Settings → Playback → Streams scrolled to the group's end, with the stream filters' rows
-    /// (`streams-settings`). It checks nothing of the rows, so it runs as it is on a build without them.
-    func testStreamSettingsShots() throws {
-        try launchDev()
-        openStreamsSettings()
-        shot("streams-settings")
     }
 
     /// Shots of the stream rows' text, on the iPad in landscape: the test addon's anime episode of an addon's
