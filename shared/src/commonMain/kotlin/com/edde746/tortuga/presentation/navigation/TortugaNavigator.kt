@@ -17,9 +17,10 @@ import kotlinx.coroutines.flow.map
  *
  * - A destination's stack has the destination's route at its bottom and exists from the first time the destination
  *   shows. Picking another destination in the chrome ([pick]) shows its stack as it was left; picking the shown one
- *   pops its stack to its root. A screen opens on the shown stack ([navigate]), and is on one stack at a time: opened
- *   while another destination's stack holds it, it leaves that stack and opens anew. A destination's route is never
- *   pushed: opening it shows its stack ([navigate], [select], [openDiscover], [openSearch], [openLibrary]).
+ *   pops its stack to its root. A screen opens on the shown stack ([navigate]), and is on one stack at a time, once:
+ *   opened while the shown stack holds it, the stack pops back to it; opened while another destination's stack holds
+ *   it, it leaves that stack and opens anew. A destination's route is never pushed: opening it shows its stack
+ *   ([navigate], [select], [openDiscover], [openSearch], [openLibrary]).
  * - The player and a sheet ([RoutePresentation.SHEET]) are only ever on the shown stack: showing another destination
  *   takes them, and whatever lies over them, off the stack left (the player's route leaving ends the playback). Closing
  *   the player returns to the screen under it, on the stack it opened on.
@@ -67,18 +68,19 @@ class TortugaNavigator(start: NavigationStacks) {
     private val removalListeners = mutableListOf<(Route) -> Unit>()
 
     /**
-     * Opens [route] on top of the shown stack, unless it is already the top. A sheet on top ([layout]) closes first:
-     * [route] replaces it, or, when [route] is the screen under the sheet, closing the sheet is all (a stream picked in
-     * the Streams sheet over the player plays in that player). A destination's route shows its stack as it was left. A
-     * screen is on one destination's stack at a time: [route] on another's leaves it, with the screens over it, and
-     * opens anew, its kept objects made again (a Detail opened to play plays again).
+     * Opens [route] on top of the shown stack; already on it, the stack pops back to it (a screen is on a stack once, its
+     * kept objects and saved state its own: Detail A → More like this B → More like this A returns to A). A sheet on top
+     * ([layout]) closes first: [route] replaces it, or, when [route] is the screen under the sheet, closing the sheet is
+     * all (a stream picked in the Streams sheet over the player plays in that player). A destination's route shows its
+     * stack as it was left. A screen is on one destination's stack at a time: [route] on another's leaves it, with the
+     * screens over it, and opens anew, its kept objects made again (a Detail opened to play plays again).
      */
     fun navigate(route: Route) {
         TopLevelDestination.of(route)?.let { return show(it) }
         val stacks = state.value
         val current = stacks.current
         val base = if (layout.sheet != null) current.dropLast(1) else current
-        val next = if (base.last() == route) base else base + route
+        val next = base.opened(route)
         if (next == current) return
         val left = stacks.stacks.filter { (destination, stack) -> destination != stacks.shown && route in stack }
             .mapValues { (destination, stack) -> stack.take(stack.indexOf(route)).ifEmpty { listOf(destination.route) } }
@@ -100,8 +102,8 @@ class TortugaNavigator(start: NavigationStacks) {
         return true
     }
 
-    /** Replaces the shown stack's top screen with [route]. */
-    fun replace(route: Route) = change(shownStack.value.dropLast(1) + route)
+    /** Replaces the shown stack's top screen with [route]; with [route] under it, the stack pops back to it ([navigate]). */
+    fun replace(route: Route) = change(shownStack.value.dropLast(1).opened(route))
 
     /** Pops [route] (and anything above it) off the shown stack; false when it isn't on it or is its root. */
     fun pop(route: Route): Boolean {
@@ -327,6 +329,9 @@ class TortugaNavigator(start: NavigationStacks) {
 
     private companion object {
         fun metaKey(type: String, id: String) = "$type/$id"
+
+        /** This stack with [route] on top: pushed, or popped back to where it is (a route is on a stack once). */
+        fun List<Route>.opened(route: Route): List<Route> = indexOf(route).let { if (it < 0) this + route else take(it + 1) }
     }
 }
 

@@ -27,7 +27,8 @@ data class SavedStacks(
      * The stacks to start on; null for none (another [version]). The shown destination is [shown], or Home when this
      * build doesn't know it; each destination's stack has the destination's route at its bottom and ends before the
      * first route this build doesn't know or the app doesn't [offer] (a screen it no longer has), or one already on
-     * another stack: a screen is on one stack at a time, the shown destination's first.
+     * a stack (two routes saved apart can restore as one, without what they were opened to do): a screen is on one
+     * stack at a time, once, the shown destination's first.
      */
     fun restore(offer: (Route) -> Boolean): NavigationStacks? {
         if (version != VERSION) return null
@@ -40,7 +41,7 @@ data class SavedStacks(
             for ((index, entry) in saved.withIndex()) {
                 val route = entry.route() ?: break
                 if (index == 0 && route == destination.route) continue
-                if (TopLevelDestination.of(route) != null || route in placed || !offer(route)) break
+                if (TopLevelDestination.of(route) != null || route in placed || route in stack || !offer(route)) break
                 stack += route
             }
             placed += stack

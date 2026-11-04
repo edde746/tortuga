@@ -417,6 +417,41 @@ class TortugaNavigatorTest {
         assertEquals(listOf<Route>(Route.Board), dev.stacks.value.stack(TopLevelDestination.BOARD))
     }
 
+    @Test
+    fun aScreenOpenedWhileTheShownStackHoldsItPopsBackToIt() {
+        val removed = mutableListOf<Route>()
+        val navigator = navigator()
+        navigator.addRemovalListener { removed += it }
+        val a = Route.Detail("movie", "tt1")
+        val b = Route.Detail("movie", "tt2")
+        // Detail A, More like this B, then More like this A: back to A, its store as it was; B leaves.
+        navigator.navigate(a)
+        val first = navigator.store(a)
+        navigator.navigate(b)
+        val over = navigator.store(b)
+        navigator.navigate(a)
+        assertEquals(listOf(Route.Board, a), navigator.backStack.value)
+        assertSame(first, navigator.store(a, "again"))
+        assertFalse(first.released)
+        assertTrue(over.released)
+        assertEquals(listOf<Route>(b), removed)
+
+        // Replacing the top with a screen under it pops back to that one too.
+        navigator.navigate(b)
+        navigator.replace(a)
+        assertEquals(listOf(Route.Board, a), navigator.backStack.value)
+    }
+
+    @Test
+    fun savedStacksComeBackWithEachScreenOnce() {
+        // A Detail opened to play a video and the same title's Detail showing that video's season save alike.
+        val played = Route.Detail("movie", "tt1", "tt1", videoAction = DetailVideoAction.PLAY)
+        val related = Route.Detail("movie", "tt2")
+        val stacks = NavigationStacks(TopLevelDestination.BOARD, mapOf(TopLevelDestination.BOARD to listOf(Route.Board, played, related, Route.Detail("movie", "tt1", shownVideoId = "tt1"))))
+        val restored = assertNotNull(SavedStacks.of(stacks).restore { true })
+        assertEquals(listOf(Route.Board, Route.Detail("movie", "tt1", shownVideoId = "tt1"), related), restored.current)
+    }
+
     /** The destination the chrome selects. */
     private val TortugaNavigator.selected: TopLevelDestination?
         get() = TopLevelDestination.selectedIn(backStack.value)
