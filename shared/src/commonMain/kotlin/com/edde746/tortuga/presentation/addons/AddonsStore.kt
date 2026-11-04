@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.seconds
 
@@ -82,7 +84,10 @@ class AddonsStore internal constructor(
     private var detailsUrl: String? = null
     private var linkRevealed = false
     private var removeUrl: String? = null
-    private var working = false
+
+    /** The stored changes not done yet ([perform]): stored one at a time ([storing]), in the order they came. */
+    private var pendingChanges = 0
+    private val storing = Mutex()
     private var notice: String? = null
 
     private var installFlow: Install = Install.Closed
@@ -209,8 +214,6 @@ class AddonsStore internal constructor(
     }
 
     fun confirmRemove() {
-        // While another change is stored the dialog stays, to be confirmed again.
-        if (working) return
         val url = removeUrl ?: return
         removeUrl = null
         perform { registry.remove(url) }
@@ -459,19 +462,18 @@ class AddonsStore internal constructor(
         if (targetIndex >= 0) registry.move(moving.transportUrl, if (before) targetIndex else targetIndex + 1)
     }
 
-    /** Stores one change at a time; its failure becomes the [notice]. */
+    /** Stores [change] once the changes before it are stored (none is dropped); its failure becomes the [notice]. */
     private fun perform(change: suspend () -> Unit) {
-        if (working) return
-        working = true
+        pendingChanges++
         notice = null
         publish()
         scope.launch {
             try {
-                change()
+                storing.withLock { change() }
             } catch (e: AddonException) {
                 notice = e.error.message
             } finally {
-                working = false
+                pendingChanges--
                 publish()
             }
         }
@@ -520,7 +522,7 @@ class AddonsStore internal constructor(
                     cancelLabel = T.addons.cancel,
                 )
             },
-            working = working,
+            working = pendingChanges > 0,
             notice = notice,
         )
     }

@@ -22,7 +22,7 @@ import kotlin.native.ObjCName
  *   lists addons.
  * @param details the addon whose details are open, or null.
  * @param removeDialog the removal being confirmed, or null.
- * @param working a reorder or removal is being stored.
+ * @param working a change (a switch, a reorder, a removal) is being stored; one made meanwhile is stored after it.
  * @param notice why the last change failed, until dismissed or the next change.
  */
 data class AddonsUiState(

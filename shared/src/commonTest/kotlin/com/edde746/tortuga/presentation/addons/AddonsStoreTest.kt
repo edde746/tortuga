@@ -358,17 +358,14 @@ class AddonsStoreTest {
     }
 
     @Test
-    fun aRemovalConfirmedWhileAMoveIsStoredIsAskedUntilItCanRun() = runTest {
+    fun aRemovalConfirmedWhileAMoveIsStoredIsStoredAfterIt() = runTest {
         val f = fixture(streamsUrl, "https://channels.example/manifest.json")
         val streams = f.id("Example Streams")
         f.addons.moveUp(f.id("Channels"))
         f.addons.remove(streams)
         f.addons.confirmRemove()
-        assertEquals(T.addons.remove.title(isolate("Example Streams")), f.state.removeDialog?.title, "the dialog stays while the move is stored")
+        assertNull(f.state.removeDialog, "confirmed, the removal waits for the move")
         runCurrent()
-        f.addons.confirmRemove()
-        runCurrent()
-        assertNull(f.state.removeDialog)
         assertEquals(listOf("Cinemeta", "OpenSubtitles v3", "Channels"), f.names())
     }
 
@@ -467,6 +464,21 @@ class AddonsStoreTest {
         assertTrue(row("Cinemeta").enabled)
         assertTrue(f.store.stored.first { it.transportUrl == DefaultAddons.CINEMETA_URL }.enabled)
         assertEquals("Cinemeta", f.registry.addons.value.first().manifest.name)
+    }
+
+    @Test
+    fun aChangeMadeWhileAnotherIsStoredIsStoredAfterIt() = runTest {
+        val f = fixture(streamsUrl, "https://channels.example/manifest.json")
+        fun enabled() = f.state.rows.associate { it.name to it.enabled }
+        // Two switches in quick succession, then a reorder: none is dropped.
+        f.addons.setEnabled(f.id("Example Streams"), false)
+        assertTrue(f.state.working)
+        f.addons.setEnabled(f.id("Channels"), false)
+        f.addons.moveUp(f.id("Channels"))
+        runCurrent()
+        assertEquals(mapOf("Cinemeta" to true, "OpenSubtitles v3" to true, "Channels" to false, "Example Streams" to false), enabled())
+        assertEquals(listOf("Cinemeta", "OpenSubtitles v3", "Channels", "Example Streams"), f.names())
+        assertFalse(f.state.working)
     }
 
     @Test
