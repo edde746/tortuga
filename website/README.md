@@ -41,12 +41,13 @@ The files that let the apps open the links themselves, in `static/.well-known/`:
 
 - `apple-app-site-association`: Universal Links for `/t/*` to the App ID `G88U5B5783.com.edde746.tortuga` (iPhone,
   iPad and the Mac, whose entitlements name `applinks:usetortuga.app`), served as JSON (`static/_headers`).
-- `assetlinks.json`: App Links for `/t/*`, per package and signing certificate. It lists `com.edde746.tortuga.dev`
-  with the debug certificate's SHA-256 fingerprint only. The release package `com.edde746.tortuga` verifies once its
-  certificates' SHA-256 fingerprints are added as a second statement: the app signing key's and the upload key's
-  (Play Console → the app → Test and release → App integrity → App signing; the upload key also signs the GitHub
-  release's APKs) and Amazon's (Amazon Developer Console → the app → its APK files → Appstore Certificate Hashes,
-  SHA-256). Until then the release build's App Links stay unverified and open the page.
+- `assetlinks.json`: App Links for `/t/*`, per package and signing certificate: `com.edde746.tortuga.dev` with the
+  debug certificate's SHA-256 fingerprint, and the release package `com.edde746.tortuga` with three: Google Play's
+  app signing key (`86:FC:…:E8:ED`; Play Console → the app → Test and release → App integrity → App signing), the
+  upload key (`90:3B:…:6E:72`, which also signs the GitHub release's APKs) and the Amazon Appstore's certificate
+  (`33:F0:…:DB:5C`; Amazon Developer Console → the app → its APK files → Appstore Certificate Hashes, the same for
+  every app of the account). A new signing key on any of them needs its fingerprint added here, or that build's App
+  Links open the page.
 
 ## Assets
 
