@@ -221,6 +221,11 @@ class MdblistTest {
         assertEquals(listOf("tt2049403" to "movie", "tt20782190" to "series"), page.items.map { it.id to it.type })
         assertEquals("2024", page.items[0].releaseInfo)
         assertNull(page.next)
+        // A list row from a collection file names any id: only a list's number goes into the path.
+        for (id in listOf("list.1234/../../user", "list.1234?x=1", "list.sci-fi")) {
+            assertFailsWith<TrackerException.Unsupported>(id) { catalog.page(rows[1].copy(id = id), null) }
+        }
+        assertEquals(2, service.requests.size, "nothing asked for them")
     }
 
     @Test

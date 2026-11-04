@@ -73,9 +73,10 @@ internal class TraktCatalog(private val api: TraktApi) : TrackerCatalogSource, T
             TrackerCatalog.Kind.TRENDING -> paged(api.get("/$path/trending?$EXTENDED&page=$page&limit=$ROW_LIMIT"), page) { entry ->
                 preview(entry[if (type == CatalogItems.MOVIE) "movie" else "show"].obj, type)
             }
-            // docs.trakt.tv/reference/getuserslistslistitems: `{rank, type, movie|show}` like the watchlist.
+            // docs.trakt.tv/reference/getuserslistslistitems: `{rank, type, movie|show}` like the watchlist. The id is
+            // the list's number [catalogs] gave it; a row from a collection file names anything.
             TrackerCatalog.Kind.LIST -> {
-                val id = catalog.id.removePrefix(LIST_PREFIX)
+                val id = catalog.id.removePrefix(LIST_PREFIX).toLongOrNull()?.takeIf { it > 0 } ?: throw TrackerException.Unsupported(service, "list id")
                 paged(api.get("/users/me/lists/$id/items/movie,show?$EXTENDED&page=$page&limit=$WATCHLIST_LIMIT"), page) { watchlistEntry(it) }
             }
             else -> throw TrackerException.Unsupported(service, "${catalog.kind} row")

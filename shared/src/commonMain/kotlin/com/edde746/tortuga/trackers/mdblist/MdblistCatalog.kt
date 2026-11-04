@@ -70,7 +70,8 @@ internal class MdblistCatalog(private val api: MdblistApi) : TrackerCatalogSourc
     override suspend fun page(catalog: TrackerCatalog, cursor: String?): TrackerCatalogPage {
         val path = when (catalog.kind) {
             TrackerCatalog.Kind.WATCHLIST -> "/watchlist/items"
-            TrackerCatalog.Kind.LIST -> "/lists/${catalog.id.removePrefix(LIST_PREFIX)}/items"
+            // The list's number [catalogs] gave it; a row from a collection file names anything.
+            TrackerCatalog.Kind.LIST -> "/lists/${catalog.id.removePrefix(LIST_PREFIX).toLongOrNull()?.takeIf { it > 0 } ?: throw TrackerException.Unsupported(service, "list id")}/items"
             TrackerCatalog.Kind.PUBLIC_LIST -> "/lists/${mdblistPublicListId(catalog.id) ?: throw TrackerException.Unsupported(service, "list id")}/items"
             else -> throw TrackerException.Unsupported(service, "${catalog.kind} row")
         }

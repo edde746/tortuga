@@ -379,6 +379,11 @@ class TraktTest {
         val list = catalog.catalogs().single { it.kind == TrackerCatalog.Kind.LIST }
         assertEquals("Star Wars in machete order", list.name)
         assertEquals(listOf("tt0076759"), catalog.page(list).items.map { it.id })
+        // A list row from a collection file names any id: only a list's number goes into the path.
+        for (id in listOf("list.55/../../../sync/history", "list.55?x=1", "list.slug")) {
+            assertFailsWith<TrackerException.Unsupported>(id) { catalog.page(list.copy(id = id)) }
+        }
+        assertEquals(1, service.to("/users/me/lists/55/items/movie,show").size, "nothing asked for them")
 
         val watchlist = catalog as TrackerWatchlist
         watchlist.addToWatchlist(WatchlistTarget(isMovie = false, ids = ExternalIds(imdb = "tt0903747", tvdb = 81189)))
