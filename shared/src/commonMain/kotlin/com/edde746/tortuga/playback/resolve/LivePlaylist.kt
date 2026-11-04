@@ -30,7 +30,10 @@ data class LivePlaylist(val segmentSeconds: List<Double>, val targetSeconds: Dou
         /** lavf's `live_start_index` default (−3): a live HLS file opens this many segments before its playlist's end. */
         const val JOIN_SEGMENTS = 3
 
-        /** [text] as a media playlist, or null when it is none: no `#EXTM3U` header, or no segment. */
+        /**
+         * [text] as a media playlist, or null when it is none: no `#EXTM3U` header, no segment, or a segment's or the
+         * target's duration that is no number of seconds (not a number, infinite or negative).
+         */
         fun parse(text: String): LivePlaylist? {
             val lines = text.removePrefix(BOM).lineSequence().map { it.trim() }.filter { it.isNotEmpty() }.toList()
             if (lines.firstOrNull()?.startsWith(HEADER) != true) return null
@@ -40,8 +43,8 @@ data class LivePlaylist(val segmentSeconds: List<Double>, val targetSeconds: Dou
             val segments = mutableListOf<Double>()
             for (line in lines) {
                 when {
-                    line.startsWith(TARGET) -> target = line.removePrefix(TARGET).trim().toDoubleOrNull()
-                    line.startsWith(SEGMENT) -> duration = line.removePrefix(SEGMENT).substringBefore(',').trim().toDoubleOrNull()
+                    line.startsWith(TARGET) -> target = seconds(line.removePrefix(TARGET)) ?: return null
+                    line.startsWith(SEGMENT) -> duration = seconds(line.removePrefix(SEGMENT).substringBefore(',')) ?: return null
                     line == END -> ended = true
                     // A segment's URI, after its #EXTINF.
                     !line.startsWith("#") -> duration?.let {
@@ -64,6 +67,8 @@ data class LivePlaylist(val segmentSeconds: List<Double>, val targetSeconds: Dou
             val variant = lines.indexOfFirst { it.startsWith(VARIANT) }.takeIf { it >= 0 } ?: return null
             return lines.drop(variant + 1).firstOrNull { !it.startsWith("#") }
         }
+
+        private fun seconds(text: String): Double? = text.trim().toDoubleOrNull()?.takeIf { it.isFinite() && it >= 0 }
 
         private const val BOM = "\uFEFF"
         private const val HEADER = "#EXTM3U"
