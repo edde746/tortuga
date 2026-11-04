@@ -1493,11 +1493,15 @@ class PlayerStore(
         pendingSeek?.let { target ->
             if (abs(playedPosition() - target) < settledSeconds()) clearPendingSeek()
         }
-        // A new file: nothing about the old one carries over. A live rewind's reopen is the same file, its window kept.
+        // A new file: nothing about the old one carries over, not even a track choice still on its way (the new file's
+        // ids are other tracks). A live rewind's reopen is the same file, its window kept.
         if (old.loaded && !new.loaded && rewindWindow() == null) {
             scrubber.end()
             endHeldSeek()
             clearPendingSeek()
+            audioTrack.clear()
+            subtitleTrack.clear()
+            secondSubtitleTrack.clear()
             roomSpeed = null
             skip.reset()
             upNext.reset()

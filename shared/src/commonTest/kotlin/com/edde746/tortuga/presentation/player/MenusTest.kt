@@ -70,6 +70,22 @@ class MenusTest {
     }
 
     @Test
+    fun tracksAskedForAsTheFileEndsAreNotTheNextFilesChoice() = playerTest {
+        playing()
+        engineState { it.copy(tracks = tracks) }
+        engine.echo = false
+        dispatch(PlayerCommand.SelectTrack(TrackKind.AUDIO, 2))
+        dispatch(PlayerCommand.SelectTrack(TrackKind.SUBTITLE, 2))
+        dispatch(PlayerCommand.ToggleSecondSubtitle(3))
+        // The file ends before the engine applied them, and the next opens with the same tracks as the last did.
+        engineState { it.copy(loaded = false, tracks = emptyList()) }
+        engineState { it.copy(loaded = true, tracks = tracks) }
+        assertEquals(listOf(true, false, false), state.audioTracks.map { it.selected })
+        assertEquals(listOf(true, false, false, false), state.subtitleTracks.map { it.selected })
+        assertTrue(state.subtitleTracks.none { it.second })
+    }
+
+    @Test
     fun aSecondActionOnATrackShowsItAsTheSecondSubtitleAndAgainTakesItAway() = playerTest {
         playing()
         engineState { it.copy(tracks = tracks) }
