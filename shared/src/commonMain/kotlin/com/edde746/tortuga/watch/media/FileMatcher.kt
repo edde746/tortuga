@@ -1,14 +1,11 @@
 package com.edde746.tortuga.watch.media
 
 import com.edde746.tortuga.addons.AddonAggregator
-import com.edde746.tortuga.addons.AddonLoadable
 import com.edde746.tortuga.addons.Loadable
 import com.edde746.tortuga.data.settings.SettingsRepository
 import com.edde746.tortuga.data.streams.StreamHistoryRepository
 import com.edde746.tortuga.downloads.LocalVideo
 import com.edde746.tortuga.model.Descriptor
-import com.edde746.tortuga.model.Stream
-import com.edde746.tortuga.model.StreamPlayability
 import com.edde746.tortuga.playback.session.LocalVideos
 import com.edde746.tortuga.playback.session.StreamChoice
 import com.edde746.tortuga.playback.streams.StreamFilter
@@ -41,11 +38,11 @@ class RoomFiles internal constructor(val files: List<RoomFile>, val searchFailed
  *
  * 1. The guest's own download of the room's video ([localVideos]), under the room's ids or its mapped ones.
  * 2. The streams the profile's installed addons offer for the room's type and video id (the download's own stream left
- *    out); when none of them offers a playable one, the same request under the room's mapped ids ([RoomMedia.imdbId],
+ *    out); when none of them is a candidate, the same request under the room's mapped ids ([RoomMedia.imdbId],
  *    [RoomMedia.tmdbId]), the IMDb form first.
  * 3. The streams are ranked ([CandidateRanking]): the host's video hash, file name or size first, then the closest
  *    size, then the profile's own order (auto-play's pick, the last link, the filters). Streams an addon marks not
- *    ready are left out.
+ *    ready are left out, so an answer of only those asks the mapped ids too.
  *
  * Only stream lists are fetched; nothing is opened here. An addon that fails is reported ([RoomFiles.searchFailed]), so
  * the guest is told the search failed rather than that it has no stream.
@@ -81,21 +78,18 @@ class FileMatcher internal constructor(
 
     private suspend fun streams(media: RoomMedia, host: FileFingerprint): StreamSearch {
         val addons = installedAddons()
+        val loaded = settings.settings(profileId)
         var failed = false
         for (video in listOf(media.ownVideo) + media.mappedVideos()) {
             val states = aggregator.streams(addons, video.type, video.videoId).last()
             failed = failed || states.any { it.state is Loadable.Error }
-            if (states.none(::offersPlayable)) continue
-            val loaded = settings.settings(profileId)
             val remembered = streamHistory.lastStream(profileId, video.metaId, video.videoId)
                 ?.let { StreamChoice.fromHistory(it, addonName = "") }
-            return StreamSearch(CandidateRanking.rank(states, host, StreamFilter.of(loaded), StreamSort.of(loaded), loaded.streamAutoPlay, remembered), failed)
+            val ranked = CandidateRanking.rank(states, host, StreamFilter.of(loaded), StreamSort.of(loaded), loaded.streamAutoPlay, remembered)
+            if (ranked.isNotEmpty()) return StreamSearch(ranked, failed)
         }
         return StreamSearch(emptyList(), failed)
     }
-
-    private fun offersPlayable(state: AddonLoadable<List<Stream>>): Boolean =
-        (state.state as? Loadable.Ready)?.content?.any { it.playability is StreamPlayability.Playable } == true
 
     /** The ranked [choices] of a search, and whether an addon failed in it. */
     private class StreamSearch(val choices: List<StreamChoice>, val failed: Boolean)

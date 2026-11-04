@@ -92,6 +92,17 @@ class FileMatcherTest {
     }
 
     @Test
+    fun theMappedIdsAreAskedWhenTheRoomsOwnOffersOnlyStreamsThatAreNotReady() = runTest {
+        val anime = media.copy(metaId = "kitsu:1376", videoId = "kitsu:1376:5", imdbId = "tt0434665", season = 1, episode = 5, tmdbId = null)
+        val f = WatchMediaFixture(this, streams)
+        f.streams("streams", anime.videoId, streamJson("download", name = "[Not ready] Addon A\n1080p"))
+        f.streams("streams", "tt0434665:1:5", streamJson("imdb", name = "⚡ Addon A\n1080p"))
+
+        assertEquals(listOf("imdb"), f.files(anime))
+        assertEquals(listOf("streams stream/series/kitsu:1376:5", "streams stream/series/tt0434665:1:5"), f.requests)
+    }
+
+    @Test
     fun aVideoWithoutMappedEpisodeIsAskedUnderItsOwnIdsOnly() = runTest {
         val f = WatchMediaFixture(this, streams)
         val unplaced = media.copy(metaId = "kitsu:1376", videoId = "kitsu:1376:5", season = null, episode = null)
