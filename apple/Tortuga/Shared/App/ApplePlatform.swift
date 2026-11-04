@@ -19,13 +19,27 @@ enum ApplePlatform {
     static var device: DeviceDescriptor {
         #if os(macOS)
         let name = Host.current().localizedName ?? "Mac"
-        return DeviceDescriptor(name: String(name.prefix(64)), platform: DevicePlatform.shared.MACOS)
+        return DeviceDescriptor(name: deviceName(name), platform: DevicePlatform.shared.MACOS)
         #elseif os(tvOS)
-        return DeviceDescriptor(name: String(UIDevice.current.name.prefix(64)), platform: DevicePlatform.shared.TVOS)
+        return DeviceDescriptor(name: deviceName(UIDevice.current.name), platform: DevicePlatform.shared.TVOS)
         #else
         let platform = UIDevice.current.userInterfaceIdiom == .pad ? DevicePlatform.shared.IPADOS : DevicePlatform.shared.IOS
-        return DeviceDescriptor(name: String(UIDevice.current.name.prefix(64)), platform: platform)
+        return DeviceDescriptor(name: deviceName(UIDevice.current.name), platform: platform)
         #endif
+    }
+
+    /// `name` cut to the protocol's longest device name, which counts UTF-16 units as the server does, not characters:
+    /// whole characters only, so an emoji or an accented letter is never split.
+    private static func deviceName(_ name: String) -> String {
+        let limit = Int(SyncProtocol.shared.MAX_DEVICE_NAME_LENGTH)
+        var units = 0
+        var kept = ""
+        for character in name {
+            units += character.utf16.count
+            if units > limit { break }
+            kept.append(character)
+        }
+        return kept
     }
 
     /// Opens the web link `url` outside the app: the browser, or the app that claims it. False for anything but an
