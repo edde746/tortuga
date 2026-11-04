@@ -363,49 +363,25 @@ extension PlayerStore {
 struct PlayerOptionsButton: View {
     let state: PlayerUiState
     let store: PlayerStore
-    @State private var importingShader = false
-    @State private var deletingShader: OptionChoice?
-
-    var body: some View {
-        menu
-            // A `.glsl` file; any file where the system knows no such type, its extension checked once picked.
-            .fileImporter(isPresented: $importingShader, allowedContentTypes: [UTType(filenameExtension: "glsl") ?? .data]) { result in
-                if case .success(let url) = result { Task { await importShader(url) } }
-            }
-            .confirmationDialog(
-                deletingShader.map { T.shared.player.options.shader.deleteTitle(name: $0.label) } ?? "",
-                isPresented: Binding(get: { deletingShader != nil }, set: { if !$0 { deletingShader = nil } }),
-                titleVisibility: .visible,
-                presenting: deletingShader
-            ) { choice in
-                Button(T.shared.player.options.shader.delete, role: .destructive) {
-                    if let delete = choice.delete { store.dispatch(command: delete) }
-                }
-                Button(T.shared.player.options.shader.cancel, role: .cancel) {}
-            }
-    }
-
-    private var shaderActions: ShaderActions {
-        ShaderActions(importShader: { importingShader = true }, delete: { deletingShader = $0 })
-    }
+    @Environment(\.shaderPrompts) private var shaderPrompts
 
     #if os(iOS)
-    private var menu: some View {
+    var body: some View {
         NativeMenuButton(
             menu: .options,
             systemImage: "ellipsis",
             label: T.shared.player.options.title,
             value: nil,
             id: "player.more",
-            content: .options(state, store: store, shaders: shaderActions),
+            content: .options(state, store: store, shaders: shaderPrompts),
             store: store
         )
         .frame(width: PlayerMetrics.button, height: PlayerMetrics.button)
     }
     #else
-    private var menu: some View {
+    var body: some View {
         Menu {
-            NativeMenuEntries(entries: NativeMenu.options(state, store: store, shaders: shaderActions).children ?? [])
+            NativeMenuEntries(entries: NativeMenu.options(state, store: store, shaders: shaderPrompts).children ?? [])
         } label: {
             PlayerMenuIcon(systemImage: "ellipsis.circle")
         }
@@ -414,26 +390,69 @@ struct PlayerOptionsButton: View {
     #endif
 
     /// Reads the picked file off the main thread and sends its name and text (`PlayerCommandImportShader`); a file
-    /// that can't be read, or not as UTF-8, fails the import (`PlayerCommandShaderImportFailed`).
+    /// that can't be read, is over `maxBytes` or isn't UTF-8 fails the import (`PlayerCommandShaderImportFailed`).
     private func importShader(_ url: URL) async {
-        let text = await Task.detached(priority: .userInitiated) {
+        let maxBytes = Self.maxBytes
+        let text = await Task.detached(priority: .userInitiated) { () -> String? in
             let scoped = url.startAccessingSecurityScopedResource()
             defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-            return (try? Data(contentsOf: url)).flatMap { String(data: $0, encoding: .utf8) }
+            guard let file = try? FileHandle(forReadingFrom: url) else { return nil }
+            defer { try? file.close() }
+            guard let data = try? file.read(upToCount: maxBytes + 1) ?? Data(), data.count <= maxBytes else { return nil }
+            return String(data: data, encoding: .utf8)
         }.value
         if let text {
             store.dispatch(command: PlayerCommandImportShader(fileName: url.lastPathComponent, source: text))
         } else {
             store.dispatch(command: PlayerCommandShaderImportFailed.shared)
-        }
-    }
 }
 
-/// What the Shaders submenu's own entries do once the menu has gone: Import shader opens the open dialog, an imported
-/// shader's Delete asks to confirm (a system menu's entries take no trailing button or swipe).
-struct ShaderActions {
-    var importShader: () -> Void = {}
-    var delete: (OptionChoice) -> Void = { _ in }
+/// What the Shaders submenu's own entries open once the menu has gone: Import shader the open dialog, an imported
+/// shader's Delete the question before it goes (a system menu's entries take no trailing button or swipe). The player
+/// shows them (`ShaderPromptsPresenter`), not the options button: the controls, the button with them, hide on their
+/// timer while the video plays, and a presentation goes with the view that shows it.
+@Observable
+final class ShaderPrompts {
+    var importing = false
+    var deleting: OptionChoice?
+}
+
+extension EnvironmentValues {
+    /// The player's shader prompts, for its options button (`PlayerScreen`).
+    @Entry var shaderPrompts: ShaderPrompts?
+}
+
+/// Shows `prompts` over the player and hands them to the options button in it: the open dialog, whose pick imports
+/// the shader, and the question before an imported shader's deletion.
+struct ShaderPromptsPresenter: ViewModifier {
+    @Bindable var prompts: ShaderPrompts
+    let store: PlayerStore
+
+    /// The most a shader file may hold, as on Android (`AndroidFiles.MAX_IMPORT_BYTES`): a larger one fails the import
+    /// rather than being read whole.
+    private static let maxBytes = 32 * 1024 * 1024
+
+    func body(content: Content) -> some View {
+        content
+            .environment(\.shaderPrompts, prompts)
+            // A `.glsl` file; any file where the system knows no such type, its extension checked once picked.
+            .fileImporter(isPresented: $prompts.importing, allowedContentTypes: [UTType(filenameExtension: "glsl") ?? .data]) { result in
+                if case .success(let url) = result { Task { await importShader(url) } }
+            }
+            .confirmationDialog(
+                prompts.deleting.map { T.shared.player.options.shader.deleteTitle(name: $0.label) } ?? "",
+                isPresented: Binding(get: { prompts.deleting != nil }, set: { if !$0 { prompts.deleting = nil } }),
+                titleVisibility: .visible,
+                presenting: prompts.deleting
+            ) { choice in
+                Button(T.shared.player.options.shader.delete, role: .destructive) {
+                    if let delete = choice.delete { store.dispatch(command: delete) }
+                }
+                Button(T.shared.player.options.shader.cancel, role: .cancel) {}
+            }
+    }
+        }
+    }
 }
 
 /// A system menu or one of its entries, built once from the store's state for iOS (`NativeMenuButton`, a `UIMenu`) and
@@ -545,7 +564,7 @@ private struct NativeMenu {
     /// the playback info, checked while it shows, which it shows or hides once the menu has gone, and on a touch screen
     /// Lock screen (`PlayerUiState.lockLabel`), which locks it once the menu has gone; then the options, an option with a
     /// page as a submenu with its value under its name, a switch as an entry checked while it is on.
-    static func options(_ state: PlayerUiState, store: PlayerStore, shaders: ShaderActions = ShaderActions()) -> NativeMenu {
+    static func options(_ state: PlayerUiState, store: PlayerStore, shaders: ShaderPrompts? = nil) -> NativeMenu {
         let info = NativeMenu(
             title: T.shared.player.info.title,
             systemImage: "info.circle",
@@ -567,7 +586,7 @@ private struct NativeMenu {
                 )
             }
             let picks = choices(PlayerMenuContent.choices(option.choices, store: store))
-            let more = shaderEntries(option, actions: shaders)
+            let more = shaderEntries(option, prompts: shaders)
             return NativeMenu(
                 title: option.label,
                 subtitle: option.value,
@@ -593,14 +612,14 @@ private struct NativeMenu {
 
     /// The Shaders submenu's entries after its choices: Delete <name> for each imported shader (`OptionChoice.delete`),
     /// which asks to confirm, and Import shader (`PlayerOption.importLabel`), which opens the open dialog.
-    private static func shaderEntries(_ option: PlayerOption, actions: ShaderActions) -> [NativeMenu] {
+    private static func shaderEntries(_ option: PlayerOption, prompts: ShaderPrompts?) -> [NativeMenu] {
         var entries = option.choices.enumerated().compactMap { index, choice -> NativeMenu? in
             guard choice.delete != nil else { return nil }
             return NativeMenu(
                 title: T.shared.player.options.shader.deleteLabel(name: choice.label),
                 systemImage: "trash",
                 identifier: "player.shaders.delete.\(index)",
-                afterClose: { actions.delete(choice) }
+                afterClose: { prompts?.deleting = choice }
             )
         }
         if let importLabel = option.importLabel {
@@ -608,7 +627,7 @@ private struct NativeMenu {
                 title: importLabel,
                 systemImage: "square.and.arrow.down",
                 identifier: "player.shaders.import",
-                afterClose: actions.importShader
+                afterClose: { prompts?.importing = true }
             ))
         }
         return entries

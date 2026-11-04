@@ -62,6 +62,10 @@ struct PlayerScreen: View {
     /// The window's buttons for the title row in full screen (`PlayerWindowChrome`).
     @State private var windowButtons: PlayerWindowButtons?
     #endif
+    #if os(iOS) || os(macOS)
+    /// The options menu's Shaders open dialog and delete question, which outlast the controls (`ShaderPrompts`).
+    @State private var shaderPrompts = ShaderPrompts()
+    #endif
     @Environment(\.accessibilityVoiceOverEnabled) private var voiceOver
     @Environment(\.accessibilitySwitchControlEnabled) private var switchControl
 
@@ -201,6 +205,7 @@ struct PlayerScreen: View {
                 }
             }
         }
+        .modifier(ShaderPromptsPresenter(prompts: shaderPrompts, store: store))
         #endif
         #if os(macOS)
         // Tab and Shift-Tab (its back tab) moving keyboard focus between the controls is using the player, as on iPad:
