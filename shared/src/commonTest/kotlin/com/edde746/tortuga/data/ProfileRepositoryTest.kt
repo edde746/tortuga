@@ -1,8 +1,10 @@
 package com.edde746.tortuga.data
 
 import com.edde746.tortuga.data.settings.DeviceSetting
+import com.edde746.tortuga.data.settings.PinLockout
 import com.edde746.tortuga.data.settings.ProfileSetting
 import com.edde746.tortuga.data.sync.PushAck
+import com.edde746.tortuga.playback.players.PlayerAppPrompt
 import com.edde746.tortuga.trackers.TrackerService
 import com.edde746.tortuga.trackers.movieMark
 import kotlinx.coroutines.flow.first
@@ -98,6 +100,9 @@ class ProfileRepositoryTest {
             data.trackerWriteQueue.enqueue(profile.id, TrackerService.TRAKT, binding, "movie:tt0111161", movieMark("tt0111161"), null, clock.now)
         }
         data.deviceSettings.set(DeviceSetting.ActiveProfileId, gone.id)
+        data.deviceSettings.set(DeviceSetting.PinLockouts, mapOf(kept.id to PinLockout(2, 0), gone.id to PinLockout(5, clock.now)))
+        val prompts = listOf(kept, gone).map { PlayerAppPrompt(it.id, "tt0111161", "tt0111161", "VLC", "The Shawshank Redemption") }
+        data.deviceSettings.set(DeviceSetting.PlayerAppPrompts, prompts)
         val pushed = data.sync.dirtyRecords(null, 100)
         data.sync.markPushed(pushed.map { PushAck(it.recordId, it.hlc, 1) })
 
@@ -111,6 +116,8 @@ class ProfileRepositoryTest {
         assertEquals(emptyList(), data.trackerAccounts.accounts(gone.id))
         assertEquals(emptyList(), data.trackerWriteQueue.pending(gone.id))
         assertNull(data.deviceSettings.settings().activeProfileId)
+        assertEquals(setOf(kept.id), data.deviceSettings.value(DeviceSetting.PinLockouts).keys)
+        assertEquals(listOf(kept.id), data.deviceSettings.value(DeviceSetting.PlayerAppPrompts).map { it.profileId })
 
         // Five tombstones to push (profile, addon list, library item, stream, setting), all based on version 1.
         val tombstones = data.sync.dirtyRecords(null, 100)

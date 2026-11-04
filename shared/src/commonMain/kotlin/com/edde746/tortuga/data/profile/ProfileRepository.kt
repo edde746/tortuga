@@ -6,6 +6,7 @@ import com.edde746.tortuga.data.Tx
 import com.edde746.tortuga.data.downloads.dropProfileDownloads
 import com.edde746.tortuga.data.settings.clearActiveProfileIf
 import com.edde746.tortuga.data.settings.forgetManifestChecks
+import com.edde746.tortuga.data.settings.forgetProfilePinAndPrompts
 import com.edde746.tortuga.data.settings.forgetRecentRooms
 import com.edde746.tortuga.data.settings.forgetRecentSearches
 import com.edde746.tortuga.data.settings.forgetSavedNavigation
@@ -184,6 +185,7 @@ internal fun Tx.dropProfileLocalData(profileId: String) {
     forgetRecentRooms(profileId)
     forgetSavedNavigation(profileId)
     forgetManifestChecks(profileId)
+    forgetProfilePinAndPrompts(profileId)
 }
 
 internal fun ProfileRow.toModel() =

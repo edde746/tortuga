@@ -321,13 +321,7 @@ class DeviceSettingsRepository internal constructor(private val db: Db) {
      * the value stays the same.
      */
     suspend fun <T> update(setting: DeviceSetting<T>, change: (T) -> T) {
-        db.write {
-            val stored = q.deviceSettingQueries.selectAll().executeAsList().firstOrNull { it.setting_key == setting.key }
-            val current = setting.decodeSetting(stored?.value_json)
-            val next = setting.normalize(change(current))
-            if (next == current) return@write
-            q.deviceSettingQueries.upsert(Device_setting(setting.key, settingsJson.encodeToString(setting.serializer, next)))
-        }
+        db.write { updateSetting(setting, change) }
     }
 
     suspend fun reset(setting: DeviceSetting<*>) {
@@ -340,6 +334,27 @@ internal fun Tx.clearActiveProfileIf(profileId: String) {
     val key = DeviceSetting.ActiveProfileId.key
     val stored = q.deviceSettingQueries.selectAll().executeAsList().firstOrNull { it.setting_key == key } ?: return
     if (DeviceSetting.ActiveProfileId.decodeSetting(stored.value_json) == profileId) q.deviceSettingQueries.delete(key)
+}
+
+/** [DeviceSettingsRepository.update] in a transaction of the caller's. */
+private fun <T> Tx.updateSetting(setting: DeviceSetting<T>, change: (T) -> T) {
+    val stored = q.deviceSettingQueries.selectAll().executeAsList().firstOrNull { it.setting_key == setting.key }
+    val current = setting.decodeSetting(stored?.value_json)
+    val next = setting.normalize(change(current))
+    if (next == current) return
+    q.deviceSettingQueries.upsert(Device_setting(setting.key, settingsJson.encodeToString(setting.serializer, next)))
+}
+
+/** Forgets [profileId]'s PIN lockout and its "Finished watching?" prompts (the profile is being deleted). */
+internal fun Tx.forgetProfilePinAndPrompts(profileId: String) {
+    updateSetting(DeviceSetting.PinLockouts) { it - profileId }
+    updateSetting(DeviceSetting.PlayerAppPrompts) { prompts -> prompts.filter { it.profileId != profileId } }
+}
+
+/** Forgets every PIN lockout and "Finished watching?" prompt (the account's profiles are leaving this device). */
+internal fun Tx.forgetAllPinsAndPrompts() {
+    q.deviceSettingQueries.delete(DeviceSetting.PinLockouts.key)
+    q.deviceSettingQueries.delete(DeviceSetting.PlayerAppPrompts.key)
 }
 
 private fun <T> DeviceSetting<T>.decodeSetting(json: String?): T {

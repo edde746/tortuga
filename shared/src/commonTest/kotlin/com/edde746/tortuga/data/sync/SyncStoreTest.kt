@@ -7,6 +7,8 @@ import com.edde746.tortuga.data.library.MetaSnapshot
 import com.edde746.tortuga.data.library.WatchedBitField
 import com.edde746.tortuga.data.movie
 import com.edde746.tortuga.data.series
+import com.edde746.tortuga.data.settings.DeviceSetting
+import com.edde746.tortuga.data.settings.PinLockout
 import com.edde746.tortuga.data.settings.ProfileSetting
 import com.edde746.tortuga.data.streams.DeviceClass
 import com.edde746.tortuga.data.streams.PickContext
@@ -20,6 +22,7 @@ import com.edde746.tortuga.model.MetaItem
 import com.edde746.tortuga.model.MetaItemPreview
 import com.edde746.tortuga.model.SeriesInfo
 import com.edde746.tortuga.model.Video
+import com.edde746.tortuga.playback.players.PlayerAppPrompt
 import com.edde746.tortuga.playback.streams.HdrBadge
 import com.edde746.tortuga.playback.streams.ResolutionBadge
 import com.edde746.tortuga.playback.streams.VideoCodecBadge
@@ -154,6 +157,18 @@ class SyncStoreTest {
         assertNull(a.syncState.dataAccount())
         assertNull(a.syncState.pullCursor("account"))
         assertEquals(emptyList(), a.sync.dirtyRecords(null, 10))
+    }
+
+    @Test
+    fun droppingTheSyncedDataForgetsThePinLockoutsAndPlayerAppPrompts() = runTest {
+        a.deviceSettings.set(DeviceSetting.PinLockouts, mapOf("p" to PinLockout(5, 1)))
+        a.deviceSettings.set(DeviceSetting.PlayerAppPrompts, listOf(PlayerAppPrompt("p", "tt1", "tt1", "VLC", "Movie")))
+        a.deviceSettings.set(DeviceSetting.HardwareDecoding, false)
+
+        a.sync.dropSyncedData()
+        assertEquals(emptyMap(), a.deviceSettings.value(DeviceSetting.PinLockouts))
+        assertEquals(emptyList(), a.deviceSettings.value(DeviceSetting.PlayerAppPrompts))
+        assertFalse(a.deviceSettings.value(DeviceSetting.HardwareDecoding), "the device's own settings stay")
     }
 
     @Test

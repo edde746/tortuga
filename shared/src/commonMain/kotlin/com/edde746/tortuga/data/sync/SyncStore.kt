@@ -19,6 +19,7 @@ import com.edde746.tortuga.data.profile.dropProfileLocalData
 import com.edde746.tortuga.data.profile.encodeHomeCatalogs
 import com.edde746.tortuga.data.settings.DeviceSetting
 import com.edde746.tortuga.data.settings.forgetAllManifestChecks
+import com.edde746.tortuga.data.settings.forgetAllPinsAndPrompts
 import com.edde746.tortuga.data.settings.forgetAllRecentRooms
 import com.edde746.tortuga.data.settings.forgetAllRecentSearches
 import com.edde746.tortuga.data.settings.forgetAllSavedNavigation
@@ -152,11 +153,12 @@ class SyncStore internal constructor(private val db: Db) {
     /**
      * Drops every synced record, tombstones and unpushed changes included, the pull cursors with the account the data
      * belonged to, and what this device keeps for the account's profiles (tracker connections and their write queue,
-     * the active-profile choice, recent searches, recent watch-together rooms, each profile's back stacks, the
-     * downloads' ownerships and Keep synced rules: the download manager then deletes every download, files included,
-     * as their stream JSON can hold the account's API keys), in one transaction: a drop cut short leaves no cursor
-     * that would skip the records on the next sign-in. For when the records belong to nobody here: the account signed
-     * out or was deleted, or another account signs in. Other device settings stay.
+     * the active-profile choice, recent searches, recent watch-together rooms, each profile's back stacks, the PIN
+     * lockouts, the "Finished watching?" prompts, the downloads' ownerships and Keep synced rules: the download
+     * manager then deletes every download, files included, as their stream JSON can hold the account's API keys), in
+     * one transaction: a drop cut short leaves no cursor that would skip the records on the next sign-in. For when the
+     * records belong to nobody here: the account signed out or was deleted, or another account signs in. Other device
+     * settings stay.
      */
     suspend fun dropSyncedData() {
         db.write {
@@ -176,6 +178,7 @@ class SyncStore internal constructor(private val db: Db) {
             forgetAllRecentRooms()
             forgetAllSavedNavigation()
             forgetAllManifestChecks()
+            forgetAllPinsAndPrompts()
         }
     }
 
