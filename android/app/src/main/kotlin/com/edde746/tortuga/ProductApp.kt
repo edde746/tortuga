@@ -14,6 +14,7 @@ import com.edde746.tortuga.model.FormFactor
 import com.edde746.tortuga.secrets.AndroidSecretStore
 import com.edde746.tortuga.sync.api.DeviceDescriptor
 import com.edde746.tortuga.sync.api.DevicePlatform
+import com.edde746.tortuga.sync.api.deviceName
 
 /**
  * The product in this process: the shared core ([AppBootstrap.product]) on the device's database and the Android
@@ -58,7 +59,7 @@ internal class ProductApp(
             val name = Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)?.takeIf { it.isNotBlank() }
                 ?: "${Build.MANUFACTURER} ${Build.MODEL}"
             val kind = if (platform.formFactor == FormFactor.TV) DevicePlatform.ANDROID_TV else DevicePlatform.ANDROID
-            return DeviceDescriptor(name.take(64), kind)
+            return DeviceDescriptor(deviceName(name), kind)
         }
     }
 }

@@ -115,6 +115,17 @@ object SyncProtocol {
     }
 }
 
+/**
+ * [name] cut to [SyncProtocol.MAX_DEVICE_NAME_LENGTH] UTF-16 units, never between the halves of a surrogate pair (an
+ * emoji or other character outside the BMP is kept whole or dropped). A combining mark may still be parted from its base.
+ */
+fun deviceName(name: String): String {
+    val limit = SyncProtocol.MAX_DEVICE_NAME_LENGTH
+    if (name.length <= limit) return name
+    val end = if (name[limit - 1].isHighSurrogate()) limit - 1 else limit
+    return name.substring(0, end)
+}
+
 /** Every endpoint, relative to the server's base URL. The KDoc of each request/response type names its endpoint. */
 object SyncPaths {
     /** `GET`, public: [ServerInfo]. */

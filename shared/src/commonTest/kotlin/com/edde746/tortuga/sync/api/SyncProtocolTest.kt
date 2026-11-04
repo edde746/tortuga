@@ -6,6 +6,16 @@ import kotlin.test.assertNull
 
 class SyncProtocolTest {
     @Test
+    fun aDeviceNameIsCutWithoutSplittingASurrogatePair() {
+        val limit = SyncProtocol.MAX_DEVICE_NAME_LENGTH
+        assertEquals("TV", deviceName("TV"))
+        assertEquals("a".repeat(limit), deviceName("a".repeat(limit + 5)))
+        val emoji = "\uD83D\uDCFA"
+        assertEquals("a".repeat(limit - 1), deviceName("a".repeat(limit - 1) + emoji), "the emoji dropped whole")
+        assertEquals("a".repeat(limit - 2) + emoji, deviceName("a".repeat(limit - 2) + emoji + "b"), "the emoji kept whole")
+    }
+
+    @Test
     fun normalizesTypedLinkCodes() {
         assertEquals("WDW85V5N", normalizeLinkCode(" wdw8-5v5n "))
         assertEquals("WDW85V5N", normalizeLinkCode("WDW8 5V5N"))

@@ -12,6 +12,7 @@ import com.edde746.tortuga.downloads.installDownloads
 import com.edde746.tortuga.secrets.SecretStore
 import com.edde746.tortuga.sync.api.DeviceDescriptor
 import com.edde746.tortuga.sync.api.DevicePlatform
+import com.edde746.tortuga.sync.api.deviceName
 import java.io.File
 import java.nio.file.Path
 import java.security.MessageDigest
@@ -79,7 +80,7 @@ internal object Bootstrap {
         val name = (if (windows) System.getenv("COMPUTERNAME") else System.getenv("HOSTNAME"))?.takeIf { it.isNotBlank() }
             ?: runCatching { java.net.InetAddress.getLocalHost().hostName }.getOrNull()?.takeIf { it.isNotBlank() }
             ?: System.getProperty("os.name")
-        return DeviceDescriptor(name.take(64), if (windows) DevicePlatform.WINDOWS else DevicePlatform.LINUX)
+        return DeviceDescriptor(deviceName(name), if (windows) DevicePlatform.WINDOWS else DevicePlatform.LINUX)
     }
 
     /** `data-dir-<12 hex>/`: the secrets' name for a `--data-dir` device, the same on every run with that directory. */
