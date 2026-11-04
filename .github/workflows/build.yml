@@ -735,7 +735,9 @@ jobs:
   create-release:
     name: Create draft release
     needs: [validate-trusted-ref, build-android, build-ios, build-macos, build-windows, build-linux]
-    if: ${{ always() && needs.validate-trusted-ref.result == 'success' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && inputs.build_android && inputs.build_ios && inputs.build_macos && inputs.build_windows && inputs.build_linux && inputs.release_tag != '' }}
+    # The implicit success(): every job above finished and succeeded. A job that never got a runner has no result, so
+    # a check for failed or cancelled ones alone would let this run against builds that don't exist.
+    if: ${{ inputs.build_android && inputs.build_ios && inputs.build_macos && inputs.build_windows && inputs.build_linux && inputs.release_tag != '' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
