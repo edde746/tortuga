@@ -192,7 +192,9 @@ object NuvioCollections {
                     val listId = json.string("listId")?.takeIf { it.isNotBlank() } ?: incomplete()
                     val kind = json.string("kind")?.let { raw -> TrackerCatalog.Kind.entries.firstOrNull { it.name.equals(raw, ignoreCase = true) } }
                         ?: incomplete()
-                    if (TrackerService.fromId(service) == null) return skip(kinds.unknown(name = service))
+                    val known = TrackerService.fromId(service) ?: return skip(kinds.unknown(name = service))
+                    // Trakt's and MDBList's own lists are the number the service gave them (`list.<n>`); a file names anything.
+                    if (kind == TrackerCatalog.Kind.LIST && known in NUMBERED_LISTS && listId.removePrefix(LIST_PREFIX).toLongOrNull()?.takeIf { it > 0 } == null) incomplete()
                     CollectionSource.TrackerList(
                         service = service,
                         listId = listId,
@@ -331,4 +333,8 @@ object NuvioCollections {
     private const val LETTERBOXD = "letterboxd"
     private const val NO_GENRE = "none"
     private val TV_TYPES = setOf("tv", "series")
+
+    /** The services whose own lists' ids are `list.<n>` (their catalogs' ids). */
+    private val NUMBERED_LISTS = setOf(TrackerService.TRAKT, TrackerService.MDBLIST)
+    private const val LIST_PREFIX = "list."
 }

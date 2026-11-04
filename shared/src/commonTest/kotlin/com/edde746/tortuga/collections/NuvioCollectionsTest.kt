@@ -223,4 +223,20 @@ class NuvioCollectionsTest {
             )
         }
     }
+
+    @Test
+    fun aTraktOrMdblistListIsTheNumberTheServiceGaveIt() {
+        fun one(source: String) = """[{"id":"c","title":"Movies","folders":[{"id":"f","title":"F","sources":[$source]}]}]"""
+        fun tracker(service: String, listId: String) = """{"provider":"tracker","service":"$service","listId":"$listId","kind":"LIST"}"""
+        for (service in listOf("trakt", "mdblist")) {
+            assertEquals("list.7", (NuvioCollections.decode(one(tracker(service, "list.7"))).sources.single() as CollectionSource.TrackerList).listId)
+            for (listId in listOf("list.../../users/settings", "list.0", "list.-3", "watchlist")) {
+                assertEquals(
+                    T.collections.refused.sourceInvalid(position = "1", folder = "F", collection = "Movies"),
+                    assertFailsWith<CollectionFileException> { NuvioCollections.decode(one(tracker(service, listId))) }.message,
+                    "$service $listId",
+                )
+            }
+        }
+    }
 }
