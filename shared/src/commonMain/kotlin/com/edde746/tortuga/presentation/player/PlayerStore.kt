@@ -49,8 +49,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
@@ -284,6 +288,14 @@ class PlayerStore(
      * position or the cache moved, several times a second while the video plays, where [state] stays as it is.
      */
     val timeline: StateFlow<TimelineState> = mutableTimeline.asStateFlow()
+
+    private val mutableUserPauses = MutableSharedFlow<Unit>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+
+    /**
+     * Each pause the viewer gives (Pause, a TogglePause that pauses: the player's buttons, keys and the OS's controls),
+     * never the system's ([PlayerCommand.SystemPause]): the OS media controls hear them ([MediaControlsHost.userPaused]).
+     */
+    internal val userPauses: SharedFlow<Unit> = mutableUserPauses.asSharedFlow()
 
     init {
         scope.launch { session.engineState.collect(::onEngineState) }
@@ -580,14 +592,18 @@ class PlayerStore(
     /**
      * Runs a command from the views, the system's controls or the keymap ([press]: the key that gave it, whose hold
      * makes a held seek or a remote's scrub): the one way the viewer's commands reach the engine. One a watch-together
-     * room doesn't let this device give ([allowedInRoom]) goes no further, and the room's reason shows.
+     * room doesn't let this device give ([allowedInRoom]) goes no further, and the room's reason shows. [system] is a
+     * pause the system gave ([PlayerCommand.SystemPause]) rather than the viewer.
      */
-    private fun execute(command: PlayerCommand, press: InputEvent.KeyDown? = null) {
+    private fun execute(command: PlayerCommand, press: InputEvent.KeyDown? = null, system: Boolean = false) {
         if (!allowedInRoom(command)) {
             watchUi?.controlsLocked?.let { text -> update { showOsd(text) } }
             return
         }
         if (info.live && command.seeks && (rewindWindow() == null || !command.seeksLive)) return
+        val pausing = command == PlayerCommand.Pause ||
+            command == PlayerCommand.TogglePause && !engineState.eof && !paused.resolve(engineState.paused)
+        if (pausing && !system) mutableUserPauses.tryEmit(Unit)
         // A stop on this device for one who doesn't control the room's playback is this device's alone, and so is the
         // Play that ends it.
         val stopped = watch?.takeIf { it.stoppedHere }
@@ -610,7 +626,7 @@ class PlayerStore(
             PlayerCommand.Pause -> setPaused(true)
             // Whoever controls the room's playback, or anyone outside a room: the system's pause is Pause, its resume
             // Play.
-            PlayerCommand.SystemPause -> execute(PlayerCommand.Pause)
+            PlayerCommand.SystemPause -> execute(PlayerCommand.Pause, system = true)
             PlayerCommand.SystemResume -> if (!stopsHereAlone()) execute(PlayerCommand.Play)
             is PlayerCommand.SeekBy ->
                 if (press?.repeat == true) holdSeek(command.seconds, press.key) else seekFromControls(displayPosition() + command.seconds)

@@ -76,6 +76,9 @@ final class NowPlayingCenter: @preconcurrency MediaControlsHost {
         onChange?()
     }
 
+    /// For Android's audio focus; nothing here.
+    func userPaused() {}
+
     // MARK: Commands
 
     private func register() {

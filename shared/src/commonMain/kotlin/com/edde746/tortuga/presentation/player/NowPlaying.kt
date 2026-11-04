@@ -141,6 +141,12 @@ interface MediaControlsHost {
 
     /** The playback ended: the controls go away and take no more commands. */
     fun hide()
+
+    /**
+     * The viewer paused (the player's own controls, keys or the OS's; never the system's [MediaCommand.SystemPause]):
+     * Android's audio focus no longer resumes a transient loss on the gain.
+     */
+    fun userPaused() {}
 }
 
 /**
@@ -173,6 +179,7 @@ class MediaControls internal constructor(
             combine(store.state, store.timeline, session.info, session.engineState) { ui, timeline, info, engine -> NowPlaying.of(ui, timeline, info, engine) }
                 .collect(::onNowPlaying)
         }
+        scope.launch { store.userPauses.collect { host.userPaused() } }
     }
 
     override fun perform(command: MediaCommand) {

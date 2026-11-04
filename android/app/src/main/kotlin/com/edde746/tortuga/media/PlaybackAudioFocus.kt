@@ -86,8 +86,9 @@ internal class PlaybackAudioFocus(
     }
 
     /**
-     * The viewer asked to pause (the session's Pause, a media button, the notification's action), whether or not the
-     * playback still plays: a transient loss waiting to resume on the gain no longer does, and focus goes once paused.
+     * The viewer asked to pause (the player's own controls and keys, the session's Pause, a media button, the
+     * notification's action), whether or not the playback still plays: a transient loss waiting to resume on the gain
+     * no longer does, and focus goes once paused.
      */
     fun userPaused() {
         if (!resumeOnGain) return

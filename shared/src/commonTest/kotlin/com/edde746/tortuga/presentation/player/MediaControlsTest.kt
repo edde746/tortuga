@@ -18,6 +18,7 @@ class MediaControlsTest {
     private class RecordingHost : MediaControlsHost {
         val shown = mutableListOf<NowPlaying>()
         var hidden = 0
+        var userPauses = 0
 
         override fun show(nowPlaying: NowPlaying, commands: MediaCommandHandler) {
             shown += nowPlaying
@@ -25,6 +26,10 @@ class MediaControlsTest {
 
         override fun hide() {
             hidden++
+        }
+
+        override fun userPaused() {
+            userPauses++
         }
     }
 
@@ -43,6 +48,12 @@ class MediaControlsTest {
         /** An OS command, and whatever it sets off. */
         fun perform(command: MediaCommand) {
             controls.perform(command)
+            scope.runCurrent()
+        }
+
+        /** A command from the player's own controls, and whatever it sets off. */
+        fun dispatch(command: PlayerCommand) {
+            player.store.dispatch(command)
             scope.runCurrent()
         }
     }
@@ -187,6 +198,24 @@ class MediaControlsTest {
 
         perform(MediaCommand.Stop)
         assertEquals(1, player.host.closed)
+    }
+
+    @Test
+    fun theHostHearsTheViewersPausesButNotTheSystems() = controlsTest {
+        player.playing(position = 100.0, duration = 600.0)
+
+        dispatch(PlayerCommand.Pause)
+        assertEquals(1, host.userPauses, "the player's own Pause")
+
+        dispatch(PlayerCommand.TogglePause)
+        assertEquals(1, host.userPauses, "a toggle that plays is no pause")
+
+        perform(MediaCommand.SystemPause)
+        assertEquals(1, host.userPauses, "the system's pause isn't the viewer's")
+
+        player.engineState { it.copy(paused = false) }
+        perform(MediaCommand.Pause)
+        assertEquals(2, host.userPauses, "the OS controls' Pause")
     }
 
     @Test
