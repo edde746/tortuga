@@ -12,9 +12,11 @@ import com.edde746.tortuga.presentation.board.FakeCatalogSource
 import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.trackers.TrackerService
 import com.edde746.tortuga.trackers.catalog.TrackerCatalog
+import com.edde746.tortuga.trackers.catalog.TrackerCatalogPage
 import com.edde746.tortuga.trackers.catalog.TrackerCatalogSource
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
@@ -166,5 +168,33 @@ class CollectionEditorStoreTest {
             listOf(CollectionSource.TrackerList("mdblist", "list.7", TrackerCatalog.Kind.LIST, null, "Best")),
             f.data.collections.collections("p").single().folders.single().sources,
         )
+    }
+
+    @Test
+    fun aLinkLookupLeftByBackAddsItsListNowhere() = runTest {
+        val answer = CompletableDeferred<TrackerCatalog?>()
+        val mdblist = object : TrackerCatalogSource {
+            override val service = TrackerService.MDBLIST
+            override suspend fun catalogs(): List<TrackerCatalog> = emptyList()
+            override suspend fun page(catalog: TrackerCatalog, cursor: String?) = TrackerCatalogPage(emptyList(), next = null)
+            override suspend fun publicList(input: String): TrackerCatalog? = answer.await()
+        }
+        val f = fixture(collectionId = "c", saved = collection(EMBER_MOVIES, more = listOf(folder("g", "Second", EMBER_SERIES))), trackers = listOf(mdblist))
+        f.store.openFolder(0)
+        f.store.openPicker()
+        runCurrent()
+        f.store.pick(f.state.picker!!.groups[1].choices.last().key)
+        f.store.submitListUrl("https://mdblist.com/lists/someone/best")
+        runCurrent()
+        // The lookup is slow: the user backs out of the form, the picker and the folder, and opens the other folder.
+        repeat(3) { f.store.back() }
+        f.store.openFolder(1)
+        answer.complete(TrackerCatalog(TrackerService.MDBLIST, "list.7", TrackerCatalog.Kind.PUBLIC_LIST, null, "Best"))
+        runCurrent()
+
+        assertEquals(listOf("Ember Series"), f.state.folder?.sources?.map { it.title }, "the open folder isn't the one it was asked for")
+        f.store.back()
+        f.store.openFolder(0)
+        assertEquals(listOf("Ember Movies"), f.state.folder?.sources?.map { it.title }, "nor is the list added to the folder it was asked for")
     }
 }

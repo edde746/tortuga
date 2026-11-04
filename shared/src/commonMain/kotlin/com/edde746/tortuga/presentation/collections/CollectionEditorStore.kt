@@ -94,9 +94,13 @@ class CollectionEditorStore internal constructor(
     private var pickerTrackers: List<TrackerLists> = emptyList()
     private var pickerJob: Job? = null
 
-    /** The service whose list-by-link form is open; [urlResolving] while its link is looked up, [urlError] why it gave no list. */
+    /**
+     * The service whose list-by-link form is open; [urlResolving] while its link is looked up ([urlJob], which closing
+     * the form cancels), [urlError] why it gave no list.
+     */
     private var urlService: TrackerService? = null
     private var urlResolving = false
+    private var urlJob: Job? = null
     private var urlError: String? = null
 
     private var addons: List<Descriptor> = emptyList()
@@ -221,7 +225,7 @@ class CollectionEditorStore internal constructor(
         }
     }
 
-    /** Looks up the list [url] links to on the open form's service, then adds it to the open folder. */
+    /** Looks up the list [url] links to on the open form's service, then adds it to the open folder (the form's). */
     fun submitListUrl(url: String) {
         val service = urlService ?: return
         if (urlResolving) return
@@ -232,7 +236,7 @@ class CollectionEditorStore internal constructor(
         urlResolving = true
         urlError = null
         publish()
-        scope.launch {
+        urlJob = scope.launch {
             val list = try {
                 source.publicList(url.trim()).also { if (it == null) urlError = text.notAList(name) }
             } catch (e: CancellationException) {
@@ -243,6 +247,7 @@ class CollectionEditorStore internal constructor(
                 null
             }
             urlResolving = false
+            urlJob = null
             if (list != null) {
                 val added = CollectionSource.TrackerList(service.id, list.id, TrackerCatalog.Kind.PUBLIC_LIST, list.type, list.name)
                 editFolder { folder -> if (added in folder.sources) folder else folder.copy(sources = folder.sources + added) }
@@ -254,12 +259,18 @@ class CollectionEditorStore internal constructor(
     }
 
     /**
-     * Back: closes the list-by-link form, else the picker, else the folder's page, else the discard question (keeping
-     * the draft), else the editor: at once when nothing changed, else after asking ([CollectionEditorUiState.discard]).
+     * Back: closes the list-by-link form (dropping its lookup), else the picker, else the folder's page, else the discard
+     * question (keeping the draft), else the editor: at once when nothing changed, else after asking
+     * ([CollectionEditorUiState.discard]).
      */
     fun back() {
         when {
-            urlService != null -> urlService = null
+            urlService != null -> {
+                urlJob?.cancel()
+                urlJob = null
+                urlResolving = false
+                urlService = null
+            }
             pickerOpen -> pickerOpen = false
             folderIndex != null -> folderIndex = null
             discardOpen -> discardOpen = false
