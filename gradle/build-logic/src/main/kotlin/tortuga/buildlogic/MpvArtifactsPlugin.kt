@@ -19,10 +19,8 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecOperations
 import java.io.File
 import java.io.IOException
+import java.net.HttpURLConnection
 import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import java.security.MessageDigest
@@ -135,9 +133,10 @@ abstract class FetchMpvArtifact @Inject constructor(
  * Returns [target] holding [url]'s bytes, whose SHA-256 is [sha256], downloading them unless [target] already does.
  * [target]'s directory is shared by concurrent builds: each download writes a temp file of its own there, verifies it
  * and moves it into place atomically. A [target] another build moved in meanwhile is kept when valid (the temp is
- * deleted) and replaced when not. Temp files of killed builds are deleted a day on.
+ * deleted) and replaced when not. Temp files of killed builds are deleted a day on. A download that sends nothing for
+ * [idleTimeout] fails.
  */
-internal fun fetchVerified(url: String, sha256: String, target: File, logger: Logger): File {
+internal fun fetchVerified(url: String, sha256: String, target: File, logger: Logger, idleTimeout: Duration = Duration.ofMinutes(1)): File {
     if (target.isFile && sha256(target) == sha256) return target
     val dir = Files.createDirectories(target.toPath().parent)
     val stale = System.currentTimeMillis() - Duration.ofDays(1).toMillis()
@@ -145,9 +144,16 @@ internal fun fetchVerified(url: String, sha256: String, target: File, logger: Lo
     val tmp = Files.createTempFile(dir, "${target.name}.", ".part")
     try {
         logger.lifecycle("Downloading $url")
-        val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).connectTimeout(Duration.ofSeconds(30)).build()
-        val response = client.send(HttpRequest.newBuilder(URI(url)).GET().build(), HttpResponse.BodyHandlers.ofFile(tmp))
-        if (response.statusCode() != 200) throw GradleException("GET $url -> HTTP ${response.statusCode()}")
+        // HttpClient has no timeout between the bytes of a body; this connection's read timeout is one.
+        val connection = URI(url).toURL().openConnection() as HttpURLConnection
+        connection.connectTimeout = Duration.ofSeconds(30).toMillis().toInt()
+        connection.readTimeout = idleTimeout.toMillis().toInt()
+        try {
+            if (connection.responseCode != 200) throw GradleException("GET $url -> HTTP ${connection.responseCode}")
+            connection.inputStream.use { input -> Files.newOutputStream(tmp).use { input.copyTo(it) } }
+        } finally {
+            connection.disconnect()
+        }
         val actual = sha256(tmp.toFile())
         if (actual != sha256) throw GradleException("Checksum mismatch for ${target.name}: expected $sha256, got $actual")
         // Another build may have moved the same bytes in while this one downloaded.

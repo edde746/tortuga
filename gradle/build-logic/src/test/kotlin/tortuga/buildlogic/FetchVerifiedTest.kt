@@ -2,10 +2,12 @@ package tortuga.buildlogic
 
 import com.sun.net.httpserver.HttpServer
 import org.gradle.api.logging.Logging
+import org.junit.jupiter.api.Assertions.assertTimeoutPreemptively
 import java.io.File
 import java.net.InetSocketAddress
 import java.nio.file.Files
 import java.security.MessageDigest
+import java.time.Duration
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -28,6 +30,7 @@ class FetchVerifiedTest {
     /** Set: the first two requests get their headers and first bytes together, then the second its rest 1.5 s later. */
     @Volatile private var overlap = false
     private val arrived = CountDownLatch(2)
+    private val released = CountDownLatch(1)
 
     private val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0).apply {
         executor = Executors.newCachedThreadPool()
@@ -47,12 +50,22 @@ class FetchVerifiedTest {
                 out.write(body, sent, body.size - sent)
             }
         }
+        // Headers and the first bytes, then nothing until the test ends.
+        createContext("/stall") { exchange ->
+            exchange.sendResponseHeaders(200, body.size.toLong())
+            exchange.responseBody.use { out ->
+                out.write(body, 0, 1 shl 16)
+                out.flush()
+                released.await(60, TimeUnit.SECONDS)
+            }
+        }
         start()
     }
     private val url = "http://127.0.0.1:${server.address.port}/asset"
 
     @AfterTest
     fun stop() {
+        released.countDown()
         server.stop(0)
         cache.deleteRecursively()
     }
@@ -85,6 +98,15 @@ class FetchVerifiedTest {
     @Test
     fun aDownloadWithTheWrongChecksumFailsAndLeavesNothing() {
         assertFails { fetchVerified(url, "0".repeat(64), target, logger) }
+        assertEquals(emptyList(), cached())
+    }
+
+    @Test
+    fun aDownloadThatStallsFailsAndLeavesNothing() {
+        val stalled = url.replace("/asset", "/stall")
+        assertTimeoutPreemptively(Duration.ofSeconds(20)) {
+            assertFails { fetchVerified(stalled, sha256, target, logger, idleTimeout = Duration.ofSeconds(1)) }
+        }
         assertEquals(emptyList(), cached())
     }
 
