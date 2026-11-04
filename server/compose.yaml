@@ -89,6 +89,8 @@ services:
       TORTUGA_ANILIST_CLIENT_SECRET_FILE: ${TORTUGA_ANILIST_CLIENT_SECRET_FILE:-}
       # The change notice streams held at once (server/README.md); unset: 3,000.
       TORTUGA_MAX_EVENT_STREAMS: ${TORTUGA_MAX_EVENT_STREAMS:-}
+      # Hosted instance only: the review sign-in for the stores' reviewers (server/README.md); unset: no review page.
+      TORTUGA_REVIEW_PASSWORD_SHA256: ${TORTUGA_REVIEW_PASSWORD_SHA256:-}
     ports:
       - "${TORTUGA_BIND:-127.0.0.1}:${TORTUGA_HTTP_PORT:-8080}:8080"
     # Only for its free space (the server's user can't read Postgres's files).

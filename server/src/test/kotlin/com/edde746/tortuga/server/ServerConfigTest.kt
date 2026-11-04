@@ -63,6 +63,14 @@ class ServerConfigTest {
                 )
             }
             assertTrue(apple.message!!.startsWith("TORTUGA_APPLE_PRIVATE_KEY is not a Sign in with Apple key"), apple.message)
+
+            // The review password itself, or a hash cut short, instead of its SHA-256.
+            for (value in listOf("Kq7mR2vX9pLw4nTb8sHd3cYf", "ab".repeat(31))) {
+                val review = assertFailsWith<IllegalArgumentException> {
+                    configFromEnvironment("TORTUGA_REVIEW_PASSWORD_SHA256" to value)
+                }
+                assertTrue(review.message!!.startsWith("TORTUGA_REVIEW_PASSWORD_SHA256 must be"), review.message)
+            }
         } finally {
             Files.delete(missing.parent)
         }

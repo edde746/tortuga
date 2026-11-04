@@ -2,6 +2,7 @@ package com.edde746.tortuga.server.service
 
 import com.edde746.tortuga.server.auth.Secrets
 import com.edde746.tortuga.server.db.Database
+import com.edde746.tortuga.server.db.Tx
 import com.edde746.tortuga.server.db.instant
 import com.edde746.tortuga.server.db.uuid
 import com.edde746.tortuga.server.http.Bearer
@@ -20,6 +21,7 @@ import com.edde746.tortuga.sync.api.normalizeLinkCode
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.time.Clock
+import java.time.Instant
 import java.util.Base64
 import java.util.UUID
 import kotlin.time.Duration.Companion.minutes
@@ -85,27 +87,53 @@ class DeviceLinks(
     }
 
     /** Answers an open link with the session's account: the new device's next poll signs it in there. */
-    suspend fun approve(bearer: Bearer, code: String) {
-        val accountId = answer(bearer, code, LinkStatus.APPROVED)
-        log.atInfo().addKeyValue("accountId", accountId).log("Device link approved")
-    }
+    suspend fun approve(bearer: Bearer, code: String) = answer(bearer, code, LinkStatus.APPROVED)
 
-    suspend fun reject(bearer: Bearer, code: String) {
-        answer(bearer, code, LinkStatus.REJECTED)
-    }
+    suspend fun reject(bearer: Bearer, code: String) = answer(bearer, code, LinkStatus.REJECTED)
 
-    /** Answers the link with [status]; an approval names the session's account. Returns that account. */
-    private suspend fun answer(bearer: Bearer, code: String, status: String): UUID {
+    /** Answers the link with [status]; an approval names the session's account. */
+    private suspend fun answer(bearer: Bearer, code: String, status: String) {
         val normalized = normalized(code)
-        val (accountId, updated) = sessions.transaction(bearer) { session ->
-            val approvedAccount = session.accountId.takeIf { status == LinkStatus.APPROVED }
-            session.accountId to update(
-                "UPDATE device_links SET status = ?, approved_account_id = ? WHERE code = ? AND $OPEN",
-                status, approvedAccount, normalized, LinkStatus.PENDING, clock.instant(),
-            )
+        val answered = sessions.transaction(bearer) { session ->
+            answer(normalized, status, session.accountId.takeIf { status == LinkStatus.APPROVED }, clock.instant())
         }
-        if (updated == 0) throw notFound("No open link with this code")
-        return accountId
+        if (!answered) throw notFound("No open link with this code")
+    }
+
+    /**
+     * Approves the open link [code] for the account [account] returns, in the same transaction (the review sign-in's
+     * demo account, which it may create): the new device's next poll signs it in there. A code that isn't open
+     * answers what it is and calls nothing: the link is locked and read first.
+     */
+    suspend fun approve(code: String, account: Tx.() -> UUID): LinkApproval {
+        val normalized = normalizeLinkCode(code) ?: return LinkApproval.NOT_FOUND
+        return db.transaction {
+            val now = clock.instant()
+            val expired = queryOne(
+                "SELECT expires_at <= ? FROM device_links WHERE code = ? AND status = ? FOR UPDATE",
+                now, normalized, LinkStatus.PENDING,
+            ) { it.getBoolean(1) }
+            when (expired) {
+                null -> LinkApproval.NOT_FOUND
+                true -> LinkApproval.EXPIRED
+                false -> LinkApproval.APPROVED.also { check(answer(normalized, LinkStatus.APPROVED, account(), now)) }
+            }
+        }
+    }
+
+    /**
+     * The one answer to an open link: [status] for the stored [code], an approval for [accountId]. False when no open
+     * link has the code.
+     */
+    private fun Tx.answer(code: String, status: String, accountId: UUID?, now: Instant): Boolean {
+        val updated = update(
+            "UPDATE device_links SET status = ?, approved_account_id = ? WHERE code = ? AND $OPEN",
+            status, accountId, code, LinkStatus.PENDING, now,
+        )
+        if (updated == 1 && status == LinkStatus.APPROVED) {
+            afterCommit { log.atInfo().addKeyValue("accountId", accountId).log("Device link approved") }
+        }
+        return updated == 1
     }
 
     /**
@@ -192,6 +220,9 @@ class DeviceLinks(
         }
     }
 }
+
+/** What [DeviceLinks.approve] found for a code: an open link it approved, a link that ran out, or none. */
+enum class LinkApproval { APPROVED, EXPIRED, NOT_FOUND }
 
 /** Checks a device name and platform against the protocol's limits. */
 fun validate(device: DeviceDescriptor) {

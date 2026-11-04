@@ -55,7 +55,8 @@ The database schema migrates at startup (Flyway). Put a TLS reverse proxy in fro
 `$remote_addr`). Keep the server's port reachable only through the proxy (compose publishes it on 127.0.0.1). Every
 request that carries a token (sign-in, account, devices, links, sync, tracker connections) counts against 300 a minute
 per client, on top of its route's own limit, so a flood of bad tokens can't take the database connections real
-requests need; past it the server answers 429 `rate_limited`. Every per-client limit (the API's rate limits and the
+requests need; past it the server answers 429 `rate_limited` (a browser that asks for a page, `Accept: text/html`,
+gets a page saying to wait a minute). Every per-client limit (the API's rate limits and the
 tracker sign-in relay's) counts an IPv6 client by its /64. `/healthz` checks the database, at most once every 5 s
 however often it is called.
 
@@ -134,6 +135,7 @@ data key that isn't the database's.
 | `TORTUGA_MAX_EVENT_STREAMS` | 3000 | change notice streams held at once ([Change notices](#change-notices)); past it a new one gets 503 `server_busy` with `Retry-After: 60` and the app keeps to its periodic pulls; 0 turns the streams off |
 | `TORTUGA_DEV_TRACKERS_URL` | | development stacks only (`compose.dev.yaml` sets it; `compose.yaml` doesn't pass it): the fake tracker server (`tools/media/test_trackers.py`) that tracker refreshes and revokes go to instead of the services; the server warns at startup when it is set |
 | `TORTUGA_DEV_TRACKER_OAUTH_URL`, `TORTUGA_DEV_TRACKER_OAUTH_BROWSER_URL` | | development stacks only (`compose.dev.yaml` sets them; both or neither): the fake tracker server as the server reaches it and as browsers reach it, standing in for MyAnimeList and AniList in the tracker sign-in relay: browsers go to its authorization pages, and the codes are exchanged there |
+| `TORTUGA_REVIEW_PASSWORD_SHA256` | | the [review sign-in](#review-sign-in): the SHA-256 of the review password, 64 hex digits; unset (the default), the server has no review page |
 
 ### Sign-in
 
@@ -192,6 +194,23 @@ into the container), `TORTUGA_APPLE_SERVICES_ID`, `TORTUGA_APPLE_WEB_RETURN=true
 Tortuga's Google client IDs. It exchanges each Apple authorization code for Apple's refresh token and revokes it when
 the account is deleted. Its GitHub OAuth App is Tortuga's, with the callback
 `https://api.usetortuga.app/v2/auth/github/return`.
+
+### Review sign-in
+
+For the app stores' reviewers, who can't be handed a provider account that signs in reliably on a new device. Off by
+default: with `TORTUGA_REVIEW_PASSWORD_SHA256` unset, as on a self-hosted server, `/review` doesn't exist. Set to the
+SHA-256 of a review password (`printf %s '<password>' | sha256sum`; the password itself is never configured), the server
+serves the review page at `/review`: a plain form that takes the review password and a code. The reviewer chooses *Link from
+another device* on the signed-out device, opens the page in any browser, enters the password and the code the device
+shows, and the device signs in, a TV as well as a phone or computer.
+
+A submission checks the password's hash in constant time, then approves the open device link with that code (the code
+normalized as the apps do, so case and hyphens don't matter) exactly as a signed-in device's approval does, for one
+account only: the demo account, whose one identity has the provider `review`. The server makes that account at the
+first approval, as a first sign-in makes an account, and again at the next approval once a reviewer has deleted it. No
+app offers it as a sign-in (`/v2/info` doesn't list `review`), and the page shows nothing of the account; it answers
+only that the device signs in, that the password is wrong, that no device shows the code, or that the code expired
+(codes last 10 minutes). Submissions take 5 a minute per client address; past it the page says to wait a minute.
 
 ### Tracker sign-in relay
 
@@ -517,7 +536,8 @@ Postgres small and mounts every secret as a file.
 - `python3 server/scripts/github-e2e.py <server URL>` checks a running dev stack's GitHub sign-in end to end, from the
   stack's host, where the server and the fake GitHub answer on 127.0.0.1.
 - `docker compose -f server/compose.yaml -f server/compose.dev.yaml up -d --build` for manual testing. The stack makes
-  its own throwaway data key in the `dev-data-key` volume, which `down -v` removes with the database. Dex's user is
+  its own throwaway data key in the `dev-data-key` volume, which `down -v` removes with the database. Its review page
+  (`/review`) takes the review password `tortuga-dev-review`. Dex's user is
   `alice@example.com` / `password`, its client `tortuga-dev`. Dex's issuer is `http://127.0.0.1:${DEX_HTTP_PORT}/dex`
   (default port 5556): the apps reach it on the host, and phones, the Android emulator and simulators through
   `adb reverse` and SSH tunnels to the same port; the server container checks tokens for that issuer and fetches the

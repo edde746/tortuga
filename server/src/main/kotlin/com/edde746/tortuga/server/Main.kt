@@ -115,6 +115,7 @@ fun main() {
         // Its client ID and addresses; GitHubConfig leaves the secret out.
         .addKeyValue("github", config.github?.toString() ?: "off")
         .addKeyValue("trackerOAuth", services.trackerOAuth.services.joinToString(","))
+        .addKeyValue("reviewSignIn", services.review != null)
         .addKeyValue("maxConnections", connections.max)
         .addKeyValue("connectionBacklog", connections.backlog)
         .log("Starting on {}:{}", config.host, config.port)

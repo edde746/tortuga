@@ -18,6 +18,7 @@ import com.edde746.tortuga.server.routes.appleWebRoutes
 import com.edde746.tortuga.server.routes.authRoutes
 import com.edde746.tortuga.server.routes.gitHubWebRoutes
 import com.edde746.tortuga.server.routes.linkRoutes
+import com.edde746.tortuga.server.routes.reviewRoutes
 import com.edde746.tortuga.server.routes.syncEventRoutes
 import com.edde746.tortuga.server.routes.syncRoutes
 import com.edde746.tortuga.server.routes.trackerConnectionRoutes
@@ -27,6 +28,7 @@ import com.edde746.tortuga.server.service.AppleHandoffs
 import com.edde746.tortuga.server.service.DeviceLinks
 import com.edde746.tortuga.server.service.GitHubHandoffs
 import com.edde746.tortuga.server.service.Janitor
+import com.edde746.tortuga.server.service.ReviewSignIn
 import com.edde746.tortuga.server.service.Sessions
 import com.edde746.tortuga.server.service.SyncEvents
 import com.edde746.tortuga.server.service.SyncRecords
@@ -103,6 +105,8 @@ class Services(val config: ServerConfig, val db: Database, http: HttpClient, val
     )
     val accounts = Accounts(db, verifier, apple, github, cipher, sessions, trackerConnections, events, clock)
     val links = DeviceLinks(db, sessions, clock)
+    /** The review sign-in, where its password's hash is configured; null (self-hosted servers): no review page. */
+    val review: ReviewSignIn? = config.reviewPasswordSha256?.let { ReviewSignIn(it, links, accounts) }
     val records = SyncRecords(
         db, sessions, cipher, trackerConnections, events, clock, config.accountQuotaBytes,
         config.databaseDisk?.let { Files.getFileStore(it) }, config.minFreeDatabaseDiskBytes,
@@ -134,6 +138,7 @@ object Limits {
     val TRACKER_OAUTH_START = RateLimitName("tracker-oauth-start")
     val TRACKER_OAUTH_RESULT = RateLimitName("tracker-oauth-result")
     val SIGN_IN_RETURN = RateLimitName("sign-in-return")
+    val REVIEW = RateLimitName("review")
 }
 
 /** Polled by the container's health check: 200 while the database answers. */
@@ -188,6 +193,7 @@ fun Application.tortugaServer(services: Services) {
         }
         if (config.apple?.webReturn == true) appleWebRoutes(services)
         services.githubHandoffs?.let { gitHubWebRoutes(it) }
+        services.review?.let { reviewRoutes(it) }
         trackerOAuthRoutes(services.trackerOAuth)
     }
 
@@ -254,6 +260,10 @@ fun Application.installServerPlugins(config: ServerConfig, bytes: ByteBudget = B
         }
         register(Limits.TRACKER_OAUTH_RESULT) {
             rateLimiter(limit = limits.trackerOAuthResult, refillPeriod = 1.minutes)
+            requestKey { it.clientAddress }
+        }
+        register(Limits.REVIEW) {
+            rateLimiter(limit = limits.review, refillPeriod = 1.minutes)
             requestKey { it.clientAddress }
         }
     }

@@ -14,6 +14,7 @@ import io.ktor.server.plugins.ContentTransformationException
 import io.ktor.server.plugins.NotFoundException
 import io.ktor.server.plugins.PayloadTooLargeException
 import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.request.acceptItems
 import io.ktor.server.response.header
 import io.ktor.server.response.respondText
 import kotlinx.serialization.SerializationException
@@ -70,7 +71,13 @@ fun Application.installErrorHandling() {
             call.respondError(HttpStatusCode.InternalServerError, ApiError(ApiErrorCode.INTERNAL, "Internal error"))
         }
         status(HttpStatusCode.TooManyRequests) { call, status ->
-            call.respondError(status, ApiError(ApiErrorCode.RATE_LIMITED, "Too many requests"))
+            // A browser on one of the server's pages (the review page, a sign-in's return page) reads a page; the apps
+            // read the API's error.
+            if (call.request.acceptItems().any { it.value == ContentType.Text.Html.toString() }) {
+                call.respondStaticPage(status, "Too many tries", "Wait a minute, then try again.")
+            } else {
+                call.respondError(status, ApiError(ApiErrorCode.RATE_LIMITED, "Too many requests"))
+            }
         }
         status(HttpStatusCode.NotFound) { call, status ->
             call.respondError(status, ApiError(ApiErrorCode.NOT_FOUND, "No such endpoint"))

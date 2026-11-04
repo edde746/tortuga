@@ -70,6 +70,12 @@ data class ServerConfig(
      * that tracker refreshes and revokes go to instead of the services. Null, the default, reaches the services.
      */
     val devTrackersUrl: String? = null,
+    /**
+     * The review sign-in (`TORTUGA_REVIEW_PASSWORD_SHA256`): the SHA-256 of the review password, 64 lowercase hex
+     * digits. Set, the server serves the review page ([com.edde746.tortuga.server.routes.reviewRoutes]); null, the
+     * default, it has no such page.
+     */
+    val reviewPasswordSha256: String? = null,
 ) {
     companion object {
         const val DEFAULT_APPLE_ISSUER: String = "https://appleid.apple.com"
@@ -151,10 +157,17 @@ data class ServerConfig(
                     require(it >= 0) { "TORTUGA_DATABASE_MIN_FREE_MB must be 0 or more" }
                 } shl 20,
                 devTrackersUrl = fakeTrackersUrl("TORTUGA_DEV_TRACKERS_URL"),
+                reviewPasswordSha256 = string("TORTUGA_REVIEW_PASSWORD_SHA256")?.lowercase()?.also {
+                    require(SHA256_HEX.matches(it)) {
+                        "TORTUGA_REVIEW_PASSWORD_SHA256 must be the review password's SHA-256 as 64 hex digits"
+                    }
+                },
             )
         }
     }
 }
+
+private val SHA256_HEX = Regex("[0-9a-f]{64}")
 
 /** Fails, naming the variable, unless [pem] is a Sign in with Apple key as AppleClient reads it. */
 private fun checkAppleKey(pem: String) {
@@ -255,6 +268,8 @@ data class RateLimits(
     val trackerOAuthResult: Int = 30,
     /** The Apple and GitHub web flows' return pages, which a browser reaches once per sign-in. */
     val signInReturn: Int = 20,
+    /** Review sign-in page submissions ([com.edde746.tortuga.server.routes.reviewRoutes]): a few tries a minute. */
+    val review: Int = 5,
 )
 
 /**

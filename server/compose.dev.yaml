@@ -60,6 +60,9 @@ services:
       TORTUGA_GITHUB_API_URL: http://github:5557
       TORTUGA_GITHUB_TOKEN_URL: http://github:5557/login/oauth/access_token
       TORTUGA_LOG_FORMAT: text
+      # The review sign-in, its page at /review: the SHA-256 of the dev review password, tortuga-dev-review, a fixed dev
+      # credential, not a secret.
+      TORTUGA_REVIEW_PASSWORD_SHA256: c4e5e490ca25afa5b21a9efdbc49c151fa95b630c0991f2deb31f1930f41ec5e
       # The tracker OAuth relay's MyAnimeList and AniList clients at the fake tracker server (the trackers service,
       # whose --anilist-secret default is dev/anilist-client-secret's): fixed dev credentials, not secrets. The relay's
       # links and callback are the server as browsers reach it; it sends them to the fake's authorization pages as they

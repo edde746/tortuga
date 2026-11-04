@@ -98,12 +98,8 @@ class Accounts(
                 // The proof is spent and may hold a token just issued (GitHub's reset, Apple's refresh token), which a
                 // shed request would lose: this waits for a connection however busy the pool is.
                 return db.transaction(Duration.INFINITE) {
-                    val now = clock.instant()
                     val existing = findIdentity(proof)
-                    val accountId = existing?.accountId ?: UUID.randomUUID().also {
-                        update("INSERT INTO accounts (id, created_at) VALUES (?, ?)", it, now)
-                        insertIdentity(it, proof)
-                    }
+                    val accountId = existing?.accountId ?: createAccount(proof)
                     if (existing != null) refreshIdentity(existing, proof)
                     val tokens = sessions.create(this, accountId, device)
                     log.atInfo().addKeyValue("accountId", accountId).addKeyValue("provider", provider)
@@ -118,6 +114,17 @@ class Accounts(
     }
 
     suspend fun accountInfo(bearer: Bearer): AccountInfo = sessions.transaction(bearer) { info(it.accountId) }
+
+    /**
+     * The review sign-in's demo account ([ReviewSignIn]): the account of the one review identity, or, when there is
+     * none (never made, or deleted), a new one made as a first sign-in makes it. Within [tx], whose caller retries a
+     * unique violation: two first approvals can race to create it.
+     */
+    fun reviewAccount(tx: Tx): UUID = with(tx) {
+        findIdentity(REVIEW_IDENTITY)?.accountId ?: createAccount(REVIEW_IDENTITY).also {
+            log.atInfo().addKeyValue("accountId", it).log("Review account created")
+        }
+    }
 
     /** Adds another provider identity to the session's account. */
     suspend fun linkIdentity(
@@ -281,6 +288,12 @@ class Accounts(
         proof.issuer, proof.subject,
     ) { Owner(it.uuid("account_id"), it.uuid("id")) }
 
+    /** A new account with [proof]'s identity, as its first sign-in makes it. */
+    private fun Tx.createAccount(proof: Proof): UUID = UUID.randomUUID().also {
+        update("INSERT INTO accounts (id, created_at) VALUES (?, ?)", it, clock.instant())
+        insertIdentity(it, proof)
+    }
+
     private fun Tx.insertIdentity(accountId: UUID, proof: Proof) {
         val now = clock.instant()
         val identityId = UUID.randomUUID()
@@ -389,6 +402,13 @@ class Accounts(
 
         /** The columns [revocable] reads. */
         const val REVOCABLE_COLUMNS = "id, provider, apple_refresh_token, apple_client_id, github_token"
+
+        /**
+         * The review sign-in's one identity: a provider of its own, which `/v2/info` doesn't list, so no app offers it
+         * as a sign-in; only the review page approves a device for it. Its issuer is no URL, so no provider's token
+         * can carry it.
+         */
+        val REVIEW_IDENTITY = Proof(provider = ReviewSignIn.PROVIDER, issuer = "tortuga:review", subject = "demo", email = null)
 
         fun invalidToken(reason: String) =
             ApiException(HttpStatusCode.Unauthorized, ApiErrorCode.INVALID_ID_TOKEN, "ID token rejected: $reason")
