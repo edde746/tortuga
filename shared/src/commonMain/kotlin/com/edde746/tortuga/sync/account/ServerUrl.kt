@@ -16,6 +16,9 @@ class ServerUrl private constructor(val value: String) {
     override fun toString(): String = value
 
     companion object {
+        /** A host's characters: a name's (ASCII letters, digits, `-`, `_`, `.`) or a bracketed IPv6 address. Before [HOSTED], which parses with it. */
+        private val HOST = Regex("""[A-Za-z0-9._-]+|\[[0-9A-Fa-f:.]+]""")
+
         /** The hosted instance ([SyncServers.HOSTED]). */
         val HOSTED: ServerUrl = parse(SyncServers.HOSTED)
 
@@ -26,15 +29,16 @@ class ServerUrl private constructor(val value: String) {
          * platform: anywhere else the sign-in, the session's tokens and the synced data would cross the internet
          * unencrypted.
          *
-         * @throws AccountException with [AccountError.InvalidServerUrl] for anything but an http(s) URL with a host and
-         *   no user info, query or fragment, and [AccountError.InsecureServerUrl] for plain `http` to any other host.
+         * @throws AccountException with [AccountError.InvalidServerUrl] for anything but an http(s) URL with a host of
+         *   a name's characters (ASCII letters, digits, `-`, `_`, `.`) or a bracketed IPv6 address, and no user info,
+         *   query or fragment, and [AccountError.InsecureServerUrl] for plain `http` to any other host.
          */
         @Throws(AccountException::class)
         fun parse(input: String): ServerUrl {
             val trimmed = input.trim()
             val withScheme = if ("://" in trimmed) trimmed else "https://$trimmed"
             val url = parseUrl(withScheme)
-            if (url == null || url.protocol.name !in setOf("http", "https") || url.host.isBlank() ||
+            if (url == null || url.protocol.name !in setOf("http", "https") || !HOST.matches(url.host) ||
                 url.user != null || url.encodedQuery.isNotEmpty() || url.encodedFragment.isNotEmpty() ||
                 withScheme.substringAfter("://").substringBefore('/').contains('@')
             ) {

@@ -172,6 +172,15 @@ class SyncApiTest {
     }
 
     @Test
+    fun aHostWithCharactersNoHostHoldsIsRefused() {
+        assertEquals("http://[::1]:8080", ServerUrl.parse("http://[::1]:8080").value)
+        assertEquals("https://my_server.example.com", ServerUrl.parse("my_server.example.com").value)
+        for (bad in listOf("https://%ZZ", "https://sync%2Eexample.com", "sync.example.com%")) {
+            assertEquals(AccountError.InvalidServerUrl, assertFailsWith<AccountException>(bad) { ServerUrl.parse(bad).value }.error)
+        }
+    }
+
+    @Test
     fun plainHttpIsOnlyForAServerOnThisDeviceOrItsNetwork() {
         val local = listOf(
             "http://127.0.0.1:18180", "http://localhost:8080", "http://[::1]:8080", "http://10.0.2.2:8080", "http://172.31.0.4",
