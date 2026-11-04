@@ -1,9 +1,9 @@
 package com.edde746.tortuga.server.crypto
 
+import com.edde746.tortuga.server.crypto.RecordCipher.Companion.NO_ACCOUNT
 import com.edde746.tortuga.server.crypto.RecordCipher.Field
 import com.edde746.tortuga.server.db.Database
 import com.edde746.tortuga.server.db.uuid
-import java.util.UUID
 import org.slf4j.LoggerFactory
 
 /**
@@ -42,7 +42,6 @@ suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
     }
 }
 
-private val NO_ACCOUNT = UUID(0, 0)
 private val NOTHING = ByteArray(0)
 
 private const val ANOTHER_KEY = "${DataKey.ENV} holds another key than the one this database's records are sealed with: " +

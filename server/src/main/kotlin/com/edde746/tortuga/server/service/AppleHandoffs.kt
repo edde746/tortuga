@@ -1,6 +1,9 @@
 package com.edde746.tortuga.server.service
 
 import com.edde746.tortuga.server.auth.Secrets
+import com.edde746.tortuga.server.crypto.RecordCipher
+import com.edde746.tortuga.server.crypto.RecordCipher.Companion.NO_ACCOUNT
+import com.edde746.tortuga.server.crypto.RecordCipher.Field
 import com.edde746.tortuga.server.db.Database
 import com.edde746.tortuga.server.http.badRequest
 import com.edde746.tortuga.server.http.notFound
@@ -9,17 +12,20 @@ import com.edde746.tortuga.sync.api.HandoffCollectRequest
 import com.edde746.tortuga.sync.api.HandoffStartRequest
 import com.edde746.tortuga.sync.api.HandoffStartResponse
 import com.edde746.tortuga.sync.api.SyncPaths
+import com.edde746.tortuga.sync.api.SyncProtocol
 import java.net.URLEncoder
 import java.time.Clock
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.toJavaDuration
+import org.slf4j.LoggerFactory
 
 /**
  * Sign in with Apple web flows between the app's start, Apple's form post and the app's pickup (protocol on
- * `HandoffStartRequest`). A result is kept only under a state this server issued, and handed over only to the
- * verifier that started it with the proof its return page sent the browser back with.
+ * `HandoffStartRequest`). A result is kept only under a state this server issued, sealed with the data key and bound to
+ * that state, and handed over only to the verifier that started it with the proof its return page sent the browser back
+ * with.
  */
-class AppleHandoffs(private val db: Database, private val clock: Clock) {
+class AppleHandoffs(private val db: Database, private val cipher: RecordCipher, private val clock: Clock) {
     /** Issues the state of a flow for [request]'s challenge and return. */
     suspend fun start(request: HandoffStartRequest): HandoffStartResponse {
         checkStart(request)
@@ -39,13 +45,15 @@ class AppleHandoffs(private val db: Database, private val clock: Clock) {
      */
     suspend fun returned(state: String, idToken: String, authorizationCode: String?, userJson: String?): String? {
         val proof = Secrets.generate(PROOF_PREFIX)
+        val result = SyncProtocol.json.encodeToString(AppleHandoff.serializer(), AppleHandoff(idToken, authorizationCode, userJson))
+        val sealed = cipher.seal(Field.APPLE_HANDOFF, NO_ACCOUNT, state.encodeToByteArray(), result.encodeToByteArray())
         val redirectUri = db.transaction {
             queryOne(
                 """
-                UPDATE apple_handoffs SET proof_hash = ?, id_token = ?, authorization_code = ?, user_json = ?
+                UPDATE apple_handoffs SET proof_hash = ?, sealed_result = ?
                 WHERE state = ? AND proof_hash IS NULL AND expires_at > ? RETURNING redirect_uri
                 """,
-                Secrets.sha256Base64Url(proof), idToken, authorizationCode, userJson, state, clock.instant(),
+                Secrets.sha256Base64Url(proof), sealed, state, clock.instant(),
             ) { it.getString("redirect_uri") }
         } ?: return null
         return appReturn(redirectUri, SyncPaths.RETURN_STATE to state, SyncPaths.RETURN_PROOF to proof)
@@ -59,23 +67,33 @@ class AppleHandoffs(private val db: Database, private val clock: Clock) {
         ) { it.getString("redirect_uri") }
     }?.let { appReturn(it, SyncPaths.RETURN_STATE to state, SyncPaths.RETURN_ERROR to providerError(error)) }
 
-    /** Hands the result over once, to [request]'s verifier and proof. */
+    /**
+     * Hands the result over once, to [request]'s verifier and proof; a result that doesn't open with the data key
+     * (sealed with a key that was lost and replaced) is gone, as an expired one is.
+     */
     suspend fun collect(request: HandoffCollectRequest): AppleHandoff {
         checkCollect(request)
-        return db.transaction {
+        val sealed = db.transaction {
             queryOne(
                 """
                 DELETE FROM apple_handoffs
                 WHERE state = ? AND challenge = ? AND proof_hash = ? AND expires_at > ?
-                RETURNING id_token, authorization_code, user_json
+                RETURNING sealed_result
                 """,
                 request.state, Secrets.sha256Base64Url(request.verifier), Secrets.sha256Base64Url(request.proof),
                 clock.instant(),
-            ) { AppleHandoff(it.getString("id_token"), it.getString("authorization_code"), it.getString("user_json")) }
+            ) { it.getBytes("sealed_result") }
         } ?: throw notFound("Nothing to collect")
+        val result = cipher.open(Field.APPLE_HANDOFF, NO_ACCOUNT, request.state.encodeToByteArray(), sealed) ?: run {
+            log.warn("A web sign-in's result doesn't open with the data key; treated as gone")
+            throw notFound("Nothing to collect")
+        }
+        return SyncProtocol.json.decodeFromString(AppleHandoff.serializer(), result.decodeToString())
     }
 
     companion object {
+        private val log = LoggerFactory.getLogger(AppleHandoffs::class.java)
+
         /** How long a flow may take, from its start to the app's pickup. */
         private val TTL = 10.minutes
 

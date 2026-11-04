@@ -2,7 +2,11 @@ package com.edde746.tortuga.server.support
 
 import com.edde746.tortuga.server.db.Database
 import java.io.StringWriter
+import java.sql.Connection
+import java.sql.DriverManager
+import java.util.UUID
 import kotlinx.coroutines.runBlocking
+import org.flywaydb.core.Flyway
 import org.postgresql.PGConnection
 import org.testcontainers.postgresql.PostgreSQLContainer
 
@@ -29,9 +33,33 @@ object TestPostgres {
     /** A relay to the database's port, for [connect]. */
     fun relay(): TcpRelay = TcpRelay(container.host, container.firstMappedPort)
 
-    /** Every application table (not Flyway's history). */
-    fun tables(): List<String> = runBlocking {
-        database.transaction {
+    /**
+     * A new database of its own in the container, migrated up to [version] only, as a server of that version left its
+     * schema: a test writes the rows that server would have, then [Upgrade.connect]s, which migrates the rest.
+     */
+    fun databaseAt(version: String): Upgrade {
+        val name = "upgrade_" + UUID.randomUUID().toString().replace("-", "")
+        DriverManager.getConnection(container.jdbcUrl, container.username, container.password).use {
+            it.createStatement().execute("CREATE DATABASE $name")
+        }
+        val upgrade = Upgrade("jdbc:postgresql://${container.host}:${container.firstMappedPort}/$name")
+        Flyway.configure().dataSource(upgrade.url, container.username, container.password)
+            .locations("classpath:db/migration").target(version).load().migrate()
+        return upgrade
+    }
+
+    /** A database from [databaseAt]. */
+    class Upgrade(val url: String) {
+        /** A connection of its own, committing each statement. */
+        fun connection(): Connection = DriverManager.getConnection(url, container.username, container.password)
+
+        /** The server's pool on it: migrated to the newest version first, as at a start. */
+        fun connect(): Database = Database.connect(url, container.username, container.password, 2)
+    }
+
+    /** Every application table of [db] (not Flyway's history). */
+    fun tables(db: Database = database): List<String> = runBlocking {
+        db.transaction {
             query(
                 """
                 SELECT table_name FROM information_schema.tables
@@ -48,12 +76,12 @@ object TestPostgres {
     }
 
     /**
-     * Every application table as `COPY … TO STDOUT` writes it (`bytea` as `\x…` hex), keyed by table: the rows of a
-     * pg_dump.
+     * Every application table of [db] as `COPY … TO STDOUT` writes it (`bytea` as `\x…` hex), keyed by table: the rows
+     * of a pg_dump.
      */
-    fun dump(): Map<String, String> = runBlocking {
-        val tables = tables()
-        database.transaction {
+    fun dump(db: Database = database): Map<String, String> = runBlocking {
+        val tables = tables(db)
+        db.transaction {
             val copy = connection.unwrap(PGConnection::class.java).copyAPI
             tables.associateWith { table -> StringWriter().also { copy.copyOut("COPY $table TO STDOUT", it) }.toString() }
         }

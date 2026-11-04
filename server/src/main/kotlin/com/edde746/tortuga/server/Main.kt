@@ -6,6 +6,7 @@ import com.edde746.tortuga.server.db.Database
 import com.edde746.tortuga.server.http.BodyGate
 import com.edde746.tortuga.server.http.ByteBudget
 import com.edde746.tortuga.server.http.Connections
+import com.edde746.tortuga.server.service.sealPlaintextAppleTokens
 import com.zaxxer.hikari.pool.HikariPool
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -92,12 +93,15 @@ fun main() {
         log.error("Not starting: no connection to the database at TORTUGA_DATABASE_URL: {}", e.cause?.message ?: e.message)
         exitProcess(1)
     }
+    val cipher = RecordCipher(config.dataKey)
     try {
-        runBlocking { checkDataKey(db, RecordCipher(config.dataKey)) }
+        runBlocking { checkDataKey(db, cipher) }
     } catch (e: IllegalArgumentException) {
         log.error("Not starting: {}", e.message)
         exitProcess(1)
     }
+    // With the data key accepted: what a server from before stored in plain text is sealed before anything is served.
+    runBlocking { sealPlaintextAppleTokens(db, cipher) }
     val http = HttpClient(OkHttp) {
         install(UserAgent) { agent = "Tortuga-Server" }
         install(HttpTimeout) {

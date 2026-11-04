@@ -14,7 +14,7 @@
 	<div class="wrap head-grid">
 		<div>
 			<h1>Privacy policy</h1>
-			<p class="effective">Effective 2 November 2026</p>
+			<p class="effective">Effective 4 November 2026</p>
 		</div>
 		<div class="head-art" aria-hidden="true"><Turtle swim /></div>
 	</div>
@@ -95,7 +95,7 @@
 				<h3>What the server stores</h3>
 				<ul>
 					<li><strong>Your sign-in identity.</strong> You sign in with Apple, Google or GitHub, or with a server’s own OpenID Connect provider. Apple, Google and OpenID Connect give the server a signed token; with GitHub, the server asks GitHub for your account’s number and verified email. The server keeps the provider, the provider’s identifier for you (its issuer and subject), your email address if the provider shares a verified one (with Apple’s Hide My Email, that is a relay address), and when you added and last used that sign-in. It keeps no name, username or picture from the provider. The account is keyed by the identifier, not by the email. A second sign-in method you add in Settings is kept the same way.</li>
-					<li><strong>Apple and GitHub tokens, for removing access.</strong> With Sign in with Apple, the hosted server also keeps the refresh token Apple issues; with GitHub, the server keeps a GitHub token, encrypted. Each is used only to remove Tortuga’s access at Apple or GitHub when you remove that sign-in method or delete your account.</li>
+					<li><strong>Apple and GitHub tokens, for removing access.</strong> With Sign in with Apple, the hosted server also keeps the refresh token Apple issues; with GitHub, the server keeps a GitHub token. Both are encrypted. Each is used only to remove Tortuga’s access at Apple or GitHub when you remove that sign-in method or delete your account.</li>
 					<li><strong>Your devices.</strong> Each signed-in device has its own session. The server keeps the device’s name as your system reports it (such as the name in its settings, or the computer’s name), its platform, when it signed in, when it was last active (updated at most every five minutes) and when its tokens expire. Access and refresh tokens are stored only as hashes.</li>
 					<li><strong>What you sync.</strong> Profiles (name, avatar and PIN hash) and, for each profile, its addons and their order (with their links), library, watch progress and watched marks, the last stream picked for each video, the streams picked by hand while Suggest a stream is on (with what the list showed around each, the device’s kind, network, screen and decoders at the pick, and how playback went; no links), and profile settings. Device settings and recent searches never sync.</li>
 					<li><strong>Tracker sign-ins.</strong> For each tracker a profile connects: the service’s access and refresh tokens, when they expire, your username there and Tortuga’s client ID at that service, all encrypted, plus which profile and service it is and when it was connected (see <a href="#trackers">Trackers</a>).</li>
@@ -103,11 +103,11 @@
 				</ul>
 				<h3>How it is protected</h3>
 				<p>Everything travels over HTTPS. The server can read what you sync and your tracker sign-ins: Tortuga does not use end-to-end encryption, which is why signing in on a new device is all it takes to get your data there.</p>
-				<p>At rest, the content and identifier of every synced record, tracker tokens and usernames, and GitHub tokens are encrypted (AES-256-GCM) with a key kept outside the database. A copy of the database, on its own, therefore reveals none of your addon links, library or tracker and GitHub tokens. Sign-in identities, email addresses, Apple tokens, device names, and which trackers each profile connected are stored as they are. The running server, and whoever operates it, can read everything. If you would rather nobody else could, run your own server.</p>
+				<p>At rest, the content and identifier of every synced record, tracker tokens and usernames, and Apple and GitHub tokens are encrypted (AES-256-GCM) with a key kept outside the database. A copy of the database, on its own, therefore reveals none of your addon links, library or tracker, Apple and GitHub tokens. Sign-in identities, email addresses, device names, and which trackers each profile connected are stored as they are. The running server, and whoever operates it, can read everything. If you would rather nobody else could, run your own server.</p>
 				<h3>Short-lived records</h3>
 				<ul>
 					<li><strong>Linking a device by code or QR code.</strong> The new device’s name and platform, the code, a hash of a secret only that device holds, and your answer. Deleted as soon as the new device collects your answer, otherwise within 11 minutes.</li>
-					<li><strong>Signing in with Apple or GitHub in a browser.</strong> Apple’s page, on Android, Windows and Linux, and GitHub’s page, on phones, tablets and computers, return to a page on the server. What they send back waits in the server’s database until the app collects it, and is then deleted, otherwise within 11 minutes: from Apple, its sign-in token, a one-time code and, the first time, the name and email you chose to share; from GitHub, a one-time code, which the server exchanges for a token.</li>
+					<li><strong>Signing in with Apple or GitHub in a browser.</strong> Apple’s page, on Android, Windows and Linux, and GitHub’s page, on phones, tablets and computers, return to a page on the server. What they send back waits in the server’s database, encrypted like your tokens, until the app collects it, and is then deleted, otherwise within 11 minutes: from Apple, its sign-in token, a one-time code and, the first time, the name and email you chose to share; from GitHub, a one-time code, which the server exchanges for a token.</li>
 					<li><strong>Sign-in checks.</strong> Single-use sign-in values and hashes of sign-in tokens already used, kept until shortly after they expire and linked to no account.</li>
 				</ul>
 				<h3 id="server-logs">Server logs</h3>
@@ -194,7 +194,7 @@
 			</section>
 			<section id="security" aria-labelledby="security-title">
 				<h2 id="security-title">Security</h2>
-				<p>The apps talk to the server over HTTPS. The server keeps session tokens only as hashes and encrypts synced data, tracker sign-ins and GitHub tokens at rest, and the apps keep secrets in the system’s secure storage. No system is perfectly secure. If you find a security problem, email <a href="mailto:support@usetortuga.app">support@usetortuga.app</a> rather than posting details publicly.</p>
+				<p>The apps talk to the server over HTTPS. The server keeps session tokens only as hashes and encrypts synced data, tracker sign-ins and Apple and GitHub tokens at rest, and the apps keep secrets in the system’s secure storage. No system is perfectly secure. If you find a security problem, email <a href="mailto:support@usetortuga.app">support@usetortuga.app</a> rather than posting details publicly.</p>
 			</section>
 			<section id="changes" aria-labelledby="changes-title">
 				<h2 id="changes-title">Changes and contact</h2>

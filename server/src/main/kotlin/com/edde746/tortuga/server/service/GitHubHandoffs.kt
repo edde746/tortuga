@@ -2,6 +2,9 @@ package com.edde746.tortuga.server.service
 
 import com.edde746.tortuga.server.auth.GitHubClient
 import com.edde746.tortuga.server.auth.Secrets
+import com.edde746.tortuga.server.crypto.RecordCipher
+import com.edde746.tortuga.server.crypto.RecordCipher.Companion.NO_ACCOUNT
+import com.edde746.tortuga.server.crypto.RecordCipher.Field
 import com.edde746.tortuga.server.db.Database
 import com.edde746.tortuga.server.http.notFound
 import com.edde746.tortuga.server.service.AppleHandoffs.Companion.PROOF_PREFIX
@@ -17,15 +20,17 @@ import com.edde746.tortuga.sync.api.SyncPaths
 import java.time.Clock
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.toJavaDuration
+import org.slf4j.LoggerFactory
 
 /**
  * GitHub web flows between the app's start, GitHub's redirect to the return page and the app's pickup (protocol on
- * `HandoffStartRequest`), as [AppleHandoffs] keeps Apple's: under a state this server issued, for the verifier that
- * started it and the proof its return page sent the browser back with.
+ * `HandoffStartRequest`), as [AppleHandoffs] keeps Apple's: under a state this server issued, sealed with the data key
+ * and bound to that state, for the verifier that started it and the proof its return page sent the browser back with.
  */
 class GitHubHandoffs(
     private val db: Database,
     private val github: GitHubClient,
+    private val cipher: RecordCipher,
     private val clock: Clock,
 ) {
     /** Issues the state of a flow for [request]'s challenge and return. */
@@ -47,13 +52,14 @@ class GitHubHandoffs(
      */
     suspend fun returned(state: String, code: String): String? {
         val proof = Secrets.generate(PROOF_PREFIX)
+        val sealed = cipher.seal(Field.GITHUB_HANDOFF, NO_ACCOUNT, state.encodeToByteArray(), code.encodeToByteArray())
         val redirectUri = db.transaction {
             queryOne(
                 """
-                UPDATE github_handoffs SET proof_hash = ?, code = ?
+                UPDATE github_handoffs SET proof_hash = ?, sealed_code = ?
                 WHERE state = ? AND proof_hash IS NULL AND expires_at > ? RETURNING redirect_uri
                 """,
-                Secrets.sha256Base64Url(proof), code, state, clock.instant(),
+                Secrets.sha256Base64Url(proof), sealed, state, clock.instant(),
             ) { it.getString("redirect_uri") }
         } ?: return null
         return appReturn(redirectUri, SyncPaths.RETURN_STATE to state, SyncPaths.RETURN_PROOF to proof)
@@ -72,24 +78,31 @@ class GitHubHandoffs(
 
     /**
      * Hands the result over once, to [request]'s verifier and proof: deletes it, then exchanges its code at GitHub, so
-     * a code GitHub refuses (401) or that GitHub couldn't take (502) is spent as well.
+     * a code GitHub refuses (401) or that GitHub couldn't take (502) is spent as well. A code that doesn't open with the
+     * data key (sealed with a key that was lost and replaced) is gone, as an expired one is.
      */
     suspend fun collect(request: HandoffCollectRequest): GitHubHandoff {
         checkCollect(request)
-        val code = db.transaction {
+        val sealed = db.transaction {
             queryOne(
                 """
                 DELETE FROM github_handoffs WHERE state = ? AND challenge = ? AND proof_hash = ? AND expires_at > ?
-                RETURNING code
+                RETURNING sealed_code
                 """,
                 request.state, Secrets.sha256Base64Url(request.verifier), Secrets.sha256Base64Url(request.proof),
                 clock.instant(),
-            ) { it.getString("code") }
+            ) { it.getBytes("sealed_code") }
         } ?: throw notFound("Nothing to collect")
-        return GitHubHandoff(github.exchangeCode(code))
+        val code = cipher.open(Field.GITHUB_HANDOFF, NO_ACCOUNT, request.state.encodeToByteArray(), sealed) ?: run {
+            log.warn("A web sign-in's result doesn't open with the data key; treated as gone")
+            throw notFound("Nothing to collect")
+        }
+        return GitHubHandoff(github.exchangeCode(code.decodeToString()))
     }
 
     private companion object {
+        val log = LoggerFactory.getLogger(GitHubHandoffs::class.java)
+
         /** How long a flow may take, from its start to the app's pickup. */
         val TTL = 10.minutes
     }

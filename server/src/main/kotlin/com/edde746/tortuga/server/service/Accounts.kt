@@ -69,7 +69,10 @@ class Accounts(
     /** An identity row's account and its own id. */
     private class Owner(val accountId: UUID, val identityId: UUID)
 
-    /** What revokes an identity's sign-in: Apple's refresh token and its client, or GitHub's token (opened). */
+    /**
+     * What revokes an identity's sign-in: Apple's refresh token and its client, or GitHub's token (both opened). An
+     * Apple client without its token is a token that no longer opens.
+     */
     private class Revocable(
         val provider: String,
         val appleRefreshToken: String?,
@@ -201,7 +204,7 @@ class Accounts(
                 val revoked = revokeApple(appleIdentities, accountId)
                 when {
                     // Signed in before this server held the key: nothing to revoke with.
-                    appleIdentities.any { it.appleRefreshToken == null } -> AppleRevocation.NOT_CONFIGURED
+                    appleIdentities.any { it.appleClientId == null } -> AppleRevocation.NOT_CONFIGURED
                     revoked -> AppleRevocation.REVOKED
                     else -> AppleRevocation.FAILED
                 }
@@ -299,12 +302,14 @@ class Accounts(
         val identityId = UUID.randomUUID()
         update(
             """
-            INSERT INTO identities (id, account_id, provider, issuer, subject, email, apple_refresh_token,
+            INSERT INTO identities (id, account_id, provider, issuer, subject, email, sealed_apple_refresh_token,
                                     apple_client_id, github_token, created_at, last_used_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            identityId, accountId, proof.provider, proof.issuer, proof.subject, proof.email, proof.appleRefreshToken,
-            proof.appleClientId, proof.githubToken?.let { sealGitHubToken(accountId, identityId, it) }, now, now,
+            identityId, accountId, proof.provider, proof.issuer, proof.subject, proof.email,
+            proof.appleRefreshToken?.let { cipher.sealIdentityToken(Field.APPLE_REFRESH_TOKEN, accountId, identityId, it) },
+            proof.appleClientId, proof.githubToken?.let { cipher.sealIdentityToken(Field.GITHUB_TOKEN, accountId, identityId, it) },
+            now, now,
         )
     }
 
@@ -313,13 +318,15 @@ class Accounts(
         update(
             """
             UPDATE identities SET last_used_at = ?, email = COALESCE(?::text, email),
-                apple_refresh_token = COALESCE(?::text, apple_refresh_token),
+                sealed_apple_refresh_token = COALESCE(?::bytea, sealed_apple_refresh_token),
                 apple_client_id = COALESCE(?::text, apple_client_id),
                 github_token = COALESCE(?::bytea, github_token)
             WHERE id = ?
             """,
-            clock.instant(), proof.email, proof.appleRefreshToken, proof.appleClientId,
-            proof.githubToken?.let { sealGitHubToken(owner.accountId, owner.identityId, it) }, owner.identityId,
+            clock.instant(), proof.email,
+            proof.appleRefreshToken?.let { cipher.sealIdentityToken(Field.APPLE_REFRESH_TOKEN, owner.accountId, owner.identityId, it) },
+            proof.appleClientId,
+            proof.githubToken?.let { cipher.sealIdentityToken(Field.GITHUB_TOKEN, owner.accountId, owner.identityId, it) }, owner.identityId,
         )
     }
 
@@ -340,14 +347,17 @@ class Accounts(
         return AccountInfo(accountId.toString(), createdAt.toEpochMilli(), identities)
     }
 
-    /** Revokes every Apple refresh token among [identities]; true only if all of them were revoked. */
+    /**
+     * Revokes every Apple refresh token among [identities]; true only if all of them were revoked, never when one no
+     * longer opens.
+     */
     private suspend fun revokeApple(identities: List<Revocable>, accountId: UUID): Boolean {
         val client = apple ?: return false
         var all = true
         for (identity in identities) {
-            val refresh = identity.appleRefreshToken ?: continue
             val clientId = identity.appleClientId ?: continue
-            if (!client.revoke(refresh, clientId)) {
+            val refresh = identity.appleRefreshToken
+            if (refresh == null || !client.revoke(refresh, clientId)) {
                 all = false
                 log.atWarn().addKeyValue("accountId", accountId).log("Sign in with Apple revocation failed")
             }
@@ -372,27 +382,25 @@ class Accounts(
         return all
     }
 
-    private fun sealGitHubToken(accountId: UUID, identityId: UUID, token: String): ByteArray = cipher.seal(
-        Field.GITHUB_TOKEN, accountId, identityId.toString().encodeToByteArray(), token.encodeToByteArray(),
-    )
-
     /**
-     * The identity row as [Revocable]. A GitHub token that doesn't open with the data key (sealed with a key that was
-     * lost and replaced) is logged and left out: there is nothing to delete its grant with, which counts as failed.
+     * The identity row as [Revocable]. A token that doesn't open with the data key (sealed with a key that was lost and
+     * replaced) is logged and left out: there is nothing to revoke with, which counts as failed.
      */
     private fun ResultSet.revocable(accountId: UUID): Revocable = Revocable(
         provider = getString("provider"),
-        appleRefreshToken = getString("apple_refresh_token"),
+        appleRefreshToken = openToken(Field.APPLE_REFRESH_TOKEN, "sealed_apple_refresh_token", accountId),
         appleClientId = getString("apple_client_id"),
-        githubToken = getBytes("github_token")?.let { sealed ->
-            val index = uuid("id").toString().encodeToByteArray()
-            val opened = cipher.open(Field.GITHUB_TOKEN, accountId, index, sealed)
-            if (opened == null) {
-                log.atWarn().addKeyValue("accountId", accountId).log("A stored GitHub token doesn't open with the data key")
-            }
-            opened?.decodeToString()
-        },
+        githubToken = openToken(Field.GITHUB_TOKEN, "github_token", accountId),
     )
+
+    private fun ResultSet.openToken(field: Field, column: String, accountId: UUID): String? = getBytes(column)?.let { sealed ->
+        val opened = cipher.open(field, accountId, uuid("id").toString().encodeToByteArray(), sealed)
+        if (opened == null) {
+            log.atWarn().addKeyValue("accountId", accountId).addKeyValue("column", column)
+                .log("A stored token doesn't open with the data key")
+        }
+        opened?.decodeToString()
+    }
 
     private companion object {
         val log = LoggerFactory.getLogger(Accounts::class.java)
@@ -401,7 +409,7 @@ class Accounts(
         val NONCE_TTL = 10.minutes
 
         /** The columns [revocable] reads. */
-        const val REVOCABLE_COLUMNS = "id, provider, apple_refresh_token, apple_client_id, github_token"
+        const val REVOCABLE_COLUMNS = "id, provider, sealed_apple_refresh_token, apple_client_id, github_token"
 
         /**
          * The review sign-in's one identity: a provider of its own, which `/v2/info` doesn't list, so no app offers it
@@ -414,6 +422,33 @@ class Accounts(
             ApiException(HttpStatusCode.Unauthorized, ApiErrorCode.INVALID_ID_TOKEN, "ID token rejected: $reason")
     }
 }
+
+/**
+ * Seals the Apple refresh tokens a server from before migration V9 stored in plain text, and empties their column.
+ * `main` runs it at start, once [com.edde746.tortuga.server.crypto.checkDataKey] has accepted [cipher]'s key; with none
+ * left it seals nothing.
+ */
+suspend fun sealPlaintextAppleTokens(db: Database, cipher: RecordCipher) {
+    val sealed = db.transaction {
+        val rows = query(
+            "SELECT id, account_id, apple_refresh_token FROM identities WHERE apple_refresh_token IS NOT NULL FOR UPDATE",
+        ) {
+            val identityId = it.uuid("id")
+            val token = it.getString("apple_refresh_token")
+            arrayOf<Any?>(cipher.sealIdentityToken(Field.APPLE_REFRESH_TOKEN, it.uuid("account_id"), identityId, token), identityId)
+        }
+        batch("UPDATE identities SET sealed_apple_refresh_token = ?, apple_refresh_token = NULL WHERE id = ?", rows)
+        rows.size
+    }
+    if (sealed > 0) {
+        LoggerFactory.getLogger(Accounts::class.java).atInfo().addKeyValue("identities", sealed)
+            .log("Sealed the Apple refresh tokens stored in plain text")
+    }
+}
+
+/** An identity's [token] for [field], sealed in its row: bound to its account and its id (its UUID as text). */
+private fun RecordCipher.sealIdentityToken(field: Field, accountId: UUID, identityId: UUID, token: String): ByteArray =
+    seal(field, accountId, identityId.toString().encodeToByteArray(), token.encodeToByteArray())
 
 /** Locks the account row for the rest of the transaction; serializes writes that bump its counters. */
 internal fun Tx.lockAccount(accountId: UUID): AccountRow =

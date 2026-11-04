@@ -23,20 +23,22 @@ identities (issuer and subject, plus a verified email if the provider shares one
 version, a tombstone flag, its size and timestamps, and per profile its tracker connections: the service's tokens,
 the client ID they were issued to and the username there ([Tracker connections](#tracker-connections)).
 
-At rest, each record's id and payload, and each tracker connection's tokens, client ID and username, are encrypted
-with the server's **data key**, a file of 32 random bytes kept outside Postgres:
+At rest, each record's id and payload, each tracker connection's tokens, client ID and username, the Apple and GitHub
+tokens kept to revoke a sign-in, and a web sign-in's result waiting for the app are encrypted with the server's
+**data key**, a file of 32 random bytes kept outside Postgres:
 
 - the id and the payload are sealed with AES-256-GCM under a key derived from the data key (HKDF-SHA256), with a
   random nonce per write and the row's account and index as associated data, so a sealed value opens only in its own
-  row; a tracker connection is sealed the same way, bound to its account, profile ID and service;
+  row; a tracker connection is sealed the same way, bound to its account, profile ID and service, an Apple or GitHub
+  token bound to its account and identity, and a web sign-in's result bound to its flow's `state`;
 - records are found by an HMAC-SHA256 of (account, record id) under a second derived key, never by the id itself, so
   the index reveals neither the id nor which accounts hold the same record.
 
 So the database, a `pg_dump` or a backup holds none of an account's addon URLs, ids or titles, nor its tracker tokens
-and usernames. It does hold the account metadata as is (identities, emails, Apple refresh tokens, device names, and
-the profile IDs and service names of tracker connections), which is why backups are encrypted as well (see
-[Backups](#backups)). Whoever has both the database and the data key can read everything, and so can the running
-server.
+and usernames, nor its Apple and GitHub tokens, nor a web sign-in's ID token or code. It does hold the account
+metadata as is (identities, emails, device names, and the profile IDs and service names of tracker connections), which
+is why backups are encrypted as well (see [Backups](#backups)). Whoever has both the database and the data key can read
+everything, and so can the running server.
 
 ## Run it
 
@@ -80,8 +82,9 @@ opened the newest record (a database without records takes the key it starts wit
   that holds the backups.
 - **Back it up separately.** Database backups don't contain it, and a backup restores only together with the same
   key: store a copy (a password manager, an offline medium) apart from the backups.
-- **Lost for good?** Then so are the records: accounts and sessions survive, their synced data and tracker
-  connections don't. Delete the check (`DELETE FROM data_key;` in psql) and start the server with a new key, which it
+- **Lost for good?** Then so are the records: accounts and sessions survive, their synced data, tracker connections
+  and the Apple and GitHub tokens that revoke their sign-ins don't (deleting such an account reports those revocations
+  failed). Delete the check (`DELETE FROM data_key;` in psql) and start the server with a new key, which it
   then stores. Pulls leave out what the old key sealed, which still counts toward its account's quota; each device's
   next push is based on versions the server can't find (409 `unknown_base_version`), so the device pulls everything
   again and pushes what it has as new.
@@ -179,8 +182,9 @@ verifier and starts the flow (`POST /v2/auth/github/start` or `/v2/auth/apple/st
 listens: its loopback receiver, or `tortuga://signin` on iPhone, iPad and Mac. The server answers a fresh `state`,
 kept ten minutes, and the browser goes to the provider with it. The provider sends the browser to the server's return
 page (`GET /v2/auth/github/return` with a code, or Apple's form post to `POST /v2/auth/apple/return`). For a `state`
-the server issued that hasn't returned yet, the page keeps the result with a one-time proof and redirects the browser
-(303) to the app on its own device; any other request gets a static error page without script and writes nothing.
+the server issued that hasn't returned yet, the page keeps the result, sealed with the data key, with a one-time proof
+and redirects the browser (303) to the app on its own device; any other request gets a static error page without
+script and writes nothing.
 The return pages take 20 requests a minute per client address. The app collects the result once
 (`POST /v2/auth/github/handoff` or `/v2/auth/apple/handoff`) with its verifier and the proof: a link someone else
 started brings the browser back to the device it runs on, so its result never reaches them. For GitHub the server
@@ -194,8 +198,8 @@ account is deleted all the same and the app points the user at GitHub's Settings
 
 The hosted instance sets Tortuga's Apple key (`TORTUGA_APPLE_PRIVATE_KEY_FILE` pointing at the `.p8` file mounted
 into the container), `TORTUGA_APPLE_SERVICES_ID`, `TORTUGA_APPLE_WEB_RETURN=true`, `TORTUGA_PUBLIC_URL` and
-Tortuga's Google client IDs. It exchanges each Apple authorization code for Apple's refresh token and revokes it when
-the account is deleted. Its GitHub OAuth App is Tortuga's, with the callback
+Tortuga's Google client IDs. It exchanges each Apple authorization code for Apple's refresh token, which it keeps sealed
+with the data key, and revokes it when the account is deleted. Its GitHub OAuth App is Tortuga's, with the callback
 `https://api.usetortuga.app/v2/auth/github/return`.
 
 ### Review sign-in
@@ -468,9 +472,9 @@ refused 7,816 (7,815 with 503, 1 by a reset); its anon and socket memory peaked 
 
 The optional `backup` service dumps the database on a schedule, encrypts the dump with
 [age](https://age-encryption.org) and uploads it to S3-compatible storage (AWS S3, Backblaze B2, Cloudflare R2,
-MinIO, …). Synced records and tracker tokens in a dump are sealed with the data key, but account metadata isn't
-(identities, emails, Apple refresh tokens), so dumps never leave the machine unencrypted. The server holds only the
-public key; keep the private key offline, away from the bucket.
+MinIO, …). Synced records, tracker tokens and Apple and GitHub tokens in a dump are sealed with the data key, but
+account metadata isn't (identities, emails, device names), so dumps never leave the machine unencrypted. The server
+holds only the public key; keep the private key offline, away from the bucket.
 
 **The data key is not in the backups.** A restored database is readable only with the key it was written with, so
 keep a copy of `tortuga-data.key` with the age private key, not with the backups: a bucket that holds both would give

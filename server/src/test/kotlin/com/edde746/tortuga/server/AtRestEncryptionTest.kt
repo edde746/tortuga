@@ -1,13 +1,27 @@
 package com.edde746.tortuga.server
 
+import com.edde746.tortuga.server.auth.Secrets
+import com.edde746.tortuga.server.crypto.RecordCipher
+import com.edde746.tortuga.server.crypto.RecordCipher.Field
+import com.edde746.tortuga.server.crypto.checkDataKey
+import com.edde746.tortuga.server.service.sealPlaintextAppleTokens
 import com.edde746.tortuga.server.support.LinkSecret
 import com.edde746.tortuga.server.support.TestPostgres
 import com.edde746.tortuga.server.support.assertError
 import com.edde746.tortuga.server.support.ok
 import com.edde746.tortuga.server.support.serverTest
+import com.edde746.tortuga.server.support.testDataKey
+import com.edde746.tortuga.server.support.withAppleKey
+import com.edde746.tortuga.server.support.withGitHub
 import com.edde746.tortuga.sync.api.AccountDeletionResponse
 import com.edde746.tortuga.sync.api.ApiErrorCode
+import com.edde746.tortuga.sync.api.AppleHandoff
+import com.edde746.tortuga.sync.api.AppleRevocation
 import com.edde746.tortuga.sync.api.DeviceDescriptor
+import com.edde746.tortuga.sync.api.GitHubHandoff
+import com.edde746.tortuga.sync.api.HandoffCollectRequest
+import com.edde746.tortuga.sync.api.HandoffStartRequest
+import com.edde746.tortuga.sync.api.HandoffStartResponse
 import com.edde746.tortuga.sync.api.LinkCodeRequest
 import com.edde746.tortuga.sync.api.PullResponse
 import com.edde746.tortuga.sync.api.PushRequest
@@ -15,11 +29,23 @@ import com.edde746.tortuga.sync.api.PushResponse
 import com.edde746.tortuga.sync.api.RecordWrite
 import com.edde746.tortuga.sync.api.SyncPaths
 import com.edde746.tortuga.sync.api.SyncProtocol
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Url
+import io.ktor.http.parameters
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.jsonObject
 
 /**
@@ -127,7 +153,120 @@ class AtRestEncryptionTest {
         pollLink(link.linkId, secret.secret).assertError(HttpStatusCode.NotFound, ApiErrorCode.NOT_FOUND)
     }
 
+    @Test
+    fun appleTokensAndWebSignInResultsAreSealedAtRest() = serverTest(configure = { c, e -> withGitHub(withAppleKey(c, e, webReturn = true)) }) {
+        val signedIn = signIn("001234.apple", issuer = apple, authorizationCode = appleEndpoints.issueCode("001234.apple"))
+        // Apple's and GitHub's results waiting on their return pages for the app.
+        val appleVerifier = Secrets.generate("")
+        val appleFlow = post(SyncPaths.APPLE_START, HandoffStartRequest(Secrets.sha256Base64Url(appleVerifier), LOOPBACK))
+            .ok<HandoffStartResponse>()
+        val idToken = apple.token("web.user", audience = listOf("com.edde746.tortuga.web"), nonce = nonce())
+        val code = appleEndpoints.issueCode("web.user")
+        val appleProof = browser.submitForm(
+            SyncPaths.APPLE_RETURN,
+            parameters {
+                append("state", appleFlow.state)
+                append("code", code)
+                append("id_token", idToken)
+                append("user", """{"name":{"firstName":"Wilhelmina"}}""")
+            },
+        ).proof()
+        val gitHubVerifier = Secrets.generate("")
+        val gitHubFlow = post(SyncPaths.GITHUB_START, HandoffStartRequest(Secrets.sha256Base64Url(gitHubVerifier), LOOPBACK))
+            .ok<HandoffStartResponse>()
+        val gitHubCode = github.authorize("octocat")
+        val gitHubProof = browser.get("${SyncPaths.GITHUB_RETURN}?code=$gitHubCode&state=${gitHubFlow.state}").proof()
+
+        val dump = TestPostgres.dump().values.joinToString("\n")
+        for (secret in listOf("apple-refresh-001234.apple", idToken, code, "Wilhelmina", gitHubCode)) {
+            assertFalse(secret in dump, "\"$secret\" in the database dump")
+            assertFalse(secret.encodeToByteArray().toHex() in dump, "\"$secret\" as bytea in the database dump")
+        }
+
+        // Each opens for the app as it came, and the refresh token revokes the sign-in.
+        val appleHandoff = post(SyncPaths.APPLE_HANDOFF, HandoffCollectRequest(appleFlow.state, appleVerifier, appleProof)).ok<AppleHandoff>()
+        assertEquals(AppleHandoff(idToken, code, """{"name":{"firstName":"Wilhelmina"}}"""), appleHandoff)
+        val gitHubToken = post(SyncPaths.GITHUB_HANDOFF, HandoffCollectRequest(gitHubFlow.state, gitHubVerifier, gitHubProof))
+            .ok<GitHubHandoff>().accessToken
+        assertEquals("octocat", github.loginOf(gitHubToken))
+        val deletion = delete(SyncPaths.ACCOUNT, signedIn.session.accessToken).ok<AccountDeletionResponse>()
+        assertEquals(AppleRevocation.REVOKED, deletion.appleRevocation)
+        assertEquals("apple-refresh-001234.apple", appleEndpoints.revocations.single()["token"])
+    }
+
+    @Test
+    fun appleSecretsAServerFromBeforeStoredInPlainTextAreSealedAtItsFirstStart() = runBlocking {
+        // A database as the server left it before migration 9: an Apple identity's refresh token and the results of
+        // an Apple and a GitHub web sign-in waiting for the app in plain text, and a flow of each still at the provider.
+        val upgrade = TestPostgres.databaseAt("8")
+        val accountId = UUID.randomUUID()
+        val identityId = UUID.randomUUID()
+        val now = OffsetDateTime.ofInstant(Instant.now(), ZoneOffset.UTC)
+        val later = now.plusMinutes(10)
+        upgrade.connection().use { connection ->
+            fun insert(sql: String, vararg values: Any?) = connection.prepareStatement(sql).use { statement ->
+                values.forEachIndexed { i, value -> statement.setObject(i + 1, value) }
+                statement.executeUpdate()
+            }
+            insert("INSERT INTO accounts (id, created_at) VALUES (?, ?)", accountId, now)
+            insert(
+                """
+                INSERT INTO identities (id, account_id, provider, issuer, subject, apple_refresh_token, apple_client_id,
+                                        created_at, last_used_at)
+                VALUES (?, ?, 'apple', 'https://appleid.apple.com', '001234.apple', 'apple-refresh-from-before',
+                        'com.edde746.tortuga', ?, ?)
+                """,
+                identityId, accountId, now, now,
+            )
+            insert(
+                """
+                INSERT INTO apple_handoffs (state, challenge, redirect_uri, proof_hash, id_token, authorization_code, user_json, expires_at)
+                VALUES ('returned', 'c', 'r', 'p', 'id-token-from-before', 'apple-code-from-before', '{"name":"Before"}', ?)
+                """,
+                later,
+            )
+            insert("INSERT INTO apple_handoffs (state, challenge, redirect_uri, expires_at) VALUES ('waiting', 'c', 'r', ?)", later)
+            insert(
+                "INSERT INTO github_handoffs (state, challenge, redirect_uri, proof_hash, code, expires_at) VALUES ('returned', 'c', 'r', 'p', 'github-code-from-before', ?)",
+                later,
+            )
+            insert("INSERT INTO github_handoffs (state, challenge, redirect_uri, expires_at) VALUES ('waiting', 'c', 'r', ?)", later)
+        }
+
+        // The server's start: migrations, the data key's check, then the sealing.
+        val db = upgrade.connect()
+        val cipher = RecordCipher(testDataKey)
+        checkDataKey(db, cipher)
+        sealPlaintextAppleTokens(db, cipher)
+
+        val dump = TestPostgres.dump(db).values.joinToString("\n")
+        for (secret in listOf("apple-refresh-from-before", "id-token-from-before", "apple-code-from-before", "Before", "github-code-from-before")) {
+            assertFalse(secret in dump, "\"$secret\" in the database dump")
+            assertFalse(secret.encodeToByteArray().toHex() in dump, "\"$secret\" as bytea in the database dump")
+        }
+        db.transaction {
+            val (plain, sealed) = queryOne("SELECT apple_refresh_token, sealed_apple_refresh_token FROM identities") {
+                it.getString(1) to it.getBytes(2)
+            }!!
+            assertNull(plain)
+            val opened = cipher.open(Field.APPLE_REFRESH_TOKEN, accountId, identityId.toString().encodeToByteArray(), sealed)
+            assertEquals("apple-refresh-from-before", opened?.decodeToString())
+            // The results in plain text are gone (those sign-ins start again); the flows at the provider go on.
+            assertEquals(listOf("waiting"), query("SELECT state FROM apple_handoffs") { it.getString(1) })
+            assertEquals(listOf("waiting"), query("SELECT state FROM github_handoffs") { it.getString(1) })
+        }
+        // The next start finds nothing left to seal.
+        sealPlaintextAppleTokens(db, cipher)
+        val again = db.transaction { queryOne("SELECT sealed_apple_refresh_token FROM identities") { it.getBytes(1) }!! }
+        assertEquals("apple-refresh-from-before", cipher.open(Field.APPLE_REFRESH_TOKEN, accountId, identityId.toString().encodeToByteArray(), again)?.decodeToString())
+    }
+
+    /** The proof a return page's redirect takes back to the app. */
+    private fun HttpResponse.proof(): String = Url(headers[HttpHeaders.Location]!!).parameters[SyncPaths.RETURN_PROOF]!!
+
     private fun String.latin1(): String = String(encodeToByteArray(), Charsets.ISO_8859_1)
 
     private fun ByteArray.toHex(): String = joinToString("") { "%02x".format(it) }
 }
+
+private const val LOOPBACK = "http://127.0.0.1:53682/callback"
