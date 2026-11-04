@@ -178,7 +178,7 @@ class TrackerRetryQueueTest {
         f.mark("tt0903747:1:1", watched = true)
         // During the wait: a mark is queued unsent, a playback isn't reported, and a replay leaves Trakt alone.
         f.mark("tt0903747:1:2", watched = true)
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.drain()
         f.observer.onVideoStopped(at(1))
         f.replay()

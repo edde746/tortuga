@@ -140,7 +140,7 @@ class TrackerCoordinator internal constructor(
      */
     internal fun observer(): PlaybackObserver = object : PlaybackObserver {
         override fun onVideoStarted(meta: MetaItem, videoId: String, at: PlaybackPosition, playing: Boolean) {
-            events.trySend(Event.Started(this, meta, videoId, at))
+            events.trySend(Event.Started(this, meta, videoId, at, playing))
         }
 
         override fun onPlayingChanged(playing: Boolean, at: PlaybackPosition) {
@@ -232,7 +232,7 @@ class TrackerCoordinator internal constructor(
     private sealed interface Event {
         val source: PlaybackObserver
 
-        class Started(override val source: PlaybackObserver, val meta: MetaItem, val videoId: String, val at: PlaybackPosition) : Event
+        class Started(override val source: PlaybackObserver, val meta: MetaItem, val videoId: String, val at: PlaybackPosition, val playing: Boolean) : Event
         class PlayingChanged(override val source: PlaybackObserver, val playing: Boolean, val at: PlaybackPosition) : Event
         class Position(override val source: PlaybackObserver, val at: PlaybackPosition) : Event
         class Stopped(override val source: PlaybackObserver, val at: PlaybackPosition) : Event
@@ -242,7 +242,7 @@ class TrackerCoordinator internal constructor(
         if (event is Event.Started) {
             source = event.source
             playback?.let(::close)
-            start(event.meta, event.videoId, event.at)
+            start(event.meta, event.videoId, event.at, event.playing)
             return
         }
         if (event.source !== source) {
@@ -263,7 +263,8 @@ class TrackerCoordinator internal constructor(
         }
     }
 
-    private suspend fun start(meta: MetaItem, videoId: String, at: PlaybackPosition) {
+    /** Opens the playback of [videoId]; its start is reported once it plays ([playing] now, else its first resume). */
+    private suspend fun start(meta: MetaItem, videoId: String, at: PlaybackPosition, playing: Boolean) {
         if (meta.preview.isLive || bound.none { it.account.enabled }) return
         val kind = when {
             videoIsTitle(meta.id, videoId) -> TrackerMediaKind.MOVIE
@@ -280,7 +281,7 @@ class TrackerCoordinator internal constructor(
         val p = Playback(context, threshold, targets)
         p.move(at)
         playback = p
-        report(p, ScrobbleState.START)
+        if (playing) report(p, ScrobbleState.START)
     }
 
     private fun moved(p: Playback, at: PlaybackPosition) {

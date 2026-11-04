@@ -50,7 +50,7 @@ class TrackerCoordinatorTest {
         f.connect(TRAKT)
         f.connect(MYANIMELIST)
         f.connect(ANILIST)
-        f.observer.onVideoStarted(anime, "kitsu:100:3", at(0), playing = false)
+        f.observer.onVideoStarted(anime, "kitsu:100:3", at(0), playing = true)
         f.observer.onPlayingChanged(true, at(0))
         f.play(1, 699)
         assertEquals(listOf("scrobble START 0"), f.calls(TRAKT))
@@ -78,14 +78,14 @@ class TrackerCoordinatorTest {
         f.connect(TRAKT)
         f.connect(ANILIST)
         f.data.settings.set(f.profileId, com.edde746.tortuga.data.settings.ProfileSetting.WatchedThresholdPercent, 90)
-        f.observer.onVideoStarted(anime, "kitsu:100:1", at(0), playing = false)
+        f.observer.onVideoStarted(anime, "kitsu:100:1", at(0), playing = true)
         f.play(1, 5)
         f.observer.onVideoStopped(at(890))
         f.drain()
         assertEquals(emptyList(), f.calls(ANILIST), "89 % is short of the profile's 90 %")
         assertEquals(listOf("scrobble START 0", "scrobble STOP 89"), f.calls(TRAKT), "no reconcile below the threshold")
 
-        f.observer.onVideoStarted(anime, "kitsu:100:2", at(0), playing = false)
+        f.observer.onVideoStarted(anime, "kitsu:100:2", at(0), playing = true)
         f.play(1, 5)
         // The player jumped to the end and left before another position report.
         f.observer.onVideoStopped(at(950))
@@ -98,7 +98,7 @@ class TrackerCoordinatorTest {
     fun theCreditsStartingBeforeTheThresholdCountTheWatchThere() = runTest {
         val f = fixture()
         f.connect(ANILIST)
-        f.observer.onVideoStarted(anime, "kitsu:100:1", PlaybackPosition(0, 1_000_000, creditsStartMillis = 600_000), playing = false)
+        f.observer.onVideoStarted(anime, "kitsu:100:1", PlaybackPosition(0, 1_000_000, creditsStartMillis = 600_000), playing = true)
         f.observer.onPosition(PlaybackPosition(599_000, 1_000_000, creditsStartMillis = 600_000))
         f.drain()
         assertEquals(emptyList(), f.calls(ANILIST), "before the credits and the threshold")
@@ -112,7 +112,7 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.connect(SIMKL)
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.play(1, 3)
         f.tracker(TRAKT).failNext("scrobble", TrackerException.Api(TRAKT, 502))
         f.tracker(SIMKL).failNext("scrobble", TrackerException.Network(SIMKL, IllegalStateException("offline")))
@@ -130,7 +130,7 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.connect(SIMKL)
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.play(1, 10)
         f.observer.onPosition(at(15)) // 5 s: playback, not a seek
         f.advance(1.seconds)
@@ -153,7 +153,7 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.connect(SIMKL)
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.settle()
         f.observer.onPlayingChanged(true, at(0)) // the player's echo of the start
         f.advance(2.seconds)
@@ -181,7 +181,7 @@ class TrackerCoordinatorTest {
         f.connect(TRAKT)
         f.connect(SIMKL)
         f.tracker(TRAKT).latency = 10.seconds
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.settle()
         f.advance(1.seconds)
         f.observer.onPlayingChanged(false, at(1))
@@ -206,11 +206,11 @@ class TrackerCoordinatorTest {
         f.hub.accounts.setContentFilter(f.profileId, TRAKT, TrackerContentType.ANIME, on = false)
         f.hub.accounts.setEnabled(f.profileId, SIMKL, false)
         f.settle()
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.drain()
         f.observer.onVideoStopped(at(10))
         val show = seriesMeta("tt0903747", 2)
-        f.observer.onVideoStarted(show, "tt0903747:1:1", at(0), playing = false)
+        f.observer.onVideoStarted(show, "tt0903747:1:1", at(0), playing = true)
         f.drain()
         assertEquals(listOf("scrobble START 0"), f.calls(TRAKT), "series only")
         assertEquals(TrackerContentType.SERIES, f.log.single().context?.contentType)
@@ -229,7 +229,7 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.settle()
-        f.observer.onVideoStarted(MetaItem(MetaItemPreview(id = "tt0111161", type = "tv", name = "A channel")), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(MetaItem(MetaItemPreview(id = "tt0111161", type = "tv", name = "A channel")), "tt0111161", at(0), playing = true)
         f.drain()
         f.observer.onVideoStopped(at(600))
         f.drain()
@@ -242,7 +242,7 @@ class TrackerCoordinatorTest {
         f.resolver.animeTt["tt2560140"] = 16498
         f.connect(TRAKT)
         val show = seriesMeta("tt2560140", 3)
-        f.observer.onVideoStarted(show, "tt2560140:1:1", at(0), playing = false)
+        f.observer.onVideoStarted(show, "tt2560140:1:1", at(0), playing = true)
         f.drain()
         // Anime and series both go to Trakt: what the item is changes nothing, so no mapping download.
         assertEquals(false, f.resolver.calls.last().second)
@@ -254,7 +254,7 @@ class TrackerCoordinatorTest {
         // Trakt's anime switch off: an IMDb-id anime is anime by the mappings, with no anime tracker connected.
         f.hub.accounts.setContentFilter(f.profileId, TRAKT, TrackerContentType.ANIME, on = false)
         f.settle()
-        f.observer.onVideoStarted(show, "tt2560140:1:2", at(0), playing = false)
+        f.observer.onVideoStarted(show, "tt2560140:1:2", at(0), playing = true)
         f.drain()
         assertEquals(true, f.resolver.calls.last().second)
         assertEquals(emptyList(), f.calls(TRAKT), "anime is filtered out on Trakt")
@@ -264,7 +264,7 @@ class TrackerCoordinatorTest {
         assertEquals(emptyList(), f.calls(TRAKT), "its marks too")
 
         f.connect(ANILIST)
-        f.observer.onVideoStarted(show, "tt2560140:1:2", at(0), playing = false)
+        f.observer.onVideoStarted(show, "tt2560140:1:2", at(0), playing = true)
         f.play(1, 800)
         f.drain()
         assertEquals(emptyList(), f.calls(TRAKT))
@@ -276,14 +276,14 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.resolver.failing += "tt0000001"
-        f.observer.onVideoStarted(movieMeta("tt0000001"), "tt0000001", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta("tt0000001"), "tt0000001", at(0), playing = true)
         f.observer.onPlayingChanged(false, at(0))
         f.observer.onVideoStopped(at(0))
         f.drain()
         assertEquals(emptyList(), f.calls(TRAKT), "unresolved: nothing to report")
 
         f.tracker(TRAKT).failNext("scrobble", IllegalStateException("a bug in a tracker"))
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.advance(2.seconds)
         f.observer.onPlayingChanged(false, at(2))
         f.advance(2.seconds)
@@ -299,7 +299,7 @@ class TrackerCoordinatorTest {
         val f = fixture()
         f.connect(TRAKT)
         f.tracker(TRAKT).failNext("scrobble", TrackerException.Api(TRAKT, 502))
-        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = true)
         f.play(1, 3)
         f.observer.onPlayingChanged(false, at(3))
         f.advance(2.seconds)
@@ -308,6 +308,31 @@ class TrackerCoordinatorTest {
         // Trakt has no session: no pause or stop invents one, and the watch is written to its history, once.
         assertEquals(listOf("scrobble START 0", "watched tt0111161"), f.calls(TRAKT))
         assertTrue(f.queued().isEmpty())
+    }
+
+    @Test
+    fun aPlaybackOpenedPausedStartsOnTheTrackersOnlyOnceItPlays() = runTest {
+        val f = fixture()
+        f.connect(TRAKT)
+        f.connect(SIMKL)
+        // A watch-together host opens the video paused for the room.
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.advance(5.seconds)
+        f.drain()
+        assertEquals(emptyList(), f.calls(TRAKT), "nothing plays")
+        assertEquals(emptyList(), f.calls(SIMKL))
+        f.observer.onPlayingChanged(true, at(0))
+        f.play(1, 3)
+        f.observer.onPlayingChanged(false, at(3))
+        f.drain()
+        assertEquals(listOf("scrobble START 0", "scrobble PAUSE 0"), f.calls(TRAKT))
+        assertEquals(listOf("scrobble START 0", "scrobble PAUSE 0"), f.calls(SIMKL))
+
+        // One that never plays never shows as playing, nor as a paused session.
+        f.observer.onVideoStarted(movieMeta(), "tt0111161", at(0), playing = false)
+        f.observer.onVideoStopped(at(0))
+        f.drain()
+        assertEquals(listOf("scrobble START 0", "scrobble PAUSE 0", "scrobble STOP 0"), f.calls(TRAKT), "the first playback's stop only")
     }
 
     @Test
