@@ -1164,15 +1164,20 @@ class DownloadManager internal constructor(
         var ending = false
         val ended = CompletableDeferred<Unit>()
 
+        /** Stops the run for [reason], unless it is stopping for one as strong already ([StopReason]'s order). */
         fun stop(reason: StopReason) {
             val current = this.reason
-            if (current == StopReason.DELETE || current == StopReason.CANCEL && reason != StopReason.DELETE) return
+            if (current != null && current >= reason) return
             this.reason = reason
             job?.cancel()
         }
     }
 
-    private enum class StopReason { PAUSE, CANCEL, DELETE, REQUEUE, DISK_FULL }
+    /**
+     * Why a run stops, weakest first: a stronger one replaces a weaker one while the run unwinds, never the other way
+     * (a pause then the network's requeue stays paused). A resume turns a pause into a requeue itself ([resumeNow]).
+     */
+    private enum class StopReason { REQUEUE, DISK_FULL, PAUSE, CANCEL, DELETE }
 
     private enum class QueueStop { FAILURES, DISK_FULL }
 

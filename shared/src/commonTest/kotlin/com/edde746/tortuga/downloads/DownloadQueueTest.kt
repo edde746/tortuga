@@ -279,6 +279,26 @@ class DownloadQueueTest {
         assertEquals(DownloadStatus.COMPLETED, h.download(id)?.status)
     }
 
+    /** A pause isn't undone by a weaker stop that comes while its transfer still stops (the network dropping). */
+    @Test
+    fun aPauseStaysAPauseWhenTheNetworkDropsWhileItStops() = downloadsTest(fake = true) { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+        // The transport takes its time to report the stop.
+        h.fakeTransport.running.clear()
+
+        manager.pause(id)
+        h.settle()
+        h.network(online = false)
+        h.advance(Transfers.STOP_WAIT)
+        h.network(online = true)
+
+        assertEquals(DownloadStatus.PAUSED, h.download(id)?.status)
+        assertEquals(1, h.fakeTransport.started.size, "not started again on its own")
+    }
+
     @Test
     fun threeFailuresInARowStopTheQueueUntilTheUserActs() = downloadsTest(fake = true) { h ->
         h.serveCdn(bytes)
