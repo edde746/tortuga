@@ -30,7 +30,8 @@ internal interface VideoHost {
 
     /**
      * Called on the mpv thread after mpv_initialize. Calls [onVideoReady] (any thread) with null once a file may be
-     * loaded, or with the reason video cannot work.
+     * loaded, or with the reason video cannot work; and with the reason once more should video stop working later,
+     * while bound. The engine fails the playback, and every later load, with it.
      */
     fun bind(core: MpvCore, onVideoReady: (error: String?) -> Unit)
 

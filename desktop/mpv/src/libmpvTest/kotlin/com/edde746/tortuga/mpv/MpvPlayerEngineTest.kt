@@ -19,6 +19,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.CountDownLatch
+import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.test.AfterTest
@@ -27,6 +28,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlin.test.fail
 import kotlin.time.Duration.Companion.seconds
 
 /**
@@ -35,7 +37,7 @@ import kotlin.time.Duration.Companion.seconds
  */
 class MpvPlayerEngineTest {
     private val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
-    private val engine = MpvPlayerEngine(MpvEngineOptions(extraOptions = mapOf("vo" to "null", "ao" to "null")), WindowlessHost)
+    private val engine = MpvPlayerEngine(WINDOWLESS, WindowlessHost())
 
     @AfterTest
     fun stop() {
@@ -212,7 +214,7 @@ class MpvPlayerEngineTest {
     @Test
     fun aDolbyTrackPlaysOnThisMachinesOutputWithPassthroughOn() {
         val file = silentAc3()
-        val output = MpvPlayerEngine(MpvEngineOptions(extraOptions = mapOf("vo" to "null", "mute" to "yes")), WindowlessHost)
+        val output = MpvPlayerEngine(MpvEngineOptions(extraOptions = mapOf("vo" to "null", "mute" to "yes")), WindowlessHost())
         try {
             val error = AtomicReference<EngineError?>()
             val played = CountDownLatch(1)
@@ -245,18 +247,97 @@ class MpvPlayerEngineTest {
         return file
     }
 
-    /** `vo=null` needs no window: nothing to attach, bind or let go of. */
-    private object WindowlessHost : VideoHost {
+    /**
+     * mpv that couldn't start fails the load waiting for it and every later one (a retry, the next stream), each of
+     * which would otherwise wait for an mpv that never comes.
+     */
+    @Test
+    fun mpvThatCouldNotStartFailsEveryLoad() = assertEveryLoadFails(WindowlessHost(failure = "no display"))
+
+    /** A video output that couldn't start fails the load waiting for it and every later one. */
+    @Test
+    fun aVideoOutputThatCouldNotStartFailsEveryLoad() = assertEveryLoadFails(WindowlessHost(bindError = "no GL context"))
+
+    /** A video output that stops working during a playback (a frame it can't render) fails it and every later load. */
+    @Test
+    fun aVideoOutputFailingDuringPlaybackFailsItAndEveryLaterLoad() {
+        val file = silentAc3()
+        val host = WindowlessHost()
+        val failing = MpvPlayerEngine(WINDOWLESS, host)
+        try {
+            val reports = Reports()
+            failing.setListener(reports)
+            failing.startWithoutWindow()
+            val first = failing.load(LoadRequest(url = file.toString(), options = PlaybackOptions.of(DeviceSettings.DEFAULT, HardwareDecoder.LINUX)))
+            reports.await("the file loaded") { it.loadId == first && it.loaded }
+            checkNotNull(host.onVideoReady)("framebuffer incomplete")
+            reports.await("the playing file's error") { it.loadId == first && it.error != null }
+            val next = failing.load(LoadRequest(url = file.toString(), options = PlaybackOptions.of(DeviceSettings.DEFAULT, HardwareDecoder.LINUX)))
+            reports.await("the next load's error") { it.loadId == next && it.error != null }
+        } finally {
+            failing.release()
+            failing.awaitReleased(10.seconds)
+            Files.deleteIfExists(file)
+        }
+    }
+
+    /** Two loads in turn on an engine with [host], each failing. */
+    private fun assertEveryLoadFails(host: WindowlessHost) {
+        val failing = MpvPlayerEngine(WINDOWLESS, host)
+        try {
+            val reports = Reports()
+            failing.setListener(reports)
+            failing.startWithoutWindow()
+            for (n in 1..2) {
+                val id = failing.load(LoadRequest(url = "/missing.mkv", options = PlaybackOptions.of(DeviceSettings.DEFAULT, HardwareDecoder.LINUX)))
+                reports.await("load $n's error") { it.loadId == id && it.error != null }
+            }
+        } finally {
+            failing.release()
+            failing.awaitReleased(10.seconds)
+        }
+    }
+
+    /** The states an engine publishes, in order. */
+    private class Reports : PlayerEngineListener {
+        private val states = LinkedBlockingQueue<EngineState>()
+
+        override fun onState(state: EngineState) {
+            states += state
+        }
+
+        /** The first state from now on that [matches], within 20 s. */
+        fun await(what: String, matches: (EngineState) -> Boolean): EngineState {
+            val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(20)
+            while (true) {
+                val state = states.poll(deadline - System.nanoTime(), TimeUnit.NANOSECONDS) ?: fail("$what: none within 20 s")
+                if (matches(state)) return state
+            }
+        }
+    }
+
+    /**
+     * `vo=null` needs no window: nothing to attach or let go of. [failure] fails mpv's start (the host's options),
+     * [bindError] the video output as it binds; [onVideoReady] is the engine's, once bound.
+     */
+    private class WindowlessHost(private val failure: String? = null, private val bindError: String? = null) : VideoHost {
         override val hardwareDecoder = HardwareDecoder.LINUX
+        @Volatile var onVideoReady: ((String?) -> Unit)? = null
 
         override fun attach(window: ComposeWindow, onReady: () -> Unit): Boolean {
             onReady()
             return true
         }
 
-        override fun options(): Map<String, String> = emptyMap()
+        override fun options(): Map<String, String> {
+            failure?.let(::error)
+            return emptyMap()
+        }
 
-        override fun bind(core: MpvCore, onVideoReady: (error: String?) -> Unit) = onVideoReady(null)
+        override fun bind(core: MpvCore, onVideoReady: (error: String?) -> Unit) {
+            this.onVideoReady = onVideoReady
+            onVideoReady(bindError)
+        }
 
         override fun unbind(core: MpvCore) = Unit
 
@@ -269,6 +350,8 @@ class MpvPlayerEngineTest {
     }
 
     private companion object {
+        val WINDOWLESS = MpvEngineOptions(extraOptions = mapOf("vo" to "null", "ao" to "null"))
+
         /** One AC-3 frame of stereo silence at 48 kHz and 32 kb/s (FFmpeg's encoder): every frame of a silent track. */
         const val SILENT_AC3_FRAME =
             "0b773f11004043e106f00108080821010104571f3e7cf9f3e7cf9f3e7cfbfe757cf9f3e7cf9f3e7cf8ff9d5f3e7cf9f3e7cf9f3e32fede" +

@@ -95,6 +95,8 @@ class MpvPlayerEngine internal constructor(
     private var core: MpvCore? = null
     private var stopped = false
     private var videoReady = false
+    /** Why mpv or its video output can't work (no core, no canvas, a host that failed): each [load] fails with it. */
+    private var videoFailure: EngineError? = null
     private var pendingLoad: LoadRequest? = null
     /** The viewer's pause: mpv's, but while the lifecycle holds for a display switch ([holdForDisplay]). */
     private var desiredPause = false
@@ -154,15 +156,22 @@ class MpvPlayerEngine internal constructor(
      * playback fails with that error instead of waiting forever.
      */
     internal fun attachTimedOut(waited: Duration) {
-        post { if (core == null) fail("video host: the window's canvas wasn't found within $waited") }
+        post { if (core == null) failVideo("video host: the window's canvas wasn't found within $waited") }
     }
 
     override fun load(request: LoadRequest): Long {
         val id = lifecycle.nextLoadId()
         post {
             pendingSubtitles.clear()
-            update { load(id) }
-            if (videoReady) startLoad(request) else pendingLoad = request
+            update {
+                load(id)
+                videoFailure?.let { fail(it) }
+            }
+            when {
+                videoFailure != null -> {}
+                videoReady -> startLoad(request)
+                else -> pendingLoad = request
+            }
         }
         return id
     }
@@ -540,7 +549,7 @@ class MpvPlayerEngine internal constructor(
         val c = try {
             MpvCore.create(baseOptions() + host.options() + options.extraOptions + ("pause" to yesNo(desiredPause || lifecycle.held)), ::setUp)
         } catch (t: Throwable) {
-            fail(t.message ?: t.toString())
+            failVideo(t.message ?: t.toString())
             return
         }
         synchronized(coreLock) { core = c }
@@ -570,10 +579,11 @@ class MpvPlayerEngine internal constructor(
         c.requestLogMessages("warn")
     }
 
+    /** The host's answer to [VideoHost.bind]: null once a file may load, else why video can't work, even after that. */
     private fun onVideoReady(error: String?) {
         if (stopped) return
         if (error != null) {
-            fail("video output: $error", EngineErrorKind.DECODE)
+            failVideo("video output: $error", EngineErrorKind.DECODE)
             return
         }
         videoReady = true
@@ -709,6 +719,14 @@ class MpvPlayerEngine internal constructor(
 
     private fun fail(message: String, kind: EngineErrorKind = EngineErrorKind.OTHER) {
         update { fail(EngineError(message, kind = kind)) }
+    }
+
+    /** Fails the playback for good: with no mpv or no video output, this load and every later one ([videoFailure]). */
+    private fun failVideo(message: String, kind: EngineErrorKind = EngineErrorKind.OTHER) {
+        val error = EngineError(message, kind = kind)
+        videoFailure = error
+        pendingLoad = null
+        update { fail(error) }
     }
 
     private fun logIfFailed(what: String, rc: Int) {

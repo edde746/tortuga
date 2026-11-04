@@ -77,6 +77,8 @@ internal class GlVideoHost : VideoHost {
     private var texH = 0
     @Volatile private var renderError: String? = null
     private var contextWaits = 0
+    /** The bound engine's `onVideoReady`, kept while bound: a later failure reaches the playback too, once. */
+    private var onVideo: ((String?) -> Unit)? = null
 
     override fun attach(window: ComposeWindow, onReady: () -> Unit): Boolean {
         if (layer != null) return true
@@ -172,23 +174,30 @@ internal class GlVideoHost : VideoHost {
             }
             if (bind != null) {
                 pendingBind = null
+                onVideo = bind.second
                 create(bind.first)
                 bind.second(null)
             }
             if (renderContext.address() == 0L) return
-            if (w != texW || h != texH) reallocate(dc, w, h)
-            MpvFfi.mpv_render_context_update(renderContext)
             val previous = Gl.currentFramebuffer()
-            render(w, h)
-            Gl.bindFramebuffer(previous)
-            dc.resetGLAll()
+            try {
+                if (w != texW || h != texH) reallocate(dc, w, h)
+                MpvFfi.mpv_render_context_update(renderContext)
+                render(w, h)
+            } finally {
+                Gl.bindFramebuffer(previous)
+                dc.resetGLAll()
+            }
             canvas.drawImageRect(checkNotNull(image), Rect.makeWH(texW.toFloat(), texH.toFloat()), Rect.makeWH(w.toFloat(), h.toFloat()), SamplingMode.LINEAR, null, true)
         } catch (t: Throwable) {
-            renderError = t.toString()
-            if (bind != null && renderContext.address() == 0L) {
-                pendingBind = null
-                bind.second(renderError)
-            }
+            // No draw renders again: the playback fails with why, whether or not the video was ready.
+            val error = t.toString()
+            renderError = error
+            System.getLogger(javaClass.name).log(System.Logger.Level.ERROR, "mpv's video rendering failed", t)
+            val report = onVideo ?: pendingBind?.second
+            onVideo = null
+            pendingBind = null
+            report?.invoke(error)
         }
     }
 
@@ -213,7 +222,9 @@ internal class GlVideoHost : VideoHost {
 
     private fun reallocate(dc: DirectContext, w: Int, h: Int) {
         image?.close() // Skia owns, and deletes, the adopted texture
+        image = null
         if (fbo != 0) Gl.deleteFramebuffer(fbo)
+        fbo = 0
         val texture = Gl.newTexture(w, h)
         fbo = Gl.newFramebuffer(texture)
         Gl.bindFramebuffer(0)
