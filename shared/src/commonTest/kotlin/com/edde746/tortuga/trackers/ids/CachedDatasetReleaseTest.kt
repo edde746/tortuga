@@ -196,6 +196,21 @@ class CachedDatasetReleaseTest {
         assertEquals("ages v1", data.get()?.text, "an answer without a tag isn't an unusable file: the next lookup asks again")
     }
 
+    @Test
+    fun aLatestRedirectWithAMalformedEscapeIsAnAnswerWithoutATag() = runTest {
+        dataset().get()
+        advanceUntilIdle()
+        clock.advance(CachedDataset.REFRESH_INTERVAL + 1.milliseconds)
+        github.malformedTag = true
+        assertEquals("ages v1", dataset().get()?.text)
+        advanceUntilIdle()
+        assertEquals(listOf(LATEST, "v1/SHA256SUMS", "v1/$FILE", LATEST), github.requests)
+
+        dataset().get()
+        advanceUntilIdle()
+        assertEquals(4, github.requests.size, "the answer counts as today's check")
+    }
+
     /** A copy as the dataset opens it: the text after [PACKED]. */
     private class Opened(val text: String)
 
@@ -248,6 +263,7 @@ class CachedDatasetReleaseTest {
         var offline = false
         var unlisted = false
         var redirects = true
+        var malformedTag = false
         var afterLatest: (() -> Unit)? = null
 
         /** Each release by tag: its packed file, and the content its checksum list was made from. */
@@ -277,7 +293,7 @@ class CachedDatasetReleaseTest {
             if (path == LATEST) {
                 requests += path
                 if (!redirects) return respond("<html>releases</html>", HttpStatusCode.OK)
-                val location = "$REPOSITORY/releases/tag/$latest"
+                val location = "$REPOSITORY/releases/tag/" + if (malformedTag) "v%ZZ" else latest
                 afterLatest?.invoke()
                 return respond("", HttpStatusCode.Found, headersOf(HttpHeaders.Location, location))
             }

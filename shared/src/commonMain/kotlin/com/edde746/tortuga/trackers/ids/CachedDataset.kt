@@ -11,6 +11,7 @@ import io.ktor.client.request.prepareGet
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.URLDecodeException
 import io.ktor.http.decodeURLPart
 import io.ktor.utils.io.exhausted
 import io.ktor.utils.io.readBuffer
@@ -351,7 +352,14 @@ internal class CachedDataset<T : Any>(
             timeout { requestTimeoutMillis = REQUEST_TIMEOUT.inWholeMilliseconds }
         }.execute { response ->
             val location = response.headers[HttpHeaders.Location]
-            val tag = location?.substringBefore('?')?.substringAfter("/releases/tag/", "")?.decodeURLPart()
+            val tag = location?.substringBefore('?')?.substringAfter("/releases/tag/", "")?.let { escaped ->
+                try {
+                    escaped.decodeURLPart()
+                } catch (e: URLDecodeException) {
+                    Log.w(TAG) { "$label: the latest release's tag '$escaped' is malformed (${e.message})" }
+                    null
+                }
+            }
             if (response.status.value in 300..399 && tag != null && RELEASE_TAG.matches(tag)) {
                 Latest.Tag(tag)
             } else {
