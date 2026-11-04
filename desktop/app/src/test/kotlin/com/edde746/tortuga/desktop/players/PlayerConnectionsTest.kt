@@ -4,6 +4,8 @@ import com.edde746.tortuga.playback.players.MpvIpcSession
 import com.edde746.tortuga.playback.players.PlayerAppEvent
 import com.edde746.tortuga.playback.players.VlcHttpSession
 import com.sun.net.httpserver.HttpServer
+import java.io.IOException
+import java.io.OutputStream
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -12,6 +14,9 @@ import java.net.UnixDomainSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.ServerSocketChannel
 import java.nio.file.Files
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -103,5 +108,46 @@ class PlayerConnectionsTest {
         }
         val closed = ServerSocket(0, 1, InetAddress.getLoopbackAddress()).use { it.localPort }
         assertNull(VlcStatusPoller(closed, "right").status(), "nothing listens: VLC starting or gone")
+    }
+
+    /**
+     * The port was free when VLC got it, so another program may answer there: a body far bigger than a status, or one
+     * that comes a byte at a time and never ends, is no status, within the poller's time, and the watch goes on.
+     */
+    @Test
+    fun theVlcPollerGivesUpOnAStatusTooBigOrTooSlow() {
+        val big = answering { body -> body.write(ByteArray(2 * 1024 * 1024) { 'x'.code.toByte() }) }
+        val dripping = answering { body ->
+            while (true) {
+                body.write('x'.code)
+                body.flush()
+                Thread.sleep(100)
+            }
+        }
+        try {
+            for ((what, server) in listOf("a big" to big, "a dripping" to dripping)) {
+                val asked = CompletableFuture.supplyAsync { VlcStatusPoller(server.address.port, "right").status() }
+                assertNull(asked.get(10, TimeUnit.SECONDS), "$what body")
+            }
+        } finally {
+            big.stop(0)
+            dripping.stop(0)
+        }
+    }
+
+    /** A server on 127.0.0.1 that answers the status with 200 and what [write] writes, until the poller hangs up. */
+    private fun answering(write: (OutputStream) -> Unit): HttpServer {
+        val server = HttpServer.create(InetSocketAddress(InetAddress.getLoopbackAddress(), 0), 0)
+        server.executor = Executors.newCachedThreadPool { Thread(it).apply { isDaemon = true } }
+        server.createContext(VlcHttpSession.STATUS_PATH) { exchange ->
+            exchange.sendResponseHeaders(200, 0)
+            try {
+                exchange.responseBody.use(write)
+            } catch (_: IOException) {
+                // The poller hung up.
+            }
+        }
+        server.start()
+        return server
     }
 }

@@ -3,6 +3,7 @@ package com.edde746.tortuga.desktop.players
 import com.edde746.tortuga.playback.players.MpvIpcSession
 import com.edde746.tortuga.playback.players.PlayerAppEvent
 import com.edde746.tortuga.playback.players.VlcHttpSession
+import java.io.ByteArrayOutputStream
 import java.io.Closeable
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -112,16 +113,20 @@ internal object MpvIpc {
     private const val CONNECT_RETRY_MILLIS = 100L
 }
 
-/** Asks one VLC's HTTP interface on 127.0.0.1:[port] for its status ([VlcHttpSession]). */
+/**
+ * Asks one VLC's HTTP interface on 127.0.0.1:[port] for its status ([VlcHttpSession]). The port was free when VLC was
+ * given it, so whatever answers there may be another program: a status past [MAX_STATUS_BYTES], or still coming after
+ * [TIMEOUT_MILLIS], is none, and the watch goes on.
+ */
 internal class VlcStatusPoller(private val port: Int, private val password: String) {
-    /** The status' JSON; null while the interface doesn't answer (VLC starting or quitting) or refuses. */
+    /** The status' JSON; null while the interface doesn't answer (VLC starting or quitting), refuses or overruns. */
     fun status(): String? = try {
         val connection = URI("http://127.0.0.1:$port${VlcHttpSession.STATUS_PATH}").toURL().openConnection(Proxy.NO_PROXY) as HttpURLConnection
         try {
             connection.connectTimeout = TIMEOUT_MILLIS
             connection.readTimeout = TIMEOUT_MILLIS
             connection.setRequestProperty("Authorization", VlcHttpSession.authorization(password))
-            if (connection.responseCode == HttpURLConnection.HTTP_OK) connection.inputStream.use { it.readBytes().decodeToString() } else null
+            if (connection.responseCode == HttpURLConnection.HTTP_OK) connection.inputStream.use(::body) else null
         } finally {
             connection.disconnect()
         }
@@ -129,7 +134,23 @@ internal class VlcStatusPoller(private val port: Int, private val password: Stri
         null
     }
 
+    /** [input] whole, or null once it passes [MAX_STATUS_BYTES] or [TIMEOUT_MILLIS] in all. */
+    private fun body(input: InputStream): String? {
+        val deadline = System.nanoTime() + TIMEOUT_MILLIS * 1_000_000L
+        val bytes = ByteArrayOutputStream()
+        val buffer = ByteArray(8 * 1024)
+        while (true) {
+            val n = input.read(buffer)
+            if (n < 0) return bytes.toByteArray().decodeToString()
+            if (bytes.size() + n > MAX_STATUS_BYTES || System.nanoTime() > deadline) return null
+            bytes.write(buffer, 0, n)
+        }
+    }
+
     private companion object {
         const val TIMEOUT_MILLIS = 2000
+
+        /** Far over a real status (a few kB, a long playlist's metadata included). */
+        const val MAX_STATUS_BYTES = 1024 * 1024
     }
 }
