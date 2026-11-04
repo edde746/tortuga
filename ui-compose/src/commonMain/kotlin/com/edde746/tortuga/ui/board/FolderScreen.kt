@@ -72,7 +72,7 @@ import com.edde746.tortuga.ui.navigation.statusBarOverlap
 import com.edde746.tortuga.ui.probe.layoutProbe
 import com.edde746.tortuga.ui.theme.LocalTortugaDimens
 import com.edde746.tortuga.ui.theme.TortugaColors
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**
  * A collection's folder ([Route.CollectionFolder]), opened from its tile on Home: its [FolderStore] lives while the
@@ -227,14 +227,14 @@ private fun ItemGrid(grid: FolderGrid, focus: FocusMemory, intents: FolderIntent
             item(key = "more", span = { GridItemSpan(maxLineSpan) }) { MoreFooter((status as? RowStatus.Failed)?.text, onRetry) }
         }
     }
-    // The next page, once the end of the grid comes into view (and again while it stays in view).
+    // The next page, once the end of the grid comes into view, again as the items change while it stays in view, and
+    // after a page that failed (no titles added), again once the end leaves the view and comes back.
     val nearEnd by rememberUpdatedState(intents.gridNearEnd)
     LaunchedEffect(gridState, grid.items.size) {
         snapshotFlow {
             val info = gridState.layoutInfo
             (info.visibleItemsInfo.lastOrNull()?.index ?: 0) >= info.totalItemsCount - SHELF_LOAD_AHEAD
-        }.first { it }
-        nearEnd()
+        }.distinctUntilChanged().collect { if (it) nearEnd() }
     }
 }
 

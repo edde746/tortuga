@@ -14,14 +14,17 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasScrollToIndexAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.pressKey
 import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.compose.ui.unit.dp
@@ -125,6 +128,25 @@ class CollectionsScreensTest {
         onNode(hasContentDescription("Ember Film") and hasClickAction()).assertDoesNotExist()
     }
 
+    /**
+     * A folder's grid asks for its next page as its end comes into view, and after a page that failed (no titles came)
+     * again once its end leaves the view and comes back.
+     */
+    @Test
+    fun aFolderGridAsksAgainForAPageThatFailedAsItsEndComesBack() = runComposeUiTest {
+        var asked = 0
+        val items = List(60) { card("Film $it") }
+        folder(FormFactor.DESKTOP, { tabs(0, items) }, nearEnd = { asked++ })
+        val grid = onNode(hasScrollToIndexAction() and !hasAnyDescendant(hasText("All")))
+        grid.performScrollToIndex(items.lastIndex)
+        runOnIdle { assertEquals(1, asked) }
+
+        grid.performScrollToIndex(0)
+        waitForIdle()
+        grid.performScrollToIndex(items.lastIndex)
+        runOnIdle { assertEquals(2, asked) }
+    }
+
     /** A folder shown as rows: a source that can't show has its note and action in place of its titles. */
     @Test
     fun aFolderRowThatCantShowHasItsNoteAndAction() = runComposeUiTest {
@@ -211,12 +233,13 @@ class CollectionsScreensTest {
         }
     }
 
-    /** A folder's screen in a [formFactor] window, its tab and note intents going to [selected] and [notes]. */
+    /** A folder's screen in a [formFactor] window, its tab, note and grid's end intents going to [selected], [notes], [nearEnd]. */
     private fun ComposeUiTest.folder(
         formFactor: FormFactor,
         state: () -> FolderUiState,
         selected: MutableList<Int> = mutableListOf(),
         notes: MutableList<Int> = mutableListOf(),
+        nearEnd: () -> Unit = {},
     ) = setContent {
         TortugaTheme {
             val tv = formFactor == FormFactor.TV
@@ -228,7 +251,7 @@ class CollectionsScreensTest {
                             selectTab = { selected += it },
                             rowVisible = {},
                             loadNextPage = {},
-                            gridNearEnd = {},
+                            gridNearEnd = nearEnd,
                             retry = {},
                             openItem = {},
                             menuAction = { _, _ -> },
