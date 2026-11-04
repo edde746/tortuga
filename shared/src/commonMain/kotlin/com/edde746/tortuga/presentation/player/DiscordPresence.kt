@@ -8,6 +8,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -242,7 +243,8 @@ interface DiscordPresenceHost {
  * goes to the [host] whenever it shows something new; off, paused, stopped or [release]d, the activity is taken down.
  *
  * Discord takes at most [UPDATES] activity updates per [WINDOW]: one beyond that waits for its turn, and then the
- * newest activity goes out (none if it is what Discord shows already).
+ * newest activity goes out (none if it is what Discord shows already). Taking the activity down never waits: the host
+ * disconnects, and an activity still waiting never goes out.
  *
  * Main thread; [release] ends it.
  */
@@ -268,13 +270,13 @@ class DiscordPresence internal constructor(
             if (on) DiscordActivity.of(NowPlaying.of(ui, timeline, info, engine), clock.now().toEpochMilliseconds()) else null
         }.stateIn(scope, SharingStarted.Eagerly, null)
         scope.launch {
-            wanted.collect {
-                if (shows(it)) return@collect
-                awaitTurn()
-                val next = wanted.value
-                if (shows(next)) return@collect
+            wanted.collectLatest { next ->
+                if (shows(next)) return@collectLatest
+                if (next != null) {
+                    awaitTurn()
+                    sent.addLast(timeSource.markNow())
+                }
                 published = next
-                sent.addLast(timeSource.markNow())
                 host.publish(next)
             }
         }

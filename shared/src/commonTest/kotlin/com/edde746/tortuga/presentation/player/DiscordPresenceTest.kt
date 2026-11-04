@@ -197,6 +197,18 @@ class DiscordPresenceTest {
     }
 
     @Test
+    fun theSettingOffTakesTheActivityDownAtOnceBeyondDiscordsLimit() = presenceTest {
+        player.playing(position = 0.0, duration = 6000.0)
+        repeat(6) { player.position(600.0 * (it + 1)) }
+        assertEquals(DiscordPresence.UPDATES, host.published.size, "the sixth update waits for its turn")
+        setEnabled(false)
+        assertNull(last, "off: down without waiting for a turn")
+        val count = host.published.size
+        player.advance(30.seconds)
+        assertEquals(count, host.published.size, "and the update that waited never goes out")
+    }
+
+    @Test
     fun longTextIsCutToDiscordsLimit() = presenceTest {
         player.sessionInfo { it.copy(title = "A".repeat(200)) }
         player.playing()
