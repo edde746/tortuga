@@ -150,6 +150,38 @@ class DetailStoreDownloadsTest {
     }
 
     @Test
+    fun aPlayStillLookingForItsDownloadPlaysNothingOnceAStreamIsChosenOrThePageIsCovered() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        h.serveMeta(FILM)
+        h.installMetaAddon()
+        h.install()
+        h.downloaded(FILM, FILM.id, cdnChoice())
+        val covered = MutableStateFlow(false)
+        val host = Host()
+        val store = h.graph.detailStore(h.profileId, "movie", FILM.id, videoId = null, host, covered = covered)
+        h.settle()
+
+        // Play, then Choose a stream before the download is found: the list opens and nothing plays.
+        store.play()
+        store.chooseStream()
+        h.settle()
+        assertEquals(listOf("tt0111161/tt0111161"), host.streams)
+        assertEquals(emptyList(), host.played)
+
+        // Play, then another screen over the page before the download is found: nothing plays.
+        store.play()
+        covered.value = true
+        h.settle()
+        assertEquals(emptyList(), host.played)
+
+        covered.value = false
+        h.settle()
+        store.play()
+        h.settle()
+        assertEquals(1, host.played.size, "a play left alone plays the download")
+    }
+
+    @Test
     fun menuEntriesPlayTheDownloadFromTheStartAndOpenTheListToDownloadFrom() = downloadsTest { h ->
         h.serveCdn(bytes)
         h.serveMeta(SHOW, FILM)

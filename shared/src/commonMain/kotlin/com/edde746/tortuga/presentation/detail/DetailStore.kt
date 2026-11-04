@@ -287,8 +287,12 @@ class DetailStore internal constructor(
 
     internal fun picking(videoId: String): Boolean = picking && pickVideoId == videoId
 
-    /** A download of the video to play is being looked for ([playLocalOr]); another press waits for it. */
-    private var lookingUp = false
+    /**
+     * Looking for a download of the video to play ([playLocalOr]); another press waits for it, and whatever cancels a
+     * pick ([cancelPick]: another intent, a screen covering this one) cancels it.
+     */
+    private var lookupJob: Job? = null
+    private val lookingUp: Boolean get() = lookupJob?.isActive == true
 
     /**
      * The stream addons' answers for the video the primary action plays, asked as the page shows it (when the page
@@ -733,20 +737,19 @@ class DetailStore internal constructor(
     private fun playLocalOr(meta: MetaItem, videoId: String, fromStart: Boolean = false, otherwise: () -> Unit) {
         videoActionDone = true
         val downloads = downloads ?: return otherwise()
-        lookingUp = true
-        scope.launch {
-            val local = try {
-                downloads.localVideo(profileId, meta.id, videoId)
-            } finally {
-                lookingUp = false
-            }
+        lookupJob = scope.launch {
+            val local = downloads.localVideo(profileId, meta.id, videoId)
+            lookupJob = null
             if (local == null) return@launch otherwise()
             val request = localPlayRequest(meta, videoId, local)
             host.play(if (fromStart) request.copy(startPositionSeconds = 0.0) else request)
         }
     }
 
+    /** Drops the playback being started: the download looked for ([lookupJob]), the stream being found ([pickJob]). */
     private fun cancelPick() {
+        lookupJob?.cancel()
+        lookupJob = null
         val job = pickJob ?: return
         pickJob = null
         job.cancel()
