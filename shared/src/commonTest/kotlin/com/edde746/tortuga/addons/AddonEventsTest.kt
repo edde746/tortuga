@@ -14,8 +14,11 @@ import com.edde746.tortuga.playback.session.SERIES
 import com.edde746.tortuga.playback.session.SessionHarness
 import com.edde746.tortuga.playback.session.choice
 import com.edde746.tortuga.playback.session.urlStream
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -290,6 +293,38 @@ class AddonEventsTest {
                 "$url/action=stop&currentTime=600000&duration=3600000.json",
             ),
             sent,
+        )
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun eachAddonGetsItsEventsOneAfterTheOtherWhileAnotherAddonIsntHeldUp() = runTest {
+        val answered = mutableListOf<String>()
+        val http = mockClient { request ->
+            val action = request.url.encodedPath.substringAfter("action=").substringBefore('&')
+            // The tracker is slow to answer the start; the pause and the stop that follow it answer at once.
+            if (request.url.host == "tracker.example" && action == "start") delay(2.seconds)
+            answered += "${request.url.host} $action at ${testScheduler.currentTime}"
+            json("{}")
+        }
+        val other = receiver("other.example", """["movie"]""", """["tt"]""")
+        val events = AddonEvents(
+            { listOf(tracker, other) },
+            AddonTransport(http, parseDispatcher = StandardTestDispatcher(testScheduler)),
+            backgroundScope,
+        )
+        val player = events.player()
+
+        player.onVideoStarted(MOVIE, MOVIE.id, PlaybackPosition(0, 3_600_000), playing = true)
+        player.onPlayingChanged(false, PlaybackPosition(1_000, 3_600_000))
+        player.onVideoStopped(PlaybackPosition(1_000, 3_600_000))
+        // The events go out in the background: time moves past the slow answer by hand.
+        advanceTimeBy(3.seconds)
+        runCurrent()
+
+        assertEquals(
+            listOf("start", "pause", "stop").map { "other.example $it at 0" } + listOf("start", "pause", "stop").map { "tracker.example $it at 2000" },
+            answered,
         )
     }
 }

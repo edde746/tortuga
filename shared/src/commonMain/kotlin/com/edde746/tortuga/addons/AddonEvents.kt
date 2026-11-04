@@ -11,6 +11,7 @@ import com.edde746.tortuga.playback.session.PlaybackPosition
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.launch
 
 /** A `player` event's action (stremio-core `PlayerEventAction`). */
@@ -70,8 +71,9 @@ internal fun videosWatchedEventPaths(type: String, id: String, videoIds: List<St
  * device makes events: playback here ([player]) and their own library actions (the other functions, which callers
  * use only for what the user did); a sync pull, a file import or another device's change make none.
  *
- * Fire and forget: the events go out in the order they came, each request on its own in [scope]; nothing waits for
- * one, and a failed one is logged.
+ * Fire and forget: the events go out in the order they came, nothing waits for one, and a failed one is logged. Each
+ * addon gets its events one after the other, the next once the last was answered (a slow `start` can't land after
+ * its `stop`), while one addon's slow answers hold up no other's.
  */
 internal class AddonEvents(
     private val addons: suspend () -> List<Descriptor>,
@@ -79,6 +81,9 @@ internal class AddonEvents(
     private val scope: CoroutineScope,
 ) {
     private val queue = Channel<List<ResourcePath>>(Channel.UNLIMITED)
+
+    /** Each addon's events on their way, by transport URL; read and written only by the [queue]'s consumer. */
+    private val lanes = mutableMapOf<String, SendChannel<PlannedRequest>>()
 
     init {
         scope.launch {
@@ -92,7 +97,9 @@ internal class AddonEvents(
                     continue
                 }
                 for (path in paths) {
-                    for (planned in AggrRequest.AllOfResource(path).plan(targets)) scope.launch { deliver(planned) }
+                    for (planned in AggrRequest.AllOfResource(path).plan(targets)) {
+                        lanes.getOrPut(planned.addon.transportUrl) { lane() }.trySend(planned)
+                    }
                 }
             }
         }
@@ -159,6 +166,11 @@ internal class AddonEvents(
 
     private fun send(paths: List<ResourcePath>) {
         if (paths.isNotEmpty()) queue.trySend(paths)
+    }
+
+    /** A new addon's events, delivered in [scope] one at a time as they come. */
+    private fun lane(): SendChannel<PlannedRequest> = Channel<PlannedRequest>(Channel.UNLIMITED).also { lane ->
+        scope.launch { for (planned in lane) deliver(planned) }
     }
 
     private suspend fun deliver(planned: PlannedRequest) {
