@@ -180,13 +180,51 @@ class SignInTest {
         oidc.discoveryBytes = IdTokenVerifier.MAX_DISCOVERY_BYTES.toInt() + 1
         attempt().assertError(HttpStatusCode.BadGateway, ApiErrorCode.UPSTREAM_UNAVAILABLE)
 
+        // A failed fetch stands for 30 seconds, as a successful one does.
+        clock.advance(Duration.ofSeconds(30))
         oidc.discoveryBytes = IdTokenVerifier.MAX_DISCOVERY_BYTES.toInt()
         oidc.keySetBytes = IdTokenVerifier.MAX_KEY_SET_BYTES.toInt() + 1
         attempt().assertError(HttpStatusCode.BadGateway, ApiErrorCode.UPSTREAM_UNAVAILABLE)
         assertEquals(0, TestPostgres.count("accounts"))
 
+        clock.advance(Duration.ofSeconds(30))
         oidc.keySetBytes = IdTokenVerifier.MAX_KEY_SET_BYTES.toInt()
         attempt().ok<SignInResponse>()
+    }
+
+    @Test
+    fun aProviderThatCantServeItsKeysCostsOneFetchAtATimeAndItsKeysLastADay() = serverTest {
+        signIn("alice")
+        val fetches = oidc.keySetRequests.get()
+        oidc.keySetStatus = HttpStatusCode.ServiceUnavailable
+
+        // The keys are past their hour: the first sign-in asks again and fails, and the ones after it within 30 seconds
+        // take that outcome, signing in with the keys fetched before.
+        clock.advance(Duration.ofMinutes(61))
+        repeat(3) { signIn("alice") }
+        assertEquals(fetches + 1, oidc.keySetRequests.get())
+        clock.advance(Duration.ofSeconds(30))
+        signIn("alice")
+        assertEquals(fetches + 2, oidc.keySetRequests.get())
+
+        // A day after they were fetched, they no longer stand in.
+        clock.advance(Duration.ofHours(23))
+        post(SyncPaths.AUTH_SIGN_IN, SignInRequest(IdentityProvider.OIDC, oidc.token("alice"), device = device))
+            .assertError(HttpStatusCode.BadGateway, ApiErrorCode.UPSTREAM_UNAVAILABLE)
+        // The provider back: its keys are fetched again.
+        oidc.keySetStatus = HttpStatusCode.OK
+        clock.advance(Duration.ofSeconds(30))
+        signIn("alice")
+    }
+
+    @Test
+    fun aKeySetThatMovedIsFoundThroughDiscoveryAgain() = serverTest {
+        signIn("alice")
+        // The provider moves its key set and signs with a new key; its discovery document names the new address.
+        oidc.keySetPath = "keys-v2"
+        oidc.rotateKey()
+        clock.advance(Duration.ofSeconds(31))
+        signIn("alice")
     }
 
     @Test

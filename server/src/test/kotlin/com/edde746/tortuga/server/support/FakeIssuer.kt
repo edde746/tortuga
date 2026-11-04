@@ -44,6 +44,12 @@ class FakeIssuer(val issuer: String, val clientId: String, private val clock: Cl
     /** The key set comes padded with spaces to this many bytes; null: unpadded. */
     @Volatile var keySetBytes: Int? = null
 
+    /** The key set answers with this status: anything but 200 is a provider that can't serve its keys. */
+    @Volatile var keySetStatus: HttpStatusCode = HttpStatusCode.OK
+
+    /** The key set's path, as discovery names it; its other paths answer 404 (a provider that moved its key set). */
+    @Volatile var keySetPath: String = "keys"
+
     /** Starts signing with a new key, published alongside the old one (a provider's key rotation). */
     fun rotateKey(): RSAKey = newKey().also { keys += it }
 
@@ -78,11 +84,13 @@ class FakeIssuer(val issuer: String, val clientId: String, private val clock: Cl
         services.hosts(issuer.trimEnd('/')) {
             routing {
                 get("/.well-known/openid-configuration") {
-                    val document = """{"issuer":"$issuer","jwks_uri":"${issuer.trimEnd('/')}/keys","id_token_signing_alg_values_supported":["RS256"]}"""
+                    val document = """{"issuer":"$issuer","jwks_uri":"${issuer.trimEnd('/')}/$keySetPath","id_token_signing_alg_values_supported":["RS256"]}"""
                     call.respondText(document.padEnd(discoveryBytes ?: 0), ContentType.Application.Json)
                 }
-                get("/keys") {
+                get("/{keySet}") {
+                    if (call.parameters["keySet"] != keySetPath) return@get call.respondText("", status = HttpStatusCode.NotFound)
                     keySetRequests.incrementAndGet()
+                    if (keySetStatus != HttpStatusCode.OK) return@get call.respondText("", status = keySetStatus)
                     val keySet = JWKSet(keys.map { it.toPublicJWK() }).toString()
                     call.respondText(keySet.padEnd(keySetBytes ?: 0), ContentType.Application.Json)
                 }

@@ -20,7 +20,6 @@ import java.security.Key
 import java.text.ParseException
 import java.time.Clock
 import java.time.Instant
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
@@ -73,9 +72,12 @@ class VerifiedIdToken(
  * Verifies OpenID Connect ID tokens against each provider's published keys: signature (RS/PS/ES algorithms only),
  * issuer, audience (and `azp` when there are several audiences), `exp`, `iat`, `nbf` and `sub`.
  *
- * Keys come from the provider's discovery document (`/.well-known/openid-configuration` → `jwks_uri`), or from
- * [ProviderSpec.jwksUri] when it is set, and are cached for an hour; a token signed by an unknown key id refetches
- * them, at most every 30 seconds per provider.
+ * Keys come from the provider's discovery document (`/.well-known/openid-configuration` → `jwks_uri`, read again for
+ * each fetch, so a key set that moved is followed), or from [ProviderSpec.jwksUri] when it is set, and are cached for
+ * an hour; a token signed by an unknown key id refetches them. A provider's fetches, failed ones too, start at most
+ * every 30 seconds, under a lock of its own: requests meanwhile take the last outcome, so a provider that can't be
+ * reached costs its sign-ins one fetch at a time and the other providers' none. While it can't be reached, its last
+ * keys stand in for at most a day after they were fetched; then its sign-ins get 502.
  * Single use and nonces are checked by the caller against the database ([VerifiedIdToken.tokenHash]).
  */
 class IdTokenVerifier(
@@ -84,9 +86,7 @@ class IdTokenVerifier(
     private val clock: Clock,
 ) {
     private val providers = providers.associateBy { it.id }
-    private val keySets = ConcurrentHashMap<String, CachedKeys>()
-    private val jwksUris = ConcurrentHashMap<String, String>()
-    private val fetchLock = Mutex()
+    private val keySets = providers.associate { it.id to ProviderKeys() }
     private val verifierFactory = DefaultJWSVerifierFactory()
 
     fun provider(id: String): ProviderSpec? = providers[id]
@@ -164,32 +164,33 @@ class IdTokenVerifier(
     }
 
     private suspend fun keys(provider: ProviderSpec, refresh: Boolean): JWKSet {
-        val cached = keySets[provider.id]
+        val state = keySets.getValue(provider.id)
+        val cached = state.cached
         if (cached != null && !refresh && cached.age() < KEYS_TTL) return cached.keys
-        return fetchLock.withLock {
-            val current = keySets[provider.id]
-            // Another request refreshed while this one waited, or a refresh just happened: use what is there.
-            if (current != null && current !== cached) return@withLock current.keys
-            if (current != null && refresh && current.age() < MIN_REFRESH_INTERVAL) return@withLock current.keys
-            try {
-                val fetched = fetchKeys(provider)
-                keySets[provider.id] = CachedKeys(fetched, clock.instant())
-                fetched
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                log.warn("Fetching signing keys of provider {} failed: {}", provider.id, e.toString())
-                current?.keys ?: throw ApiException(
-                    HttpStatusCode.BadGateway,
-                    ApiErrorCode.UPSTREAM_UNAVAILABLE,
-                    "Provider keys unavailable",
-                )
+        return state.lock.withLock {
+            // A fetch that started within the interval, one that finished while this request waited or one that
+            // failed, stands: this request takes its outcome. A clock set back counts as long ago.
+            val sinceAttempt = state.attemptedAt?.let { (clock.millis() - it.toEpochMilli()).milliseconds }
+            if (sinceAttempt == null || sinceAttempt.isNegative() || sinceAttempt >= MIN_REFRESH_INTERVAL) {
+                state.attemptedAt = clock.instant()
+                try {
+                    state.cached = CachedKeys(fetchKeys(provider), clock.instant())
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    log.warn("Fetching signing keys of provider {} failed: {}", provider.id, e.toString())
+                }
             }
+            state.cached?.takeIf { it.age() < MAX_KEY_AGE }?.keys ?: throw ApiException(
+                HttpStatusCode.BadGateway,
+                ApiErrorCode.UPSTREAM_UNAVAILABLE,
+                "Provider keys unavailable",
+            )
         }
     }
 
     private suspend fun fetchKeys(provider: ProviderSpec): JWKSet {
-        val uri = provider.jwksUri ?: jwksUris[provider.id] ?: discoverJwksUri(provider).also { jwksUris[provider.id] = it }
+        val uri = provider.jwksUri ?: discoverJwksUri(provider)
         val body = http.prepareGet(uri).execute { response ->
             check(response.status.isSuccess()) { "JWKS returned ${response.status.value}" }
             response.bodyAsTextAtMost("the JWKS at $uri", MAX_KEY_SET_BYTES)
@@ -212,6 +213,13 @@ class IdTokenVerifier(
 
     private class CachedKeys(val keys: JWKSet, val fetchedAt: Instant)
 
+    /** A provider's keys: the last fetched, when the last fetch started, and the lock its fetches take. */
+    private class ProviderKeys {
+        val lock = Mutex()
+        @Volatile var cached: CachedKeys? = null
+        @Volatile var attemptedAt: Instant? = null
+    }
+
     companion object {
         private val log = LoggerFactory.getLogger(IdTokenVerifier::class.java)
 
@@ -222,6 +230,9 @@ class IdTokenVerifier(
         )
         private val KEYS_TTL = 1.hours
         private val MIN_REFRESH_INTERVAL = 30.seconds
+
+        /** How long a provider's last keys stand in while it can't be reached; past it, its sign-ins get 502. */
+        private val MAX_KEY_AGE = 24.hours
 
         /** Tolerated clock difference when checking `exp`, `iat` and `nbf`. */
         private val CLOCK_SKEW = 60.seconds
