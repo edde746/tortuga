@@ -87,11 +87,11 @@ internal class DownloadExtras(private val env: DownloadEnv) {
             streamAddonName = choice?.addonName.orEmpty(),
         )
         // What the player would add as the file opens; the rest stay with the addons.
-        val found = env.subtitles.resolve(request, env.addons(owner), wanted).added
+        val found = env.subtitles.resolve(request, env.addons(owner), wanted)
         val folder = DownloadNames.subtitlesDirectory(videoPath)
         val existing = env.repo.subtitles(row.id).map { it.relativePath }.toSet()
-        var complete = true
-        found.forEachIndexed { index, subtitle ->
+        var complete = found.complete
+        found.added.forEachIndexed { index, subtitle ->
             val path = "$folder/${index + 1}.${subtitle.language ?: "und"}.${subtitleExtension(subtitle.url)}"
             if (path in existing) return@forEachIndexed
             if (fetch(subtitle.url, directory, path)) {

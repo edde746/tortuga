@@ -438,6 +438,33 @@ class DownloadManagerTest {
         val subtitle = assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).subtitles.single()
         assertEquals(file, read(Path(subtitle.path)).decodeToString())
     }
+    @Test
+    fun subtitlesAnAddonCouldntLookUpAreAskedForAgain() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        var lookups = 0
+        h.routes["subs.example.com"] = { request ->
+            if (request.url.segments.firstOrNull() == "subtitles") {
+                if (lookups++ == 0) {
+                    respond("", HttpStatusCode.ServiceUnavailable)
+                } else {
+                    json("""{"subtitles":[{"id":"1","lang":"eng","url":"https://subs.example.com/files/1.srt"}]}""")
+                }
+            } else {
+                respond("1\n00:00:01,000 --> 00:00:02,000\nHello\n", HttpStatusCode.OK)
+            }
+        }
+        h.data.settings.set(h.profileId, ProfileSetting.SubtitleLanguages, listOf("en"))
+        val manager = h.install()
+        manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice())
+        h.settle()
+        assertEquals(emptyList(), assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).subtitles)
+
+        h.network(online = false)
+        h.network(online = true)
+
+        assertEquals("en", assertNotNull(manager.localVideo(h.profileId, FILM.id, FILM.id)).subtitles.single().language)
+    }
+
 }
 
 /** A transfer's request (whole, or from an offset on), not one of the resolve's ranged reads. */

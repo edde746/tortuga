@@ -1,6 +1,7 @@
 package com.edde746.tortuga.playback.subtitles
 
 import com.edde746.tortuga.addons.AddonAggregator
+import com.edde746.tortuga.addons.AddonError
 import com.edde746.tortuga.addons.Loadable
 import com.edde746.tortuga.lang.LanguageTags
 import com.edde746.tortuga.log.Log
@@ -28,8 +29,10 @@ data class ExternalSubtitle(val url: String, val language: String?, val title: S
 /**
  * Every unique subtitle a lookup found, once: [added] go to the player as the file opens; [more] wait until the viewer
  * picks one (the player's More subtitles), since each is a download and OpenSubtitles alone can answer with hundreds.
+ * [complete] is false when an addon couldn't answer this time (a timeout, a network failure, a server error, a 429): a
+ * later lookup may find more.
  */
-data class FoundSubtitles(val added: List<ExternalSubtitle>, val more: List<ExternalSubtitle>)
+data class FoundSubtitles(val added: List<ExternalSubtitle>, val more: List<ExternalSubtitle>, val complete: Boolean = true)
 
 /**
  * What the subtitle lookup needs from a playing stream: the video, the resolved stream's hash, size and file name
@@ -75,18 +78,20 @@ class SubtitleResolver(
      * @param wanted canonical language tags, most wanted first.
      */
     suspend fun resolve(request: SubtitleRequest, addons: List<Descriptor>, wanted: List<String>): FoundSubtitles {
+        var complete = true
         val fromAddons = aggregator.subtitles(addons, request.type, request.videoId, extra(request)).last()
             .flatMap { loadable ->
                 when (val state = loadable.state) {
                     is Loadable.Ready -> state.content.map { Candidate(it, loadable.addon.manifest.name, own = false) }
                     is Loadable.Error -> {
                         Log.d(TAG) { "${loadable.addon.manifest.name}: no subtitles (${state.error})" }
+                        if (transient(state.error)) complete = false
                         emptyList()
                     }
                     Loadable.Loading -> emptyList()
                 }
             }
-        return pick(request.streamSubtitles.map { Candidate(it, request.streamAddonName, own = true) } + fromAddons, wanted)
+        return pick(request.streamSubtitles.map { Candidate(it, request.streamAddonName, own = true) } + fromAddons, wanted).copy(complete = complete)
     }
 
     private class Candidate(val subtitles: Subtitles, val source: String, val own: Boolean) {
@@ -136,5 +141,12 @@ class SubtitleResolver(
             .withExtra(ExtraProp(Extras.VIDEO_HASH), request.videoHash)
             .withExtra(ExtraProp(Extras.VIDEO_SIZE), request.videoSize?.toString())
             .withExtra(ExtraProp(Extras.FILENAME), request.filename)
+
+        /** An addon's failure another lookup may not meet: it couldn't be reached, or its server failed or throttled. */
+        private fun transient(error: AddonError): Boolean = when (error) {
+            AddonError.Timeout, is AddonError.Network -> true
+            is AddonError.Http -> error.status >= 500 || error.status == 429
+            else -> false
+        }
     }
 }
