@@ -42,8 +42,10 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -53,8 +55,8 @@ import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.edde746.tortuga.presentation.detail.DetailTrackerScore
 import com.edde746.tortuga.presentation.detail.DetailUserRating
@@ -147,9 +149,10 @@ internal fun UserRatingSheet(rating: DetailUserRating, onRate: (Int?) -> Unit, o
  * The score 1–10 as five stars, each half one point (4½ stars: 9): the given half stars white, the rest a dim solid
  * fill (never an outline glyph), and the score large beside them, a dash without one ([selected] null: unrated, or the
  * trackers differing). A tap on a half star, or a drag along them, gives its score (a drag on release); a remote's Left
- * and Right move it a point, Select gives it. One element for screen readers, adjustable as a slider is: "Your rating,
- * 8" or "Not rated". Harness names: `detail.userRating.stars`, and each point's half star `detail.userRating.score.<n>`
- * (8: the 4th star's right half).
+ * and Right move it a point, Select gives it. In a right-to-left layout the stars run from the right, each lit from its
+ * right, and Left raises the score. One element for screen readers, adjustable as a slider is: "Your rating, 8" or "Not
+ * rated". Harness names: `detail.userRating.stars`, and each point's half star `detail.userRating.score.<n>` (8: the
+ * 4th star's trailing half).
  */
 @Composable
 private fun Stars(selected: Int?, onRate: (Int) -> Unit, initial: FocusRequester) {
@@ -157,6 +160,8 @@ private fun Stars(selected: Int?, onRate: (Int) -> Unit, initial: FocusRequester
     var focused by remember { mutableStateOf(false) }
     val shown = pending ?: selected
     val text = T.detail.userRating
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val (lower, higher) = if (rtl) Key.DirectionRight to Key.DirectionLeft else Key.DirectionLeft to Key.DirectionRight
     fun give(score: Int) {
         pending = null
         if (score != selected) onRate(score)
@@ -178,11 +183,11 @@ private fun Stars(selected: Int?, onRate: (Int) -> Unit, initial: FocusRequester
                         // than the frames (a held Right).
                         val now = pending ?: selected
                         when (e.key) {
-                            Key.DirectionLeft -> {
+                            lower -> {
                                 pending = ((now ?: 2) - 1).coerceAtLeast(1)
                                 true
                             }
-                            Key.DirectionRight -> {
+                            higher -> {
                                 pending = ((now ?: 0) + 1).coerceAtMost(10)
                                 true
                             }
@@ -200,13 +205,13 @@ private fun Stars(selected: Int?, onRate: (Int) -> Unit, initial: FocusRequester
                             true
                         }
                     }
-                    .pointerInput(selected, onRate, star) { detectTapGestures { give(pointAt(it.x, star)) } }
-                    .pointerInput(selected, onRate, star) {
+                    .pointerInput(selected, onRate, star, rtl) { detectTapGestures { give(pointAt(it.x, star, rtl)) } }
+                    .pointerInput(selected, onRate, star, rtl) {
                         detectHorizontalDragGestures(
-                            onDragStart = { pending = pointAt(it.x, star) },
+                            onDragStart = { pending = pointAt(it.x, star, rtl) },
                             onDragEnd = { pending?.let(::give) },
                             onDragCancel = { pending = null },
-                        ) { change, _ -> pending = pointAt(change.position.x, star) }
+                        ) { change, _ -> pending = pointAt(change.position.x, star, rtl) }
                     }
                     .height(StarsHeight),
                 horizontalArrangement = Arrangement.spacedBy(StarGap),
@@ -238,16 +243,21 @@ private fun Stars(selected: Int?, onRate: (Int) -> Unit, initial: FocusRequester
 }
 
 /**
- * The point (1–10) at [x] along stars [star] wide, [StarGap] apart: a star's left half its odd point, its right half
- * and the gap after it the even one.
+ * The point (1–10) at [x] across stars [star] wide, [StarGap] apart, counted from their leading edge (the right in a
+ * right-to-left layout, [rtl]): a star's leading half its odd point, its trailing half and the gap after it the even
+ * one.
  */
-private fun Density.pointAt(x: Float, star: Dp): Int {
+private fun PointerInputScope.pointAt(x: Float, star: Dp, rtl: Boolean): Int {
+    val along = if (rtl) size.width - x else x
     val pitch = (star + StarGap).toPx()
-    val index = (x / pitch).toInt().coerceIn(0, 4)
-    return 2 * index + if (x - index * pitch < star.toPx() / 2) 1 else 2
+    val index = (along / pitch).toInt().coerceIn(0, 4)
+    return 2 * index + if (along - index * pitch < star.toPx() / 2) 1 else 2
 }
 
-/** A star white from the left as far as [fill] (0, ½ or 1), the rest a dim solid fill. */
+/**
+ * A star white from its leading edge (the right in a right-to-left layout) as far as [fill] (0, ½ or 1), the rest a
+ * dim solid fill.
+ */
 @Composable
 private fun StarGlyph(fill: Float, dimension: Dp) {
     val painter = rememberVectorPainter(TortugaIcons.Star)
@@ -257,7 +267,14 @@ private fun StarGlyph(fill: Float, dimension: Dp) {
             Icon(
                 painter,
                 contentDescription = null,
-                Modifier.matchParentSize().drawWithContent { clipRect(right = size.width * fill) { this@drawWithContent.drawContent() } },
+                Modifier.matchParentSize().drawWithContent {
+                    val lit = size.width * fill
+                    if (layoutDirection == LayoutDirection.Rtl) {
+                        clipRect(left = size.width - lit) { this@drawWithContent.drawContent() }
+                    } else {
+                        clipRect(right = lit) { this@drawWithContent.drawContent() }
+                    }
+                },
                 tint = TortugaColors.Text,
             )
         }
@@ -287,7 +304,7 @@ private fun TrackerLine(line: DetailTrackerScore, shape: Shape) {
 }
 
 private val StarMaxSize = 48.dp
-private val StarGap = 8.dp
+internal val StarGap = 8.dp
 private val StarsPadding = 4.dp
 private val StarsHeight = 48.dp
 private val StarsGap = 16.dp
