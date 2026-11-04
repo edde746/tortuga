@@ -26,14 +26,15 @@ verified email when the provider shares one), devices and sessions, each record'
 timestamps, and each profile's tracker connections: the service's tokens, the client ID they were issued to and the
 username there.
 
-At rest, each record's id and payload and each tracker connection's tokens, client ID and username are sealed with
-AES-256-GCM under a key derived (HKDF-SHA256) from the server's data key, a file of 32 random bytes kept outside
-Postgres. Each sealed value is bound to its own row. Records are looked up by an HMAC-SHA256 of the account and the
-record id, so the index reveals neither the id nor which accounts hold the same record.
+At rest, each record's id and payload, each tracker connection's tokens, client ID and username, the Apple and GitHub
+tokens kept to revoke a sign-in, and a web sign-in's result waiting for the app are sealed with AES-256-GCM under a
+key derived (HKDF-SHA256) from the server's data key, a file of 32 random bytes kept outside Postgres. Each sealed
+value is bound to its own row. Records are looked up by an HMAC-SHA256 of the account and the record id, so the index
+reveals neither the id nor which accounts hold the same record.
 
-The database, a dump or a backup therefore holds no addon URLs, ids, titles, tracker tokens or tracker usernames. It
-does hold account metadata as it is: identities, emails, Apple refresh tokens, device names, and the profile IDs and
-service names of tracker connections, which is why the server's backups are encrypted with age. Whoever has both the
-database and the data key can read everything, and so can the running server. Sync is not end-to-end encrypted.
+The database, a dump or a backup therefore holds no addon URLs, ids, titles, tracker tokens, tracker usernames, or
+Apple or GitHub tokens. It does hold account metadata as it is: identities, emails, device names, and the profile IDs
+and service names of tracker connections, which is why the server's backups are encrypted with age. Whoever has both
+the database and the data key can read everything, and so can the running server. Sync is not end-to-end encrypted.
 
 [server/README.md](server/README.md) has the details, the data key's handling and the backup setup.
