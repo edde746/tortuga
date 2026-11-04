@@ -9,11 +9,15 @@ import coil3.size.Size
 import kotlinx.coroutines.runBlocking
 import okio.Buffer
 import okio.FileSystem
+import okio.Source
+import okio.Timeout
+import okio.buffer
 import org.jetbrains.skia.EncodedImageFormat
 import org.jetbrains.skia.Image
 import org.jetbrains.skia.ImageInfo
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class FilteredSkiaDecoderTest {
@@ -49,5 +53,31 @@ class FilteredSkiaDecoderTest {
 
         val bitmap = (result.image as BitmapImage).bitmap
         assertEquals(40 to 1, bitmap.width to bitmap.height)
+    }
+
+    /** A file past any image's size (an addon's image URL leading to a huge download) fails, read no further. */
+    @Test
+    fun aFileLargerThanAnyImageFailsWithoutBeingReadWhole() {
+        var read = 0L
+        // Zeros, twice the most an image may be.
+        val huge = object : Source {
+            override fun read(sink: Buffer, byteCount: Long): Long {
+                if (read >= 2 * MAX_ENCODED_BYTES) return -1
+                val n = minOf(byteCount, 2 * MAX_ENCODED_BYTES - read)
+                sink.write(ByteArray(n.toInt()))
+                read += n
+                return n
+            }
+
+            override fun timeout() = Timeout.NONE
+
+            override fun close() = Unit
+        }
+        val options = Options(PlatformContext.INSTANCE, size = Size(40, 40), scale = Scale.FIT)
+
+        assertFailsWith<IllegalStateException> {
+            runBlocking { FilteredSkiaDecoder(ImageSource(huge.buffer(), FileSystem.SYSTEM), options).decode() }
+        }
+        assertTrue(read <= MAX_ENCODED_BYTES + 64 * 1024, "read $read bytes")
     }
 }

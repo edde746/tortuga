@@ -24,11 +24,15 @@ import org.jetbrains.skia.impl.use
  * with Skia's default sampling, the nearest pixel: an episode's 780 px thumbnail drawn 299 px wide kept one pixel in
  * about three and looked jagged. This one decodes to the same size, Coil's (the request's size, scale and
  * [maxBitmapSize]; larger than the image only with [Precision.EXACT]), at least a pixel each way, and gets there by
- * [resample].
+ * [resample]. A file of more than [MAX_ENCODED_BYTES] (an addon's image URL may lead anywhere) fails to decode, read
+ * no further.
  */
 internal class FilteredSkiaDecoder(private val source: ImageSource, private val options: Options) : Decoder {
     override suspend fun decode(): DecodeResult {
-        val bytes = source.source().use { it.readByteArray() }
+        val bytes = source.source().use { encoded ->
+            check(!encoded.request(MAX_ENCODED_BYTES + 1)) { "an image file of more than $MAX_ENCODED_BYTES bytes" }
+            encoded.readByteArray()
+        }
         val image = Image.makeFromEncoded(bytes)
         try {
             val (width, height) = decodedSize(image.width, image.height, options)
@@ -44,6 +48,9 @@ internal class FilteredSkiaDecoder(private val source: ImageSource, private val 
             FilteredSkiaDecoder(result.source, options)
     }
 }
+
+/** 32 MiB: far above any poster, background or logo. */
+internal const val MAX_ENCODED_BYTES: Long = 32L * 1024 * 1024
 
 /** The size Coil's own Skia decoder gives an image of [width] × [height] for [options], at least 1 × 1. */
 @OptIn(ExperimentalCoilApi::class)
