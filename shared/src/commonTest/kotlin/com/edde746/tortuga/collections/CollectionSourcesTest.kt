@@ -84,6 +84,14 @@ class CollectionSourcesTest {
     }
 
     @Test
+    fun anAddonNamedByUrlIsNeverAnotherInstallationOfIt() {
+        // The configuration at that URL is gone or turned off; the one left has the same manifest id and the catalog.
+        val other = addon("aio-metadata", "AIOMetadata", "aio.example/xyz", """[{"type":"movie","id":"mdblist.86934"}]""")
+        val source = CollectionSource.AddonCatalog("aio-metadata", "movie", "mdblist.86934", addonName = "AIOMetadata", addonUrl = "https://aio.example/abc")
+        assertEquals(SourceState.NeedsAddon("AIOMetadata"), resolve(source, addons = listOf(other)))
+    }
+
+    @Test
     fun aMissingCatalogOrAFilterTortugaCantSetCantShow() {
         val missing = resolve(CollectionSource.AddonCatalog("aio-metadata", "movie", "gone", catalogName = "Gone Movies", addonUrl = "https://aio.example/abc"))
         assertEquals(SourceState.NeedsCatalog("AIOMetadata", "Gone Movies"), missing)

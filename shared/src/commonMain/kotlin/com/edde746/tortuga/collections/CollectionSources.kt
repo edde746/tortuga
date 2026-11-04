@@ -48,8 +48,9 @@ object CollectionSources {
      * [source] against the profile's enabled [addons] (installed order), its connected trackers' [trackers] and
      * Trakt's public lists where this build has Trakt ([traktLists]).
      *
-     * An addon source takes the addon whose transport URL is its `addonUrl` when it has one, else the first whose
-     * manifest id is its `addonId`, and that addon's catalog of its type and id; its genre goes as the `genre` extra.
+     * An addon source takes the addon whose transport URL is its `addonUrl` when it has one (no other installation of
+     * that addon stands in for it), else the first whose manifest id is its `addonId`, and that addon's catalog of its
+     * type and id; its genre goes as the `genre` extra.
      * A catalog that needs an extra other than a genre, or doesn't take the genre, can't show. A tracker source takes
      * its service's connected account; a Trakt public list takes [traktLists], with or without a Trakt account.
      */
@@ -64,9 +65,11 @@ object CollectionSources {
     }
 
     private fun addon(source: CollectionSource.AddonCatalog, addons: List<Descriptor>): SourceState {
-        val addon = source.addonUrl?.let { url -> addons.firstOrNull { it.transportUrl.removeSuffix(MANIFEST).trimEnd('/') == url } }
-            ?: addons.firstOrNull { it.manifest.id == source.addonId }
-            ?: return SourceState.NeedsAddon(source.addonName ?: source.addonId)
+        val url = source.addonUrl
+        val addon = (
+            if (url != null) addons.firstOrNull { it.transportUrl.removeSuffix(MANIFEST).trimEnd('/') == url }
+            else addons.firstOrNull { it.manifest.id == source.addonId }
+        ) ?: return SourceState.NeedsAddon(source.addonName ?: source.addonId)
         val catalog = addon.manifest.catalogs.firstOrNull { it.type == source.type && it.id == source.catalogId }
             ?: return SourceState.NeedsCatalog(addon.manifest.name, source.catalogName ?: source.catalogId)
         val extra = source.genre?.let { listOf(ExtraValue(Extras.GENRE, it)) }.orEmpty()

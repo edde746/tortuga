@@ -58,8 +58,9 @@ data class CollectionFolder(
 sealed interface CollectionSource {
     /**
      * An addon's catalog: the installed addon whose transport URL is [addonUrl] (its manifest URL without
-     * `/manifest.json`) when given, else whose manifest id is [addonId], and its catalog of [type] and [catalogId],
-     * filtered by [genre] (its `genre` extra) when set. [addonName] and [catalogName] name them while they are missing.
+     * `/manifest.json`) when given (and only that one), else whose manifest id is [addonId], and its catalog of [type]
+     * and [catalogId], filtered by [genre] (its `genre` extra) when set. [addonName] and [catalogName] name them while
+     * they are missing.
      */
     @Serializable
     @SerialName("addon")
