@@ -2,7 +2,6 @@ package com.edde746.tortuga
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -91,8 +90,8 @@ internal class AndroidFiles(context: Context) {
         return try {
             launcher.launch(intent)
             true
-        } catch (e: ActivityNotFoundException) {
-            Log.w(TAG, e) { "No document picker" }
+        } catch (e: RuntimeException) {
+            Log.w(TAG) { "No document picker: ${e.javaClass.simpleName}" }
             pending = null
             false
         }

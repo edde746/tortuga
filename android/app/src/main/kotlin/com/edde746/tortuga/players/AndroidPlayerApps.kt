@@ -152,8 +152,9 @@ internal class AndroidPlayerApps(context: Context) : PlayerAppLauncher {
                 activity.startActivity(Intent.createChooser(intent, null))
                 Log.i(TAG) { "Opened the chooser" }
                 PlayerAppLaunch.Launched(PlayerAppProgress.NONE)
-            } catch (e: ActivityNotFoundException) {
-                Log.w(TAG, e) { "No chooser" }
+            } catch (e: RuntimeException) {
+                // By its class only: a refusal's message names the intent, the stream's link with it.
+                Log.w(TAG) { "No chooser: ${e.javaClass.simpleName}" }
                 PlayerAppLaunch.Failed(PlayerAppFailure.OTHER)
             }
         }
@@ -171,8 +172,8 @@ internal class AndroidPlayerApps(context: Context) : PlayerAppLauncher {
                 if (results != null) results.launch(candidate) else activity.startActivity(candidate)
             } catch (_: ActivityNotFoundException) {
                 continue
-            } catch (e: SecurityException) {
-                Log.w(TAG, e) { "${player.packageName} refused the launch" }
+            } catch (e: RuntimeException) {
+                Log.w(TAG) { "${player.packageName} refused the launch: ${e.javaClass.simpleName}" }
                 return PlayerAppLaunch.Failed(PlayerAppFailure.OTHER)
             }
             if (results != null) pending = Pending(player, events)

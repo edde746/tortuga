@@ -1,7 +1,6 @@
 package com.edde746.tortuga
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -97,18 +96,23 @@ internal class AndroidSignInPlatform(context: Context, private val activity: () 
         return ProviderCredential(IdentityProvider.GOOGLE, idToken, nonce, authorizationCode = null)
     }
 
-    /** Opens the sign-in page [url] in a Custom Tab, else the browser; anything but an `http`/`https` link is refused. */
+    /**
+     * Opens the sign-in page [url] in a Custom Tab, else the browser; anything but an `http`/`https` link is refused. A
+     * Custom Tab no app takes or the system refuses (a `SecurityException` from a restricted browser) falls back to the
+     * browser; each refusal is logged by its class only, as its message can carry the link.
+     */
     override fun openBrowser(url: String) {
         if (!WebUrl.isWeb(url)) return Log.w(TAG) { "Not opening a sign-in page with scheme ${WebUrl.scheme(url)}" }
         val activity = activity() ?: return Log.w(TAG) { "No activity to open the sign-in page from" }
         val uri = Uri.parse(url)
         try {
             CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(activity, uri)
-        } catch (_: ActivityNotFoundException) {
+        } catch (e: RuntimeException) {
+            Log.w(TAG) { "No Custom Tab opens the sign-in page: ${e::class.simpleName}" }
             try {
                 activity.startActivity(Intent(Intent.ACTION_VIEW, uri))
-            } catch (e: RuntimeException) {
-                Log.w(TAG) { "No browser opens the sign-in page: ${e::class.simpleName}" }
+            } catch (again: RuntimeException) {
+                Log.w(TAG) { "No browser opens the sign-in page: ${again::class.simpleName}" }
             }
         }
     }
