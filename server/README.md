@@ -220,6 +220,11 @@ app offers it as a sign-in (`/v2/info` doesn't list `review`), and the page show
 only that the device signs in, that the password is wrong, that no device shows the code, or that the code expired
 (codes last 10 minutes). Submissions take 5 a minute per client address; past it the page says to wait a minute.
 
+Make the review password random and long, `openssl rand -base64 24` (32 characters, 144 bits), never one a person
+chose: the page is on the internet, any site's page can post guesses to it from its visitors' browsers, and the hash is
+a fast SHA-256, so only the password's length keeps guesses through many addresses, or against a leaked hash, from
+finding it. What a found password opens is the demo account alone.
+
 ### Tracker sign-in relay
 
 MyAnimeList and AniList hand out tokens only to a registered redirect URI (and AniList only with the client
