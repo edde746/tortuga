@@ -104,7 +104,7 @@ for group in [only] if only else ("android", "apple", "linux", "windows"):
     elif group == "apple":
         lib = libs.get("libmpv")
     else:
-        lib = next(iter(libs.values()), None)
+        lib = libs.get(f"libmpv-{group}")
         lib = lib if lib and lib.get("prebuilt") else None
     if not lib:
         if only or group == "apple":
