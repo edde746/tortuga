@@ -23,7 +23,8 @@ import org.jetbrains.skia.impl.use
  * Coil's desktop decoder (`SkiaImageDecoder`) with a filtered shrink. Coil's draws the image into the size asked for
  * with Skia's default sampling, the nearest pixel: an episode's 780 px thumbnail drawn 299 px wide kept one pixel in
  * about three and looked jagged. This one decodes to the same size, Coil's (the request's size, scale and
- * [maxBitmapSize]; larger than the image only with [Precision.EXACT]), and gets there by [resample].
+ * [maxBitmapSize]; larger than the image only with [Precision.EXACT]), at least a pixel each way, and gets there by
+ * [resample].
  */
 internal class FilteredSkiaDecoder(private val source: ImageSource, private val options: Options) : Decoder {
     override suspend fun decode(): DecodeResult {
@@ -44,13 +45,14 @@ internal class FilteredSkiaDecoder(private val source: ImageSource, private val 
     }
 }
 
-/** The size Coil's own Skia decoder gives an image of [width] × [height] for [options]. */
+/** The size Coil's own Skia decoder gives an image of [width] × [height] for [options], at least 1 × 1. */
 @OptIn(ExperimentalCoilApi::class)
 private fun decodedSize(width: Int, height: Int, options: Options): Pair<Int, Int> {
     val target = DecodeUtils.computeDstSize(width, height, options.size, options.scale, options.maxBitmapSize)
     var multiplier = DecodeUtils.computeSizeMultiplier(width, height, target.first, target.second, options.scale, options.maxBitmapSize)
     if (options.precision == Precision.INEXACT) multiplier = multiplier.coerceAtMost(1.0)
-    return (multiplier * width).toInt() to (multiplier * height).toInt()
+    // A wide logo shrunk to a small view: its height would round down to nothing.
+    return (multiplier * width).toInt().coerceAtLeast(1) to (multiplier * height).toInt().coerceAtLeast(1)
 }
 
 /**

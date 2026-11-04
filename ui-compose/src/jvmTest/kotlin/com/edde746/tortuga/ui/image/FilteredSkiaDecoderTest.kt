@@ -37,4 +37,17 @@ class FilteredSkiaDecoderTest {
         val off = decoded.indices.filter { it % 4 != 3 }.map { decoded[it].toInt() and 0xFF }.filter { it !in 112..143 }
         assertTrue(off.isEmpty(), "${off.size} channel values off grey, e.g. ${off.take(8)}")
     }
+
+    /** A logo far wider than tall (2000 × 20) fitted into a 40 dp square keeps a pixel of height, rather than none. */
+    @Test
+    fun aVeryWideImageShrunkToASmallViewKeepsAPixelOfHeight() = runBlocking {
+        val png = Image.makeRaster(ImageInfo.makeN32Premul(2000, 20), ByteArray(2000 * 20 * 4) { -1 }, 2000 * 4)
+            .encodeToData(EncodedImageFormat.PNG)!!.bytes
+        val options = Options(PlatformContext.INSTANCE, size = Size(40, 40), scale = Scale.FIT)
+
+        val result = FilteredSkiaDecoder(ImageSource(Buffer().write(png), FileSystem.SYSTEM), options).decode()
+
+        val bitmap = (result.image as BitmapImage).bitmap
+        assertEquals(40 to 1, bitmap.width to bitmap.height)
+    }
 }
