@@ -40,13 +40,15 @@ Store), in every locale; "Stremio" never in a keyword field, and in Apple's subt
 Stremio addons"; Apple keywords name no other app or trademark, repeat no word of the name and fit 100 bytes of UTF-8.
 A field file has no trailing newline: deliver and supply upload its bytes as they are.
 
-Review access: every store's review text signs in with Google as the reviewer account, REVIEWER_EMAIL, which is public.
-Its password is never in this repository. Where the store has sign-in fields (Play's sign-in details, App Store
-Connect's demo account) the text says the account is in them, and the password goes into them at entry time; Apple's
-demo account goes to deliver as options at upload, never as review_information files here. Where the store has only
-free text (Amazon's testing instructions, Microsoft's notes for certification) the text holds the token
+Review access: every store's review text signs in through the review sign-in (server/README.md, Review sign-in): the
+reviewer chooses "Link from another device" on the device, opens REVIEW_PAGE in any browser, enters the review password
+and the code the device shows, and the device signs in. Its password is never in this repository. Where the store has
+sign-in fields (Play's sign-in details, App Store Connect's demo account) the text says the password is in them, their
+username is REVIEWER_USERNAME (the page asks only for the password), and the password goes into them at entry time;
+Apple's demo account goes to deliver as options at upload, never as review_information files here. Where the store has
+only free text (Amazon's testing instructions, Microsoft's notes for certification) the text holds the token
 {reviewer_password}, replaced with the password at entry time. Lengths count the token as the password: its real length
-when STORE_REVIEWER_FILE names the reviewer account's JSON file ({"email", "password"}), else 40 characters.
+when STORE_REVIEWER_FILE names the review sign-in's JSON file ({"password", ...}), else 40 characters.
 Ends with RESULT: PASS or RESULT: FAIL; values starting "OWNER DECIDES" are listed as open.
 """
 from __future__ import annotations
@@ -119,7 +121,9 @@ MICROSOFT_IARC = ("shared_user_generated_content_primary", "public_nudity", "pub
                   "users_can_block_users_or_content", "users_can_report_users_or_content", "chat_moderated",
                   "interactions_limited_to_invited_friends", "cash_rewards_gift_cards_crypto_or_nfts",
                   "news_or_education", "promotes_age_restricted_products")
-REVIEWER_EMAIL = "demo@usetortuga.app"
+REVIEWER_USERNAME = "review"
+REVIEW_PAGE = "https://api.usetortuga.app/review"
+LINK_OPTION = "Link from another device"  # the sign-in screen's button (T.account.signIn.linkDevice)
 PASSWORD = "{reviewer_password}"
 AMAZON = {
     "title.txt": (None, "chars"),
@@ -370,9 +374,9 @@ def play(r: Report, build: str) -> None:
         access, label = forms["app_access"], "google-play/forms.json app_access"
         r.line(bool(access.get("name")), f"{label} name", repr(access.get("name")) if access.get("name")
                else "missing: Play's sign-in details need the instruction set's name")
-        r.line(access.get("username") == REVIEWER_EMAIL, f"{label} username", repr(access.get("username")))
+        r.line(access.get("username") == REVIEWER_USERNAME, f"{label} username", repr(access.get("username")))
         r.line(access.get("password") == PASSWORD, f"{label} password", f"{access.get('password')!r}, entered as the "
-               "reviewer account's" if access.get("password") == PASSWORD else f"not {PASSWORD}")
+               "review password" if access.get("password") == PASSWORD else f"not {PASSWORD}")
         review_notes(r, f"{label} instructions", access["instructions"], PLAY_APP_ACCESS, fields=True)
 
 
@@ -459,7 +463,7 @@ def languages(r: Report) -> None:
 
 
 def password_length() -> tuple[int, str]:
-    """The reviewer account's password length, from STORE_REVIEWER_FILE, else the 40-character worst case."""
+    """The review password's length, from STORE_REVIEWER_FILE, else the 40-character worst case."""
     path = os.environ.get("STORE_REVIEWER_FILE")
     if not path:
         return 40, "the 40-character worst case"
@@ -467,12 +471,13 @@ def password_length() -> tuple[int, str]:
 
 
 def review_notes(r: Report, label: str, text: str, limit: int | None = None, fields: bool = False) -> None:
-    """A review text: the demo addon, the reviewer account, and its password only where the store has no sign-in
-    fields (`fields`), as the token; `limit` in characters with the token counted as the password."""
+    """A review text: the demo addon, the review sign-in's steps (the sign-in screen's option and the review page), and
+    its password only where the store has no sign-in fields (`fields`), as the token; `limit` in characters with the
+    token counted as the password."""
     for url in re.findall(r"https://[^\s)]+[^\s).,]", text):
         r.urls[url] = label
     r.line(f"{DEMO_URL}manifest.json" in text, label, f"names {DEMO_URL}manifest.json")
-    r.line(REVIEWER_EMAIL in text, label, f"names the reviewer account {REVIEWER_EMAIL}")
+    r.line(LINK_OPTION in text and REVIEW_PAGE in text, label, f"signs in by {LINK_OPTION!r} and {REVIEW_PAGE}")
     tokens = set(re.findall(r"\{\w+\}", text))
     want = set() if fields else {PASSWORD}
     r.line(tokens == want, label, (f"the password as {PASSWORD}" if want else "no password: the sign-in fields hold it")

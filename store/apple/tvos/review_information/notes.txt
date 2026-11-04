@@ -1,7 +1,7 @@
 Tortuga is a video player for addons the user installs. It provides no content of its own. This build has no in-app list of addons to install: an addon is added only by entering or opening its link.
 
 SIGNING IN
-Tortuga asks for an account at first launch, because a profile's setup (its addons, library and settings) is entered once and then follows the person to every device. Use the demo account in the Sign-In Information fields (demo@usetortuga.app): choose Sign in with Google on the TV, then on a phone or computer signed in to that account go to the address the TV shows and enter its code.
+Tortuga asks for an account at first launch, because a profile's setup (its addons, library and settings) is entered once and then follows the person to every device. To sign in to the review account, choose Link from another device on the TV's sign-in screen: the TV shows a code. On a phone or computer, open https://api.usetortuga.app/review in any browser, enter the password from the Sign-In Information fields and the TV's code, and choose Sign in the device. The TV signs in within a few seconds. The page asks only for the password, not the user name (review).
 
 SEEING SOMETHING PLAY
 A new profile starts with a catalog addon (Cinemeta) and a subtitle addon (OpenSubtitles). They list titles but have no streams, so nothing plays until an addon with streams is installed. Our demo addon streams full-length public-domain films from the Internet Archive and Blender Foundation open movies (CC BY) from download.blender.org, straight from those sites:
@@ -10,7 +10,7 @@ A new profile starts with a catalog addon (Cinemeta) and a subtitle addon (OpenS
 3. On Home, the last row is "Tortuga demo". Open Tears of Steel, choose Play, then pick the Tortuga demo stream: it plays from download.blender.org. Night of the Living Dead (1968), in the same row, plays from the Internet Archive.
 
 DELETING THE ACCOUNT
-Settings, then Account, then Delete account deletes the account and everything the server keeps for it, and signs out every device. Without the app, https://usetortuga.app/support/#delete says how to ask by email.
+Settings, then Account, then Delete account deletes the account and everything the server keeps for it, and signs out every device. Without the app, https://usetortuga.app/support/#delete says how to ask by email. The review account may be deleted: the next sign-in through the review page makes a new, empty one.
 
 SUPPORT
 support@usetortuga.app

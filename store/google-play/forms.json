@@ -7,10 +7,10 @@
   },
   "app_access": {
     "restricted": true,
-    "name": "Reviewer Google account",
-    "username": "demo@usetortuga.app",
+    "name": "Review sign-in",
+    "username": "review",
     "password": "{reviewer_password}",
-    "instructions": "Sign in with Google with the reviewer account in the sign-in details (demo@usetortuga.app). On a TV, choose Sign in with Google, then on a phone or computer signed in to that account go to the address the TV shows and enter its code. To see something play, open Settings, then Addons, choose Install addon, enter https://usetortuga.app/demo/manifest.json, then Continue and Install. On Home, in the Tortuga demo row, open Tears of Steel, choose Play and pick the Tortuga demo stream."
+    "instructions": "On the sign-in screen, choose Link from another device: the phone or TV shows a code. In any browser, open https://api.usetortuga.app/review, enter the password from the sign-in details and the code, and choose Sign in the device. To see something play, open Settings, then Addons, choose Install addon, enter https://usetortuga.app/demo/manifest.json, then Continue and Install. On Home, in the Tortuga demo row, open Tears of Steel, choose Play and pick the Tortuga demo stream."
   },
   "ads": {
     "contains_ads": false
