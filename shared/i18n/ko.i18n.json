@@ -222,6 +222,7 @@
       "unsupportedFormat": "플레이어가 읽을 수 없는 형식의 스트림입니다.",
       "cantDecode": "플레이어가 이 스트림의 영상이나 오디오를 재생하지 못했습니다.",
       "engineFailed": "오류로 인해 플레이어가 멈췄습니다.",
+      "cutShort": "동영상이 끝나기 전에 스트림이 멈췄습니다.",
       "retry": "다시 시도",
       "nextStream": "다음 스트림 시도",
       "close": "닫기",

@@ -891,6 +891,43 @@ class PlaybackSessionTest {
         assertNull(h.session.info.value.failure)
     }
 
+    /**
+     * A seek past what was read, on a link that died meanwhile: its request answers 403, and FFmpeg makes the failed
+     * read the file's end, which mpv reports at the file's length. An end after an HTTP error is the stream failing
+     * wherever it comes: a fresh link plays on from the seek's target. That one dying too, however soon after its
+     * start, shows the error.
+     */
+    @Test
+    fun anEndAfterAnHttpErrorIsTheStreamFailingEvenAtTheLength() = runTest {
+        val h = SessionHarness(this)
+        h.serveCdn(file)
+        var resolves = 0
+        h.routes["addon.example"] = { request ->
+            resolves++
+            redirect("https://cdn.example/${request.url.segments.last()}-$resolves.mkv")
+        }
+        h.start(movie())
+        h.engine.open(duration = 3000.0)
+        h.settle()
+        h.playTo(120.0)
+        h.seekTo(1800.0)
+        h.engine.report { it.copy(positionSeconds = 3000.0, eof = true, paused = true, httpErrorStatus = 403) }
+        h.settle()
+
+        assertFalse(h.session.engineState.value.eof)
+        assertNull(h.session.info.value.failure)
+        assertEquals(listOf("https://cdn.example/movie-2.mkv", 1800.0), h.engine.loads.last().let { listOf(it.url, it.startSeconds) })
+        assertEquals(1_800_000, h.item(MOVIE.id)!!.state.timeOffset, "the movie stays where it was sent, not at its end")
+
+        h.engine.open(duration = 3000.0)
+        h.settle()
+        h.playTo(1802.0)
+        h.engine.report { it.copy(positionSeconds = 1802.0, eof = true, paused = true, httpErrorStatus = 403) }
+        h.settle()
+        assertFalse(h.session.engineState.value.eof)
+        assertEquals(PlaybackFailure.Engine(EngineError("the file ended at 1802.0 s of 3000.0 s after HTTP error 403", 403, EngineErrorKind.CUT_SHORT)), h.session.info.value.failure)
+    }
+
     @Test
     fun tenMinutesOfPlaybackAfterAReResolveEarnAnotherOne() = runTest {
         val h = SessionHarness(this)

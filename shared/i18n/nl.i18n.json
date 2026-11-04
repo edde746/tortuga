@@ -226,6 +226,7 @@
       "unsupportedFormat": "De stream heeft een formaat dat de speler niet kan lezen.",
       "cantDecode": "De speler kon het beeld of geluid van deze stream niet afspelen.",
       "engineFailed": "De speler is gestopt door een fout.",
+      "cutShort": "De stream stopte voor het einde van de video.",
       "retry": "Opnieuw",
       "nextStream": "Volgende stream proberen",
       "close": "Sluiten",

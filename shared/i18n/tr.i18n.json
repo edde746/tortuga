@@ -226,6 +226,7 @@
       "unsupportedFormat": "Akış, oynatıcının okuyamadığı bir biçimde.",
       "cantDecode": "Oynatıcı bu akışın görüntüsünü veya sesini oynatamadı.",
       "engineFailed": "Oynatıcı bir hata nedeniyle durdu.",
+      "cutShort": "Akış, video bitmeden durdu.",
       "retry": "Tekrar dene",
       "nextStream": "Sonraki akışı dene",
       "close": "Kapat",

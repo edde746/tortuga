@@ -230,6 +230,7 @@
       "unsupportedFormat": "Stream je ve formátu, který přehrávač neumí přečíst.",
       "cantDecode": "Přehrávač nedokázal přehrát obraz nebo zvuk tohoto streamu.",
       "engineFailed": "Přehrávač se zastavil kvůli chybě.",
+      "cutShort": "Stream skončil dřív, než video dohrálo.",
       "retry": "Zkusit znovu",
       "nextStream": "Zkusit další stream",
       "close": "Zavřít",

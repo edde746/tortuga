@@ -226,6 +226,7 @@
       "unsupportedFormat": "Strömmen har ett format som spelaren inte kan läsa.",
       "cantDecode": "Spelaren kunde inte spela upp strömmens bild eller ljud.",
       "engineFailed": "Spelaren stoppades av ett fel.",
+      "cutShort": "Strömmen slutade innan videon var slut.",
       "retry": "Försök igen",
       "nextStream": "Prova nästa ström",
       "close": "Stäng",

@@ -222,6 +222,7 @@
       "unsupportedFormat": "Nguồn phát có định dạng mà trình phát không đọc được.",
       "cantDecode": "Trình phát không phát được hình ảnh hoặc âm thanh của nguồn phát này.",
       "engineFailed": "Trình phát đã dừng do gặp lỗi.",
+      "cutShort": "Nguồn phát đã dừng trước khi video kết thúc.",
       "retry": "Thử lại",
       "nextStream": "Thử nguồn tiếp theo",
       "close": "Đóng",

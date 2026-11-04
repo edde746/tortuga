@@ -101,6 +101,20 @@ class LocalPlaybackTest {
         h.settle()
     }
 
+    /** A download has no link to fail: its file's end is the end, however short of the length it comes. */
+    @Test
+    fun aDownloadThatEndsShortOfItsLengthEndsThere() = runTest {
+        val h = SessionHarness(this, localVideos = FakeLocalVideos())
+        h.start(localPlayRequest(MOVIE, MOVIE.id, local(7, choice(urlStream("https://host.example/movie.mkv")), "/data/Movie.mkv")))
+        h.engine.open(duration = 3600.0)
+        h.settle()
+        h.engine.report { it.copy(positionSeconds = 1200.0, eof = true, paused = true) }
+        h.settle()
+        assertTrue(h.session.engineState.value.eof)
+        assertEquals(1, h.engine.loads.size)
+        assertEquals(null, h.session.info.value.failure)
+    }
+
     @Test
     fun theNextEpisodePlaysFromItsDownloadWithoutAskingTheAddons() = runTest {
         val downloads = FakeLocalVideos()

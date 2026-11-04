@@ -230,6 +230,7 @@
       "unsupportedFormat": "La transmisión está en un formato que el reproductor no puede leer.",
       "cantDecode": "El reproductor no pudo reproducir el video o el audio de esta transmisión.",
       "engineFailed": "El reproductor se detuvo por un error.",
+      "cutShort": "La transmisión se detuvo antes del final del video.",
       "retry": "Reintentar",
       "nextStream": "Probar la siguiente",
       "close": "Cerrar",

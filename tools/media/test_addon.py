@@ -126,6 +126,13 @@ Routes (the addon protocol; ids are URL-decoded):
                                            /resolve/, named and sized as episode 1's, in that binge group too. With
                                            --errvid-unsized the slates' streams have no size, as an addon's that sends
                                            none: the player tells a slate by its length alone, once the engine opened it
+  /meta/series/tortuga-cut.json            "Tortuga Cut Link Test", a series of two episodes whose streams share one
+  /stream/series/tortuga-cut:1:<n>.json    binge group: episode 1 tracks-next.mkv (30 s) through serve.py's /resolve/
+                                           at 256 KiB/s, each CDN link it mints dropping its transfer after 1.2 MB
+                                           (about 10 s of the file) and answering 403 from then on, as a link that
+                                           expires while the player holds what it read: the end of the file the player
+                                           then reaches is the stream failing, not the episode's end (the Apple
+                                           PlayerTests); episode 2 the bound h264-sdr.mkv (20 s)
   /meta/series/tortuga-hero-wide.json      the Detail hero's titles (the Apple DetailTests), each with the bright
   /meta/movie/tortuga-hero-tall.json       frame as its backdrop, a metadata line (2026–, 24 min, Animation, Comedy) and
   /meta/movie/tortuga-hero-plain.json      an IMDb rating: a series with a wide, short logo, answered 3 s late, a movie
@@ -618,6 +625,13 @@ ERRVID_EPISODES = 3
 ERRVID_SIZE = 1 << 30
 # The slates' CDN links last the run, as a host's do (serve.py's default is 60 s).
 ERRVID_LINK_EXPIRE = 3600
+
+# A series whose episode 1's CDN links die partway, each after CUT_LINK_BYTES of its file, the next episode's stream
+# in its binge group.
+CUT_SERIES_ID = "tortuga-cut"
+CUT_EPISODES = 2
+CUT_LINK_BYTES = 1_200_000
+CUT_LINK_RATE = 256
 
 # The Detail hero's titles (the Apple DetailTests): each logo's canvas and its art's box in it (left, top,
 # right, bottom); the wide one is answered HERO_WIDE_DELAY seconds late (the title's name shows until it comes).
@@ -1557,6 +1571,24 @@ def errvid_stream(media, episode, sized):
     }
 
 
+def cut_meta(base):
+    return series_meta(base, CUT_SERIES_ID, "Tortuga Cut Link Test",
+                       "Two episodes, the first from links that die partway through its file.", CUT_EPISODES)
+
+
+def cut_stream(media, episode):
+    """Episode [episode]'s one stream of the cut-link series: episode 1 tracks-next.mkv through a lazy link whose CDN
+    links each drop their transfer after CUT_LINK_BYTES, episode 2 the bound h264-sdr.mkv; one binge group."""
+    if episode == 2:
+        return bound(media)
+    return {
+        "name": "Tortuga Test\n1080p",
+        "description": "tracks-next.mkv through a lazy link\nIts CDN links die after 1.2 MB",
+        "url": served(media, "resolve", "tracks-next.mkv", {"bytes": CUT_LINK_BYTES, "rate": CUT_LINK_RATE}),
+        "behaviorHints": {"filename": "tracks-next.mkv", "bingeGroup": bound(media)["behaviorHints"]["bingeGroup"]},
+    }
+
+
 def sorted_streams(media):
     """Seven releases as an addon's plain text, out of every order: their resolutions, sources and sizes read from the
     name and the description (the file name the release's); each plays h264-sdr.mkv."""
@@ -2233,6 +2265,7 @@ def main():
         f"/meta/series/{SPOILERS_ID}.json": spoilers_meta,
         f"/meta/series/{META_STREAMS_ID}.json": lambda base: meta_streams_meta(base, media),
         f"/meta/series/{ERRVID_SERIES_ID}.json": errvid_meta,
+        f"/meta/series/{CUT_SERIES_ID}.json": cut_meta,
         f"/meta/movie/{FORMATTED_ID}.json": lambda base: meta(base, FORMATTED_ID, "Tortuga Formatted Test"),
         f"/stream/movie/{FORMATTED_ID}.json": lambda base: formatted(media),
         f"/meta/movie/{SORTED_ID}.json": lambda base: meta(base, SORTED_ID, "Tortuga Sorted Test"),
@@ -2346,6 +2379,8 @@ def main():
     for episode in range(1, ERRVID_EPISODES + 1):
         routes[f"/stream/series/{ERRVID_IMDB_ID}:1:{episode}.json"] = (
             lambda base, episode=episode: {"streams": [errvid_stream(media, episode, not a.errvid_unsized)]})
+    for episode in range(1, CUT_EPISODES + 1):
+        routes[f"/stream/series/{CUT_SERIES_ID}:1:{episode}.json"] = lambda base, episode=episode: {"streams": [cut_stream(media, episode)]}
     for episode in range(1, META_STREAMS_EPISODES + 1):
         routes[f"/stream/series/{META_STREAMS_ID}:1:{episode}.json"] = lambda base: {"streams": [unbound(media), *UNSAFE_LINKS]}
     for episode in range(1, CHAPTERS_EPISODES + 1):

@@ -226,6 +226,7 @@
       "unsupportedFormat": "The stream isn't in a format the player can read.",
       "cantDecode": "The player couldn't play this stream's video or audio.",
       "engineFailed": "The player stopped with an error.",
+      "cutShort": "The stream stopped before the end of the video.",
       "retry": "Retry",
       "nextStream": "Try next stream",
       "close": "Close",

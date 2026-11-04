@@ -230,6 +230,7 @@
       "unsupportedFormat": "O stream está em um formato que o player não consegue ler.",
       "cantDecode": "O player não conseguiu reproduzir o vídeo ou o áudio deste stream.",
       "engineFailed": "O player parou por causa de um erro.",
+      "cutShort": "O stream parou antes do fim do vídeo.",
       "retry": "Tentar novamente",
       "nextStream": "Tentar próximo stream",
       "close": "Fechar",

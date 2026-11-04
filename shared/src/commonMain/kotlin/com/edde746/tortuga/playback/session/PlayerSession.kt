@@ -25,7 +25,10 @@ import kotlin.time.TimeMark
  * [SessionInfo.failure]; a failure it gives up on does.
  */
 interface PlayerSession {
-    /** The engine's latest state, as the session's engine listener received it. */
+    /**
+     * The engine's latest state, as the session takes it: an end of the file it takes for the stream failing (cut
+     * short) comes as the engine's failure instead ([com.edde746.tortuga.playback.EngineErrorKind.CUT_SHORT]).
+     */
     val engineState: StateFlow<EngineState>
 
     val info: StateFlow<SessionInfo>

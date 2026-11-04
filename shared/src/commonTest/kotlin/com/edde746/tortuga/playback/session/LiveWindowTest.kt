@@ -73,6 +73,7 @@ class LiveWindowTest {
 
         // Ahead within what the engine read: a seek, no reopen.
         h.engine.report { it.copy(cacheEndSeconds = 0.2 + 40.0) }
+        h.settle()
         h.session.seekLive(20.0)
         h.settle()
         assertEquals(2, h.engine.loads.size)
@@ -125,6 +126,7 @@ class LiveWindowTest {
         // The reopened file read ahead to a second before the edge. As mpv 0.41 with serve.py's live stream, its last
         // 1.8 s are a keyframe range not yet whole, past which it refuses a seek.
         h.engine.report { it.copy(cacheEndSeconds = 0.2 + 39.0) }
+        h.settle()
         h.engine.seekableEnd = 0.2 + 39.0 - 1.8
         h.session.seekLive(0.0)
         h.settle()
@@ -152,6 +154,7 @@ class LiveWindowTest {
         h.playTo(40.0)
         // As mpv 0.41 after a minute of serve.py's live stream: it holds everything since the first frame.
         h.engine.report { it.copy(cacheStartSeconds = 0.0) }
+        h.settle()
         val behind = h.session.info.value.liveWindow!!.behind(h.engine.state.positionSeconds)
         h.session.seekLive(behind + 30.0)
         h.settle()

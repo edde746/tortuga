@@ -16,6 +16,7 @@ import com.edde746.tortuga.model.MetaItem
 import com.edde746.tortuga.model.Video
 import com.edde746.tortuga.playback.Chapter
 import com.edde746.tortuga.playback.EngineError
+import com.edde746.tortuga.playback.EngineErrorKind
 import com.edde746.tortuga.playback.EngineState
 import com.edde746.tortuga.playback.ErrorVideoSign
 import com.edde746.tortuga.playback.LoadRequest
@@ -120,6 +121,11 @@ import kotlin.time.TimeSource
  *   once and resumes at the last position. That budget comes back after [SessionConfig.expiryResetMillis] of
  *   playback. Any other failure is surfaced in [SessionInfo.failure] without a URL in it; [retry] resolves the stream
  *   again and [playNextStream] moves to the next alternative, both at the last position.
+ * - An end of the file is the stream failing, not the video's end, when the stream was cut short ([cutShort]): the
+ *   engine logged an HTTP error for it, or it ended short of [CREDITS_THRESHOLD] of its length. [engineState] and
+ *   every rule here then see the engine's failure ([EngineErrorKind.CUT_SHORT]) instead of the end, which [ExpiryPolicy]
+ *   recovers from as from an expiry: nothing counts the video watched, tells observers it ended or plays the next
+ *   episode, and the progress saved is where it stopped.
  * - An error video (an addon's clip of a message, sent instead of the video: [ErrorVideoSign]) is never played
  *   or recorded as the video. One the resolve tells (its final URL or its size) doesn't load; one the engine tells
  *   (its length against the length recorded for the video) is paused once the engine reports its length, which can be
@@ -264,6 +270,9 @@ class PlaybackSession internal constructor(
 
     // The file in the engine, and the jobs around it.
     private var file: EngineFile? = null
+
+    /** The load whose end was its stream cut short ([judgeEnd]); null before one. */
+    private var cutShortLoad: Long? = null
     private var expiry: ExpiryState = ExpiryState.FirstResolution
     private var attempt: Job? = null
     private var ticker: Job? = null
@@ -293,11 +302,16 @@ class PlaybackSession internal constructor(
     init {
         engine.setListener(object : PlayerEngineListener {
             override fun onState(state: EngineState) {
-                mutableEngineState.value = state
                 states.trySend(state)
             }
         })
-        scope.launch { for (state in states) onEngineState(state) }
+        scope.launch {
+            for (reported in states) {
+                val state = judgeEnd(reported)
+                mutableEngineState.value = state
+                onEngineState(state)
+            }
+        }
         recorder = PlaybackRecorder(profileId, library, streamHistory, sync, config.progressIntervalMillis, scope, TAG)
         styleUpdates = scope.launch { subtitleStyle.distinctUntilChanged().collect(engine::setSubtitleStyle) }
         settingsUpdates = scope.launch { settings.observe(profileId).collect(::followSettings) }
@@ -817,6 +831,43 @@ class PlaybackSession internal constructor(
     }
 
     // The engine's reports
+
+    /**
+     * [state] as the session takes it: the current file's end, when its stream was [cutShort], as the engine's failure
+     * ([EngineErrorKind.CUT_SHORT], with the HTTP status the engine logged) instead of an end. The engine stays at that
+     * end after the session left the file, so every later report of that load ([cutShortLoad]) is the failure too.
+     */
+    private fun judgeEnd(state: EngineState): EngineState {
+        if (!state.eof) return state
+        if (state.loadId != cutShortLoad) {
+            val file = file
+            if (file == null || state.loadId != file.loadId || !cutShort(file, state)) return state
+            cutShortLoad = state.loadId
+        }
+        val why = state.httpErrorStatus?.let { " after HTTP error $it" }.orEmpty()
+        val message = "the file ended at ${state.positionSeconds} s of ${state.durationSeconds} s$why"
+        return state.copy(eof = false, error = EngineError(message, state.httpErrorStatus, EngineErrorKind.CUT_SHORT))
+    }
+
+    /**
+     * Whether [file]'s end ([state]) is its stream cut short: FFmpeg ends a read the server refused, or a connection
+     * that closed early, as the file's end. So an end after an HTTP error the engine logged for the stream, wherever it
+     * comes (a seek the dead link refused ends at the length), is the stream failing. So is one short of
+     * [CREDITS_THRESHOLD] of the length: a length a container gets wrong runs past the last frame by seconds (a
+     * subtitle or audio track that ends later), by a few percent where it is estimated from the bitrate, and past that
+     * threshold the video counts as finished anyway (a movie left there starts over). An unknown length says nothing,
+     * and a file that ended without an HTTP error within [ENDED_AT_START_SECONDS] of where it started ends there,
+     * whatever its length says: the fresh link's reload at the point where the last one stopped found the file's real
+     * end. A download has no link to fail, an error video opened for its message plays to its own end, and a live
+     * stream's end is the stream's.
+     */
+    private fun cutShort(file: EngineFile, state: EngineState): Boolean {
+        if (file.local != null || file.errorVideo != null || live(file)) return false
+        if (state.httpErrorStatus != null) return true
+        val at = state.positionSeconds
+        if (file.startAt > 0 && at - file.startAt < ENDED_AT_START_SECONDS) return false
+        return state.durationSeconds > 0 && at < state.durationSeconds * CREDITS_THRESHOLD
+    }
 
     private fun onEngineState(state: EngineState) {
         val file = file ?: return
@@ -1438,6 +1489,9 @@ class PlaybackSession internal constructor(
         /** A reported position this close to the expected one means the engine got there. */
         private const val SEEK_SETTLED_SECONDS = 2.0
         private val SEEK_SETTLE_TIMEOUT = 5.seconds
+
+        /** A file whose end comes this soon after where it started ended there ([cutShort]). */
+        private const val ENDED_AT_START_SECONDS = 5.0
 
         /** Seeks closer together than this push once, after the last. */
         private val SEEK_FLUSH_DELAY = 2.seconds

@@ -230,6 +230,7 @@
       "unsupportedFormat": "La source est dans un format que le lecteur ne sait pas lire.",
       "cantDecode": "Le lecteur n’a pas pu lire la vidéo ou le son de cette source.",
       "engineFailed": "Le lecteur s’est arrêté à cause d’une erreur.",
+      "cutShort": "La source s’est arrêtée avant la fin de la vidéo.",
       "retry": "Réessayer",
       "nextStream": "Essayer la source suivante",
       "close": "Fermer",

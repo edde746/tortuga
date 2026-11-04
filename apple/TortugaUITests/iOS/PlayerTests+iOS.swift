@@ -22,7 +22,9 @@ import XCTest
 /// plays the one before, each in turn, both episode buttons around back, play/pause and forward, each disabled at its
 /// end of the series, in portrait and in landscape. Over the intro of the test addon's chapters series' first episode
 /// the skip button sits clear of the controls brought up over it and skips it by a tap, and the credits bring up next
-/// (`SkipTestSupport`). The remux's French SRT line moves up for the controls only where they cover the picture.
+/// (`SkipTestSupport`). An episode whose links die partway plays on from a fresh link instead of ending there, then
+/// shows the error with Retry, unwatched, its next episode never playing (`testALinkThatDiesMidPlayIsNoEpisodeEnd`).
+/// The remux's French SRT line moves up for the controls only where they cover the picture.
 /// On the test addon's slow stream the loading text lies clear of the bars and the transport with the controls up, in
 /// portrait and in landscape; the error for the test addon's missing file takes the middle alone, without the
 /// transport and the bottom bar and clear of the top bar, in both orientations; over a bright and a dark still frame
@@ -799,6 +801,78 @@ extension PlayerTests {
         requireClearOfTheControls("player.upNext", "the plain up next at the episode's end in landscape")
         screenShot("upnext-cancelled in landscape")
         Self.quitAndTurn(to: .portrait)
+    }
+
+    /// The test addon's cut-link series (tortuga-cut: episode 1 tracks-next.mkv, 30 s, in the binge group of episode 2's
+    /// h264-sdr.mkv, 20 s): each CDN link of episode 1 drops its transfer after 1.2 MB, about 10 s in, and answers 403
+    /// from then on, as a link that expires while the player holds what it read. Left without a touch (the playhead probe
+    /// read twice a second until the error comes up, the second episode plays or 90 s pass), the player plays out what it
+    /// read and then, rather than take that end for the episode's, goes on where the stream stopped from a fresh link,
+    /// past the first cut; once the fresh link dies too (about 15 s in) the error comes up with Retry (shot as
+    /// "cut-link-error"). Up next never shows and the second episode never plays; closed by the error's close, the
+    /// series' details show episode 1 unwatched, its progress where the stream stopped, and Play still on it (shot as
+    /// "cut-link-detail"). Every check is read before any is judged, each its own failure, all attached as "cut link
+    /// checks".
+    func testALinkThatDiesMidPlayIsNoEpisodeEnd() throws {
+        try launchDev(addon: true, open: ["board", "detail:series:tortuga-cut", "streams:series:tortuga-cut:tortuga-cut:1:1"])
+        ready(require("streams.row.0", timeout: 60, "episode 1's Streams sheet lists its stream")).tap()
+        let video = require("player.video", timeout: 20, "a tap on the stream opens the player")
+        var furthest = 0.0, episode2 = false, prompts: [String] = []
+        _ = waitUntil(90) {
+            let head = playhead()
+            if head.contains("/ 0:20") {
+                episode2 = true
+            } else if head.contains("/ 0:30"), let at = Self.seconds(head) {
+                furthest = max(furthest, at)
+            }
+            let prompt = promptLabel("player.upNext")
+            if !prompt.isEmpty, !prompts.contains(prompt) { prompts.append(prompt) }
+            return element("player.error").exists || episode2
+        }
+        let error = element("player.error")
+        let errorShown = error.exists, retry = element("player.error.retry").exists
+        let errorText = errorShown ? error.staticTexts.allElementsBoundByIndex.map { text(of: $0) }.joined(separator: " ") : ""
+        shot("cut-link-error")
+        if errorShown, element("player.error.close").exists {
+            activate(element("player.error.close"))
+        } else {
+            closePlayer(video, "the controls' back button closes the player")
+        }
+        requireGone("player.video", "closing the player")
+        if element("streams.row.0").exists(within: 3) {
+            if isPad {
+                ready(require("streams.close", "the iPad's Streams form sheet has Close")).tap()
+            } else {
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+            }
+        }
+        let play = require("detail.play", timeout: 10, "closing the player returns to the series' details")
+        // Lazy rows: the episodes under the action row come as they scroll in.
+        let episode = element("detail.episode.0")
+        scrolledInside(episode, steps: 5)
+        if !episode.exists(within: 10) { fail("the series' details don't list S1E1") }
+        // What the row reads must hold a moment: a record landing late would change it.
+        let rowFirst = itemState(episode)
+        _ = holds(for: 1.5) { itemState(episode) == rowFirst }
+        let watched = isWatched(episode), bar = progressState(episode), playText = text(of: play)
+        shot("cut-link-detail")
+        let percent = Int(bar.filter(\.isNumber)) ?? -1
+        let checks: [(name: String, ok: Bool, detail: String)] = [
+            ("episode 1 plays on from a fresh link", furthest >= 12, "episode 1 got to \(furthest) s of 30 s, its first link dying about 10 s in"),
+            ("the error with Retry", errorShown && retry, "the error \(errorShown ? "reads '\(errorText)'" : "never came up"), Retry \(retry ? "shown" : "not shown")"),
+            ("episode 2 never played, no up next", !episode2 && prompts.isEmpty, "episode 2 \(episode2 ? "played" : "never played"), up next offered \(prompts)"),
+            ("episode 1 not watched", !watched, "S1E1's row \(watched ? "shows watched" : "unwatched"): \(itemState(episode))"),
+            ("episode 1's progress where the stream stopped", (30...69).contains(percent), "S1E1's progress bar reads '\(bar)'"),
+            ("the series still on episode 1", playText.contains("S1E1"), "Play reads '\(playText)'"),
+        ]
+        let attachment = XCTAttachment(string: checks.map { "\($0.ok ? "ok" : "FAIL") \($0.name): \($0.detail)" }.joined(separator: "\n"))
+        attachment.name = "cut link checks"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        continueAfterFailure = true
+        for check in checks where !check.ok {
+            XCTFail("cut link: \(check.name): \(check.detail)")
+        }
     }
 
     /// The test addon's own series from its last episode (three 20 s episodes; the stream in a binge group, so the

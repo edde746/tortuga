@@ -226,6 +226,7 @@
       "unsupportedFormat": "Der Stream hat ein Format, das der Player nicht lesen kann.",
       "cantDecode": "Der Player konnte Bild oder Ton dieses Streams nicht abspielen.",
       "engineFailed": "Die Wiedergabe wurde wegen eines Fehlers abgebrochen.",
+      "cutShort": "Der Stream ist vor dem Ende des Videos abgebrochen.",
       "retry": "Wiederholen",
       "nextStream": "Nächster Stream",
       "close": "Schließen",

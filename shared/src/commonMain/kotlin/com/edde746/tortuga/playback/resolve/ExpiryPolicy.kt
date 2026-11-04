@@ -1,11 +1,13 @@
 package com.edde746.tortuga.playback.resolve
 
 import com.edde746.tortuga.playback.EngineError
+import com.edde746.tortuga.playback.EngineErrorKind
 import com.edde746.tortuga.playback.PlaybackFailure
 
 /**
  * Where a playing stream stands with respect to mid-play expiry. Resolved CDN links expire, so an HTTP
- * 403, 404 or 410 while playing usually means the link died, not the stream.
+ * 403, 404 or 410 while playing usually means the link died, not the stream; so does a stream that stopped before the
+ * video's end ([EngineErrorKind.CUT_SHORT]): FFmpeg ends a read the dead link refused as the file's end.
  */
 sealed interface ExpiryState {
     /** Playing the stream's first resolution; one re-resolve is left. */
@@ -40,8 +42,8 @@ data class ExpiryStep(val state: ExpiryState, val decision: ExpiryDecision)
 
 /**
  * Mid-play expiry, as a pure state machine the playback session drives:
- * - an engine error with HTTP 403/404/410 after the file had loaded re-resolves the original URL once and resumes at
- *   the last position;
+ * - an engine error with HTTP 403/404/410, or a stream cut short, after the file had loaded re-resolves the original
+ *   URL once and resumes at the last position;
  * - any other error, an expiry error before the file loaded (the link was fresh, so resolving again wouldn't help),
  *   a failed re-resolve, or an error after the one re-resolve surfaces the error and offers the next stream.
  */
@@ -57,7 +59,7 @@ object ExpiryPolicy {
         val surface = PlaybackFailure.Engine(error)
         return when (state) {
             ExpiryState.FirstResolution ->
-                if (loaded && error.httpStatus in EXPIRY_STATUSES) {
+                if (loaded && (error.httpStatus in EXPIRY_STATUSES || error.kind == EngineErrorKind.CUT_SHORT)) {
                     val resumeAt = lastPositionSeconds.takeIf { it.isFinite() && it > 0.0 } ?: 0.0
                     ExpiryStep(ExpiryState.ReResolving(resumeAt), ExpiryDecision.ReResolve(resumeAt))
                 } else {

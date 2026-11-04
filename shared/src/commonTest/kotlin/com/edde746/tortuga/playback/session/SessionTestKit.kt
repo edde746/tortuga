@@ -115,7 +115,7 @@ internal class ScriptedEngine : PlayerEngine {
         report {
             it.copy(
                 loadId = id, loaded = false, eof = false, error = null, buffering = true, positionSeconds = 0.0, tracks = emptyList(),
-                playbackRestarts = 0, cacheStartSeconds = null, cacheEndSeconds = null,
+                playbackRestarts = 0, cacheStartSeconds = null, cacheEndSeconds = null, httpErrorStatus = null,
             )
         }
         return id

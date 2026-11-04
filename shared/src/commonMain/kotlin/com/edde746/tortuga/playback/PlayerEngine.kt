@@ -311,6 +311,12 @@ enum class EngineErrorKind {
 
     /** Anything else: mpv failing to start, a command it refused. */
     OTHER,
+
+    /**
+     * The stream stopped before the video's end: the file ended after an HTTP error, or well before its length
+     * (the playback session's rule, [com.edde746.tortuga.playback.session.PlaybackSession]).
+     */
+    CUT_SHORT,
 }
 
 data class EngineState(
@@ -353,6 +359,11 @@ data class EngineState(
      * not) until the next [PlayerEngine.load] or the file ending in an error. The end of the file ([eof]) keeps it.
      */
     val loaded: Boolean = false,
+    /**
+     * The engine reached the end of the file (mpv's `eof-reached`, or its `end-file` for that reason): what the engine
+     * read ended, whether or not the video did. The playback session reports an end it takes for the stream failing
+     * as an [error] instead ([EngineErrorKind.CUT_SHORT]).
+     */
     val eof: Boolean = false,
     val error: EngineError? = null,
     val speed: Double = 1.0,
@@ -390,4 +401,10 @@ data class EngineState(
     val audioPassthrough: Boolean = false,
     /** The playback info's details while it shows ([PlayerEngine.setStatsWanted]); null otherwise. */
     val stats: PlaybackStats? = null,
+    /**
+     * The HTTP error status the engine's HTTP client last logged for the current file's stream ("HTTP error 403
+     * Forbidden": its open, a seek's or a reconnect's request); null while none. An external subtitle's isn't the
+     * stream's. FFmpeg ends a read that failed this way as the file's end, so an [eof] with it is the stream failing.
+     */
+    val httpErrorStatus: Int? = null,
 )

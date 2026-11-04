@@ -211,6 +211,32 @@ class MpvLifecycleTest {
         assertEquals(EngineError("unrecognized file format", null, EngineErrorKind.FORMAT), mpv.state.error)
     }
 
+    /**
+     * FFmpeg's HTTP error for the stream (here a reconnect's, after the connection closed early) stays in the state
+     * through the file's end, which FFmpeg makes of the failed read; an external subtitle that failed to open logged
+     * its own, which isn't the stream's. A new file starts without one.
+     */
+    @Test
+    fun theStreamsHttpErrorStaysWithTheFileAndASubtitlesIsntIt() {
+        mpv.load(1)
+        mpv.startFile()
+        mpv.playbackRestart()
+        mpv.logLine("http: HTTP error 404 File not found", error = false)
+        mpv.logLine("Failed to open https://subs.example/a.srt.", error = true)
+        mpv.logLine("Can not open external file https://subs.example/a.srt.", error = true)
+        assertNull(mpv.state.httpErrorStatus, "the subtitle's 404")
+        mpv.logLine("http: Stream ends prematurely at 565588, should be 1155664", error = false)
+        mpv.logLine("http: Will reconnect at 565588 in 0 second(s), error=Input/output error.", error = false)
+        mpv.logLine("http: HTTP error 403 Link expired", error = false)
+        mpv.logLine("http: HTTP error 404 File not found", error = false)
+        mpv.logLine("Can not open external file https://subs.example/b.srt.", error = true)
+        mpv.flag("eof-reached", true)
+        assertEquals(403, mpv.state.httpErrorStatus, "the stream's, once the second subtitle's is taken back")
+        assertTrue(mpv.state.eof)
+        mpv.load(2)
+        assertNull(mpv.state.httpErrorStatus)
+    }
+
     @Test
     fun theEndKeepsTheFileLoaded() {
         playing()

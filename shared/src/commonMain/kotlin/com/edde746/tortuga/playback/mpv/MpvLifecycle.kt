@@ -71,8 +71,13 @@ class MpvLifecycle {
     private var mpvPaused = false
     private var heldPaused: Boolean? = null
 
-    /** What the current file's log said of a failure: FFmpeg's HTTP status, and mpv's last error line, redacted. */
+    /**
+     * What the current file's log said of a failure: FFmpeg's last HTTP status for the stream ([EngineState.httpErrorStatus]),
+     * the one before it (back in place once an external file's open turns out to have logged the last), and mpv's last
+     * error line, redacted.
+     */
     private var httpStatus: Int? = null
+    private var earlierHttpStatus: Int? = null
     private var errorLine: String? = null
 
     /** The node properties [EngineState.tracks], [EngineState.video] and [EngineState.audio] come from, read once per change. */
@@ -146,13 +151,21 @@ class MpvLifecycle {
      * One of mpv's log lines, as mpv wrote it (URLs and all); [error] for an error or fatal one. FFmpeg's HTTP status in
      * it ("HTTP error 404 Not Found") and the last error line, redacted ([Redactor]), name the current file's failure:
      * mpv logs them before the end-file they explain, and hands its client queued events first, so a status that comes
-     * after the file's error goes to that error.
+     * after the file's error goes to that error. The status is the stream's ([EngineState.httpErrorStatus]) unless mpv
+     * then fails to open an external file (a subtitle's `sub-add`: "Can not open external file <url>."), whose open
+     * logged it.
      */
     fun logLine(text: String, error: Boolean) {
         MpvState.httpStatus(text)?.let { status ->
+            earlierHttpStatus = httpStatus
             httpStatus = status
             val failure = state.error
-            if (failure != null && failure.httpStatus == null) set(state.copy(error = failure.copy(httpStatus = status)))
+            set(state.copy(httpErrorStatus = status, error = if (failure != null && failure.httpStatus == null) failure.copy(httpStatus = status) else failure))
+        }
+        if (text.startsWith(EXTERNAL_FILE_FAILED)) {
+            httpStatus = earlierHttpStatus
+            earlierHttpStatus = null
+            set(state.copy(httpErrorStatus = httpStatus))
         }
         if (error && text.isNotBlank()) errorLine = Redactor.redact(text)
     }
@@ -301,6 +314,7 @@ class MpvLifecycle {
         frameShown = false
         isFileLoaded = false
         httpStatus = null
+        earlierHttpStatus = null
         errorLine = null
         videoTracks = emptyList()
         cacheState = null
@@ -316,6 +330,7 @@ class MpvLifecycle {
                 error = null,
                 playbackRestarts = 0,
                 stats = null,
+                httpErrorStatus = null,
             ),
         )
     }
@@ -371,6 +386,9 @@ class MpvLifecycle {
         private const val END_FILE_REASON_EOF = 0
         private const val END_FILE_REASON_ERROR = 4
         private const val END_FILE_REASON_REDIRECT = 5
+
+        /** How mpv's log line starts when an external file (a subtitle's `sub-add`) failed to open. */
+        private const val EXTERNAL_FILE_FAILED = "Can not open external file"
 
         private val FORMATS: Map<String, Format> = DOUBLES.associateWith { Format.DOUBLE } + FLAGS.associateWith { Format.FLAG } +
             (TEXTS + AUDIO_DEVICE_TEXTS).associateWith { Format.TEXT }

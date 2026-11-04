@@ -222,6 +222,7 @@
       "unsupportedFormat": "Stream ini dalam format yang tidak dapat dibaca pemutar.",
       "cantDecode": "Pemutar tidak dapat memutar video atau audio stream ini.",
       "engineFailed": "Pemutar berhenti karena terjadi kesalahan.",
+      "cutShort": "Stream berhenti sebelum video selesai.",
       "retry": "Coba lagi",
       "nextStream": "Coba stream berikutnya",
       "close": "Tutup",

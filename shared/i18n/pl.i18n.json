@@ -234,6 +234,7 @@
       "unsupportedFormat": "Źródło ma format, którego odtwarzacz nie potrafi odczytać.",
       "cantDecode": "Odtwarzacz nie zdołał odtworzyć obrazu lub dźwięku tego źródła.",
       "engineFailed": "Odtwarzacz zatrzymał się z powodu błędu.",
+      "cutShort": "Źródło urwało się przed końcem wideo.",
       "retry": "Ponów",
       "nextStream": "Następne źródło",
       "close": "Zamknij",

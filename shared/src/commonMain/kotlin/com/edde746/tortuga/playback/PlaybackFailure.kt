@@ -43,6 +43,7 @@ internal val PlaybackFailure.displayText: String
             EngineErrorKind.FORMAT -> T.player.error.unsupportedFormat
             EngineErrorKind.DECODE -> T.player.error.cantDecode
             EngineErrorKind.OTHER -> T.player.error.engineFailed
+            EngineErrorKind.CUT_SHORT -> T.player.error.cutShort
         }
         is PlaybackFailure.ErrorVideo -> {
             val why = when (val sign = sign) {

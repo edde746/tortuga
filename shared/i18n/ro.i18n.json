@@ -230,6 +230,7 @@
       "unsupportedFormat": "Stream-ul are un format pe care playerul nu îl poate citi.",
       "cantDecode": "Playerul nu a putut reda imaginea sau sunetul acestui stream.",
       "engineFailed": "Playerul s-a oprit din cauza unei erori.",
+      "cutShort": "Stream-ul s-a oprit înainte de sfârșitul videoclipului.",
       "retry": "Reîncearcă",
       "nextStream": "Încearcă stream-ul următor",
       "close": "Închide",
