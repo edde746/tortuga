@@ -48,8 +48,9 @@ struct DataSettingsRoute: View {
     }
 }
 
-/// The largest file Import reads (Data's, Home's collections'); a bigger one is refused as unreadable before it fills
-/// memory, as a video picked by mistake and read whole would.
+/// The largest file Import reads (Data's, Home's collections', the player's shaders, as Android's
+/// `AndroidFiles.MAX_IMPORT_BYTES`); a bigger one is refused as unreadable before it fills memory, as a video picked by
+/// mistake and read whole would.
 private let maxImportBytes = 32 << 20
 
 /// The text of a file picked in the open dialog to import, read off the main thread; nil when it can't be read, is

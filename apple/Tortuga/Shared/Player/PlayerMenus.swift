@@ -424,10 +424,6 @@ struct ShaderPromptsPresenter: ViewModifier {
     @Bindable var prompts: ShaderPrompts
     let store: PlayerStore
 
-    /// The most a shader file may hold, as on Android (`AndroidFiles.MAX_IMPORT_BYTES`): a larger one fails the import
-    /// rather than being read whole.
-    private static let maxBytes = 32 * 1024 * 1024
-
     func body(content: Content) -> some View {
         content
             .environment(\.shaderPrompts, prompts)
@@ -448,18 +444,10 @@ struct ShaderPromptsPresenter: ViewModifier {
             }
     }
 
-    /// Reads the picked file off the main thread and sends its name and text (`PlayerCommandImportShader`); a file
-    /// that can't be read, is over `maxBytes` or isn't UTF-8 fails the import (`PlayerCommandShaderImportFailed`).
+    /// Reads the picked file (`importedText`) and sends its name and text (`PlayerCommandImportShader`); a file that
+    /// can't be read, is too large or isn't UTF-8 fails the import (`PlayerCommandShaderImportFailed`).
     private func importShader(_ url: URL) async {
-        let maxBytes = Self.maxBytes
-        let text = await Task.detached(priority: .userInitiated) { () -> String? in
-            let scoped = url.startAccessingSecurityScopedResource()
-            defer { if scoped { url.stopAccessingSecurityScopedResource() } }
-            guard let file = try? FileHandle(forReadingFrom: url) else { return nil }
-            defer { try? file.close() }
-            guard let data = try? file.read(upToCount: maxBytes + 1) ?? Data(), data.count <= maxBytes else { return nil }
-            return String(data: data, encoding: .utf8)
-        }.value
+        let text = await importedText(url)
         if let text {
             store.dispatch(command: PlayerCommandImportShader(fileName: url.lastPathComponent, source: text))
         } else {
