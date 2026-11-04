@@ -24,9 +24,10 @@ own.
 
 ## Download
 
-Tortuga is not released yet. It is coming to these places:
+Tortuga 1.0.0 is out in [GitHub releases](https://github.com/edde746/tortuga/releases/latest). The stores' versions are
+in review.
 
-| Platform | Requires | Coming to |
+| Platform | Requires | Where |
 | --- | --- | --- |
 | iPhone and iPad | iOS and iPadOS 17 or later | App Store |
 | Apple TV | tvOS 17 or later | App Store |
@@ -37,7 +38,7 @@ Tortuga is not released yet. It is coming to these places:
 | Windows | 64-bit (x64) | Microsoft Store, and a portable zip in GitHub releases |
 | Linux | A Wayland session | Flatpak bundles (x64, arm64) in GitHub releases |
 
-Until then, [build it from source](#building-from-source).
+Or [build it from source](#building-from-source).
 
 ## Features
 
