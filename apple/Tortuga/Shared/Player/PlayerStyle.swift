@@ -214,7 +214,8 @@ extension View {
 
     /// A text button of the player's panels; `prominent` for the panel's primary action. tvOS: `PlayerTVButtonStyle`'s
     /// capsule platter, which focus turns white; iOS and macOS: glass (26), else the bordered styles, the prominent one
-    /// white.
+    /// white. The Mac fills a glass button with the tint, and the player's is white (`Palette.onVideo`): there the other
+    /// buttons drop it, so they stay neutral glass beside the white primary one (`glassButtonStyle`).
     @ViewBuilder
     func playerActionStyle(prominent: Bool = false) -> some View {
         #if os(tvOS)
@@ -224,7 +225,11 @@ extension View {
             if prominent {
                 buttonStyle(.glassProminent).tint(Palette.onVideo).foregroundStyle(.black)
             } else {
+                #if os(macOS)
+                buttonStyle(.glass).tint(Color?.none)
+                #else
                 buttonStyle(.glass)
+                #endif
             }
         } else if prominent {
             buttonStyle(.borderedProminent).tint(Palette.onVideo).foregroundStyle(.black)
