@@ -18,8 +18,10 @@ import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockRequestHandleScope
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.request.HttpRequestData
+import io.ktor.client.request.HttpResponseData
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Parameters
 import io.ktor.http.Url
 import io.ktor.http.content.OutgoingContent
 import io.ktor.http.content.TextContent
@@ -157,11 +159,17 @@ class SignInFlowsTest {
         },
     )
 
+    /** Scripted provider endpoints on the test's scheduler, so their calls and the client's timeouts run in virtual time. */
+    private fun TestScope.engine(handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData) = MockEngine.create {
+        dispatcher = StandardTestDispatcher(testScheduler)
+        addHandler(handler)
+    }
+
     @Test
     fun theAuthorizationCodeFlowSendsPkceAndReturnsTheIdToken() = runTest {
         var tokenForm: Map<String, String>? = null
         val http = HttpClient(
-            MockEngine { request ->
+            engine { request ->
                 when (request.url.encodedPath) {
                     "/.well-known/openid-configuration" -> json(discovery)
                     "/token" -> {
@@ -199,7 +207,7 @@ class SignInFlowsTest {
     fun anotherStatesRedirectIsIgnoredAndADeclinedConsentEndsTheFlow() = runTest {
         var exchanged: String? = null
         val http = HttpClient(
-            MockEngine { request ->
+            engine { request ->
                 when (request.url.encodedPath) {
                     "/.well-known/openid-configuration" -> json(discovery)
                     "/token" -> {
@@ -234,7 +242,7 @@ class SignInFlowsTest {
         val polls = ArrayList<Long>()
         val answers = ArrayDeque(listOf("authorization_pending", "slow_down", "authorization_pending", "ok"))
         val http = HttpClient(
-            MockEngine { request ->
+            engine { request ->
                 when (request.url.encodedPath) {
                     "/device/code" -> json(
                         """{"device_code":"dc","user_code":"GQVQ-JKEC","verification_url":"https://www.google.com/device","expires_in":1800,"interval":5}""",
@@ -272,7 +280,7 @@ class SignInFlowsTest {
     @Test
     fun aDeclinedDeviceCodeIsCancelled() = runTest {
         val http = HttpClient(
-            MockEngine { request ->
+            engine { request ->
                 if (request.url.encodedPath == "/device/code") {
                     json("""{"device_code":"dc","user_code":"X","verification_uri":"https://id.example/device","expires_in":600,"interval":1}""")
                 } else {
@@ -438,8 +446,8 @@ class SignInFlowsTest {
     }
 
     /** A scripted GitHub device flow: the device code, then [answers] (HTTP 200 each, as GitHub does) one per poll. */
-    private fun githubDevice(answers: List<String>, polls: MutableList<Long>, currentTime: () -> Long) = HttpClient(
-        MockEngine { request ->
+    private fun TestScope.githubDevice(answers: List<String>, polls: MutableList<Long>, currentTime: () -> Long) = HttpClient(
+        engine { request ->
             assertTrue(request.headers[HttpHeaders.Accept].orEmpty().contains("application/json"), "GitHub answers JSON only when asked")
             val form = request.form()
             assertEquals("gh-client", form["client_id"])
@@ -681,5 +689,34 @@ class SignInFlowsTest {
         val apple = flows.options(ServerUrl.HOSTED, own, emptySet()).single { it.provider.id == IdentityProvider.APPLE }
         assertEquals("eyJ.apple", flows.obtain(hosted, apple.provider.id, apple.method) {}.idToken)
         assertEquals(platform.appleServicesId, Url(platform.opened.last()).parameters["client_id"])
+    }
+
+    @Test
+    fun discoveryTakesOnlyTheIssuersOwnDocumentWithSecureEndpoints() = runTest {
+        suspend fun discover(document: String) = OAuth.discover(HttpClient(engine { json(document) }), issuer)
+        fun document(token: String, device: String? = null, named: String? = issuer) = buildString {
+            append("{")
+            if (named != null) append("\"issuer\":\"$named\",")
+            append("\"authorization_endpoint\":\"$issuer/auth\",\"token_endpoint\":\"$token\"")
+            if (device != null) append(",\"device_authorization_endpoint\":\"$device\"")
+            append("}")
+        }
+        assertEquals("$issuer/token", discover(document("$issuer/token")).tokenEndpoint)
+        assertEquals("http://auth.local/token", discover(document("http://auth.local/token")).tokenEndpoint, "a provider on this network")
+        for (refused in listOf(
+            document("$issuer/token", named = "https://other.example"),
+            document("$issuer/token", named = null),
+            document("http://collector.example/token"),
+            document("$issuer/token", device = "http://collector.example/device"),
+        )) {
+            assertEquals(AccountError.ProviderUnavailable, assertFailsWith<AccountException> { discover(refused) }.error, refused)
+        }
+    }
+
+    @Test
+    fun aTokenAnswerPastItsBoundIsRefused() = runTest {
+        val endless = HttpClient(engine { json("{}" + " ".repeat(2 * 1024 * 1024)) })
+        val error = assertFailsWith<AccountException> { OAuth.postForm(endless, "$issuer/token", Parameters.Empty) }
+        assertEquals(AccountError.ProviderUnavailable, error.error)
     }
 }

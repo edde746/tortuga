@@ -4,6 +4,8 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.cancel
+import io.ktor.utils.io.readBuffer
+import kotlinx.io.readString
 
 /**
  * Reads [this] response's body with [read], then cancels what [read] left unread. Inside `HttpStatement.execute`
@@ -22,4 +24,10 @@ internal suspend fun <T> HttpResponse.readBody(read: suspend (body: ByteReadChan
     } finally {
         body.cancel()
     }
+}
+
+/** [this] response's body as UTF-8 text ([readBody]), or null when it is longer than [maxBytes]. */
+internal suspend fun HttpResponse.readText(maxBytes: Long): String? {
+    val body = readBody { it.readBuffer(maxBytes + 1) }
+    return if (body.size > maxBytes) null else body.readString()
 }

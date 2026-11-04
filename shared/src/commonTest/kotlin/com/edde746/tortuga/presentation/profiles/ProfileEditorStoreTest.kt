@@ -29,6 +29,7 @@ import com.edde746.tortuga.sync.engine.SyncStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
@@ -223,7 +224,8 @@ class ProfileEditorStoreTest {
         val device = DeviceDescriptor("Desktop", DevicePlatform.WINDOWS)
         val graph = AppGraph(inMemoryDatabase(), secrets, SyncTrigger.None, BuildFlavor.SIDELOADED, device, "test", server.client(), scope)
         graph.use {
-            val account = SyncAccount(secrets, graph.data, device, SyncApi(server.client()), { FakeSyncServer.NOW }, 2_000)
+            val api = SyncApi(server.client(StandardTestDispatcher(testScheduler)))
+            val account = SyncAccount(secrets, graph.data, device, api, { FakeSyncServer.NOW }, 2_000)
             account.restore()
             account.signIn(server.serverUrl) { TestDevice.credential() }
             val host = RecordingHost()

@@ -6,10 +6,19 @@ import com.edde746.tortuga.sync.api.ApiErrorCode
 import com.edde746.tortuga.sync.api.HandoffCollectRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.MockRequestHandleScope
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.request.HttpRequestData
+import io.ktor.client.request.HttpResponseData
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
+import io.ktor.utils.io.ByteChannel
+import io.ktor.utils.io.writeStringUtf8
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -19,14 +28,20 @@ import kotlin.test.assertTrue
 
 /** The protocol client's handling of answers the in-memory server doesn't produce. */
 class SyncApiTest {
-    private fun api(status: HttpStatusCode, body: String, headers: Map<String, String> = emptyMap()): SyncApi {
-        val engine = MockEngine {
+    /** A scripted server answering on the test's scheduler, so its delays and the client's timeouts run in virtual time. */
+    private fun TestScope.engine(handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData) = MockEngine.create {
+        dispatcher = StandardTestDispatcher(testScheduler)
+        addHandler(handler)
+    }
+
+    private fun TestScope.api(status: HttpStatusCode, body: String, headers: Map<String, String> = emptyMap()): SyncApi {
+        val engine = engine {
             respond(body, status, headersOf(*(headers + (HttpHeaders.ContentType to "application/json")).map { it.key to listOf(it.value) }.toTypedArray()))
         }
         return SyncApi(HttpClient(engine))
     }
 
-    private suspend fun errorOf(status: HttpStatusCode, body: String, headers: Map<String, String> = emptyMap()) =
+    private suspend fun TestScope.errorOf(status: HttpStatusCode, body: String, headers: Map<String, String> = emptyMap()) =
         assertFailsWith<AccountException> { api(status, body, headers).devices("https://sync.test", "token") }.error
 
     private fun apiError(code: String) = "{\"code\":\"$code\",\"message\":\"diagnostic\"}"
@@ -65,7 +80,7 @@ class SyncApiTest {
     @Test
     fun rateLimitsWithoutRetryAfterWaitARandomPartOfTheDefault() = runTest {
         var calls = 0
-        val engine = MockEngine {
+        val engine = engine {
             calls++
             if (calls == 1) respond(apiError(ApiErrorCode.RATE_LIMITED), HttpStatusCode.TooManyRequests)
             else respond("{\"devices\":[]}", HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json"))
@@ -80,7 +95,7 @@ class SyncApiTest {
     fun aBusyServersRetryAfterIsWaitedOutWhenShortAndReportedWhenLong() = runTest {
         var retryAfter = "5"
         var calls = 0
-        val engine = MockEngine {
+        val engine = engine {
             calls++
             if (calls % 2 == 1) {
                 respond(apiError("server_busy"), HttpStatusCode.ServiceUnavailable, headersOf(HttpHeaders.RetryAfter, retryAfter))
@@ -106,6 +121,36 @@ class SyncApiTest {
         assertEquals(7_000, SyncApi.parseRetryAfter("7"))
         assertNull(SyncApi.parseRetryAfter("Wed, 21 Oct 2026 07:28:00 GMT"))
         assertNull(SyncApi.parseRetryAfter("-3"))
+        assertEquals(90_000_000, SyncApi.parseRetryAfter("90000"), "25 hours")
+        assertNull(SyncApi.parseRetryAfter("90001"), "longer than 25 hours: absent")
+        assertNull(SyncApi.parseRetryAfter("99999999999999999"), "never wrapping past a Long")
+    }
+
+    @Test
+    fun anAnswerThatTakesTooLongOrRunsTooLongFails() = runTest {
+        // Headers at once, then a byte every 20 s for ten minutes: never idle long enough for a socket timeout.
+        val dripping = engine {
+            val body = ByteChannel()
+            backgroundScope.launch {
+                body.writeStringUtf8("{\"devices\":[")
+                repeat(30) {
+                    delay(20_000)
+                    body.writeStringUtf8(" ")
+                    body.flush()
+                }
+                body.writeStringUtf8("]}")
+                body.flushAndClose()
+            }
+            respond(body, HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json"))
+        }
+        val api = SyncApi(HttpClient(dripping))
+        val started = testScheduler.currentTime
+        assertEquals(AccountError.Network, assertFailsWith<AccountException> { api.devices("https://sync.test", "token") }.error)
+        val waited = testScheduler.currentTime - started
+        assertTrue(waited in SyncApi.REQUEST_TIMEOUT_MILLIS..SyncApi.REQUEST_TIMEOUT_MILLIS + 20_000, "waited $waited ms")
+
+        val padded = "{\"devices\":[]}" + " ".repeat(9 * 1024 * 1024)
+        assertEquals(AccountError.Unexpected(200, "malformed_response"), errorOf(HttpStatusCode.OK, padded))
     }
 
     @Test

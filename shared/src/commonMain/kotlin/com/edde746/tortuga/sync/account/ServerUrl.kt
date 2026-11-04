@@ -54,7 +54,7 @@ class ServerUrl private constructor(val value: String) {
  * a dot. The names are the ones Apple's App Transport Security lets the app reach over plain http
  * (`NSAllowsLocalNetworking`).
  */
-private fun isLocalHost(host: String): Boolean {
+internal fun isLocalHost(host: String): Boolean {
     val name = host.lowercase().removeSuffix(".")
     if (name.startsWith('[')) {
         val address = name.removeSurrounding("[", "]")

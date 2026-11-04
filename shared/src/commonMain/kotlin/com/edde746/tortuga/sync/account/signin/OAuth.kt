@@ -2,27 +2,30 @@ package com.edde746.tortuga.sync.account.signin
 
 import com.edde746.tortuga.crypto.cryptoProvider
 import com.edde746.tortuga.log.Log
+import com.edde746.tortuga.net.readText
 import com.edde746.tortuga.sync.account.AccountError
 import com.edde746.tortuga.sync.account.AccountException
+import com.edde746.tortuga.sync.account.ServerUrl
+import com.edde746.tortuga.sync.account.isLocalHost
 import dev.whyoleg.cryptography.algorithms.SHA256
 import dev.whyoleg.cryptography.random.CryptographyRandom
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.accept
-import io.ktor.client.request.forms.submitForm
-import io.ktor.client.request.get
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.request.forms.prepareForm
+import io.ktor.client.request.prepareGet
 import io.ktor.http.ContentType
 import io.ktor.http.Parameters
 import io.ktor.http.encodeURLParameter
 import io.ktor.http.isSuccess
+import io.ktor.http.parseUrl
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.io.encoding.Base64
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
@@ -122,14 +125,23 @@ internal object OAuth {
         }
     }
 
+    /**
+     * The endpoints in [issuer]'s discovery document, which must name [issuer] itself (as OpenID Connect Discovery asks)
+     * and endpoints over https (plain http only on this device or its network, as [ServerUrl.parse] allows it).
+     * Anything else, no answer within [REQUEST_TIMEOUT_MILLIS] or one longer than [MAX_ANSWER_BYTES] is
+     * [AccountError.ProviderUnavailable].
+     */
     suspend fun discover(http: HttpClient, issuer: String): OidcEndpoints {
         val document = try {
-            val response = http.get(issuer.trimEnd('/') + "/.well-known/openid-configuration") {
-                expectSuccess = false
-                accept(ContentType.Application.Json)
-            }
-            if (!response.status.isSuccess()) throw AccountException(AccountError.ProviderUnavailable)
-            json.parseToJsonElement(response.bodyAsText()).jsonObject
+            withTimeoutOrNull(REQUEST_TIMEOUT_MILLIS) {
+                http.prepareGet(issuer.trimEnd('/') + "/.well-known/openid-configuration") {
+                    expectSuccess = false
+                    accept(ContentType.Application.Json)
+                }.execute { response ->
+                    if (!response.status.isSuccess()) throw AccountException(AccountError.ProviderUnavailable)
+                    response.readText(MAX_ANSWER_BYTES)?.let { json.parseToJsonElement(it).jsonObject }
+                }
+            } ?: throw AccountException(AccountError.ProviderUnavailable)
         } catch (e: CancellationException) {
             throw e
         } catch (e: AccountException) {
@@ -138,32 +150,60 @@ internal object OAuth {
             Log.i(TAG) { "Discovery failed: ${e::class.simpleName}" }
             throw AccountException(AccountError.ProviderUnavailable, e)
         }
+        if (document.string("issuer") != issuer) {
+            Log.i(TAG) { "Discovery names another issuer" }
+            throw AccountException(AccountError.ProviderUnavailable)
+        }
+        fun endpoint(name: String): String? = document.string(name)?.also {
+            if (!isSecureEndpoint(it)) {
+                Log.i(TAG) { "Discovery's $name isn't https" }
+                throw AccountException(AccountError.ProviderUnavailable)
+            }
+        }
         return OidcEndpoints(
-            authorizationEndpoint = document.string("authorization_endpoint") ?: throw AccountException(AccountError.ProviderUnavailable),
-            tokenEndpoint = document.string("token_endpoint") ?: throw AccountException(AccountError.ProviderUnavailable),
-            deviceAuthorizationEndpoint = document.string("device_authorization_endpoint"),
+            authorizationEndpoint = endpoint("authorization_endpoint") ?: throw AccountException(AccountError.ProviderUnavailable),
+            tokenEndpoint = endpoint("token_endpoint") ?: throw AccountException(AccountError.ProviderUnavailable),
+            deviceAuthorizationEndpoint = endpoint("device_authorization_endpoint"),
         )
     }
 
-    /** Posts a form to a token endpoint; returns the status and the JSON object answered (empty if none). */
+    /** An https URL, or plain http to a host on this device or its network ([isLocalHost]). */
+    private fun isSecureEndpoint(url: String): Boolean {
+        val parsed = parseUrl(url) ?: return false
+        return parsed.host.isNotBlank() && when (parsed.protocol.name) {
+            "https" -> true
+            "http" -> isLocalHost(parsed.host)
+            else -> false
+        }
+    }
+
+    /**
+     * Posts a form to a token endpoint; returns the status and the JSON object answered (empty if none). No answer
+     * within [REQUEST_TIMEOUT_MILLIS] is [AccountError.ProviderUnavailable], as is one longer than [MAX_ANSWER_BYTES].
+     */
     suspend fun postForm(http: HttpClient, url: String, form: Parameters): Pair<Int, JsonObject> {
-        val response: HttpResponse = try {
-            http.submitForm(url, form) {
-                expectSuccess = false
-                accept(ContentType.Application.Json)
-            }
+        val (status, text) = try {
+            withTimeoutOrNull(REQUEST_TIMEOUT_MILLIS) {
+                http.prepareForm(url, form) {
+                    expectSuccess = false
+                    accept(ContentType.Application.Json)
+                }.execute { response -> response.status.value to response.readText(MAX_ANSWER_BYTES) }
+            } ?: throw AccountException(AccountError.ProviderUnavailable)
         } catch (e: CancellationException) {
+            throw e
+        } catch (e: AccountException) {
             throw e
         } catch (e: Exception) {
             Log.i(TAG) { "Token endpoint unreachable: ${e::class.simpleName}" }
             throw AccountException(AccountError.ProviderUnavailable, e)
         }
+        if (text == null) throw AccountException(AccountError.ProviderUnavailable)
         val body = try {
-            json.parseToJsonElement(response.bodyAsText()) as? JsonObject
+            json.parseToJsonElement(text) as? JsonObject
         } catch (_: Exception) {
             null
         }
-        return response.status.value to (body ?: JsonObject(emptyMap()))
+        return status to (body ?: JsonObject(emptyMap()))
     }
 
     fun JsonObject.string(name: String): String? = (this[name] as? JsonPrimitive)?.takeIf { it.isString }?.content
@@ -171,4 +211,10 @@ internal object OAuth {
     fun JsonObject.long(name: String): Long? = (this[name] as? JsonPrimitive)?.content?.toLongOrNull()
 
     private const val TAG = "OAuth"
+
+    /** The longest a discovery or token request and its answer take. */
+    private const val REQUEST_TIMEOUT_MILLIS: Long = 30_000
+
+    /** Discovery documents and token answers are a few KB. */
+    private const val MAX_ANSWER_BYTES: Long = 1024 * 1024
 }

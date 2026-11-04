@@ -3,6 +3,7 @@ package com.edde746.tortuga.sync.account
 import com.edde746.tortuga.log.Log
 import com.edde746.tortuga.net.Backoff
 import com.edde746.tortuga.net.readBody
+import com.edde746.tortuga.net.readText
 import com.edde746.tortuga.sync.api.AccountDeletionResponse
 import com.edde746.tortuga.sync.api.AccountInfo
 import com.edde746.tortuga.sync.api.ApiError
@@ -44,9 +45,9 @@ import io.ktor.client.plugins.timeout
 import io.ktor.client.request.accept
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
-import io.ktor.client.request.request
+import io.ktor.client.request.prepareRequest
 import io.ktor.client.request.setBody
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -61,6 +62,7 @@ import io.ktor.utils.io.LineEnding
 import io.ktor.utils.io.readLineStrict
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
 
@@ -220,13 +222,15 @@ internal class SyncApi(
             }.execute { response ->
                 val status = response.status
                 if (!status.isSuccess() || response.contentType()?.match(ContentType.Text.EventStream) != true) {
-                    return@execute Answer(status, response.bodyAsText(), parseRetryAfter(response.headers[HttpHeaders.RetryAfter]))
+                    return@execute Answer(status, response.answerText(), parseRetryAfter(response.headers[HttpHeaders.RetryAfter]))
                 }
                 onOpen()
                 response.readBody { readEvents(it, onChanged) }
                 null
             }
         } catch (e: CancellationException) {
+            throw e
+        } catch (e: AccountException) {
             throw e
         } catch (e: Exception) {
             Log.i(TAG) { "GET ${path(url)} failed: ${e::class.simpleName}" }
@@ -332,21 +336,37 @@ internal class SyncApi(
         return AccountException(errorFor(status.value, error))
     }
 
+    /**
+     * One request and its answer, within [REQUEST_TIMEOUT_MILLIS], the body read included (no answer by then is
+     * [AccountError.Network]), and at most [MAX_ANSWER_BYTES] long.
+     */
     private suspend fun transmit(method: HttpMethod, url: String, token: String?, body: String?): Answer = try {
-        val response = http.request(url) {
-            this.method = method
-            expectSuccess = false
-            accept(ContentType.Application.Json)
-            token?.let { header(HttpHeaders.Authorization, "Bearer $it") }
-            if (body != null) setBody(TextContent(body, ContentType.Application.Json))
+        withTimeoutOrNull(REQUEST_TIMEOUT_MILLIS) {
+            http.prepareRequest(url) {
+                this.method = method
+                expectSuccess = false
+                accept(ContentType.Application.Json)
+                token?.let { header(HttpHeaders.Authorization, "Bearer $it") }
+                if (body != null) setBody(TextContent(body, ContentType.Application.Json))
+            }.execute { response ->
+                Answer(response.status, response.answerText(), parseRetryAfter(response.headers[HttpHeaders.RetryAfter]))
+            }
+        } ?: run {
+            Log.i(TAG) { "${method.value} ${path(url)} timed out" }
+            throw AccountException(AccountError.Network)
         }
-        Answer(response.status, response.bodyAsText(), parseRetryAfter(response.headers[HttpHeaders.RetryAfter]))
     } catch (e: CancellationException) {
+        throw e
+    } catch (e: AccountException) {
         throw e
     } catch (e: Exception) {
         Log.i(TAG) { "${method.value} ${path(url)} failed: ${e::class.simpleName}" }
         throw AccountException(AccountError.Network, e)
     }
+
+    /** The answer's body; one longer than [MAX_ANSWER_BYTES] isn't the protocol. */
+    private suspend fun HttpResponse.answerText(): String =
+        readText(MAX_ANSWER_BYTES) ?: throw AccountException(AccountError.Unexpected(status.value, MALFORMED_RESPONSE))
 
     private data class Answer(val status: HttpStatusCode, val text: String, val retryAfterMillis: Long?)
 
@@ -357,6 +377,21 @@ internal class SyncApi(
         /** When a 429 carries no usable `Retry-After`. */
         const val DEFAULT_RETRY_AFTER_MILLIS: Long = 5_000
 
+        /** The longest `Retry-After` taken, 25 hours, as the trackers take it: a longer one counts as absent. */
+        private const val MAX_RETRY_AFTER_SECONDS: Long = 25 * 3_600
+
+        /**
+         * The longest a request and its answer take, enough for the largest push ([SyncProtocol.MAX_REQUEST_BYTES])
+         * over a slow link; a server that drips its answer can't hold a sync cycle longer.
+         */
+        const val REQUEST_TIMEOUT_MILLIS: Long = 120_000
+
+        /**
+         * The longest answer read: a pull's page and a push's stale records stay under 1.3 MiB past their first
+         * record, every other answer is far shorter.
+         */
+        private const val MAX_ANSWER_BYTES: Long = 8L * 1024 * 1024
+
         /** Notices first; JSON for the error answers. */
         private const val EVENTS_ACCEPT = "text/event-stream, application/json;q=0.5"
 
@@ -366,9 +401,12 @@ internal class SyncApi(
         /** The stream's lines are tens of bytes; a longer one isn't the protocol. */
         private const val MAX_EVENT_LINE_BYTES = 4_096L
 
-        /** `Retry-After` in delta-seconds; an HTTP date (which the server doesn't send) counts as absent. */
+        /**
+         * `Retry-After` in delta-seconds, up to [MAX_RETRY_AFTER_SECONDS]; a longer one, or an HTTP date (which the
+         * server doesn't send), counts as absent.
+         */
         internal fun parseRetryAfter(value: String?): Long? =
-            value?.trim()?.toLongOrNull()?.takeIf { it >= 0 }?.let { it * 1000 }
+            value?.trim()?.toLongOrNull()?.takeIf { it in 0..MAX_RETRY_AFTER_SECONDS }?.let { it * 1000 }
 
         /** Only the path, for logs: queries carry cursors, never secrets, but keep log lines uniform. */
         private fun path(url: String) = parseUrl(url)?.encodedPath ?: "?"
