@@ -791,6 +791,10 @@ private struct ScrubBar: View {
     #if os(macOS)
     @State private var hovered = false
     #endif
+    /// A drag of the bar is under way; SwiftUI resets it as the drag ends, released or cancelled.
+    @GestureState private var dragging = false
+    /// The store scrubs for a drag of the bar's, until its release commits it (`cancelScrub` otherwise).
+    @State private var scrubbing = false
 
     /// The bar's band as drawn, with the bubble above it.
     private static let drawn = PlayerMetrics.button * 0.6
@@ -803,15 +807,26 @@ private struct ScrubBar: View {
                 .contentShape(Rectangle())
                 .gesture(
                     DragGesture(minimumDistance: 0)
+                        .updating($dragging) { _, dragging, _ in dragging = true }
                         .onChanged { drag in
+                            scrubbing = true
                             let fraction = min(max(drag.location.x / max(proxy.size.width, 1), 0), 1)
                             store.dispatch(command: PlayerCommandScrubTo(fraction: fraction))
                         }
-                        .onEnded { _ in store.dispatch(command: PlayerCommandCommitScrub.shared) }
+                        .onEnded { _ in
+                            scrubbing = false
+                            store.dispatch(command: PlayerCommandCommitScrub.shared)
+                        }
                 )
                 // A guest in a host-only room can't seek (`PlayerUiState.canSeek`).
                 .disabled(!state.canSeek)
         }
+        // A drag that ended without its release (the system cancelled it, seeking went off meanwhile) or whose bar went
+        // leaves no scrub behind. Checked once the event's `onEnded` has run, whichever of the two SwiftUI runs first.
+        .onChange(of: dragging) { _, dragging in
+            if !dragging { Task { cancelScrub() } }
+        }
+        .onDisappear { cancelScrub() }
         .frame(height: PlayerMetrics.button)
         #if os(macOS)
         .onHover { hovered = $0 }
@@ -832,6 +847,13 @@ private struct ScrubBar: View {
         #if os(macOS)
         .padding(.vertical, (Self.drawn - PlayerMetrics.button) / 2)
         #endif
+    }
+
+    /// Ends the store's scrub of a drag that never came to its release (`PlayerCommandCancelScrub`).
+    private func cancelScrub() {
+        guard scrubbing else { return }
+        scrubbing = false
+        store.dispatch(command: PlayerCommandCancelScrub.shared)
     }
 
     /// The pointer is over the bar (the Mac).
