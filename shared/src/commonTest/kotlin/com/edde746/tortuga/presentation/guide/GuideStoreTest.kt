@@ -286,6 +286,23 @@ class GuideStoreTest {
         assertEquals(listOf("2026-03-29"), Guides.utcDates(start + 3_600_000, end), "a window within one UTC day")
     }
 
+    @Test
+    fun aLocalDayWhoseClockChangesAtMidnightStartsAtItsFirstInstant() {
+        // Chile: UTC-4 until 6 Sep 2026 04:00 UTC, when 00:00 jumps to 01:00 (UTC-3); its 6 Sep starts at 01:00.
+        val forward = Instant.parse("2026-09-06T04:00:00Z").toEpochMilliseconds()
+        val chile = { millis: Long -> if (millis < forward) -4 * 3600 else -3 * 3600 }
+        val sixth = localDay(forward, chile)
+        assertEquals(forward, Guides.dayStart(sixth, chile))
+        assertEquals(sixth, localDay(Guides.dayStart(sixth, chile), chile))
+        assertEquals(Instant.parse("2026-09-05T04:00:00Z").toEpochMilliseconds(), Guides.dayStart(sixth - 1, chile), "the day before starts as ever")
+
+        // UTC-2 until 02:00 UTC, when 00:00 goes back to 23:00 (UTC-3): the day starts at its one 00:00, 03:00 UTC.
+        val back = Instant.parse("2026-02-15T02:00:00Z").toEpochMilliseconds()
+        val summerEnds = { millis: Long -> if (millis < back) -2 * 3600 else -3 * 3600 }
+        val fifteenth = localDay(back + 3_600_000, summerEnds)
+        assertEquals(Instant.parse("2026-02-15T03:00:00Z").toEpochMilliseconds(), Guides.dayStart(fifteenth, summerEnds))
+    }
+
     private companion object {
         val NOW = Instant.parse("2026-09-12T10:30:00Z").toEpochMilliseconds()
         const val MINUTE = 60_000L

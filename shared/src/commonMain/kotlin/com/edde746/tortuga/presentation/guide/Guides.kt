@@ -13,6 +13,7 @@ import com.edde746.tortuga.model.Resources
 import com.edde746.tortuga.model.Video
 import com.edde746.tortuga.presentation.calendar.civilDate
 import com.edde746.tortuga.presentation.calendar.isoDate
+import com.edde746.tortuga.presentation.calendar.localDay
 import kotlin.time.Instant
 
 /**
@@ -63,11 +64,16 @@ internal object Guides {
             }
         }
 
-    /** When the local day [epochDay] starts, its midnight at the offset in force then. */
+    /**
+     * When the local day [epochDay] starts: its midnight at the offset in force at UTC midnight or at the one in force
+     * then, whichever is the first instant of that day, so a change of offset at local midnight (summer time starting
+     * or ending there) moves it, as [com.edde746.tortuga.presentation.calendar.nextLocalMidnight] does.
+     */
     fun dayStart(epochDay: Long, offsetSeconds: (Long) -> Int): Long {
         val utcMidnight = epochDay * DAY_MILLIS
         val guess = utcMidnight - offsetSeconds(utcMidnight) * 1000L
-        return utcMidnight - offsetSeconds(guess) * 1000L
+        val corrected = utcMidnight - offsetSeconds(guess) * 1000L
+        return listOf(guess, corrected).filter { localDay(it, offsetSeconds) >= epochDay }.minOrNull() ?: corrected
     }
 
     /**
