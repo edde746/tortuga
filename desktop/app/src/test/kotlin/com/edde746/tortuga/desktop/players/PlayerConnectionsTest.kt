@@ -45,6 +45,15 @@ class PlayerConnectionsTest {
     }
 
     @Test
+    fun mpvIpcStopsFollowingAtALineTooLongToHold() {
+        val stream = "x".repeat(5 * 1024 * 1024) + "\n" + """{"event":"file-loaded"}""" + "\n"
+        val connection = MpvIpcConnection(stream.byteInputStream(), java.io.ByteArrayOutputStream()) {}
+        val events = mutableListOf<PlayerAppEvent>()
+        MpvIpc.read(connection, MpvIpcSession(), events::add)
+        assertEquals(emptyList(), events, "nothing after the overlong line is read")
+    }
+
+    @Test
     fun mpvIpcConnectsOnceMpvListensAndGivesUpWhenItQuit() {
         val process = FakeProcess()
         val channel = FakeMpvChannel("p", busyTries = 3)

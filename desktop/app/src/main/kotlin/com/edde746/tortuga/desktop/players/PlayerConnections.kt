@@ -1,5 +1,6 @@
 package com.edde746.tortuga.desktop.players
 
+import com.edde746.tortuga.log.Log
 import com.edde746.tortuga.playback.players.MpvIpcSession
 import com.edde746.tortuga.playback.players.PlayerAppEvent
 import com.edde746.tortuga.playback.players.VlcHttpSession
@@ -102,15 +103,40 @@ internal object MpvIpc {
 
     /**
      * Writes [session]'s commands, then hands every line mpv writes to it, and its events to [emit], until mpv closes
-     * the connection (it quit).
+     * the connection (it quit). A line longer than [MAX_LINE_BYTES] means the stream can't be followed: the reading
+     * ends there.
      */
     fun read(connection: MpvIpcConnection, session: MpvIpcSession, emit: (PlayerAppEvent) -> Unit) {
         connection.output.write(session.commands.joinToString("") { "$it\n" }.encodeToByteArray())
         connection.output.flush()
-        connection.input.bufferedReader(Charsets.UTF_8).lineSequence().forEach { line -> session.onLine(line).forEach(emit) }
+        val input = connection.input.buffered()
+        val line = ByteArrayOutputStream()
+        fun handOn() {
+            session.onLine(line.toString(Charsets.UTF_8).removeSuffix("\r")).forEach(emit)
+            line.reset()
+        }
+        while (true) {
+            val byte = input.read()
+            when {
+                byte < 0 -> {
+                    if (line.size() > 0) handOn()
+                    return
+                }
+                byte == '\n'.code -> handOn()
+                line.size() == MAX_LINE_BYTES -> {
+                    Log.w(TAG) { "mpv IPC: a line past $MAX_LINE_BYTES bytes without its end: no longer following" }
+                    return
+                }
+                else -> line.write(byte)
+            }
+        }
     }
 
     private const val CONNECT_RETRY_MILLIS = 100L
+
+    /** The most a line of mpv's (one JSON event or reply) may hold before its newline, as on the Mac. */
+    private const val MAX_LINE_BYTES = 4 * 1024 * 1024
+    private const val TAG = "MpvIpc"
 }
 
 /**
