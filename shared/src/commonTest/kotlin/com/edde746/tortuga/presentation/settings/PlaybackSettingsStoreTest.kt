@@ -359,4 +359,24 @@ class PlaybackSettingsStoreTest {
         assertNull(f.state.streamPattern(StreamPatternKind.EXCLUDE).error)
         f.data.close()
     }
+
+    @Test
+    fun aSizeLimitIsOneTheRowOffersOrTheOneStored() = runTest {
+        val f = fixture()
+        f.store.choose("streams.minSize", "1024")
+        f.store.choose("streams.maxSize", "2147483647")
+        runCurrent()
+        assertEquals(1024, f.data.settings.settings("p").streamMinSizeMb)
+        assertEquals(0, f.data.settings.settings("p").streamMaxSizeMb, "a size the row doesn't offer changes nothing")
+
+        // A size another version stored is offered while stored: once another is chosen, it no longer is.
+        f.data.settings.set("p", ProfileSetting.StreamMaxSizeMb, 3000)
+        runCurrent()
+        f.store.choose("streams.maxSize", "2048")
+        runCurrent()
+        f.store.choose("streams.maxSize", "3000")
+        runCurrent()
+        assertEquals(2048, f.data.settings.settings("p").streamMaxSizeMb)
+        f.data.close()
+    }
 }

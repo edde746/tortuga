@@ -72,10 +72,16 @@ class PlaybackSettingsStore internal constructor(
             "skipRecaps" -> skipMode(optionId)?.let { write(ProfileSetting.SkipRecaps, it) }
             "skipCredits" -> skipMode(optionId)?.let { write(ProfileSetting.SkipCredits, it) }
             "streams.autoPlay" -> autoPlayMode(optionId)?.let { write(ProfileSetting.StreamAutoPlay, it) }
-            "streams.minSize" -> optionId.toIntOrNull()?.let { write(ProfileSetting.StreamMinSizeMb, it) }
-            "streams.maxSize" -> optionId.toIntOrNull()?.let { write(ProfileSetting.StreamMaxSizeMb, it) }
+            "streams.minSize" -> offeredSize(key, optionId)?.let { write(ProfileSetting.StreamMinSizeMb, it) }
+            "streams.maxSize" -> offeredSize(key, optionId)?.let { write(ProfileSetting.StreamMaxSizeMb, it) }
             else -> error("Playback settings have no choice row $key")
         }
+    }
+
+    /** The size [optionId] (MiB) when the size row [key] offers it (its sizes and the one stored), else null. */
+    private fun offeredSize(key: String, optionId: String): Int? {
+        val row = mutableState.value.sections.flatMap { it.rows }.firstNotNullOfOrNull { (it as? PlaybackSettingRow.Choice)?.row?.takeIf { row -> row.id == key } }
+        return optionId.takeIf { id -> row?.options?.any { it.id == id } == true }?.toIntOrNull()
     }
 
     /** Switches the row [key] ([SettingToggleRow.id] of a [PlaybackSettingRow.Toggle]) on or off. */
