@@ -142,12 +142,14 @@ class GuideStore internal constructor(
         val previous = selected
         guides = Guides.catalogs(addons)
         addonsKnown = true
-        val kept = guides.firstOrNull { it.key == previous?.key && it.addon == previous.addon && it.catalog == previous.catalog }
-        if (kept != null) {
+        // The selected installation's catalog stays selected, its key moved should another installation come or go.
+        val same = previous?.let { guides.firstOrNull(it::sameAs) }
+        if (previous != null && same != null && same.addon == previous.addon && same.catalog == previous.catalog) {
+            selectedKey = same.key
             publish()
             return
         }
-        selectedKey = guides.firstOrNull { it.key == previous?.key }?.key ?: guides.firstOrNull()?.key
+        selectedKey = same?.key ?: guides.firstOrNull { it.key == previous?.key }?.key ?: guides.firstOrNull()?.key
         load()
     }
 

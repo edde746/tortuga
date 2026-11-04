@@ -303,6 +303,29 @@ class GuideStoreTest {
         assertEquals(Instant.parse("2026-02-15T03:00:00Z").toEpochMilliseconds(), Guides.dayStart(fifteenth, summerEnds))
     }
 
+    @Test
+    fun eachInstallationOfAnAddonIsAGuideOfItsOwnAndStaysChosenAsTheOthersComeAndGo() = runTest {
+        fun live(host: String) = Descriptor(LIVE.manifest, "https://$host/manifest.json".transportUrl())
+        val home = live("live.example.com/home")
+        val away = live("live.example.com/away")
+        val f = Fixture(this, listOf(home, away), pages = day())
+        runCurrent()
+        val keys = f.state.catalogs.map { it.key }
+        assertEquals(listOf("org.example.livetv/tv/channels", "org.example.livetv/tv/channels#2"), keys)
+
+        f.store.selectCatalog(keys[1])
+        runCurrent()
+        assertEquals(listOf(false, true), f.state.catalogs.map { it.selected })
+        assertTrue(f.env.http.requests.takeLast(2).all { it.url.encodedPath.startsWith("/away/") }, "the second installation is asked")
+
+        // The first installation goes: the one chosen stays chosen under its new key, and isn't asked again.
+        val asked = f.requests.size
+        f.addons.value = listOf(away)
+        runCurrent()
+        assertEquals(listOf(true), f.state.catalogs.map { it.selected })
+        assertEquals(asked, f.requests.size)
+    }
+
     private companion object {
         val NOW = Instant.parse("2026-09-12T10:30:00Z").toEpochMilliseconds()
         const val MINUTE = 60_000L

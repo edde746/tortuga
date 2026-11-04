@@ -20,10 +20,14 @@ import kotlin.time.Instant
  * A guide catalog of an installed addon: a catalog declaring the `date` extra on an addon whose manifest says
  * `epgProvider` (the addon SDK's `docs/epg.md`). [required] holds the first option of each of its other required
  * extras; `date` and `skip` are the guide's own.
+ *
+ * [key] is stable across updates and never holds the transport URL (a secret): `org.example.livetv/tv/channels`, and
+ * `#2`, `#3` for the same catalog of an addon installed more than once ([Guides.catalogs]).
  */
-internal class GuideCatalog(val addon: Descriptor, val catalog: ManifestCatalog, private val required: List<ExtraValue>) {
-    /** Stable across updates: `org.example.livetv/tv/channels`. */
-    val key: String get() = "${addon.manifest.id}/${catalog.type}/${catalog.id}"
+internal class GuideCatalog(val addon: Descriptor, val catalog: ManifestCatalog, private val required: List<ExtraValue>, val key: String) {
+    /** The same catalog of the same installation as [other] (whose manifest may have changed). */
+    fun sameAs(other: GuideCatalog): Boolean =
+        addon.transportUrl == other.addon.transportUrl && catalog.type == other.catalog.type && catalog.id == other.catalog.id
 
     val pages: Boolean get() = catalog.extraProp(Extras.SKIP) != null
 
@@ -53,16 +57,22 @@ internal object Guides {
      * The guide catalogs of [addons], in the installed order and each addon's catalog order. A catalog with another
      * required extra that has no options can't be asked for and isn't one.
      */
-    fun catalogs(addons: List<Descriptor>): List<GuideCatalog> = addons
-        .filter { it.manifest.behaviorHints.epgProvider }
-        .flatMap { addon ->
-            addon.manifest.catalogs.filter { it.declaresDate }.mapNotNull { catalog ->
-                val required = catalog.extra.filter { it.isRequired && it.name != Extras.DATE && it.name != Extras.SKIP }.map { prop ->
-                    ExtraValue(prop.name, prop.options.firstOrNull() ?: return@mapNotNull null)
+    fun catalogs(addons: List<Descriptor>): List<GuideCatalog> {
+        val seen = mutableMapOf<String, Int>()
+        return addons
+            .filter { it.manifest.behaviorHints.epgProvider }
+            .flatMap { addon ->
+                addon.manifest.catalogs.filter { it.declaresDate }.mapNotNull { catalog ->
+                    val required = catalog.extra.filter { it.isRequired && it.name != Extras.DATE && it.name != Extras.SKIP }.map { prop ->
+                        ExtraValue(prop.name, prop.options.firstOrNull() ?: return@mapNotNull null)
+                    }
+                    val base = "${addon.manifest.id}/${catalog.type}/${catalog.id}"
+                    val count = (seen[base] ?: 0) + 1
+                    seen[base] = count
+                    GuideCatalog(addon, catalog, required, if (count == 1) base else "$base#$count")
                 }
-                GuideCatalog(addon, catalog, required)
             }
-        }
+    }
 
     /**
      * When the local day [epochDay] starts: its midnight at the offset in force at UTC midnight or at the one in force
