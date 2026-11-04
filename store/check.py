@@ -438,7 +438,8 @@ def microsoft(r: Report, first: bool) -> None:
         if features is not None:
             lines = features.splitlines()
             long = [line for line in lines if len(line) > 200]
-            r.line(len(lines) <= 20 and not long, f"{label} features", f"{len(lines)}/20 lines, longest {max(map(len, lines))}/200")
+            r.line(len(lines) <= 20 and not long, f"{label} features",
+                   f"{len(lines)}/20 lines, longest {max(map(len, lines), default=0)}/200")
         whats_new(r, base / "whats_new.txt", MICROSOFT_WHATS_NEW, lang, first)
     forms = json_file(r, STORE / "microsoft" / "forms.json")
     if forms:
@@ -503,10 +504,14 @@ def demo(r: Report) -> None:
     for kind, item in ids:
         data = json_file(r, DEMO / "stream" / kind / f"{item}.json")
         for stream in (data or {}).get("streams", []):
-            url, size = stream.get("url", ""), stream.get("behaviorHints", {}).get("videoSize")
-            ok = url.startswith("https://") and isinstance(size, int) and set(stream) <= {"url", "name", "description", "behaviorHints"}
+            hints = stream.get("behaviorHints")
+            url, size = stream.get("url"), hints.get("videoSize") if isinstance(hints, dict) else None
+            ok = isinstance(url, str) and url.startswith("https://") and isinstance(size, int) and \
+                set(stream) <= {"url", "name", "description", "behaviorHints"}
             r.line(ok, f"demo stream {kind}/{item}", f"{url} {size}" if ok else f"not a direct https url with its videoSize: {stream}")
-            r.streams.append((url, size, f"{kind}/{item}"))
+            # Only a valid stream is fetched (--urls): one without its size has already failed above.
+            if ok:
+                r.streams.append((url, size, f"{kind}/{item}"))
     files = {(p.parent.name, p.stem) for p in (DEMO / "stream").glob("*/*.json")}
     r.line(files == set(ids), "website/static/demo/stream", f"{len(files)} files, one per catalog id" if files == set(ids)
            else f"files without a catalog id: {sorted(files - set(ids))}, ids without a file: {sorted(set(ids) - files)}")
