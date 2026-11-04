@@ -73,7 +73,8 @@ Nor does it start with another key than the database's. Its first start on a dat
 with the key, in the table `data_key`, and every start opens it; with another key the server stops with
 `Not starting: TORTUGA_DATA_KEY_FILE holds another key than the one this database's records are sealed with`. A
 database written by a server from before the check gets its check at its first start with this one, once the key has
-opened the newest record (a database without records takes the key it starts with).
+opened the newest sealed value of each kind the database holds: a record, a tracker connection, a GitHub token, an
+Apple token (a database with none of them takes the key it starts with).
 
 - **Create it once.** `set -C` above refuses to overwrite an existing file: a new key can't read the records the old
   one sealed. There is no key rotation; the key belongs to the database for its whole life.

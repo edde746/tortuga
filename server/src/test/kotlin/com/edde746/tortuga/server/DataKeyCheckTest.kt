@@ -9,10 +9,18 @@ import com.edde746.tortuga.server.support.TestPostgres
 import com.edde746.tortuga.server.support.ok
 import com.edde746.tortuga.server.support.serverTest
 import com.edde746.tortuga.server.support.testDataKey
+import com.edde746.tortuga.server.support.withGitHub
+import com.edde746.tortuga.sync.api.DeviceDescriptor
+import com.edde746.tortuga.sync.api.IdentityProvider
 import com.edde746.tortuga.sync.api.PushRequest
 import com.edde746.tortuga.sync.api.PushResponse
 import com.edde746.tortuga.sync.api.RecordWrite
+import com.edde746.tortuga.sync.api.SignInRequest
+import com.edde746.tortuga.sync.api.SignInResponse
 import com.edde746.tortuga.sync.api.SyncPaths
+import com.edde746.tortuga.trackers.connections.TrackerConnectRequest
+import com.edde746.tortuga.trackers.connections.TrackerConnection
+import com.edde746.tortuga.trackers.connections.TrackerConnectionPaths
 import java.security.SecureRandom
 import java.time.Duration
 import java.util.UUID
@@ -76,6 +84,25 @@ class DataKeyCheckTest {
         checkDataKey(db, serversKey)
         // Its check is stored now: the newest record no longer decides.
         db.transaction { update("DELETE FROM records") }
+        assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        checkDataKey(db, serversKey)
+    }
+
+    @Test
+    fun aDatabaseFromBeforeTheCheckWithoutRecordsTakesOnlyTheKeyItsOtherSealedValuesOpenWith() = serverTest(configure = { c, _ -> withGitHub(c) }) {
+        // An account that has only signed in with GitHub: its kept token is the database's one sealed value.
+        post(SyncPaths.AUTH_SIGN_IN, SignInRequest(IdentityProvider.GITHUB, github.token("octocat"), device = DeviceDescriptor("Pixel", "android")))
+            .ok<SignInResponse>()
+        asMigrated()
+        assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        checkDataKey(db, serversKey)
+
+        // An account that has only connected a tracker.
+        TestPostgres.reset()
+        val alice = signIn("alice").session.accessToken
+        post(TrackerConnectionPaths.CONNECTIONS, TrackerConnectRequest("profile-1", "anilist", "", "anilist-access-0"), alice)
+            .ok<TrackerConnection>()
+        asMigrated()
         assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
         checkDataKey(db, serversKey)
     }

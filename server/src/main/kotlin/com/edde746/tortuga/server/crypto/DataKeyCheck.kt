@@ -3,6 +3,7 @@ package com.edde746.tortuga.server.crypto
 import com.edde746.tortuga.server.crypto.RecordCipher.Companion.NO_ACCOUNT
 import com.edde746.tortuga.server.crypto.RecordCipher.Field
 import com.edde746.tortuga.server.db.Database
+import com.edde746.tortuga.server.db.Tx
 import com.edde746.tortuga.server.db.uuid
 import org.slf4j.LoggerFactory
 
@@ -14,7 +15,8 @@ import org.slf4j.LoggerFactory
  *
  * - A check: [cipher] must open it.
  * - NULL, as migration V8 left it (a database from before the check, until its first start): [cipher] must open the
- *   newest record, if there is one; its check is then stored.
+ *   newest sealed value of each kind there is (a record, a tracker connection, a GitHub token, an Apple refresh token),
+ *   so a database whose accounts have only signed in still refuses another key; its check is then stored.
  * - No row, which the operator's `DELETE FROM data_key` leaves once the old key is lost for good: [cipher]'s check is
  *   stored, and what the lost key sealed is gone.
  *
@@ -29,10 +31,7 @@ suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
                 require(cipher.open(Field.DATA_KEY_CHECK, NO_ACCOUNT, NOTHING, stored) != null) { ANOTHER_KEY }
                 return@transaction
             }
-            val newestOpens = query("SELECT account_id, id_index, sealed_record_id FROM records ORDER BY updated_at DESC LIMIT 1") {
-                cipher.open(Field.RECORD_ID, it.uuid("account_id"), it.getBytes("id_index"), it.getBytes("sealed_record_id")) != null
-            }
-            require(newestOpens.all { it }) { ANOTHER_KEY }
+            require(newestSealedValues(cipher).all { it }) { ANOTHER_KEY }
         }
         update(
             "INSERT INTO data_key (sealed_check) VALUES (?) ON CONFLICT (id) DO UPDATE SET sealed_check = excluded.sealed_check",
@@ -41,6 +40,29 @@ suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
         log.info("Stored the data key's check: the server starts with this key only")
     }
 }
+
+/** Whether [cipher] opens the newest sealed value of each kind the database holds; one entry per kind it has. */
+private fun Tx.newestSealedValues(cipher: RecordCipher): List<Boolean> = listOf(
+    query("SELECT account_id, id_index, sealed_record_id FROM records ORDER BY updated_at DESC LIMIT 1") {
+        cipher.open(Field.RECORD_ID, it.uuid("account_id"), it.getBytes("id_index"), it.getBytes("sealed_record_id")) != null
+    },
+    query("SELECT account_id, profile_id, service, sealed_session FROM tracker_connections ORDER BY connected_at DESC LIMIT 1") {
+        val index = "${it.getString("profile_id")}/${it.getString("service")}".encodeToByteArray()
+        cipher.open(Field.TRACKER_SESSION, it.uuid("account_id"), index, it.getBytes("sealed_session")) != null
+    },
+    query("SELECT id, account_id, github_token FROM identities WHERE github_token IS NOT NULL ORDER BY last_used_at DESC LIMIT 1") {
+        cipher.open(Field.GITHUB_TOKEN, it.uuid("account_id"), it.uuid("id").toString().encodeToByteArray(), it.getBytes("github_token")) != null
+    },
+    query(
+        """
+        SELECT id, account_id, sealed_apple_refresh_token FROM identities WHERE sealed_apple_refresh_token IS NOT NULL
+        ORDER BY last_used_at DESC LIMIT 1
+        """,
+    ) {
+        val index = it.uuid("id").toString().encodeToByteArray()
+        cipher.open(Field.APPLE_REFRESH_TOKEN, it.uuid("account_id"), index, it.getBytes("sealed_apple_refresh_token")) != null
+    },
+).flatten()
 
 private val NOTHING = ByteArray(0)
 
