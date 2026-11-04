@@ -142,4 +142,12 @@ class OAuthRelayClientTest {
         assertTrue(gaps.all { it in least..most }, "gaps ${gaps.min()}..${gaps.max()} outside $least..$most")
         assertTrue(gaps.size < OAuthRelayApi.SESSION_TTL_MILLIS / least / 2, "${gaps.size} retries: the waits grew")
     }
+
+    @Test
+    fun aRetryAfterPastTheSessionsLifeWaitsOnlyUntilItEnds() = runTest {
+        val relay = client { json("""{"code":"rate_limited","message":"Too many requests"}""", HttpStatusCode.TooManyRequests, HttpHeaders.RetryAfter to "3600") }
+        assertFailsWith<TrackerException.RateLimited> { relay.poll(TrackerService.MYANIMELIST, "tto_x") }
+        assertEquals(OAuthRelayApi.SESSION_TTL_MILLIS, currentTime, "gave up as the session ended, not an hour on")
+        assertEquals(2, requests.size)
+    }
 }

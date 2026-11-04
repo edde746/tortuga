@@ -244,6 +244,9 @@ class TraktTest {
         val limited = assertIs<TrackerException.RateLimited>(failure({ Answer(429, headers = mapOf("Retry-After" to "30")) }))
         assertEquals(30, limited.retryAfterSeconds)
         assertTrue(limited.transient)
+        // A timestamp (or milliseconds) sent as Retry-After isn't a wait of years: the service's own hold applies.
+        val stamped = assertIs<TrackerException.RateLimited>(failure({ Answer(429, headers = mapOf("Retry-After" to "1767225600")) }))
+        assertNull(stamped.retryAfterSeconds)
 
         val outage = assertIs<TrackerException.Api>(failure({ Answer(503) }))
         assertEquals(503, outage.status)

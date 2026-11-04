@@ -8,6 +8,7 @@ import com.edde746.tortuga.trackers.RelayResult
 import com.edde746.tortuga.trackers.RelayStart
 import com.edde746.tortuga.trackers.TrackerException
 import com.edde746.tortuga.trackers.TrackerService
+import com.edde746.tortuga.trackers.client.TrackerHttp
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.timeout
 import io.ktor.client.request.post
@@ -34,9 +35,9 @@ import kotlin.time.TimeSource
  * A poll is held by the relay for up to [OAuthRelayApi.RESULT_WAIT_MILLIS], longer than the app client's socket
  * timeout, so result requests carry their own [POLL_TIMEOUT]. A 204 is polled again at once after a held poll, and
  * [MIN_POLL_GAP] after the start of one answered sooner (a proxy that doesn't hold); 429s and 503s with `Retry-After`
- * (a server too busy) wait for `Retry-After` (a 429 without one, [RETRY_DELAY]) and transport failures [RETRY_DELAY] at
- * first, then longer with jitter up to [MAX_RETRY_DELAY], both only while the relay session can still succeed
- * ([OAuthRelayApi.SESSION_TTL_MILLIS] from the start of the poll).
+ * (a server too busy) wait for `Retry-After` (a 429 without one, [RETRY_DELAY]), no longer than the session lives, and
+ * transport failures [RETRY_DELAY] at first, then longer with jitter up to [MAX_RETRY_DELAY], both only while the relay
+ * session can still succeed ([OAuthRelayApi.SESSION_TTL_MILLIS] from the start of the poll).
  */
 class OAuthRelayClient(
     private val http: HttpClient,
@@ -96,7 +97,9 @@ class OAuthRelayClient(
                 response.status == HttpStatusCode.Gone -> throw TrackerException.SignIn(service, "the relay session expired or was already used")
                 comeBackLater(response) -> {
                     if (deadline.hasPassedNow()) throw TrackerException.RateLimited(service, retryAfterSeconds(response))
-                    delay(retryAfterSeconds(response)?.takeIf { it > 0 }?.seconds ?: RETRY_DELAY)
+                    val wait = retryAfterSeconds(response)?.takeIf { it > 0 }?.seconds ?: RETRY_DELAY
+                    // No longer than the session lives: a last poll then says how it ended.
+                    delay(minOf(wait, -deadline.elapsedNow()))
                 }
                 else -> throw TrackerException.SignIn(service, "relay HTTP ${response.status.value}")
             }
@@ -149,7 +152,7 @@ class OAuthRelayClient(
         else -> throw TrackerException.SignIn(service, "not a relay service")
     }
 
-    private fun retryAfterSeconds(response: HttpResponse): Long? = response.headers[HttpHeaders.RetryAfter]?.trim()?.toLongOrNull()
+    private fun retryAfterSeconds(response: HttpResponse): Long? = TrackerHttp.retryAfterSeconds(response.headers)
 
     /** A 429, or a 503 with `Retry-After`: the server asks to come back later. */
     private fun comeBackLater(response: HttpResponse): Boolean =

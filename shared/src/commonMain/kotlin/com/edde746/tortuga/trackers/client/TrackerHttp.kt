@@ -241,8 +241,15 @@ internal class TrackerHttp(
 
         fun isOk(status: Int): Boolean = status in 200..299
 
-        /** `Retry-After` in seconds; the HTTP-date form (unused by these services) reads as absent. */
-        fun retryAfterSeconds(headers: Headers): Long? = headers[HttpHeaders.RetryAfter]?.trim()?.toLongOrNull()?.takeIf { it >= 0 }
+        /**
+         * `Retry-After` in seconds, up to [MAX_RETRY_AFTER_SECONDS]; the HTTP-date form (unused by these services) and
+         * a longer wait (milliseconds or a timestamp sent by mistake) read as absent.
+         */
+        fun retryAfterSeconds(headers: Headers): Long? =
+            headers[HttpHeaders.RetryAfter]?.trim()?.toLongOrNull()?.takeIf { it in 0..MAX_RETRY_AFTER_SECONDS }
+
+        /** 25 hours: past the longest wait a tracker documents (Simkl's daily quota). */
+        const val MAX_RETRY_AFTER_SECONDS = 25L * 60 * 60
 
         /** The path of [url] without its query: what logs may show. */
         private fun pathOf(url: String): String = url.substringBefore('?').substringAfter("://").let { rest ->
