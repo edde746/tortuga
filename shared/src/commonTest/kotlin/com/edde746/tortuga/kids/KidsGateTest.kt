@@ -81,6 +81,36 @@ class KidsGateTest {
         assertEquals(KidsVerdict.Blocked(KidsBlockReason.Unchecked), gate.verdict("movie", GHOSTBUSTERS.id, null))
     }
 
+    /**
+     * TMDB numbers its films and its series apart: a parent's rule on the film `tmdb:123` isn't one on the series
+     * `tmdb:123`, an IMDb id's is one whatever the type, and lists stored before keep reading so.
+     */
+    @Test
+    fun aParentsRuleOnAnIdOtherThanImdbIsAboutItsTypeOnly() = runTest {
+        val w = kidsWorld()
+        val data = w.graph.data
+        w.ages.ages[AgeIdTable.TMDB_TV to 123L] = 18
+        data.settings.set(w.kids.id, ProfileSetting.KidsAllowed, emptyList())
+        // As a device stored and synced it: the id under `key`, its type beside it.
+        data.storeRaw(
+            w.kids.id,
+            ProfileSetting.KidsAllowed,
+            """[{"key":"tmdb:123","type":"movie","name":"A film"},{"key":"${DEADPOOL.id}","type":"series","name":"${DEADPOOL.name}"}]""",
+        )
+        val gate = gate(w)
+
+        assertEquals(KidsVerdict.Allowed, gate.verdict("movie", "tmdb:123", null))
+        assertEquals(KidsVerdict.Blocked(KidsBlockReason.Suggested(18)), gate.verdict("series", "tmdb:123", null))
+        assertEquals(KidsVerdict.Allowed, gate.verdict("movie", DEADPOOL.id, null), "an IMDb id's rule whatever its type")
+
+        gate.block(KidsTitle("tmdb:123", "series", "A series"))
+        runCurrent()
+        val settings = data.settings.settings(w.kids.id)
+        assertEquals(listOf("A film", DEADPOOL.name), settings.kidsAllowed.map { it.name }, "blocking the series leaves the film allowed")
+        assertEquals(KidsVerdict.Allowed, gate.verdict("movie", "tmdb:123", null))
+        assertEquals(KidsVerdict.Blocked(KidsBlockReason.ByParent), gate.verdict("series", "tmdb:123", null))
+    }
+
     /** A rating looked up without the IMDb id a title's catalog item adds is looked up again once it comes with it. */
     @Test
     fun aTitleSeenWithoutItsImdbIdIsLookedUpAgainWithIt() = runTest {

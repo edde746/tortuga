@@ -235,7 +235,7 @@ internal class KidsGate(
      * when one is due (never looked up, or its lookup failed [RETRY_FAILED] ago or more) and none is on its way.
      */
     private fun judge(policy: KidsPolicy, type: String, id: String, preview: MetaItemPreview?): KidsVerdict? {
-        val key = keyOf(id, preview)
+        val key = keyOf(type, id, preview)
         val live = preview?.isLive ?: (type == LIVE_TYPE)
         policy.settled(key, live)?.let { return it }
         val cacheKey = cacheKey(type, id, preview)
@@ -248,7 +248,7 @@ internal class KidsGate(
     /** The verdict on the title [id] of [type] with the catalog item [preview], once the profile and its rating are known. */
     suspend fun verdict(type: String, id: String, preview: MetaItemPreview?): KidsVerdict {
         val policy = mutableRules.first { it != null }?.kids ?: return KidsVerdict.Allowed
-        val key = keyOf(id, preview)
+        val key = keyOf(type, id, preview)
         val live = preview?.isLive ?: (type == LIVE_TYPE)
         policy.settled(key, live)?.let { return it }
         val cacheKey = cacheKey(type, id, preview)
@@ -263,8 +263,8 @@ internal class KidsGate(
         return now.decide(key, live, rating, preview?.certifications.orEmpty())
     }
 
-    /** The title [id] of [type] as a parent's lists keep it ([KidsTitle.key]: its IMDb id when known). */
-    fun titleOf(type: String, id: String, preview: MetaItemPreview?, name: String): KidsTitle = KidsTitle(keyOf(id, preview), type, name)
+    /** The title [id] of [type] as a parent's lists keep it ([KidsTitle.id]: its IMDb id when known). */
+    fun titleOf(type: String, id: String, preview: MetaItemPreview?, name: String): KidsTitle = KidsTitle(idOf(id, preview), type, name)
 
     /**
      * A parent allowed [title] on this profile: it joins `kids.allowed` (and leaves `kids.blocked`). Each list is
@@ -288,7 +288,7 @@ internal class KidsGate(
     suspend fun nameAllowed(title: KidsTitle) {
         if (title.name.isBlank()) return
         settingsRepository.update(profileId, ProfileSetting.KidsAllowed) { allowed ->
-            allowed.map { if (it.key == title.key && it.name == it.key) it.copy(name = title.name) else it }
+            allowed.map { if (it.key == title.key && it.name == it.id) it.copy(name = title.name) else it }
         }
     }
 
@@ -352,7 +352,10 @@ internal class KidsGate(
         /** Stremio's type of a live TV channel. */
         private const val LIVE_TYPE = "tv"
 
-        private fun keyOf(id: String, preview: MetaItemPreview?): String = if (ImdbId.parse(id) != null) id else preview?.imdbId ?: id
+        /** The id a parent's rule keeps for the title [id] ([KidsTitle.id]): its IMDb id when it or [preview] has one. */
+        private fun idOf(id: String, preview: MetaItemPreview?): String = if (ImdbId.parse(id) != null) id else preview?.imdbId ?: id
+
+        private fun keyOf(type: String, id: String, preview: MetaItemPreview?): String = KidsTitle.keyOf(type, idOf(id, preview))
 
         /** A rating as it was looked up: by the title's type and id, and the IMDb id its [preview] adds ([AgeRatings.rating]). */
         private fun cacheKey(type: String, id: String, preview: MetaItemPreview?) = "$type/$id/${preview?.imdbId.orEmpty()}"

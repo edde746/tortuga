@@ -12,8 +12,8 @@ import com.edde746.tortuga.data.settings.ProfileSettings
  */
 internal data class KidsPolicy(val cap: AgeStep?, val allowUnrated: Boolean, val allowed: Set<String>, val blocked: Set<String>?) {
     /**
-     * The verdict on the title [key] (its IMDb id when known, else its addon id; null when it has neither), a [live]
-     * channel or not, with its [rating] and the age ratings its addon sent ([addonCertifications]), in this order:
+     * The verdict on the title [key] ([KidsTitle.key]: its IMDb id when known, else its addon id within its type), a
+     * [live] channel or not, with its [rating] and the age ratings its addon sent ([addonCertifications]), in this order:
      * - the block list can't be read: blocked as unchecked;
      * - blocked by a parent: blocked; allowed by a parent: allowed, whatever its ratings;
      * - a live channel: not rated;
