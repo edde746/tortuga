@@ -121,14 +121,12 @@ internal object CodecNames {
     fun pixelFormat(name: String): PixelFormat? {
         val format = name.lowercase().removeSuffix("le").removeSuffix("be")
         PACKED[format]?.let { return it }
-        val planar = PLANAR.matchEntire(format) ?: return null
-        val (family, chroma, bits) = planar.destructured
-        val depth = bits.toIntOrNull() ?: 8
-        return when (family) {
-            "yuv", "yuvj", "yuva" -> PixelFormat(depth, chroma.toList().joinToString(":"))
-            "gbr", "gbra" -> PixelFormat(depth, null)
-            else -> null
+        YUV.matchEntire(format)?.let { yuv ->
+            val (chroma, bits) = yuv.destructured
+            return PixelFormat(bits.toIntOrNull() ?: 8, chroma.toList().joinToString(":"))
         }
+        val rgb = RGB.matchEntire(format) ?: return null
+        return PixelFormat(rgb.groupValues[1].toIntOrNull() ?: 8, null)
     }
 
     /** Bit depth and chroma subsampling ("4:2:0"); [chroma] null for RGB. */
@@ -166,7 +164,8 @@ internal object CodecNames {
     fun audioDriver(ao: String): String = if (ao == "spatial") T.player.info.spatialAudio else AUDIO_DRIVERS[ao] ?: ao
 
     private val LAYOUT = Regex("""\d+\.\d+(\([a-z]+\))?""")
-    private val PLANAR = Regex("""(yuvj|yuva|yuv|gbra|gbr)(4[0-4][0-4])p(\d+)?""")
+    private val YUV = Regex("""(?:yuvj|yuva|yuv)(4[0-4][0-4])p(\d+)?""")
+    private val RGB = Regex("""gbra?p(\d+)?""")
 
     private val PACKED = mapOf(
         "nv12" to PixelFormat(8, "4:2:0"),

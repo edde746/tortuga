@@ -265,6 +265,14 @@ class PlaybackInfoTest {
     }
 
     @Test
+    fun planarRgbFormatsReadAsTheirDepthWithoutSubsampling() {
+        assertEquals(CodecNames.PixelFormat(8, null), CodecNames.pixelFormat("gbrp"))
+        assertEquals(CodecNames.PixelFormat(10, null), CodecNames.pixelFormat("gbrp10le"))
+        assertEquals(CodecNames.PixelFormat(12, null), CodecNames.pixelFormat("gbrap12"))
+        assertEquals(CodecNames.PixelFormat(10, "4:2:0"), CodecNames.pixelFormat("yuv420p10"))
+    }
+
+    @Test
     fun aStereoAacWebFileStillBuffering() {
         val state = EngineState(
             loaded = true,
