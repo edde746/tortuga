@@ -413,12 +413,18 @@ class SyncAccount internal constructor(
         if (owner != accountId) data.syncState.setPullCursor(accountId, 0)
     }
 
-    /** Drops the synced data and every pull cursor. Callers hold [transitions]. */
+    /**
+     * Drops the synced data and every pull cursor, in one transaction. The generation moves on even when the drop's
+     * caller is cancelled as it commits, so no cycle started before it applies its records over it. Callers hold
+     * [transitions].
+     */
     private suspend fun dropLocal() {
         dataLock.withLock {
-            data.sync.dropSyncedData()
-            data.syncState.clearAll()
-            generation++
+            try {
+                data.sync.dropSyncedData()
+            } finally {
+                generation++
+            }
         }
     }
 

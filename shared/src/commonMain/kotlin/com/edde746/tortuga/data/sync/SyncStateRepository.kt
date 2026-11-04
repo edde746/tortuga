@@ -17,9 +17,4 @@ class SyncStateRepository internal constructor(private val db: Db) {
 
     /** The account the local synced data belongs to, or null when it belongs to none. */
     suspend fun dataAccount(): String? = db.read { syncStateQueries.selectAccount().executeAsOneOrNull() }
-
-    /** Forgets every cursor, with the data's account. */
-    suspend fun clearAll() {
-        db.write { q.syncStateQueries.deleteAll() }
-    }
 }

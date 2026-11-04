@@ -144,6 +144,18 @@ class SyncStoreTest {
         assertEquals(all.map { it.recordId }, paged.map { it.recordId })
     }
 
+    /** One write: a drop cut short can't leave the old account's cursor to skip its records on the next sign-in. */
+    @Test
+    fun droppingTheSyncedDataForgetsTheirAccountAndCursor() = runTest {
+        a.syncState.setPullCursor("account", 42)
+        a.library.addToLibrary("p", movie())
+
+        a.sync.dropSyncedData()
+        assertNull(a.syncState.dataAccount())
+        assertNull(a.syncState.pullCursor("account"))
+        assertEquals(emptyList(), a.sync.dirtyRecords(null, 10))
+    }
+
     @Test
     fun markPushedClearsOnlyTheVersionThatWasPushed() = runTest {
         a.settings.set("p", ProfileSetting.SeekLongSeconds, 20)
