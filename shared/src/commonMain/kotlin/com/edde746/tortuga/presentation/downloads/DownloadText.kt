@@ -38,6 +38,7 @@ internal object DownloadText {
             DownloadFailureKind.NOT_ENOUGH_SPACE -> text.notEnoughSpace
             DownloadFailureKind.SIZE_MISMATCH -> text.sizeMismatch
             DownloadFailureKind.UNSUPPORTED -> text.unsupported
+            DownloadFailureKind.ERROR_VIDEO -> T.player.errorVideo.sent
             DownloadFailureKind.LOCATION_UNAVAILABLE -> text.locationUnavailable
             DownloadFailureKind.FILE_MISSING -> text.fileMissing
             DownloadFailureKind.STORAGE -> text.storage

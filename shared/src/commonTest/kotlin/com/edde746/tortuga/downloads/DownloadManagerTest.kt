@@ -201,6 +201,60 @@ class DownloadManagerTest {
     }
 
     @Test
+    fun anErrorVideoIsNeverDownloaded() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice("videos/downloading_v2.mp4")).id
+        h.settle()
+
+        assertEquals(DownloadFailure(DownloadFailureKind.ERROR_VIDEO), h.download(id)?.failure)
+        assertTrue(h.transferRequests().isEmpty())
+    }
+
+    @Test
+    fun aStreamFoundAgainThatIsAnErrorVideoIsNeverDownloaded() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        var lazyHits = 0
+        h.routes["lazy.example"] = { if (lazyHits++ == 0) respond("", HttpStatusCode.NotFound) else redirectTo("https://cdn.example/videos/downloading_v2.mp4") }
+        h.serveStreams { listOf(urlStream("https://lazy.example/play/abc")) }
+        val manager = h.install()
+
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, choice(urlStream("https://lazy.example/play/abc"))).id
+        h.settle()
+
+        assertEquals(DownloadFailure(DownloadFailureKind.ERROR_VIDEO), h.download(id)?.failure)
+        assertTrue(h.transferRequests().isEmpty())
+    }
+
+    @Test
+    fun aPlaylistLinkIsRefusedBeforeTransferring() = downloadsTest { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice("live/index.m3u8")).id
+        h.settle()
+
+        assertEquals(DownloadFailure(DownloadFailureKind.UNSUPPORTED), h.download(id)?.failure)
+        assertTrue(h.transferRequests().isEmpty())
+    }
+
+    @Test
+    fun aPlaylistServedWithoutItsExtensionIsRefusedOnceItArrives() = downloadsTest { h ->
+        val playlist = "#EXTM3U\n#EXT-X-TARGETDURATION:10\n#EXTINF:10.0,\nsegment0.ts\n#EXT-X-ENDLIST\n".encodeToByteArray()
+        h.serveCdn(playlist)
+        val manager = h.install()
+
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice("play/abc")).id
+        h.settle()
+
+        assertEquals(DownloadStatus.FAILED, h.download(id)?.status)
+        assertEquals(DownloadFailure(DownloadFailureKind.UNSUPPORTED), h.download(id)?.failure)
+        assertNull(manager.localVideo(h.profileId, FILM.id, FILM.id))
+        assertTrue(SystemFileSystem.list(h.file("Movies/The Shawshank Redemption (1994)")).isEmpty(), "nothing kept")
+    }
+
+    @Test
     fun aDownloadWhoseFileCantBeDeletedStaysUntilItIs() = downloadsTest { h ->
         h.serveCdn(bytes)
         val manager = h.install()

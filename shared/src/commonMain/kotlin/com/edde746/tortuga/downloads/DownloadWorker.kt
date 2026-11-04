@@ -185,15 +185,23 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
         }
     }
 
-    /** The file is all there: its size verified against [expected], moved into place. */
+    /**
+     * The file is all there: a video file (a playlist or a page, [isDocument], is refused), its size verified against
+     * [expected], moved into place.
+     */
     private suspend fun complete(id: Long, video: Path, expected: Long?, result: TransferResult.Completed): Outcome {
         val part = Path("$video${DownloadNames.PART}")
         val bytes = env.io { size(part) } ?: return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
-        if (expected != null && bytes != expected) {
-            Log.w(TAG) { "download $id: $bytes bytes arrived of $expected" }
-            env.io { deletePart(video) }
+        val head = env.io { head(part, HEAD_BYTES) } ?: return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
+        val refused = when {
+            isDocument(head) -> DownloadFailureKind.UNSUPPORTED.also { Log.i(TAG) { "download $id: the file is a playlist or a page" } }
+            expected != null && bytes != expected -> DownloadFailureKind.SIZE_MISMATCH.also { Log.w(TAG) { "download $id: $bytes bytes arrived of $expected" } }
+            else -> null
+        }
+        if (refused != null) {
+            if (!env.io { deletePart(video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
             env.repo.resetFile(id)
-            return Outcome.Failed(DownloadFailureKind.SIZE_MISMATCH)
+            return Outcome.Failed(refused)
         }
         if (!env.io { move(part, video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
         env.io { DownloadNames.PART_SIDECARS.forEach { delete(Path("$video$it")) } }
@@ -233,7 +241,7 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
         }
         val request = choice.request() ?: return Step.Stop(Outcome.Failed(DownloadFailureKind.UNSUPPORTED))
         return when (val result = env.resolver.resolve(request)) {
-            is ResolveResult.Resolved -> Step.Go(result.stream)
+            is ResolveResult.Resolved -> go(row, result.stream)
             is ResolveResult.Failed -> {
                 val failure = result.failure
                 if (failure is ResolveFailure.Http && failure.status in EXPIRED) findAgain(row, choice) else step(failure)
@@ -267,9 +275,27 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
         if (found.stream != choice.stream) env.repo.setStream(row.id, found)
         val request = found.request() ?: return Step.Stop(Outcome.Failed(DownloadFailureKind.UNSUPPORTED))
         return when (val result = env.resolver.resolve(request)) {
-            is ResolveResult.Resolved -> Step.Go(result.stream)
+            is ResolveResult.Resolved -> go(row, result.stream)
             is ResolveResult.Failed -> step(result.failure)
         }
+    }
+
+    /**
+     * [stream] to download, unless the server sent an error video in place of the file, or the stream is a playlist
+     * (HLS, DASH) by its link's or its file name's extension: its segments aren't downloaded.
+     */
+    private fun go(row: DownloadRow, stream: ResolvedStream): Step {
+        stream.errorVideo?.let { sign ->
+            Log.w(TAG) { "download ${row.id}: the stream is an error video ($sign)" }
+            return Step.Stop(Outcome.Failed(DownloadFailureKind.ERROR_VIDEO))
+        }
+        val playlist = listOfNotNull(stream.url.substringBefore('#').substringBefore('?'), stream.filename)
+            .any { it.substringAfterLast('/').substringAfterLast('.', "").lowercase() in PLAYLIST_EXTENSIONS }
+        if (playlist) {
+            Log.i(TAG) { "download ${row.id}: the stream is a playlist" }
+            return Step.Stop(Outcome.Failed(DownloadFailureKind.UNSUPPORTED))
+        }
+        return Step.Go(stream)
     }
 
     private fun step(failure: ResolveFailure): Step = when (failure) {
@@ -322,7 +348,22 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
         private const val RANGE_NOT_SATISFIABLE = 416
         private const val TOO_MANY_REQUESTS = 429
         private val EXPIRED = setOf(403, 404, 410)
+        private val PLAYLIST_EXTENSIONS = setOf("m3u8", "m3u", "mpd")
+
+        /** How much of a finished file [isDocument] reads. */
+        private const val HEAD_BYTES = 64
         private const val TAG = "downloads"
+
+        /**
+         * A file's first bytes are a document's, not a video's: after a byte order mark and white space, a playlist
+         * (`#EXTM3U`), markup (a DASH manifest, a page) or JSON. No video container starts with `#`, `<` or `{`.
+         */
+        private fun isDocument(head: ByteArray): Boolean {
+            val text = head.decodeToString().removePrefix("\uFEFF").trimStart()
+            return text.firstOrNull()?.let { it in DOCUMENT_STARTS } == true
+        }
+
+        private val DOCUMENT_STARTS = setOf('#', '<', '{')
     }
 }
 

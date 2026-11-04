@@ -52,8 +52,11 @@ enum class DownloadFailureKind {
     /** The finished file's size isn't the size the server announced. */
     SIZE_MISMATCH,
 
-    /** The stream isn't an http(s) file this app can download. */
+    /** The stream isn't a file this app can download: not http(s), or a playlist (HLS, DASH) or a page. */
     UNSUPPORTED,
+
+    /** The server sent an error video in place of the file (`ErrorVideoSign`): the service's message, not the video. */
+    ERROR_VIDEO,
 
     /** The download location is gone (an SD card removed, a folder deleted or not writable). */
     LOCATION_UNAVAILABLE,
