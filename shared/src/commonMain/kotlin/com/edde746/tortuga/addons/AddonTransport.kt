@@ -14,6 +14,7 @@ import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.request.prepareGet
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 import io.ktor.utils.io.readBuffer
 import kotlinx.coroutines.CancellationException
@@ -115,11 +116,11 @@ class AddonTransport(
 
     /**
      * Sends [request] as an event (`player`, `library`): a GET of its URL each time, past the cache and any request on
-     * its way, whose answer is not read beyond its status.
+     * its way, whose answer is not read beyond its status (its body is left unread).
      */
     suspend fun send(request: ResourceRequest) {
         val url = TransportUrl.resourceUrl(request.base, request.path)
-        withContext(parseDispatcher) { get(url) }
+        withContext(parseDispatcher) { exchange(url) {} }
     }
 
     /** Refreshes [url]'s stale entry in [scope]; a failure leaves the stale one, logged. */
@@ -179,14 +180,19 @@ class AddonTransport(
         response
     }
 
-    private suspend fun get(url: String): String {
+    private suspend fun get(url: String): String = exchange(url) { response ->
+        val body = response.readBody { it.readBuffer(MAX_BODY_BYTES + 1) }
+        if (body.size > MAX_BODY_BYTES) throw AddonException(AddonError.InvalidResponse("longer than $MAX_BODY_BYTES bytes"))
+        body.readString()
+    }
+
+    /** A GET of [url] whose successful response [read] takes; any failure is an [AddonException]. */
+    private suspend fun <T : Any> exchange(url: String, read: suspend (HttpResponse) -> T): T {
         try {
             return withTimeoutOrNull(REQUEST_TIMEOUT) {
                 client.prepareGet(url).execute { response ->
                     if (!response.status.isSuccess()) throw AddonException(AddonError.Http(response.status.value))
-                    val body = response.readBody { it.readBuffer(MAX_BODY_BYTES + 1) }
-                    if (body.size > MAX_BODY_BYTES) throw AddonException(AddonError.InvalidResponse("longer than $MAX_BODY_BYTES bytes"))
-                    body.readString()
+                    read(response)
                 }
             } ?: throw AddonException(AddonError.Timeout)
         } catch (e: CancellationException) {

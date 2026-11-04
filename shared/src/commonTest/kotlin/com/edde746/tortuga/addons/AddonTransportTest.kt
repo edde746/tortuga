@@ -12,6 +12,7 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
+import io.ktor.utils.io.ByteChannel
 import kotlin.test.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -163,6 +164,18 @@ class AddonTransportTest {
             parseDispatcher = StandardTestDispatcher(testScheduler),
         )
         assertIs<AddonError.InvalidResponse>(assertFailsWith<AddonException> { transport.resource(request) }.error)
+    }
+
+    /** An event's answer counts by its status alone: a body that never ends isn't waited for, nor read. */
+    @Test
+    fun anEventIsSentWithoutReadingItsAnswer() = runTest {
+        val endless = ByteChannel()
+        val transport = AddonTransport(
+            mockClient { respond(endless, HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json")) },
+            parseDispatcher = StandardTestDispatcher(testScheduler),
+        )
+        transport.send(request)
+        assertEquals(0, testScheduler.currentTime, "answered at once, no read until the request's timeout")
     }
 
     @Test
