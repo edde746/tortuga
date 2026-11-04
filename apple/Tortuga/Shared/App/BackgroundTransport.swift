@@ -292,6 +292,7 @@ final class BackgroundTransport: NSObject, DownloadTransport, @unchecked Sendabl
             incomingPath: path,
             status: Int32(answer.status),
             contentRange: answer.contentRange,
+            contentLength: answer.contentLength.map { KotlinLong(value: $0) },
             etag: answer.etag,
             lastModified: answer.lastModified
         )

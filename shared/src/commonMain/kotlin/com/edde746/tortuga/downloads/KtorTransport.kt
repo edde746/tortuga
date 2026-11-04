@@ -261,18 +261,21 @@ object TransferFiles {
     /**
      * Puts the body at [incomingPath], answered to [request] with [status] and these headers, into
      * [TransferRequest.partPath] and deletes [incomingPath]: appended after a 206 whose `Content-Range` starts at the
-     * request's offset (with the expected total), in place of it after a 200 to a request from offset 0. A 200 to a
-     * resumed request, or a 206 that doesn't continue the file, is [TransferResult.Changed]; another status is
-     * [TransferResult.Http]. Only the request's part path, offset and expected size are read (not its URL or headers).
+     * request's offset (with the expected total), in place of it after a 200 to a request from offset 0 whose
+     * [contentLength] is the expected size (or either is unknown). A 200 to a resumed request or of another length, or
+     * a 206 that doesn't continue the file, is [TransferResult.Changed] (the part emptied after a 200, as
+     * [KtorTransport] does); another status is [TransferResult.Http]. Only the request's part path, offset and expected
+     * size are read (not its URL or headers).
      */
     fun adopt(
         request: TransferRequest,
         incomingPath: String,
         status: Int,
         contentRange: String?,
+        contentLength: Long?,
         etag: String?,
         lastModified: String?,
-    ): TransferResult = adopt(SystemFileSystem, request, incomingPath, status, contentRange, etag, lastModified)
+    ): TransferResult = adopt(SystemFileSystem, request, incomingPath, status, contentRange, contentLength, etag, lastModified)
 
     internal fun adopt(
         fileSystem: FileSystem,
@@ -280,6 +283,7 @@ object TransferFiles {
         incomingPath: String,
         status: Int,
         contentRange: String?,
+        contentLength: Long?,
         etag: String?,
         lastModified: String?,
     ): TransferResult {
@@ -288,7 +292,7 @@ object TransferFiles {
         val validator = etag ?: lastModified
         return try {
             val result = when (status) {
-                200 -> if (request.offset > 0) {
+                200 -> if (request.offset > 0 || request.expectedSize.let { it != null && contentLength != null && it != contentLength }) {
                     if (fileSystem.exists(part)) fileSystem.sink(part).close()
                     TransferResult.Changed
                 } else {

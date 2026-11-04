@@ -202,14 +202,15 @@ class KtorTransportTest {
         write(file.copyOf(100_000))
         writeTo(incoming, file.copyOfRange(100_000, file.size))
 
-        val appended = TransferFiles.adopt(request(offset = 100_000), incoming.toString(), 206, "bytes 100000-${file.size - 1}/${file.size}", "\"e\"", null)
+        val range = "bytes 100000-${file.size - 1}/${file.size}"
+        val appended = TransferFiles.adopt(request(offset = 100_000), incoming.toString(), 206, range, file.size - 100_000L, "\"e\"", null)
 
         assertEquals(TransferResult.Completed(file.size.toLong(), "\"e\""), appended)
         assertContentEquals(file, read())
         assertFalse(SystemFileSystem.exists(incoming))
 
         writeTo(incoming, file)
-        val replaced = TransferFiles.adopt(request(offset = 0), incoming.toString(), 200, null, null, "Mon, 01 Jan 2024 00:00:00 GMT")
+        val replaced = TransferFiles.adopt(request(offset = 0), incoming.toString(), 200, null, file.size.toLong(), null, "Mon, 01 Jan 2024 00:00:00 GMT")
         assertEquals(TransferResult.Completed(file.size.toLong(), "Mon, 01 Jan 2024 00:00:00 GMT"), replaced)
         assertContentEquals(file, read())
         assertFalse(SystemFileSystem.exists(incoming))
@@ -222,12 +223,27 @@ class KtorTransportTest {
         write(file.copyOf(100_000))
         writeTo(incoming, file)
 
-        assertEquals(TransferResult.Changed, TransferFiles.adopt(request(offset = 100_000), incoming.toString(), 200, null, null, null))
+        assertEquals(TransferResult.Changed, TransferFiles.adopt(request(offset = 100_000), incoming.toString(), 200, null, file.size.toLong(), null, null))
         assertEquals(0, read().size)
         assertFalse(SystemFileSystem.exists(incoming))
 
         writeTo(incoming, ByteArray(0))
-        assertEquals(TransferResult.Http(410), TransferFiles.adopt(request(offset = 0), incoming.toString(), 410, null, null, null))
+        assertEquals(TransferResult.Http(410), TransferFiles.adopt(request(offset = 0), incoming.toString(), 410, null, null, null, null))
+        assertFalse(SystemFileSystem.exists(incoming))
+    }
+
+    /** As [KtorTransport] answers a 200 whose length isn't the resolved size: the file changed, the manager restarts it. */
+    @Test
+    fun adoptCallsAWholeBodyOfAnotherLengthAChange() {
+        SystemFileSystem.createDirectories(directory)
+        val incoming = Path(directory, "video.mkv.part.incoming")
+        val other = file.copyOf(file.size - 1_000)
+        writeTo(incoming, other)
+
+        val adopted = TransferFiles.adopt(request(offset = 0), incoming.toString(), 200, null, other.size.toLong(), "\"v2\"", null)
+
+        assertEquals(TransferResult.Changed, adopted)
+        assertFalse(SystemFileSystem.exists(part) && read().isNotEmpty())
         assertFalse(SystemFileSystem.exists(incoming))
     }
 
