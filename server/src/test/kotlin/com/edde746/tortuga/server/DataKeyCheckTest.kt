@@ -94,7 +94,8 @@ class DataKeyCheckTest {
         post(SyncPaths.AUTH_SIGN_IN, SignInRequest(IdentityProvider.GITHUB, github.token("octocat"), device = DeviceDescriptor("Pixel", "android")))
             .ok<SignInResponse>()
         asMigrated()
-        assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        val withoutToken = assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        assertContains(withoutToken.message.orEmpty(), "database's GitHub tokens are sealed with")
         checkDataKey(db, serversKey)
 
         // An account that has only connected a tracker.
@@ -103,7 +104,8 @@ class DataKeyCheckTest {
         post(TrackerConnectionPaths.CONNECTIONS, TrackerConnectRequest("profile-1", "anilist", "", "anilist-access-0"), alice)
             .ok<TrackerConnection>()
         asMigrated()
-        assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        val tracker = assertFailsWith<IllegalArgumentException> { checkDataKey(db, anotherKey()) }
+        assertContains(tracker.message.orEmpty(), "database's tracker connections are sealed with")
         checkDataKey(db, serversKey)
     }
 

@@ -20,7 +20,8 @@ import org.slf4j.LoggerFactory
  * - No row, which the operator's `DELETE FROM data_key` leaves once the old key is lost for good: [cipher]'s check is
  *   stored, and what the lost key sealed is gone.
  *
- * @throws IllegalArgumentException when [cipher] holds another key; its message says what to do.
+ * @throws IllegalArgumentException when [cipher] holds another key; its message names what it couldn't open and says
+ *   what to do.
  */
 suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
     db.transaction {
@@ -28,10 +29,11 @@ suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
         if (rows.isNotEmpty()) {
             val stored = rows.single()
             if (stored != null) {
-                require(cipher.open(Field.DATA_KEY_CHECK, NO_ACCOUNT, NOTHING, stored) != null) { ANOTHER_KEY }
+                require(cipher.open(Field.DATA_KEY_CHECK, NO_ACCOUNT, NOTHING, stored) != null) { anotherKey("values") }
                 return@transaction
             }
-            require(newestSealedValues(cipher).all { it }) { ANOTHER_KEY }
+            val unopened = unopenedKinds(cipher)
+            require(unopened.isEmpty()) { anotherKey(unopened.joinToString(" and ")) }
         }
         update(
             "INSERT INTO data_key (sealed_check) VALUES (?) ON CONFLICT (id) DO UPDATE SET sealed_check = excluded.sealed_check",
@@ -41,18 +43,18 @@ suspend fun checkDataKey(db: Database, cipher: RecordCipher) {
     }
 }
 
-/** Whether [cipher] opens the newest sealed value of each kind the database holds; one entry per kind it has. */
-private fun Tx.newestSealedValues(cipher: RecordCipher): List<Boolean> = listOf(
+/** The kinds of sealed value whose newest in the database [cipher] doesn't open, as a message names them. */
+private fun Tx.unopenedKinds(cipher: RecordCipher): List<String> = listOfNotNull(
     query("SELECT account_id, id_index, sealed_record_id FROM records ORDER BY updated_at DESC LIMIT 1") {
         cipher.open(Field.RECORD_ID, it.uuid("account_id"), it.getBytes("id_index"), it.getBytes("sealed_record_id")) != null
-    },
+    }.unopened("records"),
     query("SELECT account_id, profile_id, service, sealed_session FROM tracker_connections ORDER BY connected_at DESC LIMIT 1") {
         val index = "${it.getString("profile_id")}/${it.getString("service")}".encodeToByteArray()
         cipher.open(Field.TRACKER_SESSION, it.uuid("account_id"), index, it.getBytes("sealed_session")) != null
-    },
+    }.unopened("tracker connections"),
     query("SELECT id, account_id, github_token FROM identities WHERE github_token IS NOT NULL ORDER BY last_used_at DESC LIMIT 1") {
         cipher.open(Field.GITHUB_TOKEN, it.uuid("account_id"), it.uuid("id").toString().encodeToByteArray(), it.getBytes("github_token")) != null
-    },
+    }.unopened("GitHub tokens"),
     query(
         """
         SELECT id, account_id, sealed_apple_refresh_token FROM identities WHERE sealed_apple_refresh_token IS NOT NULL
@@ -61,12 +63,15 @@ private fun Tx.newestSealedValues(cipher: RecordCipher): List<Boolean> = listOf(
     ) {
         val index = it.uuid("id").toString().encodeToByteArray()
         cipher.open(Field.APPLE_REFRESH_TOKEN, it.uuid("account_id"), index, it.getBytes("sealed_apple_refresh_token")) != null
-    },
-).flatten()
+    }.unopened("Apple refresh tokens"),
+)
+
+/** [kind] when the newest value of it (none or one in this list) didn't open. */
+private fun List<Boolean>.unopened(kind: String): String? = kind.takeIf { false in this }
 
 private val NOTHING = ByteArray(0)
 
-private const val ANOTHER_KEY = "${DataKey.ENV} holds another key than the one this database's records are sealed with: " +
+private fun anotherKey(what: String) = "${DataKey.ENV} holds another key than the one this database's $what are sealed with: " +
     "start with that key (server/README.md, The data key)"
 
 private val log = LoggerFactory.getLogger("com.edde746.tortuga.server.crypto.DataKeyCheck")
