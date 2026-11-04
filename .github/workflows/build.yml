@@ -4,9 +4,10 @@ run-name: ${{ inputs.release_tag != '' && format('Release {0}', inputs.release_t
 # The release build: run by hand from main, it builds every platform into Actions artifacts and, given a release tag
 # equal to version.xcconfig's MARKETING_VERSION, drafts a GitHub release with them. A draft needs all five platforms.
 #
-#   Android    APKs per ABI (arm64-v8a, armeabi-v7a, x86_64) for the release, and the AAB for Google Play as an
-#              artifact only; both signed with the upload keystore. The AAB is a store build, the APKs are sideloaded
-#              ones (-Ptortuga.flavor, settings.gradle.kts: what the stream list may show).
+#   Android    APKs per ABI (arm64-v8a, armeabi-v7a, x86_64) for the release, and as artifacts only the AAB for Google
+#              Play and the Amazon Appstore's APKs (armeabi-v7a, arm64-v8a); all signed with the upload keystore. The AAB
+#              and Amazon's APKs are store builds, the release's APKs sideloaded ones (-Ptortuga.flavor,
+#              settings.gradle.kts: what the stream list may show).
 #   iOS, tvOS  unsigned IPAs, for the release.
 #   macOS      the Developer ID-signed, notarized DMG and its Sparkle signature; the release carries the DMG and
 #              appcast.xml (the feed the app reads, apple/Tortuga/Shared/Info.plist's SUFeedURL).
@@ -143,10 +144,10 @@ jobs:
           storeFile=upload-keystore.jks
           EOF
 
-      # Two builds: AGP refuses to build the bundle while the per-ABI APK splits are on. The bundle is for the stores
-      # (Google Play, Amazon), the APKs are installed by hand. Each runs R8 once; bugs.plezy.app takes no mapping, so
-      # each mapping file is kept as r8-mappings/<uuid>.txt, by the UUID its app carries and its reports name
-      # (assets/sentry-debug-meta.properties, android/app/build.gradle.kts).
+      # Three builds: AGP refuses to build the bundle while the per-ABI APK splits are on. The bundle is for Google
+      # Play, the store APKs for the Amazon Appstore, the sideloaded APKs are installed by hand. Each runs R8 once;
+      # bugs.plezy.app takes no mapping, so each mapping file is kept as r8-mappings/<uuid>.txt, by the UUID its app
+      # carries and its reports name (assets/sentry-debug-meta.properties, android/app/build.gradle.kts).
       - name: Build the Play bundle
         run: |
           ./gradlew --console=plain -Ptortuga.flavor=store :app-android:bundleRelease
@@ -156,6 +157,21 @@ jobs:
           mkdir -p r8-mappings
           cp android/app/build/outputs/mapping/release/mapping.txt "r8-mappings/$uuid.txt"
 
+      # Amazon's: the store build per ABI, each APK with a versionCode of its own (android/app/build.gradle.kts), as the
+      # Appstore requires of a listing's APKs. Fire devices are armeabi-v7a or arm64-v8a; no Amazon device runs x86_64
+      # since the Windows Subsystem for Android ended (March 2025), so that APK stays out. Copied out before the
+      # sideloaded build writes the same paths.
+      - name: Build the Amazon APKs
+        run: |
+          ./gradlew --console=plain -Ptortuga.flavor=store -Ptortuga.abiSplits=true :app-android:assembleRelease
+          uuid=$(unzip -p android/app/build/outputs/apk/release/app-android-arm64-v8a-release.apk \
+            assets/sentry-debug-meta.properties | sed -n 's/^io\.sentry\.ProguardUuids=//p')
+          [[ -n $uuid ]] || { echo "The Amazon APKs name no R8 mapping UUID." >&2; exit 1; }
+          cp android/app/build/outputs/mapping/release/mapping.txt "r8-mappings/$uuid.txt"
+          for abi in armeabi-v7a arm64-v8a; do
+            cp "android/app/build/outputs/apk/release/app-android-$abi-release.apk" "tortuga-amazon-$abi.apk"
+          done
+
       - name: Build APKs
         run: |
           ./gradlew --console=plain -Ptortuga.flavor=sideloaded -Ptortuga.abiSplits=true :app-android:assembleRelease
@@ -164,7 +180,7 @@ jobs:
           [[ -n $uuid ]] || { echo "The APKs name no R8 mapping UUID." >&2; exit 1; }
           cp android/app/build/outputs/mapping/release/mapping.txt "r8-mappings/$uuid.txt"
 
-      # The native libraries both builds packed (every ABI, as merged before AGP strips them), so the reports' native
+      # The native libraries the builds packed (every ABI, as merged before AGP strips them), so the reports' native
       # frames, libmpv's among them, symbolicate.
       - name: Upload native symbols
         if: ${{ env.HAS_SYMBOL_UPLOAD == 'true' }}
@@ -193,6 +209,8 @@ jobs:
             tortuga-android-armeabi-v7a.tar.gz
             tortuga-android-x86_64.tar.gz
             tortuga-android.aab
+            tortuga-amazon-armeabi-v7a.apk
+            tortuga-amazon-arm64-v8a.apk
 
       - name: Upload APKs
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -209,6 +227,15 @@ jobs:
         with:
           name: android-aab
           path: tortuga-android.aab
+
+      # For the Amazon Appstore only; not attached to the release.
+      - name: Upload Amazon APKs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: android-amazon
+          path: |
+            tortuga-amazon-armeabi-v7a.apk
+            tortuga-amazon-arm64-v8a.apk
 
       # Not attached to the release: a report's debug_meta names the UUID of the mapping that retraces it.
       - name: Upload R8 mappings

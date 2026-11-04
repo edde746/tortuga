@@ -17,6 +17,7 @@
 // store).
 // Regenerate it with :app-android:generateBaselineProfile on an Android TV (android/baselineprofile/).
 import com.android.build.api.artifact.SingleArtifact
+import com.android.build.api.variant.FilterConfiguration
 import java.security.MessageDigest
 import java.util.Properties
 import java.util.zip.CRC32
@@ -66,9 +67,10 @@ android {
             }
         }
     }
-    // Per-ABI APKs for the GitHub release (arm64-v8a, armeabi-v7a, x86_64): the release workflow builds
-    // them with -Ptortuga.abiSplits=true. Off by default, so the harness installs one APK with every ABI, and so the
-    // Play bundle (bundleRelease, every ABI) builds: AGP refuses to build a bundle while splits are on.
+    // Per-ABI APKs for the GitHub release (arm64-v8a, armeabi-v7a, x86_64) and the Amazon Appstore: the release workflow
+    // builds them with -Ptortuga.abiSplits=true, each with a versionCode of its own (androidComponents, below). Off by
+    // default, so the harness installs one APK with every ABI, and so the Play bundle (bundleRelease, every ABI) builds:
+    // AGP refuses to build a bundle while splits are on.
     splits {
         abi {
             isEnable = providers.gradleProperty("tortuga.abiSplits").map(String::toBoolean).getOrElse(false)
@@ -284,8 +286,19 @@ val mpvAar = configurations.dependencyScope("mpvAar")
 val mpvAarFile = configurations.resolvable("mpvAarFile") { extendsFrom(mpvAar.get()) }
 dependencies { add(mpvAar.name, project.extra["mpv.aar"] as String) }
 
+// The digit a per-ABI APK's versionCode ends in (onVariants, below), by which a store's APK slot names its ABI.
+val abiDigits = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86_64" to 3)
+
 androidComponents {
     onVariants { variant ->
+        // A per-ABI APK's versionCode is CURRENT_PROJECT_VERSION * 10 + its ABI's digit: the Amazon Appstore takes a
+        // listing's APKs only with distinct versionCodes (its "Device Filtering and Compatibility on Fire OS",
+        // Requirements for multiple APKs), and arm64-v8a's outranks armeabi-v7a's. The bundle has no ABI outputs and
+        // keeps CURRENT_PROJECT_VERSION.
+        for (output in variant.outputs) {
+            val abi = output.filters.find { it.filterType == FilterConfiguration.FilterType.ABI }?.identifier ?: continue
+            output.versionCode.set(project.extra["tortuga.build"] as Int * 10 + abiDigits.getValue(abi))
+        }
         val name = variant.name.replaceFirstChar(Char::uppercase)
         val texts = tasks.register<LicenseTexts>("copy${name}LicenseTexts") { groups.from(licenseGroups) }
         variant.sources.assets?.addGeneratedSourceDirectory(texts, LicenseTexts::output)

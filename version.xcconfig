@@ -1,5 +1,5 @@
 // The app's version on every platform, bumped here before a release:
-//   app-android     versionName and versionCode
+//   app-android     versionName and versionCode (a per-ABI APK's: CURRENT_PROJECT_VERSION * 10 + its ABI's digit)
 //   app-desktop     the packaged app's version (About, the MSIX manifest); the MSIX takes 1.0.0 or later only
 //                   (build-msix.ps1: the Store rejects a version starting with 0)
 //   store/          the release's notes and date, written with the bump: Play's changelogs/<CURRENT_PROJECT_VERSION>.txt
