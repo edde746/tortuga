@@ -156,7 +156,9 @@ fun DownloadsScreen(
     state.deleteDialog?.let { DownloadDeleteOverlay(it, "downloads.deleteGroup", onConfirmDeleteGroup, onDismissDeleteGroup) }
     val first = when (val body = state.body) {
         DownloadsBody.Loading, is DownloadsBody.Empty -> null
-        is DownloadsBody.Groups -> body.groups.first().let { group -> (group.movie ?: group.seasons.firstOrNull()?.episodes?.firstOrNull())?.let(::rowKey) }
+        is DownloadsBody.Groups -> body.groups.first().let { group ->
+            (group.movie ?: group.seasons.firstOrNull()?.episodes?.firstOrNull() ?: group.videos.firstOrNull())?.let(::rowKey)
+        }
     }
     val fallback = first ?: when {
         state.keepSynced != null -> FOCUS_KEEP_SYNCED

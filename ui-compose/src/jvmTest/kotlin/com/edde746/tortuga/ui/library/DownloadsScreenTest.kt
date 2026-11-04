@@ -299,6 +299,15 @@ class DownloadsScreenTest {
         assertEquals("downloads.keepSynced", probe.focused)
     }
 
+    /** On TV a first title of videos without episode numbers alone opens the section with focus on its first one. */
+    @Test
+    fun onTvAFirstTitleOfVideosAloneOpensOnItsFirstVideo() = runComposeUiTest {
+        val probe = FocusedProbe()
+        val videos = listOf(4L, 5L).map { row(it, "Extra $it", null, DownloadStatus.COMPLETED, text.status.completed, null, listOf(play, details, delete)) }
+        tvDownloads(probe, loaded.copy(body = DownloadsBody.Groups(listOf(groups.first().copy(seasons = emptyList(), videos = videos))), pauseAllText = null))
+        assertEquals("downloads.row.4", probe.focused)
+    }
+
     /** The section of [state] on a 1080p TV (960 × 540 dp), the arrow keys as the D-pad. */
     private fun ComposeUiTest.tvDownloads(probe: FocusedProbe, state: DownloadsUiState) {
         setContent {
