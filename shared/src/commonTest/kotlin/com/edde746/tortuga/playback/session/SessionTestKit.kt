@@ -88,6 +88,9 @@ internal class ScriptedEngine : PlayerEngine {
      */
     var seekableEnd: Double? = null
 
+    /** Subtitle URLs that don't load: as mpv's `sub-add` of a dead link, adding one lists no track. */
+    var deadSubtitles: Set<String> = emptySet()
+
     fun report(change: (EngineState) -> EngineState) {
         state = change(state)
         listener?.onState(state)
@@ -164,6 +167,7 @@ internal class ScriptedEngine : PlayerEngine {
 
     override fun addSubtitle(url: String, title: String?, lang: String?) {
         addedSubtitles += Triple(url, title, lang)
+        if (url in deadSubtitles) return
         report { s ->
             val id = (s.tracks.filter { it.kind == TrackKind.SUBTITLE }.maxOfOrNull { it.id } ?: 0) + 1
             s.copy(tracks = s.tracks + Track(id, TrackKind.SUBTITLE, title, lang, "subrip", selected = false, external = true))

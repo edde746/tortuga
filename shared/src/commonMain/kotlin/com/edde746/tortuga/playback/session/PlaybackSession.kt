@@ -1139,11 +1139,13 @@ class PlaybackSession internal constructor(
             }
             file.audioId = audio
         }
-        file.requestedSubtitle?.let { requested ->
-            // The subtitle the user added: selected as the engine lists it, and carried as a pick of theirs.
-            val added = tracks.lastOrNull {
-                it.kind == TrackKind.SUBTITLE && it.external && it.title == requested.title && LanguageTags.canonical(it.language) == requested.language
-            } ?: return
+        // The subtitle the user added: selected once the engine lists it, and carried as a pick of theirs. One that
+        // never loads leaves the rest of the choices going.
+        val requested = file.requestedSubtitle
+        val added = requested?.let {
+            tracks.lastOrNull { it.kind == TrackKind.SUBTITLE && it.external && it.title == requested.title && LanguageTags.canonical(it.language) == requested.language }
+        }
+        if (added != null) {
             file.requestedSubtitle = null
             file.subtitleId = added.id
             engine.selectTrack(TrackKind.SUBTITLE, added.id)

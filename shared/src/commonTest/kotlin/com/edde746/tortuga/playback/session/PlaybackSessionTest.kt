@@ -1554,6 +1554,35 @@ class PlaybackSessionTest {
     }
 
     @Test
+    fun anAddedSubtitleThatNeverLoadsLeavesTheOtherChoicesGoing() = runTest {
+        val h = SessionHarness(this, addons = listOf(STREAM_ADDON, SUBTITLE_ADDON))
+        h.redirectLinks()
+        h.english()
+        h.data.settings.set(h.profileId, ProfileSetting.SecondSubtitleLanguage, "fre")
+        h.routes["subs.example.com"] = {
+            json(
+                """{"subtitles":[
+                    {"id":"1","url":"https://subs.example.com/file/en.srt","lang":"eng"},
+                    {"id":"2","url":"https://subs.example.com/file/ja.srt","lang":"jpn"}
+                ]}""",
+            )
+        }
+        h.engine.fileTracks = EPISODE_1_TRACKS.filter { it.language != "fr" }
+        h.start(movie())
+        h.engine.open(duration = 3000.0)
+        h.settle()
+        assertNull(h.engine.second(), "no French yet")
+
+        val japanese = h.session.info.value.moreSubtitles.single()
+        h.engine.deadSubtitles = setOf(japanese.url)
+        h.session.addSubtitle(japanese.url)
+        h.settle()
+        h.engine.addSubtitle("https://subs.example.com/late.fr.srt", "Late", "fr")
+        h.settle()
+        assertEquals(6L, h.engine.second(), "the late French, though the Japanese never came")
+    }
+
+    @Test
     fun aTrailerPlaysFromTheStartAsItIsAndRecordsNothing() = runTest {
         val h = SessionHarness(this, addons = listOf(STREAM_ADDON, SUBTITLE_ADDON))
         h.redirectLinks()
