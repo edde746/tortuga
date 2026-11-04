@@ -220,8 +220,11 @@ struct NoticePane: View {
 final class RemoteScroll {
     /// The scrolling view's frame on screen.
     var viewport: CGRect = .zero
-    /// Each tracked row's last top on screen, in the rows' order.
-    private var tops: [(id: String, order: [Int], y: CGFloat)] = []
+    /// Each tracked row's last top on screen. Kept for a row the lazy stack has let go of too: Up goes by its last top.
+    private var tops: [String: CGFloat] = [:]
+    /// The tracked rows, in their order. Each frame of a scroll moves every row on screen, and mpv-build's texts have
+    /// some 11,000: a row's top is found by its id, and a row first seen goes in its place, not the whole list sorted.
+    private var rows: [(id: String, order: [Int])] = []
 
     /// Records the top of the row `id`, `order` its place among the rows, as it moves.
     func tracking(_ id: String, order: [Int]) -> some ViewModifier {
@@ -233,22 +236,23 @@ final class RemoteScroll {
         let half = viewport.height / 2
         switch direction {
         case .down:
-            return tops.first { $0.y >= viewport.minY + half }?.id
+            return rows.first { tops[$0.id]! >= viewport.minY + half }?.id
         case .up:
-            guard let first = tops.first, first.y < viewport.minY else { return nil }
-            return tops.last { $0.y <= viewport.minY - half }?.id ?? "top"
+            guard let first = rows.first, tops[first.id]! < viewport.minY else { return nil }
+            return rows.last { tops[$0.id]! <= viewport.minY - half }?.id ?? "top"
         default:
             return nil
         }
     }
 
     fileprivate func record(_ id: String, _ order: [Int], _ y: CGFloat) {
-        if let index = tops.firstIndex(where: { $0.id == id }) {
-            tops[index].y = y
-        } else {
-            tops.append((id, order, y))
-            tops.sort { $0.order.lexicographicallyPrecedes($1.order) }
+        guard tops.updateValue(y, forKey: id) == nil else { return }
+        var low = 0, high = rows.count
+        while low < high {
+            let middle = (low + high) / 2
+            if rows[middle].order.lexicographicallyPrecedes(order) { low = middle + 1 } else { high = middle }
         }
+        rows.insert((id, order), at: low)
     }
 
     private struct Tracking: ViewModifier {
