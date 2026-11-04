@@ -36,8 +36,8 @@ import kotlin.time.Duration.Companion.seconds
  * each in the players opened from then on ([FastTimers]: a UI test's 5 minutes run out in 30 s). `@<seconds>` after
  * the value (`subtitles.sizePercent=200@60`) stores it that long after the session starts instead ([Later]: a change
  * while a video plays). `appearance.posterTemplate=<url template>` sets every profile's poster URL template, a profile
- * setting, as each profile appears ([PosterTemplate]); `appearance.hideWatched` and `appearance.hidePosterCaptions`
- * take `true` or `false` alike ([ProfileSwitch]). [applyDevSettings] stores them.
+ * setting, as each profile appears ([PosterTemplate]): its value is taken whole, `@` included. `appearance.hideWatched`
+ * and `appearance.hidePosterCaptions` take `true` or `false` alike ([ProfileSwitch]). [applyDevSettings] stores them.
  */
 sealed interface DevSetting {
     /** The setting's [DeviceSetting.key] and the value as given, for logs and test reports. */
@@ -110,8 +110,8 @@ sealed interface DevSetting {
         /** @throws IllegalArgumentException for an unknown key or a value the setting doesn't take, with the message to show. */
         @Throws(IllegalArgumentException::class)
         fun parse(spec: String): DevSetting {
-            // A custom player's command or template may hold an `@` of its own: never a later setting.
-            if ('@' in spec && !spec.startsWith("$CUSTOM_PLAYER_KEY=")) {
+            // A custom player's command or a poster URL template may hold an `@` of its own: never a later setting.
+            if ('@' in spec && !spec.startsWith("$CUSTOM_PLAYER_KEY=") && !spec.startsWith("${ProfileSetting.PosterTemplate.key}=")) {
                 val seconds = spec.substringAfterLast('@').toDoubleOrNull()?.takeIf { it.isFinite() && it >= 0 }
                     ?: throw IllegalArgumentException("needs <key>=<value>@<seconds after the start>, got '$spec'")
                 return Later(parseNow(spec.substringBeforeLast('@')), seconds)

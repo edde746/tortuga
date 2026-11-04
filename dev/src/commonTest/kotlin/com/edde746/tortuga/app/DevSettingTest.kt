@@ -89,6 +89,11 @@ class DevSettingTest {
             DevSetting.parse("appearance.posterTemplate=http://127.0.0.1:8766/art/poster/{type}-{imdb_id}.png"),
         )
         assertEquals(DevSetting.PosterTemplate(""), DevSetting.parse("appearance.posterTemplate="))
+        assertEquals(
+            DevSetting.PosterTemplate("https://images.example/{imdb_id}@2x.png"),
+            DevSetting.parse("appearance.posterTemplate=https://images.example/{imdb_id}@2x.png"),
+        )
+        assertEquals(DevSetting.PosterTemplate("https://images.example/{imdb_id}@60"), DevSetting.parse("appearance.posterTemplate=https://images.example/{imdb_id}@60"))
     }
 
     @Test
