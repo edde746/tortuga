@@ -12,11 +12,11 @@ import SwiftUI
 /// bar's do) where the title bar has them in a window, which the title row hosts (`PlayerWindowButtons`), so they
 /// fade with the controls. Minimize is greyed out, as in AppKit's full-screen title bar (a full-screen window can't be
 /// minimized); zoom leaves full screen. AppKit draws the buttons' symbols on hover only in its own title bar, so the
-/// copies show none. The title bar that comes down in full screen keeps its own buttons: it is opaque and covers the
-/// title row, copies and all, under the menu bar, so one set shows either way (without them it would come down empty
-/// while the controls show). The copies come as the window starts into full screen, under the title bar's own, so the
-/// buttons stay through AppKit's transition; they go once the window is out, where the title bar's own sit in the same
-/// place: leaving shows no jump.
+/// copies show none. The title bar that comes down in full screen keeps its own buttons: it is opaque (the screens'
+/// is see-through, `FullScreenTitleBar`) and covers the title row, copies and all, under the menu bar, so one set shows
+/// either way (without them it would come down empty while the controls show). The copies come as the window starts
+/// into full screen, under the title bar's own, so the buttons stay through AppKit's transition; they go once the
+/// window is out, where the title bar's own sit in the same place: leaving shows no jump.
 ///
 /// It also tells the player when the window enters or leaves full screen, whoever asked (the green button, the View
 /// menu, the player's own button), so the store's keymap and full-screen button follow, and where the pointer goes
@@ -72,7 +72,10 @@ struct PlayerWindowChrome: NSViewRepresentable {
         private static let kinds: [NSWindow.ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
 
         private weak var styled: NSWindow?
-        private var saved: (titleVisibility: NSWindow.TitleVisibility, transparent: Bool, fullSizeContent: Bool, toolbar: Bool?)?
+        private var saved: (
+            titleVisibility: NSWindow.TitleVisibility, transparent: Bool, fullSizeContent: Bool, toolbar: Bool?,
+            fullScreenTransparent: Bool?
+        )?
         private var observers: [NSObjectProtocol] = []
         /// The title bar's own buttons, taken before there are copies: while the copies are in the window,
         /// `standardWindowButton` returns them instead.
@@ -136,14 +139,16 @@ struct PlayerWindowChrome: NSViewRepresentable {
                 window.titleVisibility,
                 window.titlebarAppearsTransparent,
                 window.styleMask.contains(.fullSizeContentView),
-                window.toolbar?.isVisible
+                window.toolbar?.isVisible,
+                FullScreenTitleBar.isTransparent(window)
             )
             // The toolbar goes (the screens' back button and title under the player); the title bar stays for the
-            // window's buttons, without its title.
+            // window's buttons, without its title, opaque in full screen, where it comes down over the title row.
             window.toolbar?.isVisible = false
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
             window.styleMask.insert(.fullSizeContentView)
+            FullScreenTitleBar.setTransparent(false, window)
             titleBarButtons = Self.kinds.compactMap { window.standardWindowButton($0) }
             let center = NotificationCenter.default
             let names = [
@@ -188,6 +193,7 @@ struct PlayerWindowChrome: NSViewRepresentable {
             window.titlebarAppearsTransparent = saved.transparent
             if !saved.fullSizeContent { window.styleMask.remove(.fullSizeContentView) }
             if let toolbar = saved.toolbar { window.toolbar?.isVisible = toolbar }
+            if let transparent = saved.fullScreenTransparent { FullScreenTitleBar.setTransparent(transparent, window) }
             styled = nil
             self.saved = nil
         }

@@ -95,3 +95,57 @@ enum TitleBarDoubleClick {
         }
     }
 }
+
+/// The title bar in full screen as in a window: see-through, the screen's content (Home's and Detail's artwork, the
+/// sidebar) running up under the toolbar's band and the toolbar's items over it. In full screen AppKit moves the title
+/// bar and the toolbar into a window of their own over the top of the screen (`NSToolbarFullScreenWindow`) and draws
+/// the title bar's background there, opaque, in the window's background colour (a dark grey in the app's dark
+/// appearance), whatever `titlebarAppearsTransparent` and SwiftUI's toolbar background say: a band as tall as the
+/// toolbar across the whole screen, the content laid out under it hidden (macOS 27.2). AppKit's own switch for it,
+/// `NSWindow`'s `titlebarAppearsTransparentWhenFullscreen`, has no public API; the Mac app ships outside the Mac App
+/// Store, where private API is acceptable (Tortuga-Bridging-Header.h). Where AppKit has no such switch nothing changes.
+/// AppKit reads it as it sets up the title bar's transparency: on the way into full screen, and in full screen as
+/// `titlebarAppearsTransparent` is set.
+@MainActor
+enum FullScreenTitleBar {
+    private static let key = "titlebarAppearsTransparentWhenFullscreen"
+
+    /// Whether `window`'s title bar is see-through in full screen; nil where AppKit has no such switch.
+    static func isTransparent(_ window: NSWindow) -> Bool? {
+        window.responds(to: NSSelectorFromString(key)) ? window.value(forKey: key) as? Bool : nil
+    }
+
+    /// Makes `window`'s title bar see-through in full screen (`transparent`) or opaque, at once where the window is full
+    /// screen.
+    static func setTransparent(_ transparent: Bool, _ window: NSWindow) {
+        guard let current = isTransparent(window), current != transparent else { return }
+        window.setValue(transparent, forKey: key)
+        guard window.styleMask.contains(.fullScreen) else { return }
+        let shown = window.titlebarAppearsTransparent
+        window.titlebarAppearsTransparent = !shown
+        window.titlebarAppearsTransparent = shown
+    }
+}
+
+/// Makes the window's title bar see-through in full screen (`FullScreenTitleBar`) under a screen of `RouteStack`, whose
+/// toolbar draws no background (`windowToolbarBand`), while the window shows that toolbar: the player hides it and
+/// keeps its own title bar opaque in full screen (`PlayerWindowChrome`).
+struct FullScreenTitleBarTransparency: NSViewRepresentable {
+    func makeNSView(context: Context) -> WindowView {
+        WindowView()
+    }
+
+    func updateNSView(_ nsView: WindowView, context: Context) {}
+
+    final class WindowView: NSView {
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            guard let window, window.toolbar?.isVisible != false else { return }
+            FullScreenTitleBar.setTransparent(true, window)
+        }
+
+        override func hitTest(_ point: NSPoint) -> NSView? { nil }
+
+        override func isAccessibilityElement() -> Bool { false }
+    }
+}
