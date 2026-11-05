@@ -22,7 +22,6 @@ import com.edde746.tortuga.data.tracker.TrackerWriteQueue
 import com.edde746.tortuga.data.transfer.DataTransfer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Clock
 
@@ -78,10 +77,14 @@ class LocalData internal constructor(
      * (creating or migrating it) otherwise. A database that can't open throws here.
      */
     suspend fun open() {
-        withContext(db.io) { driver.executeQuery(null, "SELECT 1", { QueryResult.Value(Unit) }, 0) }
+        db.useDriver { driver.executeQuery(null, "SELECT 1", { QueryResult.Value(Unit) }, 0) }
     }
 
-    override fun close() = driver.close()
+    /**
+     * Closes the database once the reads and writes running are done (a cancelled coroutine's read still running on the
+     * I/O context among them); one asked for afterwards throws.
+     */
+    override fun close() = db.close(driver)
 }
 
 /** [schema], calling [onMigrate] before it migrates an older database. */

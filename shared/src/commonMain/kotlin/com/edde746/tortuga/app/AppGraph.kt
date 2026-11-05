@@ -434,7 +434,10 @@ class AppGraph internal constructor(
     fun playbackOutput(store: PlayerStore, session: PlaybackSession, formFactor: FormFactor, host: PlaybackOutputHost): PlaybackOutput =
         PlaybackOutput(session.engineState, session.info.map { it.trailer }, store.state.map { it.fullscreen }, formFactor, data.deviceSettings::settings, host, scope)
 
-    /** Stops everything this graph runs and closes the HTTP client and the database. */
+    /**
+     * Stops everything this graph runs and closes the HTTP client and the database, the latter once the reads and writes
+     * already running on the I/O context are done ([LocalData.close]).
+     */
     override fun close() {
         scope.cancel()
         http.close()

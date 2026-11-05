@@ -2,24 +2,30 @@ package com.edde746.tortuga.data
 
 import app.cash.sqldelight.Query
 import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
-import app.cash.sqldelight.coroutines.mapToOne
-import app.cash.sqldelight.coroutines.mapToOneOrNull
+import app.cash.sqldelight.db.SqlDriver
 import com.edde746.tortuga.data.db.TortugaDatabase
 import com.edde746.tortuga.data.sync.Hlc
 import com.edde746.tortuga.data.sync.HybridClock
 import com.edde746.tortuga.log.Log
 import com.edde746.tortuga.net.Backoff
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.retryWhen
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlin.concurrent.atomics.AtomicInt
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.concurrent.atomics.decrementAndFetch
+import kotlin.concurrent.atomics.incrementAndFetch
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -28,8 +34,10 @@ import kotlin.coroutines.CoroutineContext
  * Writes run one at a time ([write]): each is a read-modify-write transaction, and SQLite can't upgrade two
  * concurrent read transactions to writes without failing one of them. Reads and query flows run concurrently. Every
  * read ([read]) and query flow ([observeList], [observeOneOrNull], [observeOne]) is read again when it finds the
- * database busy ([readAgain]); any other failure goes to its caller.
+ * database busy ([readAgain]); any other failure goes to its caller. Each of them uses the driver through [useDriver],
+ * so [close] waits for the ones running.
  */
+@OptIn(ExperimentalAtomicApi::class)
 internal class Db(
     val database: TortugaDatabase,
     val io: CoroutineContext,
@@ -41,12 +49,18 @@ internal class Db(
     // Loaded by the first write and only touched under writeLock.
     private var clock: HybridClock? = null
 
+    // The blocks using the driver now (useDriver), plus CLOSING once close has begun.
+    private val users = AtomicInt(0)
+
+    // Completed when the last block using the driver after close began is done.
+    private val idle = CompletableDeferred<Unit>()
+
     /**
      * Runs [block] in one transaction, after every earlier write. [at] is the write's wall time ([Tx.now], epoch
      * milliseconds) when the caller gives one; the HLC stays this device's ([Tx.tick]).
      */
     suspend fun <R> write(at: Long? = null, block: Tx.() -> R): R = writeLock.withLock {
-        withContext(io) {
+        useDriver {
             database.transactionWithResult {
                 val clock = clock ?: loadClock().also { clock = it }
                 val before = clock.last
@@ -62,7 +76,7 @@ internal class Db(
         var failures = 0
         while (true) {
             try {
-                return withContext(io) { database.block() }
+                return useDriver { database.block() }
             } catch (e: Exception) {
                 if (!readAgain(e, ++failures)) throw e
             }
@@ -70,13 +84,50 @@ internal class Db(
     }
 
     /** [query]'s rows, now and after every change to its tables; a read that finds the database busy runs again. */
-    fun <T : Any> observeList(query: Query<T>): Flow<List<T>> = query.asFlow().mapToList(io).busyRetried()
+    fun <T : Any> observeList(query: Query<T>): Flow<List<T>> = query.asFlow().map { useDriver { it.executeAsList() } }.busyRetried()
 
     /** [query]'s row or null, now and after every change to its tables; a read that finds the database busy runs again. */
-    fun <T : Any> observeOneOrNull(query: Query<T>): Flow<T?> = query.asFlow().mapToOneOrNull(io).busyRetried()
+    fun <T : Any> observeOneOrNull(query: Query<T>): Flow<T?> = query.asFlow().map { useDriver { it.executeAsOneOrNull() } }.busyRetried()
 
     /** [query]'s one row, now and after every change to its tables; a read that finds the database busy runs again. */
-    fun <T : Any> observeOne(query: Query<T>): Flow<T> = query.asFlow().mapToOne(io).busyRetried()
+    fun <T : Any> observeOne(query: Query<T>): Flow<T> = query.asFlow().map { useDriver { it.executeAsOne() } }.busyRetried()
+
+    /**
+     * [block], which uses the driver, on [io]; [close] waits for it to finish. Once [close] has begun, [block] doesn't
+     * run: a cancelled caller (a graph's work as the graph closes) gets its cancellation, any other an
+     * IllegalStateException.
+     */
+    suspend fun <R> useDriver(block: () -> R): R = withContext(io) {
+        if (users.incrementAndFetch() >= CLOSING) {
+            leave()
+            ensureActive()
+            throw IllegalStateException("The database is closed")
+        }
+        try {
+            block()
+        } finally {
+            leave()
+        }
+    }
+
+    private fun leave() {
+        if (users.decrementAndFetch() == CLOSING) idle.complete(Unit)
+    }
+
+    /**
+     * Closes [driver] once the blocks using it ([useDriver]) are done, starting no other. A read or a query flow whose
+     * coroutine is cancelled still runs on [io] until its statement is done: closing the driver under it would free the
+     * statement it steps, which crashes the native driver. Later calls do nothing.
+     */
+    fun close(driver: SqlDriver) {
+        var running: Int
+        do {
+            running = users.load()
+            if (running >= CLOSING) return
+        } while (!users.compareAndSet(running, running + CLOSING))
+        if (running > 0) runBlocking { idle.await() }
+        driver.close()
+    }
 
     /**
      * A query flow that subscribes again when a read finds the database busy ([readAgain], the busy reads counted since
@@ -115,6 +166,9 @@ internal class Db(
         const val BUSY_RETRIES = 5
         const val BUSY_RETRY_MIN_MILLIS = 1_000L
         const val BUSY_RETRY_MAX_MILLIS = 30_000L
+
+        /** Added to [users] as [close] begins: far above any count of blocks using the driver at once. */
+        const val CLOSING = 1 shl 30
     }
 }
 
