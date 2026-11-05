@@ -1,3 +1,4 @@
+import AppKit
 import XCTest
 
 /// Detail with the pointer alone (the tests iOS has too are in Pointer/DetailTests.swift):
@@ -19,7 +20,9 @@ import XCTest
 /// - the sidebar over the backdrop of the test addon's movie without a logo (the bright frame: an overcast sky's
 ///   whites), in the window at its first size and narrowed to 760 pt (`testTheSidebarReadsOverTheBackdrop`);
 /// - a season row longer than the episodes' column, scrolled to its end, draws nothing over the details in the window
-///   at its first size (`testTheSeasonRowStaysInItsColumn`).
+///   at its first size (`testTheSeasonRowStaysInItsColumn`);
+/// - full screen as the window: the bright backdrop under the toolbar's back button and sidebar toggle, both hittable,
+///   and Home's band as black as in the window (`testFullScreenRunsTheArtUpUnderTheToolbar`).
 extension DetailTests {
     func testRoundButtonsShareOneLook() throws {
         try launchDev(addon: true, open: ["board", "detail:series:tt7366338"])
@@ -135,6 +138,82 @@ extension DetailTests {
     func testTheSeasonRowStaysInItsColumn() throws {
         try launchDev(addon: true, open: ["board", Self.longSeasonRowTitle])
         requireSeasonRowInItsColumn("in the window as it opens")
+    }
+
+    /// Full screen looks as the window does (`FullScreenTitleBar`): the bright-backdrop movie's backdrop runs up to the
+    /// window's top, the toolbar's back button and sidebar toggle over it, so beside them and just under them it shows
+    /// the backdrop, not a band of the toolbar's own, both still hittable, and the sidebar's Home sits as far down from
+    /// the window's top as in the window; back on Home, the band reads as Home's black does in the window. Home and the
+    /// details are kept as shots, in the window and full screen.
+    func testFullScreenRunsTheArtUpUnderTheToolbar() throws {
+        addTeardownBlock { [weak self] in
+            guard let self, self.app.state == .runningForeground, self.isFullScreen else { return }
+            self.app.typeKey("f", modifierFlags: .function)
+        }
+        try launchDev(addon: true, open: ["board", "detail:movie:tortuga-hero-plain"])
+        require("detail.title", timeout: 60, "the bright-backdrop movie's details show")
+        requireArtDrawn("the movie's details in the window")
+        screenSettles()
+        shot("details, window", of: XCUIScreen.main)
+        let windowed = requireArtUnderTheToolbar("in the window")
+
+        ready(app.menuBars.menuBarItems["View"]).click()
+        pickMenuEntry(app.menuBars.menuItems["Enter Full Screen"])
+        requireFullScreen(true, "the View menu's Enter Full Screen on the details")
+        screenSettles()
+        shot("details, full screen", of: XCUIScreen.main)
+        let full = requireArtUnderTheToolbar("in full screen")
+        if abs(full - windowed) > 2 {
+            fail("in full screen the sidebar's Home sits \(Int(full)) pt below the window's top, in the window \(Int(windowed)) pt")
+        }
+
+        goBack()
+        require("board.shortcuts", timeout: 10, "Back returns to Home")
+        screenSettles()
+        shot("Home, full screen", of: XCUIScreen.main)
+        let fullHome = bandLuminance("Home in full screen")
+        // Fn-F, the View menu's Exit Full Screen: the menu bar hides in full screen.
+        app.typeKey("f", modifierFlags: .function)
+        requireFullScreen(false, "Fn-F on Home in full screen")
+        screenSettles()
+        shot("Home, window", of: XCUIScreen.main)
+        let windowHome = bandLuminance("Home in the window")
+        if abs(fullHome - windowHome) > 0.005 {
+            fail("in full screen Home's toolbar band reads luminance \(String(format: "%.4f", fullHome)), in the window \(String(format: "%.4f", windowHome)): a band of the toolbar's own")
+        }
+    }
+
+    /// The toolbar's back button and sidebar toggle are hittable, over the bright backdrop: on their band and just under
+    /// them, towards the window's trailing edge, the screen reads bright (the bright frame's whites), as the window's
+    /// trailing top does (`testTheSidebarReadsOverTheBackdrop`), not as a band of the toolbar's own (a uniform dark
+    /// grey). Fails with `what`; returns how far below the window's top the sidebar's Home sits.
+    private func requireArtUnderTheToolbar(_ what: String) -> CGFloat {
+        let back = app.toolbars.buttons.matching(NSPredicate(format: "label == 'Back' OR identifier == 'Back'")).firstMatch
+        for (control, name) in [(back, "back button"), (sidebarToggle, "sidebar toggle")] where !(control.exists(within: 5) && control.isHittable) {
+            fail("\(what): the toolbar's \(name) isn't hittable")
+        }
+        let home = require("nav.board", timeout: 5, "\(what): the sidebar shows Home").frame
+        let luminance = bandLuminance(what)
+        if luminance <= 0.5 {
+            fail("\(what): on the toolbar's band and just under it the screen reads luminance \(String(format: "%.4f", luminance)), not the bright backdrop")
+        }
+        return home.minY - app.windows.firstMatch.frame.minY
+    }
+
+    /// The median luminance from the middle of the toolbar's sidebar toggle to a few points under it, over the window's
+    /// trailing 360 pt, where no toolbar item is; logged with the frames it was read from.
+    private func bandLuminance(_ what: String) -> Double {
+        let window = app.windows.firstMatch.frame
+        let toggle = sidebarToggle.frame
+        let strip = CGRect(x: window.maxX - 400, y: toggle.midY, width: 360, height: toggle.height / 2 + 6)
+        let luminance = ScreenPixels()?.medianLuminance(in: strip) ?? 0
+        print("\(what): luminance \(String(format: "%.4f", luminance)) in \(strip); window \(window), sidebar toggle \(toggle), screen \(NSScreen.screens.first.map { "\($0.frame), safe area \($0.safeAreaInsets)" } ?? "none")")
+        return luminance
+    }
+
+    /// The toolbar's sidebar toggle, the system's.
+    private var sidebarToggle: XCUIElement {
+        app.toolbars.buttons.matching(NSPredicate(format: "label IN %@", ["Hide Sidebar", "Show Sidebar"])).firstMatch
     }
 
     /// Drags the window's bottom-right corner, once the screen is still, until the window is about `width` points wide

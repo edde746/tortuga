@@ -1512,6 +1512,28 @@ class TortugaUITestCase: XCTestCase {
         }
     }
 
+    /// The window is full screen: it spans the screen's width down to its bottom edge, from the top edge or from below
+    /// a band the menu bar keeps (`keepMenuBarInFullScreen`); a window here is narrower.
+    var isFullScreen: Bool {
+        let window = app.windows.firstMatch
+        guard window.exists, let screen = NSScreen.screens.first?.frame else { return false }
+        return window.frame.minX == 0 && window.frame.width == screen.width && window.frame.maxY == screen.height
+    }
+
+    /// Waits up to 15 s for the window to be full screen (`on`) or not, then for AppKit's transition to end (the frame
+    /// unchanged for a second); fails with `what` when it doesn't come.
+    func requireFullScreen(_ on: Bool, _ what: String) {
+        let window = app.windows.firstMatch
+        var last = CGRect.null
+        var since = Date()
+        let settled = waitUntil(15) {
+            let frame = window.frame
+            if frame != last || isFullScreen != on { (last, since) = (frame, Date()) }
+            return Date().timeIntervalSince(since) >= 1
+        }
+        if !settled { fail("\(what): the window \(on ? "isn't" : "is still") full screen (\(window.frame))") }
+    }
+
     /// Search's field, which is the screen's header row on the toolbar's band (its centre on the line of the window's
     /// buttons, no band of its own above the content) and not in the toolbar; fails with `what` when it doesn't show or
     /// sits elsewhere.

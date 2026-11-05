@@ -2092,28 +2092,6 @@ extension PlayerTests {
         }
     }
 
-    /// The window is full screen: it spans the screen's width down to its bottom edge, from the top edge or from below
-    /// a band the menu bar keeps (`keepMenuBarInFullScreen`); a window here is narrower.
-    private var isFullScreen: Bool {
-        let window = app.windows.firstMatch
-        guard window.exists, let screen = NSScreen.screens.first?.frame else { return false }
-        return window.frame.minX == 0 && window.frame.width == screen.width && window.frame.maxY == screen.height
-    }
-
-    /// Waits up to 15 s for the window to be full screen (`on`) or not, then for AppKit's transition to end (the frame
-    /// unchanged for a second); fails with `what` when it doesn't come.
-    private func requireFullScreen(_ on: Bool, _ what: String) {
-        let window = app.windows.firstMatch
-        var last = CGRect.null
-        var since = Date()
-        let settled = waitUntil(15) {
-            let frame = window.frame
-            if frame != last || isFullScreen != on { (last, since) = (frame, Date()) }
-            return Date().timeIntervalSince(since) >= 1
-        }
-        if !settled { fail("\(what): the window \(on ? "isn't" : "is still") full screen (\(window.frame))") }
-    }
-
     /// Leaves full screen. With the player up, by Escape, which leaves full screen first (after closing an open menu):
     /// XCUITest reports the player's copy of the zoom button on the title row not hittable, before the top edge is
     /// pushed and after. Elsewhere by the zoom button: where the window has it, else in the title bar full screen hides,
