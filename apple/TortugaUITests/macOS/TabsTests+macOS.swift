@@ -23,7 +23,9 @@ import XCTest
 /// Settings, Discover or Library leaves the screen lit: no frame of it darker than the rest
 /// (`windowToolbarBand`). Asked for the light appearance (a Mac in light mode), the system's chrome stays dark: the
 /// title bar's band and the View menu. The App menu lists Settings…, whose ⌘, shows Settings but leaves the player up
-/// while a video plays; the Playback menu acts on the player and on nothing else.
+/// while a video plays; the Playback menu acts on the player and on nothing else. Full screen keeps the window's
+/// buttons where the window has them, over Home and a pushed Detail, one set even with the menu bar down, and its zoom
+/// leaves full screen.
 extension TabsTests {
     func testSidebarListsEveryDestinationAndAClickShowsItsScreen() throws {
         // Continue Watching's titles, for posters on Library's grid.
@@ -191,6 +193,80 @@ extension TabsTests {
         requireSidebar(shown: true, "View → Show Sidebar")
         require("nav.profile", timeout: 5, "shown again, the sidebar shows the running profile")
         shot("sidebar shown")
+    }
+
+    /// Full screen keeps the window's buttons where the window has them (`FullScreenWindowButtons`): over Detail pushed
+    /// on Home and over Home, with the pointer away from the top edge (the menu bar hidden), close and zoom are hittable
+    /// and minimize drawn between them (greyed out, as in AppKit's full-screen title bar, which leaves it out of the
+    /// accessibility tree), the close button within 3 pt of where it sits in the window, one red close button on the
+    /// screen, and the toolbar's sidebar toggle and Back to their right. The top edge pushed brings the title bar down
+    /// under the menu bar with the buttons, still one close button; the pointer away, they are back at the top. A click
+    /// on zoom leaves full screen.
+    func testFullScreenKeepsTheWindowButtons() throws {
+        addTeardownBlock { [weak self] in
+            guard let self, self.app.state == .runningForeground, self.isFullScreen else { return }
+            self.app.typeKey("f", modifierFlags: .function)
+        }
+        try launchDev(addon: true, open: ["board", "detail:movie:tortuga-hero-plain"])
+        require("detail.title", timeout: 60, "the movie's details show")
+        let window = app.windows.firstMatch
+        let close = window.buttons[XCUIIdentifierCloseWindow].frame
+        let windowed = close.offsetBy(dx: -window.frame.minX, dy: -window.frame.minY)
+
+        ready(app.menuBars.menuBarItems["View"]).click()
+        pickMenuEntry(app.menuBars.menuItems["Enter Full Screen"])
+        requireFullScreen(true, "the View menu's Enter Full Screen on the details")
+        requireWindowButtonsInFullScreen(at: windowed, "Detail in full screen", pushed: true)
+        shot("Detail, full screen", of: XCUIScreen.main)
+
+        goBack()
+        require("board.shortcuts", timeout: 10, "Back returns to Home")
+        requireWindowButtonsInFullScreen(at: windowed, "Home in full screen", pushed: false)
+        shot("Home, full screen", of: XCUIScreen.main)
+        try pushTopEdge()
+        requireCloseButtonsShown(below: Self.menuBarBottom, "Home in full screen, the top edge pushed")
+        shot("Home, full screen, the top edge pushed", of: XCUIScreen.main)
+        let zoom = requireWindowButtonsInFullScreen(at: windowed, "Home in full screen, the pointer back from the top edge", pushed: false)
+        ready(zoom).click()
+        requireFullScreen(false, "the zoom button in full screen")
+    }
+
+    /// With the window full screen and the pointer moved to its middle, away from the top edge (the title bar back up):
+    /// the window's close and zoom buttons hittable and minimize drawn between them, the close button within 3 pt of
+    /// `at` (its frame in the window, relative to the window), one red close button on the screen, and the toolbar's
+    /// sidebar toggle (and Back where `pushed`) right of zoom. Fails with `what`; returns the zoom button.
+    @discardableResult
+    private func requireWindowButtonsInFullScreen(at: CGRect, _ what: String, pushed: Bool) -> XCUIElement {
+        let window = app.windows.firstMatch
+        pointerOn(window, at: CGVector(dx: 0.5, dy: 0.5))
+        _ = waitUntil(5) { !closeButtonsShown().contains { $0.y > Self.menuBarBottom } }
+        screenSettles(XCUIScreen.main)
+        let close = app.buttons.matching(identifier: XCUIIdentifierCloseWindow).firstMatch
+        let zoom = app.buttons.matching(NSPredicate(format: "identifier IN %@", [XCUIIdentifierZoomWindow, XCUIIdentifierFullScreenWindow])).firstMatch
+        let shown = closeButtonsShown()
+        let frames = [close, zoom].map { $0.exists ? "\($0.frame) hittable \($0.isHittable)" : "none" }
+        print("\(what): window \(window.frame), close \(frames[0]), zoom \(frames[1]), red close buttons at \(shown)")
+        for (button, kind) in [(close, "close"), (zoom, "zoom")] where !(button.exists && button.isHittable) {
+            fail("\(what): the window's \(kind) button isn't hittable")
+        }
+        let closeFrame = close.frame.offsetBy(dx: -window.frame.minX, dy: -window.frame.minY)
+        if abs(closeFrame.minX - at.minX) > 3 || abs(closeFrame.midY - at.midY) > 3 {
+            fail("\(what): the close button sits at \(closeFrame), in the window at \(at)")
+        }
+        if shown.count != 1 { fail("\(what): the screen shows \(shown.count) close buttons (at \(shown)), not one") }
+        // Minimize's circle, midway between close and zoom, against the band just right of zoom.
+        let middle = CGPoint(x: (close.frame.midX + zoom.frame.midX) / 2, y: close.frame.midY)
+        let screen = ScreenPixels()
+        let minimize = screen?.medianLuminance(in: CGRect(x: middle.x - 3, y: middle.y - 3, width: 6, height: 6)) ?? 0
+        let beside = screen?.medianLuminance(in: CGRect(x: zoom.frame.maxX + 6, y: middle.y - 3, width: 6, height: 6)) ?? 0
+        if abs(minimize - beside) < 0.02 {
+            fail("\(what): no minimize button drawn between close and zoom (luminance \(minimize) there, \(beside) beside zoom)")
+        }
+        for (control, name) in [(sidebarToggle, "sidebar toggle")] + (pushed ? [(toolbarBack, "Back")] : [])
+            where control.frame.minX < zoom.frame.maxX {
+            fail("\(what): the toolbar's \(name) (\(control.frame)) isn't right of the zoom button (\(zoom.frame))")
+        }
+        return zoom
     }
 
     func testPointerFromTheToolbarIntoAScreenLeavesItLit() throws {

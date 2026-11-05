@@ -2108,69 +2108,6 @@ extension PlayerTests {
         _ = waitUntil(10) { !isFullScreen }
     }
 
-    /// How many times `pushTopEdge` has pushed in this run.
-    private static var topEdgePushes = 0
-
-    /// The menu bar's bottom edge on a full-screen window's screen, in points from its top: a close button below it is
-    /// in the title bar that came down with it.
-    private static let menuBarBottom: CGFloat = 24
-
-    /// Pushes the pointer up against the top edge at `x` (screen points; the window's middle by default), as a person
-    /// reaching for the menu bar does, which XCUITest's hover can't: the push is published for the run's pointer hook
-    /// (`top-edge-<n>`: `<x>`), which posts it, the pointer going up to the edge from 40 pt below it. The hook alone
-    /// brings the pointer there: a hover onto the edge first starts the menu bar and the title bar
-    /// down, and the push's way up then crosses the title bar on its way down rather than the video (the controls, last
-    /// under the pointer at the edge, then stayed up). Then waits up to 10 s for the title bar to come down under the
-    /// menu bar with a close button (once more when it doesn't).
-    private func pushTopEdge(at x: CGFloat? = nil) throws {
-        let exchange = URL(fileURLWithPath: try AccountScenario.variable("TORTUGA_EXCHANGE"), isDirectory: true)
-        let at = x ?? app.windows.firstMatch.frame.midX
-        for _ in 0..<2 {
-            Self.topEdgePushes += 1
-            publish("top-edge-\(Self.topEdgePushes)", code: "\(Int(at))", to: exchange)
-            if waitUntil(10, { closeButtonsShown().contains { $0.y > Self.menuBarBottom } }) { return }
-        }
-    }
-
-    /// With the window full screen: exactly one close button on the screen, below `below` points from its top (the
-    /// title bar's under the menu bar), at the window's leading edge. Fails with `what`.
-    private func requireCloseButtonsShown(below: CGFloat, _ what: String) {
-        let shown = closeButtonsShown()
-        if shown.count != 1 { fail("\(what): the screen shows \(shown.count) close buttons (at \(shown)), not one") }
-        for point in shown where point.y < below || point.x > 30 {
-            fail("\(what): the close button shows at \(point), not at the leading edge below \(Int(below)) pt")
-        }
-    }
-
-    /// The close buttons the screen shows in its top-left corner, as their red circles (AppKit draws the window's
-    /// buttons in colour while the window is key; the copies and the title bar's own alike): their centres in points
-    /// from the screen's top-left corner. The accessibility tree can't count them: it reports only the window's
-    /// current ones.
-    private func closeButtonsShown() -> [CGPoint] {
-        guard let screen = ScreenPixels() else { return [] }
-        let scale = screen.scale
-        var circles: [(sum: CGPoint, count: CGFloat)] = []
-        for y in 0..<min(Int(90 * scale), screen.height) {
-            for x in 0..<min(Int(120 * scale), screen.width) {
-                let (red, green, blue) = screen.colour(x: x, y: y)
-                guard red > 200, (60...140).contains(green), (50...130).contains(blue) else { continue }
-                let point = CGPoint(x: CGFloat(x) / scale, y: CGFloat(y) / scale)
-                let near = circles.firstIndex {
-                    abs($0.sum.x / $0.count - point.x) < 10 && abs($0.sum.y / $0.count - point.y) < 10
-                }
-                if let near {
-                    circles[near].sum.x += point.x
-                    circles[near].sum.y += point.y
-                    circles[near].count += 1
-                } else {
-                    circles.append((point, 1))
-                }
-            }
-        }
-        // A circle, not a stray red pixel.
-        return circles.filter { $0.count >= 20 }.map { CGPoint(x: $0.sum.x / $0.count, y: $0.sum.y / $0.count) }
-    }
-
     /// The window's buttons by kind, as XCUITest names them: the zoom button is the full-screen button where the window
     /// can go full screen.
     private static var windowButtonKinds: [(String, [String])] {
