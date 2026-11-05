@@ -6,7 +6,8 @@ import SwiftUI
 /// its title (the player draws the title beside the window's buttons), and those buttons coming and going with the
 /// controls. Everything is handed back as it was when the player goes.
 ///
-/// Full screen hides the title bar until the pointer reaches the top edge, where it comes down under the menu bar.
+/// Full screen hides the title bar until the pointer reaches the top edge, where it comes down under the menu bar (the
+/// screens keep its buttons shown, `FullScreenWindowButtons`; with the toolbar hidden here they hide as AppKit has them).
 /// The player's title row keeps the window's buttons there all the same: copies of them
 /// (`NSWindow.standardWindowButton(_:for:)`: they act on the window and grey out while it isn't key, as the title
 /// bar's do) where the title bar has them in a window, which the title row hosts (`PlayerWindowButtons`), so they

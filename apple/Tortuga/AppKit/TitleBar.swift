@@ -127,10 +127,99 @@ enum FullScreenTitleBar {
     }
 }
 
-/// Makes the window's title bar see-through in full screen (`FullScreenTitleBar`) under a screen of `RouteStack`, whose
-/// toolbar draws no background (`windowToolbarBand`), while the window shows that toolbar: the player hides it and
-/// keeps its own title bar opaque in full screen (`PlayerWindowChrome`).
-struct FullScreenTitleBarTransparency: NSViewRepresentable {
+/// The window's buttons in full screen as in a window: close, minimize and zoom at the top left, where the window has
+/// them, the toolbar's sidebar toggle and Back to their right. AppKit keeps its own in the full-screen title bar
+/// (`NSToolbarFullScreenWindow`), in their place, but faded out, disabled and left out of the accessibility tree until
+/// the pointer at the top edge brings the menu bar down, when they come down with the title bar under it, faded in. No
+/// API keeps them shown, and AppKit's private reveal amounts (the title bar container's `buttonRevealAmount`, each
+/// button's `revealAmount`) don't either: set to 1, the buttons opaque, they took clicks but drew nothing (macOS 27.2).
+/// So, as the player's title row has them (`PlayerWindowChrome`), the full-screen title bar gets copies of them
+/// (`NSWindow.standardWindowButton(_:for:)`, public API) where its own sit: they act on the window (close closes it,
+/// zoom leaves full screen) and minimize is greyed out, as AppKit's own in full screen (a full-screen window can't be
+/// minimized); AppKit draws the buttons' symbols on hover only on its own, so the copies show none. One set at a time:
+/// the copies hide while AppKit's own show (the title bar down under the menu bar), and they go with the screens'
+/// toolbar (the player up, whose title row has copies of its own) and as the window leaves full screen.
+@MainActor
+final class FullScreenWindowButtons {
+    private static var kept: FullScreenWindowButtons?
+    private static let kinds: [NSWindow.ButtonType] = [.closeButton, .miniaturizeButton, .zoomButton]
+
+    private weak var window: NSWindow?
+    private var observers: [NSObjectProtocol] = []
+    private var toolbarShown: NSKeyValueObservation?
+    /// AppKit's own close button, which fades in and out with the title bar.
+    private weak var ownClose: NSButton?
+    private var ownFade: NSKeyValueObservation?
+    private var copies: [NSButton] = []
+
+    /// Keeps `window`'s buttons shown in full screen from now on.
+    static func keep(in window: NSWindow) {
+        guard kept?.window !== window else { return }
+        kept = FullScreenWindowButtons(window)
+    }
+
+    private init(_ window: NSWindow) {
+        self.window = window
+        let center = NotificationCenter.default
+        observers = [
+            center.addObserver(forName: NSWindow.didEnterFullScreenNotification, object: window, queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated { self?.update() }
+            },
+            center.addObserver(forName: NSWindow.willExitFullScreenNotification, object: window, queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated { self?.removeCopies() }
+            },
+        ]
+        update()
+    }
+
+    /// Copies in the full-screen title bar while the window shows the screens' toolbar, else none. Made afresh each
+    /// time, from AppKit's own buttons as they are then: `standardWindowButton` finds the copies once they are there.
+    private func update() {
+        removeCopies()
+        guard let window else { return }
+        if toolbarShown == nil, let toolbar = window.toolbar {
+            toolbarShown = toolbar.observe(\.isVisible) { [weak self] _, _ in
+                // Once the rest of the change is done: the player hands the title bar back, which may remake it.
+                DispatchQueue.main.async {
+                    MainActor.assumeIsolated { self?.update() }
+                }
+            }
+        }
+        guard window.styleMask.contains(.fullScreen), window.toolbar?.isVisible != false else { return }
+        let own = Self.kinds.compactMap { window.standardWindowButton($0) }
+        guard own.count == Self.kinds.count, let titleBar = own[0].superview else { return }
+        copies = zip(Self.kinds, own).compactMap { kind, button in
+            guard let copy = NSWindow.standardWindowButton(kind, for: window.styleMask) else { return nil }
+            copy.frame = button.frame
+            titleBar.addSubview(copy)
+            return copy
+        }
+        if copies.count == Self.kinds.count { copies[1].isEnabled = false }
+        ownClose = own[0]
+        ownFade = own[0].observe(\.alphaValue) { [weak self] _, _ in
+            MainActor.assumeIsolated { self?.followOwn() }
+        }
+        followOwn()
+    }
+
+    /// The copies hidden while AppKit's own buttons show.
+    private func followOwn() {
+        let hidden = (ownClose?.alphaValue ?? 0) > 0
+        for copy in copies where copy.isHidden != hidden { copy.isHidden = hidden }
+    }
+
+    private func removeCopies() {
+        ownFade = nil
+        copies.forEach { $0.removeFromSuperview() }
+        copies = []
+    }
+}
+
+/// The full-screen title bar as the window's under a screen of `RouteStack`, whose toolbar draws no background
+/// (`windowToolbarBand`): see-through (`FullScreenTitleBar`) while the window shows that toolbar (the player hides it
+/// and keeps its own title bar opaque in full screen, `PlayerWindowChrome`), and with the window's buttons shown
+/// (`FullScreenWindowButtons`).
+struct WindowLikeFullScreenTitleBar: NSViewRepresentable {
     func makeNSView(context: Context) -> WindowView {
         WindowView()
     }
@@ -140,7 +229,9 @@ struct FullScreenTitleBarTransparency: NSViewRepresentable {
     final class WindowView: NSView {
         override func viewDidMoveToWindow() {
             super.viewDidMoveToWindow()
-            guard let window, window.toolbar?.isVisible != false else { return }
+            guard let window else { return }
+            FullScreenWindowButtons.keep(in: window)
+            guard window.toolbar?.isVisible != false else { return }
             FullScreenTitleBar.setTransparent(true, window)
         }
 

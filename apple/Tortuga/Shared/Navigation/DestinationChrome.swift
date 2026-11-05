@@ -3,13 +3,13 @@ import TortugaKit
 
 extension View {
     /// A screen of `RouteStack` on the Mac, a top-level destination's or a pushed one's. The window's toolbar draws no
-    /// background over it (macOS 15 and later), in a window and in full screen (`FullScreenTitleBarTransparency`): the
-    /// screen's black reaches up under the toolbar, which reads as black while the window is key. On macOS 26 and later,
-    /// while the screen's content is scrolled up under the toolbar, it fades to the window's black in the band, most at
-    /// the top, so the window's buttons, Back, the title and the toolbar's items stay readable over it
-    /// (`WindowToolbarBand`); at rest the band shows what it did, the screen's black or the top of Home's and Detail's
-    /// backdrop. A header row on the band draws the fade under itself
-    /// (`screenHeader`). The toolbar's background was drawn over each scroll view under the band, as wide as that scroll
+    /// background over it (macOS 15 and later), in a window and in full screen, where the window's buttons stay too
+    /// (`WindowLikeFullScreenTitleBar`): the screen's black reaches up under the toolbar, which reads as black while the
+    /// window is key. On macOS 26 and later, while the screen's content is scrolled up under the toolbar, it fades to the
+    /// window's black in the band, most at the top, so the window's buttons, Back, the title and the toolbar's items stay
+    /// readable over it (`WindowToolbarBand`); at rest the band shows what it did, the screen's black or the top of Home's
+    /// and Detail's backdrop. A header row on the band draws the fade under itself (`screenHeader`). The toolbar's
+    /// background was drawn over each scroll view under the band, as wide as that scroll
     /// view: once the window wasn't key (another app in front, a sheet over the window) it showed as a grey box over
     /// Addons' and Settings' centred column and over Detail's details column, and with the window key the pointer coming
     /// down from the band into a screen whose content reaches under it (Home, Settings, Discover, Library) faded that
@@ -24,10 +24,10 @@ extension View {
         #if os(macOS)
         if #available(macOS 26, *) {
             modifier(WindowToolbarBand())
-                .background(FullScreenTitleBarTransparency())
+                .background(WindowLikeFullScreenTitleBar())
         } else if #available(macOS 15, *) {
             toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
-                .background(FullScreenTitleBarTransparency())
+                .background(WindowLikeFullScreenTitleBar())
         } else {
             self
         }
