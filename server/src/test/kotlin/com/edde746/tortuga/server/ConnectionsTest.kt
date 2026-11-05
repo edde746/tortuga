@@ -12,6 +12,8 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketException
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.concurrent.thread
 import kotlin.test.Test
@@ -42,7 +44,8 @@ class ConnectionsTest {
                     assertEquals(200, first.ping())
                     assertEquals(200, second.ping())
 
-                    RawHttp(port).use { third ->
+                    // Reset at once, before the connect returned, or soon after it.
+                    connectOrReset(port)?.use { third ->
                         val closedAfter = assertNotNull(third.closesWithin(5_000), "A connection past the cap stayed open")
                         assertTrue(closedAfter < 2_000, "The connection past the cap closed after $closedAfter ms")
                     }
@@ -52,7 +55,7 @@ class ConnectionsTest {
                     // One closes: a new connection gets in once the server has seen it go.
                     first.close()
                     val deadline = System.nanoTime() + 5.seconds.inWholeNanoseconds
-                    while (RawHttp(port).use { it.ping() } != 200) {
+                    while (connectOrReset(port)?.use { it.ping() } != 200) {
                         if (System.nanoTime() > deadline) fail("No connection let in within 5 s of one closing")
                         Thread.sleep(20)
                     }
@@ -107,6 +110,19 @@ class ConnectionsTest {
         } finally {
             server.stop(0, 1_000)
         }
+    }
+
+    /**
+     * A connection to [port], or null when the server reset it before `connect` returned: the server resets a connection
+     * past the cap as soon as it accepts it, which on loopback can reach the client before its connect finishes. A
+     * server that isn't listening still fails, with [ConnectException].
+     */
+    private fun connectOrReset(port: Int): RawHttp? = try {
+        RawHttp(port)
+    } catch (e: ConnectException) {
+        throw e
+    } catch (_: SocketException) {
+        null
     }
 
     /** `GET /ping`'s status, or null when the server closed or reset the connection first. */
