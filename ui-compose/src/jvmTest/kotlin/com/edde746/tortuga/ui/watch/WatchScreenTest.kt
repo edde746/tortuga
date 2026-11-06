@@ -284,6 +284,29 @@ class WatchScreenTest {
         runOnIdle { assertEquals(listOf("dismissInvite", "joinInvite"), calls) }
     }
 
+    /**
+     * On TV an invite that comes in while this device's relay is being edited asks over the editor with Cancel focused,
+     * so the remote answers it; once it is answered the editor has focus again.
+     */
+    @Test
+    fun onTvAnInviteThatComesInOverTheRelayEditorTakesFocus() = runComposeUiTest {
+        val probe = PlayerProbe()
+        val question = ConfirmAction(T.watch.invite.join, T.watch.invite.title("K7M-Q2X", "relay.example.com"), T.watch.invite.join, T.watch.room.cancel, destructive = false)
+        var state by mutableStateOf(testLobby())
+        lobby(FormFactor.TV, probe = probe) { state }
+        onNodeWithText(T.watch.relay.title).performScrollTo().requestFocus()
+        press(Key.Enter)
+        runOnIdle { assertEquals("watch.relay.field", probe.focused) }
+
+        state = testLobby(inviteQuestion = question)
+        runOnIdle { assertEquals("watch.invite.cancel", probe.focused) }
+        press(Key.Enter)
+        runOnIdle { assertEquals(listOf("dismissInvite"), calls) }
+
+        state = testLobby()
+        runOnIdle { assertEquals("watch.relay.field", probe.focused) }
+    }
+
     /** The host's Remove on a guest asks first, naming them: Cancel keeps them, Remove removes them. */
     @Test
     fun theHostRemovesAParticipantAfterAsking() = runComposeUiTest {
