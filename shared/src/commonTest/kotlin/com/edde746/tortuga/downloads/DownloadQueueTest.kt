@@ -463,6 +463,37 @@ class DownloadQueueTest {
         assertEquals(listOf(DownloadLocation.INTERNAL), manager.locations.value.locations.map { it.id }, "the settings read the locations again")
     }
 
+    @Test
+    fun aCancelOnceTheFileIsInPlaceLeavesTheDownloadComplete() = stopOnceTheFileIsInPlace { manager, id -> manager.cancel(id) }
+
+    @Test
+    fun aPauseOnceTheFileIsInPlaceLeavesTheDownloadComplete() = stopOnceTheFileIsInPlace { manager, id -> manager.pause(id) }
+
+    /** The transfer completes and its file moves into place; [stop] comes while the row's completion waits for the disk. */
+    private fun stopOnceTheFileIsInPlace(stop: (DownloadManager, Long) -> Unit) = downloadsTest(fake = true) { h ->
+        h.serveCdn(bytes)
+        val manager = h.install()
+        val id = manager.enqueue(h.profileId, FILM, FILM.id, cdnChoice()).id
+        h.settle()
+        val request = h.fakeTransport.started.single()
+        val video = Path(request.partPath.removeSuffix(DownloadNames.PART))
+
+        h.io.held = true
+        h.complete(request)
+        h.database.held = true
+        h.io.held = false
+        h.settle()
+        assertTrue(SystemFileSystem.exists(video), "the file is in place")
+
+        stop(manager, id)
+        h.settle()
+        h.database.held = false
+        h.settle()
+
+        assertEquals(DownloadStatus.COMPLETED, h.download(id)?.status)
+        assertEquals(video.toString(), manager.localVideo(h.profileId, FILM.id, FILM.id)?.path)
+    }
+
     private fun touch(path: Path) {
         path.parent?.let { SystemFileSystem.createDirectories(it) }
         SystemFileSystem.sink(path).buffered().use { it.write(ByteArray(0)) }

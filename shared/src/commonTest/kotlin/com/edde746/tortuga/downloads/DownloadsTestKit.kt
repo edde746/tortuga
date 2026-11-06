@@ -169,7 +169,9 @@ internal class DownloadsHarness(val scope: TestScope, fake: Boolean = false) {
     val routes = mutableMapOf<String, suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData>()
     val http = FakeHttp(scope) { request -> routes[request.url.host]?.invoke(this, request) ?: respond("", HttpStatusCode.NotFound) }
     val wallClock = TestClock()
-    private val io = StandardTestDispatcher(scope.testScheduler)
+
+    /** Where file operations run: [HeldDispatcher.held] holds every one. */
+    val io = HeldDispatcher(StandardTestDispatcher(scope.testScheduler))
 
     /** The database's dispatcher: [HeldDispatcher.held] holds every read and write. */
     val database = HeldDispatcher(StandardTestDispatcher(scope.testScheduler))
