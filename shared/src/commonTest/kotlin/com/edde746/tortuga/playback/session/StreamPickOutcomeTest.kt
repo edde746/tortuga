@@ -220,6 +220,26 @@ class StreamPickOutcomeTest {
     }
 
     @Test
+    fun goingOnToAnotherEpisodeLeavesThePick() = runTest {
+        val h = SessionHarness(this)
+        h.links()
+        h.suggest(true)
+        val id = assertNotNull(h.picks.listPick(SERIES, "tt1:1:1", shown, chosen = 1))
+        h.start(PlayRequest(SERIES, "tt1:1:1", choice(urlStream("https://addon.example/e1")), pickId = id))
+        h.advance(1.seconds)
+        h.engine.open(duration = 3000.0)
+        h.settle()
+        h.playTo(10.0)
+        // It stalls, and the user goes on to the next episode meanwhile.
+        h.engine.report { it.copy(buffering = true) }
+        h.settle()
+        h.session.playNextEpisode()
+        h.settle()
+        h.advance(PickWatch.STALL + 1.seconds)
+        assertEquals(PickOutcome.BACKED_OUT, h.pick(id).outcome, "left within 30 s for another video, the stall cut short by leaving")
+    }
+
+    @Test
     fun aStreamNobodyPickedRecordsNothing() = runTest {
         val h = SessionHarness(this)
         h.links()
