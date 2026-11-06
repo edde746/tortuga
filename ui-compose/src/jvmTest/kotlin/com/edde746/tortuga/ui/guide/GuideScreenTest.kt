@@ -9,6 +9,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.compose.ui.unit.dp
 import com.edde746.tortuga.model.FormFactor
@@ -18,6 +22,7 @@ import com.edde746.tortuga.presentation.guide.GuideChannel
 import com.edde746.tortuga.presentation.guide.GuideDay
 import com.edde746.tortuga.presentation.guide.GuideProgramme
 import com.edde746.tortuga.presentation.guide.GuideUiState
+import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.ui.adaptive.AdaptiveLayout
 import com.edde746.tortuga.ui.probe.LayoutProbe
 import com.edde746.tortuga.ui.probe.LocalLayoutProbe
@@ -57,6 +62,65 @@ class GuideScreenTest {
         waitForIdle()
         assertEndsAtTheGridsEdge("at 1000 dp")
     }
+
+    /**
+     * On the desktop a channel without programmes picked on one day, then a day on which it has some: the details don't
+     * call it empty; the first channel's programme the guide opens on stands in, picked, as for a programme the day
+     * doesn't have.
+     */
+    @Test
+    fun aChannelPickedWithoutProgrammesIsntShownEmptyOnADayWithSome() = runComposeUiTest {
+        var shown by mutableStateOf(twoChannels(secondHasProgrammes = false))
+        setContent {
+            val probe = LayoutProbe { name, bounds -> if (bounds != null) placed[name] = bounds else placed -= name }
+            CompositionLocalProvider(LocalLayoutProbe provides probe) {
+                TortugaTheme {
+                    Box(Modifier.size(1000.dp, 700.dp)) {
+                        AdaptiveLayout(FormFactor.DESKTOP) {
+                            GuideScreen(shown, GuideIntents({}, {}, {}, {}, {}), onBack = null)
+                        }
+                    }
+                }
+            }
+        }
+        onAllNodesWithText(T.guide.noProgrammes).onFirst().performClick()
+        waitForIdle()
+        assertEquals(placed["guide.empty.1"], placed["guide.selected"], "the empty channel isn't picked")
+
+        shown = twoChannels(secondHasProgrammes = true)
+        waitForIdle()
+        onAllNodesWithText(T.guide.noProgrammes).assertCountEquals(0)
+        assertEquals(placed["guide.programme.0.0"], placed["guide.selected"], "the opening programme isn't picked")
+    }
+
+    /** Two channels of two-hour programmes, the second without any unless [secondHasProgrammes]. */
+    private fun twoChannels(secondHasProgrammes: Boolean) = GuideUiState(
+        days = listOf(GuideDay(0, "Today", selected = true, today = true)),
+        dayStartMillis = 0,
+        dayEndMillis = day,
+        openingMillis = 0,
+        body = GuideBody.Grid(
+            listOf(channel("first", programmes = true), channel("second", programmes = secondHasProgrammes)),
+        ),
+    )
+
+    private fun channel(id: String, programmes: Boolean) = GuideChannel(
+        id = id,
+        type = "tv",
+        name = id,
+        logo = null,
+        programmes = if (!programmes) emptyList() else List(PROGRAMMES) { i ->
+            GuideProgramme(
+                id = "$id$i", title = "$id $i", startMillis = i * 2 * HOUR, endMillis = (i + 1) * 2 * HOUR,
+                timeText = "", startText = "", cellTimeText = "", overview = null, thumbnail = null, infoText = null,
+                creditsText = null, onAir = false, past = false, headline = "$id $i",
+            )
+        },
+        onNow = null,
+        next = null,
+        startIndex = if (programmes) 0 else null,
+        preview = MetaItemPreview(id, "tv", id),
+    )
 
     private fun assertEndsAtTheGridsEdge(window: String) {
         val grid = placed.getValue("guide.grid")
