@@ -507,12 +507,13 @@ private fun OverlayCard(
                     isTraversalGroup = true
                 }
                 // Clicks on the card stay on it; directional and Tab moves never leave it, nor does focus asked for
-                // elsewhere until the dialog has closed.
+                // elsewhere, until the dialog has closed or an overlay opened over it takes focus (a question that came
+                // in while it was open, a [TopOverlay]).
                 .pointerInput(Unit) { detectTapGestures { } }
                 .onFocusChanged { focus.held = it.hasFocus }
                 .focusHomeGroup { initialFocus?.requestFocus() == true || cardFocus.requestFocus() }
                 .focusRequester(cardFocus)
-                .focusProperties { onExit = { if (!focus.closed) cancelFocusChange() } }
+                .focusProperties { onExit = { if (!focus.closed && isTop()) cancelFocusChange() } }
                 .focusGroup()
                 .background(TortugaColors.Surface, MaterialTheme.shapes.extraLarge)
                 .padding(24.dp),
