@@ -231,8 +231,9 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
     /**
      * The result for [pollSecret] ([OAuthRelayPaths.RESULT]). With the [proof] the app's own browser brought back, the
      * held tokens at once, else [Poll.Gone]. Without one, waits up to [TrackerOAuthConfig.resultWait] for a confirmed
-     * result or an error; a poll past the session's [MAX_WAITING_POLLS] waiting is answered pending at once. A
-     * delivered result ends the session.
+     * result or an error; a poll past the session's [MAX_WAITING_POLLS] waiting is answered pending at once. The result
+     * goes to the poll that started waiting last, the app's retry of one whose connection end the server hasn't seen;
+     * an earlier one still waiting is answered pending. A delivered result ends the session.
      */
     suspend fun poll(pollSecret: String, proof: String? = null): Poll {
         val digest = Secrets.sha256Base64Url(pollSecret)
@@ -244,10 +245,12 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
                 Poll.Ready(held.tokens)
             }
         }
+        var number = 0L
         val session = synchronized(this) {
             live(byPollDigest[digest])?.also {
                 if (it.waitingPolls >= MAX_WAITING_POLLS) return Poll.Pending
                 it.waitingPolls++
+                number = ++it.lastPoll
             }
         } ?: return Poll.Gone
         try {
@@ -259,6 +262,8 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
             val result = session.result
             if (byPollDigest[digest] !== session || result == null) {
                 Poll.Gone
+            } else if (number != session.lastPoll) {
+                Poll.Pending
             } else {
                 session.result = null
                 remove(session)
@@ -389,8 +394,9 @@ class TrackerOAuthRelay(private val config: TrackerOAuthConfig, private val http
         var held: Held? = null
         val done = CompletableDeferred<Unit>()
 
-        /** Polls held waiting for [done]; guarded by the relay. */
+        /** Polls held waiting for [done], and the number of the last that started waiting; guarded by the relay. */
         var waitingPolls = 0
+        var lastPoll = 0L
     }
 
     @Serializable
