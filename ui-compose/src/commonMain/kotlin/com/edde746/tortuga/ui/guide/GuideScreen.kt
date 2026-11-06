@@ -226,13 +226,13 @@ fun GuideScreen(state: GuideUiState, intents: GuideIntents, onBack: (() -> Unit)
 }
 
 /**
- * The channel and programme [picked] names when the day has them; else, with [opening], the first channel's programme
- * the guide opens on (on now, else the next, else its first).
+ * The channel and programme [picked] names when the day has them (a channel picked without programmes: while it has
+ * none); else, with [opening], the first channel's programme the guide opens on (on now, else the next, else its first).
  */
 private fun shown(state: GuideUiState, picked: Pair<String, String?>?, opening: Boolean): Shown? {
     val channel = state.channels.firstOrNull { it.id == picked?.first }
     val programme = channel?.programmes?.firstOrNull { it.id == picked?.second }
-    if (channel != null && (programme != null || picked?.second == null)) return Shown(channel, programme)
+    if (channel != null && (programme != null || picked?.second == null && channel.programmes.isEmpty())) return Shown(channel, programme)
     if (!opening) return null
     val first = state.channels.firstOrNull() ?: return null
     return Shown(first, first.startIndex?.let { first.programmes[it] })
