@@ -542,10 +542,12 @@ extension BackgroundTransport: URLSessionDownloadDelegate {
         case .body(let path, let answer):
             let used = Answer.describing(first: transfer.record.answer, last: answer, bodySize: Self.fileSize(path))
             let outcome = adopt(transfer, path, used)
-            // A chunk: the next one follows until the file is whole.
+            // A chunk: the next one follows until the file is whole, unless the transfer is stopping (its task ended
+            // before the stop reached it): the chunk is in the part file, and the transfer ends as stopped.
             if case .completed(let bytes, let validator) = outcome, transfer.record.last != nil,
                let total = transfer.record.expectedSize ?? used.total, bytes < total {
                 guard bytes > transfer.record.offset else { return finish(transfer, .network("EmptyChunk")) }
+                if transfer.stopping { return finish(transfer, .stopped) }
                 return next(transfer, from: bytes, validator: validator)
             }
             finish(transfer, outcome)
