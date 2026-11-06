@@ -415,6 +415,7 @@ class PlaybackSession internal constructor(
      * pointer to [video] at once.
      */
     private fun playEpisode(request: PlayRequest, video: Video, pick: Deferred<NextPick>, advance: Boolean) {
+        leavePick()
         saveProgress()
         stopObserved()
         if (advance && !probing) recorder.write { library.advanceToVideo(profileId, request.meta, video.id) }
