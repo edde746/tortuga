@@ -212,12 +212,12 @@ class TrackerCoordinator internal constructor(
         }
         replay = scope.launch {
             loaded.await()
-            // Spans the whole burst: a service that just asked for quiet isn't asked again by the re-run.
-            val deferred = mutableSetOf<TrackerService>()
             do {
                 replayAgain = false
                 try {
-                    replayOnce(deferred)
+                    // Per pass: a call during the last one (the network back, an app resume) may have changed what
+                    // failed transiently there. A service that asked for quiet stays held ([held]).
+                    replayOnce(mutableSetOf())
                 } catch (e: CancellationException) {
                     throw e
                 } catch (e: Exception) {
