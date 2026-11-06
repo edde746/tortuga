@@ -13,8 +13,10 @@ import com.edde746.tortuga.playback.session.StreamChoice
 import com.edde746.tortuga.strings.T
 import com.edde746.tortuga.strings.isolate
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.withContext
 import kotlinx.io.files.Path
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
@@ -218,10 +220,13 @@ internal class DownloadWorker(private val env: DownloadEnv, private val transfer
             env.repo.resetFile(id)
             return Outcome.Failed(refused)
         }
-        if (!env.io { move(part, video) }) return Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
-        env.io { DownloadNames.PART_SIDECARS.forEach { delete(Path("$video$it")) } }
-        env.repo.complete(id, bytes, result.validator)
-        return Outcome.Completed(bytes)
+        // Once the file moves, the download is complete: a stop meanwhile doesn't leave the file in place unrecorded.
+        return withContext(NonCancellable) {
+            if (!env.io { move(part, video) }) return@withContext Outcome.Failed(DownloadFailureKind.LOCATION_UNAVAILABLE)
+            env.io { DownloadNames.PART_SIDECARS.forEach { delete(Path("$video$it")) } }
+            env.repo.complete(id, bytes, result.validator)
+            Outcome.Completed(bytes)
+        }
     }
 
     /** Counts a failed attempt; past [MAX_RETRIES] it fails with [failure], else waits [RETRY_DELAY] queued. */

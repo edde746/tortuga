@@ -260,7 +260,10 @@ class DownloadManager internal constructor(
         notices.update { it - profileId }
     }
 
-    /** Pauses [id], keeping what arrived. Returns the outcome ([act]), as every command here does. */
+    /**
+     * Pauses [id], keeping what arrived (one whose file is already in place completes). Returns the outcome ([act]), as
+     * every command here does.
+     */
     fun pause(id: Long): Deferred<Unit> = act("pausing download $id") { pauseNow(id) }
 
     /** Resumes a paused [id] (queued again, its failed attempts starting over: the user acted). */
@@ -278,7 +281,7 @@ class DownloadManager internal constructor(
         wake()
     }
 
-    /** Cancels [id]: its transfer stops and its partial file goes. */
+    /** Cancels [id]: its transfer stops and its partial file goes (one whose file is already in place completes). */
     fun cancel(id: Long): Deferred<Unit> = act("cancelling download $id") {
         runOf(id)?.let {
             it.stop(StopReason.CANCEL)
@@ -665,9 +668,13 @@ class DownloadManager internal constructor(
         var failures = 0
         while (true) {
             try {
+                // A stop that came once the file was in place came too late: the run completed the download (the
+                // worker's move and the row's completion aren't cancelled), and only a delete undoes that.
+                val completed = outcome is Outcome.Completed ||
+                    reason != null && reason != StopReason.DELETE && repo.download(id)?.status == DownloadStatus.COMPLETED
                 when {
-                    reason != null -> applyStop(id, reason, reported)
-                    outcome is Outcome.Completed -> {
+                    reason != null && (reason == StopReason.DELETE || !completed) -> applyStop(id, reason, reported)
+                    completed -> {
                         failureStreak = 0
                         scope.launch { logFailures("saving download $id's extras") { repo.download(id)?.let { saveExtras(listOf(it)) } } }
                     }
