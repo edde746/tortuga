@@ -45,6 +45,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -378,6 +379,21 @@ class TrackerOAuthRelayTest {
             assertEquals(TrackerOAuthRelay.Poll.Pending, withTimeout(5.seconds) { relay.poll(start.session) })
             assertTrue(waiting.all { it.isActive })
             waiting.forEach { it.cancel() }
+        }
+    }
+
+    @Test
+    fun theAppsRetryGetsTheResultWhileItsLostPollStillWaits() = relayTest(resultWait = 1.hours) {
+        val start = start(OAuthRelayApi.MYANIMELIST)
+        val state = authorize(start.url).parameters["state"]
+        coroutineScope {
+            // The app's poll whose connection dropped without the server seeing it, then the app's retry.
+            val lost = async(start = CoroutineStart.UNDISPATCHED) { relay.poll(start.session) }
+            val retry = async(start = CoroutineStart.UNDISPATCHED) { relay.poll(start.session) }
+            confirm("mal", callback("mal", state = state, code = "mal-code-1"))
+            val result = assertIs<TrackerOAuthRelay.Poll.Ready>(withTimeout(5.seconds) { retry.await() }).result
+            assertEquals("mal-access-fixture", result.accessToken)
+            assertEquals(TrackerOAuthRelay.Poll.Pending, withTimeout(5.seconds) { lost.await() })
         }
     }
 
