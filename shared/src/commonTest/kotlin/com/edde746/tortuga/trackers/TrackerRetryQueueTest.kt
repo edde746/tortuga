@@ -242,6 +242,27 @@ class TrackerRetryQueueTest {
     }
 
     @Test
+    fun aNetworkRestoredWhileAReplayWaitsOnTheDeadOneReplaysAgain() = runTest {
+        val f = fixture()
+        f.connect(TRAKT)
+        val trakt = f.tracker(TRAKT)
+        trakt.failNext("watched", TrackerException.Network(TRAKT, IllegalStateException("offline")))
+        f.mark("tt0903747:1:1", watched = true)
+        f.log.clear()
+
+        // Back in the foreground before the network: the replay's request waits, then fails on the dead network.
+        trakt.latency = 20.seconds
+        trakt.failNext("watched", TrackerException.Network(TRAKT, IllegalStateException("offline")))
+        f.hub.onForeground()
+        f.advance(5.seconds)
+        trakt.latency = 0.seconds
+        f.hub.onNetworkRestored()
+        f.advance(30.seconds)
+        assertEquals(listOf("watched tt0903747:1:1", "watched tt0903747:1:1"), f.undated(TRAKT))
+        assertEquals(emptyList(), f.queued())
+    }
+
+    @Test
     fun aWriteThatLandsDropsTheQueuedClaimsItCovers() = runTest {
         val f = fixture()
         f.connect(ANILIST)
