@@ -113,8 +113,26 @@ class MpvPlayerEngine(
         /** How often the playback info's stats are read while it shows ([setStatsWanted]). */
         private const val STATS_INTERVAL_MS = 1_000L
 
-        /** How often a loaded file is looked at for a stalled decoder ([checkDecodeStall]). */
-        private const val STALL_SAMPLE_MS = 1_000L
+        /**
+         * How often a loaded file's position is read while it plays ([watchFile]): the controls, the media session and
+         * the watch-together room need a few a second.
+         */
+        private const val POSITION_INTERVAL_MS = 250L
+
+        /**
+         * The position readings between two of the file's cache state, each with a look for a stalled decoder
+         * ([checkDecodeStall]): one a second.
+         */
+        private const val STALL_SAMPLE_READINGS = 4
+
+        /**
+         * [MpvLifecycle]'s properties this engine reads on its clock ([watchFile]) instead of observing. mpv reports
+         * an observed `time-pos` at every frame and `demuxer-cache-state` at every change of the cache, and each
+         * report wakes mpv's event thread and the library's delivery thread, for a state that goes out four times a
+         * second ([MpvLifecycle.publishable]). Read instead, a 1080p24 film woke the app's threads about 40 times a
+         * second less and took 3 % less of its CPU time on a Pixel 7.
+         */
+        private val READ_ON_THE_CLOCK = setOf("time-pos", "demuxer-cache-state")
 
         /** The Dolby Vision conversion mode ([GpuVoPolicy.DV_CONVERSION_MODES]): Tortuga has no setting for it. */
         private const val DV_CONVERSION_MODE = "auto"
@@ -126,7 +144,7 @@ class MpvPlayerEngine(
         private const val HDR_SDR_CONVERSION_MODE = "player"
 
         /**
-         * Paces every engine's stats readings ([setStatsWanted]) and decode stall checks ([watchDecodeStall]). A tick
+         * Paces every engine's stats readings ([setStatsWanted]) and its loaded file's readings ([watchFile]). A tick
          * only queues the work on its engine's executor, so one daemon thread serves them all.
          */
         private val statsClock: ScheduledExecutorService by lazy {
@@ -332,11 +350,18 @@ class MpvPlayerEngine(
     /** A stats reading waits on the executor: a busy executor gets one, not a backlog. */
     private val statsReadQueued = AtomicBoolean()
 
-    /** The [statsClock] tick while a file is loaded ([watchDecodeStall]); written on the executor. */
-    @Volatile private var stallTick: ScheduledFuture<*>? = null
+    /** The [statsClock] tick while a file is loaded ([watchFile]); written on the executor. */
+    @Volatile private var fileTick: ScheduledFuture<*>? = null
 
-    /** A stall check waits on the executor: a busy executor gets one, not a backlog. */
-    private val stallCheckQueued = AtomicBoolean()
+    /** A tick's readings wait on the executor: a busy executor gets one, not a backlog. */
+    private val fileTickQueued = AtomicBoolean()
+
+    /** A reading asked for at once ([queueFileRead]) waits on the executor: the askers until it runs share it. */
+    private val fileReadQueued = AtomicBoolean()
+
+    /** The ticks since the file loaded, and whether it is still looked at for a stalled decoder; executor-only. */
+    private var fileTicks = 0
+    private var stallWatched = false
 
     /** The last look [checkDecodeStall] took, and since when (`System.nanoTime`) it has been the same; executor-only. */
     private var stallSample: GpuVoPolicy.DecodeSample? = null
@@ -684,7 +709,7 @@ class MpvPlayerEngine(
         }
     }
 
-    /** The engine's latest state: the listener's with the position mpv reported last. */
+    /** The engine's latest state: the listener's with the position read last. */
     val currentState: EngineState get() = synchronized(stateLock) { lifecycle.state }
 
     /**
@@ -765,7 +790,7 @@ class MpvPlayerEngine(
     override fun release() {
         if (!released.compareAndSet(false, true)) return
         statsTick?.cancel(false)
-        stallTick?.cancel(false)
+        fileTick?.cancel(false)
         appContext.getSystemService(DisplayManager::class.java)?.unregisterDisplayListener(displayListener)
         synchronized(stateLock) { listener = null }
         host = null
@@ -951,9 +976,9 @@ class MpvPlayerEngine(
             }
             player = p
             appliedDisplayFps = displayFps
-            for (name in MpvLifecycle.DOUBLES) p.observeProperty(name, PropertyFormat.Double)
+            for (name in MpvLifecycle.DOUBLES - READ_ON_THE_CLOCK) p.observeProperty(name, PropertyFormat.Double)
             for (name in MpvLifecycle.FLAGS) p.observeProperty(name, PropertyFormat.Flag)
-            for (name in MpvLifecycle.TEXTS) p.observeProperty(name, PropertyFormat.String)
+            for (name in MpvLifecycle.TEXTS - READ_ON_THE_CLOCK) p.observeProperty(name, PropertyFormat.String)
             for ((name, format) in OBSERVED) p.observeProperty(name, format)
             // mpv always holds a valid Surface: the placeholder until the host's first surfaceCreated.
             syncSurfaces()
@@ -1365,27 +1390,75 @@ class MpvPlayerEngine(
         setGpuVoRequirement(GpuVoPolicy.REASON_TONE_MAP, needed)
     }
 
-    /** Looks at the file that just loaded every [STALL_SAMPLE_MS] until it ends ([checkDecodeStall]). */
-    private fun watchDecodeStall() {
+    /**
+     * Reads the file that just loaded until it ends, on a [statsClock] tick every [POSITION_INTERVAL_MS]: its position
+     * while it plays, and every [STALL_SAMPLE_READINGS] ticks its cache state, with a look for a stalled decoder
+     * ([checkDecodeStall]). Both are read at once here, and whenever mpv's events say they jumped ([queueFileRead]).
+     */
+    private fun watchFile() {
         stallSample = null
-        if (stallTick != null || player == null) return
-        stallTick = statsClock.scheduleWithFixedDelay({ queueStallCheck() }, STALL_SAMPLE_MS, STALL_SAMPLE_MS, TimeUnit.MILLISECONDS)
+        stallWatched = true
+        fileTicks = 0
+        readFileState()
+        if (fileTick != null || player == null) return
+        fileTick = statsClock.scheduleWithFixedDelay({ queueFileTick() }, POSITION_INTERVAL_MS, POSITION_INTERVAL_MS, TimeUnit.MILLISECONDS)
     }
 
-    private fun stopDecodeStallWatch() {
-        stallTick?.cancel(false)
-        stallTick = null
+    /** The file ended: the ticks stop after one more reading, of what mpv has without it. */
+    private fun stopFileWatch() {
+        fileTick?.cancel(false)
+        fileTick = null
         stallSample = null
+        readFileState()
     }
 
-    /** A [statsClock] tick: queues a stall check unless one still waits; a released engine's tick stops itself. */
-    private fun queueStallCheck() {
-        if (!stallCheckQueued.compareAndSet(false, true)) return
-        val queued = submit("decode stall check") {
-            stallCheckQueued.set(false)
-            if (stallTick != null) checkDecodeStall()
+    /** A [statsClock] tick: queues its readings unless one still waits; a released engine's tick stops itself. */
+    private fun queueFileTick() {
+        if (!fileTickQueued.compareAndSet(false, true)) return
+        val queued = submit("file readings") {
+            fileTickQueued.set(false)
+            val p = player
+            if (fileTick == null || p == null) return@submit
+            fileTicks++
+            // A paused file's position moves only with a seek, which mpv's events tell of.
+            if (!synchronized(stateLock) { lifecycle.state.paused || lifecycle.held }) readPosition(p)
+            if (fileTicks % STALL_SAMPLE_READINGS == 0) {
+                val cache = readCacheState(p)
+                if (stallWatched) checkDecodeStall(p, cache)
+            }
         }
-        if (!queued) stallTick?.cancel(false)
+        if (!queued) fileTick?.cancel(false)
+    }
+
+    /**
+     * Reads the position and the cache state now instead of at the next tick, from any thread: a pause, a seek's
+     * start, a frame up after a seek or at the file's start, and the file's end each move one of them at once.
+     */
+    private fun queueFileRead() {
+        if (!fileReadQueued.compareAndSet(false, true)) return
+        submit("file reading") {
+            fileReadQueued.set(false)
+            readFileState()
+        }
+    }
+
+    private fun readFileState() {
+        val p = player ?: return
+        readPosition(p)
+        readCacheState(p)
+    }
+
+    /** mpv's `time-pos` into the state, as an observer of it would report it (executor). */
+    private fun readPosition(p: MpvPlayer) {
+        val position = p.getDouble("time-pos")
+        publish { if (position != null) double("time-pos", position) else unavailable("time-pos") }
+    }
+
+    /** mpv's `demuxer-cache-state` into the state, as an observer of it would report it, and as read (executor). */
+    private fun readCacheState(p: MpvPlayer): String? {
+        val cache = p.getString("demuxer-cache-state")
+        publish { if (cache != null) text("demuxer-cache-state", cache) else unavailable("demuxer-cache-state") }
+        return cache
     }
 
     /**
@@ -1394,9 +1467,8 @@ class MpvPlayerEngine(
      * software one fails the file. A decoder that never answers, at the open, after a seek or mid-file, ends in
      * playback or the player's error, never in a frozen picture or an endless open.
      */
-    private fun checkDecodeStall() {
-        val p = player ?: return
-        val cache = MpvState.videoCache(p.getString("demuxer-cache-state"))
+    private fun checkDecodeStall(p: MpvPlayer, cacheState: String?) {
+        val cache = MpvState.videoCache(cacheState)
         // Unavailable until playback is initialized, when the first frame is due as well.
         val restartPending = p.getFlag("seeking") ?: true
         val pausedForCache = p.getFlag("paused-for-cache") == true
@@ -1435,7 +1507,8 @@ class MpvPlayerEngine(
             setGpuVoRequirement(GpuVoPolicy.REASON_SW_DECODE, true)
             stallSample = null
         } else {
-            stopDecodeStallWatch()
+            stallWatched = false
+            stallSample = null
             val error = EngineError("Video decoding stalled: no frame for ${unchanged.toInt()} s", kind = EngineErrorKind.DECODE)
             Log.w(TAG, "Decode stalled: $stall; playback failed: $error")
             publish { fail(error) }
@@ -1548,6 +1621,8 @@ class MpvPlayerEngine(
                 }
             }
             when (change.name) {
+                // Each of these moves the position or the cache at once.
+                "pause", "seeking", "eof-reached", "paused-for-cache" -> queueFileRead()
                 "video-params" -> {
                     if (droppedHdr) submit("HDR aspects route") { onHardwareDroppedHdr() }
                     submit("tone-map route") { applyToneMapRoute() }
@@ -1589,15 +1664,16 @@ class MpvPlayerEngine(
                 }
                 is MpvEvent.FileLoaded -> {
                     publish { fileLoaded() }
-                    submit("decode stall watch") { watchDecodeStall() }
+                    submit("file watch") { watchFile() }
                 }
                 is MpvEvent.PlaybackRestart -> {
                     var first = false
                     publish { first = playbackRestart() }
                     if (first) events?.invoke("playing")
+                    queueFileRead()
                 }
                 is MpvEvent.EndFile -> {
-                    submit("decode stall watch end") { stopDecodeStallWatch() }
+                    submit("file watch end") { stopFileWatch() }
                     // mpv-android names every reason client.h has; one it doesn't name is an mpv newer than it.
                     val reason = event.reason
                     if (reason == null) {

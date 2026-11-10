@@ -24,7 +24,8 @@ import kotlinx.serialization.json.JsonObject
  * each one sets ([MpvState]'s rules). The engine keeps mpv's handle and its events, its surfaces and its audio route:
  * it hands each event, observed value and log line here, from one thread at a time (its mpv thread, or under its state
  * lock), with what only the platform knows ([hold], [outputRange], [stats], [fail]), and publishes [state] when
- * [publishable] says so.
+ * [publishable] says so. The Android engine observes neither `time-pos` nor `demuxer-cache-state`: it reads them on a
+ * clock of its own and hands over what it read as an observer's value.
  *
  * A new file (a load, and mpv's `start-file`) starts over what is the file's own: its position and length, what is
  * read ahead, its tracks and chapters, its end, its error, its first frame and the playback info's reading. What mpv's

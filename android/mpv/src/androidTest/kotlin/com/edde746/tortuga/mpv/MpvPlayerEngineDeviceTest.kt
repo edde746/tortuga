@@ -27,6 +27,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
+import kotlin.math.abs
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
@@ -39,11 +40,12 @@ import kotlin.test.fail
  * HTTP status (on each of two engines open at once too), a load on an mpv that didn't start or with a file option mpv
  * refuses must fail with the reason, a Surface destroyed after the release must be let go of without waiting for
  * mpv's termination, loudness normalization must filter every channel of a 5.1 track with passthrough out of its way,
- * and a speed other than 1 must decode a track that passthrough sends undecoded. A load must start the next file
- * without the last one's tracks or length, a display hold must not report a failed file as buffering, and a load's
- * values must hold on the files mpv opens from its playlist. MPEG-2 must decode in hardware where the device has a
- * decoder for it, heavy AV1 must keep up in hardware and stay in hardware across Surface hand-offs, and a live stream
- * with late segments must play without stalling.
+ * and a speed other than 1 must decode a track that passthrough sends undecoded. A paused file must report where a
+ * seek put it, and go on from there. A load must start the next file without the last one's tracks or length, a
+ * display hold must not report a failed file as buffering, and a load's values must hold on the files mpv opens from
+ * its playlist. MPEG-2 must decode in hardware where the device has a decoder for it, heavy AV1 must keep up in
+ * hardware and stay in hardware across Surface hand-offs, and a live stream with late segments must play without
+ * stalling.
  * Plays the sample without a host view (on the placeholder surface, or on a test Surface) and without audio
  * output. The `mediaUrl` instrumentation argument overrides the sample URL; the matrix files and the live stream are
  * on the same server.
@@ -99,6 +101,23 @@ class MpvPlayerEngineDeviceTest {
         engine.setVolume(-5.0)
         engine.setMuted(false)
         await("the lower bounds") { it.speed == 0.01 && it.volume == 0.0 && !it.muted }
+    }
+
+    /**
+     * The engine reads the position on its clock while the file plays; a paused file's it reads when mpv says a seek
+     * moved it. The timeline follows a scrub while paused, and playback goes on from where the last seek left it.
+     */
+    @Test
+    fun aPausedFileReportsWhereASeekPutIt() {
+        engine.setPaused(true)
+        await("the pause") { it.paused }
+        engine.seek(30.0, exact = true)
+        val sought = await("the paused seek's position") { abs(it.positionSeconds - 30.0) < 0.1 }
+        assertTrue(sought.paused, "still paused after the seek")
+        engine.seek(10.0, exact = true)
+        await("the second paused seek's position") { abs(it.positionSeconds - 10.0) < 0.1 }
+        engine.setPaused(false)
+        await("the file to play on from the seek") { !it.paused && it.positionSeconds > 11.0 && it.positionSeconds < 20.0 }
     }
 
     @Test
