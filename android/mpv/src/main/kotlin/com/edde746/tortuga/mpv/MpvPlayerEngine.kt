@@ -39,6 +39,7 @@ import com.edde746.tortuga.playback.TrackKind
 import com.edde746.tortuga.playback.VOLUME_MAX
 import com.edde746.tortuga.playback.VideoLayout
 import com.edde746.tortuga.playback.mpv.DecoderOperatingRate
+import com.edde746.tortuga.playback.mpv.MediaCodecAsync
 import com.edde746.tortuga.playback.mpv.MpvLifecycle
 import com.edde746.tortuga.playback.mpv.MpvLoad
 import com.edde746.tortuga.playback.mpv.MpvState
@@ -178,13 +179,13 @@ class MpvPlayerEngine(
 
         /**
          * The bundled FFmpeg's MediaCodec decoder options: the Java MediaCodec wrapper (`ndk_codec=0`, the only one
-         * that reads crop rectangles below API 28), asynchronous where the platform is trusted to be (API 31+,
-         * Media3's threshold), realtime priority, and per file the Dolby Vision decoder routing ([dv]; FFmpeg's own
-         * defaults until the first file decides).
+         * that reads crop rectangles below API 28), asynchronous where it is trusted to be ([MediaCodecAsync]),
+         * realtime priority, and per file the Dolby Vision decoder routing ([dv]; FFmpeg's own defaults until the first
+         * file decides).
          */
-        private fun decoderOptions(sdkInt: Int, dv: GpuVoPolicy.DvDecoderOptions? = null): String = buildList {
+        private fun decoderOptions(dv: GpuVoPolicy.DvDecoderOptions? = null): String = buildList {
             add("ndk_codec=0")
-            if (sdkInt >= Build.VERSION_CODES.S) add("async=1")
+            if (MediaCodecAsync.enabled(Build.VERSION.SDK_INT, Build.DEVICE)) add("async=1")
             add("priority=0")
             if (dv != null) {
                 add("dolby_vision=${if (dv.dolbyVision) 1 else 0}")
@@ -928,7 +929,7 @@ class MpvPlayerEngine(
                 setOption("vo", VIDEO_OUTPUT)
                 setOption("gpu-context", "android")
                 setOption("opengl-es", "yes")
-                setOption("vd-lavc-o", decoderOptions(Build.VERSION.SDK_INT))
+                setOption("vd-lavc-o", decoderOptions())
                 setOption("hwdec-codecs", HWDEC_CODECS)
                 for ((name, value) in DECODER_QUEUE_OPTIONS) setOption(name, value)
                 // AV1 film grain stays in the decoder: gpu-next's GLES raster grain renders luma upside-down.
@@ -1307,7 +1308,8 @@ class MpvPlayerEngine(
     /**
      * Writes the file's Dolby Vision decoder options before its decoder opens, and moves P5 that no decoder converts
      * (or that decodes in software, [softwareChosen]) to software decode on gpu-next. Both answers come from what the
-     * bundled FFmpeg will actually open ([GpuVoPolicy.nativeDvDecoder]) and whether the display takes a DV signal.
+     * bundled FFmpeg will actually open ([GpuVoPolicy.nativeDvDecoder]) and whether the display takes a DV signal. A
+     * test run's own `vd-lavc-o` stays as it is.
      */
     private fun applyDvRouting(p: MpvPlayer, doviProfile: Int?, softwareChosen: Boolean) {
         pendingDoviProfile = doviProfile
@@ -1315,7 +1317,7 @@ class MpvPlayerEngine(
         val p5Decoder = GpuVoPolicy.nativeDvDecoder(candidates, 5)
         val displayDv = DisplayHdr.supportsDolbyVision(appContext)
         val options = GpuVoPolicy.dvDecoderOptions(DV_CONVERSION_MODE, displayDv, doviProfile, nativeP5Decoder = p5Decoder != null)
-        p.setProperty("vd-lavc-o", decoderOptions(Build.VERSION.SDK_INT, options))
+        if ("vd-lavc-o" !in extraOptions) p.setProperty("vd-lavc-o", decoderOptions(options))
         val reshape = GpuVoPolicy.needsDvReshaping(
             doviProfile,
             DV_CONVERSION_MODE,
